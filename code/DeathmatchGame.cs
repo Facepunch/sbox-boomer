@@ -4,7 +4,6 @@ global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading.Tasks;
-using Boomer.Movement;
 
 /// <summary>
 /// This is the heart of the gamemode. It's responsible
@@ -235,23 +234,33 @@ partial class DeathmatchGame : Game
 		Sandbox.UI.KillFeed.Current?.AddEntry( leftid, left, rightid, right, method );
 	}
 
-	public override void RenderHud()
+	[DebugOverlay( "entities", "Entities", "" )]
+	public static void EntityDebugOverlay()
 	{
-		var localPawn = Local.Pawn as BoomerPlayer;
-		if ( localPawn == null ) return;
-
-		//
-		// scale the screen using a matrix, so the scale math doesn't invade everywhere
-		// (other than having to pass the new scale around)
-		//
+		if ( !Host.IsClient ) return;
 
 		var scale = Screen.Height / 1080.0f;
 		var screenSize = Screen.Size / scale;
 		var matrix = Matrix.CreateScale( scale );
 
-		using ( Render.Draw2D.MatrixScope( matrix ) )
+		using var _ = Render.Draw2D.MatrixScope( matrix );
+
+		foreach ( var ent in Entity.FindInSphere( CurrentView.Position, 600 ) )
 		{
-			localPawn.RenderHud( screenSize );
+			var pos = ent.Position.ToScreen( screenSize );
+			if ( !pos.HasValue ) continue;
+
+			var str = $"{ent}";
+			Render.Draw2D.FontFamily = "Poppins";
+			Render.Draw2D.FontWeight = 600;
+			Render.Draw2D.FontSize = 14;
+
+			var textRect = Render.Draw2D.TextSize( pos.Value, str );
+
+			Render.Draw2D.Color = Color.Black;
+			Render.Draw2D.Text( pos.Value + Vector2.One, str );
+			Render.Draw2D.Color = Color.White;
+			Render.Draw2D.Text( pos.Value, str );
 		}
 	}
 
