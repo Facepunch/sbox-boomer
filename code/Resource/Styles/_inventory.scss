@@ -1,0 +1,110 @@
+﻿inventorybar
+{
+	position: absolute;
+	left: 33%;
+	bottom: 108px;
+	font-family: Roboto;
+	opacity: 1;
+	transition: all 0.2s ease-out;
+	mix-blend-mode: lighten;
+
+	&.active
+	{
+		//top: 100px;
+		transition: all 0.1s ease-out;
+		opacity: 1;
+	}
+}
+
+inventorycolumn {
+	margin-right: 5px;
+	color: #fc0;
+	flex-direction: row;
+	align-items: flex-start; // align to the left, don't stretch
+
+	.slot-number {
+		left: 10%;
+		top: 20%;
+		font-size: 10px;
+		font-weight: bolder;
+		flood-color: #fc0;
+	}
+
+	inventoryicon {
+		opacity: 1;
+		padding: 25px 15px 10px 2px;
+		width: 100px;
+		height: 45px;
+		overflow: hidden;
+		transition: all 0.1s ease-out;
+
+		.icon {
+			opacity: 1;
+		}
+	}
+
+	opacity: 0.1;
+
+	&.active {
+		opacity: 1;
+
+		inventoryicon {
+			transition: all 0.1s ease-out;
+			opacity: 0.2;
+			display: flex;
+			width: 100px;
+			height: 45px;
+
+			.icon {
+				opacity: 1;
+			}
+
+			&.active {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+inventoryicon {
+	margin-top: 5px;
+	mix-blend-mode: lighten;
+	color: #fc0;
+	background-color: #333;
+	font-size: 40px;
+	font-weight: lighter;
+	padding: 10px;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border: 1px solid rgba( #ff0, 1 );
+	border-radius: 0px;
+
+	.icon {
+		width: 80px;
+		height: 80px;
+		background-size: 100%;
+		background-image-tint: #ff0;
+		position: absolute;
+	}
+
+	&.active {
+		opacity: 1;
+
+		.icon {
+			// filter: drop-shadow additive glow
+			opacity: 1;
+		}
+	}
+
+	&.empty {
+		opacity: 0.25;
+		background-color: #c004;
+		color: #f002;
+
+		.icon {
+			background-color: #f50;
+		}
+	}
+}
+
