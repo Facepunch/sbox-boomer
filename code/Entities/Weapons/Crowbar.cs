@@ -1,4 +1,5 @@
-﻿[Library( "dm_crowbar" ), HammerEntity]
+﻿
+[Library( "dm_crowbar" ), HammerEntity]
 [EditorModel( "models/dm_crowbar.vmdl" )]
 [Title(  "Crowbar" ), Category( "Weapons" )]
 partial class Crowbar : DeathmatchWeapon
@@ -73,7 +74,6 @@ partial class Crowbar : DeathmatchWeapon
 		{
 			ViewModelEntity?.SetAnimParameter( "b_grounded", Owner.GroundEntity.IsValid() );
 			ViewModelEntity?.SetAnimParameter( "aim_pitch", Owner.EyeRotation.Pitch() );
-
 		}
 	}
 }

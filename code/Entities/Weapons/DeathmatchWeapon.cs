@@ -10,21 +10,14 @@
 
 	[Net, Predicted]
 	public int AmmoClip { get; set; }
-
 	[Net, Predicted]
 	public TimeSince TimeSinceReload { get; set; }
-
 	[Net, Predicted]
 	public bool IsReloading { get; set; }
-
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
 
-
 	public PickupTrigger PickupTrigger { get; protected set; }
-
-
-
 
 	public int AvailableAmmo()
 	{

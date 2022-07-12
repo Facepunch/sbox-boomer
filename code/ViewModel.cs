@@ -24,7 +24,7 @@ partial class DmViewModel : BaseViewModel
 		if ( Local.Pawn.LifeState == LifeState.Dead ) return;
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
 
-		// Shifts viewmodel to center of screen
+		// Shifts viewmodel to center of screen (temporary til we do it in model)
 		Position += Rotation.Right * -17f;
 		Position += Vector3.Up * -10f;
 
