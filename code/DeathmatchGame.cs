@@ -228,6 +228,23 @@ partial class DeathmatchGame : Game
 		}
 	}
 
+	public override void RenderHud()
+	{
+		base.RenderHud();
+
+		if ( Local.Pawn is not BoomerPlayer pl ) 
+			return;
+
+		var scale = Screen.Height / 1080.0f;
+		var screenSize = Screen.Size / scale;
+		var matrix = Matrix.CreateScale( scale );
+
+		using ( Render.Draw2D.MatrixScope( matrix ) )
+		{
+			pl.RenderHud( screenSize );
+		}
+	}
+
 	[ClientRpc]
 	public override void OnKilledMessage( long leftid, string left, long rightid, string right, string method )
 	{
