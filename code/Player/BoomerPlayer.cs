@@ -38,7 +38,7 @@ public partial class BoomerPlayer : Player
 
 		//Inventory.DeleteContents();
 		Inventory.Add( new Crowbar() );
-		Inventory.Add( new Crossbow());
+		Inventory.Add( new Crossbow() );
 
 		//GiveAmmo( AmmoType.Pistol, 25 );
 
@@ -218,17 +218,14 @@ public partial class BoomerPlayer : Player
 
 	public override void PostCameraSetup( ref CameraSetup setup )
 	{
-		setup.ZNear = 1f;
-
-		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
-			return;
-
 		base.PostCameraSetup( ref setup );
 
-		if ( setup.Viewer != null )
-		{
-			AddCameraEffects( ref setup );
-		}
+		setup.ZNear = 1f;
+
+		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
+		if ( setup.Viewer == null ) return;
+
+		AddCameraEffects( ref setup );
 	}
 
 	float walkBob = 0;
@@ -246,6 +243,11 @@ public partial class BoomerPlayer : Player
 		if ( GroundEntity != null )
 		{
 			walkBob += Time.Delta * 25.0f * speed;
+		}
+
+		if ( Controller is BoomerController ctrl && (ctrl.IsSliding || ctrl.IsDashing) )
+		{
+			walkBob = 0f;
 		}
 
 		setup.Position += up * MathF.Sin( walkBob ) * speed * 2;
@@ -363,14 +365,10 @@ public partial class BoomerPlayer : Player
 
 	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )
 	{
-		if ( LifeState != LifeState.Alive )
-			return;
-
-		if ( !IsServer )
-			return;
-
-		if ( timeSinceLastFootstep < 0.2f )
-			return;
+		if ( LifeState != LifeState.Alive ) return;
+		if ( !IsServer ) return;
+		if ( timeSinceLastFootstep < 0.2f ) return;
+		if ( Controller is BoomerController ctrl && (ctrl.IsSliding || ctrl.IsDashing) ) return;
 
 		volume *= FootstepVolume();
 
