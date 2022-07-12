@@ -68,7 +68,7 @@ class Slide : BaseMoveMechanic
 			
 			foreach ( var hit in hits )
 			{
-				if ( hit is not DeathmatchPlayer pl ) continue;
+				if ( hit is not BoomerPlayer pl ) continue;
 				if ( pl == ctrl.Pawn ) continue;
 
 				pl.TakeDamage( new DamageInfo()

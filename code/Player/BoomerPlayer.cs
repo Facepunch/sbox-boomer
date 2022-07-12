@@ -1,6 +1,6 @@
 ﻿using Boomer.Movement;
 
-public partial class DeathmatchPlayer : Player
+public partial class BoomerPlayer : Player
 {
 	TimeSince timeSinceDropped;
 
@@ -13,7 +13,7 @@ public partial class DeathmatchPlayer : Player
 	public int ComboKillCount { get; set; } = 0;
 	public TimeSince TimeSinceLastKill { get; set; }
 
-	public DeathmatchPlayer()
+	public BoomerPlayer()
 	{
 		Inventory = new DmInventory( this );
 	}
@@ -67,7 +67,7 @@ public partial class DeathmatchPlayer : Player
 	[ConCmd.Admin]
 	public static void GiveAll()
 	{
-		var ply = ConsoleSystem.Caller.Pawn as DeathmatchPlayer;
+		var ply = ConsoleSystem.Caller.Pawn as BoomerPlayer;
 
 		ply.GiveAmmo( AmmoType.Pistol, 1000 );
 		//ply.GiveAmmo( AmmoType.Python, 1000 );
@@ -353,7 +353,7 @@ public partial class DeathmatchPlayer : Player
 	[ConCmd.Client]
 	public static void InflictDamage()
 	{
-		if ( Local.Pawn is DeathmatchPlayer ply )
+		if ( Local.Pawn is BoomerPlayer ply )
 		{
 			ply.TookDamage( ply.Position + ply.EyeRotation.Forward * 100.0f );
 		}

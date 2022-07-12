@@ -9,7 +9,7 @@
 
 	public override bool Add( Entity ent, bool makeActive = false )
 	{
-		var player = Owner as DeathmatchPlayer;
+		var player = Owner as BoomerPlayer;
 		var weapon = ent as DeathmatchWeapon;
 		var notices = !player.SupressPickupNotices;
 

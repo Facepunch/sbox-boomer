@@ -36,7 +36,7 @@ namespace Boomer.Movement
 		{
 			base.Simulate();
 
-			if ( ctrl.Pawn is not DeathmatchPlayer pl )
+			if ( ctrl.Pawn is not BoomerPlayer pl )
 			{
 				IsActive = false;
 				return;
@@ -64,8 +64,8 @@ namespace Boomer.Movement
 			foreach( var ent in ents )
 			{
 				if ( ent == ctrl.Pawn ) continue;
-				var dmgtype = ent is DeathmatchPlayer ? DamageFlags.Sonic : DamageFlags.Generic;
-				var dmgAmount = ent is DeathmatchPlayer ? 2 : 80;
+				var dmgtype = ent is BoomerPlayer ? DamageFlags.Sonic : DamageFlags.Generic;
+				var dmgAmount = ent is BoomerPlayer ? 2 : 80;
 
 				ent.TakeDamage( new DamageInfo()
 				{
@@ -111,7 +111,7 @@ namespace Boomer.Movement
 				if ( ent.IsWorld )
 					continue;
 
-				if ( ent is DeathmatchPlayer )
+				if ( ent is BoomerPlayer )
 					continue;
 
 				var targetPos = ent.PhysicsBody.MassCenter;

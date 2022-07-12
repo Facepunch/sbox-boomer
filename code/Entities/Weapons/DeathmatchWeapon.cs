@@ -28,7 +28,7 @@
 
 	public int AvailableAmmo()
 	{
-		var owner = Owner as DeathmatchPlayer;
+		var owner = Owner as BoomerPlayer;
 		if ( owner == null ) return 0;
 		return owner.AmmoCount( AmmoType );
 	}
@@ -65,7 +65,7 @@
 
 		TimeSinceReload = 0;
 
-		if ( Owner is DeathmatchPlayer player )
+		if ( Owner is BoomerPlayer player )
 		{
 			if ( player.AmmoCount( AmmoType ) <= 0 )
 				return;
@@ -98,7 +98,7 @@
 	{
 		IsReloading = false;
 
-		if ( Owner is DeathmatchPlayer player )
+		if ( Owner is BoomerPlayer player )
 		{
 			var ammo = player.TakeAmmo( AmmoType, ClipSize - AmmoClip );
 			if ( ammo == 0 )

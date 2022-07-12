@@ -1,4 +1,4 @@
-﻿public partial class DeathmatchPlayer
+﻿public partial class BoomerPlayer
 {
 	[Net, Local]
 	public IList<int> Ammo { get; set; }

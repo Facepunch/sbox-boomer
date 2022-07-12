@@ -86,7 +86,7 @@ partial class ChargerStation : KeyframeEntity, IUse
 
 		if ( CanUse == false ) return false;
 
-		if ( user is not DeathmatchPlayer player )
+		if ( user is not BoomerPlayer player )
 			return false;
 
 
@@ -122,13 +122,13 @@ partial class ChargerStation : KeyframeEntity, IUse
 
 	public override void StartTouch( Entity other )
 	{
-		if ( other is not DeathmatchPlayer player ) return;
+		if ( other is not BoomerPlayer player ) return;
 		CanUse = true;
 	}
 
 	public override void EndTouch( Entity other )
 	{
-		if ( other is not DeathmatchPlayer player ) return;
+		if ( other is not BoomerPlayer player ) return;
 		CanUse = false;
 	}
 

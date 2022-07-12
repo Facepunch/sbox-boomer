@@ -31,7 +31,7 @@ partial class GrenadeWeapon : DeathmatchWeapon
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
 
-		if ( Owner is not DeathmatchPlayer player ) return;
+		if ( Owner is not BoomerPlayer player ) return;
 
 		if ( !TakeAmmo( 1 ) )
 		{

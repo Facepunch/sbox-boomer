@@ -25,7 +25,7 @@ partial class HealthKit : ModelEntity, IRespawnableEntity
 	{
 		base.StartTouch( other );
 
-		if ( other is not DeathmatchPlayer pl ) return;
+		if ( other is not BoomerPlayer pl ) return;
 		if ( pl.Health >= pl.MaxHealth ) return;
 
 		var newhealth = pl.Health + 25;

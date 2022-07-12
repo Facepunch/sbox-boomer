@@ -25,7 +25,7 @@ partial class Battery : ModelEntity, IRespawnableEntity
 	{
 		base.StartTouch( other );
 
-		if ( other is not DeathmatchPlayer player ) return;
+		if ( other is not BoomerPlayer player ) return;
 		if ( player.Armour >= 100 ) return;
 
 		var newhealth = player.Armour + 25;

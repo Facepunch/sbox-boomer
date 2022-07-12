@@ -50,7 +50,7 @@ partial class DeathmatchGame : Game
 	{
 		base.ClientJoined( cl );
 
-		var player = new DeathmatchPlayer();
+		var player = new BoomerPlayer();
 		player.UpdateClothes( cl );
 		player.Respawn();
 
@@ -102,7 +102,7 @@ partial class DeathmatchGame : Game
 	{
 		base.OnKilled( client, pawn );
 
-		Hud.OnPlayerDied( To.Everyone, pawn as DeathmatchPlayer );
+		Hud.OnPlayerDied( To.Everyone, pawn as BoomerPlayer );
 	}
 
 
@@ -137,7 +137,7 @@ partial class DeathmatchGame : Game
 
 		Audio.SetEffect( "core.player.death.muffle1", 0 );
 
-		if ( Local.Pawn is DeathmatchPlayer localPlayer )
+		if ( Local.Pawn is BoomerPlayer localPlayer )
 		{
 			var timeSinceDamage = localPlayer.TimeSinceDamage.Relative;
 			var damageUi = timeSinceDamage.LerpInverse( 0.25f, 0.0f, true ) * 0.3f;
@@ -237,7 +237,7 @@ partial class DeathmatchGame : Game
 
 	public override void RenderHud()
 	{
-		var localPawn = Local.Pawn as DeathmatchPlayer;
+		var localPawn = Local.Pawn as BoomerPlayer;
 		if ( localPawn == null ) return;
 
 		//

@@ -1,4 +1,4 @@
-﻿public partial class DeathmatchPlayer
+﻿public partial class BoomerPlayer
 {
 	public ClothingContainer Clothing { get; protected set; }
 

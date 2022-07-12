@@ -1,7 +1,7 @@
 ﻿public partial class DeathmatchHud : HudEntity<HudRootPanel>
 {
 	[ClientRpc]
-	public void OnPlayerDied( DeathmatchPlayer player )
+	public void OnPlayerDied( BoomerPlayer player )
 	{
 		Host.AssertClient();
 	}

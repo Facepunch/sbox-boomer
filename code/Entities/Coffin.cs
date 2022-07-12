@@ -1,4 +1,5 @@
-﻿partial class Coffin : ModelEntity
+﻿
+partial class Coffin : ModelEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/dm_coffin.vmdl" );
 
@@ -15,7 +16,7 @@
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
-	public void Populate( DeathmatchPlayer player )
+	public void Populate( BoomerPlayer player )
 	{
 		Ammos.AddRange( player.Ammo );
 
@@ -35,7 +36,7 @@
 		if ( IsClient )
 			return;
 
-		if ( other is not DeathmatchPlayer player )
+		if ( other is not BoomerPlayer player )
 			return;
 
 		if ( player.LifeState == LifeState.Dead )

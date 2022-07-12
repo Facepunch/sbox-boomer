@@ -5,7 +5,7 @@ using Sandbox.UI.Construct;
 /// When a player is within radius of the camera we add this to their entity.
 /// We remove it again when they go out of range.
 /// </summary>
-internal class NameTagComponent : EntityComponent<DeathmatchPlayer>
+internal class NameTagComponent : EntityComponent<BoomerPlayer>
 {
 	NameTag NameTag;
 
@@ -39,7 +39,7 @@ internal class NameTagComponent : EntityComponent<DeathmatchPlayer>
 	[Event.Frame]
 	public static void SystemUpdate()
 	{
-		foreach ( var player in Sandbox.Entity.All.OfType<DeathmatchPlayer>() )
+		foreach ( var player in Sandbox.Entity.All.OfType<BoomerPlayer>() )
 		{
 			if ( player.IsLocalPawn && player.IsFirstPersonMode )
 			{

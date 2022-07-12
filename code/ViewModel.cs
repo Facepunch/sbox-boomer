@@ -10,7 +10,7 @@ partial class DmViewModel : BaseViewModel
 	{
 		base.PostCameraSetup( ref camSetup );
 
-		if( Local.Pawn is DeathmatchPlayer pl && pl.Controller is BoomerController ctrl )
+		if( Local.Pawn is BoomerPlayer pl && pl.Controller is BoomerController ctrl )
 		{
 			ShouldBob = !ctrl.IsSliding && !ctrl.IsDashing;
 			TargetRoll = ctrl.IsSliding ? -30f : 0f;

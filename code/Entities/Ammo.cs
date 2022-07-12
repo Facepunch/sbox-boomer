@@ -23,7 +23,7 @@
 	{
 		base.Touch( other );
 
-		if ( other is not DeathmatchPlayer player )
+		if ( other is not BoomerPlayer player )
 			return;
 
 		if ( other.LifeState != LifeState.Alive )

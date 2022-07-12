@@ -35,7 +35,7 @@ namespace Boomer.Movement
 
 			Sound.FromWorld( "player.land1", ctrl.Pawn.Position );
 
-			if ( ctrl.Pawn is not DeathmatchPlayer p ) return;
+			if ( ctrl.Pawn is not BoomerPlayer p ) return;
 
 			var dmg = GetFallDamage( prevFallSpeed );
 

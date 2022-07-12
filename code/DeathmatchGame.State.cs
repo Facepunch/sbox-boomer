@@ -58,7 +58,7 @@ partial class DeathmatchGame : Game
 
 	private bool HasEnoughPlayers()
 	{
-		if ( All.OfType<DeathmatchPlayer>().Count() < 2 )
+		if ( All.OfType<BoomerPlayer>().Count() < 2 )
 			return false;
 
 		return true;
@@ -72,7 +72,7 @@ partial class DeathmatchGame : Game
 			cl.SetInt( "deaths", 0 );
 		}
 
-		All.OfType<DeathmatchPlayer>().ToList().ForEach( x =>
+		All.OfType<BoomerPlayer>().ToList().ForEach( x =>
 		{
 			x.Respawn();
 		} );
