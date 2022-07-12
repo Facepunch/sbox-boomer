@@ -1,48 +1,35 @@
 ﻿using Boomer.Movement;
 partial class DmViewModel : BaseViewModel
 {
-	float walkBob = 0;
+	bool ShouldBob = true;
+	float TargetRoll = 0f;
+	float WalkBob = 0f;
+	float MyRoll = 0f;
 
 	public override void PostCameraSetup( ref CameraSetup camSetup )
 	{
 		base.PostCameraSetup( ref camSetup );
 
-		Position += Rotation.Right * -17f;
-		Position += Vector3.Up * -10f;
-
-		//camSetup.ViewModelFieldOfView = camSetup.FieldOfView + (FieldOfView - 80);
+		if( Local.Pawn is DeathmatchPlayer pl && pl.Controller is BoomerController ctrl )
+		{
+			ShouldBob = !ctrl.IsSliding && !ctrl.IsDashing;
+			TargetRoll = ctrl.IsSliding ? -30f : 0f;
+		}
 
 		AddCameraEffects( ref camSetup );
 	}
 
-	protected Rotation NewRotation;
-
-	protected Vector3 Acceleration;
-
-	float MyRoll = 0f;
-
-	Rotation MyRotation;
-
 	private void AddCameraEffects( ref CameraSetup camSetup )
 	{
-		//Rotation = Local.Pawn.EyeRotation;
+		if ( Local.Pawn.LifeState == LifeState.Dead ) return;
+		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
 
-		if ( Local.Pawn.LifeState == LifeState.Dead )
-			return;
-
-		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
-			return;
-		var player = Local.Pawn as DeathmatchPlayer;
-		var ctrl = player.Controller as BoomerController;
-
-		if ( ctrl.IsSliding || ctrl.IsDashing )
-		{
-			walkBob = 0f;
-		}
+		// Shifts viewmodel to center of screen
+		Position += Rotation.Right * -17f;
+		Position += Vector3.Up * -10f;
 
 		// Slide Tilt
-		var targetRoll = ctrl.IsSliding ? -30f : 0f;
-		MyRoll = MyRoll.LerpTo( targetRoll, Time.Delta * 10f );
+		MyRoll = MyRoll.LerpTo( TargetRoll, Time.Delta * 10f );
 		Rotation *= Rotation.From( 0, 0, MyRoll );
 
 		//
@@ -52,20 +39,18 @@ partial class DmViewModel : BaseViewModel
 		var left = camSetup.Rotation.Left;
 		var up = camSetup.Rotation.Up;
 
-		if ( Owner.GroundEntity != null )
+		if ( ShouldBob && Owner.GroundEntity != null )
 		{
-			walkBob += Time.Delta * 25.0f * speed;
-
+			WalkBob += Time.Delta * 25.0f * speed;
 		}
 
-		Position += up * MathF.Sin( walkBob ) * speed * -1;
-		Position += left * MathF.Sin( walkBob * 0.5f ) * speed * -0.5f;
+		Position += up * MathF.Sin( WalkBob ) * speed * -1;
+		Position += left * MathF.Sin( WalkBob * 0.5f ) * speed * -0.5f;
 
 		var uitx = new Sandbox.UI.PanelTransform();
-		uitx.AddTranslateY( MathF.Sin( walkBob * 1.0f ) * speed * -4.0f );
-		uitx.AddTranslateX( MathF.Sin( walkBob * 0.5f ) * speed * -3.0f );
+		uitx.AddTranslateY( MathF.Sin( WalkBob * 1.0f ) * speed * -4.0f );
+		uitx.AddTranslateX( MathF.Sin( WalkBob * 0.5f ) * speed * -3.0f );
 
 		HudRootPanel.Current.Style.Transform = uitx;
-
 	}
 }

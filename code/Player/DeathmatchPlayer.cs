@@ -6,12 +6,10 @@ public partial class DeathmatchPlayer : Player
 
 	[Net]
 	public float Armour { get; set; } = 0;
-
 	[Net]
 	public float MaxHealth { get; set; } = 100;
 
 	public bool SupressPickupNotices { get; private set; }
-
 	public int ComboKillCount { get; set; } = 0;
 	public TimeSince TimeSinceLastKill { get; set; }
 
@@ -25,9 +23,7 @@ public partial class DeathmatchPlayer : Player
 		SetModel( "models/citizen/citizen.vmdl" );
 
 		Controller = new BoomerController();
-
 		Animator = new StandardPlayerAnimator();
-
 		CameraMode = new FirstPersonCamera();
 
 		EnableAllCollisions = true;

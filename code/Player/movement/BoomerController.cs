@@ -11,11 +11,11 @@ namespace Boomer.Movement
 		[Net] public float EnergyRegen { get; set; } = 20f;
 		[Net] public float MaxEnergy { get; set; } = 120f;
 		[Net] public bool IsRegeneratingEnergy { get; set; }
-		[Net] public bool IsSliding { get; set; }
-		[Net] public bool IsDashing { get; set; }
-		[Net] public bool IsHolding { get; set; }
 		[Net] public float EnergyDrain { get; set; } = 20f;
 		[Net, Predicted] public Vector3 Impulse { get; set; }
+
+		public bool IsSliding => GetMechanic<Slide>()?.IsActive ?? false;
+		public bool IsDashing => GetMechanic<GroundDash>()?.IsActive ?? false;
 
 		[Net] public int DashCount { get; set; } = 2;
 
@@ -27,8 +27,6 @@ namespace Boomer.Movement
 
 		private List<BaseMoveMechanic> mechanics = new();
 		private BaseMoveMechanic activeMechanic => mechanics.FirstOrDefault( x => x.IsActive );
-
-		public IReadOnlyList<BaseMoveMechanic> Mechanics => mechanics;
 
 		public bool PlayerPickedUpGlider { get; private set; } = false;
 
