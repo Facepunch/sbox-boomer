@@ -9,14 +9,11 @@ class GroundDash : BaseMoveMechanic
 
 	public override bool AlwaysSimulate => true;
 	public override bool TakesOverControl => false;
-
+	public TimeSince TimeSinceDash { get; private set; }
 	public int AmountOfDash { get; private set; }
 
 	public bool IsAirDashing;
-
 	private bool CanDash;
-
-	private TimeSince LastGroundDash;
 
 	public GroundDash( BoomerController controller )
 		: base( controller )
@@ -28,7 +25,7 @@ class GroundDash : BaseMoveMechanic
 	{
 		base.PostSimulate();
 
-		if ( ctrl.GroundEntity != null && ctrl.DashCount >= 0)
+		if ( ctrl.GroundEntity != null && ctrl.DashCount >= 0 )
 		{
 			CanDash = true;
 			IsAirDashing = false;
@@ -36,10 +33,10 @@ class GroundDash : BaseMoveMechanic
 
 		if ( ctrl.GroundEntity != null && ctrl.DashCount <= 1 )
 		{
-			if (LastGroundDash > 1)
+			if ( TimeSinceDash > 1 )
 			{
 				ctrl.DashCount = 2;
-				LastGroundDash = 0;
+				TimeSinceDash = 0;
 				Sound.FromScreen( "charge_added" ).SetVolume( .1f );
 			}
 		}
@@ -47,7 +44,7 @@ class GroundDash : BaseMoveMechanic
 		var result = new Vector3( Input.Forward, Input.Left, 0 );
 		result *= Input.Rotation;
 
-		if (ctrl.GroundEntity != null && InputActions.Walk.Pressed() && CanDash == true )
+		if ( ctrl.GroundEntity != null && InputActions.Walk.Pressed() && CanDash == true )
 		{
 
 			if ( ctrl.DashCount == 0 )
@@ -57,7 +54,7 @@ class GroundDash : BaseMoveMechanic
 				return;
 			}
 
-			LastGroundDash = 0;
+			TimeSinceDash = 0;
 
 			ctrl.DashCount--;
 
@@ -89,7 +86,7 @@ class GroundDash : BaseMoveMechanic
 
 		if ( !ctrl.Pawn.IsServer ) return;
 		using var _ = Prediction.Off();
-		
+
 		Particles.Create( "particles/gameplay/screeneffects/dash/ss_dash.vpcf", ctrl.Pawn );
 		Sound.FromWorld( "player.land1", ctrl.Pawn.Position );
 	}
