@@ -26,40 +26,32 @@ public partial class BoomerPlayer : Player
 		Animator = new StandardPlayerAnimator();
 		CameraMode = new FirstPersonCamera();
 
+		Health = 100;
+		Armour = 0;
+
 		EnableAllCollisions = true;
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		ClearAmmo();
-		Clothing.DressEntity( this );
-
 		SupressPickupNotices = true;
+		{
+			ClearAmmo();
+			GiveAmmo( AmmoType.Crossbow, 25 );
+			GiveAmmo( AmmoType.Buckshot, 25 );
+			GiveAmmo( AmmoType.Nails, 250 );
+			GiveAmmo( AmmoType.Grenade, 4 );
 
-		//Inventory.DeleteContents();
-		Inventory.Add( new Crowbar() );
-		Inventory.Add( new Crossbow() );
-
-		//GiveAmmo( AmmoType.Pistol, 25 );
-
-		GiveAmmo( AmmoType.Crossbow, 25 );
-		//ply.GiveAmmo( AmmoType.Python, 1000 );
-		GiveAmmo( AmmoType.Buckshot, 25 );
-		GiveAmmo( AmmoType.Nails, 250 );
-		GiveAmmo( AmmoType.Grenade, 4 );
-		//ply.GiveAmmo( AmmoType.Tripmine, 1000 );
-
-		//ply.Inventory.Add( new Python() );
-		Inventory.Add( new Shotgun() );
-		Inventory.Add( new SMG(), true );
-		Inventory.Add( new NailGun() );
-		Inventory.Add( new GrenadeWeapon() );
-		//ply.Inventory.Add( new TripmineWeapon() );
-
-
+			Inventory.Add( new Crowbar() );
+			Inventory.Add( new Crossbow() );
+			Inventory.Add( new Shotgun() );
+			Inventory.Add( new SMG(), true );
+			Inventory.Add( new NailGun() );
+			Inventory.Add( new GrenadeWeapon() );
+		}
 		SupressPickupNotices = false;
-		Health = 100;
-		Armour = 0;
+
+		Clothing.DressEntity( this );
 
 		base.Respawn();
 	}
@@ -70,18 +62,14 @@ public partial class BoomerPlayer : Player
 		var ply = ConsoleSystem.Caller.Pawn as BoomerPlayer;
 
 		ply.GiveAmmo( AmmoType.Pistol, 1000 );
-		//ply.GiveAmmo( AmmoType.Python, 1000 );
 		ply.GiveAmmo( AmmoType.Buckshot, 1000 );
 		ply.GiveAmmo( AmmoType.Crossbow, 1000 );
 		ply.GiveAmmo( AmmoType.Grenade, 1000 );
-		//ply.GiveAmmo( AmmoType.Tripmine, 1000 );
 
-		//ply.Inventory.Add( new Python() );
 		ply.Inventory.Add( new Shotgun() );
 		ply.Inventory.Add( new SMG() );
 		ply.Inventory.Add( new Crossbow() );
 		ply.Inventory.Add( new GrenadeWeapon() );
-		//ply.Inventory.Add( new TripmineWeapon() );
 	}
 
 	public override void OnKilled()
@@ -136,7 +124,6 @@ public partial class BoomerPlayer : Player
 
 		base.BuildInput( input );
 	}
-
 
 	public override void Simulate( Client cl )
 	{
