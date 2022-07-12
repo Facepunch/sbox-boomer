@@ -10,7 +10,7 @@ partial class Shotgun : DeathmatchWeapon
 	public override AmmoType AmmoType => AmmoType.Buckshot;
 	public override int ClipSize => 8;
 	public override float ReloadTime => 0.5f;
-	public override int Bucket => 3;
+	public override int Bucket => 2;
 	public override int BucketWeight => 200;
 
 	[Net, Predicted]

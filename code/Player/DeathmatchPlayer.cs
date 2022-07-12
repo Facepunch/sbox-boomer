@@ -42,11 +42,11 @@ public partial class DeathmatchPlayer : Player
 
 		//Inventory.DeleteContents();
 		Inventory.Add( new Crowbar() );
-		Inventory.Add( new Pistol(), true );
+		Inventory.Add( new Crossbow());
 
 		//GiveAmmo( AmmoType.Pistol, 25 );
 
-		GiveAmmo( AmmoType.Pistol, 25 );
+		GiveAmmo( AmmoType.Crossbow, 25 );
 		//ply.GiveAmmo( AmmoType.Python, 1000 );
 		GiveAmmo( AmmoType.Buckshot, 25 );
 		GiveAmmo( AmmoType.Nails, 250 );
@@ -55,7 +55,7 @@ public partial class DeathmatchPlayer : Player
 
 		//ply.Inventory.Add( new Python() );
 		Inventory.Add( new Shotgun() );
-		Inventory.Add( new SMG() );
+		Inventory.Add( new SMG(), true );
 		Inventory.Add( new NailGun() );
 		Inventory.Add( new GrenadeWeapon() );
 		//ply.Inventory.Add( new TripmineWeapon() );
