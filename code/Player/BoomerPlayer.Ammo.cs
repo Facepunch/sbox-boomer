@@ -86,6 +86,7 @@
 			case AmmoType.Uranium: return 100;
 			case AmmoType.Grenade: return 10;
 			case AmmoType.Satchel: return 5;
+			case AmmoType.Rails: return 5;
 			case AmmoType.Tripmine: return 5;
 			case AmmoType.Snark: return 15;
 		}
@@ -104,6 +105,7 @@ public enum AmmoType
 	Python,
 	Grenade,
 	Satchel,
+	Rails,
 	Tripmine,
 	Snark,
 	RPG,

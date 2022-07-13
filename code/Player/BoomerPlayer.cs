@@ -40,14 +40,14 @@ public partial class BoomerPlayer : Player
 			GiveAmmo( AmmoType.Crossbow, 25 );
 			GiveAmmo( AmmoType.Buckshot, 25 );
 			GiveAmmo( AmmoType.Nails, 250 );
-			GiveAmmo( AmmoType.Grenade, 4 );
+			GiveAmmo( AmmoType.Rails, 4 );
 
 			Inventory.Add( new Crowbar() );
 			Inventory.Add( new Crossbow() );
 			Inventory.Add( new Shotgun() );
 			Inventory.Add( new SMG(), true );
 			Inventory.Add( new NailGun() );
-			Inventory.Add( new GrenadeWeapon() );
+			Inventory.Add( new RailGun() );
 		}
 		SupressPickupNotices = false;
 
