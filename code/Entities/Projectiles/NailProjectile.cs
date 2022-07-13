@@ -33,6 +33,7 @@ partial class NailProjectile : ModelEntity
 		var tr = Trace.Ray( start, end )
 				.UseHitboxes()
 				//.HitLayer( CollisionLayer.Water, !InWater )
+				.WithAnyTags( "weapon", "player","solid" )
 				.Ignore( Owner )
 				.Ignore( this )
 				.Size( 1.0f )
@@ -44,7 +45,7 @@ partial class NailProjectile : ModelEntity
 			// TODO: CLINK NOISE (unless flesh)
 
 			// TODO: SPARKY PARTICLES (unless flesh)
-
+			
 			Stuck = true;
 			Position = tr.EndPosition + Rotation.Forward * -1;
 
@@ -54,7 +55,6 @@ partial class NailProjectile : ModelEntity
 													.UsingTraceResult( tr )
 													.WithAttacker( Owner )
 													.WithWeapon( this );
-
 				tr.Entity.TakeDamage( damageInfo );
 			}
 
@@ -70,11 +70,13 @@ partial class NailProjectile : ModelEntity
 			velocity = default;
 
 			// delete self in 60 seconds
-			_ = DeleteAsync( 60.0f );
+			_ = DeleteAsync( 10.0f );
 		}
 		else
 		{
 			Position = end;
+			_ = DeleteAsync( 10.0f );
 		}
+		_ = DeleteAsync( 10.0f );
 	}
 }
