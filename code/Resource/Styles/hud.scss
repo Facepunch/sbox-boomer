@@ -190,7 +190,7 @@ vitals
     }
 
     dashcount {
-        background-color: rgba( #333, 1);
+        background-color: rgba( #333, .25);
         padding: 16px;
         margin: 5px;
         font-size: 32px;
@@ -211,7 +211,7 @@ vitals
 }
 
 .inventory, .ammobar, healthhud, armourhud, gamehud {
-    background-color: rgba( #333, 1);
+    background-color: rgba( #333, .25);
     padding: 16px;
     margin: 5px;
     font-size: 32px;

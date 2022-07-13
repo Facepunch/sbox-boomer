@@ -43,10 +43,10 @@ inventorycolumn {
 		}
 	}
 
-	opacity: 0.1;
+	opacity: 0.01;
 
 	&.active {
-		opacity: 1;
+		opacity: .25;
 
 		inventoryicon {
 			transition: all 0.1s ease-out;
@@ -98,7 +98,7 @@ inventoryicon {
 	}
 
 	&.empty {
-		opacity: 0.25;
+		opacity: 0.1;
 		background-color: #c004;
 		color: #f002;
 
