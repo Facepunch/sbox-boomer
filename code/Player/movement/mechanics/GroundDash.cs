@@ -33,7 +33,7 @@ class GroundDash : BaseMoveMechanic
 
 		if ( ctrl.GroundEntity != null && ctrl.DashCount <= 1 )
 		{
-			if ( TimeSinceDash > 1 )
+			if ( TimeSinceDash > 2 )
 			{
 				ctrl.DashCount = 2;
 				TimeSinceDash = 0;

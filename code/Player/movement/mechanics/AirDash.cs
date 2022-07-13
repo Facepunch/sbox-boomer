@@ -39,7 +39,7 @@ namespace Boomer.Movement
 			}
 			if ( ctrl.DashCount <= 1 )
 			{
-				if ( LastAirDash > 1 )
+				if ( LastAirDash > 2 )
 				{
 					LastAirDash = 0;
 					if ( ctrl.GroundEntity != null )
