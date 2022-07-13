@@ -37,6 +37,7 @@ class GroundDash : BaseMoveMechanic
 			{
 				ctrl.DashCount = 2;
 				TimeSinceDash = 0;
+				if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
 				Sound.FromScreen( "charge_added" ).SetVolume( .1f );
 			}
 		}
