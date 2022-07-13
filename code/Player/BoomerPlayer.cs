@@ -40,7 +40,8 @@ public partial class BoomerPlayer : Player
 			GiveAmmo( AmmoType.Rockets, 25 );
 			GiveAmmo( AmmoType.Buckshot, 25 );
 			GiveAmmo( AmmoType.Nails, 250 );
-			GiveAmmo( AmmoType.Rails, 4 );
+			GiveAmmo( AmmoType.Rails, 16 );
+			GiveAmmo( AmmoType.Grenade, 25 );
 
 			Inventory.Add( new Crowbar() );
 			Inventory.Add( new RocketLauncher() );
@@ -48,6 +49,7 @@ public partial class BoomerPlayer : Player
 			Inventory.Add( new SMG(), true );
 			Inventory.Add( new NailGun() );
 			Inventory.Add( new RailGun() );
+			Inventory.Add( new GrenadeLauncher() );
 		}
 		SupressPickupNotices = false;
 
