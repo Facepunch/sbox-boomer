@@ -102,38 +102,14 @@ partial class NailGun : DeathmatchWeapon
 	{
 		var draw = Render.Draw2D;
 
-		if ( Zoomed )
-			timeSinceZoomed = 0;
-
-		var zoomFactor = timeSinceZoomed.Relative.LerpInverse( 0.4f, 0 );
-
 		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
 		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.2f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		draw.Color = color.WithAlpha( 0.2f + lastAttack.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// outer lines
+		// center
 		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.4f, 0.0f ) );
-			var length = 10.0f;
-			var gap = 40.0f + shootEase * 50.0f;
-
-			gap -= zoomFactor * 20.0f;
-
-
-			draw.Line( 0, center + Vector2.Up * gap, length, center + Vector2.Up * (gap + length) );
-			draw.Line( 0, center - Vector2.Up * gap, length, center - Vector2.Up * (gap + length) );
-
-			draw.Color = draw.Color.WithAlpha( draw.Color.a * zoomFactor );
-
-			for ( int i = 0; i < 4; i++ )
-			{
-				gap += 40.0f;
-
-				draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
-				draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
-
-				draw.Color = draw.Color.WithAlpha( draw.Color.a * 0.5f );
-			}
+			var shootEase = 1 + Easing.BounceIn( lastAttack.LerpInverse( 0.3f, 0.0f ) );
+			draw.Ring( center, 15 * shootEase, 14 * shootEase );
 		}
 	}
 }
