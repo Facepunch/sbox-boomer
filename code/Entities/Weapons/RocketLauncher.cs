@@ -11,7 +11,6 @@ partial class RocketLauncher : DeathmatchWeapon
 	public override float PrimaryRate => 1;
 	public override int Bucket => 4;
 	public override AmmoType AmmoType => AmmoType.Rockets;
-	public override int ClipSize => 5;
 
 	[Net, Predicted]
 	public bool Zoomed { get; set; }
@@ -20,7 +19,6 @@ partial class RocketLauncher : DeathmatchWeapon
 	{
 		base.Spawn();
 
-		AmmoClip = 5;
 		Model = WorldModel;
 	}
 

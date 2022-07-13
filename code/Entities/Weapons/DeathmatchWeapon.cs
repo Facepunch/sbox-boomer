@@ -1,23 +1,18 @@
 ﻿partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 {
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
-	public virtual int ClipSize => 16;
-	public virtual float ReloadTime => 3.0f;
 	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
 
 	public virtual int Order => (Bucket * 10000) + BucketWeight;
 
-	[Net, Predicted]
-	public int AmmoClip { get; set; }
-	[Net, Predicted]
-	public TimeSince TimeSinceReload { get; set; }
-	[Net, Predicted]
-	public bool IsReloading { get; set; }
+
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
 
 	public PickupTrigger PickupTrigger { get; protected set; }
+
+	protected BoomerPlayer Player => Owner as BoomerPlayer;
 
 	public int AvailableAmmo()
 	{
@@ -31,8 +26,6 @@
 		base.ActiveStart( ent );
 
 		TimeSinceDeployed = 0;
-
-		IsReloading = false;
 	}
 
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
@@ -50,25 +43,6 @@
 
 	public override void Reload()
 	{
-		if ( IsReloading )
-			return;
-
-		if ( AmmoClip >= ClipSize )
-			return;
-
-		TimeSinceReload = 0;
-
-		if ( Owner is BoomerPlayer player )
-		{
-			if ( player.AmmoCount( AmmoType ) <= 0 )
-				return;
-		}
-
-		IsReloading = true;
-
-		(Owner as AnimatedEntity).SetAnimParameter( "b_reload", true );
-
-		StartReloadEffects();
 	}
 
 	public override void Simulate( Client owner )
@@ -76,29 +50,7 @@
 		if ( TimeSinceDeployed < 0.6f )
 			return;
 
-		if ( !IsReloading )
-		{
-			base.Simulate( owner );
-		}
-
-		if ( IsReloading && TimeSinceReload > ReloadTime )
-		{
-			OnReloadFinish();
-		}
-	}
-
-	public virtual void OnReloadFinish()
-	{
-		IsReloading = false;
-
-		if ( Owner is BoomerPlayer player )
-		{
-			var ammo = player.TakeAmmo( AmmoType, ClipSize - AmmoClip );
-			if ( ammo == 0 )
-				return;
-
-			AmmoClip += ammo;
-		}
+		base.Simulate( owner );
 	}
 
 	[ClientRpc]
@@ -182,11 +134,7 @@
 
 	public bool TakeAmmo( int amount )
 	{
-		if ( AmmoClip < amount )
-			return false;
-
-		AmmoClip -= amount;
-		return true;
+		return Player.TakeAmmo( AmmoType, amount ) > 0;
 	}
 
 	[ClientRpc]
@@ -217,7 +165,6 @@
 
 	public bool IsUsable()
 	{
-		if ( AmmoClip > 0 ) return true;
 		if ( AmmoType == AmmoType.None ) return true;
 		return AvailableAmmo() > 0;
 	}
@@ -249,7 +196,7 @@
 	{
 		var center = screensize * 0.5f;
 
-		if ( IsReloading || (AmmoClip == 0 && ClipSize > 1) )
+		if ( AvailableAmmo() == 0 )
 			CrosshairLastReload = 0;
 
 		RenderCrosshair( center, CrosshairLastShoot.Relative, CrosshairLastReload.Relative );

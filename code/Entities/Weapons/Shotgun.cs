@@ -7,8 +7,6 @@ partial class Shotgun : DeathmatchWeapon
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
 	public override float PrimaryRate => 1.2f;
 	public override AmmoType AmmoType => AmmoType.Buckshot;
-	public override int ClipSize => 8;
-	public override float ReloadTime => 0.5f;
 	public override int Bucket => 1;
 	public override int BucketWeight => 200;
 
@@ -20,17 +18,6 @@ partial class Shotgun : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
-		AmmoClip = 6;
-	}
-
-	public override void Simulate( Client owner )
-	{
-		base.Simulate( owner );
-
-		if ( IsReloading && (Input.Pressed( InputButton.PrimaryAttack ) || Input.Pressed( InputButton.SecondaryAttack )) )
-		{
-			StopReloading = true;
-		}
 	}
 
 	public override void AttackPrimary()
@@ -75,37 +62,37 @@ partial class Shotgun : DeathmatchWeapon
 		CrosshairLastShoot = 0;
 	}
 
-	public override void OnReloadFinish()
-	{
-		var stop = StopReloading;
+	//public override void OnReloadFinish()
+	//{
+	//	var stop = StopReloading;
 
-		StopReloading = false;
-		IsReloading = false;
+	//	StopReloading = false;
+	//	IsReloading = false;
 
-		TimeSincePrimaryAttack = 0;
-		TimeSinceSecondaryAttack = 0;
+	//	TimeSincePrimaryAttack = 0;
+	//	TimeSinceSecondaryAttack = 0;
 
-		if ( AmmoClip >= ClipSize )
-			return;
+	//	if ( AmmoClip >= ClipSize )
+	//		return;
 
-		if ( Owner is BoomerPlayer player )
-		{
-			var ammo = player.TakeAmmo( AmmoType, 1 );
-			if ( ammo == 0 )
-				return;
+	//	if ( Owner is BoomerPlayer player )
+	//	{
+	//		var ammo = player.TakeAmmo( AmmoType, 1 );
+	//		if ( ammo == 0 )
+	//			return;
 
-			AmmoClip += ammo;
+	//		AmmoClip += ammo;
 
-			if ( AmmoClip < ClipSize && !stop )
-			{
-				Reload();
-			}
-			else
-			{
-				FinishReload();
-			}
-		}
-	}
+	//		if ( AmmoClip < ClipSize && !stop )
+	//		{
+	//			Reload();
+	//		}
+	//		else
+	//		{
+	//			FinishReload();
+	//		}
+	//	}
+	//}
 
 	[ClientRpc]
 	protected virtual void FinishReload()

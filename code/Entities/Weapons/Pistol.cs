@@ -8,7 +8,6 @@ partial class Pistol : DeathmatchWeapon
 
 	public override float PrimaryRate => 12.0f;
 	public override float SecondaryRate => 4.5f;
-	public override float ReloadTime => 3.0f;
 
 	public override int Bucket => 1;
 
@@ -17,7 +16,6 @@ partial class Pistol : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
-		AmmoClip = 12;
 	}
 
 	public override bool CanPrimaryAttack()

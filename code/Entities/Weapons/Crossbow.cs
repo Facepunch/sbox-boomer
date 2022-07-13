@@ -11,7 +11,6 @@ partial class Crossbow : DeathmatchWeapon
 	public override float PrimaryRate => 1;
 	public override int Bucket => 4;
 	public override AmmoType AmmoType => AmmoType.Crossbow;
-	public override int ClipSize => 5;
 
 	[Net, Predicted]
 	public bool Zoomed { get; set; }
@@ -20,7 +19,6 @@ partial class Crossbow : DeathmatchWeapon
 	{
 		base.Spawn();
 
-		AmmoClip = 5;
 		Model = WorldModel;
 	}
 
@@ -30,12 +28,9 @@ partial class Crossbow : DeathmatchWeapon
 		{
 			DryFire();
 
-			if ( AvailableAmmo() > 0 )
-			{
-				Reload();
-			}
 			return;
 		}
+
 		float flGroundFactor = 1.0f;
 		float flMul = 100f * 1.8f;
 		float forMul = 585f * 1.4f;

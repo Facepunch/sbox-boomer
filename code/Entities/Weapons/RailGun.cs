@@ -11,7 +11,6 @@ partial class RailGun : DeathmatchWeapon
 	public override float PrimaryRate => .5f;
 	public override int Bucket => 5;
 	public override AmmoType AmmoType => AmmoType.Rails;
-	public override int ClipSize => 5;
 
 	public string RailEffect = "particles/gameplay/weapons/railgun/railgun_trace.vpcf";
 
@@ -22,7 +21,6 @@ partial class RailGun : DeathmatchWeapon
 	{
 		base.Spawn();
 
-		AmmoClip = 5;
 		Model = WorldModel;
 	}
 

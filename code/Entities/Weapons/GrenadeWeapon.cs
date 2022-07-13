@@ -8,9 +8,7 @@ partial class GrenadeWeapon : DeathmatchWeapon
 
 	public override float PrimaryRate => 1.0f;
 	public override float SecondaryRate => 1.0f;
-	public override float ReloadTime => 1.0f;
 	public override AmmoType AmmoType => AmmoType.Grenade;
-	public override int ClipSize => 1;
 	public override int Bucket => 5;
 
 	public override void Spawn()
@@ -18,7 +16,6 @@ partial class GrenadeWeapon : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
-		AmmoClip = 1;
 	}
 
 	public override bool CanPrimaryAttack()
@@ -70,7 +67,7 @@ partial class GrenadeWeapon : DeathmatchWeapon
 
 		Reload();
 
-		if ( IsServer && AmmoClip == 0 && player.AmmoCount( AmmoType.Grenade ) == 0 )
+		if ( IsServer && player.AmmoCount( AmmoType.Grenade ) == 0 )
 		{
 			Delete();
 			player.SwitchToBestWeapon();

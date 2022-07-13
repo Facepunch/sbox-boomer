@@ -21,7 +21,7 @@
 		//
 		if ( weapon != null && IsCarryingType( ent.GetType() ) )
 		{
-			var ammo = weapon.AmmoClip;
+			var ammo = weapon.AvailableAmmo();
 			var ammoType = weapon.AmmoType;
 
 			if ( ammo > 0 )

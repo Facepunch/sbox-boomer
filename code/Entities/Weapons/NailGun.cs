@@ -9,7 +9,6 @@ partial class NailGun : DeathmatchWeapon
 	public override float PrimaryRate => 10;
 	public override int Bucket => 2;
 	public override AmmoType AmmoType => AmmoType.Nails;
-	public override int ClipSize => 100;
 
 	[Net, Predicted]
 	public bool Zoomed { get; set; }
@@ -18,7 +17,6 @@ partial class NailGun : DeathmatchWeapon
 	{
 		base.Spawn();
 
-		AmmoClip = 100;
 		Model = WorldModel;
 	}
 

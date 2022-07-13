@@ -8,9 +8,7 @@ partial class TripmineWeapon : DeathmatchWeapon
 
 	public override float PrimaryRate => 100.0f;
 	public override float SecondaryRate => 100.0f;
-	public override float ReloadTime => 0.1f;
 	public override AmmoType AmmoType => AmmoType.Tripmine;
-	public override int ClipSize => 1;
 	public override int Bucket => 4;
 	public override int BucketWeight => 200;
 
@@ -64,7 +62,7 @@ partial class TripmineWeapon : DeathmatchWeapon
 		TakeAmmo( 1 );
 		Reload();
 
-		if ( IsServer && AmmoClip == 0 && player.AmmoCount( AmmoType.Tripmine ) == 0 )
+		if ( IsServer && player.AmmoCount( AmmoType.Tripmine ) == 0 )
 		{
 			Delete();
 			player.SwitchToBestWeapon();

@@ -8,8 +8,6 @@ partial class Python : DeathmatchWeapon
 
 	public override float PrimaryRate => 2.0f;
 	public override float SecondaryRate => 1.0f;
-	public override float ReloadTime => 7.0f;
-	public override int ClipSize => 6;
 	public override AmmoType AmmoType => AmmoType.Python;
 
 	public override int Bucket => 1;
@@ -26,7 +24,6 @@ partial class Python : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
-		AmmoClip = 6;
 	}
 
 	public override bool CanPrimaryAttack()
