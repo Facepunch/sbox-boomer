@@ -39,7 +39,7 @@ partial class Shotgun : DeathmatchWeapon
 		//
 		// Shoot the bullets
 		//
-		ShootBullet( 0.2f, 0.3f, 20.0f, 2.0f, 4 );
+		ShootBullet( 0.6f, 0.3f, 10.0f, 2.0f, 4 );
 	}
 
 	[ClientRpc]
