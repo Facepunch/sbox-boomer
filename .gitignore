@@ -12,3 +12,5 @@ Properties/launchSettings.json
 *.generated.*
 *.*_c
 *.los
+*.sapaths
+*.sareverb
