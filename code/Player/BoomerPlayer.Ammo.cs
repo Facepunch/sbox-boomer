@@ -82,6 +82,7 @@
 			case AmmoType.Buckshot: return 100;
 			case AmmoType.Crossbow: return 40;
 			case AmmoType.Nails: return 200;
+			case AmmoType.Rockets: return 200;
 			case AmmoType.RPG: return 5;
 			case AmmoType.Uranium: return 100;
 			case AmmoType.Grenade: return 10;
@@ -102,6 +103,7 @@ public enum AmmoType
 	Buckshot,
 	Crossbow,
 	Nails,
+	Rockets,
 	Python,
 	Grenade,
 	Satchel,

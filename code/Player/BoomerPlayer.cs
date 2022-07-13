@@ -37,13 +37,13 @@ public partial class BoomerPlayer : Player
 		SupressPickupNotices = true;
 		{
 			ClearAmmo();
-			GiveAmmo( AmmoType.Crossbow, 25 );
+			GiveAmmo( AmmoType.Rockets, 25 );
 			GiveAmmo( AmmoType.Buckshot, 25 );
 			GiveAmmo( AmmoType.Nails, 250 );
 			GiveAmmo( AmmoType.Rails, 4 );
 
 			Inventory.Add( new Crowbar() );
-			Inventory.Add( new Crossbow() );
+			Inventory.Add( new RocketLauncher() );
 			Inventory.Add( new Shotgun() );
 			Inventory.Add( new SMG(), true );
 			Inventory.Add( new NailGun() );
