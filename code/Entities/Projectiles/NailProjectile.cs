@@ -2,15 +2,16 @@
 [HideInEditor]
 partial class NailProjectile : ModelEntity
 {
-	public static readonly Model WorldModel = Model.Load( "weapons/rust_crossbow/rust_crossbow_bolt.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/editor/arrow.vmdl" );
 
 	bool Stuck;
 
 	public override void Spawn()
 	{
 		base.Spawn();
-
+		
 		Model = WorldModel;
+
 	}
 
 

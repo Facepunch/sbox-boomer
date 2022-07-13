@@ -6,8 +6,8 @@ partial class NailGun : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_smg/rust_smg.vmdl" );
 	public override string ViewModelPath => "weapons/rust_smg/v_rust_smg.vmdl";
 
-	public override float PrimaryRate => 14;
-	public override int Bucket => 3;
+	public override float PrimaryRate => 10;
+	public override int Bucket => 2;
 	public override AmmoType AmmoType => AmmoType.Nails;
 	public override int ClipSize => 100;
 
@@ -43,7 +43,7 @@ partial class NailGun : DeathmatchWeapon
 		if ( IsServer )
 		{
 			var bolt = new NailProjectile();
-			bolt.Position = Owner.EyePosition;
+			bolt.Position = Owner.EyePosition + new Vector3(0,0,-10);
 			bolt.Rotation = Owner.EyeRotation;
 			bolt.Owner = Owner;
 			bolt.Velocity = Owner.EyeRotation.Forward * 100;
