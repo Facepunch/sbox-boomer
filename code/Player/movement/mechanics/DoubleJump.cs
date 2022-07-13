@@ -44,6 +44,7 @@ namespace Boomer.Movement
 				if ( InputActions.Jump.Pressed() )
 				{
 					justJumped = true;
+					
 				}
 			}
 
@@ -54,7 +55,7 @@ namespace Boomer.Movement
 			if ( ctrl.GetMechanic<Glide>()?.Gliding ?? false ) return;
 			//if ( ctrl.GetMechanic<DuckJump>().IsDuckjumping == true ) return;
 			if ( DoubleJumpsRemaining <= 0 ) return;
-
+			
 			ctrl.Velocity = ctrl.Velocity.WithZ( DoubleJumpStrength );
 			DoubleJumpsRemaining--;
 
@@ -77,7 +78,7 @@ namespace Boomer.Movement
 
 			ctrl.AddEvent( "jump" );
 
-			Sound.FromWorld( "player.djump", ctrl.Pawn.Position );
+			Sound.FromWorld( "player.land1", ctrl.Pawn.Position );
 		}
 
 	}

@@ -88,7 +88,7 @@ class GroundDash : BaseMoveMechanic
 		using var _ = Prediction.Off();
 
 		Particles.Create( "particles/gameplay/screeneffects/dash/ss_dash.vpcf", ctrl.Pawn );
-		Sound.FromWorld( "player.land1", ctrl.Pawn.Position );
+		Sound.FromWorld( "jump.double", ctrl.Pawn.Position );
 	}
 
 }

@@ -103,7 +103,7 @@
 			{
 				if ( AutoJump && !InputActions.Jump.Down() )
 					return;
-
+				Sound.FromWorld( "jump.single", ctrl.Position );
 				var flGroundFactor = 1.0f;
 				var flMul = JumpPower;
 				var startz = ctrl.Velocity.z;
