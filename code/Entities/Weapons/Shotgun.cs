@@ -10,9 +10,6 @@ partial class Shotgun : DeathmatchWeapon
 	public override int Bucket => 1;
 	public override int BucketWeight => 200;
 
-	[Net, Predicted]
-	public bool StopReloading { get; set; }
-
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -28,11 +25,6 @@ partial class Shotgun : DeathmatchWeapon
 		if ( !TakeAmmo( 1 ) )
 		{
 			DryFire();
-
-			if ( AvailableAmmo() > 0 )
-			{
-				Reload();
-			}
 			return;
 		}
 
@@ -61,38 +53,6 @@ partial class Shotgun : DeathmatchWeapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;
 	}
-
-	//public override void OnReloadFinish()
-	//{
-	//	var stop = StopReloading;
-
-	//	StopReloading = false;
-	//	IsReloading = false;
-
-	//	TimeSincePrimaryAttack = 0;
-	//	TimeSinceSecondaryAttack = 0;
-
-	//	if ( AmmoClip >= ClipSize )
-	//		return;
-
-	//	if ( Owner is BoomerPlayer player )
-	//	{
-	//		var ammo = player.TakeAmmo( AmmoType, 1 );
-	//		if ( ammo == 0 )
-	//			return;
-
-	//		AmmoClip += ammo;
-
-	//		if ( AmmoClip < ClipSize && !stop )
-	//		{
-	//			Reload();
-	//		}
-	//		else
-	//		{
-	//			FinishReload();
-	//		}
-	//	}
-	//}
 
 	[ClientRpc]
 	protected virtual void FinishReload()
