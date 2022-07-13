@@ -59,7 +59,7 @@ namespace Boomer.Movement
 			//if ( ctrl.Velocity.WithZ( 0 ).Length >= 130 ) return;
 			//Some Reason this made the longjump feel bad.
 
-			var result = new Vector3( Input.Forward, Input.Left, 0 );
+			var result = new Vector3( Input.Forward, Input.Left, 0 ).Normal;
 			result *= Input.Rotation;
 
 			if ( InputActions.Walk.Pressed() && CanDash == true )

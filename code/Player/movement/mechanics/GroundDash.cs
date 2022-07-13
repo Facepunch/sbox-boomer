@@ -41,7 +41,7 @@ class GroundDash : BaseMoveMechanic
 			}
 		}
 
-		var result = new Vector3( Input.Forward, Input.Left, 0 );
+		var result = new Vector3( Input.Forward, Input.Left, 0 ).Normal;
 		result *= Input.Rotation;
 
 		if ( ctrl.GroundEntity != null && InputActions.Walk.Pressed() && CanDash == true )
