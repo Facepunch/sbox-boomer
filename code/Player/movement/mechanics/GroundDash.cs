@@ -84,8 +84,7 @@ class GroundDash : BaseMoveMechanic
 	{
 		ctrl.AddEvent( "jump" );
 
-		if ( !ctrl.Pawn.IsServer ) return;
-		using var _ = Prediction.Off();
+		if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
 
 		Particles.Create( "particles/gameplay/screeneffects/dash/ss_dash.vpcf", ctrl.Pawn );
 		Sound.FromWorld( "jump.double", ctrl.Pawn.Position );
