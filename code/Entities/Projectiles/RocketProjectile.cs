@@ -21,6 +21,13 @@ partial class RocketProjectile : ModelEntity
 
 	}
 
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		RocketTrailSound.Stop();
+	}
+
 	public override void OnNewModel( Model model )
 	{
 		base.OnNewModel( model );
