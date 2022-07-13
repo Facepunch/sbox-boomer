@@ -5,12 +5,11 @@ partial class Shotgun : DeathmatchWeapon
 {
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" );
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
-	public override float PrimaryRate => 1;
-	public override float SecondaryRate => 1;
+	public override float PrimaryRate => 1.2f;
 	public override AmmoType AmmoType => AmmoType.Buckshot;
 	public override int ClipSize => 8;
 	public override float ReloadTime => 0.5f;
-	public override int Bucket => 2;
+	public override int Bucket => 1;
 	public override int BucketWeight => 200;
 
 	[Net, Predicted]
@@ -64,31 +63,6 @@ partial class Shotgun : DeathmatchWeapon
 		ShootBullet( 0.2f, 0.3f, 20.0f, 2.0f, 4 );
 	}
 
-	public override void AttackSecondary()
-	{
-		TimeSincePrimaryAttack = -0.5f;
-		TimeSinceSecondaryAttack = -0.5f;
-
-		if ( !TakeAmmo( 2 ) )
-		{
-			DryFire();
-			return;
-		}
-
-		(Owner as AnimatedEntity).SetAnimParameter( "b_attack", true );
-
-		//
-		// Tell the clients to play the shoot effects
-		//
-		DoubleShootEffects();
-		PlaySound( "rust_pumpshotgun.shootdouble" );
-
-		//
-		// Shoot the bullets
-		//
-		ShootBullet( 0.4f, 0.3f, 20.0f, 2.0f, 8 );
-	}
-
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
@@ -98,17 +72,6 @@ partial class Shotgun : DeathmatchWeapon
 		Particles.Create( "particles/pistol_ejectbrass.vpcf", EffectEntity, "ejection_point" );
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );
-		CrosshairLastShoot = 0;
-	}
-
-	[ClientRpc]
-	protected virtual void DoubleShootEffects()
-	{
-		Host.AssertClient();
-
-		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
-
-		ViewModelEntity?.SetAnimParameter( "fire_double", true );
 		CrosshairLastShoot = 0;
 	}
 
