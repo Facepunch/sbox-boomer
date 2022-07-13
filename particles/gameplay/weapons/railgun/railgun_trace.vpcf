@@ -21,6 +21,12 @@
 			}
 		},
 	]
+	m_Operators = 
+	[
+		{
+			_class = "C_OP_FadeAndKill"
+		},
+	]
 	m_Renderers = 
 	[
 		{
@@ -1425,7 +1431,7 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/tripmine_laser_end.vpcf"
+			m_ChildRef = resource:"particles/gameplay/weapons/railgun/railgun_trace_a.vpcf"
 		},
 	]
 }
