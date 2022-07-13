@@ -18,7 +18,13 @@ partial class GLGrenade : BasePhysics
 		GrenadeParticles = Particles.Create( "particles/grenade.vpcf", this, "trail_particle", true );
 		GrenadeParticles.SetPosition( 0, Position );
 	}
-
+	public override void Touch( Entity other )
+	{
+		if ( other is BoomerPlayer player )
+			return;
+		
+		PlaySound( "gl.impact" );
+	}
 	public async Task BlowIn( float seconds )
 	{
 		await Task.DelaySeconds( seconds );

@@ -8,13 +8,26 @@ partial class RocketProjectile : ModelEntity
 
 	public Entity IgnoreEntity { get; set; }
 
+	private Sound RocketTrailSound;
+
 	public override void Spawn()
 	{
+
+
 		base.Spawn();
 
 		Model = WorldModel;
+
+
 	}
 
+	public override void OnNewModel( Model model )
+	{
+		base.OnNewModel( model );
+
+		RocketTrailSound = Sound.FromEntity( "rl.trail", this );
+
+	}
 
 	[Event.Tick.Server]
 	public virtual void Tick()
@@ -58,6 +71,13 @@ partial class RocketProjectile : ModelEntity
 
 				tr.Entity.TakeDamage( damageInfo );
 			}
+			Sound.FromWorld
+			(
+				"rl.explode",
+				Position
+			);
+			RocketTrailSound.Stop();
+
 
 			// TODO: Parent to bone so this will stick in the meaty heads
 			SetParent( tr.Entity, tr.Bone );
@@ -88,6 +108,8 @@ partial class RocketProjectile : ModelEntity
 		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", Position );
 		//trailParticle.Destroy();
 
+		
+		
 		foreach ( var item in Entity.FindInSphere( Position, 96f ).ToList() )
 		{
 			if ( item is BoomerPlayer player )

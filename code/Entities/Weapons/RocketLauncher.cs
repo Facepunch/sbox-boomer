@@ -36,7 +36,8 @@ partial class RocketLauncher : DeathmatchWeapon
 		}
 
 		ShootEffects();
-		PlaySound( "rust_crossbow.shoot" );
+		PlaySound( "rl.shoot" );
+		PlaySound( "gl.shoot" );
 
 		// TODO - if zoomed in then instant hit, no travel, 120 damage
 

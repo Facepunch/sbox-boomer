@@ -33,7 +33,7 @@ partial class GrenadeLauncher : DeathmatchWeapon
 		// woosh sound
 		// screen shake
 
-		PlaySound( "dm.grenade_throw" );
+		PlaySound( "gl.shoot" );
 
 		Rand.SetSeed( Time.Tick );
 

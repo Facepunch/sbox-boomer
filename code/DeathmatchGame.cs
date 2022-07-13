@@ -181,7 +181,7 @@ partial class DeathmatchGame : Game
 	public static void Explosion( Entity weapon, Entity owner, Vector3 position, float radius, float damage, float forceScale )
 	{
 		// Effects
-		Sound.FromWorld( "rust_pumpshotgun.shootdouble", position );
+		Sound.FromWorld( "gl.explode", position );
 		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", position );
 
 		// Damage, etc
