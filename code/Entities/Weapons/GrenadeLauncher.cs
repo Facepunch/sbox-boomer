@@ -6,8 +6,7 @@ partial class GrenadeLauncher : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_pistol/rust_pistol.vmdl" );
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
 
-	public override float PrimaryRate => 1.0f;
-	public override float SecondaryRate => 1.0f;
+	public override float PrimaryRate => .75f;
 	public override AmmoType AmmoType => AmmoType.Grenade;
 	public override int Bucket => 3;
 
@@ -16,11 +15,6 @@ partial class GrenadeLauncher : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
-	}
-
-	public override bool CanPrimaryAttack()
-	{
-		return Input.Released( InputButton.PrimaryAttack );
 	}
 
 	public override void AttackPrimary()
