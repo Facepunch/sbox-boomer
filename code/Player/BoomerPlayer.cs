@@ -302,6 +302,16 @@ public partial class BoomerPlayer : Player
 				OnKilled();
 			}
 		}
+		
+		if ( info.Attacker is BoomerPlayer attacker )
+		{
+			if ( attacker != this )
+			{
+				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
+			}
+
+			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
+		}
 
 		//
 		// Add a score to the killer
