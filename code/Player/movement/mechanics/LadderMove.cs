@@ -24,8 +24,7 @@ namespace Boomer.Movement
 
 			var pm = Trace.Ray( start, end )
 						.Size( ctrl.Mins, ctrl.Maxs )
-						.HitLayer( CollisionLayer.All, false )
-						.HitLayer( CollisionLayer.LADDER, true )
+						.WithTag( "ladder" )
 						.Ignore( ctrl.Pawn )
 						.Run();
 
