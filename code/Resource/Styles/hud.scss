@@ -53,7 +53,23 @@ vitals
     background-image: url( /ui/weapons/dm_shotgun.png );
 }
 
-.dm_smg .icon, .dm_nailgun .icon
+.dm_railgun .icon {
+    background-image: url( /ui/weapons/dm_railgun.png );
+}
+
+.dm_nailgun .icon {
+    background-image: url( /ui/weapons/dm_nailgun.png );
+}
+
+.dm_rocketlauncher .icon {
+    background-image: url( /ui/weapons/dm_rocketlauncher.png );
+}
+
+.dm_grenadelauncher .icon {
+    background-image: url( /ui/weapons/dm_grenadelauncher.png );
+}
+
+.dm_smg .icon
 {
     background-image: url( /ui/weapons/dm_smg.png );
 }
