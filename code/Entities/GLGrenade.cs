@@ -1,6 +1,6 @@
-﻿[Library( "dm_handgrenade" ), HammerEntity]
-[Title( "Hand Grenade" )]
-partial class HandGrenade : BasePhysics
+﻿[Library( "dm_GLGrenade" ), HammerEntity]
+[Title( "GL Grenade" )]
+partial class GLGrenade : BasePhysics
 {
 	public static readonly Model WorldModel = Model.Load( "models/dm_grenade.vmdl" );
 
@@ -12,6 +12,8 @@ partial class HandGrenade : BasePhysics
 
 		Model = WorldModel;
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+
+		Tags.Add( "trigger" );
 
 		GrenadeParticles = Particles.Create( "particles/grenade.vpcf", this, "trail_particle", true );
 		GrenadeParticles.SetPosition( 0, Position );

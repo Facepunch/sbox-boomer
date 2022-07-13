@@ -31,11 +31,8 @@
 					{
 						_class = "PhysicsShapeCapsule"
 						parent_bone = ""
-						surface_prop = "plastic"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						surface_prop = "bouncy"
+						collision_tags = "solid"
 						radius = 3.0
 						point0 = [ -1.21507, 0.231125, 0.204849 ]
 						point1 = [ 0.939484, 0.198402, 0.183071 ]
@@ -74,5 +71,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
