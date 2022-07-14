@@ -24,9 +24,12 @@ class Dash : BaseMoveMechanic
 
 		if( TimeSinceDash > 2 && ctrl.DashCount != 2 )
 		{
-			ctrl.DashCount = 2;
-			if( ctrl.Pawn.IsLocalPawn )
-				Sound.FromScreen( "dashrecharge" ).SetVolume( 1f );
+			if ( ctrl.GroundEntity != null )
+			{
+				ctrl.DashCount = 2;
+				if ( ctrl.Pawn.IsLocalPawn )
+					Sound.FromScreen( "dashrecharge" ).SetVolume( 1f );
+			}
 		}
 
 		if ( ctrl.DashCount <= 0 ) 
