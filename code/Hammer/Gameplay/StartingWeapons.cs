@@ -2,15 +2,21 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-[Flags]
-public enum StarterWeapons
+public enum WeaponType
 {
-	Crowbar = (1 << 0),
-	Shotgun = (1 << 1),
-	Nailgun = (1 << 2),
-	GrenadeLauncher = (1 << 3),
-	RocketLauncher = (1 << 4),
-	RailGun = (1 << 5)
+	Crowbar,
+	Shotgun,
+	Nailgun,
+	GrenadeLauncher,
+	RocketLauncher,
+	RailGun
+}
+
+[GameResource( "Starting Weapon Setup", "bsw", "Starter weapon setup, so maps can define what a player starts with." )]
+public class StartWeaponGameResource : GameResource
+{
+	[Property]
+	public Dictionary<WeaponType, int> Weapons { get; set; } = new();
 }
 
 [Library( "shooter_startingweapons", Description = "Starting Weapons" )]
@@ -26,22 +32,53 @@ partial class StartingWeapons : Entity
 		Instance = this;
 	}
 
-	[Property]
-	public StarterWeapons Weapons { get; set; }
+	[Property, ResourceType( "bsw" )]
+	public string AssetPath { get; set; }
+
+	protected StartWeaponGameResource Resource;
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		Resource = ResourceLibrary.Get<StartWeaponGameResource>( AssetPath );
+	}
+
+	public DeathmatchWeapon MakeWeapon( WeaponType type )
+	{
+		return type switch
+		{
+			WeaponType.Crowbar => new Crowbar(),
+			WeaponType.Shotgun => new Shotgun(),
+			WeaponType.Nailgun => new NailGun(),
+			WeaponType.GrenadeLauncher => new GrenadeLauncher(),
+			WeaponType.RocketLauncher => new RocketLauncher(),
+			WeaponType.RailGun => new RailGun(),
+			_ => null
+		};
+	}
+
+	public void Give( BoomerPlayer player, WeaponType type, int ammo = 0 )
+	{
+		var weapon = MakeWeapon( type );
+		if ( !weapon.IsValid() ) return;
+
+		if ( ammo > 0 )
+		{
+			player.GiveAmmo( weapon.AmmoType, ammo );
+		}
+	}
 
 	public void SetupPlayer( BoomerPlayer player )
 	{
-		if ( Weapons.HasFlag( StarterWeapons.Crowbar ) )
-			player.Inventory.Add( new Crowbar() );
-		if ( Weapons.HasFlag( StarterWeapons.Shotgun ) )
-			player.Inventory.Add( new Shotgun() );
-		if ( Weapons.HasFlag( StarterWeapons.Nailgun ) )
-			player.Inventory.Add( new NailGun() );
-		if ( Weapons.HasFlag( StarterWeapons.GrenadeLauncher ) )
-			player.Inventory.Add( new GrenadeLauncher() );
-		if ( Weapons.HasFlag( StarterWeapons.RocketLauncher ) )
-			player.Inventory.Add( new RocketLauncher() );
-		if ( Weapons.HasFlag( StarterWeapons.RailGun ) )
-			player.Inventory.Add( new RailGun() );
+		if ( Resource is null ) return;
+
+		foreach ( var kv in Resource.Weapons )
+		{
+			var type = kv.Key;
+			var ammo = kv.Value;
+
+			Give( player, type, ammo );
+		}
 	}
 }

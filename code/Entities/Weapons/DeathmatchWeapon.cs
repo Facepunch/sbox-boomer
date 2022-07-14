@@ -1,4 +1,4 @@
-﻿partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
+﻿public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 {
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
 	public virtual int Bucket => 1;
