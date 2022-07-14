@@ -72,25 +72,6 @@ public partial class BoomerPlayer : Player
 		//ply.Inventory.Add( new GrenadeLauncher() );
 	}
 
-	public void PlayerStartingWeapons( bool crowbar,bool shotgun, bool nailgun, bool grenadelauncher, bool rocketlauncher,bool railgun)
-	{
-		SupressPickupNotices = true;
-		{
-			GiveAmmo( AmmoType.Rockets, 250 );
-			GiveAmmo( AmmoType.Buckshot, 250 );
-			GiveAmmo( AmmoType.Nails, 250 );
-			GiveAmmo( AmmoType.Rails, 250 );
-			GiveAmmo( AmmoType.Grenade, 250 );
-			if ( crowbar ) Inventory.Add( new Crowbar() );
-			if ( shotgun ) Inventory.Add( new Shotgun() );
-			if ( nailgun ) Inventory.Add( new NailGun() );
-			if ( grenadelauncher ) Inventory.Add( new GrenadeLauncher() );
-			if ( rocketlauncher ) Inventory.Add( new RocketLauncher() );
-			if ( railgun ) Inventory.Add( new RailGun() );
-
-		}
-	}
-
 	public override void OnKilled()
 	{
 		base.OnKilled();
@@ -416,6 +397,13 @@ public partial class BoomerPlayer : Player
 		if ( ActiveChild is DeathmatchWeapon weapon )
 		{
 			weapon.RenderHud( screenSize );
+		}
+	}
+	public void ApplyForce( Vector3 force )
+	{
+		if ( Controller is BoomerController controller )
+		{
+			controller.Impulse += force;
 		}
 	}
 

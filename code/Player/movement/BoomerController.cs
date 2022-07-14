@@ -90,6 +90,13 @@ partial class BoomerController : BasePlayerController
 
 		// Pros: modular, easy to edit/add movement mechanics
 
+		if ( Impulse.Length > 0 )
+		{
+			ClearGroundEntity();
+			Velocity += Impulse;
+			Impulse = 0f;
+		}
+
 		foreach ( var m in mechanics )
 		{
 			if ( !m.IsActive && !m.AlwaysSimulate ) continue;
