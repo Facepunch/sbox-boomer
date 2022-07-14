@@ -48,7 +48,7 @@ namespace Boomer.Movement
 						ctrl.DashCount = 2;
 						
 						if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
-						Sound.FromScreen( "charge_added" ).SetVolume( .1f );
+						Sound.FromScreen( "dashrecharge" ).SetVolume( 1f );
 					}
 
 				}
