@@ -34,22 +34,7 @@ public partial class BoomerPlayer : Player
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		SupressPickupNotices = true;
-		{
-			ClearAmmo();
-			GiveAmmo( AmmoType.Rockets, 25 );
-			GiveAmmo( AmmoType.Buckshot, 25 );
-			GiveAmmo( AmmoType.Nails, 250 );
-			GiveAmmo( AmmoType.Rails, 16 );
-			GiveAmmo( AmmoType.Grenade, 25 );
 
-			Inventory.Add( new Crowbar() );
-			Inventory.Add( new RocketLauncher() );
-			Inventory.Add( new Shotgun() );
-			Inventory.Add( new NailGun(), true );
-			Inventory.Add( new RailGun() );
-			Inventory.Add( new GrenadeLauncher() );
-		}
 		SupressPickupNotices = false;
 
 		Clothing.DressEntity( this );
@@ -74,6 +59,25 @@ public partial class BoomerPlayer : Player
 		//ply.Inventory.Add( new NailGun());
 		//ply.Inventory.Add( new RailGun() );
 		//ply.Inventory.Add( new GrenadeLauncher() );
+	}
+
+	public void PlayerStartingWeapons( bool crowbar,bool shotgun, bool nailgun, bool grenadelauncher, bool rocketlauncher,bool railgun)
+	{
+		SupressPickupNotices = true;
+		{
+			GiveAmmo( AmmoType.Rockets, 250 );
+			GiveAmmo( AmmoType.Buckshot, 250 );
+			GiveAmmo( AmmoType.Nails, 250 );
+			GiveAmmo( AmmoType.Rails, 250 );
+			GiveAmmo( AmmoType.Grenade, 250 );
+			if ( crowbar ) Inventory.Add( new Crowbar() );
+			if ( shotgun ) Inventory.Add( new Shotgun() );
+			if ( nailgun ) Inventory.Add( new NailGun() );
+			if ( grenadelauncher ) Inventory.Add( new GrenadeLauncher() );
+			if ( rocketlauncher ) Inventory.Add( new RocketLauncher() );
+			if ( railgun ) Inventory.Add( new RailGun() );
+
+		}
 	}
 
 	public override void OnKilled()
