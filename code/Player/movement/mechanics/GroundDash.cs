@@ -11,6 +11,7 @@ class GroundDash : BaseMoveMechanic
 	public override bool TakesOverControl => false;
 	public TimeSince TimeSinceDash { get; private set; }
 	public int AmountOfDash { get; private set; }
+	public float DashAlpha => Math.Clamp( TimeSinceDash / .35f, 0, 1f );
 
 	public bool IsAirDashing;
 	private bool CanDash;
@@ -36,7 +37,6 @@ class GroundDash : BaseMoveMechanic
 			if ( TimeSinceDash > 2 )
 			{
 				ctrl.DashCount = 2;
-				TimeSinceDash = 0;
 				if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
 				Sound.FromScreen( "charge_added" ).SetVolume( .1f );
 			}

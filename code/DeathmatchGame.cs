@@ -155,9 +155,13 @@ partial class DeathmatchGame : Game
 
 			if( localPlayer.Controller is BoomerController ctrl )
 			{
+				var alpha = ctrl.GetMechanic<GroundDash>().DashAlpha;
+				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
 				postProcess.MotionBlur.Enabled = ctrl.IsDashing;
-				postProcess.MotionBlur.Scale = 10f;
-				postProcess.MotionBlur.Samples = 2;
+				postProcess.MotionBlur.Scale = parabola * 5f;
+				postProcess.MotionBlur.Samples = 8;
+				postProcess.Brightness.Enabled = ctrl.IsDashing;
+				postProcess.Brightness.Multiplier = 1f + 2f * parabola;
 			}
 
 			var healthDelta = localPlayer.Health.LerpInverse( 0, 100.0f, true );

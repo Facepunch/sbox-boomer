@@ -11,7 +11,7 @@ partial class BoomerController : BasePlayerController
 	[Net, Predicted] public Vector3 Impulse { get; set; }
 
 	public bool IsSliding => GetMechanic<Slide>()?.IsActive ?? false;
-	public bool IsDashing => (GetMechanic<GroundDash>()?.TimeSinceDash ?? .35f) < .35f;
+	public bool IsDashing => (GetMechanic<GroundDash>()?.DashAlpha ?? 1) < 1;
 
 	[Net] public int DashCount { get; set; } = 2;
 

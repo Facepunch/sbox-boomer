@@ -18,7 +18,9 @@ namespace Boomer.Movement
 
 		private bool CanDash;
 
-		private TimeSince LastAirDash;
+		private TimeSince TimeSinceDash;
+
+		public float DashAlpha => Math.Clamp( TimeSinceDash / .35f, 0, 1f );
 
 		public AirDash( BoomerController controller )
 			: base( controller )
@@ -39,9 +41,8 @@ namespace Boomer.Movement
 			}
 			if ( ctrl.DashCount <= 1 )
 			{
-				if ( LastAirDash > 2 )
+				if ( TimeSinceDash > 2 )
 				{
-					LastAirDash = 0;
 					if ( ctrl.GroundEntity != null )
 					{
 						ctrl.DashCount = 2;
@@ -73,6 +74,7 @@ namespace Boomer.Movement
 					return;
 				}
 
+				TimeSinceDash = 0;
 				ctrl.DashCount--;
 
 				float flGroundFactor = 1.0f;
