@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 [Flags]
 public enum StarterWeapons
 {
-	Crowbar,
-	Shotgun,
-	Nailgun,
-	GrenadeLauncher,
-	RocketLauncher,
-	RailGun
+	Crowbar = (1 << 0),
+	Shotgun = (1 << 1),
+	Nailgun = (1 << 2),
+	GrenadeLauncher = (1 << 3),
+	RocketLauncher = (1 << 4),
+	RailGun = (1 << 5)
 }
 
 [Library( "shooter_startingweapons", Description = "Starting Weapons" )]
