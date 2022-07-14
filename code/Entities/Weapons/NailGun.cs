@@ -6,6 +6,7 @@ partial class NailGun : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_smg/rust_smg.vmdl" );
 	public override string ViewModelPath => "weapons/rust_smg/v_rust_smg.vmdl";
 
+	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float PrimaryRate => 10;
 	public override int Bucket => 2;
 	public override AmmoType AmmoType => AmmoType.Nails;
@@ -32,7 +33,9 @@ partial class NailGun : DeathmatchWeapon
 			}
 			return;
 		}
-
+		
+		AnimationOwner.SetAnimParameter( "b_attack", true );
+		
 		var tr = Trace.Ray( Owner.EyePosition + new Vector3( 0, 0, -10 ), Owner.EyePosition + new Vector3( 0, 0, -10 ) + Owner.EyeRotation.Forward * 48 )
 		.UseHitboxes()
 		//.HitLayer( CollisionLayer.Water, !InWater )
@@ -94,7 +97,6 @@ partial class NailGun : DeathmatchWeapon
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;
-
 	}
 
 	TimeSince timeSinceZoomed;
