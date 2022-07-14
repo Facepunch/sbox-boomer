@@ -63,6 +63,8 @@ partial class StartingWeapons : Entity
 		var weapon = MakeWeapon( type );
 		if ( !weapon.IsValid() ) return;
 
+		player.Inventory.Add( weapon );
+
 		if ( ammo > 0 )
 		{
 			player.GiveAmmo( weapon.AmmoType, ammo );
