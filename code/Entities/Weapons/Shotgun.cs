@@ -11,6 +11,7 @@ partial class Shotgun : DeathmatchWeapon
 	public override AmmoType AmmoType => AmmoType.Buckshot;
 	public override int Bucket => 1;
 	public override int BucketWeight => 200;
+	public override int MoveSpeed => Zoomed ? 150 : base.MoveSpeed;
 
 	[Net, Predicted]
 	public bool Zoomed { get; set; }
@@ -55,21 +56,6 @@ partial class Shotgun : DeathmatchWeapon
 		base.Simulate( cl );
 
 		Zoomed = Input.Down( InputButton.SecondaryAttack );
-
-		if ( Owner is BoomerPlayer player )
-		{
-			if ( player.Controller is BoomerController controller )
-			if ( Zoomed )
-			{	
-				controller.GetMechanic<Walk>().DefaultSpeed = 150;
-
-			}
-			else
-				{
-					controller.GetMechanic<Walk>().DefaultSpeed = 350;
-				}
-		}
-
 	}
 
 	public override void PostCameraSetup( ref CameraSetup camSetup )

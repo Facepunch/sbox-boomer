@@ -41,6 +41,10 @@
 
 		public override float GetWishSpeed()
 		{
+			if( ctrl.Pawn is BoomerPlayer pl && pl.ActiveChild is DeathmatchWeapon wpn )
+			{
+				return wpn.MoveSpeed;
+			}
 			return DefaultSpeed;
 		}
 
@@ -124,7 +128,7 @@
 		// how long it takes to go from standing to max speed
 		private float GetMomentum()
 		{
-			var a = ctrl.Velocity.WithZ( 0 ).Length / DefaultSpeed;
+			var a = ctrl.Velocity.WithZ( 0 ).Length / GetWishSpeed();
 			a = Easing.EaseIn( a );
 			return a * 2.4f;
 		}

@@ -13,6 +13,7 @@ partial class RailGun : DeathmatchWeapon
 	public override AmmoType AmmoType => AmmoType.Rails;
 
 	public string RailEffect = "particles/gameplay/weapons/railgun/railgun_trace.vpcf";
+	public override int MoveSpeed => Zoomed ? 150 : base.MoveSpeed;
 
 	[Net, Predicted]
 	public bool Zoomed { get; set; }

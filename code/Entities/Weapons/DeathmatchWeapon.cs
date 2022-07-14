@@ -3,6 +3,7 @@
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
 	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
+	public virtual int MoveSpeed => 350;
 
 	public virtual int Order => (Bucket * 10000) + BucketWeight;
 
