@@ -8,7 +8,8 @@
 		public float GroundAngle => 46.0f;
 		public bool AutoJump => true;
 		public float JumpPower => 322f;
-		public float DefaultSpeed => 350f;
+		
+		public float DefaultSpeed = 350f;
 		public float GroundFriction => 4.0f;
 		public float MaxNonJumpVelocity => 140.0f;
 		public float SurfaceFriction { get; set; } = 1f;

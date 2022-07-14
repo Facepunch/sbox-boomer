@@ -1,4 +1,6 @@
-﻿[Library( "dm_shotgun" ), HammerEntity]
+﻿using Boomer.Movement;
+
+[Library( "dm_shotgun" ), HammerEntity]
 [EditorModel( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" )]
 [Title( "Shotgun" ), Category( "Weapons" )]
 partial class Shotgun : DeathmatchWeapon
@@ -10,6 +12,9 @@ partial class Shotgun : DeathmatchWeapon
 	public override int Bucket => 1;
 	public override int BucketWeight => 200;
 
+	[Net, Predicted]
+	public bool Zoomed { get; set; }
+	
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -35,11 +40,55 @@ partial class Shotgun : DeathmatchWeapon
 		//
 		ShootEffects();
 		PlaySound( "rust_pumpshotgun.shoot" );
+		if ( Zoomed )
+		{
+			ShootBullet( 0.025f, 0.3f, 20.0f, 2.0f, 4 );
+		}
+		else
+		{
+			ShootBullet( 0.2f, 0.3f, 15.0f, 2.0f, 4 );
+		}
+	}
 
-		//
-		// Shoot the bullets
-		//
-		ShootBullet( 0.6f, 0.3f, 10.0f, 2.0f, 4 );
+	public override void Simulate( Client cl )
+	{
+		base.Simulate( cl );
+
+		Zoomed = Input.Down( InputButton.SecondaryAttack );
+
+		if ( Owner is BoomerPlayer player )
+		{
+			if ( player.Controller is BoomerController controller )
+			if ( Zoomed )
+			{	
+				controller.GetMechanic<Walk>().DefaultSpeed = 150;
+
+			}
+			else
+				{
+					controller.GetMechanic<Walk>().DefaultSpeed = 350;
+				}
+		}
+
+	}
+
+	public override void PostCameraSetup( ref CameraSetup camSetup )
+	{
+		base.PostCameraSetup( ref camSetup );
+
+		if ( Zoomed )
+		{
+			camSetup.FieldOfView -= 30f;
+			camSetup.ViewModel.FieldOfView = 100;
+		}
+	}
+
+	public override void BuildInput( InputBuilder owner )
+	{
+		if ( Zoomed )
+		{
+			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, .65f );
+		}
 	}
 
 	[ClientRpc]
