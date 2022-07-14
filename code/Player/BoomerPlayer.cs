@@ -45,9 +45,8 @@ public partial class BoomerPlayer : Player
 
 			Inventory.Add( new Crowbar() );
 			Inventory.Add( new RocketLauncher() );
-			Inventory.Add( new Shotgun(), true );
-			Inventory.Add( new SMG());
-			Inventory.Add( new NailGun() );
+			Inventory.Add( new Shotgun() );
+			Inventory.Add( new NailGun(), true );
 			Inventory.Add( new RailGun() );
 			Inventory.Add( new GrenadeLauncher() );
 		}
@@ -63,15 +62,18 @@ public partial class BoomerPlayer : Player
 	{
 		var ply = ConsoleSystem.Caller.Pawn as BoomerPlayer;
 
-		ply.GiveAmmo( AmmoType.Pistol, 1000 );
-		ply.GiveAmmo( AmmoType.Buckshot, 1000 );
-		ply.GiveAmmo( AmmoType.Crossbow, 1000 );
-		ply.GiveAmmo( AmmoType.Grenade, 1000 );
+		ply.GiveAmmo( AmmoType.Rockets, 250 );
+		ply.GiveAmmo( AmmoType.Buckshot, 250 );
+		ply.GiveAmmo( AmmoType.Nails, 250 );
+		ply.GiveAmmo( AmmoType.Rails, 250 );
+		ply.GiveAmmo( AmmoType.Grenade, 250 );
 
-		ply.Inventory.Add( new Shotgun() );
-		ply.Inventory.Add( new SMG() );
-		ply.Inventory.Add( new Crossbow() );
-		ply.Inventory.Add( new GrenadeWeapon() );
+		//ply.Inventory.Add( new Crowbar() );
+		//ply.Inventory.Add( new RocketLauncher() );
+		//ply.Inventory.Add( new Shotgun() );
+		//ply.Inventory.Add( new NailGun());
+		//ply.Inventory.Add( new RailGun() );
+		//ply.Inventory.Add( new GrenadeLauncher() );
 	}
 
 	public override void OnKilled()
