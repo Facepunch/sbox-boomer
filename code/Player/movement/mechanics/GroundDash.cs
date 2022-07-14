@@ -1,22 +1,18 @@
 ﻿
 namespace Boomer.Movement;
 
-class GroundDash : BaseMoveMechanic
+class Dash : BaseMoveMechanic
 {
 
-	public override string HudName => "Ground Dash";
-	public override string HudDescription => $"Press {InputActions.Walk.GetButtonOrigin()} in air";
+	public override string HudName => "Dash";
+	public override string HudDescription => $"Press {InputActions.Walk.GetButtonOrigin()}";
 
 	public override bool AlwaysSimulate => true;
 	public override bool TakesOverControl => false;
 	public TimeSince TimeSinceDash { get; private set; }
-	public int AmountOfDash { get; private set; }
 	public float DashAlpha => Math.Clamp( TimeSinceDash / .35f, 0, 1f );
 
-	public bool IsAirDashing;
-	private bool CanDash;
-
-	public GroundDash( BoomerController controller )
+	public Dash( BoomerController controller )
 		: base( controller )
 	{
 
@@ -26,59 +22,39 @@ class GroundDash : BaseMoveMechanic
 	{
 		base.PostSimulate();
 
-		if ( ctrl.GroundEntity != null && ctrl.DashCount >= 0 )
+		if( TimeSinceDash > 2 && ctrl.DashCount != 2 )
 		{
-			CanDash = true;
-			IsAirDashing = false;
-		}
-
-		if ( ctrl.GroundEntity != null && ctrl.DashCount <= 1 )
-		{
-			if ( TimeSinceDash > 2 )
-			{
-				ctrl.DashCount = 2;
-				if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
+			ctrl.DashCount = 2;
+			if( ctrl.Pawn.IsLocalPawn )
 				Sound.FromScreen( "dashrecharge" ).SetVolume( 1f );
-			}
 		}
 
-		var result = new Vector3( Input.Forward, Input.Left, 0 ).Normal;
-		result *= Input.Rotation;
+		if ( ctrl.DashCount <= 0 ) 
+			return;
 
-		if ( ctrl.GroundEntity != null && InputActions.Walk.Pressed() && CanDash == true )
+		if ( !InputActions.Walk.Pressed() )
+			return;
+
+		TimeSinceDash = 0;
+		ctrl.DashCount--;
+
+		float flGroundFactor = ctrl.GroundEntity != null ? 1.75f : 1.0f;
+		float flMul = 100f * 1.2f;
+		float forMul = 585f * 2.2f;
+
+		var dashDirection = new Vector3( Input.Forward, Input.Left, 0 ).Normal;
+		dashDirection *= Input.Rotation;
+
+		if ( dashDirection.IsNearlyZero() )
 		{
-
-			if ( ctrl.DashCount == 0 )
-			{
-				IsAirDashing = true;
-				CanDash = false;
-				return;
-			}
-
-			TimeSinceDash = 0;
-
-			ctrl.DashCount--;
-
-			float flGroundFactor = 1.75f;
-			float flMul = 100f * 1.2f;
-			float forMul = 585f * 2.2f;
-
-			if ( result.IsNearlyZero() )
-			{
-				ctrl.Velocity = ctrl.Rotation.Forward * forMul * flGroundFactor;
-				ctrl.Velocity = ctrl.Velocity.WithZ( flMul * flGroundFactor );
-				ctrl.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
-			}
-			else
-			{
-
-				ctrl.Velocity = result * forMul * flGroundFactor;
-				ctrl.Velocity = ctrl.Velocity.WithZ( flMul * flGroundFactor );
-				ctrl.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
-			}
-
-			DashEffect();
+			dashDirection = ctrl.Rotation.Forward;
 		}
+
+		ctrl.Velocity = dashDirection * forMul * flGroundFactor;
+		ctrl.Velocity = ctrl.Velocity.WithZ( flMul * flGroundFactor );
+		ctrl.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
+
+		DashEffect();
 	}
 
 	private void DashEffect()

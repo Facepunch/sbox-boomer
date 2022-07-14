@@ -11,7 +11,7 @@ partial class BoomerController : BasePlayerController
 	[Net, Predicted] public Vector3 Impulse { get; set; }
 
 	public bool IsSliding => GetMechanic<Slide>()?.IsActive ?? false;
-	public bool IsDashing => (GetMechanic<GroundDash>()?.DashAlpha ?? 1) < 1;
+	public bool IsDashing => (GetMechanic<Dash>()?.DashAlpha ?? 1) < 1;
 
 	[Net] public int DashCount { get; set; } = 2;
 
@@ -45,10 +45,9 @@ partial class BoomerController : BasePlayerController
 		mechanics.Add( new Glide( this ) );
 		mechanics.Add( new FallDamage( this ) );
 		//mechanics.Add( new LongJump( this ) );
-		mechanics.Add( new AirDash( this ) );
 		//mechanics.Add( new GroundSlam( this ) );
 		mechanics.Add( new GetPushed( this ) );
-		mechanics.Add( new GroundDash( this ) );
+		mechanics.Add( new Dash( this ) );
 
 		mechanics.Add( new LedgeGrab( this ) );
 		//mechanics.Add( new WallJump( this ) ); Bit too buggy atm

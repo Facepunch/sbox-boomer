@@ -155,7 +155,7 @@ partial class DeathmatchGame : Game
 
 			if( localPlayer.Controller is BoomerController ctrl )
 			{
-				var alpha = ctrl.GetMechanic<GroundDash>().DashAlpha;
+				var alpha = ctrl.GetMechanic<Dash>().DashAlpha;
 				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
 				postProcess.MotionBlur.Enabled = ctrl.IsDashing;
 				postProcess.MotionBlur.Scale = parabola * 5f;
