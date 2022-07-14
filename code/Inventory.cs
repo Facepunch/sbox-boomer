@@ -15,6 +15,8 @@
 
 		if ( weapon == null )
 			return false;
+		
+		if ( Count() < 1 ) makeActive = true;
 
 		if ( !base.Add( ent, makeActive ) )
 			return false;
