@@ -4,6 +4,7 @@ global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading.Tasks;
+using Boomer.Movement;
 
 /// <summary>
 /// This is the heart of the gamemode. It's responsible
@@ -152,6 +153,12 @@ partial class DeathmatchGame : Game
 				postProcess.Blur.Strength = damageUi * 0.5f;
 			}
 
+			if( localPlayer.Controller is BoomerController ctrl )
+			{
+				postProcess.MotionBlur.Enabled = ctrl.IsDashing;
+				postProcess.MotionBlur.Scale = 10f;
+				postProcess.MotionBlur.Samples = 2;
+			}
 
 			var healthDelta = localPlayer.Health.LerpInverse( 0, 100.0f, true );
 
