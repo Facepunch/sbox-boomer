@@ -7,7 +7,7 @@
   "HasAssets": true,
   "AssetsPath": "",
   "ResourcePaths": [
-    "/resource/*",
+    "/resources/*",
     "/ui/*"
   ],
   "HasCode": true,
@@ -16,13 +16,13 @@
   "Metadata": {
     "MinPlayers": 1,
     "MaxPlayers": 32,
-    "GameNetworkType": 0,
+    "GameNetworkType": "Multiplayer",
     "MapList": [
       "facepunch.crossfire"
     ],
-    "MapSelect": 2,
+    "MapSelect": "Tagged",
     "PerMapRanking": false,
-    "LeaderboardType": 0,
-    "RankType": 0
+    "LeaderboardType": "None",
+    "RankType": "None"
   }
 }
