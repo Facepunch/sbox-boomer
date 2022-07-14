@@ -37,6 +37,7 @@ inventorycolumn {
 		height: 45px;
 		overflow: hidden;
 		transition: all 0.1s ease-out;
+		background-color: rgba( #333, .25);
 
 		.icon {
 			opacity: 1;
@@ -46,7 +47,7 @@ inventorycolumn {
 	opacity: 0.01;
 
 	&.active {
-		opacity: .25;
+		opacity: 1;
 
 		inventoryicon {
 			transition: all 0.1s ease-out;
