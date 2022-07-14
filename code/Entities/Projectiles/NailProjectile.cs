@@ -6,10 +6,12 @@ partial class NailProjectile : ModelEntity
 
 	bool Stuck;
 
+	bool Passed = false;
+
 	public override void Spawn()
 	{
 		base.Spawn();
-		
+
 		Model = WorldModel;
 
 	}
@@ -23,7 +25,7 @@ partial class NailProjectile : ModelEntity
 
 		if ( Stuck )
 			return;
-
+			
 		float Speed = 1500.0f;
 		var velocity = Rotation.Forward * Speed;
 
@@ -33,19 +35,20 @@ partial class NailProjectile : ModelEntity
 		var tr = Trace.Ray( start, end )
 				.UseHitboxes()
 				//.HitLayer( CollisionLayer.Water, !InWater )
-				.WithAnyTags( "weapon", "player","solid" )
+				.WithAnyTags( "weapon", "player", "solid" )
 				.Ignore( Owner )
 				.Ignore( this )
 				.Size( 1.0f )
 				.Run();
 
-
+		FlyBy( start, end );
+		
 		if ( tr.Hit )
 		{
 			// TODO: CLINK NOISE (unless flesh)
 
 			// TODO: SPARKY PARTICLES (unless flesh)
-			
+
 			Stuck = true;
 			Position = tr.EndPosition + Rotation.Forward * -1;
 
@@ -75,8 +78,44 @@ partial class NailProjectile : ModelEntity
 		else
 		{
 			Position = end;
-			_ = DeleteAsync( 10.0f );
 		}
-		_ = DeleteAsync( 10.0f );
+	}
+
+	public void FlyBy(Vector3 start,Vector3 end)
+	{
+		var trace = Trace.Ray( start, end )
+		.WithAnyTags( "weapon", "player", "solid" )
+		.Ignore( this )
+		.Ignore( Owner )
+		.Size( 128.0f )
+		.Run();
+
+		if ( trace.Hit )
+		{
+			
+			if ( trace.Entity is BoomerPlayer player )
+			{
+				
+				if ( !Passed)
+				{
+					//
+					//Only play to flyby target
+					//
+					PlayFlyBySound( To.Single( player ), "flyby" );
+
+					//
+					//Only play once
+					//
+					Passed = true;
+				}
+			}
+
+		}
+	}
+
+	[ClientRpc]
+	public void PlayFlyBySound( string sound )
+	{
+		Sound.FromEntity( sound,this );
 	}
 }
