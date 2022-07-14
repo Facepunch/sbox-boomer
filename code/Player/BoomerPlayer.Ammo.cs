@@ -78,18 +78,12 @@
 		switch ( ammo )
 		{
 			case AmmoType.Pistol: return 250;
-			case AmmoType.Python: return 36;
 			case AmmoType.Buckshot: return 100;
-			case AmmoType.Crossbow: return 40;
 			case AmmoType.Nails: return 200;
 			case AmmoType.Rockets: return 200;
-			case AmmoType.RPG: return 5;
-			case AmmoType.Uranium: return 100;
 			case AmmoType.Grenade: return 10;
-			case AmmoType.Satchel: return 5;
 			case AmmoType.Rails: return 5;
-			case AmmoType.Tripmine: return 5;
-			case AmmoType.Snark: return 15;
+
 		}
 
 		return 0;
@@ -101,15 +95,8 @@ public enum AmmoType
 	None,
 	Pistol,
 	Buckshot,
-	Crossbow,
 	Nails,
 	Rockets,
-	Python,
 	Grenade,
-	Satchel,
-	Rails,
-	Tripmine,
-	Snark,
-	RPG,
-	Uranium
+	Rails
 }

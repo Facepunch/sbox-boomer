@@ -12,11 +12,7 @@
 
 		Model = WorldModel;
 
-		PhysicsEnabled = true;
-		UsePhysicsCollision = true;
-
-		CollisionGroup = CollisionGroup.Weapon;
-		SetInteractsAs( CollisionLayer.Debris );
+		Tags.Add( "weapon" );
 	}
 
 	public override void Touch( Entity other )
@@ -76,26 +72,4 @@ partial class AmmoBuckshot : BaseAmmo
 	public override int AmmoAmount => 12;
 
 	public override Model WorldModel => Model.Load( "models/dm_ammo_buckshot.vmdl" );
-}
-
-[Library( "dm_ammo357" ), HammerEntity]
-[EditorModel( "models/dm_ammo_357.vmdl" )]
-[Title( "357 Ammo" ), Category( "Ammo" )]
-partial class Ammo357 : BaseAmmo
-{
-	public override AmmoType AmmoType => AmmoType.Python;
-	public override int AmmoAmount => 6;
-
-	public override Model WorldModel => Model.Load( "models/dm_ammo_357.vmdl" );
-}
-
-[Library( "dm_ammocrossbow" ), HammerEntity]
-[EditorModel( "models/dm_ammo_crossbow.vmdl" )]
-[Title( "Crossbow Bolts" ), Category( "Ammo" )]
-partial class AmmoCrossbow : BaseAmmo
-{
-	public override AmmoType AmmoType => AmmoType.Crossbow;
-	public override int AmmoAmount => 5;
-
-	public override Model WorldModel => Model.Load( "models/dm_ammo_crossbow.vmdl" );
 }
