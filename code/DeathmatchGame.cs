@@ -159,7 +159,7 @@ partial class DeathmatchGame : Game
 				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
 				postProcess.MotionBlur.Enabled = ctrl.IsDashing;
 				postProcess.MotionBlur.Scale = parabola * 5f;
-				postProcess.MotionBlur.Samples = 8;
+				postProcess.MotionBlur.Samples = 4;
 				postProcess.Brightness.Enabled = ctrl.IsDashing;
 				postProcess.Brightness.Multiplier = 1f + 2f * parabola;
 			}
