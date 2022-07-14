@@ -64,7 +64,8 @@ partial class NailGun : DeathmatchWeapon
 		}
 
 		ShootEffects();
-		PlaySound( "rust_crossbow.shoot" );
+		PlaySound( "gl.shoot" );
+		PlaySound( "ng.shoot" );
 
 		// TODO - if zoomed in then instant hit, no travel, 120 damage
 

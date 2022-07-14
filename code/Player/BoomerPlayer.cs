@@ -45,8 +45,8 @@ public partial class BoomerPlayer : Player
 
 			Inventory.Add( new Crowbar() );
 			Inventory.Add( new RocketLauncher() );
-			Inventory.Add( new Shotgun() );
-			Inventory.Add( new SMG(), true );
+			Inventory.Add( new Shotgun(), true );
+			Inventory.Add( new SMG());
 			Inventory.Add( new NailGun() );
 			Inventory.Add( new RailGun() );
 			Inventory.Add( new GrenadeLauncher() );

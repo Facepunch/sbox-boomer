@@ -57,7 +57,9 @@ partial class RailGun : DeathmatchWeapon
 		// Tell the clients to play the shoot effects
 		//
 		ShootEffects();
-		PlaySound( "rust_pistol.shoot" );
+		PlaySound( "rl.shoot" );
+		PlaySound( "rg.shoot.1" );
+		PlaySound( "rg.shoot.2" );
 
 		//
 		// Shoot the bullets

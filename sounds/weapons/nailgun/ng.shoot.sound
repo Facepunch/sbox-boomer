@@ -1,0 +1,21 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		UI = false
+		Volume = 0.75
+		VolumeRandom = 0
+		Pitch = 1
+		PitchRandom = 0.03
+		Decibels = 100
+		Sounds = 
+		[
+			resource:"sounds/weapons/nailgun/ng.shoot.1.vsnd",
+			resource:"sounds/weapons/nailgun/ng.shoot.2.vsnd",
+			resource:"sounds/weapons/nailgun/ng.shoot.3.vsnd",
+		]
+		SelectionMode = "Random"
+		MaximumDistance = 2301.2522
+		MinimumDistance = 115.062614
+	}
+}
