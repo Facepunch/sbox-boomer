@@ -53,24 +53,9 @@ partial class RocketLauncher : DeathmatchWeapon
 		}
 	}
 
-	public override void Simulate( Client cl )
-	{
-		base.Simulate( cl );
-
-		Zoomed = Input.Down( InputButton.SecondaryAttack );
-	}
-
 	public override void PostCameraSetup( ref CameraSetup camSetup )
 	{
 		base.PostCameraSetup( ref camSetup );
-	}
-
-	public override void BuildInput( InputBuilder owner )
-	{
-		if ( Zoomed )
-		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, 0.2f );
-		}
 	}
 
 	[ClientRpc]
