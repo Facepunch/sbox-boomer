@@ -34,7 +34,18 @@ public partial class BoomerPlayer : Player
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-
+		
+		SupressPickupNotices = true;
+			var w = StartingWeapons.Instance;
+			if ( w.IsValid() )
+			{
+				w.SetupPlayer( this );
+			}
+			else
+			{
+				Inventory.Add( new Crowbar() );
+				Inventory.Add( new NailGun() );
+			}
 		SupressPickupNotices = false;
 
 		Clothing.DressEntity( this );
