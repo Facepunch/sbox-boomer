@@ -6,6 +6,11 @@
 
 	public virtual int Order => (Bucket * 10000) + BucketWeight;
 
+	// We'll store how much ammo has been taken otherwise people would just drop and pick up to dupe ammo 
+	public int PickupAmmo { get; set; } = 0;
+
+	// How much ammo this weapon should start with, and give to its first Owner
+	public virtual int StartingAmmo => 0;
 
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
@@ -39,6 +44,8 @@
 		PickupTrigger = new PickupTrigger();
 		PickupTrigger.Parent = this;
 		PickupTrigger.Position = Position;
+
+		PickupAmmo = StartingAmmo;
 	}
 
 	public override void Reload()

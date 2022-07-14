@@ -29,6 +29,11 @@
 			PickupFeed.OnPickupWeapon( To.Single( player ), display.Name );
 		}
 
+		if ( weapon.PickupAmmo > 0 )
+		{
+			weapon.PickupAmmo -= player.GiveAmmo( weapon.AmmoType, weapon.PickupAmmo );
+		}
+
 		ItemRespawn.Taken( ent );
 
 		return true;
