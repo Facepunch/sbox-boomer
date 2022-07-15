@@ -4,8 +4,8 @@ namespace Boomer.Movement;
 class Slide : BaseMoveMechanic
 {
 
-	public float StopSpeed => 50f;
-	public float Friction => 1f;
+	public float StopSpeed => 75f;
+	public float Friction => 1.5f;
 	public float EndSlideSpeed => 120f;
 	public float StartSlideSpeed => 240f;
 	public float SlideBoost => 475f;
@@ -25,6 +25,7 @@ class Slide : BaseMoveMechanic
 
 	protected override bool TryActivate()
 	{
+		if ( InputActions.Jump.Down() ) return false;
 		if ( !InputActions.Duck.Down() ) return false;
 		if ( ctrl.GroundEntity == null ) return false;
 		if ( ctrl.Velocity.WithZ( 0 ).Length < StartSlideSpeed ) return false;
@@ -115,6 +116,7 @@ class Slide : BaseMoveMechanic
 		if ( !InputActions.Duck.Down() ) return false;
 		if ( ctrl.GroundEntity == null ) return false;
 		if ( ctrl.Velocity.WithZ( 0 ).Length < EndSlideSpeed ) return false;
+		if ( InputActions.Jump.Down() ) return false;
 		return true;
 	}
 
