@@ -27,6 +27,15 @@ partial class LightningGun : DeathmatchWeapon
 		Model = WorldModel;
 	}
 
+	public override void ActiveEnd( Entity ent, bool dropped )
+	{
+		base.ActiveEnd( ent, dropped );
+
+		LightningSound.Stop();
+		LightningEffect?.Destroy();
+		LightningEffect = null;
+	}
+
 	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = 0;
