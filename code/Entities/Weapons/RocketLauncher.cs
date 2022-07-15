@@ -9,7 +9,7 @@ partial class RocketLauncher : DeathmatchWeapon
 	public override string ViewModelPath => "weapons/rust_crossbow/v_rust_crossbow.vmdl";
 
 	public override float PrimaryRate => 1;
-	public override int Bucket => 4;
+	public override int Bucket => 3;
 	public override AmmoType AmmoType => AmmoType.Rockets;
 
 	[Net, Predicted]

@@ -8,7 +8,7 @@ partial class GrenadeLauncher : DeathmatchWeapon
 
 	public override float PrimaryRate => .75f;
 	public override AmmoType AmmoType => AmmoType.Grenade;
-	public override int Bucket => 3;
+	public override int Bucket => 2;
 
 	public override void Spawn()
 	{
@@ -49,7 +49,6 @@ partial class GrenadeLauncher : DeathmatchWeapon
 
 				grenade.PhysicsBody.Velocity = Owner.EyeRotation.Forward * 600.0f + Owner.EyeRotation.Up * 200.0f + Owner.Velocity;
 
-				// This is fucked in the head, lets sort this this year
 
 				_ = grenade.BlowIn( 3.0f );
 			}

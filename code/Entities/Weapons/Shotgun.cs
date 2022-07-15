@@ -9,7 +9,7 @@ partial class Shotgun : DeathmatchWeapon
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
 	public override float PrimaryRate => 1.2f;
 	public override AmmoType AmmoType => AmmoType.Buckshot;
-	public override int Bucket => 1;
+	public override int Bucket => 0;
 	public override int BucketWeight => 200;
 	public override int MoveSpeed => Zoomed ? 150 : base.MoveSpeed;
 

@@ -8,7 +8,7 @@ partial class NailGun : DeathmatchWeapon
 
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float PrimaryRate => 10;
-	public override int Bucket => 2;
+	public override int Bucket => 1;
 	public override AmmoType AmmoType => AmmoType.Nails;
 
 	[Net, Predicted]

@@ -9,7 +9,7 @@ partial class RailGun : DeathmatchWeapon
 	public override string ViewModelPath => "weapons/rust_shotgun/v_rust_shotgun.vmdl";
 
 	public override float PrimaryRate => .5f;
-	public override int Bucket => 5;
+	public override int Bucket => 4;
 	public override AmmoType AmmoType => AmmoType.Rails;
 
 	public string RailEffect = "particles/gameplay/weapons/railgun/railgun_trace.vpcf";
