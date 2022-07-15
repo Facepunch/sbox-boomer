@@ -50,8 +50,8 @@ partial class RailGun : DeathmatchWeapon
 		
 		if ( Owner is BoomerPlayer player )
 		{
-			player.Velocity = player.EyeRotation.Backward * forMul * flGroundFactor;
-			player.Velocity = player.Velocity.WithZ( flMul * flGroundFactor );
+			player.Velocity += player.EyeRotation.Backward * forMul * flGroundFactor;
+			player.Velocity += player.Velocity.WithZ( flMul * flGroundFactor );
 			player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
 		}
 		//
