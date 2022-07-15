@@ -83,6 +83,7 @@
 			case AmmoType.Rockets: return 200;
 			case AmmoType.Grenade: return 10;
 			case AmmoType.Rails: return 5;
+			case AmmoType.Lightning: return 300;
 
 		}
 
@@ -98,5 +99,6 @@ public enum AmmoType
 	Nails,
 	Rockets,
 	Grenade,
-	Rails
+	Rails,
+	Lightning
 }

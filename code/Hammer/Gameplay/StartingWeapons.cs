@@ -9,7 +9,8 @@ public enum WeaponType
 	Nailgun,
 	GrenadeLauncher,
 	RocketLauncher,
-	RailGun
+	RailGun,
+	LightningGun
 }
 
 [GameResource( "Starting Weapon Setup", "bsw", "Starter weapon setup, so maps can define what a player starts with." )]
@@ -54,6 +55,7 @@ partial class StartingWeapons : Entity
 			WeaponType.GrenadeLauncher => new GrenadeLauncher(),
 			WeaponType.RocketLauncher => new RocketLauncher(),
 			WeaponType.RailGun => new RailGun(),
+			WeaponType.LightningGun => new LightningGun(),
 			_ => null
 		};
 	}
