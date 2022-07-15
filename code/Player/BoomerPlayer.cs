@@ -64,6 +64,7 @@ public partial class BoomerPlayer : Player
 		ply.GiveAmmo( AmmoType.Nails, 250 );
 		ply.GiveAmmo( AmmoType.Rails, 250 );
 		ply.GiveAmmo( AmmoType.Grenade, 250 );
+		ply.GiveAmmo( AmmoType.Lightning, 250 );
 
 		//ply.Inventory.Add( new Crowbar() );
 		//ply.Inventory.Add( new RocketLauncher() );
