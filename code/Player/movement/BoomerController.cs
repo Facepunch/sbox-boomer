@@ -72,8 +72,13 @@ partial class BoomerController : BasePlayerController
 
 	public override void Simulate()
 	{
-		EyeLocalPosition = Vector3.Up * (64 * Pawn.Scale) + TraceOffset;
-		EyeLocalPosition *= activeMechanic != null ? activeMechanic.EyePosMultiplier : 1f;
+		var eyeHeight = 64 * Pawn.Scale;
+		var curz = EyeLocalPosition.z;
+		var targetz = eyeHeight * (activeMechanic != null ? activeMechanic.EyePosMultiplier : 1f);
+		var newz = curz.LerpTo( targetz, Time.Delta * 8f );
+
+		EyeLocalPosition = Vector3.Up * newz;
+
 		EyeRotation = Input.Rotation;
 		UpdateBBox();
 

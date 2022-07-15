@@ -1,4 +1,5 @@
-﻿using Boomer.Movement;
+﻿using Boomer;
+using Boomer.Movement;
 
 public partial class BoomerPlayer : Player
 {
@@ -24,7 +25,7 @@ public partial class BoomerPlayer : Player
 
 		Controller = new BoomerController();
 		Animator = new StandardPlayerAnimator();
-		CameraMode = new FirstPersonCamera();
+		CameraMode = new BoomerCamera();
 
 		Health = 100;
 		Armour = 0;
