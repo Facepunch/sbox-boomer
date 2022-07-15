@@ -4,10 +4,12 @@
 	{
 		Weapons = 
 		{
-			Crowbar = 0
-			Nailgun = 64
-			GrenadeLauncher = 10
-			RailGun = 10
+			LightningGun = 3000
+			Nailgun = 200
+			Shotgun = 25
+			GrenadeLauncher = 15
+			RocketLauncher = 15
+			RailGun = 15
 		}
 	}
 }
