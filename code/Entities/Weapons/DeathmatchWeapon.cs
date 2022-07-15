@@ -218,8 +218,11 @@
 		RenderCrosshair( center, CrosshairLastShoot.Relative, CrosshairLastReload.Relative );
 	}
 
-	private float CurrentFoV = 90;
-	private float CurrentVMFoV = 45;
+	private const float FoV = 90;
+	private const float VMFoV = 45;
+
+	private float CurrentFoV = FoV;
+	private float CurrentVMFoV = VMFoV;
 	public override void PostCameraSetup( ref CameraSetup camSetup )
 	{
 		base.PostCameraSetup( ref camSetup );
@@ -237,7 +240,7 @@
 	{
 		if ( Zoomed )
 		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, .65f );
+			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, CurrentFoV / FoV );
 		}
 	}
 
