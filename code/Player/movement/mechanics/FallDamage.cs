@@ -59,9 +59,9 @@ namespace Boomer.Movement
 			fallspeed = Math.Abs( fallspeed );
 
 			if ( fallspeed < 700 ) return 0;
-			if ( fallspeed < 1000 ) return 1;
-			if ( fallspeed < 1300 ) return 2;
-			if ( fallspeed < 1600 ) return 3;
+			if ( fallspeed < 1000 ) return 5;
+			if ( fallspeed < 1300 ) return 15;
+			if ( fallspeed < 1600 ) return 30;
 
 			return 4;
 		}
