@@ -274,6 +274,8 @@ public partial class BoomerPlayer : Player
 
 		this.ProceduralHitReaction( info );
 
+		this.ApplyForce( info.Force );
+
 		LastAttacker = info.Attacker;
 		LastAttackerWeapon = info.Weapon;
 
