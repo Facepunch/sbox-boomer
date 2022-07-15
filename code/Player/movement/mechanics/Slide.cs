@@ -58,29 +58,6 @@ class Slide : BaseMoveMechanic
 
 	public override void Simulate()
 	{
-		if ( ctrl.Pawn.IsServer )
-		{
-			var hits = Entity.FindInSphere( ctrl.Position, 50f );
-
-			if ( BasePlayerController.Debug )
-			{
-				DebugOverlay.Sphere( ctrl.Position, 50f, Color.Red );
-			}
-			
-			foreach ( var hit in hits )
-			{
-				if ( hit is not BoomerPlayer pl ) continue;
-				if ( pl == ctrl.Pawn ) continue;
-
-				pl.TakeDamage( new DamageInfo()
-				{
-					Attacker = ctrl.Pawn,
-					Damage = 1,
-					Force = ctrl.Pawn.Velocity.Normal * 620f + Vector3.Up * 150f,
-					Flags = DamageFlags.Sonic
-				} );
-			}
-		}
 
 		if ( !StillSliding() )
 		{
