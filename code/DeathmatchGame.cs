@@ -157,11 +157,11 @@ partial class DeathmatchGame : Game
 			{
 				var alpha = ctrl.GetMechanic<Dash>().DashAlpha;
 				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
-				postProcess.MotionBlur.Enabled = ctrl.IsDashing;
+				postProcess.MotionBlur.Enabled = false;
 				postProcess.MotionBlur.Scale = parabola * 5f;
 				postProcess.MotionBlur.Samples = 4;
 				postProcess.Brightness.Enabled = ctrl.IsDashing;
-				postProcess.Brightness.Multiplier = 1f + 2f * parabola;
+				postProcess.Brightness.Multiplier = 1f + 1f * parabola;
 			}
 
 			var healthDelta = localPlayer.Health.LerpInverse( 0, 100.0f, true );
