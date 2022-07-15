@@ -8,7 +8,7 @@ public class DashCount : Panel
 	public IconPanel dashicon;
 	public DashCount()
 	{
-		dashicon = Add.Icon( "double_arrow", "dashicon" );
+		dashicon = Add.Icon( "double_arrow", "icon" );
 		dashnumber = Add.Label( "0", "dashcount" );
 	}
 

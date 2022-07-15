@@ -1,6 +1,7 @@
 ﻿
 $yellow: #ff0;
 $orange: #f20;
+$yellow2: #FAB002;
 
 @import "_crosshair.scss";
 @import "_damageindicator.scss";
@@ -10,20 +11,19 @@ $orange: #f20;
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
 
-HudRootPanel
-{
+HudRootPanel {
     background-color: rgba( #333, 0 );
     transition: background-color 0.2s ease-in;
     transform-origin: 50% 50%;
 
-    &.devcamera
-    {
+    &.devcamera {
         display: none;
     }
 }
 
 vitals
 {
+
     font-size: 64px;
     color: #ff0;
     mix-blend-mode: lighten;
@@ -101,21 +101,20 @@ vitals
 
 .bottom-left
 {
-    left: 500px;
+    left: 550px;
 }
 
 .bottom-right
 {
-    right: 500px;
+    right: 550px;
 }
 
-.bottom-left, .bottom-right
-{
+.bottom-left, .bottom-right {
+
     mix-blend-mode: lighten;
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
 }
-
 .top-middle
 {
     top: 32px;
@@ -143,114 +142,30 @@ vitals
         }
     }
 }
-
-.bottom-right {
-    ammo {
-        flex-direction: row;
-        mix-blend-mode: lighten;
-        font-family: Roboto;
-        width: 100%;
-        height: 100%;
-
-        .ammobar {
-            flex-direction: row-reverse;
-            flex-shrink: 0;
-            align-items: center;
-
-
-            .bullet {
-                width: 2px;
-                flex-shrink: 0;
-                flex-grow: 0;
-                height: 30px;
-                background-color: #ff0;
-                border-radius: 3px 3px 2px 2px;
-                margin-left: 2px;
-                transition: all 0.1s ease-out;
-
-                &.empty {
-                    background-color: #fa0;
-                    opacity: 0.4;
-                    box-shadow: none;
-                }
-            }
-
-            &.is-shotgun .bullet {
-                width: 4px;
-                height: 30px;
-                margin-left: 4px;
-                border-radius: 1px 1px 1px 1px;
-            }
-
-            &.is-crossbow .bullet {
-                width: 3px;
-                height: 30px;
-                margin-left: 4px;
-                border-radius: 1px 1px 1px 1px;
-            }
-
-            &.is-smg .bullet {
-                width: 2px;
-                margin-left: 2px;
-                border-radius: 2px 2px 1px 1px;
-            }
-        }
-
-        label {
-            text-align: right;
-
-            &.danger {
-                color: #f00;
-            }
-        }
-    }
-
-    dashcount {
-        background-color: rgba( #333, .25);
-        padding: 16px;
-        margin: 5px;
-        font-size: 32px;
-        font-weight: bolder;
-        color: #ff0;
-        min-width: 96px;
-        text-align: center;
-        align-items: center;
-        border: 1px solid rgba( #ff0,1 );
-        border-radius: 0px;
-
-        .dashicon {
-            width: 32px;
-            height: 32px;
-            text-align: left;
-        }
-    }
-}
-
-.inventory, .ammobar, healthhud, armourhud, gamehud {
-    background-color: rgba( #333, .25);
-    padding: 16px;
-    margin: 5px;
-    font-size: 32px;
+.inventory, ammo, healthhud, armourhud, gamehud, dashcount {
+    padding: 0px;
+    margin: 0px;
+    font-size: 72px;
     font-weight: bolder;
-    color: #ff0;
-    min-width: 40px;
+    color: $yellow2;
+    min-width: 0px;
     text-align: center;
     align-items: center;
-    border: 1px solid rgba( #ff0,1 );
-    border-radius: 0px;
 }
 
-iconpanel
-{
+iconpanel {
+
     font-family: "Material Icons";
 }
 
-healthhud, armourhud
-{
-    iconpanel
-    {
+healthhud, armourhud, ammo, dashcount {
+    opacity: 1;
+
+
+    iconpanel {
         flex-grow: 1;
-        text-align: left;
+        text-align: right;
+
     }
 }
 

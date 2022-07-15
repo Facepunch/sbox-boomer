@@ -3,10 +3,12 @@ using Sandbox.UI.Construct;
 
 public class Ammo : Panel
 {
+	public IconPanel Icon;
 	public Label Inventory;
 
 	public Ammo()
 	{
+		Icon = Add.Icon( "storage", "icon" );
 		Inventory = Add.Label( "100", "inventory" );
 	}
 

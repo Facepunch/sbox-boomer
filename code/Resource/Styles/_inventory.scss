@@ -37,14 +37,12 @@ inventorycolumn {
 		height: 45px;
 		overflow: hidden;
 		transition: all 0.1s ease-out;
-		background-color: rgba( #333, .25);
-
 		.icon {
 			opacity: 1;
 		}
 	}
 
-	opacity: 0.01;
+	opacity: 0.1;
 
 	&.active {
 		opacity: 1;
@@ -71,21 +69,20 @@ inventoryicon {
 	margin-top: 5px;
 	mix-blend-mode: lighten;
 	color: #fc0;
-	background-color: #333;
+
 	font-size: 40px;
 	font-weight: lighter;
 	padding: 10px;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	border: 1px solid rgba( #ff0, 1 );
-	border-radius: 0px;
+
 
 	.icon {
 		width: 80px;
 		height: 80px;
 		background-size: 100%;
-		background-image-tint: #ff0;
+		background-image-tint: $yellow2;
 		position: absolute;
 	}
 
