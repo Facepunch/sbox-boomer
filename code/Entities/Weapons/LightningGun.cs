@@ -113,30 +113,11 @@ partial class LightningGun : DeathmatchWeapon
 		
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
-			var forward = Owner.EyeRotation.Forward;
-			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0 * 0.25f;
-			forward = forward.Normal;
-
-			var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 5000 ).UseHitboxes()
-				//.HitLayer( CollisionLayer.Water, !InWater )
-				.Ignore( Owner )
-				.Ignore( this )
-				.Size( 1.0f )
-				.Run();
-
-
-			var pos = EffectEntity.GetAttachment( "muzzle" ) ?? Transform;
-
 			if ( LightningEffect == null )
 			{
 				PlaySound( "rl.shoot" );
 				LightningEffect = Particles.Create( "particles/gameplay/weapons/lightninggun/lightninggun_trace.vpcf" );
 				LightningSound = Sound.FromEntity( "lg.beam", this );
-			}
-			using ( Prediction.Off() )
-			{
-				LightningEffect.SetPosition( 0, pos.Position );
-				LightningEffect.SetPosition( 1, tr.EndPosition );
 			}
 		}
 		else
@@ -146,6 +127,32 @@ partial class LightningGun : DeathmatchWeapon
 			LightningEffect = null;
 		}
 
+	}
+
+	[Event.Frame]
+	private void OnFrame()
+	{
+		if ( LightningEffect == null ) 
+			return;
+
+		var forward = Owner.EyeRotation.Forward;
+		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0 * 0.25f;
+		forward = forward.Normal;
+
+		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 5000 ).UseHitboxes()
+			//.HitLayer( CollisionLayer.Water, !InWater )
+			.Ignore( Owner )
+			.Ignore( this )
+			.Size( 1.0f )
+			.Run();
+
+		var pos = EffectEntity.GetAttachment( "muzzle" ) ?? Transform;
+
+		using ( Prediction.Off() )
+		{
+			LightningEffect.SetPosition( 0, pos.Position );
+			LightningEffect.SetPosition( 1, tr.EndPosition );
+		}
 	}
 
 	public override void PostCameraSetup( ref CameraSetup camSetup )
