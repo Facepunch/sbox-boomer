@@ -150,25 +150,6 @@ partial class LightningGun : DeathmatchWeapon
 		}
 	}
 
-	public override void PostCameraSetup( ref CameraSetup camSetup )
-	{
-		base.PostCameraSetup( ref camSetup );
-
-		if ( Zoomed )
-		{
-			camSetup.FieldOfView = 20;
-			camSetup.ViewModel.FieldOfView = 40;
-		}
-	}
-
-	public override void BuildInput( InputBuilder owner )
-	{
-		if ( Zoomed )
-		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, 0.2f );
-		}
-	}
-
 	[ClientRpc]
 	protected override void ShootEffects()
 	{

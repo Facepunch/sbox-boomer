@@ -14,6 +14,8 @@
 	public virtual int StartingAmmo => 0;
 
 	public virtual bool CanZoom => false;
+	public virtual float ZoomedFov => 20;
+	public virtual float ZoomedViewmodelFov => 40;
 
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
@@ -216,9 +218,29 @@
 		RenderCrosshair( center, CrosshairLastShoot.Relative, CrosshairLastReload.Relative );
 	}
 
-	public virtual void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
+	private float CurrentFoV = 90;
+	private float CurrentVMFoV = 45;
+	public override void PostCameraSetup( ref CameraSetup camSetup )
 	{
-		var draw = Render.Draw2D;
+		base.PostCameraSetup( ref camSetup );
+
+		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 45f;
+		var targetFoV = Zoomed ? ZoomedFov : 90f;
+		CurrentFoV = CurrentFoV.LerpTo( targetFoV, 15f * Time.Delta );
+		CurrentVMFoV = CurrentVMFoV.LerpTo( targetVMFoV, 15f * Time.Delta );
+
+		camSetup.FieldOfView = CurrentFoV;
+		camSetup.ViewModel.FieldOfView = CurrentVMFoV;
 	}
+
+	public override void BuildInput( InputBuilder owner )
+	{
+		if ( Zoomed )
+		{
+			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, .65f );
+		}
+	}
+
+	public virtual void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload ) { }
 
 }

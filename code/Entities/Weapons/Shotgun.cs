@@ -12,6 +12,8 @@ partial class Shotgun : DeathmatchWeapon
 	public override int Bucket => 0;
 	public override int BucketWeight => 200;
 	public override bool CanZoom => true;
+	public override float ZoomedFov => 65;
+	public override float ZoomedViewmodelFov => 100;
 
 	public override void Spawn()
 	{
@@ -45,25 +47,6 @@ partial class Shotgun : DeathmatchWeapon
 		else
 		{
 			ShootBullet( 0.2f, 0.3f, 15.0f, 2.0f, 4 );
-		}
-	}
-
-	public override void PostCameraSetup( ref CameraSetup camSetup )
-	{
-		base.PostCameraSetup( ref camSetup );
-
-		if ( Zoomed )
-		{
-			camSetup.FieldOfView -= 30f;
-			camSetup.ViewModel.FieldOfView = 100;
-		}
-	}
-
-	public override void BuildInput( InputBuilder owner )
-	{
-		if ( Zoomed )
-		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, .65f );
 		}
 	}
 
