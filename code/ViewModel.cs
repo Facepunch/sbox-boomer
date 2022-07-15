@@ -4,7 +4,7 @@ partial class DmViewModel : BaseViewModel
 	bool ShouldBob = true;
 	float TargetRoll = 0f;
 	float TargetFOV = 0f;
-	float TargetPos = 0f;
+	Vector3 TargetPos = 0f;
 	float WalkBob = 0f;
 	float MyRoll = 0f;
 
@@ -16,14 +16,14 @@ partial class DmViewModel : BaseViewModel
 		{
 			ShouldBob = !ctrl.IsSliding && !ctrl.IsDashing;
 			TargetRoll = ctrl.IsSliding ? -45f : 0f;
-			
+
 			TargetFOV = ctrl.IsSliding ? 80f : 75f;
 			camSetup.ViewModel.FieldOfView = TargetFOV;
 
-			TargetPos = ctrl.IsSliding ? -15f : 0f;
-			Position += Vector3.Up * TargetPos;
+			TargetPos = TargetPos.LerpTo( Vector3.Up * (ctrl.IsSliding ? -15f : 0f), 10f * Time.Delta );
+			Position += TargetPos;
 		}
-		
+
 
 		AddCameraEffects( ref camSetup );
 	}
@@ -41,7 +41,6 @@ partial class DmViewModel : BaseViewModel
 		MyRoll = MyRoll.LerpTo( TargetRoll, Time.Delta * 10f );
 		Rotation *= Rotation.From( 0, 0, MyRoll );
 
-
 		//
 		// Bob up and down based on our walk movement
 		//
@@ -52,7 +51,7 @@ partial class DmViewModel : BaseViewModel
 		if ( ShouldBob && Owner.GroundEntity != null )
 		{
 			WalkBob += Time.Delta * 25.0f * speed;
-			
+
 		}
 
 		Position += up * MathF.Sin( WalkBob ) * speed * -1;
