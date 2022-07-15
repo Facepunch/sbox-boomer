@@ -83,21 +83,8 @@ namespace Boomer.Movement
 			var destup = (center + (ctrl.Pawn.Rotation.Up * 32.0f));
 
 			// Should be done.
-			var trup = Trace.Ray( center, destup )
-				.Ignore( ctrl.Pawn )
-				.WithoutTags( "PropCarry" )
-				.WithoutTags( "Platplayer" )
-				.WorldOnly()
-				.Radius( 16 )
-				.Run();
-
-			var tr = Trace.Ray( center, dest )
-				.Ignore( ctrl.Pawn )
-				.WithoutTags( "PropCarry" )
-				.WithoutTags( "Platplayer" )
-				.WorldOnly()
-				.Radius( 8 )
-				.Run();
+			var trup = ctrl.TraceBBox( center, destup );
+			var tr = ctrl.TraceBBox( center, dest );
 
 			if ( trup.Hit ) return false;
 			if ( tr.Hit )
