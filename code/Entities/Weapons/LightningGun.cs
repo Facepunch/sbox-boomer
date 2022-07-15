@@ -50,7 +50,7 @@ partial class LightningGun : DeathmatchWeapon
 		//
 		// Shoot the bullets
 		//
-		ShootBullet( 0.01f, 1.5f, 10.0f, 2.0f );
+		ShootBullet( 0.01f, 1.5f, 1f, 2.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
