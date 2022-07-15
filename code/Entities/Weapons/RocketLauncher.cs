@@ -8,12 +8,10 @@ partial class RocketLauncher : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_crossbow/rust_crossbow.vmdl" );
 	public override string ViewModelPath => "weapons/rust_crossbow/v_rust_crossbow.vmdl";
 
+	public override bool CanZoom => true;
 	public override float PrimaryRate => 1;
 	public override int Bucket => 3;
 	public override AmmoType AmmoType => AmmoType.Rockets;
-
-	[Net, Predicted]
-	public bool Zoomed { get; set; }
 
 	public override void Spawn()
 	{

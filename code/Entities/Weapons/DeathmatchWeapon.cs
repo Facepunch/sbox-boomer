@@ -3,7 +3,7 @@
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
 	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
-	public virtual int MoveSpeed => 350;
+	public virtual int MoveSpeed => Zoomed ? 150 : 350;
 
 	public virtual int Order => (Bucket * 10000) + BucketWeight;
 
@@ -13,8 +13,12 @@
 	// How much ammo this weapon should start with, and give to its first Owner
 	public virtual int StartingAmmo => 0;
 
+	public virtual bool CanZoom => false;
+
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
+	[Net, Predicted]
+	public bool Zoomed { get; set; }
 
 	public PickupTrigger PickupTrigger { get; protected set; }
 
@@ -57,6 +61,8 @@
 	{
 		if ( TimeSinceDeployed < 0.6f )
 			return;
+
+		Zoomed = CanZoom && Input.Down( InputButton.SecondaryAttack );
 
 		base.Simulate( owner );
 	}

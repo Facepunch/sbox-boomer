@@ -8,6 +8,7 @@ partial class LightningGun : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_shotgun/rust_shotgun.vmdl" );
 	public override string ViewModelPath => "weapons/rust_shotgun/v_rust_shotgun.vmdl";
 
+	public override bool CanZoom => true;
 	public override float PrimaryRate => 50f;
 	public override int Bucket => 5;
 	public override AmmoType AmmoType => AmmoType.Lightning;
@@ -15,10 +16,6 @@ partial class LightningGun : DeathmatchWeapon
 	Particles LightningEffect;
 
 	Sound LightningSound;
-	public override int MoveSpeed => Zoomed ? 150 : base.MoveSpeed;
-
-	[Net, Predicted]
-	public bool Zoomed { get; set; }
 
 	public override void Spawn()
 	{
@@ -108,9 +105,7 @@ partial class LightningGun : DeathmatchWeapon
 	public override void Simulate( Client cl )
 	{
 		base.Simulate( cl );
-		
-		Zoomed = Input.Down( InputButton.SecondaryAttack );
-		
+
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
 			if ( LightningEffect == null )

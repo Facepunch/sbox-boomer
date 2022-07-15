@@ -11,11 +11,8 @@ partial class Shotgun : DeathmatchWeapon
 	public override AmmoType AmmoType => AmmoType.Buckshot;
 	public override int Bucket => 0;
 	public override int BucketWeight => 200;
-	public override int MoveSpeed => Zoomed ? 150 : base.MoveSpeed;
+	public override bool CanZoom => true;
 
-	[Net, Predicted]
-	public bool Zoomed { get; set; }
-	
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -49,13 +46,6 @@ partial class Shotgun : DeathmatchWeapon
 		{
 			ShootBullet( 0.2f, 0.3f, 15.0f, 2.0f, 4 );
 		}
-	}
-
-	public override void Simulate( Client cl )
-	{
-		base.Simulate( cl );
-
-		Zoomed = Input.Down( InputButton.SecondaryAttack );
 	}
 
 	public override void PostCameraSetup( ref CameraSetup camSetup )

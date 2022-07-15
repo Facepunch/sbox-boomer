@@ -11,9 +11,6 @@ partial class NailGun : DeathmatchWeapon
 	public override int Bucket => 1;
 	public override AmmoType AmmoType => AmmoType.Nails;
 
-	[Net, Predicted]
-	public bool Zoomed { get; set; }
-
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -98,8 +95,6 @@ partial class NailGun : DeathmatchWeapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;
 	}
-
-	TimeSince timeSinceZoomed;
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{

@@ -8,15 +8,12 @@ partial class RailGun : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "weapons/rust_shotgun/rust_shotgun.vmdl" );
 	public override string ViewModelPath => "weapons/rust_shotgun/v_rust_shotgun.vmdl";
 
+	public override bool CanZoom => true;
 	public override float PrimaryRate => .5f;
 	public override int Bucket => 4;
 	public override AmmoType AmmoType => AmmoType.Rails;
 
 	public string RailEffect = "particles/gameplay/weapons/railgun/railgun_trace.vpcf";
-	public override int MoveSpeed => Zoomed ? 150 : base.MoveSpeed;
-
-	[Net, Predicted]
-	public bool Zoomed { get; set; }
 
 	public override void Spawn()
 	{
@@ -109,13 +106,6 @@ partial class RailGun : DeathmatchWeapon
 				tr.Entity.TakeDamage( damageInfo );
 			}
 		}
-	}
-
-	public override void Simulate( Client cl )
-	{
-		base.Simulate( cl );
-
-		Zoomed = Input.Down( InputButton.SecondaryAttack );
 	}
 
 	public override void PostCameraSetup( ref CameraSetup camSetup )
