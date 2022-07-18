@@ -24,8 +24,6 @@ partial class BoomerController : BasePlayerController
 	private List<BaseMoveMechanic> mechanics = new();
 	private BaseMoveMechanic activeMechanic => mechanics.FirstOrDefault( x => x.IsActive );
 
-	public bool PlayerPickedUpGlider { get; private set; } = false;
-
 	public BoomerController()
 	{
 		//mechanics.Add( new StepJump( this ) );
@@ -81,18 +79,6 @@ partial class BoomerController : BasePlayerController
 
 		EyeRotation = Input.Rotation;
 		UpdateBBox();
-
-		// This is confusing and needs review:
-		//		PreSimulate and PostSimulate are always called if 
-		//		the mechanic is active or AlwaysSimulate=true
-
-		//		Simulate is only called if the mechanic is active, 
-		//		AlwaysSimulates, AND there's no other mechanic in control
-
-		//		The control is for things like vaulting, it stops 
-		//		all other mechanics until its finished with the vault
-
-		// Pros: modular, easy to edit/add movement mechanics
 
 		if ( Impulse.Length > 0 )
 		{
@@ -266,10 +252,5 @@ partial class BoomerController : BasePlayerController
 	public override TraceResult TraceBBox( Vector3 start, Vector3 end, float liftFeet = 0.0f )
 	{
 		return TraceBBox( start, end, Mins, Maxs, liftFeet );
-	}
-
-	public void EnableGliderControl()
-	{
-		PlayerPickedUpGlider = true;
 	}
 }

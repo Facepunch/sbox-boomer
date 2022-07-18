@@ -37,13 +37,14 @@ namespace Boomer.Movement
 		public override void Simulate()
 		{
 			base.Simulate();
-
+			
 			ctrl.SetTag( "grabbing_wall" );
 
 			ctrl.Velocity = 0;
 			ctrl.Rotation = (-GrabNormal).EulerAngles.WithPitch( 0 ).ToRotation();
 			ctrl.Position = Vector3.Lerp( ctrl.Position, TargetLocation, Time.Delta * 10.0f );
-
+			
+	
 			if ( TimeToDisengage > 0 )
 			{
 				if ( Time.Now > TimeToDisengage )

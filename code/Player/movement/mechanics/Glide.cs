@@ -24,8 +24,6 @@ namespace Boomer.Movement
 
 			Gliding = false;
 
-			if ( !ctrl.PlayerPickedUpGlider ) return;
-
 			if ( ctrl.GroundEntity != null ) return;
 			if ( ctrl.Energy == 0 ) return;
 			if ( !InputActions.Jump.Down() )
