@@ -20,7 +20,7 @@ partial class DmViewModel : BaseViewModel
 			TargetFOV = ctrl.IsSliding ? 80f : 75f;
 			camSetup.ViewModel.FieldOfView = TargetFOV;
 
-			TargetPos = TargetPos.LerpTo( Vector3.Up * (ctrl.IsSliding ? -15f : 0f), 10f * Time.Delta );
+			TargetPos = TargetPos.LerpTo( Vector3.Up * (ctrl.IsSliding ? -15f : 0f), 2f * Time.Delta );
 			Position += TargetPos;
 		}
 
@@ -34,8 +34,8 @@ partial class DmViewModel : BaseViewModel
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
 
 		// Shifts viewmodel to center of screen (temporary til we do it in model)
-		Position += Rotation.Right * -17f;
-		Position += Vector3.Up * -10f;
+		//Position += Rotation.Right * -17f;
+		//Position += Vector3.Up * -10f;
 
 		// Slide Tilt
 		MyRoll = MyRoll.LerpTo( TargetRoll, Time.Delta * 10f );
