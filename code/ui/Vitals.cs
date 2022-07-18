@@ -20,6 +20,7 @@ public class HealthHud : Panel
 		Value.Text = $"{player.Health.CeilToInt()}";
 
 		SetClass( "low", player.Health < 40.0f );
+		SetClass( "overheal", player.Health > 100.0f );
 		SetClass( "empty", player.Health <= 0.0f );
 	}
 }
@@ -44,6 +45,7 @@ public class ArmourHud : Panel
 		Value.Text = $"{player.Armour.CeilToInt()}";
 
 		SetClass( "low", player.Armour < 40.0f );
+		SetClass( "overarmour", player.Armour > 100.0f );
 		SetClass( "empty", player.Armour <= 0.0f );
 	}
 }

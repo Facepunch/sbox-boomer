@@ -21,20 +21,16 @@ HudRootPanel {
     }
 }
 
-vitals
-{
-
+vitals {
     font-size: 64px;
     color: #ff0;
     mix-blend-mode: lighten;
     font-family: Roboto;
 
-    label
-    {
+    label {
         text-shadow: 0px 0px 20px #f70a;
 
-        &.danger
-        {
+        &.danger {
             color: #f00;
             text-shadow: 0px 0px 10px #f005;
         }
@@ -66,8 +62,7 @@ vitals
     background-image-tint: #70ff00;
 }
 
-.dm_crowbar .icon
-{
+.dm_crowbar .icon {
     background-image: url( /ui/weapons/dm_crowbar.png );
 }
 
@@ -76,49 +71,44 @@ vitals
     background-image-tint: #16edcc;
 }
 
-.bottom-left
-{
+.bottom-left {
     left: 550px;
 }
 
-.bottom-right
-{
+.bottom-right {
     right: 550px;
 }
 
 .bottom-left, .bottom-right {
-
     mix-blend-mode: lighten;
     position: absolute;
     bottom: 0px;
 }
-.top-middle
-{
+
+.top-middle {
     top: 32px;
     width: 100%;
     flex-direction: column;
     align-items: center;
 
-    gamehud
-    {
+    gamehud {
         font-family: Roboto;
         font-size: 20px;
         flex-direction: column;
         justify-content: center;
 
-        .game-state
-        {
+        .game-state {
             font-size: 12px;
             font-weight: 400;
             text-transform: uppercase;
         }
 
-        .game-timer
-        {
+        .game-timer {
             font-size: 32px;
         }
     }
 }
+
 .inventory, ammo, healthhud, armourhud, gamehud, dashcount {
     padding: 0px;
     margin: 0px;
@@ -131,38 +121,56 @@ vitals
 }
 
 iconpanel {
-
     font-family: "Material Icons";
 }
 
 healthhud, armourhud, ammo, dashcount {
     opacity: 1;
 
-
     iconpanel {
         flex-grow: 1;
         text-align: right;
-
-    }
-}
-
-armourhud
-{
-    &.empty
-    {
         opacity: 1;
     }
+
+}
+healthhud {
+    &.overheal {
+        color: #25cf12;
+
+        iconpanel {
+            color: $yellow2;
+        }
+    }
+
+    &.low {
+        color: #f20;
+        iconpanel {
+            color: $yellow2;
+        }
+    }
 }
 
-.game-end
-{
-    chatbox, .top-middle
-    {
+armourhud {
+    &.empty {
+        opacity: 1;
+    }
+
+    &.overarmour {
+        color: #25cf12;
+
+        iconpanel {
+            color: $yellow2;
+        }
+    }
+}
+
+.game-end {
+    chatbox, .top-middle {
         z-index: 1000;
     }
 
-    inventorybar, .bottom-right, .bottom-left
-    {
+    inventorybar, .bottom-right, .bottom-left {
         display: none;
     }
 }

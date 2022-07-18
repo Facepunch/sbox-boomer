@@ -8,11 +8,16 @@ public partial class BoomerPlayer : Player
 	[Net]
 	public float Armour { get; set; } = 0;
 	[Net]
-	public float MaxHealth { get; set; } = 100;
+	public float MaxArmour { get; set; } = 200;
+	[Net]
+	public float MaxHealth { get; set; } = 200;
 
 	public bool SupressPickupNotices { get; private set; }
 	public int ComboKillCount { get; set; } = 0;
 	public TimeSince TimeSinceLastKill { get; set; }
+
+	public TimeSince HealthTick { get; set; }
+	public TimeSince ArmourTick { get; set; }
 
 	public BoomerPlayer()
 	{
@@ -147,32 +152,26 @@ public partial class BoomerPlayer : Player
 
 		TickPlayerUse();
 
-		//if ( Input.Pressed( InputButton.View ) )
-		//{
-		//	if ( CameraMode is ThirdPersonCamera )
-		//	{
-		//		CameraMode = new FirstPersonCamera();
-		//	}
-		//	else
-		//	{
-		//		CameraMode = new ThirdPersonCamera();
-		//	}
-		//}
+		
 
-		//if ( Input.Pressed( InputButton.Drop ) )
-		//{
-		//	var dropped = Inventory.DropActive();
-		//	if ( dropped != null )
-		//	{
-		//		if ( dropped.PhysicsGroup != null )
-		//		{
-		//			dropped.PhysicsGroup.Velocity = Velocity + (EyeRotation.Forward + EyeRotation.Up) * 300;
-		//		}
-
-		//		timeSinceDropped = 0;
-		//		SwitchToBestWeapon();
-		//	}
-		//}
+		if(Health > 100)
+		{
+			if ( HealthTick > 1 )
+			{
+				Health.Clamp( 100, 200 );
+				Health--;
+				HealthTick = 0;
+			}
+		}
+		if(Armour > 100)
+		{
+			if ( ArmourTick > 1 )
+			{
+				Armour.Clamp( 100, 200 );
+				Armour--;
+				ArmourTick = 0;
+			}
+		}
 
 		SimulateActiveChild( cl, ActiveChild );
 

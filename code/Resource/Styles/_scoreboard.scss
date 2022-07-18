@@ -1,4 +1,6 @@
-﻿.scoreboard
+﻿$yellow2: #FAB002;
+
+.scoreboard
 {
 	position: absolute;
 	z-index: 100;
@@ -56,8 +58,7 @@
 		min-width: 30%;
 		margin-bottom: 10px;
 		padding-bottom: 5px;
-		color: #fc0;
-		mix-blend-mode: lighten;
+		color: $yellow2;
 	}
 
 	.canvas
@@ -72,7 +73,7 @@
 			mix-blend-mode: lighten;
 			margin-bottom: 2px;
 			padding: 4px 10px;
-			color: #fff;
+			color: #FAB002;
 
 			label
 			{

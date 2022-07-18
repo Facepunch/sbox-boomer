@@ -90,8 +90,8 @@ partial class ChargerStation : KeyframeEntity, IUse
 			return false;
 
 
-		if ( !IsArmourCharger && player.Health >= 100 ) return false;
-		if ( IsArmourCharger && player.Armour >= 100 ) return false;
+		if ( !IsArmourCharger && player.Health >= 200 ) return false;
+		if ( IsArmourCharger && player.Armour >= 200 ) return false;
 
 		// standard rate of 10 health per second
 		var add = 10 * Time.Delta;
@@ -106,15 +106,15 @@ partial class ChargerStation : KeyframeEntity, IUse
 		if ( IsArmourCharger )
 		{
 			player.Armour += add;
-			player.Armour.Clamp( 0, 100 );
-			return player.Armour < 100;
+			player.Armour.Clamp( 0, 200 );
+			return player.Armour < 200;
 		}
 
 		if ( !IsArmourCharger )
 		{
 			player.Health += add;
-			player.Health.Clamp( 0, 100 );
-			return player.Health < 100;
+			player.Health.Clamp( 0, 200 );
+			return player.Health < 200;
 		}
 
 		return false;
