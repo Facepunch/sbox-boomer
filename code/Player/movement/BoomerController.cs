@@ -43,7 +43,7 @@ partial class BoomerController : BasePlayerController
 		//mechanics.Add( new DuckJump( this ) );
 		mechanics.Add( new DoubleJump( this ) );
 		mechanics.Add( new Glide( this ) );
-		mechanics.Add( new FallDamage( this ) );
+		//mechanics.Add( new FallDamage( this ) );
 		//mechanics.Add( new LongJump( this ) );
 		//mechanics.Add( new GroundSlam( this ) );
 		mechanics.Add( new GetPushed( this ) );
