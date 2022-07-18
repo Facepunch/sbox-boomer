@@ -5,8 +5,8 @@
 [Title( "RailGun" ), Category( "Weapons" )]
 partial class RailGun : DeathmatchWeapon
 {
-	public static readonly Model WorldModel = Model.Load( "weapons/rust_shotgun/rust_shotgun.vmdl" );
-	public override string ViewModelPath => "weapons/rust_shotgun/v_rust_shotgun.vmdl";
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/railgun/w_railgun.vmdl" );
+	public override string ViewModelPath => "models/gameplay/weapons/railgun/railgun.vmdl";
 
 	public override bool CanZoom => true;
 	public override float PrimaryRate => .5f;
@@ -51,6 +51,7 @@ partial class RailGun : DeathmatchWeapon
 			player.Velocity += player.Velocity.WithZ( flMul * flGroundFactor );
 			player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
 		}
+
 		//
 		// Tell the clients to play the shoot effects
 		//
@@ -116,6 +117,12 @@ partial class RailGun : DeathmatchWeapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;
 
+	}
+
+	public override void SimulateAnimator( PawnAnimator anim )
+	{
+		anim.SetAnimParameter( "holdtype", 3 ); // TODO this is shit
+		anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 
 	TimeSince timeSinceZoomed;

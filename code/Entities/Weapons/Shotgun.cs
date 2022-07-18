@@ -5,8 +5,8 @@
 [Title( "Shotgun" ), Category( "Weapons" )]
 partial class Shotgun : DeathmatchWeapon
 {
-	public static readonly Model WorldModel = Model.Load( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" );
-	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/shotgun/w_shotgun.vmdl" );
+	public override string ViewModelPath => "models/gameplay/weapons/shotgun/shotgun.vmdl";
 	public override float PrimaryRate => 1.2f;
 	public override AmmoType AmmoType => AmmoType.Buckshot;
 	public override int Bucket => 0;

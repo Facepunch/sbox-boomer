@@ -3,8 +3,8 @@
 [Title( "NailGun" ), Category( "Weapons" )]
 partial class NailGun : DeathmatchWeapon
 {
-	public static readonly Model WorldModel = Model.Load( "weapons/rust_smg/rust_smg.vmdl" );
-	public override string ViewModelPath => "weapons/rust_smg/v_rust_smg.vmdl";
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/nailgun/w_nailgun.vmdl" );
+	public override string ViewModelPath => "models/gameplay/weapons/nailgun/nailgun.vmdl";
 
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float PrimaryRate => 10;

@@ -5,8 +5,8 @@
 [Title( "LightningGun" ), Category( "Weapons" )]
 partial class LightningGun : DeathmatchWeapon
 {
-	public static readonly Model WorldModel = Model.Load( "weapons/rust_shotgun/rust_shotgun.vmdl" );
-	public override string ViewModelPath => "weapons/rust_shotgun/v_rust_shotgun.vmdl";
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/lightninggun/w_lightninggun.vmdl" );
+	public override string ViewModelPath => "models/gameplay/weapons/lightninggun/lightninggun.vmdl";
 
 	public override bool CanZoom => true;
 	public override float PrimaryRate => 50f;
@@ -103,7 +103,7 @@ partial class LightningGun : DeathmatchWeapon
 					dmgincrease = dmgincrease.Clamp( 1, 5 ) - 1;
 				}
 				
-				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, 0*dmgincrease )
+				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage*dmgincrease )
 					.UsingTraceResult( tr )
 					.WithAttacker( Owner )
 					.WithWeapon( this );
@@ -171,7 +171,13 @@ partial class LightningGun : DeathmatchWeapon
 		CrosshairLastShoot = 0;
 	}
 
-		TimeSince timeSinceZoomed;
+	public override void SimulateAnimator( PawnAnimator anim )
+	{
+		anim.SetAnimParameter( "holdtype", 1 ); // TODO this is shit
+		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+	}
+
+	TimeSince timeSinceZoomed;
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{

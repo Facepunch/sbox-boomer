@@ -5,8 +5,8 @@
 [Title( "RocketLauncher" ), Category( "Weapons" )]
 partial class RocketLauncher : DeathmatchWeapon
 {
-	public static readonly Model WorldModel = Model.Load( "weapons/rust_crossbow/rust_crossbow.vmdl" );
-	public override string ViewModelPath => "weapons/rust_crossbow/v_rust_crossbow.vmdl";
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/rocketlauncher/w_rocketlauncher.vmdl" );
+	public override string ViewModelPath => "models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl";
 
 	public override bool CanZoom => true;
 	public override float PrimaryRate => 1;
@@ -64,6 +64,12 @@ partial class RocketLauncher : DeathmatchWeapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;
 
+	}
+
+	public override void SimulateAnimator( PawnAnimator anim )
+	{
+		anim.SetAnimParameter( "holdtype", 3 ); // TODO this is shit
+		anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 
 	TimeSince timeSinceZoomed;
