@@ -13,6 +13,8 @@ partial class LightningGun : DeathmatchWeapon
 	public override int Bucket => 5;
 	public override AmmoType AmmoType => AmmoType.Lightning;
 
+	public int dmgincrease = 0;
+
 	Particles LightningEffect;
 
 	Sound LightningSound;
@@ -88,16 +90,26 @@ partial class LightningGun : DeathmatchWeapon
 
 				//	//CreateTracerEffect( tr.EndPosition );
 				//}
+			
 
 				if ( !IsServer ) continue;
 				if ( !tr.Entity.IsValid() ) continue;
-
-				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage )
+				if ( tr.Entity is BoomerPlayer pl )
+				{
+					dmgincrease = dmgincrease.Clamp( 1, 5 ) + 1;
+				}
+				else
+				{
+					dmgincrease = dmgincrease.Clamp( 1, 5 ) - 1;
+				}
+				
+				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, 0*dmgincrease )
 					.UsingTraceResult( tr )
 					.WithAttacker( Owner )
 					.WithWeapon( this );
 
 				tr.Entity.TakeDamage( damageInfo );
+
 			}
 		}
 	}
@@ -117,6 +129,7 @@ partial class LightningGun : DeathmatchWeapon
 		}
 		else
 		{
+			dmgincrease = 0;
 			LightningSound.Stop();
 			LightningEffect?.Destroy();
 			LightningEffect = null;
@@ -147,6 +160,7 @@ partial class LightningGun : DeathmatchWeapon
 		{
 			LightningEffect.SetPosition( 0, pos.Position );
 			LightningEffect.SetPosition( 1, tr.EndPosition );
+			LightningEffect.SetPosition( 2, new Vector3 ( dmgincrease * 10 , 0, 0));
 		}
 	}
 
