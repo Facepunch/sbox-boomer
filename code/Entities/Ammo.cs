@@ -39,37 +39,70 @@
 }
 
 
-[Library( "dm_ammo9mmclip" ), HammerEntity]
-[EditorModel( "models/dm_ammo_9mmclip.vmdl" )]
-[Title( "9mm Clip" ), Category( "Ammo" )]
-partial class Ammo9mmClip : BaseAmmo
+[Library( "bm_nails" ), HammerEntity]
+[EditorModel( "models/gameplay/ammo/nails/bm_nails.vmdl" )]
+[Title( "Nail Clip" ), Category( "Ammo" )]
+partial class AmmoNails : BaseAmmo
 {
-	public override AmmoType AmmoType => AmmoType.Pistol;
-	public override int AmmoAmount => 17;
-	public override Model WorldModel => Model.Load( "models/dm_ammo_9mmclip.vmdl" );
+	public override AmmoType AmmoType => AmmoType.Nails;
+	public override int AmmoAmount => 100;
+	public override Model WorldModel => Model.Load( "models/gameplay/ammo/nails/bm_nails.vmdl" );
 
 }
 
-[Library( "dm_ammo9mmbox" ), HammerEntity]
-[EditorModel( "models/dm_ammo_9mmbox.vmdl" )]
-[Title( "9mm Box" ), Category( "Ammo" )]
-partial class Ammo9mmBox : BaseAmmo
+[Library( "bm_grenades" ), HammerEntity]
+[EditorModel( "models/gameplay/ammo/grenades/bm_grenades.vmdl" )]
+[Title( "Grenades" ), Category( "Ammo" )]
+partial class AmmoGrenades : BaseAmmo
 {
-	public override AmmoType AmmoType => AmmoType.Pistol;
-	public override int AmmoAmount => 200;
+	public override AmmoType AmmoType => AmmoType.Grenade;
+	public override int AmmoAmount => 5;
 
-	public override Model WorldModel => Model.Load( "models/dm_ammo_9mmbox.vmdl" );
+	public override Model WorldModel => Model.Load( "models/gameplay/ammo/grenades/bm_grenades.vmdl" );
 }
 
 
 
-[Library( "dm_ammobuckshot" ), HammerEntity]
-[EditorModel( "models/dm_ammo_buckshot.vmdl" )]
+[Library( "bm_ammobuckshot" ), HammerEntity]
+[EditorModel( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" )]
 [Title( "Buckshot" ), Category( "Ammo" )]
 partial class AmmoBuckshot : BaseAmmo
 {
 	public override AmmoType AmmoType => AmmoType.Buckshot;
-	public override int AmmoAmount => 12;
+	public override int AmmoAmount => 5;
 
-	public override Model WorldModel => Model.Load( "models/dm_ammo_buckshot.vmdl" );
+	public override Model WorldModel => Model.Load( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" );
+}
+
+[Library( "bm_rockets" ), HammerEntity]
+[EditorModel( "models/gameplay/ammo/rockets/bm_rockets.vmdl" )]
+[Title( "Rockets" ), Category( "Ammo" )]
+partial class AmmoRockets : BaseAmmo
+{
+	public override AmmoType AmmoType => AmmoType.Rockets;
+	public override int AmmoAmount => 5;
+
+	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rockets/bm_rockets.vmdl" );
+}
+
+[Library( "bm_rails" ), HammerEntity]
+[EditorModel( "models/gameplay/ammo/rails/bm_rails.vmdl" )]
+[Title( "Rails" ), Category( "Ammo" )]
+partial class AmmoRails: BaseAmmo
+{
+	public override AmmoType AmmoType => AmmoType.Rails;
+	public override int AmmoAmount => 5;
+
+	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rails/bm_rails.vmdl" );
+}
+
+[Library( "bm_lightning" ), HammerEntity]
+[EditorModel( "models/gameplay/ammo/lightning/bm_lightning.vmdl" )]
+[Title( "Lightning" ), Category( "Ammo" )]
+partial class AmmoLightning : BaseAmmo
+{
+	public override AmmoType AmmoType => AmmoType.Lightning;
+	public override int AmmoAmount => 100;
+
+	public override Model WorldModel => Model.Load( "models/gameplay/ammo/lightning/bm_lightning.vmdl" );
 }
