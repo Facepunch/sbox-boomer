@@ -15,9 +15,8 @@ partial class NailProjectile : ModelEntity
 		base.Spawn();
 
 		Model = WorldModel;
-
+		Predictable = false;
 	}
-
 
 	[Event.Tick.Server]
 	public virtual void Tick()

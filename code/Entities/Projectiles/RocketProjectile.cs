@@ -3,22 +3,18 @@
 partial class RocketProjectile : ModelEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/light_arrow.vmdl" );
-
-	bool Stuck;
-
+	
 	public Entity IgnoreEntity { get; set; }
 
 	private Sound RocketTrailSound;
+	bool Stuck;
 
 	public override void Spawn()
 	{
-
-
 		base.Spawn();
 
 		Model = WorldModel;
-
-
+		Predictable = false;
 	}
 
 	protected override void OnDestroy()
