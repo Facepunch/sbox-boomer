@@ -59,20 +59,20 @@ public class ItemRespawn
 	/// Entity has been picked up, or deleted or something.
 	/// If it was in our records, start a respawn timer
 	/// </summary>
-	public static void Taken( Entity ent )
+	public static void Taken( Entity ent, int respawntime )
 	{
 		if ( Records.Remove( ent, out var record ) )
 		{
-			_ = RespawnAsync( record );
+			_ = RespawnAsync( record, respawntime );
 		}
 	}
 
 	/// <summary>
 	/// Async Respawn timer. Wait 30 seconds, spawn the entity, add a record for it.
 	/// </summary>
-	static async Task RespawnAsync( Record record )
+	static async Task RespawnAsync( Record record, int respawntime )
 	{
-		await GameTask.Delay( 1000 * 30 );
+		await GameTask.Delay( 1000 * respawntime );
 
 		// TODO - find a sound that sounds like the echoey crazy truck horn sound that played in HL1 when items spawned
 		Sound.FromWorld( "dm.item_respawn", record.Transform.Position + Vector3.Up * 50 );

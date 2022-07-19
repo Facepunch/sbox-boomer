@@ -1,6 +1,6 @@
 ﻿partial class DmInventory : BaseInventory
 {
-
+	public int RespawnTime = 30;
 
 	public DmInventory( Player player ) : base( player )
 	{
@@ -34,7 +34,7 @@
 			weapon.PickupAmmo -= player.GiveAmmo( weapon.AmmoType, weapon.PickupAmmo );
 		}
 
-		ItemRespawn.Taken( ent );
+		ItemRespawn.Taken( ent,RespawnTime );
 
 		return true;
 	}

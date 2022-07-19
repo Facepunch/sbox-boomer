@@ -7,7 +7,8 @@
 partial class Battery : ModelEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/dm_battery.vmdl" );
-
+	
+	public int RespawnTime = 30;
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -36,7 +37,7 @@ partial class Battery : ModelEntity, IRespawnableEntity
 		Sound.FromWorld( "dm_item_battery", Position );
 		PickupFeed.OnPickup( To.Single( player ), $"+25 Armour" );
 
-		ItemRespawn.Taken( this );
+		ItemRespawn.Taken( this, RespawnTime );
 		Delete();
 	}
 }

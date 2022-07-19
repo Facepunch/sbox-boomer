@@ -9,6 +9,7 @@ partial class HealthKit : ModelEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
 
+	public int RespawnTime = 30;
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -38,7 +39,7 @@ partial class HealthKit : ModelEntity, IRespawnableEntity
 
 		Sound.FromWorld( "dm.item_health", Position );
 		PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
-		ItemRespawn.Taken( this );
+		ItemRespawn.Taken( this , RespawnTime);
 		Delete();
 	}
 

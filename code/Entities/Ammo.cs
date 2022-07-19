@@ -6,6 +6,8 @@
 	public virtual int AmmoAmount => 17;
 	public virtual Model WorldModel => Model.Load( "models/dm_battery.vmdl" );
 
+	public int RespawnTime = 30;
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -35,7 +37,7 @@
 		Sound.FromWorld( "dm.pickup_ammo", Position );
 		PickupFeed.OnPickup( To.Single( player ), $"+{ammoTaken} {AmmoType}" );
 
-		ItemRespawn.Taken( this );
+		ItemRespawn.Taken( this, RespawnTime );
 		Delete();
 	}
 }
