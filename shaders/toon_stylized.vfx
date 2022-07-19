@@ -1,0 +1,183 @@
+//=========================================================================================================================
+// Optional
+//=========================================================================================================================
+HEADER
+{
+	CompileTargets = ( IS_SM_50 && ( PC || VULKAN ) );
+	Description = "Stylized Toon Shader";
+}
+
+//=========================================================================================================================
+// Optional
+//=========================================================================================================================
+FEATURES
+{
+    #include "common/features.hlsl"
+
+    Feature( F_ILLUMINATE, 0..1, "Stylized Toon" );
+}
+
+//=========================================================================================================================
+// Optional
+//=========================================================================================================================
+MODES
+{
+    VrForward();													// Indicates this shader will be used for main rendering
+    Depth( "vr_depth_only.vfx" ); 									// Shader that will be used for shadowing and depth prepass
+    ToolsVis( S_MODE_TOOLS_VIS ); 									// Ability to see in the editor
+    ToolsWireframe( "vr_tools_wireframe.vfx" ); 					// Allows for mat_wireframe to work
+    ToolsShadingComplexity( "vr_tools_shading_complexity.vfx" ); 	// Shows how expensive drawing is in debug view
+}
+
+//=========================================================================================================================
+COMMON
+{
+	#include "common/shared.hlsl"
+}
+
+//=========================================================================================================================
+
+struct VertexInput
+{
+	#include "common/vertexinput.hlsl"
+};
+
+//=========================================================================================================================
+
+struct PixelInput
+{
+	#include "common/pixelinput.hlsl"
+};
+
+//=========================================================================================================================
+
+VS
+{
+	#include "common/vertex.hlsl"
+	PixelInput MainVs( INSTANCED_SHADER_PARAMS( VS_INPUT i ) )
+	{
+		PixelInput o = ProcessVertex( i );
+		return FinalizeVertex( o );
+	}
+}
+
+//=========================================================================================================================
+PS
+{
+    StaticCombo( S_ILLUMINATE, F_ILLUMINATE, Sys( PC ) );
+    float4 g_vShadowTint< Default4(0.0f, 0.0f, 0.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Shadow,10/1" ); >;
+    float3 g_vDiffuseColor< Default3(1.0f, 1.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Diffuse,10/1" );  >;
+    float3 g_vSpecularColor< Default3(1.0f, 1.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Specular,10/1" ); >;
+    float3 g_vRimColor< Default3(1.0f, 1.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Rim Light,10/1" ); >;
+    float g_flSpecularIntensive< Default(1.0f); Range(0.0f, 1.0f); UiGroup( "Toon,10/Specular,10/1" ); >;
+    float g_flShininess< Default(0.5f); Range(0.0f, 1.0f); UiGroup( "Toon,10/Specular,10/1" ); >;
+    float g_flRimPower< Default(3.0f); Range(0.0f, 10.0f); UiGroup( "Toon,10/Rim Light,10/2" );>;
+    float g_flAttenuation< Default(1.0f); Range(0.0f, 1.0f); UiGroup( "Toon,10/Attenuation,10/1" );  >;
+    #if S_ILLUMINATE
+        float g_flIlluminateAmount< Default(0.0f); Range(0.0f, 1.0f); UiGroup( "Toon,10/Diffuse,10/1" );  >;
+    #endif
+
+    #include "common/pixel.hlsl"
+	
+    class ShadingModelStylizedToon : ShadingModel
+    {
+        float3 Albedo;
+        float3 NormalWs;
+        float AO;
+        float3 PositionWithOffsetWs;
+        float3 PositionWs;
+        float3 ViewRayWs;
+
+        void Init( const PixelInput pixelInput, const Material material )
+        {
+            Albedo = material.Albedo;
+            NormalWs = material.Normal;
+            AO = material.AmbientOcclusion;
+
+            PositionWithOffsetWs = pixelInput.vPositionWithOffsetWs.xyz;
+            PositionWs = PositionWithOffsetWs + g_vCameraPositionWs;
+
+            // View ray in World Space
+            ViewRayWs = CalculatePositionToCameraDirWs( PositionWs );
+        }
+        
+        //
+        // Executed for every direct light
+        //
+        LightShade Direct( const LightData light )
+        {
+            LightShade shade;
+
+            const float flAttenuation = 1.0f;
+
+            float3 vClearColor = (Albedo * g_vColorTint) * light.Visibility;
+            float3 vDiffuseReflection = lerp( g_vDiffuseColor.rgb, 1.0f, saturate(g_flAttenuation * light.NdotL) );
+            float3 vSpecularReflection = 0.0f;
+            
+            [branch]
+            if(light.NdotL > 0.0f)
+            {
+                vSpecularReflection = g_flAttenuation * g_vSpecularColor * g_flSpecularIntensive * light.Color * pow(
+                    max(0.0f, dot(reflect(-light.LightDir, NormalWs), ViewRayWs)), (g_flShininess * g_flShininess * 100.0f + 1.0f)
+                );
+            }
+
+            float flRim = 1.0f - saturate( dot(ViewRayWs, NormalWs) );
+            float3 vRimLighting = g_flAttenuation * light.Color * g_vRimColor * pow( flRim, g_flRimPower );
+
+            vClearColor *= AO;
+
+            float3 vDiffuse = lerp(
+                g_vShadowTint.rgb * g_vShadowTint.a,
+                (vClearColor * light.Color + (vRimLighting + vSpecularReflection) * 1.0f) * vDiffuseReflection,
+                (light.Visibility * light.Attenuation) * (1.0f - g_vShadowTint.a));
+            
+            shade.Diffuse = vDiffuse;
+
+            // We're doing this ourselves
+            shade.Specular = 0.0f;
+            return shade;
+        }
+        
+        //
+        // Executed for indirect lighting, combine ambient occlusion, etc.
+        //
+        LightShade Indirect()
+        {
+            LightShade shade;
+
+            // Get a flat average ambient
+            float3 vAmbientCube[6];
+		    SampleLightProbeVolume( vAmbientCube, float3(0,0,0) );
+
+            const float flAttenuation = 1.0f;
+
+            float3 vClearColor = (Albedo * g_vColorTint) * vAmbientCube[0];
+            float3 vDiffuseReflection = g_vDiffuseColor.rgb;
+
+            float flRim = 1.0f - saturate( dot(ViewRayWs, NormalWs) );
+            float3 vRimLighting = g_flAttenuation * vAmbientCube[0] * g_vRimColor * pow( flRim, g_flRimPower );
+            vClearColor *= AO;
+            float3 vDiffuse = (vClearColor + (vRimLighting) * 1.0f) * vDiffuseReflection;
+
+            #if S_ILLUMINATE
+                vDiffuse += (Albedo * g_vColorTint) * g_flIlluminateAmount;
+            #endif
+
+            shade.Diffuse =  vDiffuse;
+            shade.Specular = 0.0f;
+            return shade;
+        }
+    };
+
+	//
+	// Main
+	//
+	PixelOutput MainPs( PixelInput i )
+	{
+		Material m = GatherMaterial( i );
+		ShadingModelStylizedToon sm;
+		
+		return FinalizePixelMaterial( i, m, sm );
+	}
+}
