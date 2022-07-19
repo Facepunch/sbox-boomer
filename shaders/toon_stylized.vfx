@@ -122,7 +122,7 @@ PS
                 );
             }
 
-            float flRim = 1.0f - saturate( dot(ViewRayWs, NormalWs) );
+            float flRim = 1.0f - saturate( dot(ViewRayWs, NormalWs) ) * ( saturate(NormalWs.z) * 2.0f );
             float3 vRimLighting = g_flAttenuation * light.Color * g_vRimColor * pow( flRim, g_flRimPower );
 
             vClearColor *= AO;
