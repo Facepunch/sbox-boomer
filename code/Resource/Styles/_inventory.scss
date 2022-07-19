@@ -6,7 +6,6 @@
 	font-family: Roboto;
 	opacity: 1;
 	transition: all 0.2s ease-out;
-	mix-blend-mode: lighten;
 
 	&.active
 	{
@@ -67,7 +66,6 @@ inventorycolumn {
 
 inventoryicon {
 	margin-top: 5px;
-	mix-blend-mode: lighten;
 	color: #fc0;
 
 	font-size: 40px;
