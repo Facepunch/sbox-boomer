@@ -56,7 +56,7 @@
 							},
 							{
 								from = "liquid.vmat"
-								to = "models/gameplay/weapons/test/text.vmat"
+								to = "models/gameplay/textures/textureatlas.vmat"
 							},
 						]
 						use_global_default = false
