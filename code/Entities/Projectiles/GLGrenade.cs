@@ -6,6 +6,8 @@ partial class GLGrenade : BasePhysics
 
 	Particles GrenadeParticles;
 
+	public Entity FromWeapon;
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -29,7 +31,7 @@ partial class GLGrenade : BasePhysics
 	{
 		await Task.DelaySeconds( seconds );
 
-		DeathmatchGame.Explosion( this, Owner, Position, 400, 100, 1.0f );
+		DeathmatchGame.Explosion( FromWeapon, Owner, Position, 400, 100, 1.0f );
 		Delete();
 	}
 }

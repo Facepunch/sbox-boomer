@@ -76,6 +76,7 @@ partial class NailGun : DeathmatchWeapon
 			bolt.Rotation = Owner.EyeRotation;
 			bolt.Owner = Owner;
 			bolt.Velocity = Owner.EyeRotation.Forward * 100;
+			bolt.FromWeapon = this;
 
 		}
 	}

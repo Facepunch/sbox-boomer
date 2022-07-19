@@ -4,6 +4,8 @@ partial class NailProjectile : ModelEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/editor/arrow.vmdl" );
 
+	public Entity FromWeapon;
+
 	bool Stuck;
 
 	bool Passed = false;
@@ -57,7 +59,7 @@ partial class NailProjectile : ModelEntity
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, tr.Direction * 200, 20 )
 													.UsingTraceResult( tr )
 													.WithAttacker( Owner )
-													.WithWeapon( this );
+													.WithWeapon( FromWeapon );
 				tr.Entity.TakeDamage( damageInfo );
 			}
 

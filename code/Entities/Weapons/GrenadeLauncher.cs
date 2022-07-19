@@ -44,7 +44,8 @@ partial class GrenadeLauncher : DeathmatchWeapon
 				var grenade = new GLGrenade
 				{
 					Position = Owner.EyePosition + Owner.EyeRotation.Forward * 3.0f,
-					Owner = Owner
+					Owner = Owner,
+					FromWeapon = this
 				};
 
 				grenade.PhysicsBody.Velocity = Owner.EyeRotation.Forward * 600.0f + Owner.EyeRotation.Up * 200.0f + Owner.Velocity;
