@@ -122,8 +122,8 @@ PS
                 );
             }
 
-            float flRim = 1.0f - saturate( dot(ViewRayWs, NormalWs) ) * ( saturate(NormalWs.z) * 2.0f );
-            float3 vRimLighting = g_flAttenuation * light.Color * g_vRimColor * pow( flRim, g_flRimPower );
+            float flRim = saturate(1.25f - dot(ViewRayWs, NormalWs)* saturate(NormalWs.z) * 0.25f );
+            float3 vRimLighting = g_flAttenuation * light.Color * g_vRimColor * pow( flRim, g_flRimPower + 100.0f ) * 1000.0f;
 
             vClearColor *= AO;
 
@@ -156,7 +156,7 @@ PS
             float3 vDiffuseReflection = g_vDiffuseColor.rgb;
 
             float flRim = 1.0f - saturate( dot(ViewRayWs, NormalWs) );
-            float3 vRimLighting = g_flAttenuation * vAmbientCube[0] * g_vRimColor * pow( flRim, g_flRimPower );
+            float3 vRimLighting = g_flAttenuation * vAmbientCube[0] * g_vRimColor * pow( flRim, g_flRimPower + 10.0f ) * 1000.0f;
             vClearColor *= AO;
             float3 vDiffuse = (vClearColor + (vRimLighting) * 1.0f) * vDiffuseReflection;
 
