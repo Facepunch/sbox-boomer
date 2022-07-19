@@ -11,10 +11,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models\\gameplay\\healthkit\\dmx\\mesh\\healthkit.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
+						filename = "models/gameplay/healthkit/mesh/healthkit.fbx"
+						import_translation = [ 0.0, 0.0, 20.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.5
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -35,19 +35,77 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
-						origin = [ -0.034934, 0.003014, 0.74286 ]
+						collision_tags = "solid"
+						origin = [ -0.034934, 0.003014, 21.21892 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 18.127476, 18.058338, 4.530061 ]
+						dimensions = [ 18.127476, 18.058338, 45.482182 ]
 					},
 				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "glass.vmat"
+								to = "models/gameplay/healthkit/glassbottle.vmat"
+							},
+							{
+								from = "liquid.vmat"
+								to = "models/gameplay/weapons/test/text.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 0.0, 0.0, 15.0 ]
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = "ACT_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/healthkit/mesh/healthkit@idle.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
 			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "boomer/animgraphs/healthkit.vanmgrph"
+		base_model_name = ""
 	}
 }

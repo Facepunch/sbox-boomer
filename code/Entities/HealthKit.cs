@@ -5,7 +5,7 @@
 [Library( "dm_healthkit" ), HammerEntity]
 [EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
 [Title( "Health Kit" )]
-partial class HealthKit : ModelEntity, IRespawnableEntity
+partial class HealthKit : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
 
@@ -19,7 +19,8 @@ partial class HealthKit : ModelEntity, IRespawnableEntity
 		PhysicsEnabled = true;
 		UsePhysicsCollision = true;
 
-		Tags.Add( "weapon" );
+		
+		Tags.Add( "trigger" );
 	}
 
 	public override void StartTouch( Entity other )
@@ -32,7 +33,7 @@ partial class HealthKit : ModelEntity, IRespawnableEntity
 		var newhealth = pl.Health + 25;
 
 		newhealth = newhealth.Clamp( 0, pl.MaxHealth );
-
+		
 		pl.Health = newhealth;
 
 		PickEffect( pl );
