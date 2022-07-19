@@ -1,7 +1,6 @@
 ﻿$yellow2: #FAB002;
 
-.scoreboard
-{
+.scoreboard {
 	position: absolute;
 	z-index: 100;
 	flex-direction: column;
@@ -19,70 +18,60 @@
 	transform-origin: 50% 50%;
 	background-size: 100% 100%;
 	background-position: center center;
-	background-color: rgba( 10, 10, 10, 0.8 );
-	backdrop-filter: blur( 10px );
+	background-color: rgba( 10, 10, 10, .75 );
 
-	&.open
-	{
+	&.open {
 		opacity: 1;
 		transform: scale( 1 );
 		transition: all 0.1s ease-out;
 	}
 
-	.name
-	{
+	.name {
 		flex-grow: 1;
 	}
 
-	.deaths, .kills, .ping, .fps
-	{
-		width: 90px;
+	.deaths, .kills, .ping, .fps {
+		width: 300px;
 		text-align: right;
 	}
 
-	.ping, .fps
-	{
-		opacity: 0.3;
-		width: 50px;
+	.ping, .fps {
+		width: 100px;
 	}
 
-	.deaths
-	{
-		margin-right: 50px;
+	.deaths {
+		margin-right: 20px;
 	}
 
-	.header
-	{
+	.header {
 		font-weight: 500;
-		border-bottom: 3px solid #fc0;
-		min-width: 30%;
+		border-bottom: 5px solid #fc0;
+		min-width: 45%;
 		margin-bottom: 10px;
 		padding-bottom: 5px;
 		color: $yellow2;
+		background-color: rgba( black, 1 );
+		padding: 10px 15px;
+		border-color: $yellow2;
 	}
 
-	.canvas
-	{
+	.canvas {
 		flex-direction: column;
 		min-height: 50%;
 		min-width: 30%;
-		mix-blend-mode: lighten;
 
-		.entry
-		{
-			mix-blend-mode: lighten;
-			margin-bottom: 2px;
+		.entry {
+			margin-bottom: 4px;
 			padding: 4px 10px;
-			color: #FAB002;
+			color: $yellow2;
 
-			label
-			{
-				//text-shadow: 0px 0px 10px #f70a;
+			label {
+				//	text-shadow: 0px 0px 1px #f70a;
 			}
 
-			&.me
-			{
-				background-color: #00aa;
+			&.me {
+				background-color: rgba( 10, 10, 10, .75 );
+				color: #e2e2e2;
 			}
 		}
 	}
