@@ -11,13 +11,15 @@
 		base.Spawn();
 
 		Model = WorldModel;
+		PhysicsEnabled = true;
+		UsePhysicsCollision = true;
 
 		Tags.Add( "weapon" );
 	}
 
-	public override void Touch( Entity other )
+	public override void StartTouch( Entity other )
 	{
-		base.Touch( other );
+		base.StartTouch( other );
 
 		if ( other is not BoomerPlayer player )
 			return;
