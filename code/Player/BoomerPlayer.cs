@@ -40,18 +40,19 @@ public partial class BoomerPlayer : Player
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		
+
 		SupressPickupNotices = true;
-			var w = StartingWeapons.Instance;
-			if ( w.IsValid() )
-			{
-				w.SetupPlayer( this );
-			}
-			else
-			{
-				Inventory.Add( new Crowbar() );
-				Inventory.Add( new NailGun() );
-			}
+		var w = StartingWeapons.Instance;
+		if ( w.IsValid() )
+		{
+			w.SetupPlayer( this );
+		}
+		else
+		{
+			//	Inventory.Add( new Crowbar() );
+			Inventory.Add( new NailGun() );
+			GiveAmmo( AmmoType.Nails, 250 );
+		}
 		SupressPickupNotices = false;
 
 		Clothing.DressEntity( this );
@@ -72,11 +73,12 @@ public partial class BoomerPlayer : Player
 		ply.GiveAmmo( AmmoType.Lightning, 250 );
 
 		//ply.Inventory.Add( new Crowbar() );
-		//ply.Inventory.Add( new RocketLauncher() );
-		//ply.Inventory.Add( new Shotgun() );
-		//ply.Inventory.Add( new NailGun());
-		//ply.Inventory.Add( new RailGun() );
-		//ply.Inventory.Add( new GrenadeLauncher() );
+		ply.Inventory.Add( new RocketLauncher() );
+		ply.Inventory.Add( new Shotgun() );
+		//ply.Inventory.Add( new NailGun() );
+		ply.Inventory.Add( new RailGun() );
+		ply.Inventory.Add( new GrenadeLauncher() );
+		ply.Inventory.Add( new LightningGun() );
 	}
 
 	public override void OnKilled()
@@ -152,9 +154,9 @@ public partial class BoomerPlayer : Player
 
 		TickPlayerUse();
 
-		
 
-		if(Health > 100)
+
+		if ( Health > 100 )
 		{
 			if ( HealthTick > 1 )
 			{
@@ -163,7 +165,7 @@ public partial class BoomerPlayer : Player
 				HealthTick = 0;
 			}
 		}
-		if(Armour > 100)
+		if ( Armour > 100 )
 		{
 			if ( ArmourTick > 1 )
 			{
@@ -199,16 +201,16 @@ public partial class BoomerPlayer : Player
 
 	public override void StartTouch( Entity other )
 	{
-		if ( timeSinceDropped < 1 ) 
+		if ( timeSinceDropped < 1 )
 			return;
 
-		if( other is PickupTrigger pickup )
+		if ( other is PickupTrigger pickup )
 		{
 			StartTouch( pickup.Parent );
 			return;
 		}
 
-		if( other is DeathmatchWeapon wpn )
+		if ( other is DeathmatchWeapon wpn )
 		{
 			if ( Children.Any( x => x is DeathmatchWeapon w && w.ClassName == wpn.ClassName ) )
 				return;
@@ -316,7 +318,7 @@ public partial class BoomerPlayer : Player
 				OnKilled();
 			}
 		}
-		
+
 		if ( info.Attacker is BoomerPlayer attacker )
 		{
 			if ( attacker != this )
