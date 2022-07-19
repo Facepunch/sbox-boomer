@@ -1,9 +1,10 @@
-﻿/// <summary>
+﻿using Boomer.Movement;
+/// <summary>
 /// Gives 25 health points.
 /// </summary>
 [Library( "dm_healthkit" ), HammerEntity]
 [EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
-[Title(  "Health Kit" )]
+[Title( "Health Kit" )]
 partial class HealthKit : ModelEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
@@ -33,8 +34,22 @@ partial class HealthKit : ModelEntity, IRespawnableEntity
 
 		pl.Health = newhealth;
 
+		PickEffect( pl );
+
 		Sound.FromWorld( "dm.item_health", Position );
+		PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
 		ItemRespawn.Taken( this );
 		Delete();
+	}
+
+	private void PickEffect( BoomerPlayer player )
+	{
+		if ( player.Controller is not BoomerController ctrl ) 
+		return;
+
+		if ( Host.IsServer || !player.IsLocalPawn )
+		return;
+
+		Particles.Create( "particles/gameplay/screeneffects/healthpickup/ss_healthpickup.vpcf",ctrl.Pawn);
 	}
 }
