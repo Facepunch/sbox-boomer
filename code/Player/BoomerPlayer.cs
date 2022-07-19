@@ -199,7 +199,20 @@ public partial class BoomerPlayer : Player
 
 	public override void StartTouch( Entity other )
 	{
-		if ( timeSinceDropped < 1 ) return;
+		if ( timeSinceDropped < 1 ) 
+			return;
+
+		if( other is PickupTrigger pickup )
+		{
+			StartTouch( pickup.Parent );
+			return;
+		}
+
+		if( other is DeathmatchWeapon wpn )
+		{
+			if ( Children.Any( x => x is DeathmatchWeapon w && w.ClassName == wpn.ClassName ) )
+				return;
+		}
 
 		base.StartTouch( other );
 	}
