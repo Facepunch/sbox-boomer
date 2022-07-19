@@ -10,19 +10,20 @@
 				children = 
 				[
 					{
-						_class = "RenderPrimitiveBox"
-						name = "box"
+						_class = "RenderMeshFile"
+						filename = "models/gameplay/ammo/rockets/rockets.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.5
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
 						parent_bone = ""
-						material_name = "materials/gameplay/weaponcolours/red.vmat"
-						origin = [ 0.704634, 0.725076, 9.947135 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						max_u = 1.0
-						max_v = 1.0
-						dimensions = [ 7.880856, 8.251077, 19.87726 ]
-						segments_x = 1
-						segments_y = 1
-						segments_z = 1
-						invert = false
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
@@ -35,9 +36,27 @@
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						origin = [ 0.530524, 0.612185, 10.661811 ]
+						origin = [ 0.049922, 0.108144, 12.319973 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 11.061048, 11.676685, 21.241278 ]
+						dimensions = [ 10.099844, 10.668602, 24.557602 ]
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "models/gameplay/textures/textureatlas.vmat"
+								to = "models/gameplay/textures/textureatlas.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
 					},
 				]
 			},

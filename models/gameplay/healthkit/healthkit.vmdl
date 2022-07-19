@@ -56,7 +56,7 @@
 							},
 							{
 								from = "liquid.vmat"
-								to = "models/gameplay/textures/textureatlas.vmat"
+								to = "models/gameplay/healthkit/healthliquid.vmat"
 							},
 						]
 						use_global_default = false
