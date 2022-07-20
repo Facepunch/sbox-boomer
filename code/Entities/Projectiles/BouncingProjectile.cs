@@ -5,14 +5,11 @@ public partial class BouncingProjectile : BulletDropProjectile
 
 	protected override void PostSimulate( TraceResult trace )
 	{
-		if ( LifeTime.HasValue )
+		if ( trace.Hit )
 		{
-			if ( trace.Hit )
-			{
-				var reflect = Vector3.Reflect( Velocity.Normal, trace.Normal );
-				GravityModifier = 0f;
-				Velocity = reflect * Velocity.Length * Bounciness;
-			}
+			var reflect = Vector3.Reflect( trace.Direction, trace.Normal );
+			GravityModifier = 0f;
+			Velocity = reflect * Velocity.Length * Bounciness;
 		}
 
 		base.PostSimulate( trace );
