@@ -16,11 +16,13 @@ public partial class BoomerPlayer : Player
 	public int ComboKillCount { get; set; } = 0;
 	public TimeSince TimeSinceLastKill { get; set; }
 
+	public ProjectileSimulator Projectiles { get; private set; }
 	public TimeSince HealthTick { get; set; }
 	public TimeSince ArmourTick { get; set; }
 
 	public BoomerPlayer()
 	{
+		Projectiles = new( this );
 		Inventory = new DmInventory( this );
 	}
 
@@ -136,6 +138,8 @@ public partial class BoomerPlayer : Player
 
 	public override void Simulate( Client cl )
 	{
+		Projectiles.Simulate();
+
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return;
 
