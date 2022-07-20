@@ -9,8 +9,8 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public override string ViewModelPath => "models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl";
 
 	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
-	public override float Gravity => 10f;
-	public override float Speed => 1500f;
+	public override float Gravity => 0f;
+	public override float Speed => 2500f;
 	public override bool CanZoom => true;
 	public override float PrimaryRate => 1;
 	public override int Bucket => 3;
