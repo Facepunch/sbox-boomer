@@ -56,9 +56,14 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 		anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 
+	protected override Vector3 AdjustProjectileVelocity( Vector3 velocity )
+	{
+		return velocity + Vector3.Up * 300f;
+	}
+
 	protected override void OnCreateProjectile( BouncingProjectile projectile )
 	{
-		projectile.Bounciness = 0.65f;
+		projectile.Bounciness = 0.8f;
 
 		base.OnCreateProjectile( projectile );
 	}
