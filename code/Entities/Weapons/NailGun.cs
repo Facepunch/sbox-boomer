@@ -8,8 +8,8 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 	public override string ProjectileModel => "models/editor/arrow.vmdl";
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float ProjectileLifeTime => 10f;
-	public override float Gravity => 5f;
-	public override float Speed => 1000f;
+	public override float Gravity => 0f;
+	public override float Speed => 2000f;
 	public override float PrimaryRate => 10;
 	public override int Bucket => 1;
 	public override AmmoType AmmoType => AmmoType.Nails;
@@ -40,6 +40,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 		base.AttackPrimary();
 
 		ShootEffects();
+		PlaySound( "gl.shoot" );
 		PlaySound( "ng.shoot" );
 	}
 

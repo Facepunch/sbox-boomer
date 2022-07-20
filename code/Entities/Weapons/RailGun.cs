@@ -149,12 +149,12 @@ partial class RailGun : DeathmatchWeapon
 			gap -= zoomFactor * 10.0f;
 
 
-			draw.Line( 0, center + Vector2.Up * gap, length, center + Vector2.Up * (gap + length) );
-			draw.Line( 0, center - Vector2.Up * gap, length, center - Vector2.Up * (gap + length) );
+			draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
+			draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
 
 			draw.Color = draw.Color.WithAlpha( draw.Color.a * zoomFactor );
 
-			for ( int i = 0; i < 4; i++ )
+			for ( int i = 0; i < 2; i++ )
 			{
 				gap += 40.0f;
 
