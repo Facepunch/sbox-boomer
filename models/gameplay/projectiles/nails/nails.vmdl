@@ -11,7 +11,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/projectiles/grenades/grenades.fbx"
+						filename = "models/gameplay/projectiles/nails/nails.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 0.3
@@ -36,7 +36,7 @@
 						parent_bone = ""
 						surface_prop = "bouncy"
 						collision_tags = "solid"
-						radius = 3.0
+						radius = 1.044421
 						point0 = [ -3.973253, 0.273016, 0.232728 ]
 						point1 = [ 4.707166, 0.141179, 0.144988 ]
 					},
@@ -80,7 +80,7 @@
 						[
 							{
 								from = "models/gameplay/textures/textureatlas.vmat"
-								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 						]
 						use_global_default = false

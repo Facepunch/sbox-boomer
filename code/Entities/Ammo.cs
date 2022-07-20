@@ -16,7 +16,7 @@
 		PhysicsEnabled = true;
 		UsePhysicsCollision = true;
 
-		Tags.Add( "weapon" );
+		Tags.Add( "trigger" );
 	}
 
 	public override void StartTouch( Entity other )
