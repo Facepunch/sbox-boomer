@@ -2,7 +2,7 @@
 [HideInEditor]
 partial class RocketProjectile : ModelEntity
 {
-	public static readonly Model WorldModel = Model.Load( "models/light_arrow.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/projectiles/rockets/rocket.vmdl" );
 	
 	public Entity IgnoreEntity { get; set; }
 

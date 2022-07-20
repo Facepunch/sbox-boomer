@@ -2,7 +2,7 @@
 [Title( "GL Grenade" )]
 partial class GLGrenade : BasePhysics
 {
-	public static readonly Model WorldModel = Model.Load( "models/dm_grenade.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/projectiles/grenades/grenade.vmdl" );
 
 	Particles GrenadeParticles;
 
