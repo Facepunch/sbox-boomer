@@ -63,6 +63,7 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 
 	protected override void OnCreateProjectile( BouncingProjectile projectile )
 	{
+		projectile.BounceSoundMinimumVelocity = 50f;
 		projectile.Bounciness = 0.8f;
 		projectile.BounceSound = "gl.impact";
 

@@ -1,6 +1,7 @@
 ﻿[Library]
 public partial class BouncingProjectile : BulletDropProjectile
 {
+	public float BounceSoundMinimumVelocity { get; set; }
 	public string BounceSound { get; set; }
 	public float Bounciness { get; set; } = 1f;
 
@@ -9,9 +10,15 @@ public partial class BouncingProjectile : BulletDropProjectile
 		if ( trace.Hit )
 		{
 			var reflect = Vector3.Reflect( trace.Direction, trace.Normal );
+
 			GravityModifier = 0f;
 			Velocity = reflect * Velocity.Length * Bounciness;
-			PlaySound( BounceSound );
+
+			if ( Velocity.Length > BounceSoundMinimumVelocity )
+			{
+				if ( !string.IsNullOrEmpty( BounceSound ) )
+					PlaySound( BounceSound );
+			}
 		}
 
 		base.PostSimulate( trace );
