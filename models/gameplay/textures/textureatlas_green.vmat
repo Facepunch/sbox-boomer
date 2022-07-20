@@ -38,7 +38,7 @@ Layer0
 	g_flShininess "0.102"
 	g_flSpecularIntensive "0.017"
 	g_vDiffuseColor "[1.000000 0.913726 0.913726 1.000000]"
-	g_vRimColor "[0.000000 0.000000 1.000000 1.000000]"
+	g_vRimColor "[0.000000 0.501961 0.000000 1.000000]"
 	g_vShadowTint "[0.000000 0.000000 0.000000 1.000000]"
 	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
 
