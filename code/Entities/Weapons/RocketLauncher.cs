@@ -8,7 +8,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/rocketlauncher/w_rocketlauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl";
 
-	public override string ProjectileModel => "models/light_arrow.vmdl";
+	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
 	public override float Gravity => 10f;
 	public override float Speed => 1500f;
 	public override bool CanZoom => true;

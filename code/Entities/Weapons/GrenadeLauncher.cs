@@ -6,7 +6,7 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl";
 
-	public override string ProjectileModel => "models/dm_grenade.vmdl";
+	public override string ProjectileModel => "models/gameplay/projectiles/grenades/grenade.vmdl";
 	public override string TrailEffect => "particles/grenade.vpcf";
 	public override float ProjectileLifeTime => 3f;
 	public override string HitSound => "gl.impact";
