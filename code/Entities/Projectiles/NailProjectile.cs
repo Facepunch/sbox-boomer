@@ -2,7 +2,7 @@
 [HideInEditor]
 partial class NailProjectile : ModelEntity
 {
-	public static readonly Model WorldModel = Model.Load( "models/editor/arrow.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/projectiles/nails/nails.vmdl" );
 
 	public Entity FromWeapon;
 

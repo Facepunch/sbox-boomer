@@ -10,17 +10,20 @@
 				children = 
 				[
 					{
-						_class = "RenderPrimitiveSphere"
-						name = "Sphere"
+						_class = "RenderMeshFile"
+						filename = "models/gameplay/projectiles/grenades/grenades.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.3
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
 						parent_bone = ""
-						material_name = "dev/helper/testgrid.vmat"
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						max_u = 1.0
-						max_v = 1.0
-						radius = 4.0
-						segments_u = 8
-						segments_v = 8
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
@@ -34,8 +37,8 @@
 						surface_prop = "bouncy"
 						collision_tags = "solid"
 						radius = 3.0
-						point0 = [ -1.21507, 0.231125, 0.204849 ]
-						point1 = [ 0.939484, 0.198402, 0.183071 ]
+						point0 = [ -3.973253, 0.273016, 0.232728 ]
+						point1 = [ 4.707166, 0.141179, 0.144988 ]
 					},
 				]
 			},
@@ -64,6 +67,24 @@
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "models/gameplay/textures/textureatlas.vmat"
+								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
 					},
 				]
 			},

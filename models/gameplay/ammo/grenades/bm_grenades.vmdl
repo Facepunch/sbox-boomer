@@ -10,19 +10,20 @@
 				children = 
 				[
 					{
-						_class = "RenderPrimitiveBox"
-						name = "box"
+						_class = "RenderMeshFile"
+						filename = "models/gameplay/ammo/grenades/grenades.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.4
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
 						parent_bone = ""
-						material_name = "materials/gameplay/weaponcolours/lightgreen.vmat"
-						origin = [ 0.704634, 0.725076, 5.70932 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						max_u = 1.0
-						max_v = 1.0
-						dimensions = [ 7.880856, 8.251077, 11.401632 ]
-						segments_x = 1
-						segments_y = 1
-						segments_z = 1
-						invert = false
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
@@ -38,6 +39,24 @@
 						origin = [ 0.530524, 0.612185, 6.080905 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 11.061048, 11.676685, 12.079466 ]
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "models/gameplay/textures/textureatlas.vmat"
+								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
 					},
 				]
 			},
