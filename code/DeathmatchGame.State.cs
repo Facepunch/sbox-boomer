@@ -39,7 +39,7 @@ partial class DeathmatchGame : Game
 		await WaitStateTimer();
 
 		GameState = GameStates.Live;
-		StateTimer = 10 * 60;
+		StateTimer = 1000 * 60;
 		FreshStart();
 		await WaitStateTimer();
 

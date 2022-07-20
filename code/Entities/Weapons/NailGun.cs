@@ -5,7 +5,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/nailgun/w_nailgun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/nailgun/nailgun.vmdl";
-	public override string ProjectileModel => "models/editor/arrow.vmdl";
+	public override string ProjectileModel => "models/gameplay/projectiles/nails/nails.vmdl";
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float ProjectileLifeTime => 10f;
 	public override float Gravity => 0f;
