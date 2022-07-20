@@ -71,6 +71,7 @@
 		direction = direction.Normal;
 
 		var velocity = (direction * Speed) + (player.Velocity * InheritVelocity);
+		velocity = AdjustProjectileVelocity( velocity );
 		projectile.Initialize( position, velocity, ProjectileRadius, (p, t) => OnProjectileHit( (T)p, t ) );
 	}
 
@@ -96,6 +97,11 @@
 	protected virtual float ModifyDamage( Entity victim, float damage )
 	{
 		return damage;
+	}
+
+	protected virtual Vector3 AdjustProjectileVelocity( Vector3 velocity )
+	{
+		return velocity;
 	}
 
 	protected virtual void DamageInRadius( Vector3 position, float radius, float baseDamage, float force = 1f )
