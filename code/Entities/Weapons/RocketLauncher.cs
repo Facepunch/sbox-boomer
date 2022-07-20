@@ -3,11 +3,14 @@
 [Library( "dm_rocketlauncher" ), HammerEntity]
 [EditorModel( "weapons/rust_crossbow/rust_crossbow.vmdl" )]
 [Title( "RocketLauncher" ), Category( "Weapons" )]
-partial class RocketLauncher : DeathmatchWeapon
+public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/rocketlauncher/w_rocketlauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl";
 
+	public override string ProjectileModel => "models/light_arrow.vmdl";
+	public override float Gravity => 10f;
+	public override float Speed => 1500f;
 	public override bool CanZoom => true;
 	public override float PrimaryRate => 1;
 	public override int Bucket => 3;
@@ -35,20 +38,8 @@ partial class RocketLauncher : DeathmatchWeapon
 
 		ShootEffects();
 		PlaySound( "rl.shoot" );
-		PlaySound( "gl.shoot" );
 
-		// TODO - if zoomed in then instant hit, no travel, 120 damage
-
-		if ( IsServer )
-		{
-			var rocket = new RocketProjectile();
-			rocket.Position = Owner.EyePosition;
-			rocket.Rotation = Owner.EyeRotation;
-			rocket.Owner = Owner;
-			rocket.Velocity = Owner.EyeRotation.Forward * 180;
-			rocket.IgnoreEntity = Owner;
-
-		}
+		base.AttackPrimary();
 	}
 
 	public override void PostCameraSetup( ref CameraSetup camSetup )
@@ -105,5 +96,38 @@ partial class RocketLauncher : DeathmatchWeapon
 			draw.Line( thickness, center + Vector2.Left * gap + Vector2.Up * length, center + Vector2.Left * gap - Vector2.Up * length );
 			draw.Line( thickness, center - Vector2.Left * gap + Vector2.Up * length, center - Vector2.Left * gap - Vector2.Up * length );
 		}
+	}
+
+	protected override void OnProjectileHit( RocketProjectile projectile, TraceResult trace )
+	{
+		Sound.FromWorld( "rl.explode", trace.EndPosition );
+		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", trace.EndPosition );
+
+		if ( IsServer )
+		{
+			foreach ( var item in FindInSphere( trace.EndPosition, 96f ).ToList() )
+			{
+				if ( item is BoomerPlayer player )
+				{
+					Vector3 middlePos = (player.Position + player.EyePosition) / 2;
+					var tr = Trace.Ray( Position, middlePos ).Run();
+					if ( tr.Hit )
+					{
+						player.GroundEntity = null;
+						player.Velocity += (middlePos - Position) * 12;
+						var damage = (middlePos - Position).Length;
+						damage = damage.Remap( 0, 64, 10, 40 );
+						if ( tr.Entity == Owner ) damage /= 4;
+						player.TakeDamage( DamageInfo.Generic( damage ) );
+					}
+				}
+			}
+		}
+		else
+		{
+			trace.Surface.DoBulletImpact( trace );
+		}
+
+		base.OnProjectileHit( projectile, trace );
 	}
 }
