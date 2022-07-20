@@ -27,21 +27,30 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 	{
 		base.StartTouch( other );
 
-		if ( other is not BoomerPlayer pl ) return;
-		if ( pl.Health >= pl.MaxHealth ) return;
+		if ( IsServer )
+		{
+			if ( other is not BoomerPlayer pl ) return;
+			if ( pl.Health >= pl.MaxHealth ) return;
 
-		var newhealth = pl.Health + 25;
+			var newhealth = pl.Health + 25;
 
-		newhealth = newhealth.Clamp( 0, pl.MaxHealth );
-		
-		pl.Health = newhealth;
+			newhealth = newhealth.Clamp( 0, pl.MaxHealth );
 
-		PickEffect( pl );
+			pl.Health = newhealth;
 
+			PickEffect( pl );
+
+			PlayPickupSound();
+			PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
+			ItemRespawn.Taken( this, RespawnTime );
+			Delete();
+		}
+	}
+
+	[ClientRpc]
+	private void PlayPickupSound()
+	{
 		Sound.FromWorld( "dm.item_health", Position );
-		PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
-		ItemRespawn.Taken( this , RespawnTime);
-		Delete();
 	}
 
 	private void PickEffect( BoomerPlayer player )
