@@ -1,0 +1,16 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "BoomerSKin"
+		Subtitle = ""
+		Category = "Skin"
+		Model = null
+		SkinMaterial = resource:"models/gameplay/citizen/textures/citizen_skin.vmat"
+		EyesMaterial = resource:"models/citizen/skin/citizen_eyes_advanced.vmat"
+		MaterialGroup = "Skin01"
+		SlotsUnder = "Skin"
+		SlotsOver = 0
+		HideBody = 0
+	}
+}

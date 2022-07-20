@@ -14,15 +14,14 @@
 		ent.Rotation = Rotation;
 		ent.MoveType = MoveType.Physics;
 		ent.UsePhysicsCollision = true;
-		ent.SetInteractsAs( CollisionLayer.Debris );
-		ent.SetInteractsWith( CollisionLayer.WORLD_GEOMETRY );
-		ent.SetInteractsExclude( CollisionLayer.Player | CollisionLayer.Debris );
-
+		Tags.Add( "debris" );
+		ent.PhysicsEnabled = true;
+		
 		ent.CopyFrom( this );
 		ent.CopyBonesFrom( this );
 		ent.SetRagdollVelocityFrom( this );
 		ent.DeleteAsync( 20.0f );
-
+		
 		// Copy the clothes over
 		foreach ( var child in Children )
 		{

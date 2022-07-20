@@ -20,6 +20,12 @@ public partial class BoomerPlayer : Player
 	public TimeSince HealthTick { get; set; }
 	public TimeSince ArmourTick { get; set; }
 
+	[Net]
+	private Material SkinMat { get; set; } = Material.Load( "models/gameplay/citizen/textures/citizen_skin.vmat" );
+
+	[Net]
+	private Color PlayerColor { get; set; } = Color.Random;
+
 	public BoomerPlayer()
 	{
 		Projectiles = new( this );
@@ -57,9 +63,18 @@ public partial class BoomerPlayer : Player
 		}
 		SupressPickupNotices = false;
 
-		Clothing.DressEntity( this );
+		//For now
+		//Clothing.DressEntity( this );
+
+		SetMaterialOverride( SkinMat, "skin");
+		RandomColor();
 
 		base.Respawn();
+	}
+	[ClientRpc]
+	public void RandomColor()
+	{
+		SceneObject.Attributes.Set( "RimColor", PlayerColor );
 	}
 
 	[ConCmd.Admin]
