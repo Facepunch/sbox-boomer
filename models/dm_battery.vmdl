@@ -10,19 +10,20 @@
 				children = 
 				[
 					{
-						_class = "RenderPrimitiveBox"
-						name = "box"
+						_class = "RenderMeshFile"
+						filename = "models/gameplay/armour/armour.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.7
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
 						parent_bone = ""
-						material_name = "dev/helper/testgrid.vmat"
-						origin = [ 0.0, 0.0, 7.040061 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						max_u = 1.0
-						max_v = 1.0
-						dimensions = [ 10.0, 10.0, 13.822604 ]
-						segments_x = 1
-						segments_y = 1
-						segments_z = 1
-						invert = false
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
@@ -34,10 +35,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						origin = [ -0.134631, 0.20999, 6.036602 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 12.159899, 13.616497, 22.073204 ]
@@ -53,8 +51,8 @@
 						remaps = 
 						[
 							{
-								from = "dev/helper/testgrid.vmat"
-								to = "models/dm_battery.vmat"
+								from = "models/gameplay/textures/textureatlas.vmat"
+								to = "models/gameplay/textures/textureatlas_cyan.vmat"
 							},
 						]
 						use_global_default = false
@@ -66,5 +64,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
