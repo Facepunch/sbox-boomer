@@ -1,7 +1,6 @@
 ﻿[Library]
 public partial class BulletDropProjectile : ModelEntity
 {
-	// TODO: Find a better way to achieve this without networking all these strings. Use a projectile data class?
 	[Net, Predicted] public string ExplosionEffect { get; set; } = "";
 	[Net, Predicted] public string LaunchSoundName { get; set; } = null;
 	[Net, Predicted] public string FollowEffect { get; set; } = "";

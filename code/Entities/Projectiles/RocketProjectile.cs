@@ -1,4 +1,5 @@
-﻿public partial class RocketProjectile : BulletDropProjectile
+﻿[Library]
+public partial class RocketProjectile : BulletDropProjectile
 {
 	private Sound RocketTrailSound { get; set; }
 

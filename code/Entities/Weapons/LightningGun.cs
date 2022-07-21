@@ -51,6 +51,7 @@ partial class LightningGun : DeathmatchWeapon
 			{
 				Reload();
 			}
+
 			return;
 		}
 
@@ -68,20 +69,20 @@ partial class LightningGun : DeathmatchWeapon
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
-			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000, bulletSize ) )
+			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000f, bulletSize ) )
 			{
 				tr.Surface.DoBulletImpact( tr );
 
 				if ( !tr.Entity.IsValid() ) continue;
 
 				if ( tr.Entity is BoomerPlayer pl )
-					DamageModifier = DamageModifier.Clamp( 1, 5 ) + 1;
+					DamageModifier = (DamageModifier + 1).Clamp( 1, 5 );
 				else
-					DamageModifier = DamageModifier.Clamp( 1, 5 ) - 1;
+					DamageModifier = (DamageModifier - 1).Clamp( 1, 5 );
 
 				if ( !IsServer ) continue;
 
-				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage * DamageModifier )
+				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100f * force, damage * DamageModifier )
 					.UsingTraceResult( tr )
 					.WithAttacker( Owner )
 					.WithWeapon( this );

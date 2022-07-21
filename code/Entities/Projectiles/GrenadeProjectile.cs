@@ -1,4 +1,5 @@
-﻿public partial class GrenadeProjectile : BouncingProjectile
+﻿[Library]
+public partial class GrenadeProjectile : BouncingProjectile
 {
 
 }
