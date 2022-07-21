@@ -74,10 +74,54 @@ public partial class BoomerPlayer : Player
 
 		SupressPickupNotices = false;
 
+		SetBodyGroup( "Hands", 1 );
+		SetBodyGroup( "Feet", 1 );
+		
 		SetMaterialOverride( SkinMat, "skin");
+		UpdateClothes();
 		RandomColor();
 
+
 		base.Respawn();
+	}
+
+	[Net]
+	private Material ArmourMat { get; set; } = Material.Load( "models/gameplay/textures/textureatlas_player_outfit.vmat" );
+
+	[ClientRpc]
+	public void UpdateClothes()
+	{
+
+		ModelEntity pants = new ModelEntity();
+		pants.SetModel( "models/cosmetics/outfit/boomeroutfit_pants.vmdl" );
+		pants.SetParent( this, true );
+		pants.EnableHideInFirstPerson = true;
+		pants.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+
+		ModelEntity shoes = new ModelEntity();
+		shoes.SetModel( "models/cosmetics/outfit/boomeroutfit_shoes.vmdl" );
+		shoes.SetParent( this, true );
+		shoes.EnableHideInFirstPerson = true;
+		shoes.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+
+		ModelEntity helmet = new ModelEntity();
+		helmet.SetModel( "models/cosmetics/outfit/boomeroutfit_helmet.vmdl" );
+		helmet.SetParent( this, true );
+		helmet.EnableHideInFirstPerson = true;
+		helmet.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+
+		ModelEntity gloves = new ModelEntity();
+		gloves.SetModel( "models/cosmetics/outfit/boomeroutfit_gloves.vmdl" );
+		gloves.SetParent( this, true );
+		gloves.EnableHideInFirstPerson = true;
+		gloves.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+
+		ModelEntity chest = new ModelEntity();
+		chest.SetModel( "models/cosmetics/outfit/boomeroutfit_chest.vmdl" );
+		chest.SetParent( this, true );
+		chest.EnableHideInFirstPerson = true;
+		chest.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+
 	}
 
 	public void GiveAward( string type )
@@ -155,7 +199,7 @@ public partial class BoomerPlayer : Player
 		}
 		else
 		{
-			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ) );
+			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ),PlayerColor );
 		}
 
 		if ( LastDamage.Attacker is BoomerPlayer attacker && attacker != this )
