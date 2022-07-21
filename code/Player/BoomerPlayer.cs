@@ -172,7 +172,7 @@ public partial class BoomerPlayer : Player
 
 			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
 			{
-				attacker.PlaySoundFromScreen( "headshot" );
+				attacker.PlaySoundFromScreen( To.Single( attacker ), "headshot" );
 			}
 
 			if ( ConsecutiveKills >= 5 )
