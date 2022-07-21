@@ -43,7 +43,7 @@ partial class RailGun : DeathmatchWeapon
 		//
 		float flGroundFactor = 1.0f;
 		float flMul = 100f * 1.8f;
-		float forMul = 585f * 1.4f;
+		float forMul = 150f * 1.4f;
 		
 		if ( Owner is BoomerPlayer player )
 		{
