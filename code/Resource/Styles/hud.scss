@@ -21,6 +21,21 @@ HudRootPanel {
     }
 }
 
+AwardQueue {
+    flex-direction: column;
+    flex-grow: 0;
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    z-index: 5;
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 vitals {
     font-size: 64px;
     color: #ff0;
