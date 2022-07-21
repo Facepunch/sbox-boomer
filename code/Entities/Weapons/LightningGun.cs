@@ -31,6 +31,7 @@ partial class LightningGun : DeathmatchWeapon
 		base.ActiveEnd( ent, dropped );
 
 		IsLightningActive = false;
+		DamageModifier = 0;
 
 		LightningSound.Stop();
 		LightningEffect?.Destroy();
