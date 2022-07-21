@@ -18,7 +18,7 @@ public partial class BoomerPlayer : Player
 
 	public bool SupressPickupNotices { get; private set; }
 	public int ComboKillCount { get; set; } = 0;
-	public TimeSince TimeSinceLastKill { get; set; }
+	public TimeSince TimeSinceLastDamage { get; set; }
 
 	public ProjectileSimulator Projectiles { get; private set; }
 	public List<Award> EarnedAwards { get; private set; }
@@ -160,13 +160,13 @@ public partial class BoomerPlayer : Player
 
 		if ( LastDamage.Attacker is BoomerPlayer attacker && attacker != this )
 		{
-			if ( attacker.TimeSinceLastKill < 3f )
+			if ( attacker.TimeSinceLastDamage < 3f )
 			{
 				attacker.ConsecutiveKills++;
 				attacker.CalculateConsecutiveKill();
 			}
 
-			attacker.TimeSinceLastKill = 0f;
+			attacker.TimeSinceLastDamage = 0f;
 			attacker.SpreeKills++;
 			attacker.CalculateSpreeKill();
 
@@ -416,6 +416,7 @@ public partial class BoomerPlayer : Player
 		{
 			if ( attacker != this )
 			{
+				attacker.TimeSinceDamage = 0f;
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
 			}
 
@@ -576,7 +577,7 @@ public partial class BoomerPlayer : Player
 	[Event.Tick.Server]
 	protected virtual void ServerTick()
 	{
-		if ( TimeSinceLastKill > 3f && ConsecutiveKills > 0 )
+		if ( TimeSinceLastDamage > 3f && ConsecutiveKills > 0 )
 		{
 			ConsecutiveKills = 0;
 		}
