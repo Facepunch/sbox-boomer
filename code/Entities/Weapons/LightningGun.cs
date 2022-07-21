@@ -72,14 +72,15 @@ partial class LightningGun : DeathmatchWeapon
 			{
 				tr.Surface.DoBulletImpact( tr );
 
-				if ( !IsServer ) continue;
 				if ( !tr.Entity.IsValid() ) continue;
 
 				if ( tr.Entity is BoomerPlayer pl )
 					DamageModifier = DamageModifier.Clamp( 1, 5 ) + 1;
 				else
 					DamageModifier = DamageModifier.Clamp( 1, 5 ) - 1;
-				
+
+				if ( !IsServer ) continue;
+
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage * DamageModifier )
 					.UsingTraceResult( tr )
 					.WithAttacker( Owner )

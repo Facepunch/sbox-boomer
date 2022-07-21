@@ -1,7 +1,7 @@
 ﻿[Library( "dm_grenadelauncher" ), HammerEntity]
 [EditorModel( "weapons/rust_pistol/rust_pistol.vmdl" )]
 [Title( "GrenadeLauncher" ), Category( "Weapons" )]
-partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
+partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl";
@@ -61,7 +61,7 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 		return velocity + Vector3.Up * 300f;
 	}
 
-	protected override void OnCreateProjectile( BouncingProjectile projectile )
+	protected override void OnCreateProjectile( GrenadeProjectile projectile )
 	{
 		projectile.BounceSoundMinimumVelocity = 50f;
 		projectile.Bounciness = 0.8f;
@@ -71,7 +71,7 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 		base.OnCreateProjectile( projectile );
 	}
 
-	protected override void OnProjectileHit( BouncingProjectile projectile, TraceResult trace )
+	protected override void OnProjectileHit( GrenadeProjectile projectile, TraceResult trace )
 	{
 		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 400f, 100f, 1f );
 	}
