@@ -15,7 +15,7 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 	public override float PrimaryRate => 0.75f;
 	public override AmmoType AmmoType => AmmoType.Grenade;
 	public override int Bucket => 2;
-
+	
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -66,6 +66,7 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 		projectile.BounceSoundMinimumVelocity = 50f;
 		projectile.Bounciness = 0.8f;
 		projectile.BounceSound = "gl.impact";
+		projectile.FromWeapon = this;
 
 		base.OnCreateProjectile( projectile );
 	}
@@ -74,7 +75,6 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 	{
 		Sound.FromWorld( "rl.explode", trace.EndPosition );
 		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", trace.EndPosition );
-
 		if ( IsServer )
 		{
 			DeathmatchGame.Explosion( this, Owner, projectile.Position, 400f, 100f, 1f );

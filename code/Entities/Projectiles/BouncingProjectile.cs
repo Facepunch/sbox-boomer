@@ -4,6 +4,8 @@ public partial class BouncingProjectile : BulletDropProjectile
 	public float BounceSoundMinimumVelocity { get; set; }
 	public string BounceSound { get; set; }
 	public float Bounciness { get; set; } = 1f;
+	
+	public Entity FromWeapon;
 
 	protected override void PostSimulate( TraceResult trace )
 	{
@@ -18,6 +20,21 @@ public partial class BouncingProjectile : BulletDropProjectile
 			{
 				if ( !string.IsNullOrEmpty( BounceSound ) )
 					PlaySound( BounceSound );
+			}
+			
+			if ( trace.Entity is BoomerPlayer )
+			{
+				if ( trace.Entity.IsLocalPawn )
+				{
+					return;
+				}
+				Sound.FromWorld( "rl.explode", trace.EndPosition );
+				Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", trace.EndPosition );
+				if ( IsServer )
+				{
+					DeathmatchGame.Explosion( FromWeapon, Owner, Position, 400f, 100f, 1f );
+				}
+				OnDestroy();
 			}
 		}
 
