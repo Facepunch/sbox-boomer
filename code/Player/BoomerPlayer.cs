@@ -160,7 +160,7 @@ public partial class BoomerPlayer : Player
 
 		if ( LastDamage.Attacker is BoomerPlayer attacker && attacker != this )
 		{
-			if ( attacker.TimeSinceLastDamage < 3f )
+			if ( attacker.TimeSinceLastDamage < 4f )
 			{
 				attacker.ConsecutiveKills++;
 				attacker.CalculateConsecutiveKill();
@@ -416,7 +416,7 @@ public partial class BoomerPlayer : Player
 		{
 			if ( attacker != this )
 			{
-				attacker.TimeSinceDamage = 0f;
+				attacker.TimeSinceLastDamage = 0f;
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
 			}
 
@@ -577,7 +577,7 @@ public partial class BoomerPlayer : Player
 	[Event.Tick.Server]
 	protected virtual void ServerTick()
 	{
-		if ( TimeSinceLastDamage > 3f && ConsecutiveKills > 0 )
+		if ( TimeSinceLastDamage > 4f && ConsecutiveKills > 0 )
 		{
 			ConsecutiveKills = 0;
 		}
