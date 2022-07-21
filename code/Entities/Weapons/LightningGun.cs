@@ -31,6 +31,7 @@ partial class LightningGun : DeathmatchWeapon
 		base.ActiveEnd( ent, dropped );
 
 		IsLightningActive = false;
+
 		LightningSound.Stop();
 		LightningEffect?.Destroy();
 		LightningEffect = null;
@@ -145,6 +146,15 @@ partial class LightningGun : DeathmatchWeapon
 			LightningEffect.SetPosition( 1, tr.EndPosition );
 			LightningEffect.SetPosition( 2, new Vector3 ( DamageModifier * 10 , 0, 0));
 		}
+	}
+
+	protected override void OnDestroy()
+	{
+		LightningSound.Stop();
+		LightningEffect?.Destroy();
+		LightningEffect = null;
+
+		base.OnDestroy();
 	}
 
 	[ClientRpc]
