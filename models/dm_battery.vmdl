@@ -12,9 +12,9 @@
 					{
 						_class = "RenderMeshFile"
 						filename = "models/gameplay/armour/armour.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_translation = [ 0.0, 0.0, 40.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 0.7
+						import_scale = 0.65
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -36,9 +36,9 @@
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						origin = [ -0.134631, 0.20999, 6.036602 ]
+						origin = [ -0.034934, 0.003014, 21.21892 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 12.159899, 13.616497, 22.073204 ]
+						dimensions = [ 18.127476, 18.058338, 45.482182 ]
 					},
 				]
 			},
@@ -59,6 +59,44 @@
 						global_default_material = ""
 					},
 				]
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 0.0, 0.0, 15.0 ]
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = "ACT_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/armour/armour@idle.fbx"
+						start_frame = 0
+						end_frame = 30
+						framerate = 12.0
+						take = 1
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
 			},
 		]
 		model_archetype = ""
