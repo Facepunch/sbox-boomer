@@ -29,6 +29,9 @@ public partial class BoomerPlayer : Player
 	private Material SkinMat { get; set; } = Material.Load( "models/gameplay/citizen/textures/citizen_skin.vmat" );
 
 	[Net]
+	private Material EyeMat { get; set; } = Material.Load( "models/gameplay/citizen/textures/eyes/citizen_eyes_advanced.vmat" );
+
+	[Net]
 	private Color PlayerColor { get; set; } = Color.Random;
 
 	public Dictionary<long, int> DominationTracker { get; private set; } = new();
@@ -78,6 +81,7 @@ public partial class BoomerPlayer : Player
 		SetBodyGroup( "Feet", 1 );
 		
 		SetMaterialOverride( SkinMat, "skin");
+		SetMaterialOverride( EyeMat, "eyes");
 		UpdateClothes();
 		RandomColor();
 
