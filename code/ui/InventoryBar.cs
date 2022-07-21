@@ -110,7 +110,7 @@ public class InventoryBar : Panel
 
 		if ( oldSelected != SelectedWeapon )
 		{
-			Sound.FromScreen( "dm.ui_tap" );
+			Sound.FromScreen( "weapon.swap" );
 		}
 	}
 
