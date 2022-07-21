@@ -76,9 +76,11 @@ partial class LightningGun : DeathmatchWeapon
 				if ( !tr.Entity.IsValid() ) continue;
 
 				if ( tr.Entity is BoomerPlayer pl )
-					DamageModifier = (DamageModifier + 1).Clamp( 1, 5 );
+					DamageModifier++;
 				else
-					DamageModifier = (DamageModifier - 1).Clamp( 1, 5 );
+					DamageModifier--;
+
+				DamageModifier = DamageModifier.Clamp( 1, 6 );
 
 				if ( !IsServer ) continue;
 
