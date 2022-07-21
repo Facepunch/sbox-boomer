@@ -80,7 +80,7 @@ partial class LightningGun : DeathmatchWeapon
 				else
 					DamageModifier--;
 
-				DamageModifier = DamageModifier.Clamp( 1, 6 );
+				DamageModifier = DamageModifier.Clamp( 0, 5 );
 
 				if ( !IsServer ) continue;
 
@@ -96,8 +96,6 @@ partial class LightningGun : DeathmatchWeapon
 
 	public override void Simulate( Client cl )
 	{
-		base.Simulate( cl );
-
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
 			IsLightningActive = true;
@@ -108,6 +106,7 @@ partial class LightningGun : DeathmatchWeapon
 			DamageModifier = 0;
 		}
 
+		base.Simulate( cl );
 	}
 
 	[Event.Frame]
@@ -132,6 +131,11 @@ partial class LightningGun : DeathmatchWeapon
 		if ( LightningEffect == null ) 
 			return;
 
+		if ( Owner.IsLocalPawn )
+		{
+			DebugOverlay.ScreenText( DamageModifier.ToString() );
+		}
+
 		var forward = Owner.EyeRotation.Forward;
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0 * 0.25f;
 		forward = forward.Normal;
@@ -145,12 +149,9 @@ partial class LightningGun : DeathmatchWeapon
 
 		var pos = EffectEntity.GetAttachment( "muzzle" ) ?? Transform;
 
-		using ( Prediction.Off() )
-		{
-			LightningEffect.SetPosition( 0, pos.Position );
-			LightningEffect.SetPosition( 1, tr.EndPosition );
-			LightningEffect.SetPosition( 2, new Vector3( DamageModifier * 10f, 0, 0 ) );
-		}
+		LightningEffect.SetPosition( 0, pos.Position );
+		LightningEffect.SetPosition( 1, tr.EndPosition );
+		LightningEffect.SetPosition( 2, new Vector3( DamageModifier * 10f, 0, 0 ) );
 	}
 
 	protected override void OnDestroy()

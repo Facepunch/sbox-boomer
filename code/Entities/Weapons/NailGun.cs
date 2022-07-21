@@ -105,7 +105,10 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 	{
 		if ( IsServer )
 		{
-			DealDamage( trace.Entity, projectile.Position, 1f );
+			if ( trace.Entity.IsValid() )
+			{
+				DealDamage( trace.Entity, projectile.Position, 1f );
+			}
 		}
 		else
 		{
