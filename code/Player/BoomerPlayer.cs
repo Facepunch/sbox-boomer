@@ -163,12 +163,12 @@ public partial class BoomerPlayer : Player
 			if ( attacker.TimeSinceLastKill < 3f )
 			{
 				attacker.ConsecutiveKills++;
-				CalculateConsecutiveKill();
+				attacker.CalculateConsecutiveKill();
 			}
 
 			attacker.TimeSinceLastKill = 0f;
 			attacker.SpreeKills++;
-			CalculateSpreeKill();
+			attacker.CalculateSpreeKill();
 
 			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
 			{
