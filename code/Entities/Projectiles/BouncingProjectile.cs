@@ -21,21 +21,6 @@ public partial class BouncingProjectile : BulletDropProjectile
 				if ( !string.IsNullOrEmpty( BounceSound ) )
 					PlaySound( BounceSound );
 			}
-			
-			if ( trace.Entity is BoomerPlayer )
-			{
-				if ( trace.Entity.IsLocalPawn )
-				{
-					return;
-				}
-				Sound.FromWorld( "rl.explode", trace.EndPosition );
-				Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", trace.EndPosition );
-				if ( IsServer )
-				{
-					DeathmatchGame.Explosion( FromWeapon, Owner, Position, 400f, 100f, 1f );
-				}
-				OnDestroy();
-			}
 		}
 
 		base.PostSimulate( trace );
@@ -43,6 +28,11 @@ public partial class BouncingProjectile : BulletDropProjectile
 
 	protected override bool HasHitTarget( TraceResult trace )
 	{
+		if ( trace.Entity is BoomerPlayer player && player != Attacker )
+		{
+			return true;
+		}
+
 		if ( LifeTime.HasValue )
 		{
 			return false;

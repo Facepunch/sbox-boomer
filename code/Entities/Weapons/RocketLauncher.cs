@@ -98,43 +98,9 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	protected override void OnProjectileHit( RocketProjectile projectile, TraceResult trace )
 	{
-		var hitPosition = trace.EndPosition;
+		DeathmatchGame.Explosion( this, Owner, projectile.Position, 400f, 40f, 1f, 0.3f );
 
-		Sound.FromWorld( "rl.explode", hitPosition );
-		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", hitPosition );
-
-		if ( IsServer )
-		{
-			var dmg = 40;
-			foreach ( var item in FindInSphere( hitPosition, 96f ).ToList() )
-			{
-				if ( item is BoomerPlayer player )
-				{
-							Vector3 middlePos = (player.Position + player.EyePosition) / 2;
-							var tr = Trace.Ray( hitPosition, middlePos ).Run();
-					//		if ( tr.Hit )
-					//		{
-					//			player.GroundEntity = null;
-					//			player.Velocity += (middlePos - hitPosition) * 12;
-					//			var damage = (middlePos - hitPosition).Length;
-					//			damage = damage.Remap( 0, 64, 10, 40 );
-					//			if ( tr.Entity == Owner ) damage /= 4;
-					//			player.TakeDamage( DamageInfo.Generic( damage ) );
-					//		}
-
-					if ( tr.Entity == Owner )
-					{
-						dmg /= 3;
-						Log.Info( Owner );
-					}
-				}
-			}
-
-
-
-			DeathmatchGame.Explosion( this, Owner, projectile.Position, 400f, dmg, 1f );
-		}
-		else
+		if ( IsClient )
 		{
 			trace.Surface.DoBulletImpact( trace );
 		}

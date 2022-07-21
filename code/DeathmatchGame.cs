@@ -7,17 +7,12 @@ global using System.Threading.Tasks;
 using Boomer.Movement;
 
 /// <summary>
-/// This is the heart of the gamemode. It's responsible
-/// for creating the player and stuff.
+/// This is the heart of the gamemode. It's responsible for creating the player and stuff.
 /// </summary>
 partial class DeathmatchGame : Game
 {
-	[Net]
-	DeathmatchHud Hud { get; set; }
-
-	StandardPostProcess postProcess;
-
-
+	[Net] private DeathmatchHud Hud { get; set; }
+	private StandardPostProcess PostProcessing { get; set; }
 
 	public DeathmatchGame()
 	{
@@ -34,15 +29,14 @@ partial class DeathmatchGame : Game
 
 		if ( IsClient )
 		{
-			postProcess = new StandardPostProcess();
-			PostProcess.Add( postProcess );
+			PostProcessing = new StandardPostProcess();
+			PostProcess.Add( PostProcessing );
 		}
 	}
 
 	public override void PostLevelLoaded()
 	{
 		base.PostLevelLoaded();
-
 		ItemRespawn.Init();
 	}
 
@@ -59,13 +53,11 @@ partial class DeathmatchGame : Game
 
 	public override void MoveToSpawnpoint( Entity pawn )
 	{
-		var spawnpoint = Entity.All
-								.OfType<SpawnPoint>()
-								.OrderByDescending( x => SpawnpointWeight( pawn, x ) )
-								.ThenBy( x => Guid.NewGuid() )
-								.FirstOrDefault();
-
-		//Log.Info( $"chose {spawnpoint}" );
+		var spawnpoint = All
+			.OfType<SpawnPoint>()
+			.OrderByDescending( x => SpawnpointWeight( pawn, x ) )
+			.ThenBy( x => Guid.NewGuid() )
+			.FirstOrDefault();
 
 		if ( spawnpoint == null )
 		{
@@ -93,47 +85,43 @@ partial class DeathmatchGame : Game
 			distance = MathF.Max( distance, spawnDist );
 		}
 
-		//Log.Info( $"{spawnpoint} is {distance} away from any player" );
-
 		return distance;
 	}
 
 	public override void OnKilled( Client client, Entity pawn )
 	{
 		base.OnKilled( client, pawn );
-
 		Hud.OnPlayerDied( To.Everyone, pawn as BoomerPlayer );
 	}
-
 
 	public override void FrameSimulate( Client cl )
 	{
 		base.FrameSimulate( cl );
 
-		postProcess.Sharpen.Enabled = false;
-		postProcess.Sharpen.Strength = 0.5f;
+		PostProcessing.Sharpen.Enabled = false;
+		PostProcessing.Sharpen.Strength = 0.5f;
 
-		postProcess.FilmGrain.Enabled = true;
-		postProcess.FilmGrain.Intensity = 0.2f;
-		postProcess.FilmGrain.Response = 1;
+		PostProcessing.FilmGrain.Enabled = true;
+		PostProcessing.FilmGrain.Intensity = 0.2f;
+		PostProcessing.FilmGrain.Response = 1;
 
-		postProcess.Vignette.Enabled = true;
-		postProcess.Vignette.Intensity = 1.0f;
-		postProcess.Vignette.Roundness = 1.5f;
-		postProcess.Vignette.Smoothness = 0.5f;
-		postProcess.Vignette.Color = Color.Black;
+		PostProcessing.Vignette.Enabled = true;
+		PostProcessing.Vignette.Intensity = 1.0f;
+		PostProcessing.Vignette.Roundness = 1.5f;
+		PostProcessing.Vignette.Smoothness = 0.5f;
+		PostProcessing.Vignette.Color = Color.Black;
 
-		postProcess.Saturate.Enabled = true;
-		postProcess.Saturate.Amount = 1;
+		PostProcessing.Saturate.Enabled = true;
+		PostProcessing.Saturate.Amount = 1;
 
-		postProcess.Blur.Enabled = false;
+		PostProcessing.Blur.Enabled = false;
 
-		postProcess.Pixelate.Enabled = false;
-		postProcess.Pixelate.PixelCount = 512;
+		PostProcessing.Pixelate.Enabled = false;
+		PostProcessing.Pixelate.PixelCount = 512;
 
-		postProcess.MotionBlur.Enabled = false;
+		PostProcessing.MotionBlur.Enabled = false;
 
-		postProcess.PaniniProjection.Enabled = false;
+		PostProcessing.PaniniProjection.Enabled = false;
 
 		Audio.SetEffect( "core.player.death.muffle1", 0 );
 
@@ -143,76 +131,72 @@ partial class DeathmatchGame : Game
 			var damageUi = timeSinceDamage.LerpInverse( 0.25f, 0.0f, true ) * 0.3f;
 			if ( damageUi > 0 )
 			{
-				postProcess.Saturate.Amount -= damageUi;
-				postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, damageUi );
-				postProcess.Vignette.Intensity += damageUi;
-				postProcess.Vignette.Smoothness += damageUi;
-				postProcess.Vignette.Roundness += damageUi;
+				PostProcessing.Saturate.Amount -= damageUi;
+				PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, damageUi );
+				PostProcessing.Vignette.Intensity += damageUi;
+				PostProcessing.Vignette.Smoothness += damageUi;
+				PostProcessing.Vignette.Roundness += damageUi;
 
-				postProcess.Blur.Enabled = true;
-				postProcess.Blur.Strength = damageUi * 0.5f;
+				PostProcessing.Blur.Enabled = true;
+				PostProcessing.Blur.Strength = damageUi * 0.5f;
 			}
 
 			if( localPlayer.Controller is BoomerController ctrl )
 			{
 				var alpha = ctrl.GetMechanic<Dash>().DashAlpha;
 				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
-				postProcess.MotionBlur.Enabled = false;
-				postProcess.MotionBlur.Scale = parabola * 5f;
-				postProcess.MotionBlur.Samples = 4;
-				postProcess.Brightness.Enabled = ctrl.IsDashing;
-				postProcess.Brightness.Multiplier = 1f + 1f * parabola;
+				PostProcessing.MotionBlur.Enabled = false;
+				PostProcessing.MotionBlur.Scale = parabola * 5f;
+				PostProcessing.MotionBlur.Samples = 4;
+				PostProcessing.Brightness.Enabled = ctrl.IsDashing;
+				PostProcessing.Brightness.Multiplier = 1f + 1f * parabola;
 			}
 
 			var healthDelta = localPlayer.Health.LerpInverse( 0, 100.0f, true );
-
 			healthDelta = MathF.Pow( healthDelta, 0.5f );
 
-			postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, 1 - healthDelta );
-			postProcess.Vignette.Intensity += (1 - healthDelta) * 0.5f;
-			postProcess.Vignette.Smoothness += (1 - healthDelta);
-			postProcess.Vignette.Roundness += (1 - healthDelta) * 0.5f;
-			postProcess.Saturate.Amount *= healthDelta;
-			postProcess.FilmGrain.Intensity += (1 - healthDelta) * 0.5f;
+			PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, 1 - healthDelta );
+			PostProcessing.Vignette.Intensity += (1 - healthDelta) * 0.5f;
+			PostProcessing.Vignette.Smoothness += (1 - healthDelta);
+			PostProcessing.Vignette.Roundness += (1 - healthDelta) * 0.5f;
+			PostProcessing.Saturate.Amount *= healthDelta;
+			PostProcessing.FilmGrain.Intensity += (1 - healthDelta) * 0.5f;
 
 			Audio.SetEffect( "core.player.death.muffle1", 1 - healthDelta, velocity: 2.0f );
-
 		}
-
 
 		if ( CurrentState == GameStates.Warmup )
 		{
-			postProcess.FilmGrain.Intensity = 0.4f;
-			postProcess.FilmGrain.Response = 0.5f;
-
-			postProcess.Saturate.Amount = 0;
+			PostProcessing.FilmGrain.Intensity = 0.4f;
+			PostProcessing.FilmGrain.Response = 0.5f;
+			PostProcessing.Saturate.Amount = 0;
 		}
 	}
 
-	public static void Explosion( Entity weapon, Entity owner, Vector3 position, float radius, float damage, float forceScale )
+	public static void Explosion( Entity weapon, Entity owner, Vector3 position, float radius, float damage, float forceScale, float ownerDamageScale = 1f )
 	{
-		// Effects
 		Sound.FromWorld( "gl.explode", position );
 		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", position );
 
-		// Damage, etc
-		var overlaps = Entity.FindInSphere( position, radius );
+		if ( Host.IsClient ) return;
+
+		var overlaps = FindInSphere( position, radius );
 
 		foreach ( var overlap in overlaps )
 		{
-			if ( overlap is not ModelEntity ent || !ent.IsValid() )
+			if ( overlap is not ModelEntity entity || !entity.IsValid() )
 				continue;
 
-			if ( ent.LifeState != LifeState.Alive )
+			if ( entity.LifeState != LifeState.Alive )
 				continue;
 
-			if ( !ent.PhysicsBody.IsValid() )
+			if ( !entity.PhysicsBody.IsValid() )
 				continue;
 
-			if ( ent.IsWorld )
+			if ( entity.IsWorld )
 				continue;
 
-			var targetPos = ent.PhysicsBody.MassCenter;
+			var targetPos = entity.PhysicsBody.MassCenter;
 
 			var dist = Vector3.DistanceBetween( position, targetPos );
 			if ( dist > radius )
@@ -228,14 +212,20 @@ partial class DeathmatchGame : Game
 
 			var distanceMul = 1.0f - Math.Clamp( dist / radius, 0.0f, 1.0f );
 			var dmg = damage * distanceMul;
-			var force = (forceScale * distanceMul) * ent.PhysicsBody.Mass;
+			var force = (forceScale * distanceMul) * entity.PhysicsBody.Mass;
 			var forceDir = (targetPos - position).Normal;
 
+			if ( overlap == owner )
+			{
+				dmg *= ownerDamageScale;
+			}
+
 			var damageInfo = DamageInfo.Explosion( position, forceDir * force, dmg )
+				.WithFlag( DamageFlags.Blast )
 				.WithWeapon( weapon )
 				.WithAttacker( owner );
 
-			ent.TakeDamage( damageInfo );
+			entity.TakeDamage( damageInfo );
 		}
 	}
 
@@ -273,7 +263,7 @@ partial class DeathmatchGame : Game
 
 		using var _ = Render.Draw2D.MatrixScope( matrix );
 
-		foreach ( var ent in Entity.FindInSphere( CurrentView.Position, 600 ) )
+		foreach ( var ent in FindInSphere( CurrentView.Position, 600 ) )
 		{
 			var pos = ent.Position.ToScreen( screenSize );
 			if ( !pos.HasValue ) continue;
@@ -283,12 +273,12 @@ partial class DeathmatchGame : Game
 			Render.Draw2D.FontWeight = 600;
 			Render.Draw2D.FontSize = 14;
 
-			var textRect = Render.Draw2D.TextSize( pos.Value, str );
+			var textRect = Render.Draw2D.MeasureText( new Rect( pos.Value ), str );
 
 			Render.Draw2D.Color = Color.Black;
-			Render.Draw2D.Text( pos.Value + Vector2.One, str );
+			Render.Draw2D.DrawText( new Rect( pos.Value + Vector2.One ), str );
 			Render.Draw2D.Color = Color.White;
-			Render.Draw2D.Text( pos.Value, str );
+			Render.Draw2D.DrawText( new Rect( pos.Value ), str );
 		}
 	}
 

@@ -73,11 +73,6 @@ partial class GrenadeLauncher : BulletDropWeapon<BouncingProjectile>
 
 	protected override void OnProjectileHit( BouncingProjectile projectile, TraceResult trace )
 	{
-		Sound.FromWorld( "rl.explode", trace.EndPosition );
-		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", trace.EndPosition );
-		if ( IsServer )
-		{
-			DeathmatchGame.Explosion( this, Owner, projectile.Position, 400f, 100f, 1f );
-		}
+		DeathmatchGame.Explosion( this, Owner, projectile.Position, 400f, 100f, 1f );
 	}
 }
