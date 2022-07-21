@@ -76,6 +76,8 @@ partial class DeathmatchGame : Game
 		{
 			x.Respawn();
 		} );
+
+		HasFirstPlayerDied = false;
 	}
 
 	public enum GameStates

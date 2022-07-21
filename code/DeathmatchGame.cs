@@ -14,6 +14,8 @@ partial class DeathmatchGame : Game
 	[Net] private DeathmatchHud Hud { get; set; }
 	private StandardPostProcess PostProcessing { get; set; }
 
+	public static bool HasFirstPlayerDied { get; set; }
+
 	public DeathmatchGame()
 	{
 		//
@@ -66,6 +68,15 @@ partial class DeathmatchGame : Game
 		}
 
 		pawn.Transform = spawnpoint.Transform;
+	}
+
+	[ConCmd.Admin]
+	public static void GiveAwardCmd( string awardName )
+	{
+		if ( ConsoleSystem.Caller.Pawn is BoomerPlayer player )
+		{
+			player.GiveAward( awardName );
+		}
 	}
 
 	/// <summary>
