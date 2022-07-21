@@ -16,7 +16,7 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 
 		Model = WorldModel;
 
-		PhysicsEnabled = true;
+		PhysicsEnabled = false;
 		UsePhysicsCollision = true;
 
 		
@@ -32,7 +32,7 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 			if ( other is not BoomerPlayer pl ) return;
 			if ( pl.Health >= pl.MaxHealth ) return;
 
-			var newhealth = pl.Health + 25;
+			var newhealth = pl.Health + 15;
 
 			newhealth = newhealth.Clamp( 0, pl.MaxHealth );
 
@@ -41,7 +41,7 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 			PickEffect( pl );
 
 			PlayPickupSound();
-			PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
+			PickupFeed.OnPickup( To.Single( pl ), $"+15 Health" );
 			ItemRespawn.Taken( this, RespawnTime );
 			Delete();
 		}
