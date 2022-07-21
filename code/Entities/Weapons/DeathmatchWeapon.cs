@@ -16,6 +16,7 @@
 	public virtual bool CanZoom => false;
 	public virtual float ZoomedFov => 20;
 	public virtual float ZoomedViewmodelFov => 40;
+	public virtual bool GivesAirshotAward => false;
 
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }

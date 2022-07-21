@@ -8,6 +8,7 @@ partial class RailGun : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/railgun/w_railgun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/railgun/railgun.vmdl";
 
+	public override bool GivesAirshotAward => true;
 	public override bool CanZoom => true;
 	public override float PrimaryRate => .5f;
 	public override int Bucket => 4;
