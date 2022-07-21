@@ -34,7 +34,37 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 
 			return;
 		}
-		
+
+		var tr = Trace.Ray( Owner.EyePosition + new Vector3( 0, 0, -10 ), Owner.EyePosition + new Vector3( 0, 0, -10 ) + Owner.EyeRotation.Forward * 48 )
+.UseHitboxes()
+//.HitLayer( CollisionLayer.Water, !InWater )
+.Ignore( Owner )
+.Ignore( this )
+.Size( 4.0f )
+.Run();
+
+		if ( tr.Hit )
+		{
+			//
+			//Push player back
+			//
+			float flGroundFactor = .75f;
+			float flMul = 100f * 1.8f;
+			float forMul = 585f * 1.4f;
+
+			if ( Owner is BoomerPlayer player )
+			{
+				player.Velocity = player.EyeRotation.Backward * forMul * flGroundFactor;
+				player.Velocity = player.Velocity.WithZ( flMul * flGroundFactor );
+				player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
+			}
+			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, 50, 1 )
+			.UsingTraceResult( tr )
+			.WithAttacker( Owner )
+			.WithWeapon( this );
+			Owner.TakeDamage( damageInfo );
+		}
+
 		AnimationOwner.SetAnimParameter( "b_attack", true );
 
 		base.AttackPrimary();
