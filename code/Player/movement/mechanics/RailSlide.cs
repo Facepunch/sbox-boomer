@@ -101,6 +101,7 @@ internal class RailSlide : BaseMoveMechanic
 				// and fix getting grounded immediately so we don't have to set position
 				ctrl.Velocity = ctrl.Velocity.WithZ( 420f );
 				ctrl.Position = ctrl.Position.WithZ( ctrl.Position.z + 10 );
+				ctrl.GetMechanic<DoubleJump>().DoubleJumpsRemaining = 1;
 
 				return;
 			}
@@ -139,6 +140,7 @@ internal class RailSlide : BaseMoveMechanic
 			ctrl.Position = ctrl.Position.WithZ( ctrl.Position.z + 10 );
 			DoOnce = false;
 			SlideStopped();
+			ctrl.GetMechanic<DoubleJump>().DoubleJumpsRemaining = 1;
 		}
 	}
 
