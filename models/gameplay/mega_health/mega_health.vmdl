@@ -6,15 +6,37 @@
 		children = 
 		[
 			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "glass.001.vmat"
+								to = "models/gameplay/healthkit/glassbottle.vmat"
+							},
+							{
+								from = "liquid.vmat"
+								to = "models/gameplay/mega_health/megahealthliquid.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
 				_class = "RenderMeshList"
 				children = 
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/armour/armour.fbx"
-						import_translation = [ 0.0, 0.0, 40.0 ]
+						filename = "models/gameplay/mega_health/mega_health.fbx"
+						import_translation = [ 0.0, 0.0, 24.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 0.65
+						import_scale = 1.25
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -28,45 +50,12 @@
 				]
 			},
 			{
-				_class = "PhysicsShapeList"
-				children = 
-				[
-					{
-						_class = "PhysicsShapeBox"
-						parent_bone = ""
-						surface_prop = "default"
-						collision_tags = "solid"
-						origin = [ -0.034934, 0.003014, 21.21892 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 18.127476, 18.058338, 45.482182 ]
-					},
-				]
-			},
-			{
-				_class = "MaterialGroupList"
-				children = 
-				[
-					{
-						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "models/gameplay/textures/textureatlas.vmat"
-								to = "models/gameplay/textures/textureatlas_armour.vmat"
-							},
-						]
-						use_global_default = false
-						global_default_material = ""
-					},
-				]
-			},
-			{
 				_class = "ModelModifierList"
 				children = 
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 0.0, 0.0, 15.0 ]
+						translation = [ 0.0, 0.0, 0.0 ]
 					},
 				]
 			},
@@ -77,7 +66,7 @@
 					{
 						_class = "AnimFile"
 						name = "idle"
-						activity_name = "ACT_IDLE"
+						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
 						fade_in_time = 0.2
@@ -88,15 +77,30 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/gameplay/armour/armour@idle.fbx"
-						start_frame = 0
-						end_frame = 30
+						source_filename = "models/gameplay/healthkit/mesh/healthkit@idle.fbx"
+						start_frame = -1
+						end_frame = -1
 						framerate = 12.0
-						take = 1
+						take = 0
 						reverse = false
 					},
 				]
 				default_root_bone_name = ""
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ 0.187879, -0.59944, 30.840214 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 30.518061, 32.906094, 59.04454 ]
+					},
+				]
 			},
 		]
 		model_archetype = ""

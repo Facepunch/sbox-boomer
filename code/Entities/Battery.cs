@@ -4,7 +4,7 @@
 [Library( "dm_battery" ), HammerEntity]
 [EditorModel( "models/dm_battery.vmdl" )]
 [Title(  "Battery" )]
-partial class Battery : ModelEntity, IRespawnableEntity
+partial class Battery : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/dm_battery.vmdl" );
 	
@@ -15,10 +15,10 @@ partial class Battery : ModelEntity, IRespawnableEntity
 
 		Model = WorldModel;
 
-		PhysicsEnabled = true;
+		PhysicsEnabled = false;
 		UsePhysicsCollision = true;
 
-		Tags.Add( "weapon" );
+		Tags.Add( "trigger" );
 	}
 
 	public override void StartTouch( Entity other )

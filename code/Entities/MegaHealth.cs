@@ -3,11 +3,11 @@
 /// Gives 25 health points.
 /// </summary>
 [Library( "bm_megahealth" ), HammerEntity]
-[EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
+[EditorModel( "models/gameplay/mega_health/mega_health.vmdl" )]
 [Title( "Mega Health" )]
-partial class MegaHealth : ModelEntity, IRespawnableEntity
+partial class MegaHealth : AnimatedEntity, IRespawnableEntity
 {
-	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/mega_health/mega_health.vmdl" );
 
 	public int RespawnTime = 240;
 	public override void Spawn()
@@ -16,10 +16,10 @@ partial class MegaHealth : ModelEntity, IRespawnableEntity
 
 		Model = WorldModel;
 
-		PhysicsEnabled = true;
+		PhysicsEnabled = false;
 		UsePhysicsCollision = true;
 
-		Tags.Add( "weapon" );
+		Tags.Add( "trigger" );
 	}
 
 	public override void StartTouch( Entity other )

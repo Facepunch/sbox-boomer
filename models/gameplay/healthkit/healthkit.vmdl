@@ -70,7 +70,7 @@
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 0.0, 0.0, 15.0 ]
+						translation = [ 0.0, 0.0, 0.0 ]
 					},
 				]
 			},
@@ -105,7 +105,7 @@
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = "boomer/animgraphs/healthkit.vanmgrph"
+		anim_graph_name = ""
 		base_model_name = ""
 	}
 }
