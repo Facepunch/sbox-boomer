@@ -52,7 +52,7 @@
 						[
 							{
 								from = "models/gameplay/textures/textureatlas.vmat"
-								to = "models/gameplay/textures/textureatlas_cyan.vmat"
+								to = "models/gameplay/textures/textureatlas_armour.vmat"
 							},
 						]
 						use_global_default = false
