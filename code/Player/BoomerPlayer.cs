@@ -11,12 +11,17 @@ public partial class BoomerPlayer : Player
 	public float MaxArmour { get; set; } = 200;
 	[Net]
 	public float MaxHealth { get; set; } = 200;
+	[Net]
+	public int SpreeKills { get; set; } = 0;
+	[Net]
+	public int ConsecutiveKills { get; set; } = 0;
 
 	public bool SupressPickupNotices { get; private set; }
 	public int ComboKillCount { get; set; } = 0;
 	public TimeSince TimeSinceLastKill { get; set; }
 
 	public ProjectileSimulator Projectiles { get; private set; }
+	public List<Award> EarnedAwards { get; private set; }
 	public TimeSince HealthTick { get; set; }
 	public TimeSince ArmourTick { get; set; }
 
@@ -26,8 +31,12 @@ public partial class BoomerPlayer : Player
 	[Net]
 	private Color PlayerColor { get; set; } = Color.Random;
 
+	public Dictionary<long, int> DominationTracker { get; private set; } = new();
+
 	public BoomerPlayer()
 	{
+		DominationTracker = new();
+		EarnedAwards = new();
 		Projectiles = new( this );
 		Inventory = new DmInventory( this );
 	}
@@ -40,6 +49,8 @@ public partial class BoomerPlayer : Player
 		Animator = new StandardPlayerAnimator();
 		CameraMode = new BoomerCamera();
 
+		ConsecutiveKills = 0;
+		SpreeKills = 0;
 		Health = 100;
 		Armour = 0;
 
@@ -47,30 +58,50 @@ public partial class BoomerPlayer : Player
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
-
-
 		SupressPickupNotices = true;
+
 		var w = StartingWeapons.Instance;
+
 		if ( w.IsValid() )
 		{
 			w.SetupPlayer( this );
 		}
 		else
 		{
-			//	Inventory.Add( new Crowbar() );
 			Inventory.Add( new NailGun() );
 			GiveAmmo( AmmoType.Nails, 250 );
 		}
-		SupressPickupNotices = false;
 
-		//For now
-		//Clothing.DressEntity( this );
+		SupressPickupNotices = false;
 
 		SetMaterialOverride( SkinMat, "skin");
 		RandomColor();
 
 		base.Respawn();
 	}
+
+	public void GiveAward( string type )
+	{
+		var award = Awards.Get( type );
+		if ( award == null ) return;
+		ShowAward( To.Single( this ), type );
+		EarnedAwards.Add( award );
+	}
+
+	public void GiveAward<T>() where T : Award
+	{
+		GiveAward( typeof( T ).Name );
+	}
+
+	[ClientRpc]
+	public void ShowAward( string name )
+	{
+		var award = Awards.Get( name );
+		if ( award == null ) return;
+		EarnedAwards.Add( award );
+		award.Show();
+	}
+
 	[ClientRpc]
 	public void RandomColor()
 	{
@@ -127,8 +158,58 @@ public partial class BoomerPlayer : Player
 			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ) );
 		}
 
-		Controller = null;
+		if ( LastDamage.Attacker is BoomerPlayer attacker && attacker != this )
+		{
+			if ( attacker.TimeSinceLastKill < 3f )
+			{
+				attacker.ConsecutiveKills++;
+				CalculateConsecutiveKill();
+			}
 
+			attacker.TimeSinceLastKill = 0f;
+			attacker.SpreeKills++;
+			CalculateSpreeKill();
+
+			if ( ConsecutiveKills >= 5 )
+			{
+				attacker.GiveAward<ComboBreaker>();
+			}
+
+			if ( !DeathmatchGame.HasFirstPlayerDied )
+			{
+				DeathmatchGame.HasFirstPlayerDied = true;
+				attacker.GiveAward<FirstBlood>();
+			}
+
+			attacker.TrackDominationKill( this );
+
+			if ( attacker.GetDominationKills( this ) == 3 )
+			{
+				attacker.GiveAward<Dominating>();
+			}
+
+			if ( GetDominationKills( attacker ) >= 3 )
+			{
+				ClearDominationKills( attacker );
+				attacker.GiveAward<Revenge>();
+			}
+
+			if ( attacker.ActiveChild is DeathmatchWeapon weapon && weapon.GivesAirshotAward )
+			{
+				var trace = Trace.Ray( attacker.Position, attacker.Position + Vector3.Down * 500f )
+					.WorldOnly()
+					.Ignore( attacker )
+					.Ignore( attacker.ActiveChild )
+					.Run();
+
+				if ( !trace.Hit && !trace.StartedSolid )
+				{
+					attacker.GiveAward<Airshot>();
+				}
+			}
+		}
+
+		Controller = null;
 		CameraMode = new SpectateRagdollCamera();
 
 		EnableAllCollisions = false;
@@ -160,9 +241,6 @@ public partial class BoomerPlayer : Player
 
 		base.Simulate( cl );
 
-		//
-		// Input requested a weapon switch
-		//
 		if ( Input.ActiveChild != null )
 		{
 			ActiveChild = Input.ActiveChild;
@@ -172,8 +250,6 @@ public partial class BoomerPlayer : Player
 			return;
 
 		TickPlayerUse();
-
-
 
 		if ( Health > 100 )
 		{
@@ -196,10 +272,6 @@ public partial class BoomerPlayer : Player
 
 		SimulateActiveChild( cl, ActiveChild );
 
-		//
-		// If the current weapon is out of ammo and we last fired it over half a second ago
-		// lets try to switch to a better wepaon
-		//
 		if ( ActiveChild is DeathmatchWeapon weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f )
 		{
 			SwitchToBestWeapon();
@@ -299,16 +371,16 @@ public partial class BoomerPlayer : Player
 
 		LastDamage = info;
 
-		// hack - hitbox group 1 is head
-		// we should be able to get this from somewhere (it's pretty specific to citizen though?)
+		var wasHeadshot = false;
+
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
 		{
 			info.Damage *= 2.0f;
+			wasHeadshot = true;
 		}
 
 		this.ProceduralHitReaction( info );
-
-		this.ApplyForce( info.Force );
+		ApplyForce( info.Force );
 
 		LastAttacker = info.Attacker;
 		LastAttackerWeapon = info.Weapon;
@@ -343,14 +415,16 @@ public partial class BoomerPlayer : Player
 			if ( attacker != this )
 			{
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
+
+				if ( wasHeadshot )
+				{
+					attacker.PlaySoundFromScreen( "headshot" );
+				}
 			}
 
 			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
 		}
 
-		//
-		// Add a score to the killer
-		//
 		if ( LifeState == LifeState.Dead && info.Attacker != null )
 		{
 			if ( info.Attacker.Client != null && info.Attacker != this )
@@ -358,6 +432,37 @@ public partial class BoomerPlayer : Player
 				info.Attacker.Client.AddInt( "kills" );
 			}
 		}
+	}
+
+	public void TrackDominationKill( BoomerPlayer victim )
+	{
+		var id = victim.Client.PlayerId;
+
+		if ( DominationTracker.TryGetValue( id, out var kills ) )
+		{
+			DominationTracker[id] = kills + 1;
+			return;
+		}
+
+		DominationTracker[id] = 1;
+	}
+
+	public void ClearDominationKills( BoomerPlayer victim )
+	{
+		var id = victim.Client.PlayerId;
+		DominationTracker.Remove( id );
+	}
+
+	public int GetDominationKills( BoomerPlayer victim )
+	{
+		var id = victim.Client.PlayerId;
+
+		if ( DominationTracker.TryGetValue( id, out var kills ) )
+		{
+			return kills;
+		}
+
+		return 0;
 	}
 
 	[ClientRpc]
@@ -374,8 +479,6 @@ public partial class BoomerPlayer : Player
 	[ClientRpc]
 	public void TookDamage( Vector3 pos )
 	{
-		//DebugOverlay.Sphere( pos, 10.0f, Color.Red, true, 10.0f );
-
 		TimeSinceDamage = 0;
 		DamageIndicator.Current?.OnHit( pos );
 	}
@@ -407,9 +510,6 @@ public partial class BoomerPlayer : Player
 		volume *= FootstepVolume();
 
 		timeSinceLastFootstep = 0;
-
-		//DebugOverlay.Box( 1, pos, -1, 1, Color.Red );
-		//DebugOverlay.Text( pos, $"{volume}", Color.White, 5 );
 
 		var tr = Trace.Ray( pos, pos + Vector3.Down * 20 )
 			.Radius( 1 )
@@ -444,4 +544,44 @@ public partial class BoomerPlayer : Player
 		}
 	}
 
+	protected void CalculateConsecutiveKill()
+	{
+		if ( ConsecutiveKills == 2 )
+			GiveAward<DoubleKill>();
+		else if ( ConsecutiveKills == 3 )
+			GiveAward<TripleKill>();
+		else if ( ConsecutiveKills == 4 )
+			GiveAward<MegaKill>();
+		else if ( ConsecutiveKills == 5 )
+			GiveAward<MonsterKill>();
+		else if ( ConsecutiveKills == 6 )
+			GiveAward<UltraKill>();
+		else if ( ConsecutiveKills == 7 )
+			GiveAward<GodlikeKill>();
+		else if ( ConsecutiveKills == 8 )
+			GiveAward<BeyondGodlike>();
+	}
+
+	protected void CalculateSpreeKill()
+	{
+		if ( ConsecutiveKills == 5 )
+			GiveAward<KillingSpree>();
+		else if ( ConsecutiveKills == 10 )
+			GiveAward<Rampage>();
+		else if ( ConsecutiveKills == 20 )
+			GiveAward<Unstoppable>();
+		else if ( ConsecutiveKills == 25 )
+			GiveAward<Godlike>();
+		else if ( ConsecutiveKills == 30 )
+			GiveAward<WickedSick>();
+	}
+
+	[Event.Tick.Server]
+	protected virtual void ServerTick()
+	{
+		if ( TimeSinceLastKill > 3f && ConsecutiveKills > 0 )
+		{
+			ConsecutiveKills = 0;
+		}
+	}
 }
