@@ -170,7 +170,7 @@ public partial class BoomerPlayer : Player
 			attacker.SpreeKills++;
 			CalculateSpreeKill();
 
-			if ( GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
+			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
 			{
 				attacker.PlaySoundFromScreen( "headshot" );
 			}
