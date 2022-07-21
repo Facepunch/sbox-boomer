@@ -25,19 +25,29 @@ partial class Battery : ModelEntity, IRespawnableEntity
 	{
 		base.StartTouch( other );
 
-		if ( other is not BoomerPlayer player ) return;
-		if ( player.Armour >= player.MaxArmour ) return;
+		if ( IsServer )
+		{
+			if ( other is not BoomerPlayer player ) return;
+			if ( player.Armour >= player.MaxArmour ) return;
 
-		var newhealth = player.Armour + 25;
+			var newhealth = player.Armour + 25;
 
-		newhealth = newhealth.Clamp( 0, 200 );
+			newhealth = newhealth.Clamp( 0, 200 );
 
-		player.Armour = newhealth;
+			player.Armour = newhealth;
 
-		Sound.FromWorld( "dm_item_battery", Position );
-		PickupFeed.OnPickup( To.Single( player ), $"+25 Armour" );
+			PlayPickupSound();
 
-		ItemRespawn.Taken( this, RespawnTime );
-		Delete();
+			PickupFeed.OnPickup( To.Single( player ), $"+25 Armour" );
+			ItemRespawn.Taken( this, RespawnTime );
+
+			Delete();
+		}
+	}
+
+	[ClientRpc]
+	private void PlayPickupSound()
+	{
+		Sound.FromWorld( "dm.dm_item_battery", Position );
 	}
 }

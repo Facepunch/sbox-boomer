@@ -39,10 +39,11 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 			pl.Health = newhealth;
 
 			PickEffect( pl );
-
 			PlayPickupSound();
+
 			PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
 			ItemRespawn.Taken( this, RespawnTime );
+
 			Delete();
 		}
 	}

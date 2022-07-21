@@ -23,25 +23,34 @@
 	{
 		base.StartTouch( other );
 
-		if ( other is not BoomerPlayer player )
-			return;
+		if ( IsServer )
+		{
+			if ( other is not BoomerPlayer player )
+				return;
 
-		if ( other.LifeState != LifeState.Alive )
-			return;
+			if ( other.LifeState != LifeState.Alive )
+				return;
 
-		var ammoTaken = player.GiveAmmo( AmmoType, AmmoAmount );
+			var ammoTaken = player.GiveAmmo( AmmoType, AmmoAmount );
 
-		if ( ammoTaken == 0 )
-			return;
+			if ( ammoTaken == 0 )
+				return;
 
+			PlayPickupSound();
+
+			PickupFeed.OnPickup( To.Single( player ), $"+{ammoTaken} {AmmoType}" );
+			ItemRespawn.Taken( this, RespawnTime );
+
+			Delete();
+		}
+	}
+
+	[ClientRpc]
+	private void PlayPickupSound()
+	{
 		Sound.FromWorld( "dm.pickup_ammo", Position );
-		PickupFeed.OnPickup( To.Single( player ), $"+{ammoTaken} {AmmoType}" );
-
-		ItemRespawn.Taken( this, RespawnTime );
-		Delete();
 	}
 }
-
 
 [Library( "bm_nails" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/nails/bm_nails.vmdl" )]
