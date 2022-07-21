@@ -144,7 +144,7 @@ partial class LightningGun : DeathmatchWeapon
 		{
 			LightningEffect.SetPosition( 0, pos.Position );
 			LightningEffect.SetPosition( 1, tr.EndPosition );
-			LightningEffect.SetPosition( 2, new Vector3 ( DamageModifier * 10 , 0, 0));
+			LightningEffect.SetPosition( 2, new Vector3( DamageModifier * 10f, 0, 0 ) );
 		}
 	}
 
