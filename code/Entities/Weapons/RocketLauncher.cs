@@ -8,6 +8,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	public override bool GivesAirshotAward => true;
 	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
+	public override string TrailEffect => "particles/gameplay/weapons/rocketlauncher/trail_1.vpcf";
 	public override float Gravity => 0f;
 	public override float Speed => 2500f;
 	public override bool CanZoom => true;
