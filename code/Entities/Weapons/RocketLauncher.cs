@@ -1,6 +1,4 @@
-﻿using Boomer.Movement;
-
-[Library( "dm_rocketlauncher" ), HammerEntity]
+﻿[Library( "dm_rocketlauncher" ), HammerEntity]
 [EditorModel( "weapons/rust_crossbow/rust_crossbow.vmdl" )]
 [Title( "RocketLauncher" ), Category( "Weapons" )]
 public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
@@ -107,23 +105,34 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 		if ( IsServer )
 		{
+			var dmg = 40;
 			foreach ( var item in FindInSphere( hitPosition, 96f ).ToList() )
 			{
 				if ( item is BoomerPlayer player )
 				{
-					Vector3 middlePos = (player.Position + player.EyePosition) / 2;
-					var tr = Trace.Ray( hitPosition, middlePos ).Run();
-					if ( tr.Hit )
+							Vector3 middlePos = (player.Position + player.EyePosition) / 2;
+							var tr = Trace.Ray( hitPosition, middlePos ).Run();
+					//		if ( tr.Hit )
+					//		{
+					//			player.GroundEntity = null;
+					//			player.Velocity += (middlePos - hitPosition) * 12;
+					//			var damage = (middlePos - hitPosition).Length;
+					//			damage = damage.Remap( 0, 64, 10, 40 );
+					//			if ( tr.Entity == Owner ) damage /= 4;
+					//			player.TakeDamage( DamageInfo.Generic( damage ) );
+					//		}
+
+					if ( tr.Entity == Owner )
 					{
-						player.GroundEntity = null;
-						player.Velocity += (middlePos - hitPosition) * 12;
-						var damage = (middlePos - hitPosition).Length;
-						damage = damage.Remap( 0, 64, 10, 40 );
-						if ( tr.Entity == Owner ) damage /= 4;
-						player.TakeDamage( DamageInfo.Generic( damage ) );
+						dmg /= 3;
+						Log.Info( Owner );
 					}
 				}
 			}
+
+
+
+			DeathmatchGame.Explosion( this, Owner, projectile.Position, 400f, dmg, 1f );
 		}
 		else
 		{
