@@ -170,6 +170,11 @@ public partial class BoomerPlayer : Player
 			attacker.SpreeKills++;
 			CalculateSpreeKill();
 
+			if ( GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
+			{
+				attacker.PlaySoundFromScreen( "headshot" );
+			}
+
 			if ( ConsecutiveKills >= 5 )
 			{
 				attacker.GiveAward<ComboBreaker>();
@@ -371,12 +376,9 @@ public partial class BoomerPlayer : Player
 
 		LastDamage = info;
 
-		var wasHeadshot = false;
-
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
 		{
 			info.Damage *= 2.0f;
-			wasHeadshot = true;
 		}
 
 		this.ProceduralHitReaction( info );
@@ -415,11 +417,6 @@ public partial class BoomerPlayer : Player
 			if ( attacker != this )
 			{
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
-
-				if ( wasHeadshot )
-				{
-					attacker.PlaySoundFromScreen( "headshot" );
-				}
 			}
 
 			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
