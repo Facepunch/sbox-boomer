@@ -1,14 +1,15 @@
-﻿AwardItem {
+﻿$yellow2: #FAB002;
+
+AwardItem {
     align-self: flex-start;
     align-items: center;
-    box-shadow: rgba( 0 0 0 0.5 );
-    background-color: rgb(255, 216, 0, 0.1);
-    border-radius: 16px;
     flex-direction: column;
+    box-shadow: rgba( 0 0 0 0.5 );
+    background-image: linear-gradient( -90deg, rgba( black, 0.25 ), rgba( black, 0.0 ) );
     padding: 8px;
     transition: all 0.5s bounce-in;
     opacity: 1;
-    bottom: 0;
+    bottom: 40px;
 
     &:intro {
         opacity: 0;
@@ -27,8 +28,10 @@
         margin-bottom: 8px;
 
         .icon {
-            width: 50px;
-            height: 50px;
+            //50vv
+            width: 0px;
+            height: 0px;
+            //50^^
             margin-right: 4px;
 
             &.hidden {
@@ -39,7 +42,9 @@
         .title {
             font-family: Roboto;
             font-size: 40px;
-            color: orange;
+            color: $yellow2;
+            font-weight: 500;
+            text-transform: uppercase;
         }
     }
 
