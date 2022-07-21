@@ -13,11 +13,11 @@ partial class LightningGun : DeathmatchWeapon
 	public override int Bucket => 5;
 	public override AmmoType AmmoType => AmmoType.Lightning;
 
-	public int dmgincrease = 0;
+	[Net, Predicted] private bool IsLightningActive { get; set; }
+	[Net, Predicted] private int DamageModifier { get; set; } = 0;
 
-	Particles LightningEffect;
-
-	Sound LightningSound;
+	private Particles LightningEffect { get; set; }
+	private Sound LightningSound { get; set; }
 
 	public override void Spawn()
 	{
@@ -30,6 +30,7 @@ partial class LightningGun : DeathmatchWeapon
 	{
 		base.ActiveEnd( ent, dropped );
 
+		IsLightningActive = false;
 		LightningSound.Stop();
 		LightningEffect?.Destroy();
 		LightningEffect = null;
@@ -50,22 +51,13 @@ partial class LightningGun : DeathmatchWeapon
 			}
 			return;
 		}
-		//
-		// Tell the clients to play the shoot effects
-		//
+
 		ShootEffects();
-		
-		//
-		// Shoot the bullets
-		//
 		ShootBullet( 0.01f, 1.5f, 1f, 2.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
 	{
-		//
-		// Seed rand using the tick, so bullet cones match on client and server
-		//
 		Rand.SetSeed( Time.Tick );
 
 		for ( int i = 0; i < bulletCount; i++ )
@@ -74,42 +66,24 @@ partial class LightningGun : DeathmatchWeapon
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
-			//
-			// ShootBullet is coded in a way where we can have bullets pass through shit
-			// or bounce off shit, in which case it'll return multiple results
-			//
 			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000, bulletSize ) )
 			{
 				tr.Surface.DoBulletImpact( tr );
 
-				//if ( tr.Distance > 200 )
-				//{
-				//	var pos = EffectEntity.GetAttachment( "muzzle" ) ?? Transform;
-				//	var tracer = Particles.Create( LightningEffect, pos.Position );
-				//	tracer.SetPosition( 1, tr.EndPosition );
-
-				//	//CreateTracerEffect( tr.EndPosition );
-				//}
-			
-
 				if ( !IsServer ) continue;
 				if ( !tr.Entity.IsValid() ) continue;
+
 				if ( tr.Entity is BoomerPlayer pl )
-				{
-					dmgincrease = dmgincrease.Clamp( 1, 5 ) + 1;
-				}
+					DamageModifier = DamageModifier.Clamp( 1, 5 ) + 1;
 				else
-				{
-					dmgincrease = dmgincrease.Clamp( 1, 5 ) - 1;
-				}
+					DamageModifier = DamageModifier.Clamp( 1, 5 ) - 1;
 				
-				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage*dmgincrease )
+				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage * DamageModifier )
 					.UsingTraceResult( tr )
 					.WithAttacker( Owner )
 					.WithWeapon( this );
 
 				tr.Entity.TakeDamage( damageInfo );
-
 			}
 		}
 	}
@@ -120,19 +94,12 @@ partial class LightningGun : DeathmatchWeapon
 
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
-			if ( LightningEffect == null )
-			{
-				PlaySound( "rl.shoot" );
-				LightningEffect = Particles.Create( "particles/gameplay/weapons/lightninggun/lightninggun_trace.vpcf" );
-				LightningSound = Sound.FromEntity( "lg.beam", this );
-			}
+			IsLightningActive = true;
 		}
 		else
 		{
-			dmgincrease = 0;
-			LightningSound.Stop();
-			LightningEffect?.Destroy();
-			LightningEffect = null;
+			IsLightningActive = false;
+			DamageModifier = 0;
 		}
 
 	}
@@ -140,6 +107,22 @@ partial class LightningGun : DeathmatchWeapon
 	[Event.Frame]
 	private void OnFrame()
 	{
+		if ( IsLightningActive )
+		{
+			if ( LightningEffect == null )
+			{
+				LightningEffect = Particles.Create( "particles/gameplay/weapons/lightninggun/lightninggun_trace.vpcf" );
+				LightningSound = Sound.FromEntity( "lg.beam", this );
+				PlaySound( "rl.shoot" );
+			}
+		}
+		else if ( LightningEffect != null )
+		{
+			LightningSound.Stop();
+			LightningEffect?.Destroy();
+			LightningEffect = null;
+		}
+
 		if ( LightningEffect == null ) 
 			return;
 
@@ -147,8 +130,8 @@ partial class LightningGun : DeathmatchWeapon
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0 * 0.25f;
 		forward = forward.Normal;
 
-		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 5000 ).UseHitboxes()
-			//.HitLayer( CollisionLayer.Water, !InWater )
+		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 5000f )
+			.UseHitboxes()
 			.Ignore( Owner )
 			.Ignore( this )
 			.Size( 1.0f )
@@ -160,7 +143,7 @@ partial class LightningGun : DeathmatchWeapon
 		{
 			LightningEffect.SetPosition( 0, pos.Position );
 			LightningEffect.SetPosition( 1, tr.EndPosition );
-			LightningEffect.SetPosition( 2, new Vector3 ( dmgincrease * 10 , 0, 0));
+			LightningEffect.SetPosition( 2, new Vector3 ( DamageModifier * 10 , 0, 0));
 		}
 	}
 
@@ -173,7 +156,7 @@ partial class LightningGun : DeathmatchWeapon
 
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
-		anim.SetAnimParameter( "holdtype", 1 ); // TODO this is shit
+		anim.SetAnimParameter( "holdtype", 1 );
 		anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 
