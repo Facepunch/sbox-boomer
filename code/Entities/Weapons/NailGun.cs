@@ -121,6 +121,11 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 			nail.Position += nail.Rotation.Forward * 5f;
 			nail.DeleteAsync( 10f );
 
+			if ( trace.Entity.IsValid() )
+			{
+				nail.SetParent( trace.Entity, trace.Bone );
+			}
+
 			trace.Surface.DoBulletImpact( trace );
 		}
 	}
