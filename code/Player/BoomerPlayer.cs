@@ -201,10 +201,10 @@ public partial class BoomerPlayer : Player
 
 			if ( attacker.ActiveChild is DeathmatchWeapon weapon && weapon.GivesAirshotAward )
 			{
-				var trace = Trace.Ray( attacker.Position, attacker.Position + Vector3.Down * 500f )
+				var trace = Trace.Ray( Position, Position + Vector3.Down * 400f )
 					.WorldOnly()
-					.Ignore( attacker )
-					.Ignore( attacker.ActiveChild )
+					.Ignore( this )
+					.Ignore( ActiveChild )
 					.Run();
 
 				if ( !trace.Hit && !trace.StartedSolid )
