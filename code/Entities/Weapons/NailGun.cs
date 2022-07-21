@@ -36,21 +36,17 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 		}
 
 		var tr = Trace.Ray( Owner.EyePosition + new Vector3( 0, 0, -10 ), Owner.EyePosition + new Vector3( 0, 0, -10 ) + Owner.EyeRotation.Forward * 48 )
-.UseHitboxes()
-//.HitLayer( CollisionLayer.Water, !InWater )
-.Ignore( Owner )
-.Ignore( this )
-.Size( 4.0f )
-.Run();
+			.UseHitboxes()
+			.Ignore( Owner )
+			.Ignore( this )
+			.Size( 4.0f )
+			.Run();
 
 		if ( tr.Hit )
 		{
-			//
-			//Push player back
-			//
-			float flGroundFactor = .75f;
-			float flMul = 100f * 1.8f;
-			float forMul = 585f * 1.4f;
+			var flGroundFactor = 0.75f;
+			var flMul = 100f * 1.8f;
+			var forMul = 585f * 1.4f;
 
 			if ( Owner is BoomerPlayer player )
 			{
@@ -58,10 +54,12 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 				player.Velocity = player.Velocity.WithZ( flMul * flGroundFactor );
 				player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
 			}
+
 			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, 50, 1 )
-			.UsingTraceResult( tr )
-			.WithAttacker( Owner )
-			.WithWeapon( this );
+				.UsingTraceResult( tr )
+				.WithAttacker( Owner )
+				.WithWeapon( this );
+
 			Owner.TakeDamage( damageInfo );
 		}
 
@@ -99,11 +97,8 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 		draw.BlendMode = BlendMode.Lighten;
 		draw.Color = color.WithAlpha( 0.2f + lastAttack.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// center
-		{
-			var shootEase = 1 + Easing.BounceIn( lastAttack.LerpInverse( 0.3f, 0.0f ) );
-			draw.Ring( center, 15 * shootEase, 14 * shootEase );
-		}
+		var shootEase = 1 + Easing.BounceIn( lastAttack.LerpInverse( 0.3f, 0.0f ) );
+		draw.Ring( center, 15 * shootEase, 14 * shootEase );
 	}
 
 	protected override void OnProjectileHit( BulletDropProjectile projectile, TraceResult trace )
