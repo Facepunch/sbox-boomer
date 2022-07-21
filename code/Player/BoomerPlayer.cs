@@ -561,15 +561,15 @@ public partial class BoomerPlayer : Player
 
 	protected void CalculateSpreeKill()
 	{
-		if ( ConsecutiveKills == 5 )
+		if ( SpreeKills == 5 )
 			GiveAward<KillingSpree>();
-		else if ( ConsecutiveKills == 10 )
+		else if ( SpreeKills == 10 )
 			GiveAward<Rampage>();
-		else if ( ConsecutiveKills == 20 )
+		else if ( SpreeKills == 20 )
 			GiveAward<Unstoppable>();
-		else if ( ConsecutiveKills == 25 )
+		else if ( SpreeKills == 25 )
 			GiveAward<Godlike>();
-		else if ( ConsecutiveKills == 30 )
+		else if ( SpreeKills == 30 )
 			GiveAward<WickedSick>();
 	}
 
