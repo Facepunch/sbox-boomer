@@ -62,7 +62,7 @@
 
 	public override void Simulate( Client owner )
 	{
-		if ( TimeSinceDeployed < 0.6f )
+		if ( TimeSinceDeployed < 0.25f )
 			return;
 
 		Zoomed = CanZoom && Input.Down( InputButton.SecondaryAttack );
