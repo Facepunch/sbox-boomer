@@ -6,6 +6,7 @@ public class InventoryBar : Panel
 
 	private DeathmatchWeapon SelectedWeapon { get; set; }
 	private List<DeathmatchWeapon> Weapons { get; set; } = new();
+	private DeathmatchWeapon LastWeapon { get; set; }
 	private Panel Container { get; set; }
 
 	public InventoryBar()
@@ -76,7 +77,12 @@ public class InventoryBar : Panel
 		selectedIndex -= input.MouseWheel;
 
 		if ( input.Pressed( InputButton.Menu ) )
-			selectedIndex++;
+		{
+			if ( LastWeapon.IsValid() && sortedWeapons.Contains( LastWeapon ) )
+				selectedIndex = sortedWeapons.IndexOf( LastWeapon );
+			else
+				selectedIndex++;
+		}
 
 		selectedIndex = selectedIndex.UnsignedMod( Weapons.Count );
 
@@ -95,6 +101,7 @@ public class InventoryBar : Panel
 		if ( oldSelected != SelectedWeapon )
 		{
 			Sound.FromScreen( "weapon.swap" );
+			LastWeapon = oldSelected;
 		}
 	}
 
