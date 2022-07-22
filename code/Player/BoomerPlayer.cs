@@ -113,20 +113,30 @@ public partial class BoomerPlayer : Player
 	{
 		var ply = ConsoleSystem.Caller.Pawn as BoomerPlayer;
 
+		if ( !ply.Children.OfType<RocketLauncher>().Any() )
+			ply.Inventory.Add( new RocketLauncher() );
+
+		if ( !ply.Children.OfType<Shotgun>().Any() )
+			ply.Inventory.Add( new Shotgun() );
+
+		if ( !ply.Children.OfType<NailGun>().Any() )
+			ply.Inventory.Add( new NailGun() );
+
+		if ( !ply.Children.OfType<RailGun>().Any() )
+			ply.Inventory.Add( new RailGun() );
+
+		if ( !ply.Children.OfType<GrenadeLauncher>().Any() )
+			ply.Inventory.Add( new GrenadeLauncher() );
+
+		if ( !ply.Children.OfType<LightningGun>().Any() )
+			ply.Inventory.Add( new LightningGun() );
+
 		ply.GiveAmmo( AmmoType.Rockets, 250 );
 		ply.GiveAmmo( AmmoType.Buckshot, 250 );
 		ply.GiveAmmo( AmmoType.Nails, 250 );
 		ply.GiveAmmo( AmmoType.Rails, 250 );
 		ply.GiveAmmo( AmmoType.Grenade, 250 );
 		ply.GiveAmmo( AmmoType.Lightning, 250 );
-
-		//ply.Inventory.Add( new Crowbar() );
-		ply.Inventory.Add( new RocketLauncher() );
-		ply.Inventory.Add( new Shotgun() );
-		//ply.Inventory.Add( new NailGun() );
-		ply.Inventory.Add( new RailGun() );
-		ply.Inventory.Add( new GrenadeLauncher() );
-		ply.Inventory.Add( new LightningGun() );
 	}
 
 	public override void OnKilled()
@@ -273,6 +283,11 @@ public partial class BoomerPlayer : Player
 				Armour--;
 				ArmourTick = 0;
 			}
+		}
+
+		if ( Input.Released( InputButton.Drop ) )
+		{
+			Inventory.SwitchActiveSlot( 1, true );
 		}
 
 		SimulateActiveChild( cl, ActiveChild );
