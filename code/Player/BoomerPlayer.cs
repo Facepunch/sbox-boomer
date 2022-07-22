@@ -333,11 +333,6 @@ public partial class BoomerPlayer : Player
 			}
 		}
 
-		if ( Input.Released( InputButton.Drop ) )
-		{
-			Inventory.SwitchActiveSlot( 1, true );
-		}
-
 		SimulateActiveChild( cl, ActiveChild );
 
 		if ( ActiveChild is DeathmatchWeapon weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f )
