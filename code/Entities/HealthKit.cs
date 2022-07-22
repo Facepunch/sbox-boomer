@@ -51,7 +51,7 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 	[ClientRpc]
 	private void PlayPickupSound()
 	{
-		Sound.FromWorld( "dm.item_health", Position );
+		Sound.FromWorld( "health.pickup", Position );
 	}
 
 	private void PickEffect( BoomerPlayer player )

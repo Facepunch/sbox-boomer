@@ -37,6 +37,7 @@ partial class BoomerController : BasePlayerController
 		mechanics.Add( new Unstucker( this ) );
 		mechanics.Add( new Ducker( this ) );
 		mechanics.Add( new Slide( this ) );
+		mechanics.Add( new RailSlide( this ) );
 		//mechanics.Add( new LedgeJump( this ) );
 		//mechanics.Add( new DuckJump( this ) );
 		mechanics.Add( new DoubleJump( this ) );

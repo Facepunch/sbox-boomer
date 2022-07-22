@@ -48,6 +48,6 @@ partial class Battery : AnimatedEntity, IRespawnableEntity
 	[ClientRpc]
 	private void PlayPickupSound()
 	{
-		Sound.FromWorld( "dm.dm_item_battery", Position );
+		Sound.FromWorld( "armour.pickup", Position );
 	}
 }

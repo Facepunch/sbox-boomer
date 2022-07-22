@@ -75,7 +75,7 @@ public class ItemRespawn
 		await GameTask.Delay( 1000 * respawntime );
 
 		// TODO - find a sound that sounds like the echoey crazy truck horn sound that played in HL1 when items spawned
-		Sound.FromWorld( "dm.item_respawn", record.Transform.Position + Vector3.Up * 50 );
+		Sound.FromWorld( "armour.respawn", record.Transform.Position + Vector3.Up * 50 );
 
 		var ent = Entity.CreateByName( record.ClassName );
 		ent.Transform = record.Transform;

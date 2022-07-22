@@ -12,8 +12,7 @@ partial class Coffin : ModelEntity
 
 		Model = WorldModel;
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-		CollisionGroup = CollisionGroup.Weapon;
-		SetInteractsAs( CollisionLayer.Debris );
+		Tags.Add( "debris" );
 	}
 
 	public void Populate( BoomerPlayer player )
