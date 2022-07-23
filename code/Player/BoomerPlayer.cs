@@ -32,7 +32,7 @@ public partial class BoomerPlayer : Player
 	private Material EyeMat { get; set; } = Material.Load( "models/gameplay/citizen/textures/eyes/citizen_eyes_advanced.vmat" );
 
 	[Net]
-	private Color PlayerColor { get; set; } = Color.Random;
+	public Color PlayerColor { get; set; }
 
 	public Dictionary<long, int> DominationTracker { get; private set; } = new();
 

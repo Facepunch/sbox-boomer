@@ -49,7 +49,9 @@ partial class DeathmatchGame : Game
 		var player = new BoomerPlayer();
 		player.UpdateClothes( cl );
 		player.Respawn();
-
+		
+		player.PlayerColor = Color.Random;
+		
 		cl.Pawn = player;
 	}
 
