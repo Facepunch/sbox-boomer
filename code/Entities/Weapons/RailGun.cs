@@ -8,6 +8,7 @@ partial class RailGun : DeathmatchWeapon
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/railgun/w_railgun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/railgun/railgun.vmdl";
 
+	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override bool CanZoom => true;
 	public override float PrimaryRate => .5f;
@@ -52,6 +53,8 @@ partial class RailGun : DeathmatchWeapon
 			player.Velocity += player.Velocity.WithZ( flMul * flGroundFactor );
 			player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
 		}
+
+		AnimationOwner.SetAnimParameter( "b_attack", true );
 
 		//
 		// Tell the clients to play the shoot effects
