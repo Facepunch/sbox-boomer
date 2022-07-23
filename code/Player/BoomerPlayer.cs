@@ -84,8 +84,7 @@ public partial class BoomerPlayer : Player
 		SetMaterialOverride( EyeMat, "eyes");
 		UpdateClothes();
 		RandomColor();
-
-
+		
 		base.Respawn();
 	}
 
@@ -187,6 +186,7 @@ public partial class BoomerPlayer : Player
 		ply.GiveAmmo( AmmoType.Lightning, 250 );
 	}
 
+
 	public override void OnKilled()
 	{
 		base.OnKilled();
@@ -222,11 +222,15 @@ public partial class BoomerPlayer : Player
 			{
 				attacker.ConsecutiveKills++;
 				attacker.CalculateConsecutiveKill();
+
 			}
 
 			attacker.TimeSinceLastDamage = 0f;
 			attacker.SpreeKills++;
 			attacker.CalculateSpreeKill();
+
+			attacker.PlaySoundFromScreen( To.Single( attacker ), "killsound" );
+
 
 			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
 			{
@@ -245,6 +249,7 @@ public partial class BoomerPlayer : Player
 			}
 
 			attacker.TrackDominationKill( this );
+
 
 			if ( attacker.GetDominationKills( this ) == 3 )
 			{
@@ -522,9 +527,15 @@ public partial class BoomerPlayer : Player
 	}
 
 	[ClientRpc]
+	public void KillSound()
+	{
+		Sound.FromScreen( "killsound" ).SetVolume( 10f );
+	}
+
+	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv )
 	{
-		Sound.FromScreen( "dm.ui_attacker" )
+		Sound.FromScreen( "hitsound" )
 			.SetPitch( 1 + healthinv * 1 );
 
 		HitIndicator.Current?.OnHit( pos, amount );
