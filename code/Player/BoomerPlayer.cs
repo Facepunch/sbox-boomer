@@ -532,6 +532,8 @@ public partial class BoomerPlayer : Player
 		Sound.FromScreen( "killsound" ).SetVolume( 10f );
 	}
 
+	public Particles DMGParticle { get; set; }
+
 	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv )
 	{
@@ -539,6 +541,43 @@ public partial class BoomerPlayer : Player
 			.SetPitch( 1 + healthinv * 1 );
 
 		HitIndicator.Current?.OnHit( pos, amount );
+		
+		var number = amount;
+
+		if ( amount < 10 )
+		{
+			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
+
+			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
+
+		}
+		else if ( amount < 100 )
+		{
+			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
+
+			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
+			DMGParticle.SetPositionComponent( 22, 1, 1 );
+
+			number /= 10;
+			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
+		}
+		else
+		{
+			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
+
+			DMGParticle.SetPositionComponent( 21, 2, number % 1 );
+			DMGParticle.SetPositionComponent( 22, 2, 1 );
+			
+			number /= 10;
+			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
+			DMGParticle.SetPositionComponent( 22, 1, 1 );
+
+			number /= 10;
+			Log.Info( number );
+			DMGParticle.SetPositionComponent( 21, 0, number % 100 );
+			DMGParticle.SetPositionComponent( 22, 0, 1 );
+
+		}
 	}
 
 	public TimeSince TimeSinceDamage = 1.0f;
