@@ -32,8 +32,6 @@ public partial class SlowMovement : BaseTrigger
 		if ( pl.Controller is BoomerController ctrl )
 
 		ctrl.GetMechanic<Walk>().SurfaceFriction = friction;
-
-		Log.Info( "touch" );
 		
 		base.Touch( other );
 	}

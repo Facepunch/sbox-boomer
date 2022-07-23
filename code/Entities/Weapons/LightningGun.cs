@@ -138,7 +138,7 @@ partial class LightningGun : DeathmatchWeapon
 
 		if ( Owner.IsLocalPawn )
 		{
-			DebugOverlay.ScreenText( DamageModifier.ToString() );
+		//	DebugOverlay.ScreenText( DamageModifier.ToString() );
 		}
 
 		var forward = Owner.EyeRotation.Forward;

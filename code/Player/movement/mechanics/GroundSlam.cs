@@ -58,7 +58,7 @@ namespace Boomer.Movement
 
 			if ( BasePlayerController.Debug )
 			{
-				DebugOverlay.Sphere( ctrl.Position, 30f, Color.Red, 3f );
+				//DebugOverlay.Sphere( ctrl.Position, 30f, Color.Red, 3f );
 			}
 
 			foreach( var ent in ents )

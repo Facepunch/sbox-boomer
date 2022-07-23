@@ -117,7 +117,7 @@ namespace Boomer.Movement
 						.Ignore( ctrl.Pawn )
 						.Radius( PlayerRadius )
 						.Run();
-					DebugOverlay.TraceResult( tr );
+					
 					if ( tr.Hit )
 					{
 						// We can't climb
