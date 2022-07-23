@@ -90,7 +90,7 @@
 						disable_compression = false
 						source_filename = "models/gameplay/armour/armour@idle.fbx"
 						start_frame = 0
-						end_frame = 30
+						end_frame = 29
 						framerate = 12.0
 						take = 1
 						reverse = false

@@ -344,6 +344,12 @@ public partial class BoomerPlayer : Player
 		{
 			SwitchToBestWeapon();
 		}
+
+		if ( ResetDmgCount >= 2 )
+		{
+			LastDamageDealt = 0;
+			ResetDmgCount = 0;
+		}
 	}
 
 	public void SwitchToBestWeapon()
@@ -431,6 +437,8 @@ public partial class BoomerPlayer : Player
 	}
 
 	DamageInfo LastDamage;
+
+	TimeSince ResetDmgCount;
 
 	public override void TakeDamage( DamageInfo info )
 	{
@@ -534,6 +542,8 @@ public partial class BoomerPlayer : Player
 
 	public Particles DMGParticle { get; set; }
 
+	public float LastDamageDealt { get; set; }
+
 	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv )
 	{
@@ -541,7 +551,13 @@ public partial class BoomerPlayer : Player
 			.SetPitch( 1 + healthinv * 1 );
 
 		HitIndicator.Current?.OnHit( pos, amount );
-		
+
+		Log.Info( $"You Did {amount} Damage" );
+
+		LastDamageDealt += amount;
+
+		ResetDmgCount = 0;
+
 		var number = amount;
 
 		if ( amount < 10 )
@@ -573,7 +589,7 @@ public partial class BoomerPlayer : Player
 			DMGParticle.SetPositionComponent( 22, 1, 1 );
 
 			number /= 10;
-			Log.Info( number );
+
 			DMGParticle.SetPositionComponent( 21, 0, number % 100 );
 			DMGParticle.SetPositionComponent( 22, 0, 1 );
 
