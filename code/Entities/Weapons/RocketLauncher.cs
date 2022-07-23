@@ -6,6 +6,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/rocketlauncher/w_rocketlauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl";
 
+	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
 	public override string TrailEffect => "particles/gameplay/weapons/rocketlauncher/trail_1.vpcf";
@@ -35,6 +36,8 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 			}
 			return;
 		}
+
+		AnimationOwner.SetAnimParameter( "b_attack", true );
 
 		ShootEffects();
 		PlaySound( "rl.shoot" );
