@@ -1,5 +1,4 @@
-﻿hitindicator
-{
+﻿hitindicator {
 	mix-blend-mode: lighten;
 	position: absolute;
 	left: 0;
@@ -11,8 +10,7 @@
 	justify-content: center;
 
 
-	hitpoint
-	{
+	hitpoint {
 		width: 60px;
 		height: 60px;
 		background-color: red;
@@ -20,20 +18,17 @@
 		position: absolute;
 		transition: all 0.1s ease-out;
 		background-image: url( /ui/hit.png );
-		background-image-tint: #fc0;
+		background-image-tint: #f20;
 		background-size: 100%;
 
-		label
-		{
+		label {
 		}
 
-		&:intro
-		{
+		&:intro {
 			opacity: 0;
 		}
 
-		&:outro
-		{
+		&:outro {
 			transition: all 0.1s ease-in;
 			opacity: 0;
 		}
