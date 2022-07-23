@@ -24,11 +24,13 @@ inventoryicon {
 	opacity: 0.5;
 	width: 100px;
 	height: 100px;
+	padding: 0px 55px;
+	top: 30px;
 
 	.icon {
 		width: 100px;
 		height: 100px;
-		opacity: 0.5;
+		opacity: 0.1;
 		background-size: 100%;
 		background-image-tint: $yellow2;
 		position: absolute;
