@@ -80,7 +80,7 @@
 			case AmmoType.Pistol: return 250;
 			case AmmoType.Buckshot: return 100;
 			case AmmoType.Nails: return 200;
-			case AmmoType.Rockets: return 200;
+			case AmmoType.Rockets: return 20;
 			case AmmoType.Grenade: return 10;
 			case AmmoType.Rails: return 15;
 			case AmmoType.Lightning: return 300;
