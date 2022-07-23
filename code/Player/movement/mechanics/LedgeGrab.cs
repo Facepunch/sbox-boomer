@@ -25,11 +25,14 @@ namespace Boomer.Movement
 
 		protected override bool TryActivate()
 		{
-			if ( TimeUntilNextGrab > Time.Now )
-				return false;
+			if ( InputActions.Jump.Down() )
+			{
+				if ( TimeUntilNextGrab > Time.Now )
+					return false;
 
-			if ( TryGrabUpperLedge() )
-				return true;
+				if ( TryGrabUpperLedge() )
+					return true;
+			}
 
 			return false;
 		}
