@@ -17,6 +17,7 @@
 	&.active {
 		transition: all 0.1s ease-out;
 		opacity: 1;
+
 	}
 }
 
@@ -38,9 +39,13 @@ inventoryicon {
 
 	&.active {
 		opacity: 1;
+		transition: all 0.15s ease;
 
 		.icon {
 			opacity: 1;
+			animation-name: rotation;
+			animation-duration: 5s;
+			animation-timing-function: linear;
 		}
 	}
 
@@ -55,3 +60,17 @@ inventoryicon {
 	}
 }
 
+
+@keyframes rotation {
+	0% {
+		transform: rotate( 5deg ) scale( 1.5 );
+	}
+
+	50% {
+		transform: rotate( -5deg ) scale( 1.25 );
+	}
+
+	100% {
+		transform: rotate( 5deg ) scale( 1.5 );
+	}
+}

@@ -159,6 +159,12 @@ healthhud {
     &.overheal {
         color: #25cf12;
 
+        label {
+            animation-name: scaletxt;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+        }
+
         iconpanel {
             color: $yellow2;
         }
@@ -167,9 +173,29 @@ healthhud {
     &.low {
         color: #f20;
 
+        label {
+            animation-name: scaletxt;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+        }
+
         iconpanel {
             color: $yellow2;
         }
+    }
+}
+
+@keyframes scaletxt {
+    0% {
+        transform: scale( 1.1 );
+    }
+
+    50% {
+        transform: scale( 1 );
+    }
+
+    100% {
+        transform: scale( 1.1 );
     }
 }
 
@@ -181,6 +207,12 @@ armourhud {
 
     &.overarmour {
         color: #25cf12;
+
+        label {
+            animation-name: scaletxt;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+        }
 
         iconpanel {
             color: $yellow2;
