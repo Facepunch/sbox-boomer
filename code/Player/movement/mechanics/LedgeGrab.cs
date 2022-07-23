@@ -97,6 +97,7 @@ namespace Boomer.Movement
 				// Trace again to check if we have a valid ground
 				tr = Trace.Ray( destinationTestPos, destinationTestPos - (Vector3.Up * 64.0f) )
 					.Ignore( ctrl.Pawn )
+					.WithoutTags( "player", "npc" )
 					.Radius( 4 )
 					.Run();
 
