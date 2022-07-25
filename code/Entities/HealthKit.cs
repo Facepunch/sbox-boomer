@@ -34,7 +34,7 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 			
 			var newhealth = pl.Health + 25;
 
-			newhealth = newhealth.Clamp( 0, pl.MaxHealth );
+			newhealth = newhealth.Clamp( 0, 100 );
 
 			pl.Health = newhealth;
 

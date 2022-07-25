@@ -32,7 +32,7 @@ partial class Battery : AnimatedEntity, IRespawnableEntity
 
 			var newhealth = player.Armour + 25;
 
-			newhealth = newhealth.Clamp( 0, 200 );
+			newhealth = newhealth.Clamp( 0, 100 );
 
 			player.Armour = newhealth;
 

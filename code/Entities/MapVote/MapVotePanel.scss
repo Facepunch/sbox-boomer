@@ -1,6 +1,8 @@
 ﻿
 $yellow: #ff0;
 $orange: #f70;
+$yellow2: #FAB002;
+
 
 mapvotepanel
 {
@@ -10,7 +12,7 @@ mapvotepanel
     right: -50px;
     top: -50px;
     bottom: -50px;
-    font-family: "Trebuchet MS";
+    font-family: Roboto;
     pointer-events: all;
     z-index: 99;
 }
@@ -35,16 +37,15 @@ mapvotepanel > .inner > .header
         {
             font-size: 50px;
             font-weight: bold;
-            color: $yellow;
-            text-shadow: 0px 0px 10px $orange;
+            color: $yellow2;
         }
 
         .subtitle
         {
             font-size: 24px;
             font-weight: bold;
-            color: $yellow;
-            text-shadow: 0px 0px 7px $orange;
+            color: $yellow2;
+
         }
     }
 
@@ -54,8 +55,7 @@ mapvotepanel > .inner > .header
         {
             font-size: 50px;
             font-weight: bold;
-            color: $yellow;
-            text-shadow: 0px 0px 10px $orange;
+            color: $yellow2;
         }
     }
 }
