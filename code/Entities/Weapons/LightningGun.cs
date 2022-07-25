@@ -61,7 +61,7 @@ partial class LightningGun : DeathmatchWeapon
 		player.SetAnimParameter( "b_attack", true );
 
 		ShootEffects();
-		ShootBullet( 0.01f, 1.5f, 1f, 2.0f );
+		ShootBullet( 0.01f, .5f, 1f, 5.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
@@ -85,7 +85,7 @@ partial class LightningGun : DeathmatchWeapon
 				else
 					DamageModifier--;
 
-				DamageModifier = DamageModifier.Clamp( 0, 5 );
+				DamageModifier = DamageModifier.Clamp( 0, 10 );
 
 				if ( !IsServer ) continue;
 
