@@ -30,8 +30,8 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 		if ( IsServer )
 		{
 			if ( other is not BoomerPlayer pl ) return;
-			if ( pl.Health >= pl.MaxHealth ) return;
-
+			if ( pl.Health >= 100 ) return;
+			
 			var newhealth = pl.Health + 25;
 
 			newhealth = newhealth.Clamp( 0, pl.MaxHealth );

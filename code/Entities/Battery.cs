@@ -28,7 +28,7 @@ partial class Battery : AnimatedEntity, IRespawnableEntity
 		if ( IsServer )
 		{
 			if ( other is not BoomerPlayer player ) return;
-			if ( player.Armour >= player.MaxArmour ) return;
+			if ( player.Armour >= 100 ) return;
 
 			var newhealth = player.Armour + 25;
 
