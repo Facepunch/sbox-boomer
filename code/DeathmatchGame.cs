@@ -24,6 +24,8 @@ partial class DeathmatchGame : Game
 		//
 		if ( IsServer )
 		{
+			PrecacheAssets();
+
 			Hud = new DeathmatchHud();
 
 			_ = GameLoopAsync();
@@ -33,6 +35,17 @@ partial class DeathmatchGame : Game
 		{
 			PostProcessing = new StandardPostProcess();
 			PostProcess.Add( PostProcessing );
+		}
+	}
+
+	private void PrecacheAssets()
+	{
+		var assets = FileSystem.Mounted.ReadJsonOrDefault<List<string>>( "boomer.assets.json" );
+
+		foreach ( var asset in assets )
+		{
+			Log.Info( $"Precaching: {asset}" );
+			Precache.Add( asset );
 		}
 	}
 
