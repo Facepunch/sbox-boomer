@@ -100,30 +100,35 @@ public partial class BoomerPlayer : Player
 		pants.SetParent( this, true );
 		pants.EnableHideInFirstPerson = true;
 		pants.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+		pants.EnableShadowInFirstPerson = true;
 
 		ModelEntity shoes = new ModelEntity();
 		shoes.SetModel( "models/cosmetics/outfit/boomeroutfit_shoes.vmdl" );
 		shoes.SetParent( this, true );
 		shoes.EnableHideInFirstPerson = true;
 		shoes.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+		shoes.EnableShadowInFirstPerson = true;
 
 		ModelEntity helmet = new ModelEntity();
 		helmet.SetModel( "models/cosmetics/outfit/boomeroutfit_helmet.vmdl" );
 		helmet.SetParent( this, true );
 		helmet.EnableHideInFirstPerson = true;
 		helmet.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+		helmet.EnableShadowInFirstPerson = true;
 
 		ModelEntity gloves = new ModelEntity();
 		gloves.SetModel( "models/cosmetics/outfit/boomeroutfit_gloves.vmdl" );
 		gloves.SetParent( this, true );
 		gloves.EnableHideInFirstPerson = true;
 		gloves.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+		gloves.EnableShadowInFirstPerson = true;
 
 		ModelEntity chest = new ModelEntity();
 		chest.SetModel( "models/cosmetics/outfit/boomeroutfit_chest.vmdl" );
 		chest.SetParent( this, true );
 		chest.EnableHideInFirstPerson = true;
 		chest.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
+		chest.EnableShadowInFirstPerson = true;
 
 	}
 
