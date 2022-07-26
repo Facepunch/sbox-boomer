@@ -144,7 +144,7 @@ partial class DeathmatchGame : Game
 			var damageUi = timeSinceDamage.LerpInverse( 0.25f, 0.0f, true ) * 0.3f;
 			if ( damageUi > 0 )
 			{
-				PostProcessing.Saturate.Amount -= damageUi;
+			//	PostProcessing.Saturate.Amount -= damageUi;
 				PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, damageUi );
 				PostProcessing.Vignette.Intensity += damageUi;
 				PostProcessing.Vignette.Smoothness += damageUi;
@@ -169,11 +169,11 @@ partial class DeathmatchGame : Game
 			healthDelta = MathF.Pow( healthDelta, 0.5f );
 
 			PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, 1 - healthDelta );
-			PostProcessing.Vignette.Intensity += (1 - healthDelta) * 0.5f;
-			PostProcessing.Vignette.Smoothness += (1 - healthDelta);
-			PostProcessing.Vignette.Roundness += (1 - healthDelta) * 0.5f;
-			PostProcessing.Saturate.Amount *= healthDelta;
-			PostProcessing.FilmGrain.Intensity += (1 - healthDelta) * 0.5f;
+			PostProcessing.Vignette.Intensity += (1 - healthDelta) * 1f;
+			PostProcessing.Vignette.Smoothness += (1 - healthDelta) * 5f;
+			PostProcessing.Vignette.Roundness += (1 - healthDelta) * 1f;
+			//PostProcessing.Saturate.Amount *= healthDelta;
+			//PostProcessing.FilmGrain.Intensity += (1 - healthDelta) * 0.1f;
 
 			Audio.SetEffect( "core.player.death.muffle1", 1 - healthDelta, velocity: 2.0f );
 		}
