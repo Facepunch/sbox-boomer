@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Boomer.UI;
+using Sandbox.UI;
 
 public class HudRootPanel : RootPanel
 {
@@ -19,7 +20,7 @@ public class HudRootPanel : RootPanel
 		AddChild<InventoryBar>();
 		AddChild<PickupFeed>();
 
-		AddChild<ChatBox>();
+		AddChild<BoomerChatBox>();
 		AddChild<KillFeed>();
 		Scoreboard = AddChild<Scoreboard>();
 		AddChild<VoiceList>();

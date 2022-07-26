@@ -1,9 +1,9 @@
-﻿using Sandbox.UI.Construct;
+﻿using Sandbox.UI;
+using Sandbox.UI.Construct;
 
-
-namespace Sandbox.UI
+namespace Boomer.UI
 {
-	public partial class ChatEntry : Panel
+	public partial class BoomerChatEntry : Panel
 	{
 		public Label NameLabel { get; internal set; }
 		public Label Message { get; internal set; }
@@ -11,7 +11,7 @@ namespace Sandbox.UI
 
 		public RealTimeSince TimeSinceBorn = 0;
 
-		public ChatEntry()
+		public BoomerChatEntry()
 		{
 			Avatar = Add.Image();
 			NameLabel = Add.Label( "Name", "name" );

@@ -1,7 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
 using System.Threading.Tasks;
 
 public partial class HitIndicator : Panel

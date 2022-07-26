@@ -1,20 +1,20 @@
 ﻿using Sandbox.UI.Construct;
-using System;
+using Sandbox.UI;
 
-namespace Sandbox.UI
+namespace Boomer.UI
 {
-	public partial class ChatBox : Panel
+	public partial class BoomerChatBox : Panel
 	{
-		static ChatBox Current;
+		static BoomerChatBox Current;
 
 		public Panel Canvas { get; protected set; }
 		public TextEntry Input { get; protected set; }
 
-		public ChatBox()
+		public BoomerChatBox()
 		{
 			Current = this;
 
-			StyleSheet.Load( "/ui/chat/ChatBox.scss" );
+			StyleSheet.Load( "/ui/chat/BoomerChatBox.scss" );
 
 			Canvas = Add.Panel( "chat_canvas" );
 
@@ -23,7 +23,7 @@ namespace Sandbox.UI
 			Input.AddEventListener( "onblur", () => Close() );
 			Input.AcceptsFocus = true;
 			Input.AllowEmojiReplace = true;
-
+			
 			Sandbox.Hooks.Chat.OnOpenChat += Open;
 		}
 
@@ -54,7 +54,7 @@ namespace Sandbox.UI
 
 		public void AddEntry( string name, string message, string avatar, string lobbyState = null )
 		{
-			var e = Canvas.AddChild<ChatEntry>();
+			var e = Canvas.AddChild<BoomerChatEntry>();
 
 			e.Message.Text = message;
 			e.NameLabel.Text = name;
