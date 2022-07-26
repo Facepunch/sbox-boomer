@@ -36,9 +36,9 @@
 						parent_bone = ""
 						surface_prop = "bouncy"
 						collision_tags = "solid"
-						radius = 3.0
+						radius = 3.410525
 						point0 = [ -3.973253, 0.273016, 0.232728 ]
-						point1 = [ 4.707166, 0.141179, 0.144988 ]
+						point1 = [ 7.025441, 0.105969, 0.121555 ]
 					},
 				]
 			},

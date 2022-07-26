@@ -36,9 +36,9 @@
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						origin = [ 0.530524, 0.612185, 9.184916 ]
+						origin = [ -0.10791, 0.042934, 13.496135 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 11.061048, 11.676685, 18.287489 ]
+						dimensions = [ 28.096828, 28.486122, 26.909925 ]
 					},
 				]
 			},
