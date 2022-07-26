@@ -7,9 +7,9 @@
   "HasAssets": true,
   "AssetsPath": "",
   "ResourcePaths": [
-    "/resources/*",
     "/ui/*",
-    "/fonts/*"
+    "/fonts/*",
+    "/resources/*"
   ],
   "HasCode": true,
   "CodePath": "code",
@@ -40,8 +40,9 @@
     "Compiler": {
       "RootNamespace": "Sandbox",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
-      "NoWarn": "1701;1702;1591;"
+      "NoWarn": "1701;1702;1591;",
+      "ReleaseMode": "Release"
     },
-    "GameCategory": "None"
+    "GameCategory": "Shooter"
   }
 }
