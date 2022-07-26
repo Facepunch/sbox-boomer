@@ -3,13 +3,13 @@ using Sandbox.UI.Construct;
 
 public class Ammo : Panel
 {
-	public IconPanel Icon;
-	public Label Inventory;
+	public Image Icon;
+	public Label AmmoInv;
 
 	public Ammo()
 	{
-		Icon = Add.Icon( "storage", "icon" );
-		Inventory = Add.Label( "100", "inventory" );
+		Icon = Add.Image( "ui/vitals/ammo.png", "ammoicon" );
+		AmmoInv = Add.Label( "100", "ammoinv" );
 	}
 
 	int weaponHash;
@@ -25,7 +25,7 @@ public class Ammo : Panel
 		if ( weapon == null ) return;
 
 		var inv = weapon.AvailableAmmo();
-		Inventory.Text = $"{inv}";
-		Inventory.SetClass( "active", inv >= 0 );
+		AmmoInv.Text = $"{inv}";
+		AmmoInv.SetClass( "active", inv >= 0 );
 	}
 }

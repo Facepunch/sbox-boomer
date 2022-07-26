@@ -4,7 +4,7 @@
 	{
 		Weapons = 
 		{
-			LightningGun = 3000
+			LightningGun = 300
 			Nailgun = 200
 			Shotgun = 25
 			GrenadeLauncher = 15

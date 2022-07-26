@@ -1,45 +1,62 @@
-﻿inventorybar {
+﻿$yellow2: #FAB002;
+
+inventorybar {
+	transform: skew(0deg, 5deg);
 	position: absolute;
 	width: 100%;
-	height: 100px;
-	bottom: 120px;
-	font-family: Roboto;
+	height: 90%;
+	font-family: Teko-SemiBold;
 	transition: all 0.2s ease-out;
 	opacity: 1;
 	justify-content: center;
 	align-items: center;
+	left: 46%;
 
 	.container {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 	}
 
 	&.active {
 		transition: all 0.1s ease-out;
 		opacity: 1;
-
 	}
 }
 
 inventoryicon {
-	opacity: 0.5;
-	width: 100px;
+	opacity: 0.75;
+	width: 400px;
 	height: 100px;
-	padding: 0px 55px;
-	top: 30px;
+	padding: 0px 0px;
+	bottom: 0px;
+
 
 	.icon {
+		left: 80px;
 		width: 100px;
 		height: 100px;
-		opacity: 0.1;
+		opacity: 0.5;
 		background-size: 100%;
 		background-image-tint: $yellow2;
 		position: absolute;
+		transform: scale( .75 );
 	}
+
+	.ammocount {
+		left: 210px;
+		text-align: left;
+		font-size: 32px;
+		font-weight: bolder;
+		color: $yellow2;
+		font-family: Teko-SemiBold;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	}
+
 
 	&.active {
 		opacity: 1;
 		transition: all 0.15s ease;
+		background-image: linear-gradient(to left, rgba( black, 1 ), rgba( black, 0 ));
 
 		.icon {
 			opacity: 1;
@@ -50,7 +67,7 @@ inventoryicon {
 	}
 
 	&.empty {
-		opacity: 0.1;
+		opacity: 0.2;
 		background-color: #c004;
 		color: #f002;
 
@@ -63,14 +80,14 @@ inventoryicon {
 
 @keyframes rotation {
 	0% {
-		transform: rotate( 5deg ) scale( 1.5 );
+		transform: rotate( 5deg ) scale( 1.75 );
 	}
 
 	50% {
-		transform: rotate( -5deg ) scale( 1.25 );
+		transform: rotate( -5deg ) scale( 1.5 );
 	}
 
 	100% {
-		transform: rotate( 5deg ) scale( 1.5 );
+		transform: rotate( 5deg ) scale( 1.75);
 	}
 }

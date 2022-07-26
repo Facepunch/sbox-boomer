@@ -33,6 +33,7 @@ public class InventoryBar : Panel
 			foreach ( var weapon in Weapons.OrderBy( x => x.Order ) )
 			{
 				var icon = new InventoryIcon( weapon );
+
 				Container.AddChild( icon );
 			}
 		}

@@ -41,6 +41,7 @@ vitals {
     color: #ff0;
     mix-blend-mode: lighten;
     font-family: Roboto;
+
     label {
         text-shadow: 0px 0px 20px #f70a;
 
@@ -87,11 +88,13 @@ vitals {
 }
 
 .bottom-left {
-    left: 550px;
+    left: 160px;
+    flex-direction: column;
 }
 
 .bottom-right {
-    right: 550px;
+    right: 160px;
+    flex-direction: column;
 }
 
 .bottom-left, .bottom-right {
@@ -108,8 +111,9 @@ vitals {
 
 
     gamehud {
+        text-align: left;
         padding: 10px;
-        font-family: Roboto;
+        font-family: Teko-SemiBold;
         font-size: 20px;
         flex-direction: column;
         justify-content: center;
@@ -123,13 +127,15 @@ vitals {
         }
 
         .game-timer {
-            font-size: 48px;
+            left: 38px;
+            min-width: 256px;
+            font-size: 68px;
             color: $yellow2;
         }
     }
 }
 
-.inventory, ammo, healthhud, armourhud, gamehud, dashcount, lastdamage {
+.inventory, gamehud, dashcount, lastdamage {
     padding: 0px;
     margin: 0px;
     font-size: 72px;
@@ -144,14 +150,9 @@ iconpanel {
     font-family: "Material Icons";
 }
 
-healthhud, armourhud, ammo, dashcount, lastdamage {
+dashcount, lastdamage {
     opacity: 1;
 
-    iconpanel {
-        flex-grow: 1;
-        text-align: right;
-        opacity: 1;
-    }
 }
 
 lastdamage {
@@ -169,29 +170,124 @@ lastdamage {
     }
 }
 
-healthhud {
+dashcount {
+    bottom: 96px;
+    right: 32px;
+    transform: skew(0deg, 5deg);
 
-    &.overheal {
-        color: #25cf12;
+    .dashsegments {
+        align-items: center;
 
-        label {
-            animation-name: scaletxt;
-            animation-duration: 2s;
-            animation-timing-function: linear;
+        panel {
+            width: 84px;
+            height: 16px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
+            color: $yellow2;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
         }
 
-        iconpanel {
-            color: $yellow2;
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .dashicon {
+        font-size: 98px;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+ammo {
+    bottom: 96px;
+    left: 96px; 
+    transform: skew(0deg, 5deg);
+
+    .ammoinv {
+        text-align: right;
+        font-size: 128px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        top: 72px;
+        right: 90px;
+    }
+
+    .ammoicon {
+        right: 100px;
+        top: 124px;
+        width: 64px;
+        height: 64px;
+        background-size: 100%;
+        background-image-tint: $yellow2;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+healthhud {
+    flex-direction: column;
+    transform: skew(0deg, -5deg);
+
+    .segments {
+        align-items: center;
+
+        panel {
+            width: 13px;
+            height: 24px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .health {
+        text-align: right;
+        font-size: 72px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        top: 72px;
+        right: 90px;
+    }
+
+    .hpicon {
+        margin-left: -60px;
+        top: 36px;
+        width: 48px;
+        height: 48px;
+        background-size: 100%;
+        background-image-tint: $yellow2;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .healthsupport {
+        position: absolute;
+        text-align: right;
+        font-size: 48px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        bottom: 14px;
+        left: 90px;
+    }
+
+    &.overheal {
+
+        .health {
+            color: #00eadc;
         }
     }
 
     &.low {
         color: #f20;
 
-        label {
-            animation-name: scaletxt;
-            animation-duration: 1s;
-            animation-timing-function: linear;
+
+
+        .health {
+            color: #f20;
         }
 
         iconpanel {
@@ -216,6 +312,59 @@ healthhud {
 
 
 armourhud {
+    flex-direction: column;
+    bottom: 64px;
+    left: 32px;
+    transform: skew(0deg, -5deg);
+
+    .armoursegments {
+        align-items: center;
+
+        panel {
+            width: 13px;
+            height: 24px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .armour {
+        text-align: right;
+        font-size: 72px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        top: 72px;
+        right: 90px;
+    }
+
+    .armouricon {
+        margin-left: -60px;
+        top: 36px;
+        width: 48px;
+        height: 48px;
+        background-size: 100%;
+        background-image-tint: $yellow2;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .armoursupport {
+        position: absolute;
+        text-align: right;
+        font-size: 48px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        bottom: 14px;
+        left: 90px;
+    }
+
+
     &.empty {
         opacity: 1;
     }
@@ -223,10 +372,8 @@ armourhud {
     &.overarmour {
         color: #25cf12;
 
-        label {
-            animation-name: scaletxt;
-            animation-duration: 2s;
-            animation-timing-function: linear;
+        .armour {
+            color: #00eadc;
         }
 
         iconpanel {
