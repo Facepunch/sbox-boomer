@@ -10,7 +10,7 @@ Properties/launchSettings.json
 *.csproj
 .vs
 *.generated.*
-*.*_c
+*.*vtex_c
 *.los
 *.sapaths
 *.sareverb

@@ -5,11 +5,11 @@
 		Weapons = 
 		{
 			LightningGun = 300
-			Nailgun = 200
 			Shotgun = 25
 			GrenadeLauncher = 15
 			RocketLauncher = 15
 			RailGun = 15
+			Nailgun = 250
 		}
 	}
 }
