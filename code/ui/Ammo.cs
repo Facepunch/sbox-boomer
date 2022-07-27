@@ -8,12 +8,17 @@ public partial class AmmoVital : Panel
 
 	public static AmmoVital Current { get; private set; }
 
+	protected BoomerPlayer Player => Local.Pawn as BoomerPlayer;
+
 	public AmmoVital()
 	{
 		Current = this;
 
 		Icon = Add.Image( "ui/vitals/ammo.png", "ammoicon" );
 		AmmoInv = Add.Label( "100", "ammoinv" );
+
+		AmmoInv.BindClass( "low", () => Player?.SinceAmmoWentDown <= 0.1f );
+		AmmoInv.BindClass( "gained", () => Player?.SinceAmmoWentUp <= 0.1f );
 	}
 
 	int weaponHash;

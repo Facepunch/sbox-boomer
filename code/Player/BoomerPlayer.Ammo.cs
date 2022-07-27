@@ -90,18 +90,13 @@
 		{
 			if ( weapon.AmmoType != type ) return;
 
-			_ = AmmoChangedAnim( positive );
+			if ( positive ) SinceAmmoWentUp = 0;
+			if ( !positive ) SinceAmmoWentDown = 0;
 		}
 	}
 
-	protected static async Task AmmoChangedAnim( bool positive )
-	{
-		var c = positive ? "gained" : "low";
-
-		AmmoVital.Current.AmmoInv.SetClass( c, true );
-		await GameTask.DelaySeconds( 0.1f );
-		AmmoVital.Current.AmmoInv.SetClass( c, false );
-	}
+	public TimeSince SinceAmmoWentUp;
+	public TimeSince SinceAmmoWentDown;
 
 	public int MaxAmmo( AmmoType ammo )
 	{
