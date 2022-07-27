@@ -35,7 +35,7 @@ partial class DeathmatchGame : Game
 	private async Task GameLoopAsync()
 	{
 		GameState = GameStates.Warmup;
-		StateTimer = 1;
+		StateTimer = 30;
 		await WaitStateTimer();
 
 		GameState = GameStates.Live;

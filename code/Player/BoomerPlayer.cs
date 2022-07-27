@@ -63,17 +63,20 @@ public partial class BoomerPlayer : Player
 		EnableShadowInFirstPerson = true;
 		SupressPickupNotices = true;
 
-		var w = StartingWeapons.Instance;
+		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
+		{
+			var w = StartingWeapons.Instance;
 
-		if ( w.IsValid() )
-		{
-			w.SetupPlayer( this );
+			if ( w.IsValid() )
+			{
+				w.SetupPlayer( this );
+			}
 		}
-		else
-		{
-			Inventory.Add( new NailGun() );
-			GiveAmmo( AmmoType.Nails, 250 );
-		}
+		//else
+		//{
+		//	Inventory.Add( new NailGun() );
+		//	GiveAmmo( AmmoType.Nails, 250 );
+		//}
 
 		SupressPickupNotices = false;
 
