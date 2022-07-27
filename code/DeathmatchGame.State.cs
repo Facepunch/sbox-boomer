@@ -32,24 +32,36 @@ partial class DeathmatchGame : Game
 		await Task.DelayRealtimeSeconds( 1.0f );
 	}
 
+	[ConVar.Replicated( "bm_warmuptime", Min = 0, Max = 600 )]
+	public static float WarmupTime { get; set; } = 30f;
+
+	[ConVar.Replicated( "bm_gametime", Min = 0, Max = 1800 )]
+	public static float GameTime { get; set; } = 600f;
+
+	[ConVar.Replicated( "bm_roundendtime", Min = 0, Max = 1800 )]
+	public static float RoundEndTime { get; set; } = 10f;
+
+	[ConVar.Replicated( "bm_mapvotetime", Min = 0, Max = 1800 )]
+	public static float MapVoteTime { get; set; } = 10f;
+
 	private async Task GameLoopAsync()
 	{
 		GameState = GameStates.Warmup;
-		StateTimer = 30;
+		StateTimer = WarmupTime;
 		await WaitStateTimer();
 
 		GameState = GameStates.Live;
-		StateTimer = 10 * 60;
+		StateTimer = GameTime;
 		FreshStart();
 		await WaitStateTimer();
 
 		GameState = GameStates.GameEnd;
-		StateTimer = 10.0f;
+		StateTimer = RoundEndTime;
 		await WaitStateTimer();
 
 		GameState = GameStates.MapVote;
 		var mapVote = new MapVoteEntity();
-		mapVote.VoteTimeLeft = 10.0f;
+		mapVote.VoteTimeLeft = MapVoteTime;
 		StateTimer = mapVote.VoteTimeLeft;
 		await WaitStateTimer();
 
