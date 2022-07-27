@@ -45,6 +45,10 @@
 		var taken = total - AmmoCount( type );
 
 		SetAmmo( type, total );
+
+		if ( Host.IsServer )
+			OnAmmoChanged( type, true );
+
 		return taken;
 	}
 
@@ -72,23 +76,31 @@
 		SetAmmo( type, available - amount );
 
 		if ( Host.IsServer )
-			OnTakeAmmoRpc( To.Single( Client ) );
+			OnAmmoChanged( type, false );
 
 		return amount;
 	}
 
 	[ClientRpc]
-	public void OnTakeAmmoRpc()
+	public void OnAmmoChanged( AmmoType type, bool positive )
 	{
 		Host.AssertClient();
-		_ = ChangedAmmoAnim();
+
+		if ( ActiveChild is DeathmatchWeapon weapon )
+		{
+			if ( weapon.AmmoType != type ) return;
+
+			_ = AmmoChangedAnim( positive );
+		}
 	}
 
-	protected static async Task ChangedAmmoAnim()
+	protected static async Task AmmoChangedAnim( bool positive )
 	{
-		AmmoVital.Current.AmmoInv.SetClass( "low", true );
+		var c = positive ? "gained" : "low";
+
+		AmmoVital.Current.AmmoInv.SetClass( c, true );
 		await GameTask.DelaySeconds( 0.1f );
-		AmmoVital.Current.AmmoInv.SetClass( "low", false );
+		AmmoVital.Current.AmmoInv.SetClass( c, false );
 	}
 
 	public int MaxAmmo( AmmoType ammo )
