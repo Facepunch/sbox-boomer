@@ -1,4 +1,9 @@
 [
+"models/cosmetics/outfit/boomeroutfit_chest.vmdl",
+"models/cosmetics/outfit/boomeroutfit_gloves.vmdl",
+"models/cosmetics/outfit/boomeroutfit_helmet.vmdl",
+"models/cosmetics/outfit/boomeroutfit_pants.vmdl",
+"models/cosmetics/outfit/boomeroutfit_shoes.vmdl",
 "particles/gameplay/damagenumber/dmg_number.vpcf",
 "particles/gameplay/damagenumber/dmg_number_a.vpcf",
 "particles/gameplay/damagenumber/dmg_number_b.vpcf",

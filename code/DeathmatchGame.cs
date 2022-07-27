@@ -40,7 +40,7 @@ partial class DeathmatchGame : Game
 
 	private void PrecacheAssets()
 	{
-		var assets = FileSystem.Mounted.ReadJsonOrDefault<List<string>>( "boomer.assets.json" );
+		var assets = FileSystem.Mounted.ReadJsonOrDefault<List<string>>( "resources/boomer.assets.json" );
 
 		foreach ( var asset in assets )
 		{
