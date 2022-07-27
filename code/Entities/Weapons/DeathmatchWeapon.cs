@@ -90,9 +90,11 @@
 		Host.AssertClient();
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
-
+	
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;
+
+
 
 	}
 
@@ -101,6 +103,8 @@
 	/// </summary>
 	public virtual void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
 	{
+
+
 		//
 		// Seed rand using the tick, so bullet cones match on client and server
 		//
@@ -151,6 +155,7 @@
 
 	public bool TakeAmmo( int amount )
 	{
+		
 		return Player.TakeAmmo( AmmoType, amount ) > 0;
 	}
 
@@ -219,7 +224,7 @@
 		RenderCrosshair( center, CrosshairLastShoot.Relative, CrosshairLastReload.Relative );
 	}
 
-	private const float FoV = 90;
+	private const float FoV = 100;
 	private const float VMFoV = 45;
 
 	private float CurrentFoV = FoV;

@@ -198,7 +198,7 @@ dashcount {
 
 ammo {
     bottom: 96px;
-    left: 96px; 
+    left: 96px;
     transform: skew(0deg, 5deg);
 
     .ammoinv {
@@ -210,6 +210,13 @@ ammo {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         top: 72px;
         right: 90px;
+        transform: scale( 1 );
+
+        &.low {
+            color: #ffe9b4;
+            transition: all 0.1s ease-in-out;
+            transform: scale( 1.5 );
+        }
     }
 
     .ammoicon {
