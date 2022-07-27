@@ -155,7 +155,6 @@
 
 	public bool TakeAmmo( int amount )
 	{
-		
 		return Player.TakeAmmo( AmmoType, amount ) > 0;
 	}
 

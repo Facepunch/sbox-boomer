@@ -1,14 +1,14 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-public partial class Ammo : Panel
+public partial class AmmoVital : Panel
 {
 	public Image Icon;
 	public Label AmmoInv;
 
-	public static Ammo Current { get; private set; }
+	public static AmmoVital Current { get; private set; }
 
-	public Ammo()
+	public AmmoVital()
 	{
 		Current = this;
 
@@ -31,15 +31,5 @@ public partial class Ammo : Panel
 		var inv = weapon.AvailableAmmo();
 		AmmoInv.Text = $"{inv}";
 		AmmoInv.SetClass( "active", inv >= 0 );
-	}
-
-	[ClientRpc]
-	public static async void TakeAmmoAnim()
-	{
-		Current.AmmoInv.SetClass( "low", true);
-		
-		await GameTask.DelaySeconds( .1f );
-		Current.AmmoInv.SetClass( "low", false );
-		Log.Info( "Hey" );
 	}
 }

@@ -70,7 +70,25 @@
 		amount = Math.Min( available, amount );
 
 		SetAmmo( type, available - amount );
+
+		if ( Host.IsServer )
+			OnTakeAmmoRpc( To.Single( Client ) );
+
 		return amount;
+	}
+
+	[ClientRpc]
+	public void OnTakeAmmoRpc()
+	{
+		Host.AssertClient();
+		_ = ChangedAmmoAnim();
+	}
+
+	protected static async Task ChangedAmmoAnim()
+	{
+		AmmoVital.Current.AmmoInv.SetClass( "low", true );
+		await GameTask.DelaySeconds( 0.1f );
+		AmmoVital.Current.AmmoInv.SetClass( "low", false );
 	}
 
 	public int MaxAmmo( AmmoType ammo )
