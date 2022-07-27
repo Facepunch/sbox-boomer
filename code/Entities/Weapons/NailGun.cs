@@ -9,7 +9,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float ProjectileLifeTime => 10f;
 	public override float Gravity => 0f;
-	public override float Speed => 2000f;
+	public override float Speed => 3000f;
 	public override float PrimaryRate => 10;
 	public override int Bucket => 1;
 	public override AmmoType AmmoType => AmmoType.Nails;
