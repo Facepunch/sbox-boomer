@@ -146,7 +146,7 @@ partial class RailGun : DeathmatchWeapon
 
 		// outer lines
 		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.4f, 0.0f ) );
+			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 2.65f, 0.0f ) );
 			var length = 10.0f;
 			var gap = 20.0f + shootEase * 50.0f;
 
