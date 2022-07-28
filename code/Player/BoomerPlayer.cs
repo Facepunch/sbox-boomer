@@ -402,6 +402,8 @@ public partial class BoomerPlayer : Player
 		if ( setup.Viewer == null ) return;
 
 		AddCameraEffects( ref setup );
+
+		BaseCameraModifier.PostCameraSetup( ref setup );
 	}
 
 	float walkBob = 0;

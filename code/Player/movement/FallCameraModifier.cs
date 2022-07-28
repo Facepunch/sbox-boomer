@@ -4,8 +4,7 @@ using System;
 
 namespace Boomer.Movement
 {
-	// TODO: SCREENSHAKE
-	class FallCameraModifier 
+	class FallCameraModifier : BaseCameraModifier
 	{
 
 		private float fallSpeed;
@@ -19,10 +18,10 @@ namespace Boomer.Movement
 		public FallCameraModifier( float fallSpeed, float length = .5f )
 		{
 			this.length = length;
-			this.fallSpeed = fallSpeed * .15f;
+			this.fallSpeed = fallSpeed * .5f;
 		}
 
-		public bool Update( ref CameraSetup setup )
+		public override bool Update( ref CameraSetup setup )
 		{
 			var delta = t.LerpInverse( 0, length, true );
 			delta = Easing.EaseOut( delta );
@@ -33,7 +32,7 @@ namespace Boomer.Movement
 			var a = Math.Min( Math.Abs(fallSpeed) / effectMaxSpeed, 1f );
 			if ( fallSpeed < 0f ) a *= -1f;
 
-			//setup.Rotation *= Rotation.FromAxis( Vector3.Left, effectStrength * invdelta * pos * a );
+			setup.Rotation *= Rotation.FromAxis( Vector3.Left, effectStrength * invdelta * pos * a );
 
 			t += Time.Delta;
 
