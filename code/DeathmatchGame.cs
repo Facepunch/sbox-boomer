@@ -5,6 +5,7 @@ global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading.Tasks;
 using Boomer.Movement;
+using Boomer.UI;
 
 /// <summary>
 /// This is the heart of the gamemode. It's responsible for creating the player and stuff.
@@ -57,7 +58,8 @@ partial class DeathmatchGame : Game
 
 	public override void ClientJoined( Client cl )
 	{
-		base.ClientJoined( cl );
+		Log.Info( $"\"{cl.Name}\" has joined the game" );
+		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has joined", $"avatar:{cl.PlayerId}" );
 
 		var player = new BoomerPlayer();
 		player.UpdateClothes( cl );
@@ -66,6 +68,18 @@ partial class DeathmatchGame : Game
 		player.PlayerColor = Color.Random;
 		
 		cl.Pawn = player;
+	}
+
+	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+	{
+		Log.Info( $"\"{cl.Name}\" has left the game ({reason})" );
+		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has left ({reason})", $"avatar:{cl.PlayerId}" );
+
+		if ( cl.Pawn.IsValid() )
+		{
+			cl.Pawn.Delete();
+			cl.Pawn = null;
+		}
 	}
 
 	public override void MoveToSpawnpoint( Entity pawn )
