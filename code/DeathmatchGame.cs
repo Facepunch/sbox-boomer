@@ -244,6 +244,7 @@ partial class DeathmatchGame : Game
 			if ( overlap == owner )
 			{
 				dmg *= ownerDamageScale;
+				forceDir = (targetPos - (position + Vector3.Down * 32f)).Normal;
 			}
 
 			var damageInfo = DamageInfo.Explosion( position, forceDir * force, dmg )
