@@ -54,6 +54,8 @@ namespace Boomer.UI
 
 		public void AddEntry( string name, string message, string avatar, string lobbyState = null )
 		{
+			Log.Info( $"AddEntry - {name}: {message}" );
+
 			var e = Canvas.AddChild<BoomerChatEntry>();
 
 			e.Message.Text = message;
@@ -73,10 +75,11 @@ namespace Boomer.UI
 		[ConCmd.Client( "chat_add", CanBeCalledFromServer = true )]
 		public static void AddChatEntry( string name, string message, string avatar = null, string lobbyState = null )
 		{
+			Assert.NotNull( Current );
 			Current?.AddEntry( name, message, avatar, lobbyState );
 
 			// Only log clientside if we're not the listen server host
-			if ( !Global.IsListenServer )
+			//if ( !Global.IsListenServer )
 			{
 				Log.Info( $"{name}: {message}" );
 			}
