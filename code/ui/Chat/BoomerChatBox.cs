@@ -49,7 +49,7 @@ namespace Boomer.UI
 			if ( string.IsNullOrWhiteSpace( msg ) )
 				return;
 
-			Say( msg );
+			Chat( msg );
 		}
 
 		public void AddEntry( string name, string message, string avatar, string lobbyState = null )
@@ -88,8 +88,8 @@ namespace Boomer.UI
 			Current?.AddEntry( null, message, avatar );
 		}
 
-		[ConCmd.Server( "say" )]
-		public static void Say( string message )
+		[ConCmd.Server( "chat" )]
+		public static void Chat( string message )
 		{
 			Assert.NotNull( ConsoleSystem.Caller );
 
