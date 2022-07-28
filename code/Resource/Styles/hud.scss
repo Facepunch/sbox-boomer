@@ -68,11 +68,20 @@ vitals {
     background-image-tint: #0024ff;
 }
 
+.dm_rocketlauncher_rocket .icon {
+    background-image: url( /ui/weapons/dm_rocketlauncher_rocket.png );
+    background-image-tint: #f20;
+}
+
 .dm_rocketlauncher .icon {
     background-image: url( /ui/weapons/dm_rocketlauncher.png );
     background-image-tint: #f20;
 }
 
+.dm_grenadelauncher_grenade .icon {
+    background-image: url( /ui/weapons/dm_grenadelauncher_grenade.png );
+    background-image-tint: #70ff00;
+}
 .dm_grenadelauncher .icon {
     background-image: url( /ui/weapons/dm_grenadelauncher.png );
     background-image-tint: #70ff00;

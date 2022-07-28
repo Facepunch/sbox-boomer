@@ -1,4 +1,4 @@
-﻿[Library]
+﻿[Library( "dm_rocketlauncher_rocket" )]
 public partial class RocketProjectile : BulletDropProjectile
 {
 	private Sound RocketTrailSound { get; set; }
