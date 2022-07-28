@@ -1,24 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-public enum WeaponType
-{
-	Crowbar,
-	Shotgun,
-	Nailgun,
-	GrenadeLauncher,
-	RocketLauncher,
-	RailGun,
-	LightningGun
-}
-
-[GameResource( "Starting Weapon Setup", "bsw", "Starter weapon setup, so maps can define what a player starts with." )]
-public class StartWeaponGameResource : GameResource
-{
-	[Property]
-	public Dictionary<WeaponType, int> Weapons { get; set; } = new();
-}
+﻿
+using System.ComponentModel.DataAnnotations;
 
 [Library( "shooter_startingweapons", Description = "Starting Weapons" )]
 [EditorSprite( "editor/ent_logic.vmat" )]
@@ -33,56 +14,62 @@ partial class StartingWeapons : Entity
 		Instance = this;
 	}
 
-	[Property, ResourceType( "bsw" )]
-	public string AssetPath { get; set; }
+	[Property] public bool Crowbar { get; set; }
+	[Property] public bool Shotgun { get; set; }
+	[Property] public bool Nailgun { get; set; }
+	[Property] public bool GrenadeLauncher { get; set; }
+	[Property] public bool RocketLauncher { get; set; }
+	[Property] public bool RailGun { get; set; }
+	[Property] public bool LightningGun { get; set; }
 
-	protected StartWeaponGameResource Resource;
-
-	public override void Spawn()
-	{
-		base.Spawn();
-
-		Resource = ResourceLibrary.Get<StartWeaponGameResource>( AssetPath );
-	}
-
-	public DeathmatchWeapon MakeWeapon( WeaponType type )
-	{
-		return type switch
-		{
-			WeaponType.Crowbar => new Crowbar(),
-			WeaponType.Shotgun => new Shotgun(),
-			WeaponType.Nailgun => new NailGun(),
-			WeaponType.GrenadeLauncher => new GrenadeLauncher(),
-			WeaponType.RocketLauncher => new RocketLauncher(),
-			WeaponType.RailGun => new RailGun(),
-			WeaponType.LightningGun => new LightningGun(),
-			_ => null
-		};
-	}
-
-	public void Give( BoomerPlayer player, WeaponType type, int ammo = 0 )
-	{
-		var weapon = MakeWeapon( type );
-		if ( !weapon.IsValid() ) return;
-
-		player.Inventory.Add( weapon );
-
-		if ( ammo > 0 )
-		{
-			player.GiveAmmo( weapon.AmmoType, ammo );
-		}
-	}
+	[Property] public int BuckshotAmmo { get; set; } = 32;
+	[Property] public int NailsAmmo { get; set; } = 128;
+	[Property] public int GrenadeAmmo { get; set; } = 8;
+	[Property] public int RocketAmmo { get; set; } = 8;
+	[Property] public int RailAmmo { get; set; } = 24;
+	[Property] public int LightningAmmo { get; set; } = 300;
 
 	public void SetupPlayer( BoomerPlayer player )
 	{
-		if ( Resource is null ) return;
-
-		foreach ( var kv in Resource.Weapons )
+		if ( Crowbar )
 		{
-			var type = kv.Key;
-			var ammo = kv.Value;
+			player.Inventory.Add( new Crowbar() );
+		}
 
-			Give( player, type, ammo );
+		if ( Shotgun )
+		{
+			player.Inventory.Add( new Shotgun() );
+			player.GiveAmmo( AmmoType.Buckshot, BuckshotAmmo );
+		}
+
+		if ( Nailgun )
+		{
+			player.Inventory.Add( new NailGun() );
+			player.GiveAmmo( AmmoType.Nails, NailsAmmo );
+		}
+
+		if ( GrenadeLauncher )
+		{
+			player.Inventory.Add( new GrenadeLauncher() );
+			player.GiveAmmo( AmmoType.Grenade, GrenadeAmmo );
+		}
+
+		if ( RocketLauncher )
+		{
+			player.Inventory.Add( new RocketLauncher() );
+			player.GiveAmmo( AmmoType.Rockets, RocketAmmo );
+		}
+
+		if ( RailGun )
+		{
+			player.Inventory.Add( new RailGun() );
+			player.GiveAmmo( AmmoType.Rails, RailAmmo );
+		}
+
+		if ( LightningGun )
+		{
+			player.Inventory.Add( new LightningGun() );
+			player.GiveAmmo( AmmoType.Lightning, LightningAmmo );
 		}
 	}
 }
