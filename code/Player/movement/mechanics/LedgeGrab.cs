@@ -11,13 +11,16 @@ namespace Boomer.Movement
 		public Vector3 LedgeGrabLocation;
 		public Vector3 GrabNormal;
 
+		public Vector3 StartLocation;
 		public Vector3 TargetLocation;
 
 		public float TimeUntilNextGrab;
-		public float TimeToDisengage = -1;
 
-		public float GrabDistance => 16.0f;
-		public float PlayerRadius => 32.0f;
+		public float PlayerRadius => 17.0f;
+		public float LedgeGrabTime => .35f;
+
+		private Vector3 PreVelocity;
+		private TimeSince TimeSinceLedgeGrab;
 
 		public LedgeGrab( BoomerController controller ) : base( controller )
 		{
@@ -31,7 +34,12 @@ namespace Boomer.Movement
 					return false;
 
 				if ( TryGrabUpperLedge() )
+				{
+					PreVelocity = ctrl.Velocity.WithZ( 0 );
+					StartLocation = ctrl.Position;
+					TimeSinceLedgeGrab = 0f;
 					return true;
+				}
 			}
 
 			return false;
@@ -43,36 +51,24 @@ namespace Boomer.Movement
 			
 			ctrl.SetTag( "grabbing_wall" );
 
-			ctrl.Velocity = 0;
-			ctrl.Rotation = (-GrabNormal).EulerAngles.WithPitch( 0 ).ToRotation();
-			ctrl.Position = Vector3.Lerp( ctrl.Position, TargetLocation, Time.Delta * 10.0f );
-			
-	
-			if ( TimeToDisengage > 0 )
-			{
-				if ( Time.Now > TimeToDisengage )
-				{
-					IsActive = false;
-					TimeToDisengage = -1;
-				}
+			var a = TimeSinceLedgeGrab / LedgeGrabTime;
+			a = Easing.EaseIn( a );
 
+			ctrl.Rotation = (-GrabNormal).EulerAngles.WithPitch( 0 ).ToRotation();
+			ctrl.Position = Vector3.Lerp( StartLocation, TargetLocation, a );
+
+			if ( TimeSinceLedgeGrab > LedgeGrabTime )
+			{
+				IsActive = false;
+				ctrl.Velocity = PreVelocity;
 				return;
 			}
 
-			// Drop down
-			if ( InputActions.Duck.Pressed() || InputActions.Back.Pressed() )
-			{
-				TimeToDisengage = Time.Now;
-			}
-
 			// Climb up
+			// Effects
+			ctrl.Pawn.PlaySound( "player.slam.land" );
 
-				// Effects
-				ctrl.Pawn.PlaySound( "player.slam.land" );
-
-				TimeToDisengage = Time.Now + 0.5f;
-				TargetLocation = LedgeDestination;
-
+			TargetLocation = LedgeDestination;
 		}
 
 		internal bool TryGrabUpperLedge()
@@ -95,7 +91,7 @@ namespace Boomer.Movement
 			{
 				var normal = tr.Normal;
 				var destinationTestPos = tr.EndPosition - (normal * PlayerRadius) + (Vector3.Up * 64.0f);
-				var originTestPos = tr.EndPosition + (normal * GrabDistance);
+				var originTestPos = tr.EndPosition + (normal * PlayerRadius);
 
 				// Trace again to check if we have a valid ground
 				tr = Trace.Ray( destinationTestPos, destinationTestPos - (Vector3.Up * 64.0f) )
