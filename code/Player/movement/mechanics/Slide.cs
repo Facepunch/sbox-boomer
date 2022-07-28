@@ -56,7 +56,7 @@ class Slide : BaseMoveMechanic
 		return 100;
 	}
 
-	public override void Simulate()
+	public override void PreSimulate()
 	{
 
 		if ( !StillSliding() )
@@ -91,7 +91,12 @@ class Slide : BaseMoveMechanic
 	private bool StillSliding()
 	{
 		if ( !InputActions.Duck.Down() ) return false;
-		if ( ctrl.GroundEntity == null ) return false;
+		if ( ctrl.GroundEntity == null )
+		{
+			var tr = ctrl.TraceBBox( ctrl.Position, ctrl.Position + Vector3.Down * 3f, 2f );
+			if ( tr.Hit ) return true;
+			return false;
+		}
 		if ( ctrl.Velocity.WithZ( 0 ).Length < EndSlideSpeed ) return false;
 		if ( InputActions.Jump.Down() ) return false;
 		return true;
