@@ -22,7 +22,7 @@ namespace Boomer.Movement
 		protected override bool TryActivate()
 		{
 			if ( !InputActions.Duck.Down() ) return false;
-			if ( ctrl.GroundEntity == null ) return false;
+			//if ( ctrl.GroundEntity == null ) return false;
 			//let slide activate if we too fast
 			if ( ctrl.GroundEntity != null && ctrl.Velocity.WithZ( 0 ).Length > MaxDuckSpeed ) return false;
 
