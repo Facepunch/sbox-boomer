@@ -41,8 +41,24 @@ partial class Battery : AnimatedEntity, IRespawnableEntity
 			PickupFeed.OnPickup( To.Single( player ), $"+25 Armour" );
 			ItemRespawn.Taken( this, RespawnTime );
 
+			OnPickUpRpc( To.Single( other ) );
+
 			Delete();
 		}
+	}
+
+	[ClientRpc]
+	public void OnPickUpRpc()
+	{
+		Host.AssertClient();
+		_ = ChangedArmourAnim();
+	}
+
+	protected static async Task ChangedArmourAnim()
+	{
+		ArmourHud.Current.Value.SetClass( "gained", true );
+		await GameTask.DelaySeconds( 0.25f );
+		ArmourHud.Current.Value.SetClass( "gained", false );
 	}
 
 	[ClientRpc]

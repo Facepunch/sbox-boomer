@@ -44,8 +44,26 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 			PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
 			ItemRespawn.Taken( this, RespawnTime );
 
+			OnPickUpRpc( To.Single( other ) );
+
+			if ( Host.IsServer )
+
 			Delete();
 		}
+	}
+	
+	[ClientRpc]
+	public void OnPickUpRpc()
+	{
+		Host.AssertClient();
+		_ = ChangedHealthAnim();
+	}
+
+	protected static async Task ChangedHealthAnim()
+	{
+		HealthHud.Current.Value.SetClass( "gained", true );
+		await GameTask.DelaySeconds( 0.25f );
+		HealthHud.Current.Value.SetClass( "gained", false );
 	}
 
 	[ClientRpc]

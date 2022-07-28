@@ -446,6 +446,34 @@ public partial class BoomerPlayer : Player
 
 	}
 
+	[ClientRpc]
+	public void OnDmgRpc()
+	{
+		Host.AssertClient();
+		_ = ChangedHealthAnim();
+	}
+
+	[ClientRpc]
+	public void OnArmourDmgRpc()
+	{
+		Host.AssertClient();
+		_ = ChangedArmourAnim();
+	}
+
+	protected static async Task ChangedHealthAnim()
+	{
+		HealthHud.Current.Value.SetClass( "low", true );
+		await GameTask.DelaySeconds( 0.25f );
+		HealthHud.Current.Value.SetClass( "low", false );
+	}
+
+	protected static async Task ChangedArmourAnim()
+	{
+		ArmourHud.Current.Value.SetClass( "low", true );
+		await GameTask.DelaySeconds( 0.25f );
+		ArmourHud.Current.Value.SetClass( "low", false );
+	}
+
 	DamageInfo LastDamage;
 
 	TimeSince ResetDmgCount;
@@ -481,6 +509,7 @@ public partial class BoomerPlayer : Player
 			{
 				info.Damage = 0;
 			}
+			OnArmourDmgRpc( To.Single( Client ) );
 		}
 
 		if ( Health > 0 && info.Damage > 0 )
@@ -491,6 +520,7 @@ public partial class BoomerPlayer : Player
 				Health = 0;
 				OnKilled();
 			}
+			OnDmgRpc( To.Single( Client ) );
 		}
 
 		if ( info.Attacker is BoomerPlayer attacker )

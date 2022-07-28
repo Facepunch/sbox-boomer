@@ -214,14 +214,10 @@ AmmoVital {
 
         &.low {
             color: #ffe9b4;
-            transition: all 0.1s ease-in-out;
-            transform: scale( 1.5 );
         }
 
         &.gained {
             color: #c9ffb4;
-            transition: all 0.1s ease-in-out;
-            transform: scale( 1.25 );
         }
     }
 
@@ -263,6 +259,18 @@ healthhud {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         top: 72px;
         right: 90px;
+
+        &.low {
+            color: #f20;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
+
+        &.gained {
+            color: #c9ffb4;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
     }
 
     .hpicon {
@@ -353,6 +361,18 @@ armourhud {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         top: 72px;
         right: 90px;
+
+        &.low {
+            color: #f20;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
+
+        &.gained {
+            color: #c9ffb4;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
     }
 
     .armouricon {
@@ -396,7 +416,7 @@ armourhud {
 }
 
 .game-end {
-    chatbox, .top-middle {
+    boomerchatbox, .top-middle {
         z-index: 1000;
     }
 

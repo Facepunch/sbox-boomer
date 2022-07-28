@@ -3,16 +3,19 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 
-public class HealthHud : Panel
+public partial class HealthHud : Panel
 {
 	public Image Icon;
 	public Label Value;
 	public Label Total;
 	
 	public List<Panel> Segments;
-
+	
+	public static HealthHud Current { get; private set; }
 	public HealthHud()
 	{
+		Current = this;
+
 		Value = Add.Label( "0", "health" );
 		
 		Icon = Add.Image( "ui/vitals/healthicon.png", "hpicon" );
@@ -23,7 +26,6 @@ public class HealthHud : Panel
 		Segments = new List<Panel>();
 		for ( int i = 0; i < 10; i++ )
 			Segments.Add( segmentsContainer.Add.Panel() );
-
 	}
 
 	public override void Tick()
@@ -68,8 +70,12 @@ public class ArmourHud : Panel
 
 	public List<Panel> ArmourSegments;
 
+	public static ArmourHud Current { get; private set; }
+
 	public ArmourHud()
 	{
+		Current = this;
+		
 		Value = Add.Label( "0", "armour" );
 		
 		Icon = Add.Image( "ui/vitals/armour.png", "armouricon" );
