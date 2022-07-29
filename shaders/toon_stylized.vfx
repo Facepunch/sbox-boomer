@@ -105,37 +105,18 @@ PS
         // Executed for every direct light
         //
         LightShade Direct( const LightData light )
-        {
+ {
             LightShade shade;
+            float fLight = pow( saturate(light.NdotL) * light.Visibility , 0.25f ) * light.Attenuation;
 
-            const float flAttenuation = 1.0f;
+            float3 vHalfAngleDirWs = normalize(ViewRayWs + light.LightDir);
 
-            float3 vClearColor = (Albedo * g_vColorTint) * light.Visibility;
-            float3 vDiffuseReflection = lerp( g_vDiffuseColor.rgb, 1.0f, saturate(g_flAttenuation * light.NdotL) );
-            float3 vSpecularReflection = 0.0f;
-            
-            [branch]
-            if(light.NdotL > 0.0f)
-            {
-                vSpecularReflection = g_flAttenuation * g_vSpecularColor * g_flSpecularIntensive * light.Color * pow(
-                    max(0.0f, dot(reflect(-light.LightDir, NormalWs), ViewRayWs)), (g_flShininess * g_flShininess * 100.0f + 1.0f)
-                );
-            }
+            float flNDotL = saturate( light.NdotL );
+            float flNdotH = dot( vHalfAngleDirWs.xyz, NormalWs );
+            float fSpecularLobe = saturate(flNdotH) * fLight;
 
-            float flRim = saturate(1.25f - dot(ViewRayWs, NormalWs)* saturate(NormalWs.z) * 0.25f );
-            float3 vRimLighting = g_flAttenuation * light.Color * g_vRimColor * pow( flRim, g_flRimPower + 100.0f ) * 1000.0f;
-
-            vClearColor *= AO;
-
-            float3 vDiffuse = lerp(
-                g_vShadowTint.rgb * g_vShadowTint.a,
-                (vClearColor * light.Color + (vRimLighting + vSpecularReflection) * 1.0f) * vDiffuseReflection,
-                (light.Visibility * light.Attenuation) * (1.0f - g_vShadowTint.a));
-            
-            shade.Diffuse = vDiffuse;
-
-            // We're doing this ourselves
-            shade.Specular = 0.0f;
+            shade.Diffuse = fLight * Albedo * g_vColorTint * light.Color;
+            shade.Specular = saturate( pow(fSpecularLobe, 100.0f) * 1000.0f ) * Albedo * g_vColorTint;
             return shade;
         }
         
@@ -165,7 +146,8 @@ PS
             #endif
 
             shade.Diffuse =  vDiffuse;
-            shade.Specular = 0.0f;
+            float fSpecularLobe = ( 1.2f - dot( ViewRayWs, NormalWs ) ) * saturate(NormalWs.z) * 1.25f;
+            shade.Specular = saturate( pow(fSpecularLobe, 1000.0f) * 10.0f );
             return shade;
         }
     };
