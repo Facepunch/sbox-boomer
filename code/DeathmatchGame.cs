@@ -97,6 +97,11 @@ partial class DeathmatchGame : Game
 		}
 
 		pawn.Transform = spawnpoint.Transform;
+
+		if( pawn is BoomerPlayer pl )
+		{
+			pl.SetViewAngles( pawn.Rotation.Angles() );
+		}
 	}
 
 	[ConCmd.Admin]

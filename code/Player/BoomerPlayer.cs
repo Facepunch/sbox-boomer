@@ -305,6 +305,12 @@ public partial class BoomerPlayer : Player
 			return;
 		};
 
+		if ( OverrideViewAngles )
+		{
+			OverrideViewAngles = false;
+			input.ViewAngles = NewViewAngles;
+		}
+
 		base.BuildInput( input );
 	}
 
@@ -649,6 +655,15 @@ public partial class BoomerPlayer : Player
 	public void PlaySoundFromScreen( string sound )
 	{
 		Sound.FromScreen( sound );
+	}
+
+	private bool OverrideViewAngles = false;
+	private Angles NewViewAngles;
+	[ClientRpc]
+	public void SetViewAngles( Angles angles )
+	{
+		OverrideViewAngles = true;
+		NewViewAngles = angles;
 	}
 
 	[ConCmd.Client]
