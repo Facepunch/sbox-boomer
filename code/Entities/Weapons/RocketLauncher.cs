@@ -11,9 +11,9 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
 	public override string TrailEffect => "particles/gameplay/weapons/rocketlauncher/trail_1.vpcf";
 	public override float Gravity => 0f;
-	public override float Speed => 2500f;
+	public override float Speed => 1800f;
 	public override bool CanZoom => true;
-	public override float PrimaryRate => 1;
+	public override float PrimaryRate => 1.4f;
 	public override int Bucket => 3;
 	public override AmmoType AmmoType => AmmoType.Rockets;
 
@@ -103,7 +103,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	protected override void OnProjectileHit( RocketProjectile projectile, TraceResult trace )
 	{
-		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 400f, 40f, 1f, 0.3f );
+		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 180f, 40f, 1f, 0.3f );
 
 		if ( IsClient )
 		{
