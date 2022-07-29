@@ -223,29 +223,29 @@
 		RenderCrosshair( center, CrosshairLastShoot.Relative, CrosshairLastReload.Relative );
 	}
 
-	private const float FoV = 100;
-	private const float VMFoV = 45;
-
-	private float CurrentFoV = FoV;
-	private float CurrentVMFoV = VMFoV;
+	private float FOVDefault;
+	private float FOVCurrent;
+	private float FOVCurrentVM = 45;
 	public override void PostCameraSetup( ref CameraSetup camSetup )
 	{
 		base.PostCameraSetup( ref camSetup );
 
-		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 45f;
-		var targetFoV = Zoomed ? ZoomedFov : 90f;
-		CurrentFoV = CurrentFoV.LerpTo( targetFoV, 15f * Time.Delta );
-		CurrentVMFoV = CurrentVMFoV.LerpTo( targetVMFoV, 15f * Time.Delta );
+		FOVDefault = camSetup.FieldOfView;
 
-		camSetup.FieldOfView = CurrentFoV;
-		camSetup.ViewModel.FieldOfView = CurrentVMFoV;
+		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 45f;
+		var targetFoV = Zoomed ? ZoomedFov : FOVDefault;
+		FOVCurrent = FOVCurrent.LerpTo( targetFoV, 15f * Time.Delta );
+		FOVCurrentVM = FOVCurrentVM.LerpTo( targetVMFoV, 15f * Time.Delta );
+
+		camSetup.FieldOfView = FOVCurrent;
+		camSetup.ViewModel.FieldOfView = FOVCurrentVM;
 	}
 
 	public override void BuildInput( InputBuilder owner )
 	{
 		if ( Zoomed )
 		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, CurrentFoV / FoV );
+			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, FOVCurrent / FOVDefault );
 		}
 	}
 
