@@ -24,8 +24,8 @@
     ],
     "MapSelect": "Official",
     "PerMapRanking": false,
-    "LeaderboardType": "None",
-    "RankType": "None",
+    "LeaderboardType": "Ascending",
+    "RankType": "Increment",
     "Physics": {
       "SubSteps": 1,
       "TimeScale": 1,

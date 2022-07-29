@@ -57,6 +57,7 @@ partial class DeathmatchGame : Game
 
 		GameState = GameStates.GameEnd;
 		StateTimer = RoundEndTime;
+		_ = SubmitScore();
 		await WaitStateTimer();
 
 		GameState = GameStates.MapVote;
@@ -72,12 +73,26 @@ partial class DeathmatchGame : Game
 	{
 		if ( All.OfType<BoomerPlayer>().Count() < 2 )
 			return false;
-
+		
 		return true;
 	}
 
-	private void FreshStart()
+	private async Task SubmitScore()
 	{
+		foreach ( var cl in Client.All )
+		{
+			var Kills = cl.GetInt( "kills" );
+			var Deaths = cl.GetInt( "deaths" );
+
+			var ScoreToSubmit = Kills - Deaths;
+			
+			var scoreResult = await GameServices.SubmitScore( cl.PlayerId, ScoreToSubmit );
+			
+		}
+		
+	}
+
+	private void FreshStart(){
 		foreach ( var cl in Client.All )
 		{
 			cl.SetInt( "kills", 0 );
