@@ -43,7 +43,7 @@ class Dash : BaseMoveMechanic
 
 		float flGroundFactor = ctrl.GroundEntity != null ? 1.75f : 1.0f;
 		float flMul = 100f * 1.2f;
-		float forMul = 585f * 2.2f;
+		float forMul = 485f * 2.2f;
 
 		var dashDirection = new Vector3( Input.Forward, Input.Left, 0 ).Normal;
 		dashDirection *= Input.Rotation;
