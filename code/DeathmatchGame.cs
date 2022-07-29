@@ -56,8 +56,14 @@ partial class DeathmatchGame : Game
 		ItemRespawn.Init();
 	}
 
+
+	public static bool ScoreSystemDisabled { get; set; } = false;
+
 	public override void ClientJoined( Client cl )
 	{
+		if ( cl.IsBot )
+			ScoreSystemDisabled = true;
+
 		Log.Info( $"\"{cl.Name}\" has joined the game" );
 		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has joined", $"avatar:{cl.PlayerId}" );
 

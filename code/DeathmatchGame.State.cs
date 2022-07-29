@@ -79,6 +79,8 @@ partial class DeathmatchGame : Game
 
 	private async Task SubmitScore()
 	{
+		if ( ScoreSystemDisabled ) return;
+
 		foreach ( var cl in Client.All )
 		{
 			var Kills = cl.GetInt( "kills" );
