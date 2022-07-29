@@ -12,8 +12,8 @@ namespace Boomer.Movement
 		private float length;
 		private float t;
 
-		private const float effectMaxSpeed = 500f;
-		private const float effectStrength = 100f;
+		private const float effectMaxSpeed = 0f;
+		private const float effectStrength = 0f;
 
 		public FallCameraModifier( float fallSpeed, float length = .5f )
 		{
