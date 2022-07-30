@@ -433,3 +433,14 @@ armourhud {
         display: none;
     }
 }
+
+button {
+    padding: 12px 20px;
+    background-color: rgba(black .25);
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:hover {
+        background-color:black;
+    }
+}

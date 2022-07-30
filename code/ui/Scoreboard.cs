@@ -1,4 +1,5 @@
 ﻿
+using Boomer;
 using Sandbox.UI;
 
 [UseTemplate]
@@ -76,6 +77,11 @@ public class Scoreboard : Panel
 		var p = Canvas.AddChild<ScoreboardEntry>();
 		p.Client = entry;
 		return p;
+	}
+
+	public void OpenSettings()
+	{
+		SettingsMenu.SetOpen( true );
 	}
 
 	[Event.BuildInput]
