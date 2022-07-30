@@ -1,22 +1,43 @@
-﻿using Sandbox.UI.Construct;
+﻿
+using Sandbox.UI;
 
-public class Scoreboard : Sandbox.UI.Scoreboard<ScoreboardEntry>
+[UseTemplate]
+public class Scoreboard : Panel
 {
-	protected override void AddHeader()
-	{
-		Header = Add.Panel( "header" );
-		Header.Add.Label( "Player", "name" );
-		Header.Add.Label( "Kills", "kills" );
-		Header.Add.Label( "Deaths", "deaths" );
-		Header.Add.Label( "Ping", "ping" );
-	}
 
 	bool Cursor;
 	RealTimeSince timeSinceSorted;
+	Dictionary<Client, ScoreboardEntry> Rows = new();
+
+	public Panel Canvas { get; protected set; }
+	public Panel Header { get; protected set; }
 
 	public override void Tick()
 	{
 		base.Tick();
+
+		SetClass( "open", ShouldBeOpen() );
+
+		if ( !IsVisible )
+			return;
+
+		//
+		// Clients that were added
+		//
+		foreach ( var client in Client.All.Except( Rows.Keys ) )
+		{
+			var entry = AddClient( client );
+			Rows[client] = entry;
+		}
+
+		foreach ( var client in Rows.Keys.Except( Client.All ) )
+		{
+			if ( Rows.TryGetValue( client, out var row ) )
+			{
+				row?.Delete();
+				Rows.Remove( client );
+			}
+		}
 
 		Style.PointerEvents = Cursor ? "all" : "none";
 
@@ -39,12 +60,22 @@ public class Scoreboard : Sandbox.UI.Scoreboard<ScoreboardEntry>
 		}
 	}
 
-	public override bool ShouldBeOpen()
+	private bool ShouldBeOpen()
 	{
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return true;
 
-		return base.ShouldBeOpen();
+		if ( Input.Down( InputButton.Score ) )
+			return true;
+
+		return false;
+	}
+
+	private ScoreboardEntry AddClient( Client entry )
+	{
+		var p = Canvas.AddChild<ScoreboardEntry>();
+		p.Client = entry;
+		return p;
 	}
 
 	[Event.BuildInput]
