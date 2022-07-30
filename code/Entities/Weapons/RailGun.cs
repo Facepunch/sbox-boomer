@@ -11,7 +11,7 @@ partial class RailGun : DeathmatchWeapon
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override bool CanZoom => true;
-	public override float PrimaryRate => .5f;
+	public override float PrimaryRate => .75f;
 	public override int Bucket => 4;
 	public override AmmoType AmmoType => AmmoType.Rails;
 
@@ -67,7 +67,7 @@ partial class RailGun : DeathmatchWeapon
 		//
 		// Shoot the bullets
 		//
-		ShootBullet( 0.01f, 1.5f, 50.0f, 2.0f );
+		ShootBullet( 0.01f, 1.5f, 50.0f, 10.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
@@ -142,31 +142,40 @@ partial class RailGun : DeathmatchWeapon
 
 		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
 		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.2f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		draw.Color = color.WithAlpha( 0.8f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// outer lines
+
+		// center circle
 		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 2.65f, 0.0f ) );
-			var length = 10.0f;
-			var gap = 20.0f + shootEase * 50.0f;
-
-			gap -= zoomFactor * 10.0f;
-
-
-			draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
-			draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
-
-			draw.Color = draw.Color.WithAlpha( draw.Color.a * zoomFactor );
-
-			for ( int i = 0; i < 2; i++ )
-			{
-				gap += 40.0f;
-
-				draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
-				draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
-
-				draw.Color = draw.Color.WithAlpha( draw.Color.a * 0.5f );
-			}
+			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
+			var length = 4.0f + shootEase * 2.0f;
+			draw.Circle( center, length );
 		}
+
+
+		//// outer lines
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 2.65f, 0.0f ) );
+		//	var length = 10.0f;
+		//	var gap = 20.0f + shootEase * 50.0f;
+
+		//	gap -= zoomFactor * 10.0f;
+
+
+		//	draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
+		//	draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
+
+		//	draw.Color = draw.Color.WithAlpha( draw.Color.a * zoomFactor );
+
+		//	for ( int i = 0; i < 2; i++ )
+		//	{
+		//		gap += 40.0f;
+
+		//		draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
+		//		draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
+
+		//		draw.Color = draw.Color.WithAlpha( draw.Color.a * 0.5f );
+		//	}
+		//}
 	}
 }
