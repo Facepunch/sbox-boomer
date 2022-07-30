@@ -61,7 +61,7 @@ partial class LightningGun : DeathmatchWeapon
 		player.SetAnimParameter( "b_attack", true );
 
 		ShootEffects();
-		ShootBullet( 0.01f, .5f, 1f, 5.0f );
+		ShootBullet( 0.01f, 0.75f, 1f, 5.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
