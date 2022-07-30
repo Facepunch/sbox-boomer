@@ -24,7 +24,7 @@
     ],
     "MapSelect": "Official",
     "PerMapRanking": false,
-    "LeaderboardType": "Ascending",
+    "LeaderboardType": "Descending",
     "RankType": "Increment",
     "Physics": {
       "SubSteps": 1,
