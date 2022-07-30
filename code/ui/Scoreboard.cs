@@ -11,13 +11,22 @@ public class Scoreboard : Sandbox.UI.Scoreboard<ScoreboardEntry>
 		Header.Add.Label( "Ping", "ping" );
 	}
 
+	bool Cursor;
 	RealTimeSince timeSinceSorted;
 
 	public override void Tick()
 	{
 		base.Tick();
 
+		Style.PointerEvents = Cursor ? "all" : "none";
+
+		if ( !HasClass( "open" ) ) Cursor = false;
 		if ( !IsVisible ) return;
+
+		if ( Input.Down( InputButton.PrimaryAttack ) || Input.Down( InputButton.SecondaryAttack ) )
+		{
+			Cursor = true;
+		}
 
 		if ( timeSinceSorted > 0.1f )
 		{
@@ -37,6 +46,17 @@ public class Scoreboard : Sandbox.UI.Scoreboard<ScoreboardEntry>
 
 		return base.ShouldBeOpen();
 	}
+
+	[Event.BuildInput]
+	public void OnBuildInput( InputBuilder bn )
+	{
+		if ( Cursor )
+		{
+			bn.ClearButton( InputButton.PrimaryAttack );
+			bn.ClearButton( InputButton.SecondaryAttack );
+		}
+	}
+
 }
 
 public class ScoreboardEntry : Sandbox.UI.ScoreboardEntry
