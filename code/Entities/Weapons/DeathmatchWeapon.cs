@@ -231,6 +231,7 @@
 		base.PostCameraSetup( ref camSetup );
 
 		FOVDefault = camSetup.FieldOfView;
+		if ( FOVCurrent == 0 ) FOVCurrent = camSetup.FieldOfView;
 
 		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 45f;
 		var targetFoV = Zoomed ? ZoomedFov : FOVDefault;
