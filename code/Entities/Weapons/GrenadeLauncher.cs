@@ -8,11 +8,11 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 
 	public override string ProjectileModel => "models/gameplay/projectiles/grenades/grenade.vmdl";
 	public override string TrailEffect => "particles/grenade.vpcf";
-	public override float ProjectileLifeTime => 3f;
+	public override float ProjectileLifeTime => 1.5f;
 	public override string HitSound => "gl.impact";
 	public override float Gravity => 30f;
-	public override float Speed => 1000f;
-	public override float PrimaryRate => 0.75f;
+	public override float Speed => 1300f;
+	public override float PrimaryRate => 1.15f;
 	public override AmmoType AmmoType => AmmoType.Grenade;
 	public override int Bucket => 2;
 	
@@ -58,7 +58,7 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 
 	protected override Vector3 AdjustProjectileVelocity( Vector3 velocity )
 	{
-		return velocity + Vector3.Up * 300f;
+		return velocity + Vector3.Up * 400f;
 	}
 
 	protected override void OnCreateProjectile( GrenadeProjectile projectile )
