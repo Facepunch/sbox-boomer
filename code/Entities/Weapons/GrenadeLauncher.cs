@@ -73,6 +73,6 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 
 	protected override void OnProjectileHit( GrenadeProjectile projectile, TraceResult trace )
 	{
-		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 400f, 100f, 1f );
+		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 140f, 100f, 1f );
 	}
 }
