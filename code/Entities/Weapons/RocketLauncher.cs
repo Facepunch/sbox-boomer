@@ -9,7 +9,10 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
+	
+	public override float ProjectileRadius => 2f;
 	public override string TrailEffect => "particles/gameplay/weapons/rocketlauncher/trail_1.vpcf";
+	public override float Spread => 0.0f;
 	public override float Gravity => 0f;
 	public override float Speed => 1800f;
 	public override bool CanZoom => true;
