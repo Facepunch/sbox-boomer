@@ -44,6 +44,10 @@
       "NoWarn": "1701;1702;1591;",
       "ReleaseMode": "Release"
     },
-    "GameCategory": "Shooter"
+    "GameCategory": "Shooter",
+    "ControlModes": {
+      "Keyboard": true,
+      "Gamepad": true
+    }
   }
 }
