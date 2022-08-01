@@ -55,7 +55,7 @@ public partial class BoomerPlayer : Player
 		ConsecutiveKills = 0;
 		SpreeKills = 0;
 		Health = 100;
-		Armour = 0;
+		Armour = 100;
 
 		EnableAllCollisions = true;
 		EnableDrawing = true;
