@@ -11,7 +11,7 @@ partial class RailGun : DeathmatchWeapon
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override bool CanZoom => true;
-	public override float PrimaryRate => .75f;
+	public override float PrimaryRate => .6f;
 	public override int Bucket => 4;
 	public override AmmoType AmmoType => AmmoType.Rails;
 
