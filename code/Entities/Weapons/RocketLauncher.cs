@@ -16,7 +16,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public override float Gravity => 0f;
 	public override float Speed => 1800f;
 	public override bool CanZoom => true;
-	public override float PrimaryRate => 1.4f;
+	public override float PrimaryRate => 1.1f;
 	public override int Bucket => 3;
 	public override AmmoType AmmoType => AmmoType.Rockets;
 
