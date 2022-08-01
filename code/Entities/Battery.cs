@@ -6,7 +6,7 @@
 [Title(  "Battery" )]
 partial class Battery : AnimatedEntity, IRespawnableEntity
 {
-	public static readonly Model WorldModel = Model.Load( "models/dm_battery.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/armour/armourkit.vmdl" );
 	
 	public int RespawnTime = 30;
 	public override void Spawn()
@@ -15,7 +15,7 @@ partial class Battery : AnimatedEntity, IRespawnableEntity
 
 		Model = WorldModel;
 
-		PhysicsEnabled = false;
+		PhysicsEnabled = true;
 		UsePhysicsCollision = true;
 
 		Tags.Add( "trigger" );

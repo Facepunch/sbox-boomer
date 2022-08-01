@@ -55,7 +55,7 @@ public partial class BoomerPlayer : Player
 		ConsecutiveKills = 0;
 		SpreeKills = 0;
 		Health = 100;
-		Armour = 100;
+		Armour = 50;
 
 		EnableAllCollisions = true;
 		EnableDrawing = true;
@@ -205,6 +205,20 @@ public partial class BoomerPlayer : Player
 		coffin.PhysicsBody.Velocity = Velocity + Rotation.Forward * 100;
 
 		coffin.Populate( this );
+
+		if ( IsServer )
+			using ( Prediction.Off() )
+			{
+				for ( int i = 0; i < 2; i++ )
+				{
+					var armour = new Battery
+					{
+						Position = Position = Position + Vector3.Up * 30
+					};
+
+					armour.PhysicsBody.Velocity = Owner.EyeRotation.Up * 200.0f + Owner.Velocity + Vector3.Random * 100.0f;
+				}
+			}
 
 		Inventory.DeleteContents();
 
