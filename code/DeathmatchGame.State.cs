@@ -48,10 +48,12 @@ partial class DeathmatchGame : Game
 	{
 		GameState = GameStates.Warmup;
 		StateTimer = WarmupTime;
+		CountDownPlayed = false;
 		await WaitStateTimer();
 
 		GameState = GameStates.Live;
 		StateTimer = GameTime;
+		CountDownPlayed = false;
 		FreshStart();
 		await WaitStateTimer();
 

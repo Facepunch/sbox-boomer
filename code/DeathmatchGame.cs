@@ -333,5 +333,4 @@ partial class DeathmatchGame : Game
 			Render.Draw2D.DrawText( new Rect( pos.Value ), str );
 		}
 	}
-
 }
