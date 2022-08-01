@@ -106,7 +106,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	protected override void OnProjectileHit( RocketProjectile projectile, TraceResult trace )
 	{
-		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 180f, 30f, 1f, 0.3f );
+		DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 180f, 80f, 1f, 0.3f );
 
 		if ( IsClient )
 		{
