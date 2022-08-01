@@ -46,8 +46,8 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 		if ( tr.Hit )
 		{
 			var flGroundFactor = 0.75f;
-			var flMul = 100f * 1.8f;
-			var forMul = 585f * 1.4f;
+			var flMul = 400f * 1.8f;
+			var forMul = 1085f * 1.4f;
 
 			if ( Owner is BoomerPlayer player )
 			{
