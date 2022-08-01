@@ -147,6 +147,7 @@ partial class LightningGun : DeathmatchWeapon
 
 		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 5000f )
 			.UseHitboxes()
+			.WithoutTags( "trigger" )
 			.Ignore( Owner )
 			.Ignore( this )
 			.Size( 1.0f )
