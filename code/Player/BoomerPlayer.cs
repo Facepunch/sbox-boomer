@@ -504,6 +504,8 @@ public partial class BoomerPlayer : Player
 		if ( LifeState == LifeState.Dead )
 			return;
 
+		var attacker = info.Attacker as BoomerPlayer;
+
 		LastDamage = info;
 
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun )
@@ -517,8 +519,11 @@ public partial class BoomerPlayer : Player
 		LastAttacker = info.Attacker;
 		LastAttackerWeapon = info.Weapon;
 
+
 		if ( IsServer && Armour > 0 )
 		{
+			var lastArmor = Armour;
+			
 			Armour -= info.Damage;
 
 			if ( Armour < 0 )
@@ -530,7 +535,16 @@ public partial class BoomerPlayer : Player
 			{
 				info.Damage = 0;
 			}
+			
 			OnArmourDmgRpc( To.Single( Client ) );
+
+			if ( attacker.IsValid() )
+			{
+				if ( attacker != this )
+				{
+					attacker.DidArmorDamage( To.Single( attacker ), info.Position, lastArmor - Armour, Armour.LerpInverse( 100, 0 ) );
+				}
+			}
 		}
 
 		if ( Health > 0 && info.Damage > 0 )
@@ -544,7 +558,7 @@ public partial class BoomerPlayer : Player
 			OnDmgRpc( To.Single( Client ) );
 		}
 
-		if ( info.Attacker is BoomerPlayer attacker )
+		if ( attacker.IsValid() )
 		{
 			if ( attacker != this )
 			{
@@ -604,6 +618,57 @@ public partial class BoomerPlayer : Player
 	public Particles DMGParticle { get; set; }
 
 	public float LastDamageDealt { get; set; }
+
+	[ClientRpc]
+	public void DidArmorDamage( Vector3 pos, float amount, float armorinv )
+	{
+		Sound.FromScreen( "hitsound" )
+			.SetPitch( 1 + armorinv * 1 );
+
+		HitIndicator.Current?.OnHit( pos, amount );
+
+		Log.Info( $"You Did {amount} Armour Damage" );
+
+		LastDamageDealt += amount;
+
+		ResetDmgCount = 0;
+
+		var number = amount;
+
+		if ( amount < 10 )
+		{
+			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/armour_dmg_number.vpcf", pos );
+
+			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
+
+		}
+		else if ( amount < 100 )
+		{
+			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/armour_dmg_number.vpcf", pos );
+
+			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
+			DMGParticle.SetPositionComponent( 22, 1, 1 );
+
+			number /= 10;
+			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
+		}
+		else
+		{
+			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/armour_dmg_number.vpcf", pos );
+
+			DMGParticle.SetPositionComponent( 21, 2, number % 1 );
+			DMGParticle.SetPositionComponent( 22, 2, 1 );
+
+			number /= 10;
+			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
+			DMGParticle.SetPositionComponent( 22, 1, 1 );
+
+			number /= 10;
+
+			DMGParticle.SetPositionComponent( 21, 0, number % 100 );
+			DMGParticle.SetPositionComponent( 22, 0, 1 );
+		}
+	}
 
 	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv )
