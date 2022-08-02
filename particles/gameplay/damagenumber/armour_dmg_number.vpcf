@@ -319,7 +319,7 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/gameplay/damagenumber/dmg_number_a.vpcf"
+			m_ChildRef = resource:"particles/gameplay/damagenumber/armour_dmg_number_a.vpcf"
 		},
 	]
 }

@@ -28,11 +28,13 @@ partial class Shotgun : DeathmatchWeapon
 	{
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
-
-		if ( !TakeAmmo( 1 ) )
+		if ( !DeathmatchGame.UnlimitedAmmo )
 		{
-			DryFire();
-			return;
+			if ( !TakeAmmo( 1 ) )
+			{
+				DryFire();
+				return;
+			}
 		}
 
 		(Owner as AnimatedEntity).SetAnimParameter( "b_attack", true );

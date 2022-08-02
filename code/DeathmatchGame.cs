@@ -21,6 +21,9 @@ partial class DeathmatchGame : Game
 
 	public static bool HasFirstPlayerDied { get; set; }
 
+	[ConVar.Replicated( "bm_unlimitedammo" )]
+	public static bool UnlimitedAmmo { get; set; } = false;
+
 	public DeathmatchGame()
 	{
 		//

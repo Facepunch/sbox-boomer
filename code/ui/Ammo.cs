@@ -17,7 +17,7 @@ public partial class AmmoVital : Panel
 		Current = this;
 
 		Icon = Add.Image( "ui/vitals/ammo.png", "ammoicon" );
-		AmmoInv = Add.Label( "100", "ammoinv" );
+		AmmoInv = Add.Label( "", "ammoinv" );
 
 		AmmoInv.BindClass( "low", () => Player?.SinceAmmoWentDown <= 0.1f );
 		AmmoInv.BindClass( "gained", () => Player?.SinceAmmoWentUp <= 0.1f );
@@ -34,7 +34,15 @@ public partial class AmmoVital : Panel
 		if ( !weapon.IsValid() ) return;
 
 		var inv = weapon.AvailableAmmo();
-		AmmoInv.Text = $"{inv}";
-		AmmoInv.SetClass( "active", inv >= 0 );
+		if ( DeathmatchGame.UnlimitedAmmo )
+		{
+			AmmoInv.Text = $"∞";
+			//AmmoInv.SetClass( "active", inv >= 0 );
+		}
+		else
+		{
+			AmmoInv.Text = $"{inv}";
+			AmmoInv.SetClass( "active", inv >= 0 );
+		}
 	}
 }

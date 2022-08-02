@@ -11,15 +11,16 @@ partial class StartingWeapons : Entity
 	public StartingWeapons()
 	{
 		Instance = this;
-	}
 
-	[Property] public bool Crowbar { get; set; }
+	}
 	[Property] public bool Shotgun { get; set; }
 	[Property] public bool Nailgun { get; set; }
 	[Property] public bool GrenadeLauncher { get; set; }
 	[Property] public bool RocketLauncher { get; set; }
 	[Property] public bool RailGun { get; set; }
 	[Property] public bool LightningGun { get; set; }
+	
+	[Property] public bool UnlimitedAmmo { get; set; }
 
 	[Property] public int BuckshotAmmo { get; set; } = 32;
 	[Property] public int NailsAmmo { get; set; } = 128;
@@ -28,13 +29,18 @@ partial class StartingWeapons : Entity
 	[Property] public int RailAmmo { get; set; } = 24;
 	[Property] public int LightningAmmo { get; set; } = 300;
 
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		if ( UnlimitedAmmo )
+		{
+			DeathmatchGame.UnlimitedAmmo = UnlimitedAmmo;
+		}
+	}
+
 	public void SetupPlayer( BoomerPlayer player )
 	{
-		if ( Crowbar )
-		{
-			player.Inventory.Add( new Crowbar() );
-		}
-
 		if ( Shotgun )
 		{
 			player.Inventory.Add( new Shotgun() );

@@ -19,10 +19,9 @@
     "MaxPlayers": 12,
     "GameNetworkType": "Multiplayer",
     "MapList": [
-      "facepunch.bm_dockyard",
-      "gmodn.ians_boomer"
+      "facepunch.bm_dockyard"
     ],
-    "MapSelect": "Official",
+    "MapSelect": "Tagged",
     "PerMapRanking": false,
     "LeaderboardType": "Descending",
     "RankType": "Increment",

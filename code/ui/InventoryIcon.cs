@@ -28,8 +28,11 @@ class InventoryIcon : Panel
 
 		if ( !Weapon.IsValid() || Weapon.Owner != Local.Pawn )
 			Delete( true );
-
-		Value.Text = $"{Weapon.AvailableAmmo()}";
+		if(DeathmatchGame.UnlimitedAmmo)
+			Value.Text = "∞";
+		else
+			Value.Text = Weapon.AvailableAmmo().ToString();
+	//	Value.Text = $"{Weapon.AvailableAmmo()}";
 		
 	}
 }

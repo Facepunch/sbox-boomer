@@ -26,16 +26,19 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 
 	public override void AttackPrimary()
 	{
-		if ( !TakeAmmo( 1 ) )
+		if ( !DeathmatchGame.UnlimitedAmmo )
 		{
-			DryFire();
-
-			if ( AvailableAmmo() > 0 )
+			if ( !TakeAmmo( 1 ) )
 			{
-				Reload();
-			}
+				DryFire();
 
-			return;
+				if ( AvailableAmmo() > 0 )
+				{
+					Reload();
+				}
+
+				return;
+			}
 		}
 
 		var tr = Trace.Ray( Owner.EyePosition + new Vector3( 0, 0, -10 ), Owner.EyePosition + new Vector3( 0, 0, -10 ) + Owner.EyeRotation.Forward * 48 )

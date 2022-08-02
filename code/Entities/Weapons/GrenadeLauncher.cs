@@ -32,11 +32,14 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 		TimeSinceSecondaryAttack = 0;
 
 		if ( Owner is not BoomerPlayer player ) return;
-
-		if ( !TakeAmmo( 1 ) )
+		
+		if ( !DeathmatchGame.UnlimitedAmmo )
 		{
-			Reload();
-			return;
+			if ( !TakeAmmo( 1 ) )
+			{
+				Reload();
+				return;
+			}
 		}
 
 		PlaySound( "gl.shoot" );
