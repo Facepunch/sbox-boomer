@@ -30,7 +30,7 @@ partial class BoomerController : BasePlayerController
 		mechanics.Add( new Walk( this ) );
 		mechanics.Add( new AirMove( this ) );
 		mechanics.Add( new WaterMove( this ) );
-		mechanics.Add( new WallRun( this ) );
+		//mechanics.Add( new WallRun( this ) );
 		mechanics.Add( new LadderMove( this ) );
 		//mechanics.Add( new VaultMove( this ) );
 		//mechanics.Add( new SideBoost( this ) );
