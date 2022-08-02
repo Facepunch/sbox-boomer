@@ -96,10 +96,22 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 
 		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
 		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.2f + lastAttack.LerpInverse( 1.2f, 0 ) * 0.5f );
+		draw.Color = color.WithAlpha( 0.4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		var shootEase = 1 + Easing.BounceIn( lastAttack.LerpInverse( 0.3f, 0.0f ) );
-		draw.Ring( center, 15 * shootEase, 14 * shootEase );
+		// outer lines
+		{
+			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.1f ) );
+			var length = 10.0f + shootEase * 2.0f;
+			var gap = 8.0f + shootEase * 10.0f;
+			var thickness = 2.0f;
+
+			draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 0, gap ) );
+			draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 0, gap ) );
+
+			draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 0 ) );
+			draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 0 ) );
+
+		}
 	}
 
 	protected override void OnProjectileHit( BulletDropProjectile projectile, TraceResult trace )

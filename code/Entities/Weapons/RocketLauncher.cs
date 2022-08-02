@@ -77,12 +77,12 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
 		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.2f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		draw.Color = color.WithAlpha( 1.8f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
 		// center circle
 		{
 			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
-			var length = 2.0f + shootEase * 2.0f;
+			var length = 2f + shootEase * 2.0f;
 			draw.Circle( center, length );
 		}
 
@@ -92,15 +92,15 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 		// outer lines
 		{
 			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.0f ) );
-			var length = 3.0f + shootEase * 2.0f;
-			var gap = 30.0f + shootEase * 50.0f;
+			var length = 10.0f + shootEase * 2.0f;
+			var gap = 8.0f + shootEase * 50.0f;
 			var thickness = 2.0f;
 
-			draw.Line( thickness, center + Vector2.Up * gap + Vector2.Left * length, center + Vector2.Up * gap - Vector2.Left * length );
-			draw.Line( thickness, center - Vector2.Up * gap + Vector2.Left * length, center - Vector2.Up * gap - Vector2.Left * length );
-
-			draw.Line( thickness, center + Vector2.Left * gap + Vector2.Up * length, center + Vector2.Left * gap - Vector2.Up * length );
-			draw.Line( thickness, center - Vector2.Left * gap + Vector2.Up * length, center - Vector2.Left * gap - Vector2.Up * length );
+			draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 0, gap) );
+			draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 0, gap) );
+			
+			draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 0 ) );
+			draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 0 ) );
 		}
 	}
 

@@ -57,6 +57,31 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 		anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 
+	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
+	{
+		var draw = Render.Draw2D;
+
+		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
+		draw.BlendMode = BlendMode.Lighten;
+		draw.Color = color.WithAlpha( .4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+
+		// outer lines
+		{
+			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.0f ) );
+			var length = 10.0f + shootEase * 2.0f;
+			var gap = 8.0f + shootEase * 50.0f;
+			var thickness = 2.0f;
+
+
+			draw.Line( thickness, center - Vector2.Up * gap * 3f + Vector2.Left * length * 2.5f, center - Vector2.Up * gap * 3f - Vector2.Left * length * 2.5f );
+			draw.Line( thickness, center - Vector2.Up * gap * 1.5f + Vector2.Left * length * 2f, center - Vector2.Up * gap * 1.5f - Vector2.Left * length * 2f );
+			draw.Line( thickness, center - Vector2.Up + Vector2.Left * length * 1.5f, center - Vector2.Up - Vector2.Left * length * 1.5f );
+			draw.Line( thickness, center + Vector2.Up * gap * 1.5f + Vector2.Left * length * 1f, center + Vector2.Up * gap * 1.5f - Vector2.Left * length * 1f );
+			draw.Line( thickness, center + Vector2.Up * gap * 3f + Vector2.Left * length * .5f, center + Vector2.Up * gap * 3f - Vector2.Left * length * .5f );
+
+		}
+	}
+
 	protected override Vector3 AdjustProjectileVelocity( Vector3 velocity )
 	{
 		return velocity + Vector3.Up * 400f;
