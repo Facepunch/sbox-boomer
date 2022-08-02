@@ -505,7 +505,7 @@ public partial class BoomerPlayer : Player
 
 		LastDamage = info;
 
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
+		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun )
 		{
 			info.Damage *= 2.0f;
 		}
