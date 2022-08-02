@@ -16,7 +16,7 @@ namespace Boomer.Movement
 
 		public float TimeUntilNextGrab;
 
-		public float PlayerRadius => 17.0f;
+		public float PlayerRadius => 24.0f;
 		public float LedgeGrabTime => .35f;
 
 		private Vector3 PreVelocity;
