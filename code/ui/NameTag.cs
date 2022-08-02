@@ -43,7 +43,7 @@ internal class NameTagComponent : EntityComponent<BoomerPlayer>
 	{
 		foreach ( var player in Sandbox.Entity.All.OfType<BoomerPlayer>() )
 		{
-			if ( player.IsLocalPawn && player.IsFirstPersonMode )
+			if ( player.IsLocalPawn && player.IsFirstPersonMode || BoomerCamera.Target == player )
 			{
 				var c = player.Components.Get<NameTagComponent>();
 				c?.Remove();
