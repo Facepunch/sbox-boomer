@@ -1,4 +1,6 @@
-﻿public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : BulletDropProjectile, new()
+﻿namespace Boomer;
+
+public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : BulletDropProjectile, new()
 {
 	public virtual string ProjectileModel => "";
 	public virtual float ProjectileRadius => 10f;

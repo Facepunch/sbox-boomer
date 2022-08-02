@@ -1,4 +1,7 @@
 ﻿using Boomer.Movement;
+
+namespace Boomer;
+
 /// <summary>
 /// Gives 25 health points.
 /// </summary>

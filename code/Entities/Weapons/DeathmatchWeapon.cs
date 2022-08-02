@@ -1,4 +1,6 @@
-﻿public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
+﻿namespace Boomer;
+
+public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 {
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
 	public virtual int Bucket => 1;

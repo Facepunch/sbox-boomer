@@ -1,5 +1,6 @@
-﻿using Boomer;
-using Boomer.Movement;
+﻿using Boomer.Movement;
+
+namespace Boomer;
 
 public partial class BoomerPlayer : Player
 {

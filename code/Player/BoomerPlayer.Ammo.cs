@@ -1,4 +1,6 @@
-﻿public partial class BoomerPlayer
+﻿namespace Boomer;
+
+public partial class BoomerPlayer
 {
 	[Net, Local]
 	public IList<int> Ammo { get; set; }

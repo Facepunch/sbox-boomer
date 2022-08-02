@@ -1,5 +1,7 @@
 ﻿using Sandbox.UI;
 
+namespace Boomer.UI;
+
 public class InventoryBar : Panel
 {
 	public bool IsOpen { get; private set; }

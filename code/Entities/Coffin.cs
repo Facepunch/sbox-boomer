@@ -1,4 +1,5 @@
-﻿
+﻿namespace Boomer;
+
 partial class Coffin : ModelEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/dm_coffin.vmdl" );

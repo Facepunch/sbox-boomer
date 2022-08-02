@@ -1,6 +1,8 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
 
+namespace Boomer.UI;
+
 public class InventoryColumn : Panel
 {
 	public int Column;

@@ -1,18 +1,7 @@
-﻿global using Sandbox;
-global using SandboxEditor;
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Threading.Tasks;
-using Boomer.Movement;
-using Boomer.UI;
+﻿namespace Boomer;
 
-/// <summary>
-/// This is the heart of the gamemode. It's responsible for creating the player and stuff.
-/// </summary>
 partial class DeathmatchGame : Game
 {
-
 	[Net]
 	private bool CountDownPlayed { get; set; } = false;
 
@@ -69,7 +58,7 @@ partial class DeathmatchGame : Game
 		Sound.FromScreen( "Play" );
 	}
 
-		private async Task TenCountDown()
+	private async Task TenCountDown()
 	{
 		Sound.FromScreen( "ten" );
 		await Task.Delay( 1000 );
@@ -92,6 +81,5 @@ partial class DeathmatchGame : Game
 		Sound.FromScreen( "one" );
 		await Task.Delay( 2000 );
 		Sound.FromScreen( "EndOfRound" );
-
 	}
 }

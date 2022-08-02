@@ -1,5 +1,4 @@
-﻿
-
+﻿namespace Boomer;
 
 partial class DeathmatchGame : Game
 {

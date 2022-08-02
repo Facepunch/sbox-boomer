@@ -1,4 +1,6 @@
-﻿public partial class BoomerPlayer
+﻿namespace Boomer;
+
+public partial class BoomerPlayer
 {
 	public ClothingContainer Clothing { get; protected set; }
 

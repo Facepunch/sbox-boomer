@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿namespace Boomer;
+
+/// <summary>
 /// A wall-mounted device that gives a limited amount of health and armour.
 /// </summary>
 [Library( "dm_chargerstation" ), HammerEntity]

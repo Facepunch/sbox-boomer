@@ -1,4 +1,5 @@
-﻿
+﻿namespace Boomer;
+
 [Library( "dm_crowbar" ), HammerEntity]
 [EditorModel( "models/dm_crowbar.vmdl" )]
 [Title(  "Crowbar" ), Category( "Weapons" )]

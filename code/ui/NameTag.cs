@@ -1,6 +1,8 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
 
+namespace Boomer;
+
 /// <summary>
 /// When a player is within radius of the camera we add this to their entity.
 /// We remove it again when they go out of range.

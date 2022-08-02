@@ -1,4 +1,6 @@
-﻿[Library( "dm_nailgun" ), HammerEntity]
+﻿namespace Boomer;
+
+[Library( "dm_nailgun" ), HammerEntity]
 [EditorModel( "weapons/rust_smg/rust_smg.vmdl" )]
 [Title( "NailGun" ), Category( "Weapons" )]
 partial class NailGun : BulletDropWeapon<BulletDropProjectile>

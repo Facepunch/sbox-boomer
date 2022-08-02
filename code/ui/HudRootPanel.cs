@@ -1,5 +1,6 @@
-﻿using Boomer.UI;
-using Sandbox.UI;
+﻿using Sandbox.UI;
+
+namespace Boomer.UI;
 
 public class HudRootPanel : RootPanel
 {

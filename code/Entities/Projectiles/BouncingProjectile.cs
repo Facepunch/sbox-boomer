@@ -1,4 +1,5 @@
-﻿[Library]
+﻿namespace Boomer;
+
 public partial class BouncingProjectile : BulletDropProjectile
 {
 	public float BounceSoundMinimumVelocity { get; set; }

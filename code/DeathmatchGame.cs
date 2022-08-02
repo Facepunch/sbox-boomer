@@ -4,8 +4,12 @@ global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading.Tasks;
+global using System.ComponentModel.DataAnnotations;
+
 using Boomer.Movement;
 using Boomer.UI;
+
+namespace Boomer;
 
 /// <summary>
 /// This is the heart of the gamemode. It's responsible for creating the player and stuff.
@@ -68,7 +72,7 @@ partial class DeathmatchGame : Game
 		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has joined", $"avatar:{cl.PlayerId}" );
 
 		var player = new BoomerPlayer();
-		player.UpdateClothes( cl );
+		player.UpdateClothes( To.Single( cl ) );
 		player.Respawn();
 		
 		player.PlayerColor = Color.Random;

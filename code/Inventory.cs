@@ -1,10 +1,11 @@
-﻿partial class DmInventory : BaseInventory
+﻿namespace Boomer;
+
+partial class DmInventory : BaseInventory
 {
 	public int RespawnTime = 30;
 
 	public DmInventory( Player player ) : base( player )
 	{
-
 	}
 
 	public override bool Add( Entity ent, bool makeActive = false )

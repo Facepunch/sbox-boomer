@@ -1,4 +1,6 @@
-﻿[Library( "dm_rocketlauncher" ), HammerEntity]
+﻿namespace Boomer;
+
+[Library( "dm_rocketlauncher" ), HammerEntity]
 [EditorModel( "weapons/rust_crossbow/rust_crossbow.vmdl" )]
 [Title( "RocketLauncher" ), Category( "Weapons" )]
 public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>

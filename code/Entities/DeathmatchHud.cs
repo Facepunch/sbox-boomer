@@ -1,4 +1,6 @@
-﻿public partial class DeathmatchHud : HudEntity<HudRootPanel>
+﻿namespace Boomer.UI;
+
+public partial class DeathmatchHud : HudEntity<HudRootPanel>
 {
 	[ClientRpc]
 	public void OnPlayerDied( BoomerPlayer player )

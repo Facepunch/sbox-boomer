@@ -84,6 +84,11 @@ public class Scoreboard : Panel
 		SettingsMenu.SetOpen( true );
 	}
 
+	public void ToggleSpectator()
+	{
+		DeathmatchGame.ToggleSpectator();
+	}
+
 	[Event.BuildInput]
 	public void OnBuildInput( InputBuilder bn )
 	{

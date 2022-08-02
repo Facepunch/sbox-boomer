@@ -1,5 +1,8 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
+
+namespace Boomer;
+
 public class LastDamage : Panel
 {
 	public Label DmgValue;
@@ -14,11 +17,7 @@ public class LastDamage : Panel
 		var player = Local.Pawn as BoomerPlayer;
 		if ( player == null ) return;
 
-			SetClass( "nodmg", player.LastDamageDealt == 0 );
-
-			DmgValue.Text = $"-{(int)player.LastDamageDealt}";
-
-	//	DmgValue.Text = $"LOL";
-
+		SetClass( "nodmg", player.LastDamageDealt == 0 );
+		DmgValue.Text = $"-{(int)player.LastDamageDealt}";
 	}
 }

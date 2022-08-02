@@ -10,6 +10,8 @@ public partial class HealthHud : Panel
 	public Label Total;
 	
 	public List<Panel> Segments;
+
+	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
 	
 	public static HealthHud Current { get; private set; }
 	public HealthHud()
@@ -30,8 +32,9 @@ public partial class HealthHud : Panel
 
 	public override void Tick()
 	{
-		var player = Local.Pawn as BoomerPlayer;
-		if ( player == null ) return;
+		var player = Player;
+		if ( !player.IsValid() ) 
+			return;
 
 		var col = ColorConvert.HSLToRGB((int)player.Health, 1.0f, 0.5f );
 
@@ -70,6 +73,8 @@ public class ArmourHud : Panel
 
 	public List<Panel> ArmourSegments;
 
+	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
+
 	public static ArmourHud Current { get; private set; }
 
 	public ArmourHud()
@@ -91,8 +96,9 @@ public class ArmourHud : Panel
 
 	public override void Tick()
 	{
-		var player = Local.Pawn as BoomerPlayer;
-		if ( player == null ) return;
+		var player = Player;
+		if ( !player.IsValid() )
+			return;
 
 		Value.Text = $"{player.Armour.CeilToInt()}";
 

@@ -1,5 +1,6 @@
-﻿
-using Sandbox.UI;
+﻿using Sandbox.UI;
+
+namespace Boomer.UI;
 
 [UseTemplate]
 class MapVotePanel : Panel

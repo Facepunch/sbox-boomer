@@ -1,4 +1,7 @@
-﻿
+﻿using Boomer.UI;
+
+namespace Boomer;
+
 partial class MapVoteEntity : Entity
 {
 	static MapVoteEntity Current;

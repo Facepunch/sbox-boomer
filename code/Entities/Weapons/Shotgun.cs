@@ -1,5 +1,7 @@
 ﻿using Boomer.Movement;
 
+namespace Boomer;
+
 [Library( "dm_shotgun" ), HammerEntity]
 [EditorModel( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" )]
 [Title( "Shotgun" ), Category( "Weapons" )]

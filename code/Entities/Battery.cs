@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿namespace Boomer;
+
+/// <summary>
 /// Gives 25 Armour
 /// </summary>
 [Library( "dm_battery" ), HammerEntity]

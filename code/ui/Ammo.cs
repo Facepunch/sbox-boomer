@@ -1,6 +1,8 @@
 ﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
 
+namespace Boomer;
+
 public partial class AmmoVital : Panel
 {
 	public Image Icon;
@@ -8,7 +10,7 @@ public partial class AmmoVital : Panel
 
 	public static AmmoVital Current { get; private set; }
 
-	protected BoomerPlayer Player => Local.Pawn as BoomerPlayer;
+	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
 
 	public AmmoVital()
 	{
@@ -21,17 +23,15 @@ public partial class AmmoVital : Panel
 		AmmoInv.BindClass( "gained", () => Player?.SinceAmmoWentUp <= 0.1f );
 	}
 
-	int weaponHash;
-
 	public override void Tick()
 	{
-		var player = Local.Pawn as Player;
-		if ( player == null ) return;
+		var player = Player;
+		if ( !player.IsValid() ) return;
 
 		var weapon = player.ActiveChild as DeathmatchWeapon;
-		SetClass( "active", weapon != null );
+		SetClass( "active", weapon.IsValid() );
 
-		if ( weapon == null ) return;
+		if ( !weapon.IsValid() ) return;
 
 		var inv = weapon.AvailableAmmo();
 		AmmoInv.Text = $"{inv}";

@@ -1,4 +1,8 @@
 ﻿using Boomer.Movement;
+using Boomer.UI;
+
+namespace Boomer;
+
 partial class DmViewModel : BaseViewModel
 {
 	bool ShouldBob = true;

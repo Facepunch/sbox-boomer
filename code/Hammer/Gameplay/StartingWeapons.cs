@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿namespace Boomer;
 
 [Library( "shooter_startingweapons", Description = "Starting Weapons" )]
 [EditorSprite( "editor/ent_logic.vmat" )]

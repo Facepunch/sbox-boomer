@@ -1,4 +1,6 @@
-﻿public partial class BoomerPlayer
+﻿namespace Boomer;
+
+public partial class BoomerPlayer
 {
 	// TODO - make ragdolls one per entity
 	// TODO - make ragdolls dissapear after a load of seconds
