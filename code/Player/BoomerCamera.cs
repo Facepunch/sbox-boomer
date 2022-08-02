@@ -17,8 +17,8 @@ internal class BoomerCamera : CameraMode
 		}
 	}
 
-	static bool IsSpectator => Local.Pawn is SpectatorPawn;
-	static bool IsLocal => Target.IsLocalPawn;
+	public static bool IsSpectator => !Target.IsLocalPawn;
+	public static bool IsLocal => !IsSpectator;
 
 	static BaseViewModel vm;
 	static DeathmatchWeapon cachedWeapon;

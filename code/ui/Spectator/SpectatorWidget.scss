@@ -1,0 +1,33 @@
+$yellow: #ff0;
+$orange: #f70;
+$yellow2: #FAB002;
+
+SpectatorWidget {
+    position: absolute;
+    width: 512px;
+    top: 0px;
+    left: 0px;
+    padding: 16px;
+    flex-direction: column;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 20px #f70a;
+
+    label {
+        color: $yellow2;
+    }
+
+    .title {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .target {
+        font-size: 24px;
+    }
+
+    opacity: 0;
+
+    &.open {
+        opacity: 1;
+    }
+}

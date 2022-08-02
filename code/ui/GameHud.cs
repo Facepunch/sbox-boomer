@@ -26,6 +26,5 @@ internal class GameHud : Panel
 		Timer.Text = span.ToString( @"hh\:mm\:ss" );
 		State.Text = game.GameState.ToString();
 	}
-
 }
 
