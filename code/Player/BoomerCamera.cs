@@ -30,8 +30,11 @@ internal class BoomerCamera : CameraMode
 			vm?.Delete();
 			vm = null;
 
-			weapon?.CreateViewModel();
-			vm = weapon.ViewModelEntity;
+			if ( weapon.IsValid() )
+			{
+				weapon?.CreateViewModel();
+				vm = weapon.ViewModelEntity;
+			}
 		}
 		else
 		{
