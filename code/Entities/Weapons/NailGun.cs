@@ -40,20 +40,21 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 			.UseHitboxes()
 			.Ignore( Owner )
 			.Ignore( this )
-			.Size( 4.0f )
+			.Size( 12.0f )
 			.Run();
 
 		if ( tr.Hit )
 		{
 			var flGroundFactor = 0.75f;
 			var flMul = 400f * 1.8f;
-			var forMul = 1085f * 1.4f;
+			var forMul = 110f * 1.4f;
 
 			if ( Owner is BoomerPlayer player )
 			{
-				player.Velocity = player.EyeRotation.Backward * forMul * flGroundFactor;
-				player.Velocity = player.Velocity.WithZ( flMul * flGroundFactor );
-				player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
+				player.Velocity += player.EyeRotation.Backward * forMul * flGroundFactor;
+			//	This just turns the nail climbing into rocket jumping
+			//	player.Velocity = player.Velocity.WithZ( flMul * flGroundFactor );
+			//	player.Velocity -= new Vector3( 0, 0, 800f * 0.5f ) * Time.Delta;
 			}
 
 			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, 50, 1 )
