@@ -42,11 +42,11 @@ partial class Shotgun : DeathmatchWeapon
 		PlaySound( "rust_pumpshotgun.shoot" );
 		if ( Zoomed )
 		{
-			ShootBullet( 0.025f, 0.3f, 8.0f, 2.0f, 8 );
+			ShootBullet( 0.025f, 0.3f, 10.0f, 15.0f, 8 );
 		}
 		else
 		{
-			ShootBullet( 0.2f, 0.3f, 4.0f, 2.0f, 14 );
+			ShootBullet( 0.2f, 0.3f, 6.0f, 15.0f, 14 );
 		}
 	}
 
