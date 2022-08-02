@@ -89,16 +89,6 @@ public class Scoreboard : Panel
 		DeathmatchGame.ToggleSpectator();
 	}
 
-	[Event.BuildInput]
-	public void OnBuildInput( InputBuilder bn )
-	{
-		if ( Cursor )
-		{
-			bn.ClearButton( InputButton.PrimaryAttack );
-			bn.ClearButton( InputButton.SecondaryAttack );
-		}
-	}
-
 }
 
 public class ScoreboardEntry : Sandbox.UI.ScoreboardEntry
