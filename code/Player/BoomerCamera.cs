@@ -17,7 +17,7 @@ internal class BoomerCamera : CameraMode
 		}
 	}
 
-	public static bool IsSpectator => !Target.IsLocalPawn;
+	public static bool IsSpectator => Target.IsValid() && !Target.IsLocalPawn;
 	public static bool IsLocal => !IsSpectator;
 
 	static BaseViewModel vm;
