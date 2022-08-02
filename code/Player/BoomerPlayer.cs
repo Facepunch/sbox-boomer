@@ -542,6 +542,7 @@ public partial class BoomerPlayer : Player
 			{
 				if ( attacker != this )
 				{
+					attacker.TimeSinceLastDamage = 0f;
 					attacker.DidArmorDamage( To.Single( attacker ), info.Position, lastArmor - Armour, Armour.LerpInverse( 100, 0 ) );
 				}
 			}
