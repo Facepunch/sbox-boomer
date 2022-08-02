@@ -254,7 +254,7 @@ public partial class BoomerPlayer : Player
 			attacker.PlaySoundFromScreen( To.Single( attacker ), "killsound" );
 
 
-			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 )
+			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 && LastDamage.Weapon is RailGun)
 			{
 				attacker.PlaySoundFromScreen( To.Single( attacker ), "headshot" );
 			}
