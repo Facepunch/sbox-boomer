@@ -74,7 +74,7 @@ partial class LightningGun : DeathmatchWeapon
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
-			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000f, bulletSize ) )
+			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 750f, bulletSize ) )
 			{
 				tr.Surface.DoBulletImpact( tr );
 
@@ -144,8 +144,8 @@ partial class LightningGun : DeathmatchWeapon
 		var forward = Owner.EyeRotation.Forward;
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0 * 0.25f;
 		forward = forward.Normal;
-
-		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 5000f )
+		
+		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 750f )
 			.UseHitboxes()
 			.WithoutTags( "trigger" )
 			.Ignore( Owner )
