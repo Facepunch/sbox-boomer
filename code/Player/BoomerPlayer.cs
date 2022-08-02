@@ -507,7 +507,7 @@ public partial class BoomerPlayer : Player
 
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun )
 		{
-			info.Damage *= 2.0f;
+			info.Damage = 100.0f;
 		}
 
 		this.ProceduralHitReaction( info );
