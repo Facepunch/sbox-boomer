@@ -216,7 +216,7 @@ public partial class BoomerPlayer : Player
 					{
 						Position = Position = Position + Vector3.Up * 30
 					};
-
+					armour.DeleteAsync( 60f );
 					armour.PhysicsBody.Velocity = Owner.EyeRotation.Up * 200.0f + Owner.Velocity + Vector3.Random * 100.0f;
 				}
 			}
@@ -564,7 +564,7 @@ public partial class BoomerPlayer : Player
 			if ( attacker != this )
 			{
 				attacker.TimeSinceLastDamage = 0f;
-				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ) );
+				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ), Armour );
 			}
 
 			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
@@ -621,7 +621,7 @@ public partial class BoomerPlayer : Player
 	public float LastDamageDealt { get; set; }
 
 	[ClientRpc]
-	public void DidArmorDamage( Vector3 pos, float amount, float armorinv )
+	public void DidArmorDamage( Vector3 pos, float amount, float armorinv)
 	{
 		Sound.FromScreen( "hitsound" )
 			.SetPitch( 1 + armorinv * 1 );
@@ -672,7 +672,7 @@ public partial class BoomerPlayer : Player
 	}
 
 	[ClientRpc]
-	public void DidDamage( Vector3 pos, float amount, float healthinv )
+	public void DidDamage( Vector3 pos, float amount, float healthinv, float armour )
 	{
 		Sound.FromScreen( "hitsound" )
 			.SetPitch( 1 + healthinv * 1 );
@@ -684,42 +684,44 @@ public partial class BoomerPlayer : Player
 		LastDamageDealt += amount;
 
 		ResetDmgCount = 0;
-
 		var number = amount;
-
-		if ( amount < 10 )
+		if ( armour == 0 )
 		{
-			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
+	
+			if ( amount < 10 )
+			{
+				DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
 
-			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
+				DMGParticle.SetPositionComponent( 21, 0, number % 10 );
 
-		}
-		else if ( amount < 100 )
-		{
-			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
+			}
+			else if ( amount < 100 )
+			{
+				DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
 
-			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
-			DMGParticle.SetPositionComponent( 22, 1, 1 );
+				DMGParticle.SetPositionComponent( 21, 1, number % 10 );
+				DMGParticle.SetPositionComponent( 22, 1, 1 );
 
-			number /= 10;
-			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
-		}
-		else
-		{
-			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
+				number /= 10;
+				DMGParticle.SetPositionComponent( 21, 0, number % 10 );
+			}
+			else
+			{
+				DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
 
-			DMGParticle.SetPositionComponent( 21, 2, number % 1 );
-			DMGParticle.SetPositionComponent( 22, 2, 1 );
-			
-			number /= 10;
-			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
-			DMGParticle.SetPositionComponent( 22, 1, 1 );
+				DMGParticle.SetPositionComponent( 21, 2, number % 1 );
+				DMGParticle.SetPositionComponent( 22, 2, 1 );
 
-			number /= 10;
+				number /= 10;
+				DMGParticle.SetPositionComponent( 21, 1, number % 10 );
+				DMGParticle.SetPositionComponent( 22, 1, 1 );
 
-			DMGParticle.SetPositionComponent( 21, 0, number % 100 );
-			DMGParticle.SetPositionComponent( 22, 0, 1 );
+				number /= 10;
 
+				DMGParticle.SetPositionComponent( 21, 0, number % 100 );
+				DMGParticle.SetPositionComponent( 22, 0, 1 );
+
+			}
 		}
 	}
 
