@@ -4,25 +4,28 @@ $yellow2: #FAB002;
 
 SpectatorWidget {
     position: absolute;
-    width: 512px;
+    width: 600px;
     top: 0px;
     left: 0px;
-    padding: 16px;
+    padding: 128px;
     flex-direction: column;
     text-transform: uppercase;
-    text-shadow: 0px 0px 20px #f70a;
+    font-family: Teko-SemiBold;
+    transform: skew(0deg, 5deg);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
     label {
         color: $yellow2;
     }
 
     .title {
-        font-size: 32px;
-        font-weight: 600;
+        font-size: 64px;
+        font-weight: bolder;
     }
 
     .target {
-        font-size: 24px;
+        font-size: 48px;
+        color: #55FF00;
     }
 
     opacity: 0;
