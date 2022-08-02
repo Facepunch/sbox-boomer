@@ -61,7 +61,7 @@ partial class LightningGun : DeathmatchWeapon
 		player.SetAnimParameter( "b_attack", true );
 
 		ShootEffects();
-		ShootBullet( 0.01f, 0.75f, 1f, 5.0f );
+		ShootBullet( 0.01f, 0.75f, 1f, 15.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
@@ -187,37 +187,7 @@ partial class LightningGun : DeathmatchWeapon
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
 		var draw = Render.Draw2D;
-
-
-		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
-		//draw.BlendMode = BlendMode.Lighten;
-		//draw.Color = color.WithAlpha( 0.2f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
-
-		//// outer lines
-		//{
-		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.4f, 0.0f ) );
-		//	var length = 10.0f;
-		//	var gap = 40.0f + shootEase * 50.0f;
-
-		//	gap -= zoomFactor * 20.0f;
-
-
-		//	draw.Line( 0, center + Vector2.Up * gap, length, center + Vector2.Up * (gap + length) );
-		//	draw.Line( 0, center - Vector2.Up * gap, length, center - Vector2.Up * (gap + length) );
-
-		//	draw.Color = draw.Color.WithAlpha( draw.Color.a * zoomFactor );
-
-		//	for ( int i = 0; i < 4; i++ )
-		//	{
-		//		gap += 40.0f;
-
-		//		draw.Line( 0, center - Vector2.Left * gap, length, center - Vector2.Left * (gap + length) );
-		//		draw.Line( 0, center + Vector2.Left * gap, length, center + Vector2.Left * (gap + length) );
-
-		//		draw.Color = draw.Color.WithAlpha( draw.Color.a * 0.5f );
-		//	}
-		//}
-
+		
 		if ( Zoomed )
 			timeSinceZoomed = 0;
 
