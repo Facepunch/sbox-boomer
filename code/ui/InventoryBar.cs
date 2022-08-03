@@ -110,7 +110,7 @@ public class InventoryBar : Panel
 		{
 			// We want to change weapon with slot keys
 			var chosenWeapon = Weapons.FirstOrDefault( x => x.Bucket == wantedIndex );
-			if ( chosenWeapon != SelectedWeapon )
+			if ( chosenWeapon != SelectedWeapon && chosenWeapon.IsValid() )
 			{
 				SelectedWeapon = chosenWeapon;
 				input.ActiveChild = SelectedWeapon;
