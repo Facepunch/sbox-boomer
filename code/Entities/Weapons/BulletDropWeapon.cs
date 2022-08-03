@@ -64,6 +64,7 @@ public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : B
 		var forward = player.EyeRotation.Forward;
 		var endPosition = player.EyePosition + forward * BulletRange;
 		var trace = Trace.Ray( player.EyePosition, endPosition )
+			.WithAnyTags( "weapon", "player", "solid" )
 			.Ignore( player )
 			.Ignore( this )
 			.Run();
