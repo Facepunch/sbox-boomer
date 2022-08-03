@@ -53,4 +53,22 @@ SettingRow {
         padding: 20px;
         background-color: black;
     }
+
+    Button.toggle {
+        border: 5px solid black;
+        background-color: rgba($yellow .1);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        margin-right: 5px;
+
+        &:hover {
+            background-color: rgba( $yellow .5 );
+        }
+
+        &.active {
+            background-color: $yellow2;
+        }
+    }
 }

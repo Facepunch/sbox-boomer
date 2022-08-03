@@ -15,7 +15,13 @@ internal class SettingRow : Panel
 		Label = Add.Label( "Label" );
 		Add.Panel().Style.FlexGrow = 1;
 		ValueArea = Add.Panel( "value-area" );
-		ValueArea.Add.TextEntry( "Test" );
+		//ValueArea.Add.TextEntry( "Test" );
+
+		var button = ValueArea.Add.Button( string.Empty, "toggle" );
+		button.AddEventListener( "onmousedown", () =>
+		{
+			button.SetClass( "active", !button.HasClass( "active" ) );
+		} );
 	}
 
 }
