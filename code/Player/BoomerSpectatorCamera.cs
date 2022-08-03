@@ -4,6 +4,11 @@ internal class BoomerSpectatorCamera : BoomerCamera
 {
 	public bool IsFree { get; set; } = false;
 
+	protected virtual float BaseMoveSpeed => 800f;
+
+	// TODO - Input modifiers
+	protected float MoveMultiplier = 1f;
+
 	int playerIndex = 0;
 	public BoomerPlayer SelectPlayerIndex( int index )
 	{
@@ -21,6 +26,9 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		var player = players[playerIndex];
 		Target = player;
 
+		// Force freecam off
+		IsFree = false;
+
 		return player;
 	}
 	
@@ -34,12 +42,41 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		if ( input.Pressed( InputButton.Jump ) )
 			IsFree ^= true;
 
-		if ( input.Pressed( InputButton.Left ) )
+		if ( input.Pressed( InputButton.Menu ) )
 			SpectateNextPlayer( false ); 
 
-		if ( input.Pressed( InputButton.Right ) )
+		if ( input.Pressed( InputButton.Use ) )
 			SpectateNextPlayer();
 
-		base.BuildInput( input );
+		if ( IsFree )
+		{
+			MoveInput = input.AnalogMove;
+			LookAngles += input.AnalogLook;
+			LookAngles.roll = 0;
+
+			input.Clear();
+			input.StopProcessing = true;
+		}
+		else
+		{
+			base.BuildInput( input );
+		}
+	}
+
+	Angles LookAngles;
+	Vector3 MoveInput;
+
+	public override void Update()
+	{
+		if ( IsFree )
+		{
+			var mv = MoveInput.Normal * BaseMoveSpeed * RealTime.Delta * Rotation * MoveMultiplier;
+			Position += mv;
+			Rotation = Rotation.From( LookAngles );
+		}
+		else
+		{
+			base.Update();
+		}
 	}
 }
