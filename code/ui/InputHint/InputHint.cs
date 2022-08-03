@@ -13,9 +13,12 @@ public partial class InputHint : Panel
 
 	protected bool IsSet = false;
 
+	public bool DisableOnGamepad { get; set; } = false;
+
 	public InputHint()
 	{
 		BindClass( "noaction", () => string.IsNullOrEmpty( Text ) );
+		BindClass( "hide", () => DisableOnGamepad && Input.UsingController );
 	}
 
 	public override void SetProperty( string name, string value )
@@ -25,6 +28,14 @@ public partial class InputHint : Panel
 		if ( name == "btn" )
 		{
 			SetButton( Enum.Parse<InputButton>( value, true ) );
+		}
+
+		if ( name == "input" )
+		{
+			if ( value == "keyboardonly" )
+			{
+				DisableOnGamepad = true;
+			}
 		}
 	}
 

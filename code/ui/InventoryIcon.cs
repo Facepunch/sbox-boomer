@@ -31,6 +31,8 @@ class InventoryIcon : Panel
 		Value = Add.Label( $"0", "ammocount");
 		Hint = AddChild<InputHint>( "hint" );
 		Hint.SetButton( FromBucket( weapon.Bucket ) );
+		Hint.DisableOnGamepad = true;
+
 		AddClass( weapon.ClassName );
 	}
 

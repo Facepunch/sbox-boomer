@@ -1,6 +1,7 @@
 inputhint {
     align-items: center;
     height: 32px;
+    display: flex;
 
     .glyph {
         background-size: contain;
@@ -41,5 +42,9 @@ inputhint {
         .action {
             display: none;
         }
+    }
+
+    &.hide {
+        display: none;
     }
 }
