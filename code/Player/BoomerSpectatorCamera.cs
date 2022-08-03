@@ -64,6 +64,16 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		}
 	}
 
+	float GetSpeedMultiplier( InputBuilder input )
+	{
+		if ( input.Down( InputButton.Run ) )
+			return 2f;
+		if ( input.Down( InputButton.Duck ) )
+			return 0.3f;
+
+		return 1f;
+	}
+
 	public override void BuildInput( InputBuilder input )
 	{
 		if ( input.Pressed( InputButton.Jump ) )
@@ -75,14 +85,13 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		if ( input.Pressed( InputButton.Use ) )
 			SpectateNextPlayer();
 
+		MoveMultiplier = GetSpeedMultiplier( input );
+
 		if ( IsFree )
 		{
 			MoveInput = input.AnalogMove;
 			LookAngles += input.AnalogLook;
 			LookAngles.roll = 0;
-
-			input.Clear();
-			input.StopProcessing = true;
 		}
 		else
 		{
@@ -127,6 +136,11 @@ internal class BoomerSpectatorCamera : BoomerCamera
 
 	public override void Update()
 	{
+		if ( !Target.IsValid() )
+		{
+			IsFree = true;
+		}
+
 		if ( IsFree )
 		{
 			var mv = MoveInput.Normal * BaseMoveSpeed * RealTime.Delta * Rotation * MoveMultiplier;
