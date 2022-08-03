@@ -52,12 +52,18 @@ internal class BoomerCamera : CameraMode
 		UpdateViewModel( curWeapon );
 	}
 	
+	public virtual IEnumerable<BoomerPlayer> GetPlayers()
+	{
+		return Entity.All.OfType<BoomerPlayer>();
+	}
+
 	public override void Update()
 	{
 		if ( Local.Pawn is BoomerPlayer player )
 			Target = player;
-		else
-			Target = Entity.All.OfType<BoomerPlayer>().FirstOrDefault();
+
+		if ( !Target.IsValid() )
+			Target = GetPlayers().FirstOrDefault();
 
 		var target = Target;
 		if ( !target.IsValid() )
