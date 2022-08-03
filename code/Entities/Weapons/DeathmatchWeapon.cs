@@ -13,7 +13,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	public int PickupAmmo { get; set; } = 0;
 
 	// How much ammo this weapon should start with, and give to its first Owner
-	public virtual int StartingAmmo => 0;
+	public virtual int StartingAmmo => 500;
 
 	public virtual bool CanZoom => false;
 	public virtual float ZoomedFov => 20;

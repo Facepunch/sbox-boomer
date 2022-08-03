@@ -67,7 +67,7 @@ public partial class BoomerPlayer : Player
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
 			var w = StartingWeapons.Instance;
-
+			Inventory.DeleteContents();
 			if ( w.IsValid() )
 			{
 				w.SetupPlayer( this );
