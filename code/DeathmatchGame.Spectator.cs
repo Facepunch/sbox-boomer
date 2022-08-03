@@ -1,4 +1,6 @@
-﻿namespace Boomer;
+﻿using Boomer.UI;
+
+namespace Boomer;
 
 /// <summary>
 /// This is the heart of the gamemode. It's responsible for creating the player and stuff.
@@ -22,6 +24,8 @@ partial class DeathmatchGame : Game
 			player.UpdateClothes( To.Single( cl ) );
 			player.Respawn();
 			player.PlayerColor = Color.Random;
+
+			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} stopped spectating", $"avatar:{cl.PlayerId}" );
 		}
 		else
 		{
@@ -33,6 +37,8 @@ partial class DeathmatchGame : Game
 			var pawn = new SpectatorPawn();
 			cl.Pawn = pawn;
 			pawn.Respawn();
+
+			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} started spectating", $"avatar:{cl.PlayerId}" );
 		}
 	}
 }
