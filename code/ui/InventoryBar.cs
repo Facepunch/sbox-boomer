@@ -72,44 +72,64 @@ public class InventoryBar : Panel
 
 		if ( !IsOpen ) return;
 
-		var sortedWeapons = Weapons.OrderBy( x => x.Order ).ToList();
 		var oldSelected = SelectedWeapon;
-		var selectedIndex = sortedWeapons.IndexOf( SelectedWeapon );
+		var wantedIndex = SlotPressInput( input );
 
-		selectedIndex = SlotPressInput( input, selectedIndex, sortedWeapons );
-		selectedIndex -= input.MouseWheel;
-
-		if ( input.Pressed( InputButton.Menu ) )
+		if ( wantedIndex == -1 )
 		{
-			if ( LastWeapon.IsValid() && sortedWeapons.Contains( LastWeapon ) )
-				selectedIndex = sortedWeapons.IndexOf( LastWeapon );
-			else
-				selectedIndex++;
+			// Let's check other ways of input
+			var sortedWeapons = Weapons.OrderBy( x => x.Bucket ).ToList();
+
+			if ( input.Pressed( InputButton.Menu ) )
+			{
+				if ( LastWeapon.IsValid() && sortedWeapons.Contains( LastWeapon ) )
+				{
+					SelectedWeapon = LastWeapon;
+					input.ActiveChild = SelectedWeapon;
+				}
+			}
+			else if ( input.MouseWheel != 0 )
+			{
+				var currentIndex = sortedWeapons.IndexOf( SelectedWeapon );
+				currentIndex -= input.MouseWheel;
+				currentIndex = currentIndex.UnsignedMod( Weapons.Count );
+
+				var wishedWeapon = sortedWeapons.ElementAtOrDefault( currentIndex );
+				if ( wishedWeapon.IsValid() && wishedWeapon != SelectedWeapon )
+				{
+					SelectedWeapon = wishedWeapon;
+					input.ActiveChild = SelectedWeapon;
+				}
+			}
 		}
-
-		selectedIndex = selectedIndex.UnsignedMod( Weapons.Count );
-
-		SelectedWeapon = sortedWeapons[selectedIndex];
-
-		var icons = Container.ChildrenOfType<InventoryIcon>();
-
-		foreach ( var icon in icons )
+		else
 		{
-			icon.TickSelection( SelectedWeapon );
+			// We want to change weapon with slot keys
+			var chosenWeapon = Weapons.FirstOrDefault( x => x.Bucket == wantedIndex );
+			if ( chosenWeapon != SelectedWeapon )
+			{
+				SelectedWeapon = chosenWeapon;
+				input.ActiveChild = SelectedWeapon;
+			}
 		}
-
-		input.ActiveChild = SelectedWeapon;
-		input.MouseWheel = 0;
 
 		if ( oldSelected != SelectedWeapon )
 		{
 			Sound.FromScreen( "weapon.swap" );
 			LastWeapon = oldSelected;
 		}
+
+		var icons = Container.ChildrenOfType<InventoryIcon>();
+		foreach ( var icon in icons )
+			icon.TickSelection( SelectedWeapon );
+
+		input.MouseWheel = 0;
 	}
 
-	private int SlotPressInput( InputBuilder input, int index, List<DeathmatchWeapon> sortedWeapons )
+	private int SlotPressInput( InputBuilder input )
 	{
+		int index = -1;
+
 		if ( input.Pressed( InputButton.Slot1 ) ) index = 0;
 		if ( input.Pressed( InputButton.Slot2 ) ) index = 1;
 		if ( input.Pressed( InputButton.Slot3 ) ) index = 2;
