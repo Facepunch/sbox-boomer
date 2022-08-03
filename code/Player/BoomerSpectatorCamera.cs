@@ -37,10 +37,24 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		return SelectPlayerIndex( asc ? playerIndex + 1 : playerIndex - 1 );
 	}
 
+	protected void ToggleFree()
+	{
+		IsFree ^= true;
+
+		if ( IsFree )
+		{
+			if ( Target.IsValid() )
+				Position = Target.EyePosition;
+
+			vm?.Delete();
+			cachedWeapon = null;
+		}
+	}
+
 	public override void BuildInput( InputBuilder input )
 	{
 		if ( input.Pressed( InputButton.Jump ) )
-			IsFree ^= true;
+			ToggleFree();
 
 		if ( input.Pressed( InputButton.Menu ) )
 			SpectateNextPlayer( false ); 
@@ -66,6 +80,37 @@ internal class BoomerSpectatorCamera : BoomerCamera
 	Angles LookAngles;
 	Vector3 MoveInput;
 
+	protected BaseViewModel vm;
+	protected DeathmatchWeapon cachedWeapon;
+
+	protected void UpdateViewModel( DeathmatchWeapon weapon )
+	{
+		if ( IsSpectator )
+		{
+			vm?.Delete();
+			vm = null;
+
+			if ( weapon.IsValid() )
+			{
+				weapon?.CreateViewModel();
+				vm = weapon.ViewModelEntity;
+			}
+		}
+		else
+		{
+			vm?.Delete();
+		}
+	}
+
+	[Event( "boomer.spectator.changedtarget" )]
+	protected void OnTargetChanged( BoomerPlayer oldTarget, BoomerPlayer newTarget )
+	{
+		var curWeapon = newTarget?.ActiveChild as DeathmatchWeapon;
+		cachedWeapon = curWeapon;
+
+		UpdateViewModel( curWeapon );
+	}
+
 	public override void Update()
 	{
 		if ( IsFree )
@@ -76,6 +121,13 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		}
 		else
 		{
+			var curWeapon = Target?.ActiveChild as DeathmatchWeapon;
+			if ( curWeapon.IsValid() && curWeapon != cachedWeapon )
+			{
+				cachedWeapon = curWeapon;
+				UpdateViewModel( curWeapon );
+			}
+
 			base.Update();
 		}
 	}
