@@ -10,6 +10,7 @@ $yellow2: #FAB002;
 @import "_killfeed.scss";
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
+@import "_button.scss";
 
 HudRootPanel {
     background-color: rgba( #333, 0 );
@@ -434,16 +435,5 @@ armourhud {
 
     inventorybar, .bottom-right, .bottom-left {
         display: none;
-    }
-}
-
-button {
-    padding: 12px 20px;
-    background-color: rgba(black .25);
-    border-radius: 2px;
-    cursor: pointer;
-
-    &:hover {
-        background-color:black;
     }
 }

@@ -1,0 +1,13 @@
+﻿
+
+.button, button {
+    padding: 12px 20px;
+    background-color: rgba($yellow2 .25);
+    border-radius: 2px;
+    cursor: pointer;
+    color: white;
+
+    &:hover, &.active {
+        background-color: rgba($yellow2 1);
+    }
+}
