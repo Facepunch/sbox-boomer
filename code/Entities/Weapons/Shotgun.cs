@@ -41,7 +41,8 @@ partial class Shotgun : DeathmatchWeapon
 		// Tell the clients to play the shoot effects
 		//
 		ShootEffects();
-		PlaySound( "rust_pumpshotgun.shoot" );
+		PlaySound( "shotgun.shoot" );
+		PlaySound( "shotgun.reload" );
 		if ( Zoomed )
 		{
 			ShootBullet( 0.025f, 0.3f, 10.0f, 15.0f, 8 );
