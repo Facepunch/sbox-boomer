@@ -33,4 +33,12 @@ SpectatorWidget {
     &.open {
         opacity: 1;
     }
+
+    .inline {
+        padding-bottom: 4px;
+        flex-direction: row;
+        InputHint {
+            margin-right: 16px;
+        }
+    }
 }
