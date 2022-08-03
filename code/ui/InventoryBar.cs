@@ -75,11 +75,13 @@ public class InventoryBar : Panel
 		var oldSelected = SelectedWeapon;
 		var wantedIndex = SlotPressInput( input );
 
+		// If the wanted index is -1, it means we're not pressing any slot keys
 		if ( wantedIndex == -1 )
 		{
 			// Let's check other ways of input
 			var sortedWeapons = Weapons.OrderBy( x => x.Bucket ).ToList();
 
+			// Support switching to our last used weapon
 			if ( input.Pressed( InputButton.Menu ) )
 			{
 				if ( LastWeapon.IsValid() && sortedWeapons.Contains( LastWeapon ) )
@@ -88,10 +90,12 @@ public class InventoryBar : Panel
 					input.ActiveChild = SelectedWeapon;
 				}
 			}
+			// Otherwise, check to see if we're using the scroll wheel to switch.
 			else if ( input.MouseWheel != 0 )
 			{
 				var currentIndex = sortedWeapons.IndexOf( SelectedWeapon );
 				currentIndex -= input.MouseWheel;
+				// Wrap around the array of weapons if we go too far
 				currentIndex = currentIndex.UnsignedMod( Weapons.Count );
 
 				var wishedWeapon = sortedWeapons.ElementAtOrDefault( currentIndex );
