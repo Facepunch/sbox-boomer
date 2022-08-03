@@ -6,7 +6,8 @@
 [HammerEntity]
 partial class StartingWeapons : Entity
 {
-	public static StartingWeapons Instance;
+	[Net]
+	public static StartingWeapons Instance { get; set; }
 	
 	public StartingWeapons()
 	{
@@ -19,8 +20,8 @@ partial class StartingWeapons : Entity
 	[Property] public bool RocketLauncher { get; set; }
 	[Property] public bool RailGun { get; set; }
 	[Property] public bool LightningGun { get; set; }
-	
-	[Property] public bool UnlimitedAmmo { get; set; }
+
+	[Property, Net] public bool UnlimitedAmmo { get; set; }
 
 	[Property] public int BuckshotAmmo { get; set; } = 32;
 	[Property] public int NailsAmmo { get; set; } = 128;
@@ -32,6 +33,8 @@ partial class StartingWeapons : Entity
 	public override void Spawn()
 	{
 		base.Spawn();
+
+		Transmit = TransmitType.Always;
 
 		if ( UnlimitedAmmo )
 		{
