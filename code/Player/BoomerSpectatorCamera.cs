@@ -48,6 +48,11 @@ internal class BoomerSpectatorCamera : BoomerCamera
 
 			vm?.Delete();
 			cachedWeapon = null;
+			Viewer = null;
+		}
+		else
+		{
+			Viewer = Target;
 		}
 	}
 
