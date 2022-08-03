@@ -75,6 +75,12 @@ public class InventoryBar : Panel
 		var oldSelected = SelectedWeapon;
 		var wantedIndex = SlotPressInput( input );
 
+		var slotDirection = input.MouseWheel;
+		if ( input.Pressed( InputButton.SlotPrev ) )
+			slotDirection = 1;
+		if ( input.Pressed( InputButton.SlotNext ) )
+			slotDirection = -1;
+
 		// If the wanted index is -1, it means we're not pressing any slot keys
 		if ( wantedIndex == -1 )
 		{
@@ -91,10 +97,10 @@ public class InventoryBar : Panel
 				}
 			}
 			// Otherwise, check to see if we're using the scroll wheel to switch.
-			else if ( input.MouseWheel != 0 )
+			else if ( slotDirection != 0 )
 			{
 				var currentIndex = sortedWeapons.IndexOf( SelectedWeapon );
-				currentIndex -= input.MouseWheel;
+				currentIndex -= slotDirection;
 				// Wrap around the array of weapons if we go too far
 				currentIndex = currentIndex.UnsignedMod( Weapons.Count );
 
