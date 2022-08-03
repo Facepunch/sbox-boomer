@@ -37,6 +37,13 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		return SelectPlayerIndex( asc ? playerIndex + 1 : playerIndex - 1 );
 	}
 
+	public void ResetInterpolation()
+	{
+		// Force eye rotation to avoid lerping when switching targets
+		if ( Target.IsValid() )
+			Rotation = Target.EyeRotation;
+	}
+
 	protected void ToggleFree()
 	{
 		IsFree ^= true;
@@ -52,6 +59,7 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		}
 		else
 		{
+			ResetInterpolation();
 			Viewer = Target;
 		}
 	}
@@ -113,6 +121,7 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		var curWeapon = newTarget?.ActiveChild as DeathmatchWeapon;
 		cachedWeapon = curWeapon;
 
+		ResetInterpolation();
 		UpdateViewModel( curWeapon );
 	}
 
