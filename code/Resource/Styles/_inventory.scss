@@ -43,13 +43,20 @@ inventoryicon {
 	}
 
 	.ammocount {
-		left: 210px;
+		position: absolute;
+        right: 150px;
 		text-align: left;
 		font-size: 32px;
 		font-weight: bolder;
 		color: $yellow2;
 		font-family: Teko-SemiBold;
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	}
+
+	.hint {
+		position: absolute;
+		bottom: 8px;
+		right: 150px;
 	}
 
 
