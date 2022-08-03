@@ -46,19 +46,17 @@ partial class LightningGun : DeathmatchWeapon
 		TimeSinceSecondaryAttack = 0;
 
 		if ( Owner is not BoomerPlayer player ) return;
-		if ( !DeathmatchGame.UnlimitedAmmo )
+
+		if ( !TakeAmmo( 1 ) )
 		{
-			if ( !TakeAmmo( 1 ) )
+			DryFire();
+
+			if ( AvailableAmmo() > 0 )
 			{
-				DryFire();
-
-				if ( AvailableAmmo() > 0 )
-				{
-					Reload();
-				}
-
-				return;
+				Reload();
 			}
+
+			return;
 		}
 
 		player.SetAnimParameter( "b_attack", true );

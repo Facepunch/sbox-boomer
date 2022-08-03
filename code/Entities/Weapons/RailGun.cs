@@ -30,24 +30,22 @@ partial class RailGun : DeathmatchWeapon
 	{
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
-		if ( !DeathmatchGame.UnlimitedAmmo )
-		{
-			if ( !TakeAmmo( 1 ) )
-			{
-				DryFire();
 
-				if ( AvailableAmmo() > 0 )
-				{
-					Reload();
-				}
-				return;
+		if ( !TakeAmmo( 1 ) )
+		{
+			DryFire();
+
+			if ( AvailableAmmo() > 0 )
+			{
+				Reload();
 			}
+			return;
 		}
 
-			//
-			//Push player back
-			//
-			float flGroundFactor = 1.0f;
+		//
+		//Push player back
+		//
+		float flGroundFactor = 1.0f;
 		float flMul = 100f * 1.8f;
 		float forMul = 150f * 1.4f;
 		

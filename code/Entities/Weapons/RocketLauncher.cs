@@ -31,18 +31,15 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	public override void AttackPrimary()
 	{
-		if ( !DeathmatchGame.UnlimitedAmmo )
+		if ( !TakeAmmo( 1 ) )
 		{
-			if ( !TakeAmmo( 1 ) )
-			{
-				DryFire();
+			DryFire();
 
-				if ( AvailableAmmo() > 0 )
-				{
-					Reload();
-				}
-				return;
+			if ( AvailableAmmo() > 0 )
+			{
+				Reload();
 			}
+			return;
 		}
 
 		AnimationOwner.SetAnimParameter( "b_attack", true );
