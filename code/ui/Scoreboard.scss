@@ -49,6 +49,15 @@
             &.me {
                 color: #b6ff00;
             }
+
+            &:hover {
+                cursor: pointer;
+                background-color: rgba( #FAB002, 0.2 );
+            }
+
+            &:active {
+                background-color: rgba( #FAB002, 0.4 );
+            }
         }
     }
 }

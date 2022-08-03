@@ -93,5 +93,18 @@ public class Scoreboard : Panel
 
 public class ScoreboardEntry : Sandbox.UI.ScoreboardEntry
 {
+	public ScoreboardEntry()
+	{
+		AddEventListener( "onclick", OnClick );
+	}
 
+	public void OnClick()
+	{
+		if ( Client == Local.Client ) return;
+
+		if ( BoomerCamera.IsSpectator )
+		{
+			BoomerCamera.Target = Client.Pawn as BoomerPlayer;
+		}
+	}
 }
