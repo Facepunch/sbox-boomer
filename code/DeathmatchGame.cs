@@ -24,6 +24,9 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_unlimitedammo" )]
 	public static bool UnlimitedAmmo { get; set; } = false;
 
+	[ConVar.Replicated( "bm_norocketselfdamage" )]
+	public static bool NoRocketSelfDmg { get; set; } = false;
+
 	public DeathmatchGame()
 	{
 		//
@@ -275,7 +278,14 @@ partial class DeathmatchGame : Game
 
 			if ( overlap == owner )
 			{
-				dmg *= ownerDamageScale;
+				if ( NoRocketSelfDmg )
+				{
+					dmg = 0;
+				}
+				else
+				{
+					dmg *= ownerDamageScale;
+				}
 				forceDir = (targetPos - (position + Vector3.Down * 32f)).Normal;
 			}
 

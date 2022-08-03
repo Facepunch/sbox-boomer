@@ -14,21 +14,20 @@ partial class StartingWeapons : Entity
 		Instance = this;
 
 	}
-	[Property] public bool Shotgun { get; set; }
-	[Property] public bool Nailgun { get; set; }
-	[Property] public bool GrenadeLauncher { get; set; }
-	[Property] public bool RocketLauncher { get; set; }
-	[Property] public bool RailGun { get; set; }
-	[Property] public bool LightningGun { get; set; }
-
-	[Property, Net] public bool UnlimitedAmmo { get; set; }
-
-	[Property] public int BuckshotAmmo { get; set; } = 32;
-	[Property] public int NailsAmmo { get; set; } = 128;
-	[Property] public int GrenadeAmmo { get; set; } = 8;
-	[Property] public int RocketAmmo { get; set; } = 8;
-	[Property] public int RailAmmo { get; set; } = 24;
-	[Property] public int LightningAmmo { get; set; } = 300;
+	[Property, Category( "Weapons" )] public bool Shotgun { get; set; }
+	[Property, Category( "Weapons" )] public bool Nailgun { get; set; }
+	[Property, Category( "Weapons" )] public bool GrenadeLauncher { get; set; }
+	[Property, Category( "Weapons" )] public bool RocketLauncher { get; set; }
+	[Property, Category( "Weapons" )] public bool RailGun { get; set; }
+	[Property, Category( "Weapons" )] public bool LightningGun { get; set; }
+	[Property, Category( "Ammo" )] public int BuckshotAmmo { get; set; } = 32;
+	[Property, Category( "Ammo" )] public int NailsAmmo { get; set; } = 128;
+	[Property, Category( "Ammo" )] public int GrenadeAmmo { get; set; } = 8;
+	[Property, Category( "Ammo" )] public int RocketAmmo { get; set; } = 8;
+	[Property, Category( "Ammo" )] public int RailAmmo { get; set; } = 24;
+	[Property, Category( "Ammo" )] public int LightningAmmo { get; set; } = 300;
+	[Property, Category( "Special" ), Net] public bool UnlimitedAmmo { get; set; }
+	[Property, Category( "Special" ), Title ("No Rocket Self Damage"), Net] public bool NoRocketSelfDMG { get; set; }
 
 	public override void Spawn()
 	{
@@ -39,6 +38,10 @@ partial class StartingWeapons : Entity
 		if ( UnlimitedAmmo )
 		{
 			DeathmatchGame.UnlimitedAmmo = UnlimitedAmmo;
+		}
+		if ( NoRocketSelfDMG )
+		{
+			DeathmatchGame.NoRocketSelfDmg = NoRocketSelfDMG;
 		}
 	}
 
