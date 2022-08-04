@@ -345,8 +345,9 @@ public partial class BoomerPlayer : Player
 
 		if ( LifeState != LifeState.Alive )
 			return;
-
-		TickPlayerUse();
+		
+		//We dont use anything.
+		//TickPlayerUse();
 
 		if ( Health > 100 )
 		{
