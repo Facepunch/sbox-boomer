@@ -8,30 +8,23 @@ namespace Boomer
 	internal class SettingsMenu : Panel
 	{
 
-		public Panel Canvas { get; protected set; }
+		public ObjectEditor Editor { get; protected set; }
+
+		private ClientSettings Settings;
 
 		public SettingsMenu()
 		{
 			Current = this;
+			Settings = ClientSettings.Current;
 
-			Rebuild();
+			Editor.SetTarget( Settings );
 		}
 
 		public override void OnHotloaded()
 		{
 			base.OnHotloaded();
 
-			Rebuild();
-		}
-
-		private void Rebuild()
-		{
-			Canvas.DeleteChildren( true );
-
-			Canvas.AddChild( new SettingRow() );
-			Canvas.AddChild( new SettingRow() );
-			Canvas.AddChild( new SettingRow() );
-			Canvas.AddChild( new SettingRow() );
+			Editor.SetTarget( Settings );
 		}
 
 		public void Close() => SetOpen( false );
@@ -39,6 +32,16 @@ namespace Boomer
 		private static SettingsMenu Current;
 		public static void SetOpen( bool open ) => Current?.SetClass( "open", open );
 		public static void ToggleOpen() => Current?.SetClass( "open", !Current.HasClass( "open" ) );
+
+		protected override void OnEvent( PanelEvent e )
+		{
+			base.OnEvent( e );
+
+			if ( e.Name == "save" )
+			{
+				Settings.Save();
+			}
+		}
 
 	}
 }
