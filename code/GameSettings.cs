@@ -17,7 +17,17 @@ internal class ClientSettings
 	public bool HearOwnFootsteps { get; set; }
 
 	public void Save() => Cookie.Set( "boomer.clientsettings", this );
-	public static ClientSettings Current => Cookie.Get<ClientSettings>( "boomer.clientsettings", new() );
+
+	private static ClientSettings current;
+	public static ClientSettings Current
+	{
+		get
+		{
+			if( current == null ) 
+				current = Cookie.Get<ClientSettings>( "boomer.clientsettings", new() );
+			return current;
+		}
+	}
 
 }
 
