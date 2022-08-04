@@ -69,7 +69,7 @@ partial class RailGun : DeathmatchWeapon
 		//
 		// Shoot the bullets
 		//
-		ShootBullet( 0.01f, 1.5f, 80.0f, 30.0f );
+		ShootBullet( 0.01f, 1.5f, 80.0f, 15.0f );
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
