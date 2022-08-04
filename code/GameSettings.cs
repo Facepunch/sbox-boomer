@@ -4,19 +4,33 @@ namespace Boomer;
 internal class ClientSettings
 {
 
-	public WeaponPositions WeaponPosition { get; set; }
-	public bool SomeToggle { get; set; }
-	public float SomeFloat { get; set; }
-	public string SomeString { get; set; }
+	public WeaponPositionSetting WeaponPosition { get; set; }
+	public bool TennisBallMode { get; set; }
+	// todo: TennisBallModeColor color editor
+	public bool ShowHitMarkers { get; set; }
+	public bool ShowDamageNumbers { get; set; }
+	public bool BatchDamageNumbers { get; set; }
+	// todo: CrosshairColor color editor
+	public bool Speedometer { get; set; }
+	public GoreModeSetting GoreMode { get; set; }
+	public bool WalkBob { get; set; }
+	public bool HearOwnFootsteps { get; set; }
 
 	public void Save() => Cookie.Set( "boomer.clientsettings", this );
 	public static ClientSettings Current => Cookie.Get<ClientSettings>( "boomer.clientsettings", new() );
 
 }
 
-internal enum WeaponPositions
+internal enum WeaponPositionSetting
 {
 	Left,
 	Center,
 	Right
+}
+
+internal enum GoreModeSetting
+{
+	NoRagdolls,
+	NoGore,
+	Nothing
 }
