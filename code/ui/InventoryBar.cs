@@ -146,6 +146,9 @@ public class InventoryBar : Panel
 		if ( input.Pressed( InputButton.Slot4 ) ) index = 3;
 		if ( input.Pressed( InputButton.Slot5 ) ) index = 4;
 		if ( input.Pressed( InputButton.Slot6 ) ) index = 5;
+		if ( input.Pressed( InputButton.Use ) ) index = 5;
+		if ( input.Pressed( InputButton.Reload ) ) index = 4;
+		if ( input.Pressed( InputButton.Flashlight ) ) index = 3;
 
 		return index;
 	}
