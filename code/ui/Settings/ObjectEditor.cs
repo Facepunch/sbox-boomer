@@ -1,5 +1,6 @@
 ﻿
 using Sandbox.UI;
+using System.Reflection;
 
 namespace Boomer.UI;
 
@@ -15,7 +16,7 @@ internal class ObjectEditor : Panel
 	{
 		DeleteChildren( true );
 
-		var properties = target.GetType().GetProperties();
+		var properties = target.GetType().GetProperties( BindingFlags.Public | BindingFlags.Instance );
 		foreach ( var property in properties )
 		{
 			AddChild( new SettingRow( target, property ) );
