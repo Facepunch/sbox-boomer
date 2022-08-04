@@ -43,6 +43,19 @@ internal class SettingRow : Panel
 				CreateEvent( "save" );
 			} );
 		}
+
+		if( property.PropertyType.IsEnum )
+		{
+			var value = property.GetValue( target ).ToString();
+			var dropdown = new DropDown( ValueArea );
+			dropdown.SetPropertyObject( "value", property.GetValue( target ) );
+			dropdown.AddEventListener( "value.changed", () =>
+			{
+				Enum.TryParse( property.PropertyType, dropdown.Value, out var newval );
+				property.SetValue( target, newval );
+				CreateEvent( "save" );
+			} );
+		}
 	}
 
 	public SettingRow()
