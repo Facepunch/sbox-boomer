@@ -22,6 +22,7 @@ public class HudRootPanel : RootPanel
 		AddChild<PickupFeed>();
 
 		AddChild<BoomerChatBox>();
+		AddChild<Speedo>();
 		AddChild<KillFeed>();
 		Scoreboard = AddChild<Scoreboard>();
 		AddChild<VoiceList>();
