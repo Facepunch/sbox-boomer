@@ -450,6 +450,11 @@ public partial class BoomerPlayer : Player
 			walkBob = 0f;
 		}
 
+		if ( !ClientSettings.Current.WalkBob )
+		{
+			walkBob = 0;
+		}
+
 		setup.Position += up * MathF.Sin( walkBob ) * speed * 2;
 		setup.Position += left * MathF.Sin( walkBob * 0.6f ) * speed * 1;
 
