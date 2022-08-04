@@ -26,6 +26,18 @@ partial class DmViewModel : BaseViewModel
 
 			TargetPos = TargetPos.LerpTo( Vector3.Up * (ctrl.IsSliding ? -15f : 0f), 2f * Time.Delta );
 			Position += TargetPos;
+
+			switch ( ClientSettings.Current.WeaponPosition ) 
+			{
+				case WeaponPositionSetting.Left:
+					Position += Rotation.Left * 10;
+					break;
+				case WeaponPositionSetting.Center:
+					break;
+				case WeaponPositionSetting.Right:
+					Position += Rotation.Right * 10;
+					break;
+			}
 		}
 
 
