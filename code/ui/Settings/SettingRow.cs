@@ -32,6 +32,17 @@ internal class SettingRow : Panel
 				CreateEvent( "save" );
 			} );
 		}
+
+		if( property.PropertyType == typeof( string ) )
+		{
+			var value = (string)property.GetValue( target );
+			var textentry = ValueArea.Add.TextEntry( value );
+			textentry.AddEventListener( "value.changed", () =>
+			{
+				property.SetValue( target, textentry.Text );
+				CreateEvent( "save" );
+			} );
+		}
 	}
 
 	public SettingRow()
