@@ -4,12 +4,14 @@
 SettingsMenu {
     position: absolute;
     z-index: 999;
-    width: 40%;
+    width: 60%;
     height: 75%;
     flex-direction: column;
-    left: 30%;
+    left: 20%;
     top: 12.5%;
     opacity: 0;
+    font-size: 34px;
+    font-family: Teko-SemiBold;
 
     &.open {
         pointer-events: all;
@@ -24,6 +26,7 @@ SettingsMenu {
         border-radius: 0 0 10px 10px;
         padding: 20px;
         flex-direction: column;
+
     }
 
     .navbar button {
@@ -37,6 +40,8 @@ SettingRow {
     color: white;
     margin-bottom: 4px;
     align-items: center;
+    font-size: 24px;
+    font-family: Teko-SemiBold;
 
     &:hover {
         background-color: rgba(black .3);
@@ -55,9 +60,9 @@ SettingRow {
     }
 
     Button.toggle {
-        border: 5px solid black;
-        background-color: rgba($yellow .1);
-        border-radius: 50%;
+        border: 2px solid black;
+        background-color: rgba($yellow .01);
+        border-radius: 10%;
         width: 32px;
         height: 32px;
         padding: 0;

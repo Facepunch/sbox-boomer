@@ -40,8 +40,8 @@ AwardItem {
         }
 
         .title {
-            font-family: Roboto;
-            font-size: 40px;
+            font-family: Teko-SemiBold;
+            font-size: 64px;
             color: $yellow2;
             font-weight: 500;
             text-transform: uppercase;
@@ -51,7 +51,7 @@ AwardItem {
     .text {
         color: white;
         font-size: 24px;
-        font-family: Roboto;
+        font-family: Teko-SemiBold;
         margin-left: 8px;
         flex-grow: 1;
         margin-right: 16px;
