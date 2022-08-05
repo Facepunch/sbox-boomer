@@ -49,7 +49,7 @@ partial class RailGun : DeathmatchWeapon
 		float flMul = 100f * 1.8f;
 		float forMul = 150f * 1.4f;
 		
-		if ( Owner is BoomerPlayer player )
+		if ( Owner is BoomerPlayer player && !Input.Down(InputButton.Duck))
 		{
 			player.Velocity += player.EyeRotation.Backward * forMul * flGroundFactor;
 			player.Velocity += player.Velocity.WithZ( flMul * flGroundFactor );
