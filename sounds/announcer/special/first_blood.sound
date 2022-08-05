@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/special/first_blood.vsnd",
+			resource:"sounds/announcer/special/firstblood_a.vsnd",
+			resource:"sounds/announcer/special/firstblood_b.vsnd",
+			resource:"sounds/announcer/special/firstblood_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

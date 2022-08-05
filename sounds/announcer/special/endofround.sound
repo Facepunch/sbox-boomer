@@ -10,7 +10,10 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/special/endofround.vsnd",
+			resource:"sounds/announcer/special/endofround_a.vsnd",
+			resource:"sounds/announcer/special/endofround_b.vsnd",
+			resource:"sounds/announcer/special/endofround_c.vsnd",
+			resource:"sounds/announcer/special/endofround_d.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

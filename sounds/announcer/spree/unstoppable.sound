@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/spree/unstoppable.vsnd",
+			resource:"sounds/announcer/spree/unstoppable_a.vsnd",
+			resource:"sounds/announcer/spree/unstoppable_b.vsnd",
+			resource:"sounds/announcer/spree/unstoppable_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

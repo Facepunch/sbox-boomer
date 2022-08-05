@@ -10,7 +10,10 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/spree/rampage.vsnd",
+			resource:"sounds/announcer/spree/rampage_b.vsnd",
+			resource:"sounds/announcer/spree/rampage_b.vsnd",
+			resource:"sounds/announcer/spree/rampage_c.vsnd",
+			resource:"sounds/announcer/spree/rampage_d.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

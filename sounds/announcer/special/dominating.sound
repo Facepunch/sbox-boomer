@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/special/dominating.vsnd",
+			resource:"sounds/announcer/special/dominating_a.vsnd",
+			resource:"sounds/announcer/special/dominating_b.vsnd",
+			resource:"sounds/announcer/special/dominating_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

@@ -10,7 +10,8 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/special/six.vsnd",
+			resource:"sounds/announcer/special/countdown_06_a.vsnd",
+			resource:"sounds/announcer/special/countdown_06_b.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

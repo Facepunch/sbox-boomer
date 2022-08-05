@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/killstreak/godlike.vsnd",
+			resource:"sounds/announcer/killstreak/godlike_a.vsnd",
+			resource:"sounds/announcer/killstreak/godlike_b.vsnd",
+			resource:"sounds/announcer/killstreak/godlike_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

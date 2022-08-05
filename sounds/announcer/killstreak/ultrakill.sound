@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/killstreak/ultrakill.vsnd",
+			resource:"sounds/announcer/killstreak/ultrakill_a.vsnd",
+			resource:"sounds/announcer/killstreak/ultrakill_b.vsnd",
+			resource:"sounds/announcer/killstreak/ultrakill_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

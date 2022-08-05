@@ -11,6 +11,7 @@
 		Sounds = 
 		[
 			resource:"sounds/announcer/special/countdown.vsnd",
+			resource:"sounds/announcer/special/countdown_b.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

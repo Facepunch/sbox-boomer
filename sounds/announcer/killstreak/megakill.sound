@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/killstreak/megakill.vsnd",
+			resource:"sounds/announcer/killstreak/megakill_a.vsnd",
+			resource:"sounds/announcer/killstreak/megakill_b.vsnd",
+			resource:"sounds/announcer/killstreak/megakill_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

@@ -10,7 +10,8 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/killstreak/monsterkill.vsnd",
+			resource:"sounds/announcer/killstreak/monsterkill_a.vsnd",
+			resource:"sounds/announcer/killstreak/monsterkill_b.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

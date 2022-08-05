@@ -10,7 +10,7 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/special/2_minutes_remain.vsnd",
+			resource:"sounds/announcer/special/remaining_02mn.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

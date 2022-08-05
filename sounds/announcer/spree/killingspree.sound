@@ -10,7 +10,9 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/spree/killingspree.vsnd",
+			resource:"sounds/announcer/spree/killingspree_a.vsnd",
+			resource:"sounds/announcer/spree/killingspree_b.vsnd",
+			resource:"sounds/announcer/spree/killingspree_c.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

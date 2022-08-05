@@ -10,7 +10,8 @@
 		Decibels = 70
 		Sounds = 
 		[
-			resource:"sounds/announcer/special/midair1.vsnd",
+			resource:"sounds/announcer/special/midair_a.vsnd",
+			resource:"sounds/announcer/special/midair_b.vsnd",
 		]
 		SelectionMode = "Random"
 		MaximumDistance = 1143.9335

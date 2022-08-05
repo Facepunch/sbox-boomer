@@ -4,9 +4,14 @@ partial class DeathmatchGame : Game
 {
 	[Net]
 	private bool CountDownPlayed { get; set; } = false;
+	[Net]
+	private bool RoundBeginsPlayed { get; set; } = false;
 
 	[Net]
 	private bool FiveWarnPlayed { get; set; } = false;
+	
+	[Net]
+	private bool TenMinWarnPlayed { get; set; } = false;
 
 	[Net]
 	private bool TwoWarnPlayed { get; set; } = false;
@@ -20,11 +25,22 @@ partial class DeathmatchGame : Game
 	[Event.Tick.Server]
 	public void Tick()
 	{
-		if ( StateTimer <= 4 && !CountDownPlayed && CurrentState == GameStates.Warmup )
+		if ( StateTimer <= 6 && !RoundBeginsPlayed && CurrentState == GameStates.Warmup )
+		{
+			RoundBeginsPlayed = true;
+			Sound.FromScreen( "roundbeginsin" );
+		}
+			if ( StateTimer <= 4 && !CountDownPlayed && CurrentState == GameStates.Warmup )
 		{
 			CountDownPlayed = true;
 			Sound.FromScreen( "countdown" );
 			_ = RoundPlay();
+		}
+
+		if ( StateTimer <= 600 && !TenMinWarnPlayed && CurrentState == GameStates.Live )
+		{
+			TenMinWarnPlayed = true;
+			Sound.FromScreen( "10_minute_warning" );
 		}
 
 		if ( StateTimer <= 300 && !FiveWarnPlayed && CurrentState == GameStates.Live )
@@ -55,7 +71,7 @@ partial class DeathmatchGame : Game
 	private async Task RoundPlay()
 	{
 		await Task.Delay( 5000 );
-		Sound.FromScreen( "Play" );
+		Sound.FromScreen( "Fight" );
 	}
 
 	private async Task TenCountDown()
