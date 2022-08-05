@@ -34,8 +34,8 @@ internal class ClientSettings
 
 internal enum WeaponPositionSetting
 {
-	Left,
 	Center,
+	Left,
 	Right
 }
 
