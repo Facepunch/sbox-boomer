@@ -121,7 +121,10 @@
 			new FallCameraModifier( jumpPower );
 
 			if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
-			Sound.FromWorld( "jump.single", ctrl.Position );
+			if ( !ClientSettings.Current.MuteGrunting )
+			{
+				Sound.FromWorld( "jump.single", ctrl.Position );
+			}
 		}
 
 		// todo: really need to do this in a way we can define simply

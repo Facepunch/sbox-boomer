@@ -15,6 +15,7 @@ internal class ClientSettings
 	public GoreModeSetting GoreMode { get; set; }
 	public bool WalkBob { get; set; } = true;
 	public bool HearOwnFootsteps { get; set; } = true;
+	public bool MuteGrunting { get; set; } = false;
 
 	public void Save() => Cookie.Set( "boomer.clientsettings", this );
 
