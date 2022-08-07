@@ -50,10 +50,6 @@ partial class DmViewModel : BaseViewModel
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
 		if ( !ClientSettings.Current.WalkBob ) return;
 
-		// Shifts viewmodel to center of screen (temporary til we do it in model)
-		//Position += Rotation.Right * -17f;
-		//Position += Vector3.Up * -10f;
-
 		// Slide Tilt
 		MyRoll = MyRoll.LerpTo( TargetRoll, Time.Delta * 10f );
 		Rotation *= Rotation.From( 0, 0, MyRoll );
@@ -68,7 +64,6 @@ partial class DmViewModel : BaseViewModel
 		if ( ShouldBob && Owner.GroundEntity != null )
 		{
 			WalkBob += Time.Delta * 25.0f * speed;
-
 		}
 
 		Position += up * MathF.Sin( WalkBob ) * speed * -1;
