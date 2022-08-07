@@ -45,12 +45,6 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 		player.SetAnimParameter( "b_attack", true );
 
 		base.AttackPrimary();
-
-		if ( IsServer && player.AmmoCount( AmmoType.Grenade ) == 0 )
-		{
-			Delete();
-			player.SwitchToBestWeapon();
-		}
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )
