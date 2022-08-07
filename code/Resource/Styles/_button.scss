@@ -9,5 +9,10 @@
 
     &:hover, &.active {
         background-color: rgba($yellow2 1);
+        sound-in: button_hover;
+    }
+
+    &:active {
+        sound-in: button_click;
     }
 }
