@@ -27,6 +27,13 @@ namespace Boomer
 			Editor.SetTarget( Settings );
 		}
 
+		protected override void PostTemplateApplied()
+		{
+			base.PostTemplateApplied();
+
+			Editor.SetTarget( Settings );
+		}
+
 		public void Close() => SetOpen( false );
 
 		private static SettingsMenu Current;
