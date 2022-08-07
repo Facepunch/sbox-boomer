@@ -26,7 +26,7 @@ public class InventoryBar : Panel
 		if ( player == null ) return;
 
 		Weapons.Clear();
-		Weapons.AddRange( player.Children.Select( x => x as DeathmatchWeapon ).Where( x => x.IsValid() && x.IsUsable() ) );
+		Weapons.AddRange( player.Children.Select( x => x as DeathmatchWeapon ).Where( x => x.IsValid() ) );
 
 		if ( Weapons.Count != Container.ChildrenCount )
 		{
