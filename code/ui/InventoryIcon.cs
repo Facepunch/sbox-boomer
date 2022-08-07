@@ -36,18 +36,22 @@ class InventoryIcon : Panel
 		AddClass( weapon.ClassName );
 	}
 
-	internal void TickSelection( DeathmatchWeapon selectedWeapon )
-	{
-		SetClass( "active", selectedWeapon == Weapon );
-		SetClass( "empty", !Weapon?.IsUsable() ?? true );
-	}
-
 	public override void Tick()
 	{
 		base.Tick();
 
-		if ( !Weapon.IsValid() || Weapon.Owner != Local.Pawn )
+		if( !Weapon.IsValid || Weapon.Owner != Local.Pawn )
+		{
 			Delete( true );
+			return;
+		}
+
+		var active = Weapon.Owner is BoomerPlayer pl && pl.ActiveChild == Weapon;
+		var empty = !Weapon.IsUsable();
+
+		SetClass( "active", active );
+		SetClass( "empty", empty );
+
 		if(DeathmatchGame.UnlimitedAmmo)
 			Value.Text = "∞";
 		else

@@ -129,10 +129,6 @@ public class InventoryBar : Panel
 			LastWeapon = oldSelected;
 		}
 
-		var icons = Container.ChildrenOfType<InventoryIcon>();
-		foreach ( var icon in icons )
-			icon.TickSelection( SelectedWeapon );
-
 		input.MouseWheel = 0;
 	}
 
