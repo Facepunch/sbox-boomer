@@ -11,17 +11,13 @@ internal class SettingRow : Panel
 	public Label Label { get; }
 	public Panel ValueArea { get; }
 
-	private object Target;
-	private PropertyInfo Property;
-
 	public SettingRow( object target, PropertyInfo property ) : this()
 	{
-		Target = target;
-		Property = property;
+		var di = DisplayInfo.ForProperty( property );
 
-		Label.Text = property.Name;
+		Label.Text = di.Name;
 
-		if( property.PropertyType == typeof( bool ) )
+		if ( property.PropertyType == typeof( bool ) )
 		{
 			var button = ValueArea.Add.Button( string.Empty, "toggle" );
 			button.SetClass( "active", (bool)property.GetValue( target ) );

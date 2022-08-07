@@ -4,6 +4,7 @@ namespace Boomer;
 internal class ClientSettings
 {
 
+	[Display(Name = "Weapon Position", Description = "Screen position of your viewmodel")]
 	public WeaponPositionSetting WeaponPosition { get; set; }
 	public bool TennisBallMode { get; set; } 
 	// todo: TennisBallModeColor color editor
