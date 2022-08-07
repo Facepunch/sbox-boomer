@@ -43,6 +43,10 @@ SettingsMenu {
     }
 }
 
+ObjectEditor {
+    overflow: scroll;
+}
+
 SettingRow {
     background-color: rgba(black .1);
     color: white;
@@ -50,6 +54,7 @@ SettingRow {
     align-items: center;
     font-size: 24px;
     font-family: Teko-SemiBold;
+    flex-shrink: 0;
 
     &:hover {
         background-color: rgba(black .3);
