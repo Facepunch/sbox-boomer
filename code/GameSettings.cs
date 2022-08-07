@@ -30,6 +30,12 @@ internal class ClientSettings
 		}
 	}
 
+	public static void Reset()
+	{
+		current = new();
+		current.Save();
+	}
+
 }
 
 internal enum WeaponPositionSetting

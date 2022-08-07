@@ -10,28 +10,32 @@ namespace Boomer
 
 		public ObjectEditor Editor { get; protected set; }
 
-		private ClientSettings Settings;
-
 		public SettingsMenu()
 		{
 			Current = this;
-			Settings = ClientSettings.Current;
 
-			Editor.SetTarget( Settings );
+			Editor.SetTarget( ClientSettings.Current );
 		}
 
 		public override void OnHotloaded()
 		{
 			base.OnHotloaded();
 
-			Editor.SetTarget( Settings );
+			Editor.SetTarget( ClientSettings.Current );
 		}
 
 		protected override void PostTemplateApplied()
 		{
 			base.PostTemplateApplied();
 
-			Editor.SetTarget( Settings );
+			Editor.SetTarget( ClientSettings.Current );
+		}
+
+		public void SetDefaults()
+		{
+			ClientSettings.Reset();
+
+			Editor.SetTarget( ClientSettings.Current );
 		}
 
 		public void Close() => SetOpen( false );
@@ -46,7 +50,7 @@ namespace Boomer
 
 			if ( e.Name == "save" )
 			{
-				Settings.Save();
+				ClientSettings.Current.Save();
 			}
 		}
 
