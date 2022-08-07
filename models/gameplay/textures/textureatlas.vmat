@@ -35,12 +35,8 @@ Layer0
 	g_flAttenuation "1.000"
 	g_flIlluminateAmount "0.058"
 	g_flRimPower "10.000"
-	g_flShininess "0.102"
-	g_flSpecularIntensive "0.017"
 	g_vDiffuseColor "[1.000000 0.913726 0.913726 1.000000]"
 	g_vRimColor "[0.000000 0.000000 1.000000 1.000000]"
-	g_vShadowTint "[0.000000 0.000000 0.000000 1.000000]"
-	g_vSpecularColor "[1.000000 1.000000 1.000000 0.000000]"
 
 	DynamicParams
 	{

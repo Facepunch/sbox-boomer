@@ -44,7 +44,7 @@ inventoryicon {
 
 	.ammocount {
 		position: absolute;
-        right: 150px;
+		right: 150px;
 		text-align: left;
 		font-size: 32px;
 		font-weight: bolder;
@@ -74,12 +74,10 @@ inventoryicon {
 	}
 
 	&.empty {
-		opacity: 0.2;
-		background-color: #c004;
-		color: #f002;
+		opacity: .1;
 
 		.icon {
-			background-color: #f50;
+			background-image-tint: #f50;
 		}
 	}
 }
