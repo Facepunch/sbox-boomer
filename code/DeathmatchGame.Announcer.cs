@@ -77,7 +77,6 @@ partial class DeathmatchGame : Game
 	[ClientRpc]
 	private void PlayAnnouncerSound( string sound )
 	{
-		Log.Error( ClientSettings.Current.AnnouncerVolume );
 		Sound.FromScreen( sound ).SetVolume( ClientSettings.Current.AnnouncerVolume );
 	}
 
