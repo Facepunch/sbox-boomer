@@ -640,6 +640,8 @@ public partial class BoomerPlayer : Player
 
 		ResetDmgCount = 0;
 
+		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
+
 		var number = amount;
 
 		if ( amount < 10 )
@@ -691,6 +693,9 @@ public partial class BoomerPlayer : Player
 
 		ResetDmgCount = 0;
 		var number = amount;
+
+		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
+
 		if ( armour == 0 )
 		{
 	
