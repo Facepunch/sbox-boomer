@@ -24,12 +24,21 @@
 	.chat_canvas {
 		flex-direction: column;
 		align-items: flex-start;
+		overflow: scroll;
+		max-height: 480px;
 	}
 
 	&.open {
+		pointer-events: all;
+
 		textentry {
 			opacity: 1;
 			backdrop-filter: blur( 10px );
+			cursor: text;
+		}
+
+		.faded {
+			opacity: 1;
 		}
 	}
 }
@@ -39,7 +48,7 @@ boomerchatentry {
 	margin-bottom: 5px;
 	border-radius: 50px;
 	color: white;
-	transition: all 0.1s ease-out;
+	transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 	opacity: 1;
 	max-height: 200px;
 	flex-shrink: 0;
@@ -60,9 +69,8 @@ boomerchatentry {
 		transform: scale( 0 );
 	}
 
-	&:outro {
+	&.faded {
 		opacity: 0;
-		transition: all 2s ease-out;
 	}
 
 	image {

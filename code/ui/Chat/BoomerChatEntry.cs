@@ -22,10 +22,7 @@ namespace Boomer.UI
 		{
 			base.Tick();
 
-			if ( TimeSinceBorn > 10 ) 
-			{ 
-				Delete();
-			}
+			SetClass( "faded", TimeSinceBorn > 10f );
 		}
 	}
 }

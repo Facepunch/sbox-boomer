@@ -17,6 +17,7 @@ namespace Boomer.UI
 			StyleSheet.Load( "/ui/chat/BoomerChatBox.scss" );
 
 			Canvas = Add.Panel( "chat_canvas" );
+			Canvas.PreferScrollToBottom = true;
 
 			Input = Add.TextEntry( "" );
 			Input.AddEventListener( "onsubmit", () => Submit() );
@@ -31,6 +32,7 @@ namespace Boomer.UI
 		{
 			AddClass( "open" );
 			Input.Focus();
+			Canvas.TryScrollToBottom();
 		}
 
 		void Close()
@@ -67,6 +69,8 @@ namespace Boomer.UI
 			{
 				e.SetClass( "is-lobby", true );
 			}
+
+			Canvas.TryScrollToBottom();
 		}
 
 
