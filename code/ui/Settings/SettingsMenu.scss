@@ -92,5 +92,20 @@ SettingRow {
 
     .slider {
         min-width: 200px;
+
+        .track {
+            background-color: rgba($yellow, .15);
+            border-radius: 2px;
+        }
+
+        .track .inner {
+            background-color: $yellow2;
+            border-radius: 2px;
+        }
+
+        .thumb {
+            background-color: $yellow2;
+            border-radius: 2px;
+        }
     }
 }
