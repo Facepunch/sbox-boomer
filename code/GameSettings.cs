@@ -1,4 +1,6 @@
 ﻿
+using Boomer.UI;
+
 namespace Boomer;
 
 internal class ClientSettings
@@ -17,8 +19,8 @@ internal class ClientSettings
 	public bool WalkBob { get; set; } = true;
 	public bool HearOwnFootsteps { get; set; } = true;
 	public bool MuteGrunting { get; set; } = false;
-	[MinMax(0f, 1f)]
-	public float TestFloat { get; set; } = .5f;
+	[MinMax(0f, 1f), SliderStep(.1f)]
+	public float AnnouncerVolume { get; set; } = 1f;
 
 	public void Save() => Cookie.Set( "boomer.clientsettings", this );
 
