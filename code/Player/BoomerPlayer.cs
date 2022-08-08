@@ -631,6 +631,11 @@ public partial class BoomerPlayer : Player
 		ResetDmgCount = 0;
 
 		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
+		if ( ClientSettings.Current.BatchDamageNumbers )
+		{
+			DamageNumbers.Enqueue( pos, amount, true );
+			return;
+		}
 
 		HitIndicator.Current?.OnHit( pos, amount );
 		Sound.FromScreen( "hitsound" ).SetPitch( 1 + armorinv * 1 );
@@ -643,15 +648,17 @@ public partial class BoomerPlayer : Player
 		LastDamageDealt += amount;
 		ResetDmgCount = 0;
 
-		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
-
 		HitIndicator.Current?.OnHit( pos, amount );
 		Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv * 1 );
 
-		if( armour == 0 )
+		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
+		if ( ClientSettings.Current.BatchDamageNumbers )
 		{
-			DamageNumbers.Create( pos, amount );
+			DamageNumbers.Enqueue( pos, amount );
+			return;
 		}
+
+		DamageNumbers.Create( pos, amount );
 	}
 
 	public TimeSince TimeSinceDamage = 1.0f;
