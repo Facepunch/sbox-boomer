@@ -622,117 +622,35 @@ public partial class BoomerPlayer : Player
 		Sound.FromScreen( "killsound" ).SetVolume( 10f );
 	}
 
-	public Particles DMGParticle { get; set; }
-
 	public float LastDamageDealt { get; set; }
 
 	[ClientRpc]
 	public void DidArmorDamage( Vector3 pos, float amount, float armorinv)
 	{
-		Sound.FromScreen( "hitsound" )
-			.SetPitch( 1 + armorinv * 1 );
-
-		HitIndicator.Current?.OnHit( pos, amount );
-
-		Log.Info( $"You Did {amount} Armour Damage" );
-
 		LastDamageDealt += amount;
-
 		ResetDmgCount = 0;
 
 		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
 
-		var number = amount;
-
-		if ( amount < 10 )
-		{
-			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/armour_dmg_number.vpcf", pos );
-
-			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
-
-		}
-		else if ( amount < 100 )
-		{
-			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/armour_dmg_number.vpcf", pos );
-
-			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
-			DMGParticle.SetPositionComponent( 22, 1, 1 );
-
-			number /= 10;
-			DMGParticle.SetPositionComponent( 21, 0, number % 10 );
-		}
-		else
-		{
-			DMGParticle = Particles.Create( "particles/gameplay/damagenumber/armour_dmg_number.vpcf", pos );
-
-			DMGParticle.SetPositionComponent( 21, 2, number % 1 );
-			DMGParticle.SetPositionComponent( 22, 2, 1 );
-
-			number /= 10;
-			DMGParticle.SetPositionComponent( 21, 1, number % 10 );
-			DMGParticle.SetPositionComponent( 22, 1, 1 );
-
-			number /= 10;
-
-			DMGParticle.SetPositionComponent( 21, 0, number % 100 );
-			DMGParticle.SetPositionComponent( 22, 0, 1 );
-		}
+		HitIndicator.Current?.OnHit( pos, amount );
+		Sound.FromScreen( "hitsound" ).SetPitch( 1 + armorinv * 1 );
+		DamageNumbers.Create( pos, amount, true );
 	}
 
 	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv, float armour )
 	{
-		Sound.FromScreen( "hitsound" )
-			.SetPitch( 1 + healthinv * 1 );
-
-		HitIndicator.Current?.OnHit( pos, amount );
-
-		Log.Info( $"You Did {amount} Damage" );
-
 		LastDamageDealt += amount;
-
 		ResetDmgCount = 0;
-		var number = amount;
 
 		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
 
-		if ( armour == 0 )
+		HitIndicator.Current?.OnHit( pos, amount );
+		Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv * 1 );
+
+		if( armour == 0 )
 		{
-	
-			if ( amount < 10 )
-			{
-				DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
-
-				DMGParticle.SetPositionComponent( 21, 0, number % 10 );
-
-			}
-			else if ( amount < 100 )
-			{
-				DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
-
-				DMGParticle.SetPositionComponent( 21, 1, number % 10 );
-				DMGParticle.SetPositionComponent( 22, 1, 1 );
-
-				number /= 10;
-				DMGParticle.SetPositionComponent( 21, 0, number % 10 );
-			}
-			else
-			{
-				DMGParticle = Particles.Create( "particles/gameplay/damagenumber/dmg_number.vpcf", pos );
-
-				DMGParticle.SetPositionComponent( 21, 2, number % 1 );
-				DMGParticle.SetPositionComponent( 22, 2, 1 );
-
-				number /= 10;
-				DMGParticle.SetPositionComponent( 21, 1, number % 10 );
-				DMGParticle.SetPositionComponent( 22, 1, 1 );
-
-				number /= 10;
-
-				DMGParticle.SetPositionComponent( 21, 0, number % 100 );
-				DMGParticle.SetPositionComponent( 22, 0, 1 );
-
-			}
+			DamageNumbers.Create( pos, amount );
 		}
 	}
 
