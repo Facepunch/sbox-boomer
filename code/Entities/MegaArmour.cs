@@ -5,9 +5,9 @@ namespace Boomer;
 /// <summary>
 /// Gives 25 health points.
 /// </summary>
-[Library( "bm_megaarmour" ), HammerEntity]
+[Library( "boomer_megaarmour" ), HammerEntity]
 [EditorModel( "models/gameplay/mega_armour/mega_armour.vmdl" )]
-[Title( "Mega Armour" )]
+[Title( "Mega Armour" ), Category( "PickUps" )]
 partial class MegaArmour : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/mega_armour/mega_armour.vmdl" );
@@ -43,7 +43,7 @@ partial class MegaArmour : AnimatedEntity, IRespawnableEntity
 			PickEffect( pl );
 			PlayPickupSound();
 
-			PickupFeed.OnPickup( To.Single( pl ), $"+Mega Health" );
+			PickupFeed.OnPickup( To.Single( pl ), $"+Mega Armour" );
 			ItemRespawn.Taken( this, RespawnTime );
 
 			Delete();

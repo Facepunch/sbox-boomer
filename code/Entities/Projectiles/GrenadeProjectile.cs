@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-[Library( "dm_grenadelauncher_grenade" )]
+[Library( "boomer_grenadelauncher_grenade" )]
 public partial class GrenadeProjectile : BouncingProjectile
 {
 }

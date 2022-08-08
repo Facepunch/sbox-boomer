@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Boomer;
 
-[Library( "shooter_slowmovement" )]
+[Library( "boomer_slowmovement" )]
 [Display( Name = "Slow Movement", GroupName = "Shooter", Description = "A pad that launches players toward a target entity" ), Category( "Gameplay" ), Icon( "sports_gymnastics" )]
 [AutoApplyMaterial( "materials/tools/toolstrigger.vmat" )]
 [HammerEntity]

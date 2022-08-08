@@ -212,7 +212,7 @@ public partial class BoomerPlayer : Player
 			{
 				for ( int i = 0; i < 2; i++ )
 				{
-					var armour = new Battery
+					var armour = new Armour
 					{
 						Position = Position = Position + Vector3.Up * 30
 					};

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Boomer;
 
-[Library( "shooter_jumppad" )]
+[Library( "boomer_jumppad" )]
 [Display( Name = "Jump Pad", GroupName = "Shooter", Description = "A pad that launches players toward a target entity" ), Category( "Gameplay" ), Icon( "sports_gymnastics" )]
 [AutoApplyMaterial( "materials/tools/toolstrigger.vmat" )]
 [Line( "targetname", "targetentity" )]

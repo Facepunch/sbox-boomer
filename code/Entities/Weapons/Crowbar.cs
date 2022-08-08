@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-[Library( "dm_crowbar" ), HammerEntity]
+[Library( "boomer_crowbar" ), HammerEntity]
 [EditorModel( "models/dm_crowbar.vmdl" )]
 [Title(  "Crowbar" ), Category( "Weapons" )]
 partial class Crowbar : DeathmatchWeapon

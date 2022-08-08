@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-[Library( "dm_grenadelauncher" ), HammerEntity]
+[Library( "boomer_grenadelauncher" ), HammerEntity]
 [EditorModel( "weapons/rust_pistol/rust_pistol.vmdl" )]
 [Title( "GrenadeLauncher" ), Category( "Weapons" )]
 partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>

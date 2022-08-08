@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace Boomer
 {
-	[Library( "bm_path_rail" )]
+	[Library( "boomer_path_rail" )]
 	[Display( Name = "Path Rail", GroupName = "Boomer", Description = "A rail path the player can slide along." )]
 	[Path( "path_generic_node" )]
 	[HammerEntity]

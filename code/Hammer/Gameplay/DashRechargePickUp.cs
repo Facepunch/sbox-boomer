@@ -2,7 +2,7 @@
 
 namespace Boomer;
 
-[Library( "shooter_dashrecharge", Description = "Dash Recharge" )]
+[Library( "boomer_dashrecharge", Description = "Dash Recharge" )]
 [EditorModel( "models/gameplay/dashrecharge/dashrecharge.vmdl", FixedBounds = true )]
 [Display( Name = "Dash Recharge", GroupName = "Shooter", Description = "Coin Pickup." ), Category( "Gameplay" ), Icon( "currency_bitcoin" )]
 [HammerEntity]

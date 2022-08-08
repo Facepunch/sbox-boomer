@@ -5,9 +5,9 @@ namespace Boomer;
 /// <summary>
 /// Gives 25 health points.
 /// </summary>
-[Library( "dm_healthkit" ), HammerEntity]
+[Library( "boomer_healthkit" ), HammerEntity]
 [EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
-[Title( "Health Kit" )]
+[Title( "Health Kit" ), Category( "PickUps" )]
 partial class HealthKit : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );

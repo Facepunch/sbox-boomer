@@ -2,7 +2,7 @@
 
 namespace Boomer;
 
-[Library( "dm_lightninggun" ), HammerEntity]
+[Library( "boomer_lightninggun" ), HammerEntity]
 [EditorModel( "weapons/rust_shotgun/rust_shotgun.vmdl" )]
 [Title( "LightningGun" ), Category( "Weapons" )]
 partial class LightningGun : DeathmatchWeapon

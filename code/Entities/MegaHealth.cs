@@ -5,9 +5,9 @@ namespace Boomer;
 /// <summary>
 /// Gives 25 health points.
 /// </summary>
-[Library( "bm_megahealth" ), HammerEntity]
+[Library( "boomer_megahealth" ), HammerEntity]
 [EditorModel( "models/gameplay/mega_health/mega_health.vmdl" )]
-[Title( "Mega Health" )]
+[Title( "Mega Health" ), Category( "PickUps" )]
 partial class MegaHealth : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/mega_health/mega_health.vmdl" );

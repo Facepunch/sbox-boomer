@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-[Library( "shooter_startingweapons", Description = "Starting Weapons" )]
+[Library( "boomer_startingweapons", Description = "Starting Weapons" )]
 [EditorSprite( "editor/ent_logic.vmat" )]
 [Display( Name = "Starting Weapons", GroupName = "Shooter", Description = "Coin Pickup." ), Category( "Gameplay" ), Icon( "currency_bitcoin" )]
 [HammerEntity]

@@ -3,10 +3,10 @@
 /// <summary>
 /// Gives 25 Armour
 /// </summary>
-[Library( "dm_battery" ), HammerEntity]
+[Library( "boomer_armour" ), HammerEntity]
 [EditorModel( "models/dm_battery.vmdl" )]
-[Title(  "Battery" )]
-partial class Battery : AnimatedEntity, IRespawnableEntity
+[Title( "Armour" ), Category( "PickUps" )]
+partial class Armour : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/armour/armourkit.vmdl" );
 	

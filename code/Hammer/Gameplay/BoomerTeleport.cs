@@ -5,7 +5,7 @@ namespace Boomer;
 /// <summary>
 /// A simple trigger volume that teleports entities that touch it.
 /// </summary>
-[Library( "bm_teleport" )]
+[Library( "boomer_teleport" )]
 [HammerEntity, Solid]
 [Title( "Teleport Volume" ), Category( "Triggers" ), Icon( "auto_fix_normal" )]
 public partial class BoomerTeleportVolumeEntity : BaseTrigger

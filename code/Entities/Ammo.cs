@@ -54,7 +54,7 @@ partial class BaseAmmo : ModelEntity, IRespawnableEntity
 	}
 }
 
-[Library( "bm_nails" ), HammerEntity]
+[Library( "boomer_nails" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/nails/bm_nails.vmdl" )]
 [Title( "Nail Clip" ), Category( "Ammo" )]
 partial class AmmoNails : BaseAmmo
@@ -65,7 +65,7 @@ partial class AmmoNails : BaseAmmo
 
 }
 
-[Library( "bm_grenades" ), HammerEntity]
+[Library( "boomer_grenades" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/grenades/bm_grenades.vmdl" )]
 [Title( "Grenades" ), Category( "Ammo" )]
 partial class AmmoGrenades : BaseAmmo
@@ -78,7 +78,7 @@ partial class AmmoGrenades : BaseAmmo
 
 
 
-[Library( "bm_ammobuckshot" ), HammerEntity]
+[Library( "boomer_ammobuckshot" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" )]
 [Title( "Buckshot" ), Category( "Ammo" )]
 partial class AmmoBuckshot : BaseAmmo
@@ -89,7 +89,7 @@ partial class AmmoBuckshot : BaseAmmo
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" );
 }
 
-[Library( "bm_rockets" ), HammerEntity]
+[Library( "boomer_rockets" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/rockets/bm_rockets.vmdl" )]
 [Title( "Rockets" ), Category( "Ammo" )]
 partial class AmmoRockets : BaseAmmo
@@ -100,7 +100,7 @@ partial class AmmoRockets : BaseAmmo
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rockets/bm_rockets.vmdl" );
 }
 
-[Library( "bm_rails" ), HammerEntity]
+[Library( "boomer_rails" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/rails/bm_rails.vmdl" )]
 [Title( "Rails" ), Category( "Ammo" )]
 partial class AmmoRails: BaseAmmo
@@ -111,7 +111,7 @@ partial class AmmoRails: BaseAmmo
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rails/bm_rails.vmdl" );
 }
 
-[Library( "bm_lightning" ), HammerEntity]
+[Library( "boomer_lightning" ), HammerEntity]
 [EditorModel( "models/gameplay/ammo/lightning/bm_lightning.vmdl" )]
 [Title( "Lightning" ), Category( "Ammo" )]
 partial class AmmoLightning : BaseAmmo
