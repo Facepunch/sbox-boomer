@@ -52,6 +52,20 @@ internal class SettingRow : Panel
 				CreateEvent( "save" );
 			} );
 		}
+
+		if( property.PropertyType == typeof( float ) )
+		{
+			var value = (float)property.GetValue( target );
+			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
+			var min = minmax?.MinValue ?? 0f;
+			var max = minmax?.MaxValue ?? 1000f;
+			var slider = ValueArea.Add.SliderWithEntry( min, max, .1f );
+			slider.Bind( "value", target, property.Name );
+			slider.AddEventListener( "value.changed", () =>
+			{
+				CreateEvent( "save" );
+			} );
+		}
 	}
 
 	public SettingRow()

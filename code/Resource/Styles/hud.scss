@@ -11,7 +11,8 @@ $yellow2: #FAB002;
 @import "_pickupfeed.scss";
 @import "_scoreboard.scss";
 @import "_button.scss";
-@import "styles/base/_popup.scss";
+@import "styles/base.scss";
+@import "styles/form.scss";
 
 HudRootPanel {
     background-color: rgba( #333, 0 );

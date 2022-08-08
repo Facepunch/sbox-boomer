@@ -17,6 +17,8 @@ internal class ClientSettings
 	public bool WalkBob { get; set; } = true;
 	public bool HearOwnFootsteps { get; set; } = true;
 	public bool MuteGrunting { get; set; } = false;
+	[MinMax(0f, 1f)]
+	public float TestFloat { get; set; } = .5f;
 
 	public void Save() => Cookie.Set( "boomer.clientsettings", this );
 
