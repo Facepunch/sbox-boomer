@@ -624,11 +624,19 @@ public partial class BoomerPlayer : Player
 
 	public float LastDamageDealt { get; set; }
 
+	private TimeSince TimeSinceArmorDamageEffect;
 	[ClientRpc]
 	public void DidArmorDamage( Vector3 pos, float amount, float armorinv)
 	{
 		LastDamageDealt += amount;
 		ResetDmgCount = 0;
+
+		if ( TimeSinceArmorDamageEffect > .1f )
+		{
+			HitIndicator.Current?.OnHit( pos, amount );
+			Sound.FromScreen( "hitsound" ).SetPitch( 1 + armorinv * 1 );
+			TimeSinceArmorDamageEffect = 0f;
+		}
 
 		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
 		if ( ClientSettings.Current.BatchDamageNumbers )
@@ -637,19 +645,22 @@ public partial class BoomerPlayer : Player
 			return;
 		}
 
-		HitIndicator.Current?.OnHit( pos, amount );
-		Sound.FromScreen( "hitsound" ).SetPitch( 1 + armorinv * 1 );
 		DamageNumbers.Create( pos, amount, true );
 	}
 
+	private TimeSince TimeSinceDamageEffect;
 	[ClientRpc]
 	public void DidDamage( Vector3 pos, float amount, float healthinv, float armour )
 	{
 		LastDamageDealt += amount;
 		ResetDmgCount = 0;
 
-		HitIndicator.Current?.OnHit( pos, amount );
-		Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv * 1 );
+		if( TimeSinceDamageEffect > .1f )
+		{
+			HitIndicator.Current?.OnHit( pos, amount );
+			Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv * 1 );
+			TimeSinceDamageEffect = 0f;
+		}
 
 		if ( !ClientSettings.Current.ShowDamageNumbers ) return;
 		if ( ClientSettings.Current.BatchDamageNumbers )
