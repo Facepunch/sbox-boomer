@@ -4,18 +4,21 @@
 SettingsMenu {
     position: absolute;
     z-index: 999;
-    width: 60%;
+    width: 40%;
     height: 75%;
     flex-direction: column;
-    left: 20%;
+    left: -100%;
     top: 12.5%;
     opacity: 0;
     font-size: 34px;
     font-family: Teko-SemiBold;
+    transition: all 0.3s ease-out;
 
     &.open {
         pointer-events: all;
         opacity: 1;
+        left: 0%;
+        transition: all 0.3s ease-out;
     }
 
     .body {
@@ -29,7 +32,7 @@ SettingsMenu {
     }
 
     .navbar button {
-        border-radius: 10px 10px 0 0;
+        border-radius: 0px 00px 0 0;
         backdrop-filter: blur(15px);
     }
 
@@ -75,7 +78,7 @@ SettingRow {
     Button.toggle {
         border: 2px solid black;
         background-color: rgba($yellow .01);
-        border-radius: 10%;
+        border-radius: 0%;
         width: 32px;
         height: 32px;
         padding: 0;
@@ -95,17 +98,17 @@ SettingRow {
 
         .track {
             background-color: rgba($yellow, .15);
-            border-radius: 2px;
+            border-radius: 0px;
         }
 
         .track .inner {
             background-color: $yellow2;
-            border-radius: 2px;
+            border-radius: 0px;
         }
 
         .thumb {
             background-color: $yellow2;
-            border-radius: 2px;
+            border-radius: 0px;
         }
     }
 }
