@@ -68,7 +68,7 @@ partial class MapVoteEntity : Entity
 		if ( Votes.Count == 0 )
 			return;
 
-		WinningMap = Votes.GroupBy( x => x.Value ).OrderBy( x => x.Count() ).First().Key;
+		WinningMap = Votes.GroupBy( x => x.Value ).OrderByDescending( x => x.Count() ).First().Key;
 	}
 
 	void SetVote( Client client, string map )
