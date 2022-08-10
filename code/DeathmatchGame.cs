@@ -103,7 +103,6 @@ partial class DeathmatchGame : Game
 		var spawnpoint = All
 			.OfType<SpawnPoint>()
 			.OrderByDescending( x => SpawnpointWeight( pawn, x ) )
-			.ThenBy( x => Guid.NewGuid() )
 			.FirstOrDefault();
 
 		if ( spawnpoint == null )
@@ -134,7 +133,8 @@ partial class DeathmatchGame : Game
 	/// </summary>
 	public float SpawnpointWeight( Entity pawn, Entity spawnpoint )
 	{
-		float distance = 0;
+		// We want to find the closest player (worst weight)
+		float distance = float.MaxValue;
 
 		foreach ( var client in Client.All )
 		{
@@ -143,7 +143,7 @@ partial class DeathmatchGame : Game
 			if ( client.Pawn.LifeState != LifeState.Alive ) continue;
 
 			var spawnDist = (spawnpoint.Position - client.Pawn.Position).Length;
-			distance = MathF.Max( distance, spawnDist );
+			distance = MathF.Min( distance, spawnDist );
 		}
 
 		return distance;
