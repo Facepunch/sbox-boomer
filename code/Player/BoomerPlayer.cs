@@ -301,7 +301,7 @@ public partial class BoomerPlayer : Player
 		}
 
 		Controller = null;
-		CameraMode = new SpectateRagdollCamera();
+		CameraMode = new BoomerRagdollCamera();
 
 		EnableAllCollisions = false;
 		EnableDrawing = false;
