@@ -496,6 +496,9 @@ public partial class BoomerPlayer : Player
 
 	protected static async Task ShowDeathScreen( BoomerPlayer attacker )
 	{
+		if ( !attacker.IsValid() )
+			return;
+
 		KilledHud.Current.AttackerName.SetText( $"{attacker.Client.Name} Killed You" );
 		KilledHud.Current.AttackerAvatar.Style.SetBackgroundImage( $"avatar:{attacker.Client.PlayerId}" );
 		KilledHud.Current.AttackerHealth.SetText( $"{(int)attacker.Health}" );
