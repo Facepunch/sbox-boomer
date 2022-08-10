@@ -16,12 +16,18 @@ namespace Sandbox
 		public override void Update()
 		{
 			var player = Local.Client;
-			if ( player == null ) return;
+			if ( !player.IsValid() ) return;
 
 			// lerp the focus point
 			FocusPoint = Vector3.Lerp( FocusPoint, GetSpectatePoint(), Time.Delta * 5.0f );
 
-			Position = FocusPoint + GetViewOffset();
+			var tr = Trace.Ray( FocusPoint + Vector3.Up * 12, FocusPoint + GetViewOffset() )
+				.WorldOnly()
+				.Ignore( player.Pawn )
+				.Radius( 6 )
+				.Run();
+
+			Position = tr.EndPosition;
 			Rotation = Input.Rotation;
 			FieldOfView = FieldOfView.LerpTo( 90, Time.Delta * 3.0f );
 
