@@ -20,6 +20,7 @@ public class HudRootPanel : RootPanel
 
 		AddChild<InventoryBar>();
 		AddChild<PickupFeed>();
+		AddChild<KilledHud>();
 
 		AddChild<BoomerChatBox>();
 		AddChild<Speedo>();

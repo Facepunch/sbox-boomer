@@ -206,7 +206,7 @@ public partial class BoomerPlayer : Player
 		coffin.PhysicsBody.Velocity = Velocity + Rotation.Forward * 100;
 
 		coffin.Populate( this );
-
+		
 		if ( IsServer )
 			using ( Prediction.Off() )
 			{
@@ -254,7 +254,7 @@ public partial class BoomerPlayer : Player
 
 			attacker.PlaySoundFromScreen( To.Single( attacker ), "killsound" );
 
-
+	
 			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 && LastDamage.Weapon is RailGun)
 			{
 				attacker.PlaySoundFromScreen( To.Single( attacker ), "headshot" );
@@ -311,7 +311,7 @@ public partial class BoomerPlayer : Player
 			child.EnableDrawing = false;
 		}
 	}
-
+	
 	public override void BuildInput( InputBuilder input )
 	{
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
@@ -487,6 +487,24 @@ public partial class BoomerPlayer : Player
 		_ = ChangedArmourAnim();
 	}
 
+	[ClientRpc]
+	public void OnKilledRpc( BoomerPlayer attacker)
+	{
+		Host.AssertClient();
+		_ = ShowDeathScreen(attacker);
+	}
+
+	protected static async Task ShowDeathScreen( BoomerPlayer attacker )
+	{
+		KilledHud.Current.AttackerName.SetText( $"{attacker.Client.Name} Killed You" );
+		KilledHud.Current.AttackerAvatar.Style.SetBackgroundImage( $"avatar:{attacker.Client.PlayerId}" );
+		KilledHud.Current.AttackerHealth.SetText( $"{(int)attacker.Health}" );
+		KilledHud.Current.AttackerArmour.SetText( $"{(int)attacker.Armour}" );
+		KilledHud.Current.SetClass( "show", true ); 
+		await GameTask.DelaySeconds( 3f );
+		KilledHud.Current.SetClass( "show", false );
+	}
+
 	protected static async Task ChangedHealthAnim()
 	{
 		HealthHud.Current.Value.SetClass( "low", true );
@@ -561,6 +579,7 @@ public partial class BoomerPlayer : Player
 			{
 				Health = 0;
 				OnKilled();
+				OnKilledRpc( To.Single( Client ), attacker );
 			}
 			OnDmgRpc( To.Single( Client ) );
 		}
