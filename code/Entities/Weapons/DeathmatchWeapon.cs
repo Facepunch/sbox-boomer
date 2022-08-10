@@ -2,6 +2,8 @@
 
 public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 {
+	[Property]
+	public int RespawnTime { get; set; } = 10;
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
 	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
@@ -202,6 +204,8 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 		if ( PickupTrigger.IsValid() )
 		{
 			PickupTrigger.EnableTouch = false;
+			
+			ItemRespawn.Taken( this, RespawnTime );
 		}
 	}
 

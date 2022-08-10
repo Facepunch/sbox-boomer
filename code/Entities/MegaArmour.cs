@@ -12,7 +12,8 @@ partial class MegaArmour : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/mega_armour/mega_armour.vmdl" );
 
-	public int RespawnTime = 240;
+	[Property]
+	public int RespawnTime { get; set; } = 240;
 	public override void Spawn()
 	{
 		base.Spawn();

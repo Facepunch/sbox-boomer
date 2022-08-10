@@ -9,8 +9,9 @@
 partial class Armour : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/armour/armourkit.vmdl" );
-	
-	public int RespawnTime = 30;
+
+	[Property]
+	public int RespawnTime { get; set; } = 30;
 	public override void Spawn()
 	{
 		base.Spawn();

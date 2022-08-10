@@ -4,11 +4,13 @@ partial class BaseAmmo : ModelEntity, IRespawnableEntity
 {
 	//public static Model WorldModel = Model.Load( "models/dm_battery.vmdl" );
 
+	
 	public virtual AmmoType AmmoType => AmmoType.None;
 	public virtual int AmmoAmount => 17;
 	public virtual Model WorldModel => Model.Load( "models/dm_battery.vmdl" );
 
-	public int RespawnTime = 30;
+	[Property]
+	public int RespawnTime { get; set; } = 30;
 
 	public override void Spawn()
 	{

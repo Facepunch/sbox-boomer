@@ -12,7 +12,8 @@ partial class MegaHealth : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/mega_health/mega_health.vmdl" );
 
-	public int RespawnTime = 240;
+	[Property]
+	public int RespawnTime { get; set; } = 240;
 	public override void Spawn()
 	{
 		base.Spawn();
