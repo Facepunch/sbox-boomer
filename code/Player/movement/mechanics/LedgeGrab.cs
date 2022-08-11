@@ -33,6 +33,9 @@ namespace Boomer.Movement
 				if ( TimeUntilNextGrab > Time.Now )
 					return false;
 
+				if ( ctrl.Velocity.z > 320f )
+					return false;
+
 				if ( TryGrabUpperLedge() )
 				{
 					PreVelocity = ctrl.Velocity.WithZ( 0 );
