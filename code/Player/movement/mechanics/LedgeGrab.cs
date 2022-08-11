@@ -63,7 +63,7 @@ namespace Boomer.Movement
 			if ( TimeSinceLedgeGrab > LedgeGrabTime )
 			{
 				IsActive = false;
-				ctrl.Velocity = PreVelocity;
+				ctrl.Velocity = (ctrl.EyeRotation.Forward * PreVelocity.Length).WithZ( 0 );
 				return;
 			}
 
