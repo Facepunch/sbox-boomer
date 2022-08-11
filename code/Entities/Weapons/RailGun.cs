@@ -79,6 +79,9 @@ partial class RailGun : DeathmatchWeapon
 		//
 		Rand.SetSeed( Time.Tick );
 
+		var effectStart = EffectEntity?.GetAttachment( "muzzle" )?.Position ?? Transform.Position;
+		var effectEnd = effectStart + Owner.EyeRotation.Forward * 5000;
+
 		for ( int i = 0; i < bulletCount; i++ )
 		{
 			var forward = Owner.EyeRotation.Forward;
@@ -93,13 +96,7 @@ partial class RailGun : DeathmatchWeapon
 			{
 				tr.Surface.DoBulletImpact( tr );
 
-				if ( tr.Distance > 200 )
-				{
-					var pos = EffectEntity.GetAttachment( "muzzle" ) ?? Transform;
-					var tracer = Particles.Create( RailEffect, pos.Position );
-					tracer.SetPosition( 1, tr.EndPosition );
-					//CreateTracerEffect( tr.EndPosition );
-				}
+				effectEnd = tr.EndPosition;
 
 				if ( !IsServer ) continue;
 				if ( !tr.Entity.IsValid() ) continue;
@@ -112,6 +109,10 @@ partial class RailGun : DeathmatchWeapon
 				tr.Entity.TakeDamage( damageInfo );
 			}
 		}
+
+		var tracer = Particles.Create( RailEffect, effectStart );
+		tracer.SetPosition( 1, effectEnd );
+		//CreateTracerEffect( tr.EndPosition );
 	}
 
 	[ClientRpc]
