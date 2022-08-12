@@ -94,7 +94,10 @@ partial class RailGun : DeathmatchWeapon
 			//
 			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000, bulletSize ) )
 			{
-				tr.Surface.DoBulletImpact( tr );
+				// Move into the normal by the bullet radius to give us a better chance of making a decal
+				var impactTrace = tr;
+				impactTrace.EndPosition -= tr.Normal * (bulletSize * 0.5f);
+				tr.Surface.DoBulletImpact( impactTrace );
 
 				effectEnd = tr.EndPosition;
 
