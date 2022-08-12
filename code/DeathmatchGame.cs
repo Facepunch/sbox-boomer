@@ -27,6 +27,9 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_norocketselfdamage" )]
 	public static bool NoRocketSelfDmg { get; set; } = false;
 
+	[ConVar.Replicated( "bm_instagib" )]
+	public static bool InstaGib { get; set; } = false;
+	
 	public DeathmatchGame()
 	{
 		//

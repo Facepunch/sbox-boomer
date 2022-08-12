@@ -26,6 +26,11 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 
 		
 		Tags.Add( "trigger" );
+
+		if ( DeathmatchGame.InstaGib )
+		{
+			Delete();
+		}
 	}
 
 	public override void StartTouch( Entity other )

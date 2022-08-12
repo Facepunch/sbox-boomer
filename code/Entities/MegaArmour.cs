@@ -24,6 +24,11 @@ partial class MegaArmour : AnimatedEntity, IRespawnableEntity
 		UsePhysicsCollision = true;
 
 		Tags.Add( "trigger" );
+
+		if ( DeathmatchGame.InstaGib )
+		{
+			Delete();
+		}
 	}
 
 	public override void StartTouch( Entity other )

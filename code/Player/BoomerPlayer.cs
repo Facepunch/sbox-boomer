@@ -66,11 +66,19 @@ public partial class BoomerPlayer : Player
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
-			var w = StartingWeapons.Instance;
-			Inventory.DeleteContents();
-			if ( w.IsValid() )
+			if ( DeathmatchGame.InstaGib == true )
 			{
-				w.SetupPlayer( this );
+				Inventory.Add( new RailGun() );
+				GiveAmmo( AmmoType.Rails, 100 );
+			}
+			else
+			{
+				var w = StartingWeapons.Instance;
+				Inventory.DeleteContents();
+				if ( w.IsValid() )
+				{
+					w.SetupPlayer( this );
+				}
 			}
 		}
 		//else
@@ -207,7 +215,7 @@ public partial class BoomerPlayer : Player
 
 		coffin.Populate( this );
 		
-		if ( IsServer )
+		if ( IsServer && !DeathmatchGame.InstaGib )
 			using ( Prediction.Off() )
 			{
 				for ( int i = 0; i < 2; i++ )
@@ -535,7 +543,7 @@ public partial class BoomerPlayer : Player
 
 		LastDamage = info;
 
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun )
+		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaGib )
 		{
 			info.Damage = 100.0f;
 		}

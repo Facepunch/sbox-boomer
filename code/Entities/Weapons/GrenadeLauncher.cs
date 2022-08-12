@@ -24,6 +24,11 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 		base.Spawn();
 
 		Model = WorldModel;
+
+		if ( DeathmatchGame.InstaGib )
+		{
+			Delete();
+		}
 	}
 
 	public override void AttackPrimary()

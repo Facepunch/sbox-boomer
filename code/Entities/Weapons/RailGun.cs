@@ -48,8 +48,8 @@ partial class RailGun : DeathmatchWeapon
 		float flGroundFactor = 1.0f;
 		float flMul = 100f * 1.8f;
 		float forMul = 150f * 1.4f;
-		
-		if ( Owner is BoomerPlayer player && !Input.Down(InputButton.Duck))
+
+		if ( Owner is BoomerPlayer player && !Input.Down( InputButton.Duck ) )
 		{
 			player.Velocity += player.EyeRotation.Backward * forMul * flGroundFactor;
 			player.Velocity += player.Velocity.WithZ( flMul * flGroundFactor );
@@ -69,7 +69,15 @@ partial class RailGun : DeathmatchWeapon
 		//
 		// Shoot the bullets
 		//
-		ShootBullet( 0.01f, 1.5f, 80.0f, 15.0f );
+		if ( DeathmatchGame.InstaGib )
+		{
+			ShootBullet( 0.01f, 1.5f, 10000.0f, 15.0f );
+		}
+		else
+		{
+			ShootBullet( 0.01f, 1.5f, 80.0f, 15.0f );
+		}
+
 	}
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )

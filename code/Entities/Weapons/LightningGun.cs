@@ -26,6 +26,11 @@ partial class LightningGun : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
+
+		if ( DeathmatchGame.InstaGib )
+		{
+			Delete();
+		}
 	}
 
 	public override void ActiveEnd( Entity ent, bool dropped )

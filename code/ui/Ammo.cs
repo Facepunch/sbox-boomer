@@ -34,7 +34,7 @@ public partial class AmmoVital : Panel
 		if ( !weapon.IsValid() ) return;
 
 		var inv = weapon.AvailableAmmo();
-		if ( DeathmatchGame.UnlimitedAmmo )
+		if ( DeathmatchGame.UnlimitedAmmo || DeathmatchGame.InstaGib)
 		{
 			AmmoInv.Text = $"∞";
 			//AmmoInv.SetClass( "active", inv >= 0 );

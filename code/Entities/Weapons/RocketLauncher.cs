@@ -27,6 +27,11 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 		base.Spawn();
 
 		Model = WorldModel;
+
+		if ( DeathmatchGame.InstaGib )
+		{
+			Delete();
+		}
 	}
 
 	public override void AttackPrimary()
