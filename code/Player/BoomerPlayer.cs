@@ -231,7 +231,7 @@ public partial class BoomerPlayer : Player
 
 		Inventory.DeleteContents();
 
-		if ( LastDamage.Flags.HasFlag( DamageFlags.Blast ) )
+		if ( LastDamage.Flags.HasFlag( DamageFlags.Blast ) || DeathmatchGame.InstaGib)
 		{
 			using ( Prediction.Off() )
 			{
