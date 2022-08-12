@@ -23,7 +23,7 @@ partial class Shotgun : DeathmatchWeapon
 
 		Model = WorldModel;
 
-		if ( DeathmatchGame.InstaGib )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio )
 		{
 			Delete();
 		}

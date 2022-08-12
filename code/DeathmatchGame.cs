@@ -29,7 +29,10 @@ partial class DeathmatchGame : Game
 
 	[ConVar.Replicated( "bm_instagib" )]
 	public static bool InstaGib { get; set; } = false;
-	
+
+	[ConVar.Replicated( "bm_mastertrio" )]
+	public static bool MasterTrio { get; set; } = false;
+
 	public DeathmatchGame()
 	{
 		//
@@ -281,7 +284,7 @@ partial class DeathmatchGame : Game
 
 			if ( overlap == owner )
 			{
-				if ( NoRocketSelfDmg )
+				if ( NoRocketSelfDmg || MasterTrio )
 				{
 					dmg = 0;
 				}

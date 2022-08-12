@@ -66,10 +66,21 @@ public partial class BoomerPlayer : Player
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
-			if ( DeathmatchGame.InstaGib == true )
+			if ( DeathmatchGame.InstaGib )
 			{
 				Inventory.Add( new RailGun() );
 				GiveAmmo( AmmoType.Rails, 100 );
+			}
+			else if ( DeathmatchGame.MasterTrio )
+			{
+				Inventory.Add( new RailGun() );
+				GiveAmmo( AmmoType.Rails, 100 );
+
+				Inventory.Add( new RocketLauncher() );
+				GiveAmmo( AmmoType.Rockets, 100 );
+
+				Inventory.Add( new LightningGun() );
+				GiveAmmo( AmmoType.Lightning, 100 );
 			}
 			else
 			{
@@ -215,7 +226,7 @@ public partial class BoomerPlayer : Player
 
 		coffin.Populate( this );
 		
-		if ( IsServer && !DeathmatchGame.InstaGib )
+		if ( IsServer && !DeathmatchGame.InstaGib || !DeathmatchGame.MasterTrio )
 			using ( Prediction.Off() )
 			{
 				for ( int i = 0; i < 2; i++ )
