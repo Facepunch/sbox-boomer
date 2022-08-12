@@ -54,9 +54,9 @@ public class InventoryBar : Panel
 		wantOpen = wantOpen || input.Pressed( InputButton.Slot1 );
 		wantOpen = wantOpen || input.Pressed( InputButton.Slot2 );
 		wantOpen = wantOpen || input.Pressed( InputButton.Slot3 );
-		wantOpen = wantOpen || input.Pressed( InputButton.Slot4 );
-		wantOpen = wantOpen || input.Pressed( InputButton.Slot5 );
-		wantOpen = wantOpen || input.Pressed( InputButton.Slot6 );
+		wantOpen = wantOpen || input.Pressed( InputButton.Slot4 ) || input.Pressed( InputButton.Flashlight );
+		wantOpen = wantOpen || input.Pressed( InputButton.Slot5 ) || input.Pressed( InputButton.Reload );
+		wantOpen = wantOpen || input.Pressed( InputButton.Slot6 ) || input.Pressed( InputButton.Use );
 
 		if ( Weapons.Count == 0 )
 		{
