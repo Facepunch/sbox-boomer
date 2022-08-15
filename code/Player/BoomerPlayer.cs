@@ -303,8 +303,11 @@ public partial class BoomerPlayer : Player
 
 			attacker.TrackDominationKill( this );
 
-			attacker.Inventory.DeleteContents();
-
+			if ( DeathmatchGame.RailTag )
+			{
+				attacker.Inventory.DeleteContents();
+			}
+			
 			if ( attacker.GetDominationKills( this ) == 3 )
 			{
 				attacker.GiveAward<Dominating>();
