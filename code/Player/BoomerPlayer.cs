@@ -84,23 +84,23 @@ public partial class BoomerPlayer : Player
 				Inventory.Add( new LightningGun() );
 				GiveAmmo( AmmoType.Lightning, 100 );
 			}
-			else if ( DeathmatchGame.RailTag  )
+			else if ( DeathmatchGame.RailTag )
 			{
-				if(TaggedPlayer)
+				if ( TaggedPlayer )
 				{
 					Inventory.Add( new RailGun() );
 					GiveAmmo( AmmoType.Rails, 100 );
 				}
 			}
-		else
-		{
-			var w = StartingWeapons.Instance;
-			Inventory.DeleteContents();
-			if ( w.IsValid() )
+			else
 			{
-				w.SetupPlayer( this );
+				var w = StartingWeapons.Instance;
+				Inventory.DeleteContents();
+				if ( w.IsValid() )
+				{
+					w.SetupPlayer( this );
+				}
 			}
-		}
 		}
 		//else
 		//{
@@ -112,12 +112,12 @@ public partial class BoomerPlayer : Player
 
 		SetBodyGroup( "Hands", 1 );
 		SetBodyGroup( "Feet", 1 );
-		
-		SetMaterialOverride( SkinMat, "skin");
-		SetMaterialOverride( EyeMat, "eyes");
+
+		SetMaterialOverride( SkinMat, "skin" );
+		SetMaterialOverride( EyeMat, "eyes" );
 		UpdateClothes();
 		RandomColor();
-		
+
 		base.Respawn();
 	}
 
@@ -235,7 +235,7 @@ public partial class BoomerPlayer : Player
 		coffin.PhysicsBody.Velocity = Velocity + Rotation.Forward * 100;
 
 		coffin.Populate( this );
-		
+
 		if ( IsServer && !DeathmatchGame.InstaGib || !DeathmatchGame.MasterTrio || !DeathmatchGame.RailTag )
 			using ( Prediction.Off() )
 			{
@@ -265,7 +265,7 @@ public partial class BoomerPlayer : Player
 		}
 		else
 		{
-			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ),PlayerColor );
+			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ), PlayerColor );
 		}
 
 		if ( LastDamage.Attacker is BoomerPlayer attacker && attacker != this )
@@ -284,8 +284,8 @@ public partial class BoomerPlayer : Player
 			attacker.PlaySoundFromScreen( To.Single( attacker ), "killsound" );
 
 			attacker.TaggedPlayer = false;
-	
-			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 && LastDamage.Weapon is RailGun)
+
+			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 && LastDamage.Weapon is RailGun )
 			{
 				attacker.PlaySoundFromScreen( To.Single( attacker ), "headshot" );
 			}
@@ -329,7 +329,7 @@ public partial class BoomerPlayer : Player
 					attacker.GiveAward<Airshot>();
 				}
 			}
-			
+
 			if ( DeathmatchGame.RailTag )
 			{
 				TaggedPlayer = true;
@@ -347,7 +347,7 @@ public partial class BoomerPlayer : Player
 			child.EnableDrawing = false;
 		}
 	}
-	
+
 	public override void BuildInput( InputBuilder input )
 	{
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
@@ -534,10 +534,10 @@ public partial class BoomerPlayer : Player
 	}
 
 	[ClientRpc]
-	public void OnKilledRpc( BoomerPlayer attacker)
+	public void OnKilledRpc( BoomerPlayer attacker )
 	{
 		Host.AssertClient();
-		_ = ShowDeathScreen(attacker);
+		_ = ShowDeathScreen( attacker );
 	}
 
 	protected static async Task ShowDeathScreen( BoomerPlayer attacker )
@@ -549,7 +549,7 @@ public partial class BoomerPlayer : Player
 		KilledHud.Current.AttackerAvatar.Style.SetBackgroundImage( $"avatar:{attacker.Client.PlayerId}" );
 		KilledHud.Current.AttackerHealth.SetText( $"{(int)attacker.Health}" );
 		KilledHud.Current.AttackerArmour.SetText( $"{(int)attacker.Armour}" );
-		KilledHud.Current.SetClass( "show", true ); 
+		KilledHud.Current.SetClass( "show", true );
 		await GameTask.DelaySeconds( 3f );
 		KilledHud.Current.SetClass( "show", false );
 	}
@@ -596,7 +596,7 @@ public partial class BoomerPlayer : Player
 		if ( IsServer && Armour > 0 )
 		{
 			var lastArmor = Armour;
-			
+
 			Armour -= info.Damage;
 
 			if ( Armour < 0 )
@@ -608,7 +608,7 @@ public partial class BoomerPlayer : Player
 			{
 				info.Damage = 0;
 			}
-			
+
 			OnArmourDmgRpc( To.Single( Client ) );
 
 			if ( attacker.IsValid() )
@@ -694,7 +694,7 @@ public partial class BoomerPlayer : Player
 
 	private TimeSince TimeSinceArmorDamageEffect;
 	[ClientRpc]
-	public void DidArmorDamage( Vector3 pos, float amount, float armorinv)
+	public void DidArmorDamage( Vector3 pos, float amount, float armorinv )
 	{
 		LastDamageDealt += amount;
 		ResetDmgCount = 0;
@@ -723,7 +723,7 @@ public partial class BoomerPlayer : Player
 		LastDamageDealt += amount;
 		ResetDmgCount = 0;
 
-		if( TimeSinceDamageEffect > .1f )
+		if ( TimeSinceDamageEffect > .1f )
 		{
 			HitIndicator.Current?.OnHit( pos, amount );
 			Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv * 1 );
@@ -810,6 +810,7 @@ public partial class BoomerPlayer : Player
 		{
 			weapon.RenderHud( screenSize );
 		}
+		RenderControlHud( screenSize );
 	}
 	public void ApplyForce( Vector3 force )
 	{
@@ -857,6 +858,51 @@ public partial class BoomerPlayer : Player
 		if ( TimeSinceLastDamage > 4f && ConsecutiveKills > 0 )
 		{
 			ConsecutiveKills = 0;
+		}
+	}
+
+	public virtual void RenderControlHud( in Vector2 screensize )
+	{
+		var center = screensize * 0.5f;
+
+		RenderCrosshair( center, 0, 0 );
+	}
+
+	public void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
+	{
+		var draw = Render.Draw2D;
+
+		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 1.0f, 1.4f ) );
+		draw.BlendMode = BlendMode.Lighten;
+		draw.Color = Color.White.WithAlpha( 0.25f );
+		if(ClientSettings.Current.ShowMovementHint)
+		// outer lines
+		{
+			var length = 22.0f;
+			var gap = 48.0f;
+			var thickness = 2.0f;
+
+			if ( Input.Down( InputButton.Forward ) )
+			{
+				draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 20, gap ) );
+				draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( -20, gap ) );
+			}
+			if ( Input.Down( InputButton.Back ) )
+			{
+				draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 20, gap ) );
+				draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( -20, gap ) );
+			}
+			if ( Input.Down( InputButton.Left ) )
+			{
+				draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 20 ) );
+				draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, -20 ) );
+			}
+			if ( Input.Down( InputButton.Right ) )
+			{
+				draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 20 ) );
+				draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, -20 ) );
+			}
+
 		}
 	}
 }

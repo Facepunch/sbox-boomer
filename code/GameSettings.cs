@@ -10,6 +10,7 @@ internal class ClientSettings
 	public WeaponPositionSetting WeaponPosition { get; set; }
 	public bool TennisBallMode { get; set; } 
 	// todo: TennisBallModeColor color editor
+	public bool ShowMovementHint { get; set; } = false;
 	public bool ShowHitMarkers { get; set; } = true;
 	public bool ShowDamageNumbers { get; set; } = true;
 	public bool BatchDamageNumbers { get; set; }

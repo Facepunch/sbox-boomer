@@ -39,6 +39,50 @@ AwardQueue {
     }
 }
 
+MovementHint {
+    flex-direction: column;
+    flex-grow: 0;
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    height: 160px;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //background-color: rgba(#f20,.5);
+    font-family: "Material Icons";
+    color: white;
+    left: 64px;
+    mix-blend-mode: lighten;
+
+    .jump {
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        font-size: 32px;
+
+        &.active {
+            opacity: .5;
+        }
+    }
+
+    .duck {
+        top: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        font-size: 32px;
+
+        &.active {
+            opacity: .5;
+        }
+    }
+}
+
 KilledHud {
     flex-direction: column;
     flex-grow: 0;
