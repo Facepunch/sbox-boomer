@@ -52,7 +52,7 @@ class InventoryIcon : Panel
 		SetClass( "active", active );
 		SetClass( "empty", empty );
 
-		if(DeathmatchGame.UnlimitedAmmo || DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio )
+		if(DeathmatchGame.UnlimitedAmmo || DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag )
 			Value.Text = "∞";
 		else
 			Value.Text = Weapon.AvailableAmmo().ToString();

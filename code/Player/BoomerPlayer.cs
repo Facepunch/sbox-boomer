@@ -37,6 +37,8 @@ public partial class BoomerPlayer : Player
 
 	public Dictionary<long, int> DominationTracker { get; private set; } = new();
 
+	[Net]
+	public bool TaggedPlayer { get; set; } = false;
 	public BoomerPlayer()
 	{
 		DominationTracker = new();
@@ -82,15 +84,23 @@ public partial class BoomerPlayer : Player
 				Inventory.Add( new LightningGun() );
 				GiveAmmo( AmmoType.Lightning, 100 );
 			}
-			else
+			else if ( DeathmatchGame.RailTag  )
 			{
-				var w = StartingWeapons.Instance;
-				Inventory.DeleteContents();
-				if ( w.IsValid() )
+				if(TaggedPlayer)
 				{
-					w.SetupPlayer( this );
+					Inventory.Add( new RailGun() );
+					GiveAmmo( AmmoType.Rails, 100 );
 				}
 			}
+		else
+		{
+			var w = StartingWeapons.Instance;
+			Inventory.DeleteContents();
+			if ( w.IsValid() )
+			{
+				w.SetupPlayer( this );
+			}
+		}
 		}
 		//else
 		//{
@@ -226,7 +236,7 @@ public partial class BoomerPlayer : Player
 
 		coffin.Populate( this );
 		
-		if ( IsServer && !DeathmatchGame.InstaGib || !DeathmatchGame.MasterTrio )
+		if ( IsServer && !DeathmatchGame.InstaGib || !DeathmatchGame.MasterTrio || !DeathmatchGame.RailTag )
 			using ( Prediction.Off() )
 			{
 				for ( int i = 0; i < 2; i++ )
@@ -242,7 +252,7 @@ public partial class BoomerPlayer : Player
 
 		Inventory.DeleteContents();
 
-		if ( LastDamage.Flags.HasFlag( DamageFlags.Blast ) || DeathmatchGame.InstaGib)
+		if ( LastDamage.Flags.HasFlag( DamageFlags.Blast ) || DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
 		{
 			using ( Prediction.Off() )
 			{
@@ -273,6 +283,7 @@ public partial class BoomerPlayer : Player
 
 			attacker.PlaySoundFromScreen( To.Single( attacker ), "killsound" );
 
+			attacker.TaggedPlayer = false;
 	
 			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 && LastDamage.Weapon is RailGun)
 			{
@@ -292,6 +303,7 @@ public partial class BoomerPlayer : Player
 
 			attacker.TrackDominationKill( this );
 
+			attacker.Inventory.DeleteContents();
 
 			if ( attacker.GetDominationKills( this ) == 3 )
 			{
@@ -316,6 +328,11 @@ public partial class BoomerPlayer : Player
 				{
 					attacker.GiveAward<Airshot>();
 				}
+			}
+			
+			if ( DeathmatchGame.RailTag )
+			{
+				TaggedPlayer = true;
 			}
 		}
 
@@ -348,6 +365,8 @@ public partial class BoomerPlayer : Player
 		base.BuildInput( input );
 	}
 
+	TimeSince PerSec = 0;
+
 	public override void Simulate( Client cl )
 	{
 		Projectiles.Simulate();
@@ -364,9 +383,17 @@ public partial class BoomerPlayer : Player
 
 		if ( LifeState != LifeState.Alive )
 			return;
-		
+
 		//We dont use anything.
 		//TickPlayerUse();
+		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
+		{
+			if ( !TaggedPlayer && DeathmatchGame.RailTag && PerSec >= 1f )
+			{
+				Client.AddInt( "kills" );
+				PerSec = 0f;
+			}
+		}
 
 		if ( Health > 100 )
 		{
@@ -554,7 +581,7 @@ public partial class BoomerPlayer : Player
 
 		LastDamage = info;
 
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaGib )
+		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaGib && !DeathmatchGame.RailTag )
 		{
 			info.Damage = 100.0f;
 		}
@@ -617,7 +644,7 @@ public partial class BoomerPlayer : Player
 			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
 		}
 
-		if ( LifeState == LifeState.Dead && info.Attacker != null )
+		if ( LifeState == LifeState.Dead && info.Attacker != null && !DeathmatchGame.RailTag )
 		{
 			if ( info.Attacker.Client != null && info.Attacker != this )
 			{

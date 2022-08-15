@@ -28,7 +28,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 		Model = WorldModel;
 
-		if ( DeathmatchGame.InstaGib )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
 		{
 			Delete();
 		}

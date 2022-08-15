@@ -22,7 +22,7 @@ partial class BaseAmmo : ModelEntity, IRespawnableEntity
 
 		Tags.Add( "trigger" );
 
-		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag )
 		{
 			Delete();
 		}

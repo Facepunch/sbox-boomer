@@ -27,7 +27,7 @@ partial class LightningGun : DeathmatchWeapon
 
 		Model = WorldModel;
 
-		if ( DeathmatchGame.InstaGib )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
 		{
 			Delete();
 		}

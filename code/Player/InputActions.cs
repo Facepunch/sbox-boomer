@@ -45,11 +45,11 @@ public static class InputActionsExtensions
 				InputActions.Walk => InputButton.Reload,
 				InputActions.Jump => InputButton.Jump,
 				InputActions.Duck => InputButton.SecondaryAttack,
-				InputActions.Kill => InputButton.Menu,
+				InputActions.Kill => InputButton.Use,
 				InputActions.LeftClick => InputButton.Reload,
 				InputActions.RightClick => InputButton.SlotNext,
 				InputActions.Spray => InputButton.Flashlight,
-				InputActions.Menu => InputButton.SlotNext,
+				InputActions.Menu => InputButton.Menu,
 				InputActions.Use => InputButton.Use,
 				_ => default
 			};

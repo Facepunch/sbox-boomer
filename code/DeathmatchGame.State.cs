@@ -54,6 +54,10 @@ partial class DeathmatchGame : Game
 		StateTimer = GameTime;
 		CountDownPlayed = false;
 		FreshStart();
+		if ( RailTag )
+		{
+			StartTag();
+		}
 		await WaitStateTimer();
 
 		GameState = GameStates.GameEnd;
@@ -80,7 +84,7 @@ partial class DeathmatchGame : Game
 
 	private async Task SubmitScore()
 	{
-		if ( ScoreSystemDisabled ) return;
+		if ( ScoreSystemDisabled || DeathmatchGame.RailTag ) return;
 
 		foreach ( var cl in Client.All )
 		{

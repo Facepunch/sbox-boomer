@@ -33,6 +33,9 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_mastertrio" )]
 	public static bool MasterTrio { get; set; } = false;
 
+	[ConVar.Replicated( "bm_railtag" )]
+	public static bool RailTag { get; set; } = false;
+
 	public DeathmatchGame()
 	{
 		//
@@ -96,11 +99,15 @@ partial class DeathmatchGame : Game
 	{
 		Log.Info( $"\"{cl.Name}\" has left the game ({reason})" );
 		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has left ({reason})", $"avatar:{cl.PlayerId}" );
-
+		var player = cl.Pawn as BoomerPlayer;
 		if ( cl.Pawn.IsValid() )
 		{
 			cl.Pawn.Delete();
 			cl.Pawn = null;
+			if(player.TaggedPlayer)
+			{
+				StartTag();
+			}
 		}
 	}
 
@@ -355,5 +362,16 @@ partial class DeathmatchGame : Game
 			Render.Draw2D.Color = Color.White;
 			Render.Draw2D.DrawText( new Rect( pos.Value ), str );
 		}
+	}
+
+	public void StartTag()
+	{
+		var allplayers = Entity.All.OfType<BoomerPlayer>();
+
+		var randomplayer = allplayers.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
+
+		randomplayer.TaggedPlayer = true;
+		randomplayer.Inventory.Add( new RailGun() );
+		randomplayer.GiveAmmo( AmmoType.Rails, 100 );
 	}
 }

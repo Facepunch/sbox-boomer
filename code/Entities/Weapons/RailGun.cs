@@ -69,7 +69,7 @@ partial class RailGun : DeathmatchWeapon
 		//
 		// Shoot the bullets
 		//
-		if ( DeathmatchGame.InstaGib )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
 		{
 			ShootBullet( 0.01f, 1.5f, 10000.0f, 15.0f );
 		}

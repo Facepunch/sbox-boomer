@@ -25,7 +25,7 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 
 		Model = WorldModel;
 
-		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag )
 		{
 			Delete();
 		}
