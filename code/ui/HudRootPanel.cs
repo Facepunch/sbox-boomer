@@ -24,7 +24,7 @@ public class HudRootPanel : RootPanel
 		AddChild<MovementHint>();
 
 		AddChild<BoomerChatBox>();
-		AddChild<Speedo>();
+		//AddChild<Speedo>();
 		AddChild<KillFeed>();
 		Scoreboard = AddChild<Scoreboard>();
 		AddChild<VoiceList>();

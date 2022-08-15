@@ -171,434 +171,430 @@ KilledHud {
 }
 
 
-    vitals {
-        font-size: 64px;
-        color: #ff0;
-        mix-blend-mode: lighten;
-        font-family: Roboto;
+vitals {
+    font-size: 64px;
+    color: #ff0;
+    mix-blend-mode: lighten;
+    font-family: Roboto;
 
-        label {
-            text-shadow: 0px 0px 20px #f70a;
+    label {
+        text-shadow: 0px 0px 20px #f70a;
 
-            &.danger {
-                color: #f00;
-                text-shadow: 0px 0px 10px #f005;
-            }
+        &.danger {
+            color: #f00;
+            text-shadow: 0px 0px 10px #f005;
+        }
+    }
+}
+
+
+.boomer_shotgun .icon {
+    background-image: url( /ui/weapons/dm_shotgun.png );
+    background-image-tint: #f70f;
+}
+
+.boomer_railgun .icon {
+    background-image: url( /ui/weapons/dm_railgun.png );
+    background-image-tint: #25cf12;
+}
+
+.boomer_nailgun .icon {
+    background-image: url( /ui/weapons/dm_nailgun.png );
+    background-image-tint: #0024ff;
+}
+
+.boomer_rocketlauncher_rocket .icon {
+    background-image: url( /ui/weapons/dm_rocketlauncher_rocket.png );
+    background-image-tint: #f20;
+}
+
+.boomer_rocketlauncher .icon {
+    background-image: url( /ui/weapons/dm_rocketlauncher.png );
+    background-image-tint: #f20;
+}
+
+.boomer_grenadelauncher_grenade .icon {
+    background-image: url( /ui/weapons/dm_grenadelauncher_grenade.png );
+    background-image-tint: #70ff00;
+}
+
+.boomer_grenadelauncher .icon {
+    background-image: url( /ui/weapons/dm_grenadelauncher.png );
+    background-image-tint: #70ff00;
+}
+
+.boomer_crowbar .icon {
+    background-image: url( /ui/weapons/dm_crowbar.png );
+}
+
+.boomer_lightninggun .icon {
+    background-image: url( /ui/weapons/dm_lightninggun.png );
+    background-image-tint: #16edcc;
+}
+
+.bottom-left {
+    left: 160px;
+    flex-direction: column;
+}
+
+.bottom-right {
+    right: 160px;
+    flex-direction: column;
+}
+
+.bottom-left, .bottom-right {
+    position: absolute;
+    bottom: 0px;
+}
+
+.top-middle {
+    top: 0px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+
+    gamehud {
+        text-align: left;
+        padding: 10px;
+        font-family: Teko-SemiBold;
+        font-size: 20px;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 24px;
+        color: $yellow2;
+        font-weight: 500;
+        text-transform: uppercase;
+        background-image: linear-gradient( -90deg, rgba( black, 0.0 ), rgba( black, 0.5 ) );
+
+        .game-state {
+        }
+
+        .game-timer {
+            left: 38px;
+            min-width: 256px;
+            font-size: 68px;
+            color: $yellow2;
         }
     }
 
 
-    .boomer_shotgun .icon {
-        background-image: url( /ui/weapons/dm_shotgun.png );
-        background-image-tint: #f70f;
-    }
+}
+speedo {
+    position: absolute;
+    top: 86%;
+    text-align: left;
+    padding: 0px;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: uppercase;
 
-    .boomer_railgun .icon {
-        background-image: url( /ui/weapons/dm_railgun.png );
-        background-image-tint: #25cf12;
-    }
+    .text {
+        text-align: right;
+        align-items: center;
+        font-size: 72px;
+        color: $yellow2;
+        font-weight: bolder;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        opacity: 0;
 
-    .boomer_nailgun .icon {
-        background-image: url( /ui/weapons/dm_nailgun.png );
-        background-image-tint: #0024ff;
+        &.active {
+            opacity: 1;
+        }
     }
+}
 
-    .boomer_rocketlauncher_rocket .icon {
-        background-image: url( /ui/weapons/dm_rocketlauncher_rocket.png );
-        background-image-tint: #f20;
+.inventory, gamehud, dashcount {
+    padding: 0px;
+    margin: 0px;
+    font-size: 72px;
+    font-weight: bolder;
+    color: $yellow2;
+    min-width: 0px;
+    text-align: center;
+    align-items: center;
+}
+
+iconpanel {
+    font-family: "Material Icons";
+}
+
+dashcount, lastdamage {
+    opacity: 1;
+}
+
+
+
+lastdamage {
+    top: 100px;
+    font-size: 64px;
+    left: 200px;
+    color: #f20;
+    transition: all 0.1s ease-in;
+    transform: scale( 1 ) skew(0deg, -5deg);
+    position: absolute;
+    font-weight: bolder;
+    font-family: Teko-SemiBold;
+
+    &.nodmg {
+        opacity: 1;
+        transform: scale( 0 ) skew(0deg, -5deg);
+        transition: all 0.1s ease-out;
     }
+}
 
-    .boomer_rocketlauncher .icon {
-        background-image: url( /ui/weapons/dm_rocketlauncher.png );
-        background-image-tint: #f20;
-    }
+dashcount {
+    bottom: 96px;
+    right: 32px;
+    transform: skew(0deg, 5deg);
 
-    .boomer_grenadelauncher_grenade .icon {
-        background-image: url( /ui/weapons/dm_grenadelauncher_grenade.png );
-        background-image-tint: #70ff00;
-    }
-
-    .boomer_grenadelauncher .icon {
-        background-image: url( /ui/weapons/dm_grenadelauncher.png );
-        background-image-tint: #70ff00;
-    }
-
-    .boomer_crowbar .icon {
-        background-image: url( /ui/weapons/dm_crowbar.png );
-    }
-
-    .boomer_lightninggun .icon {
-        background-image: url( /ui/weapons/dm_lightninggun.png );
-        background-image-tint: #16edcc;
-    }
-
-    .bottom-left {
-        left: 160px;
-        flex-direction: column;
-    }
-
-    .bottom-right {
-        right: 160px;
-        flex-direction: column;
-    }
-
-    .bottom-left, .bottom-right {
-        position: absolute;
-        bottom: 0px;
-    }
-
-    .top-middle {
-        top: 0px;
-        width: 100%;
-        flex-direction: column;
+    .dashsegments {
         align-items: center;
 
-
-        gamehud {
-            text-align: left;
-            padding: 10px;
-            font-family: Teko-SemiBold;
-            font-size: 20px;
-            flex-direction: column;
-            justify-content: center;
-            font-size: 24px;
+        panel {
+            width: 84px;
+            height: 16px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
             color: $yellow2;
-            font-weight: 500;
-            text-transform: uppercase;
-            background-image: linear-gradient( -90deg, rgba( black, 0.0 ), rgba( black, 0.5 ) );
-
-            .game-state {
-            }
-
-            .game-timer {
-                left: 38px;
-                min-width: 256px;
-                font-size: 68px;
-                color: $yellow2;
-            }
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
         }
 
-        speedo {
-            // position: absolute;
-            top: 70%;
-            text-align: left;
-            padding: 10px;
-            font-family: Teko-SemiBold;
-            font-size: 20px;
-            flex-direction: column;
-            justify-content: center;
-            font-size: 24px;
-            color: $yellow2;
-            font-weight: 500;
-            text-transform: uppercase;
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    }
 
-            .text {
-                text-align: right;
-                align-items: center;
-                font-size: 72px;
-                color: $yellow2;
-                font-weight: bolder;
-                font-family: Teko-SemiBold;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-                opacity: 0;
+    .dashicon {
+        font-size: 98px;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+}
 
-                &.active {
-                    opacity: 1;
-                }
-            }
+AmmoVital {
+    bottom: 96px;
+    left: 96px;
+    transform: skew(0deg, 5deg);
+
+    .ammoinv {
+        text-align: right;
+        font-size: 128px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        top: 72px;
+        right: 90px;
+        transform: scale( 1 );
+
+        &.low {
+            color: #ffe9b4;
+        }
+
+        &.gained {
+            color: #c9ffb4;
         }
     }
 
-    .inventory, gamehud, dashcount {
-        padding: 0px;
-        margin: 0px;
+    .ammoicon {
+        right: 100px;
+        top: 124px;
+        width: 64px;
+        height: 64px;
+        background-size: 100%;
+        background-image-tint: $yellow2;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+}
+
+healthhud {
+    flex-direction: column;
+    transform: skew(0deg, -5deg);
+
+    .segments {
+        align-items: center;
+
+        panel {
+            width: 13px;
+            height: 24px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .health {
+        text-align: right;
         font-size: 72px;
         font-weight: bolder;
         color: $yellow2;
-        min-width: 0px;
-        text-align: center;
-        align-items: center;
-    }
-
-    iconpanel {
-        font-family: "Material Icons";
-    }
-
-    dashcount, lastdamage {
-        opacity: 1;
-    }
-
-
-
-    lastdamage {
-        top: 100px;
-        font-size: 64px;
-        left: 200px;
-        color: #f20;
-        transition: all 0.1s ease-in;
-        transform: scale( 1 ) skew(0deg, -5deg);
-        position: absolute;
-        font-weight: bolder;
         font-family: Teko-SemiBold;
-
-        &.nodmg {
-            opacity: 1;
-            transform: scale( 0 ) skew(0deg, -5deg);
-            transition: all 0.1s ease-out;
-        }
-    }
-
-    dashcount {
-        bottom: 96px;
-        right: 32px;
-        transform: skew(0deg, 5deg);
-
-        .dashsegments {
-            align-items: center;
-
-            panel {
-                width: 84px;
-                height: 16px;
-                background-color: rgb(85, 85, 85);
-                margin-right: 4px;
-                color: $yellow2;
-                box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
-            }
-
-            box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .dashicon {
-            font-size: 98px;
-            box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
-        }
-    }
-
-    AmmoVital {
-        bottom: 96px;
-        left: 96px;
-        transform: skew(0deg, 5deg);
-
-        .ammoinv {
-            text-align: right;
-            font-size: 128px;
-            font-weight: bolder;
-            color: $yellow2;
-            font-family: Teko-SemiBold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            top: 72px;
-            right: 90px;
-            transform: scale( 1 );
-
-            &.low {
-                color: #ffe9b4;
-            }
-
-            &.gained {
-                color: #c9ffb4;
-            }
-        }
-
-        .ammoicon {
-            right: 100px;
-            top: 124px;
-            width: 64px;
-            height: 64px;
-            background-size: 100%;
-            background-image-tint: $yellow2;
-            box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
-        }
-    }
-
-    healthhud {
-        flex-direction: column;
-        transform: skew(0deg, -5deg);
-
-        .segments {
-            align-items: center;
-
-            panel {
-                width: 13px;
-                height: 24px;
-                background-color: rgb(85, 85, 85);
-                margin-right: 4px;
-                box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
-            }
-
-            box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .health {
-            text-align: right;
-            font-size: 72px;
-            font-weight: bolder;
-            color: $yellow2;
-            font-family: Teko-SemiBold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            top: 72px;
-            right: 90px;
-
-            &.low {
-                color: #f20;
-                transition: all 0.15s ease-in-out;
-                transform: scale( 1.25 ) translate(-32px, -10%);
-            }
-
-            &.gained {
-                color: #c9ffb4;
-                transition: all 0.15s ease-in-out;
-                transform: scale( 1.25 ) translate(-32px, -10%);
-            }
-        }
-
-        .hpicon {
-            margin-left: -60px;
-            top: 36px;
-            width: 48px;
-            height: 48px;
-            background-size: 100%;
-            background-image-tint: $yellow2;
-            box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .healthsupport {
-            position: absolute;
-            text-align: right;
-            font-size: 48px;
-            font-weight: bolder;
-            color: $yellow2;
-            font-family: Teko-SemiBold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            bottom: 14px;
-            left: 90px;
-        }
-
-        &.overheal {
-
-            .health {
-                color: #00eadc;
-            }
-        }
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        top: 72px;
+        right: 90px;
 
         &.low {
             color: #f20;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
 
-
-
-            .health {
-                color: #f20;
-            }
-
-            iconpanel {
-                color: $yellow2;
-            }
+        &.gained {
+            color: #c9ffb4;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
         }
     }
 
-    @keyframes scaletxt {
-        0% {
-            transform: scale( 1.1 );
-        }
+    .hpicon {
+        margin-left: -60px;
+        top: 36px;
+        width: 48px;
+        height: 48px;
+        background-size: 100%;
+        background-image-tint: $yellow2;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
 
-        50% {
-            transform: scale( 1 );
-        }
+    .healthsupport {
+        position: absolute;
+        text-align: right;
+        font-size: 48px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        bottom: 14px;
+        left: 90px;
+    }
 
-        100% {
-            transform: scale( 1.1 );
+    &.overheal {
+
+        .health {
+            color: #00eadc;
         }
     }
 
+    &.low {
+        color: #f20;
 
-    armourhud {
-        flex-direction: column;
-        bottom: 64px;
-        left: 32px;
-        transform: skew(0deg, -5deg);
 
-        .armoursegments {
-            align-items: center;
 
-            panel {
-                width: 13px;
-                height: 24px;
-                background-color: rgb(85, 85, 85);
-                margin-right: 4px;
-                box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
-            }
-
-            box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+        .health {
+            color: #f20;
         }
+
+        iconpanel {
+            color: $yellow2;
+        }
+    }
+}
+
+@keyframes scaletxt {
+    0% {
+        transform: scale( 1.1 );
+    }
+
+    50% {
+        transform: scale( 1 );
+    }
+
+    100% {
+        transform: scale( 1.1 );
+    }
+}
+
+
+armourhud {
+    flex-direction: column;
+    bottom: 64px;
+    left: 32px;
+    transform: skew(0deg, -5deg);
+
+    .armoursegments {
+        align-items: center;
+
+        panel {
+            width: 13px;
+            height: 24px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .armour {
+        text-align: right;
+        font-size: 72px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        top: 72px;
+        right: 90px;
+
+        &.low {
+            color: #f20;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
+
+        &.gained {
+            color: #c9ffb4;
+            transition: all 0.15s ease-in-out;
+            transform: scale( 1.25 ) translate(-32px, -10%);
+        }
+    }
+
+    .armouricon {
+        margin-left: -60px;
+        top: 36px;
+        width: 48px;
+        height: 48px;
+        background-size: 100%;
+        background-image-tint: $yellow2;
+        box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .armoursupport {
+        position: absolute;
+        text-align: right;
+        font-size: 48px;
+        font-weight: bolder;
+        color: $yellow2;
+        font-family: Teko-SemiBold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        bottom: 14px;
+        left: 90px;
+    }
+
+
+    &.empty {
+        opacity: 1;
+    }
+
+    &.overarmour {
+        color: #25cf12;
 
         .armour {
-            text-align: right;
-            font-size: 72px;
-            font-weight: bolder;
+            color: #00eadc;
+        }
+
+        iconpanel {
             color: $yellow2;
-            font-family: Teko-SemiBold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            top: 72px;
-            right: 90px;
-
-            &.low {
-                color: #f20;
-                transition: all 0.15s ease-in-out;
-                transform: scale( 1.25 ) translate(-32px, -10%);
-            }
-
-            &.gained {
-                color: #c9ffb4;
-                transition: all 0.15s ease-in-out;
-                transform: scale( 1.25 ) translate(-32px, -10%);
-            }
-        }
-
-        .armouricon {
-            margin-left: -60px;
-            top: 36px;
-            width: 48px;
-            height: 48px;
-            background-size: 100%;
-            background-image-tint: $yellow2;
-            box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .armoursupport {
-            position: absolute;
-            text-align: right;
-            font-size: 48px;
-            font-weight: bolder;
-            color: $yellow2;
-            font-family: Teko-SemiBold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            bottom: 14px;
-            left: 90px;
-        }
-
-
-        &.empty {
-            opacity: 1;
-        }
-
-        &.overarmour {
-            color: #25cf12;
-
-            .armour {
-                color: #00eadc;
-            }
-
-            iconpanel {
-                color: $yellow2;
-            }
         }
     }
+}
 
-    .game-end {
-        boomerchatbox, .top-middle {
-            z-index: 1000;
-        }
-
-        inventorybar, .bottom-right, .bottom-left {
-            display: none;
-        }
+.game-end {
+    boomerchatbox, .top-middle {
+        z-index: 1000;
     }
+
+    inventorybar, .bottom-right, .bottom-left {
+        display: none;
+    }
+}

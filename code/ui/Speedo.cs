@@ -5,11 +5,7 @@ using Sandbox.UI.Construct;
 
 public class Speedo : Panel
 {
-	//public Label dashnumber;
 	public Label Speed;
-
-
-	public List<Panel> DashSegments;
 	public Speedo()
 	{
 		Speed = Add.Label( "", "text" );
