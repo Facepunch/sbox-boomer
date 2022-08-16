@@ -5,7 +5,6 @@
 [Title( "MasterBall" ), Category( "Weapons" )]
 partial class MasterBall : DeathmatchWeapon
 {
-	public static Model WorldModel = Model.Load( "models/gameplay/weapons/masterball/w_masterball.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/masterball/masterball.vmdl";
 
 	public override float PrimaryRate => 2.0f;
@@ -13,11 +12,19 @@ partial class MasterBall : DeathmatchWeapon
 	public override AmmoType AmmoType => AmmoType.None;
 	public override int Bucket => 6;
 
+	[Net]
+	public TimeUntil PickupCooldown { get; set; }
+
 	public override void Spawn()
 	{
 		base.Spawn();
 
-		Model = WorldModel;
+		PickupTrigger.Delete();
+
+		SetModel( "models/gameplay/weapons/masterball/w_masterball.vmdl" );
+
+		SetupPhysicsFromSphere( PhysicsMotionType.Dynamic, Vector3.Up * 8, 16f );
+		PhysicsEnabled = true;
 	}
 
 	public override bool CanPrimaryAttack()
@@ -61,13 +68,6 @@ partial class MasterBall : DeathmatchWeapon
 			player.SetAnimParameter( "b_attack", true );
 		}
 	}
-	public override void ActiveEnd( Entity ent, bool dropped )
-	{
-		base.ActiveEnd( ent, dropped );
-
-		OnCarryDrop( ent );
-
-	}
 
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
@@ -80,4 +80,43 @@ partial class MasterBall : DeathmatchWeapon
 			ViewModelEntity?.SetAnimParameter( "aim_pitch", Owner.EyeRotation.Pitch() );
 		}
 	}
+
+	public override void OnCarryStart( Entity carrier )
+	{
+		base.OnCarryStart( carrier );
+
+		if ( carrier is not Player pl ) 
+			return;
+
+		pl.Inventory.SetActive( this );
+
+		PhysicsEnabled = false;
+	}
+
+	public override async void OnCarryDrop( Entity dropper )
+	{
+		base.OnCarryDrop( dropper );
+
+		PhysicsEnabled = true;
+		PickupCooldown = 2.5f;
+
+		Log.Error( "The masterball was dropped" );
+
+		await Task.Delay( (int)(PickupCooldown * 1000f) );
+
+		Log.Error( "The masterball can be picked up again" );
+	}
+
+	[Event.Tick.Server]
+	private void OnServerTick()
+	{
+		if ( Owner is not Player pl ) 
+			return;
+
+		if( pl.ActiveChild != this )
+		{
+			pl.Inventory.Drop( this );
+		}
+	}
+
 }

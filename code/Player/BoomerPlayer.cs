@@ -469,6 +469,9 @@ public partial class BoomerPlayer : Player
 				return;
 		}
 
+		if ( other is MasterBall mb && mb.PickupCooldown > 0 )
+			return;
+
 		base.StartTouch( other );
 	}
 
