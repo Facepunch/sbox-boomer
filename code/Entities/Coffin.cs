@@ -22,6 +22,12 @@ partial class Coffin : ModelEntity
 
 		foreach ( var child in player.Children.ToArray() )
 		{
+			if( child is MasterBall mb )
+			{
+				player.Inventory.Drop( mb );
+				continue;
+			}
+
 			if ( child is DeathmatchWeapon weapon )
 			{
 				Weapons.Add( weapon.ClassName );
