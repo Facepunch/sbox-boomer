@@ -253,7 +253,7 @@ partial class DeathmatchGame : Game
 	public static void Explosion( Entity weapon, Entity owner, Vector3 position, float radius, float damage, float forceScale, float ownerDamageScale = 1f )
 	{
 		Sound.FromWorld( "gl.explode", position );
-		Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", position );
+		Particles.Create( "particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_barrel.vpcf", position );
 
 		if ( Host.IsClient ) return;
 
