@@ -23,7 +23,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 
 		Model = WorldModel;
 
-		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag )
+		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag || DeathmatchGame.RocketArena )
 		{
 			Delete();
 		}

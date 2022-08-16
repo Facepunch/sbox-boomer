@@ -24,6 +24,11 @@ partial class RailGun : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
+
+		if( DeathmatchGame.RocketArena )
+		{
+			Delete();
+		}
 	}
 
 	public override void AttackPrimary()

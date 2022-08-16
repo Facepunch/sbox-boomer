@@ -92,6 +92,12 @@ public partial class BoomerPlayer : Player
 					GiveAmmo( AmmoType.Rails, 100 );
 				}
 			}
+			else if (DeathmatchGame.RocketArena)
+			{
+
+				Inventory.Add( new RocketLauncher() );
+				GiveAmmo( AmmoType.Rockets, 100 );
+			}
 			else
 			{
 				var w = StartingWeapons.Instance;

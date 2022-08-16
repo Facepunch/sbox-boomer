@@ -36,6 +36,9 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_railtag" )]
 	public static bool RailTag { get; set; } = false;
 
+	[ConVar.Replicated( "bm_rocketarena" )]
+	public static bool RocketArena { get; set; } = false;
+
 	public DeathmatchGame()
 	{
 		//
@@ -291,7 +294,7 @@ partial class DeathmatchGame : Game
 
 			if ( overlap == owner )
 			{
-				if ( NoRocketSelfDmg || MasterTrio )
+				if ( NoRocketSelfDmg || MasterTrio || RocketArena)
 				{
 					dmg = 0;
 				}
