@@ -39,6 +39,10 @@ public partial class BoomerPlayer : Player
 
 	[Net]
 	public bool TaggedPlayer { get; set; } = false;
+									
+	[Net]
+	public bool HasTheBall => Children.Any( x => x is MasterBall );
+
 	public BoomerPlayer()
 	{
 		DominationTracker = new();
@@ -383,6 +387,8 @@ public partial class BoomerPlayer : Player
 	{
 		Projectiles.Simulate();
 
+		Log.Info( HasTheBall );
+
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return;
 
@@ -401,6 +407,11 @@ public partial class BoomerPlayer : Player
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
 			if ( !TaggedPlayer && DeathmatchGame.RailTag && PerSec >= 1f )
+			{
+				Client.AddInt( "kills" );
+				PerSec = 0f;
+			}
+			else if ( HasTheBall && DeathmatchGame.MasterBall && PerSec >= 2f )
 			{
 				Client.AddInt( "kills" );
 				PerSec = 0f;

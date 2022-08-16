@@ -39,6 +39,9 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_rocketarena" )]
 	public static bool RocketArena { get; set; } = false;
 
+	[ConVar.Replicated( "bm_masterball" )]
+	public static bool MasterBall { get; set; } = false;
+
 	public DeathmatchGame()
 	{
 		//
@@ -376,5 +379,10 @@ partial class DeathmatchGame : Game
 		randomplayer.TaggedPlayer = true;
 		randomplayer.Inventory.Add( new RailGun() );
 		randomplayer.GiveAmmo( AmmoType.Rails, 100 );
+	}
+	public void StartMasterBall()
+	{
+		var masterball = new MasterBall();
+		masterball.Position = new Vector3( 0, 0, 2096 );
 	}
 }

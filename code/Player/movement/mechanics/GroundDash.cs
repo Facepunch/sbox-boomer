@@ -21,7 +21,12 @@ class Dash : BaseMoveMechanic
 	public override void PreSimulate()
 	{
 		base.PostSimulate();
-
+		if ( ctrl.Pawn is BoomerPlayer pl )
+		{
+			if ( pl.HasTheBall )
+				return;
+		}
+		
 		if( TimeSinceDash > 2 && ctrl.DashCount != 2 )
 		{
 			if ( ctrl.GroundEntity != null )

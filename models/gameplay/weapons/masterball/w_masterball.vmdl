@@ -31,12 +31,12 @@
 						_class = "RenderPrimitiveSphere"
 						name = "MasterBall"
 						parent_bone = "hold_r"
-						material_name = "dev/helper/testgrid.vmat"
+						material_name = "models/dm_battery.vmat"
 						origin = [ 0.0, 0.0, 0.0 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						max_u = 1.0
 						max_v = 1.0
-						radius = 4.0
+						radius = 8.0
 						segments_u = 16
 						segments_v = 16
 					},

@@ -5,6 +5,8 @@
 [Title( "MasterBall" ), Category( "Weapons" )]
 partial class MasterBall : DeathmatchWeapon
 {
+	[Net]
+	public TimeSince DroppedBall { get; set; }
 	public override string ViewModelPath => "models/gameplay/weapons/masterball/masterball.vmdl";
 
 	public override float PrimaryRate => 2.0f;
@@ -15,15 +17,22 @@ partial class MasterBall : DeathmatchWeapon
 	[Net]
 	public TimeUntil PickupCooldown { get; set; }
 
+	[Net]
+	public bool PickedUpOnce { get; set; } = false;
+
+	private Particles BallEffect { get; set; }
+
 	public override void Spawn()
 	{
 		base.Spawn();
 
 		PickupTrigger.Delete();
 
+		Transmit = TransmitType.Always;
+
 		SetModel( "models/gameplay/weapons/masterball/w_masterball.vmdl" );
 
-		SetupPhysicsFromSphere( PhysicsMotionType.Dynamic, Vector3.Up * 8, 16f );
+		SetupPhysicsFromSphere( PhysicsMotionType.Dynamic, Vector3.Zero, 16f );
 		PhysicsEnabled = true;
 	}
 
@@ -31,7 +40,7 @@ partial class MasterBall : DeathmatchWeapon
 	{
 		return base.CanPrimaryAttack();
 	}
-
+	
 	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = 0;
@@ -89,8 +98,11 @@ partial class MasterBall : DeathmatchWeapon
 			return;
 
 		pl.Inventory.SetActive( this );
-
+		
 		PhysicsEnabled = false;
+
+		PickedUpOnce = true;
+
 	}
 
 	public override async void OnCarryDrop( Entity dropper )
@@ -98,20 +110,47 @@ partial class MasterBall : DeathmatchWeapon
 		base.OnCarryDrop( dropper );
 
 		PhysicsEnabled = true;
-		PickupCooldown = 2.5f;
-
-		Log.Error( "The masterball was dropped" );
+		PickupCooldown = 1.5f;
+		DroppedBall = 0;
 
 		await Task.Delay( (int)(PickupCooldown * 1000f) );
+	}
 
-		Log.Error( "The masterball can be picked up again" );
+	[Event.Tick.Client]
+	public void UpdateParticle()
+	{
+		if ( Local.Pawn == Owner && BallEffect != null )
+		{
+			BallEffect.Destroy();
+			BallEffect = null;
+		}
+		else if ( Local.Pawn != Owner && BallEffect == null )
+		{
+			BallEffect = Particles.Create( "particles/gameplay/gamemodes/masterball/masterball.vpcf", this );
+		}
+
 	}
 
 	[Event.Tick.Server]
 	private void OnServerTick()
 	{
-		if ( Owner is not Player pl ) 
+		if ( !Owner.IsValid() )
+		{
+			if ( DroppedBall > 30 && PickedUpOnce  )
+			{
+				Position = new Vector3( 0, 0, 2096 );
+				PickedUpOnce = false;
+			}		
+		}
+		else
+		{
+			DroppedBall = 0;
+		}
+
+		if ( Owner is not Player pl )
+		{
 			return;
+		}
 
 		if( pl.ActiveChild != this )
 		{
