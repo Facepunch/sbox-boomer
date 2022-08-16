@@ -1,4 +1,6 @@
-﻿namespace Boomer;
+﻿using Boomer.UI;
+
+namespace Boomer;
 
 [Library( "boomer_masterball" ), HammerEntity]
 [EditorModel( "models/dm_crowbar.vmdl" )]
@@ -103,6 +105,8 @@ partial class MasterBall : DeathmatchWeapon
 
 		PickedUpOnce = true;
 
+		BoomerChatBox.AddInformation( To.Everyone, $"{carrier.Client.Name} has the ball!", $"avatar:{carrier.Client.PlayerId}" );
+
 	}
 
 	public override async void OnCarryDrop( Entity dropper )
@@ -112,6 +116,8 @@ partial class MasterBall : DeathmatchWeapon
 		PhysicsEnabled = true;
 		PickupCooldown = 1.5f;
 		DroppedBall = 0;
+
+		BoomerChatBox.AddInformation( To.Everyone, $"{dropper.Client.Name} has dropped the ball!", $"avatar:{dropper.Client.PlayerId}" );
 
 		await Task.Delay( (int)(PickupCooldown * 1000f) );
 	}
@@ -128,7 +134,6 @@ partial class MasterBall : DeathmatchWeapon
 		{
 			BallEffect = Particles.Create( "particles/gameplay/gamemodes/masterball/masterball.vpcf", this );
 		}
-
 	}
 
 	[Event.Tick.Server]
@@ -140,6 +145,8 @@ partial class MasterBall : DeathmatchWeapon
 			{
 				Position = new Vector3( 0, 0, 2096 );
 				PickedUpOnce = false;
+
+				BoomerChatBox.AddInformation( To.Everyone, $"Ball has been reset!", $"avatar:{null}" );
 			}		
 		}
 		else

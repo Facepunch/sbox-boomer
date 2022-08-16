@@ -891,4 +891,10 @@
 			m_hTexture = resource:"particles/sprites/effects/glowyringsharp.vtex"
 		},
 	]
+	m_Children = 
+	[
+		{
+			m_ChildRef = resource:"particles/gameplay/gamemodes/masterball/masterball_a.vpcf"
+		},
+	]
 }

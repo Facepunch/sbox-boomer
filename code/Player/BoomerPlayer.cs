@@ -226,9 +226,6 @@ public partial class BoomerPlayer : Player
 		if ( !ply.Children.OfType<LightningGun>().Any() )
 			ply.Inventory.Add( new LightningGun() );
 
-		if ( !ply.Children.OfType<MasterBall>().Any() )
-			ply.Inventory.Add( new MasterBall() );
-
 		ply.GiveAmmo( AmmoType.Rockets, 250 );
 		ply.GiveAmmo( AmmoType.Buckshot, 250 );
 		ply.GiveAmmo( AmmoType.Nails, 250 );
@@ -386,8 +383,6 @@ public partial class BoomerPlayer : Player
 	public override void Simulate( Client cl )
 	{
 		Projectiles.Simulate();
-
-		Log.Info( HasTheBall );
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return;

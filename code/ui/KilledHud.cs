@@ -31,12 +31,6 @@ public partial class KilledHud : Panel
 	{
 		base.Tick();
 	}
-
-	public void AddEntry( BoomerPlayer attacker)
-	{
-		
-	}
-
 }
 
 
