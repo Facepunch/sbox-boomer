@@ -8,7 +8,7 @@
 [Title( "Armour Shard" ), Category( "PickUps" )]
 partial class ArmourShard : AnimatedEntity, IRespawnableEntity
 {
-	public static readonly Model WorldModel = Model.Load( "models/gameplay/armour_shard/armour_shard.vmdl" );
+	public static readonly Model WorldModel = Model.Load( "models/gameplay/armour_shard/dm_armour_shard.vmdl" );
 
 	[Property]
 	public int RespawnTime { get; set; } = 15;
@@ -38,7 +38,7 @@ partial class ArmourShard : AnimatedEntity, IRespawnableEntity
 			if ( other is not BoomerPlayer player ) return;
 			if ( player.Armour >= 100 ) return;
 
-			var newhealth = player.Armour + 25;
+			var newhealth = player.Armour + 5;
 
 			newhealth = newhealth.Clamp( 0, 100 );
 
