@@ -23,6 +23,7 @@ partial class MasterBall : DeathmatchWeapon
 	public bool PickedUpOnce { get; set; } = false;
 
 	private Particles BallEffect { get; set; }
+	private Particles BallTimer { get; set; }
 
 	public override void Spawn()
 	{
@@ -106,6 +107,9 @@ partial class MasterBall : DeathmatchWeapon
 		PickedUpOnce = true;
 
 		MasterballHud.NotifyHasBall( To.Everyone, carrier.Client.Id );
+
+		if ( BallTimer != null )
+			BallTimer.Destroy();
 		//BoomerChatBox.AddInformation( To.Everyone, $"{carrier.Client.Name} has the ball!", $"avatar:{carrier.Client.PlayerId}" );
 
 	}
@@ -119,6 +123,8 @@ partial class MasterBall : DeathmatchWeapon
 		DroppedBall = 0;
 
 		MasterballHud.NotifyDroppedBall( To.Everyone, dropper.Client.Id );
+
+		BallTimer = Particles.Create( "particles/gameplay/gamemodes/masterball/masterball_b.vpcf", this );
 		//BoomerChatBox.AddInformation( To.Everyone, $"{dropper.Client.Name} has dropped the ball!", $"avatar:{dropper.Client.PlayerId}" );
 	}
 
@@ -147,6 +153,10 @@ partial class MasterBall : DeathmatchWeapon
 				PickedUpOnce = false;
 
 				MasterballHud.NotifyBallReset( To.Everyone );
+
+				if ( BallTimer != null )
+					BallTimer.Destroy();
+				
 				//BoomerChatBox.AddInformation( To.Everyone, $"Ball has been reset!", $"avatar:{null}" );
 			}		
 		}
