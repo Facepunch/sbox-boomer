@@ -29,6 +29,7 @@ public class HudRootPanel : RootPanel
 		Scoreboard = AddChild<Scoreboard>();
 		AddChild<VoiceList>();
 		AddChild<VoiceSpeaker>();
+		AddChild<MasterballHud>();
 	}
 
 	public override void Tick()

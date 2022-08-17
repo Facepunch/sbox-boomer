@@ -1,4 +1,5 @@
 ﻿using Boomer.Movement;
+using Boomer.UI;
 
 namespace Boomer;
 
@@ -225,6 +226,9 @@ public partial class BoomerPlayer : Player
 
 		if ( !ply.Children.OfType<LightningGun>().Any() )
 			ply.Inventory.Add( new LightningGun() );
+
+		if ( !ply.Children.OfType<MasterBall>().Any() )
+			ply.Inventory.Add( new MasterBall() );
 
 		ply.GiveAmmo( AmmoType.Rockets, 250 );
 		ply.GiveAmmo( AmmoType.Buckshot, 250 );

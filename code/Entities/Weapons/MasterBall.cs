@@ -105,11 +105,12 @@ partial class MasterBall : DeathmatchWeapon
 
 		PickedUpOnce = true;
 
-		BoomerChatBox.AddInformation( To.Everyone, $"{carrier.Client.Name} has the ball!", $"avatar:{carrier.Client.PlayerId}" );
+		MasterballHud.NotifyHasBall( To.Everyone, carrier.Client.Id );
+		//BoomerChatBox.AddInformation( To.Everyone, $"{carrier.Client.Name} has the ball!", $"avatar:{carrier.Client.PlayerId}" );
 
 	}
 
-	public override async void OnCarryDrop( Entity dropper )
+	public override void OnCarryDrop( Entity dropper )
 	{
 		base.OnCarryDrop( dropper );
 
@@ -117,9 +118,8 @@ partial class MasterBall : DeathmatchWeapon
 		PickupCooldown = 1.5f;
 		DroppedBall = 0;
 
-		BoomerChatBox.AddInformation( To.Everyone, $"{dropper.Client.Name} has dropped the ball!", $"avatar:{dropper.Client.PlayerId}" );
-
-		await Task.Delay( (int)(PickupCooldown * 1000f) );
+		MasterballHud.NotifyDroppedBall( To.Everyone, dropper.Client.Id );
+		//BoomerChatBox.AddInformation( To.Everyone, $"{dropper.Client.Name} has dropped the ball!", $"avatar:{dropper.Client.PlayerId}" );
 	}
 
 	[Event.Tick.Client]
@@ -146,7 +146,8 @@ partial class MasterBall : DeathmatchWeapon
 				Position = new Vector3( 0, 0, 2096 );
 				PickedUpOnce = false;
 
-				BoomerChatBox.AddInformation( To.Everyone, $"Ball has been reset!", $"avatar:{null}" );
+				MasterballHud.NotifyBallReset( To.Everyone );
+				//BoomerChatBox.AddInformation( To.Everyone, $"Ball has been reset!", $"avatar:{null}" );
 			}		
 		}
 		else
