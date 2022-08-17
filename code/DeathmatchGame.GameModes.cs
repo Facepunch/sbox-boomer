@@ -181,12 +181,7 @@ partial class DeathmatchGame : Game
 	//
 	public void DeleteAllGuns()
 	{
-		DeleteNailGun();
-		DeleteGrenadeLauncher();
-		DeleteLightningGun();
-		DeleteRailGun();
-		DeleteRocketLauncher();
-		DeleteShotgun();
+		Entity.All.OfType<DeathmatchWeapon>().ToList().ForEach( x => x.Delete() );
 	}
 	//
 	//GUNS
@@ -294,29 +289,9 @@ partial class DeathmatchGame : Game
 	}
 	public void DeleteAmmo()
 	{
-		foreach ( var AmmoNails in Entity.All.OfType<AmmoNails>() )
+		foreach ( var Ammos in Entity.All.OfType<BaseAmmo>() )
 		{
-			AmmoNails.Delete();
-		}
-		foreach ( var AmmoRockets in Entity.All.OfType<AmmoRockets>() )
-		{
-			AmmoRockets.Delete();
-		}
-		foreach ( var AmmoBuckshot in Entity.All.OfType<AmmoBuckshot>() )
-		{
-			AmmoBuckshot.Delete();
-		}
-		foreach ( var AmmoGrenades in Entity.All.OfType<AmmoGrenades>() )
-		{
-			AmmoGrenades.Delete();
-		}
-		foreach ( var AmmoRails in Entity.All.OfType<AmmoRails>() )
-		{
-			AmmoRails.Delete();
-		}
-		foreach ( var AmmoLightning in Entity.All.OfType<AmmoLightning>() )
-		{
-			AmmoLightning.Delete();
+			Ammos.Delete();
 		}
 	}
 }
