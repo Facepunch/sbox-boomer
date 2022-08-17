@@ -30,6 +30,8 @@ public partial class MasterballHud : Panel
 		if ( Current == null ) return;
 
 		Current.Notify( $"{cl.Name} picked up the ball!" );
+
+		//Sound.FromScreen( "ball.pickedup" );
 	}
 
 	[ConCmd.Client( "bm_droppedball", CanBeCalledFromServer = true )]
@@ -40,6 +42,8 @@ public partial class MasterballHud : Panel
 		if ( Current == null ) return;
 
 		Current.Notify( $"{cl.Name} dropped the ball!" );
+
+		//Sound.FromScreen( "ball.dropped" );
 	}
 
 	[ConCmd.Client( "bm_ballreset", CanBeCalledFromServer = true )]
@@ -48,6 +52,8 @@ public partial class MasterballHud : Panel
 		if ( Current == null ) return;
 
 		Current.Notify( $"The ball has been reset" );
+
+		//Sound.FromScreen( "ball.reset" );
 	}
 
 	public class NotifyLabel : Label
