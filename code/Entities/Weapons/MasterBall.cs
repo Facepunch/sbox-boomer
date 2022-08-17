@@ -64,7 +64,7 @@ partial class MasterBall : DeathmatchWeapon
 			if ( !IsServer ) continue;
 			if ( !tr.Entity.IsValid() ) continue;
 
-			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 32, 25 )
+			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 32, 75 )
 				.UsingTraceResult( tr )
 				.WithAttacker( Owner )
 				.WithWeapon( this );
