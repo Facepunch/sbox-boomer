@@ -13,7 +13,7 @@ partial class HealthVial : AnimatedEntity, IRespawnableEntity
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthvial/healthvial.vmdl" );
 
 	[Property]
-	public int RespawnTime { get; set; } = 30;
+	public int RespawnTime { get; set; } = 15;
 	
 	public override void Spawn()
 	{

@@ -11,7 +11,7 @@ partial class ArmourShard : AnimatedEntity, IRespawnableEntity
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/armour_shard/armour_shard.vmdl" );
 
 	[Property]
-	public int RespawnTime { get; set; } = 30;
+	public int RespawnTime { get; set; } = 15;
 	public override void Spawn()
 	{
 		base.Spawn();
