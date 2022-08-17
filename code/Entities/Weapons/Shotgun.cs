@@ -22,11 +22,6 @@ partial class Shotgun : DeathmatchWeapon
 		base.Spawn();
 
 		Model = WorldModel;
-
-		if ( DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag || DeathmatchGame.RocketArena )
-		{
-			Delete();
-		}
 	}
 
 	public override void AttackPrimary()

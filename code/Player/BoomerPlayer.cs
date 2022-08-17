@@ -44,6 +44,9 @@ public partial class BoomerPlayer : Player
 	[Net]
 	public bool HasTheBall => Children.Any( x => x is MasterBall );
 
+	[Net]
+	public bool HasQuadDamage { get; set; } = false;
+
 	public BoomerPlayer()
 	{
 		DominationTracker = new();
@@ -73,35 +76,19 @@ public partial class BoomerPlayer : Player
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
-			if ( DeathmatchGame.InstaGib )
+			if ( DeathmatchGame.NotUsingStartingGuns && !TaggedPlayer )
 			{
-				Inventory.Add( new RailGun() );
-				GiveAmmo( AmmoType.Rails, 100 );
-			}
-			else if ( DeathmatchGame.MasterTrio )
-			{
-				Inventory.Add( new RailGun() );
-				GiveAmmo( AmmoType.Rails, 100 );
-
-				Inventory.Add( new RocketLauncher() );
-				GiveAmmo( AmmoType.Rockets, 100 );
-
-				Inventory.Add( new LightningGun() );
-				GiveAmmo( AmmoType.Lightning, 100 );
-			}
-			else if ( DeathmatchGame.RailTag )
-			{
-				if ( TaggedPlayer )
+				var w = StartingWeapons.Instance;
+				Inventory.DeleteContents();
+				if ( w.IsValid() )
 				{
-					Inventory.Add( new RailGun() );
-					GiveAmmo( AmmoType.Rails, 100 );
+					w.SetupPlayer( this );
 				}
 			}
-			else if (DeathmatchGame.RocketArena)
+			else if ( DeathmatchGame.NotUsingStartingGuns && TaggedPlayer )
 			{
-
-				Inventory.Add( new RocketLauncher() );
-				GiveAmmo( AmmoType.Rockets, 100 );
+				Inventory.Add( new RailGun() );
+				GiveAmmo( AmmoType.Rails, 100 );
 			}
 			else
 			{
@@ -113,11 +100,6 @@ public partial class BoomerPlayer : Player
 				}
 			}
 		}
-		//else
-		//{
-		//	Inventory.Add( new NailGun() );
-		//	GiveAmmo( AmmoType.Nails, 250 );
-		//}
 
 		SupressPickupNotices = false;
 
@@ -387,7 +369,6 @@ public partial class BoomerPlayer : Player
 	public override void Simulate( Client cl )
 	{
 		Projectiles.Simulate();
-
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return;
 
@@ -606,9 +587,17 @@ public partial class BoomerPlayer : Player
 
 		LastDamage = info;
 
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaGib && !DeathmatchGame.RailTag )
+		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaKillRail )
 		{
 			info.Damage = 100.0f;
+		}
+
+		if ( attacker != null )
+		{
+			if ( attacker.HasQuadDamage )
+			{
+				info.Damage *= 4.0f;
+			}
 		}
 
 		this.ProceduralHitReaction( info );

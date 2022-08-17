@@ -162,7 +162,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 
 	public bool TakeAmmo( int amount )
 	{
-		if ( DeathmatchGame.UnlimitedAmmo || DeathmatchGame.InstaGib || DeathmatchGame.MasterTrio || DeathmatchGame.RailTag || DeathmatchGame.RocketArena)
+		if ( DeathmatchGame.UnlimitedAmmo )
 			return true;
 
 		return Player.TakeAmmo( AmmoType, amount ) > 0;

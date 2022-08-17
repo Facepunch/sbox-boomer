@@ -27,21 +27,6 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_norocketselfdamage" )]
 	public static bool NoRocketSelfDmg { get; set; } = false;
 
-	[ConVar.Replicated( "bm_instagib" )]
-	public static bool InstaGib { get; set; } = false;
-
-	[ConVar.Replicated( "bm_mastertrio" )]
-	public static bool MasterTrio { get; set; } = false;
-
-	[ConVar.Replicated( "bm_railtag" )]
-	public static bool RailTag { get; set; } = false;
-
-	[ConVar.Replicated( "bm_rocketarena" )]
-	public static bool RocketArena { get; set; } = false;
-
-	[ConVar.Replicated( "bm_masterball" )]
-	public static bool MasterBall { get; set; } = false;
-
 	public DeathmatchGame()
 	{
 		//
@@ -55,6 +40,7 @@ partial class DeathmatchGame : Game
 			Hud = new DeathmatchHud();
 
 			_ = GameLoopAsync();
+
 		}
 
 		if ( IsClient )
@@ -368,21 +354,5 @@ partial class DeathmatchGame : Game
 			Render.Draw2D.Color = Color.White;
 			Render.Draw2D.DrawText( new Rect( pos.Value ), str );
 		}
-	}
-
-	public void StartTag()
-	{
-		var allplayers = Entity.All.OfType<BoomerPlayer>();
-
-		var randomplayer = allplayers.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
-
-		randomplayer.TaggedPlayer = true;
-		randomplayer.Inventory.Add( new RailGun() );
-		randomplayer.GiveAmmo( AmmoType.Rails, 100 );
-	}
-	public void StartMasterBall()
-	{
-		var masterball = new MasterBall();
-		masterball.Position = new Vector3( 0, 0, 2096 );
 	}
 }

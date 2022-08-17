@@ -23,10 +23,6 @@ partial class Armour : AnimatedEntity, IRespawnableEntity
 
 		Tags.Add( "trigger" );
 
-		if ( DeathmatchGame.InstaGib )
-		{
-			Delete();
-		}
 	}
 
 	public override void StartTouch( Entity other )

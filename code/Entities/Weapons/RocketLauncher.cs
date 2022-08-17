@@ -27,11 +27,6 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 		base.Spawn();
 
 		Model = WorldModel;
-
-		if ( DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
-		{
-			Delete();
-		}
 	}
 
 	public override void AttackPrimary()
