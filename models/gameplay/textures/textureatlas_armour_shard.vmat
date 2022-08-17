@@ -36,7 +36,7 @@ Layer0
 	g_flIlluminateAmount "0.058"
 	g_flRimPower "0.000"
 	g_vDiffuseColor "[1.000000 0.913726 0.913726 1.000000]"
-	g_vRimColor "[0.000000 1.000000 1.000000 1.000000]"
+	g_vRimColor "[0.631373 0.000000 1.000000 1.000000]"
 
 	DynamicParams
 	{
