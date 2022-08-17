@@ -2,6 +2,9 @@
 
 partial class DeathmatchGame : Game
 {
+	[ConVar.Replicated( "bm_deathmatch" )]
+	public static bool DeathMatch { get; set; } = false;
+	
 	[ConVar.Replicated( "bm_instagib" )]
 	public static bool InstaGib { get; set; } = false;
 
@@ -31,35 +34,50 @@ partial class DeathmatchGame : Game
 	
 	public void Gamemode()
 	{
-		//UnlimitedAmmo = false;
-		
+	
 		if ( InstaGib )
 		{
 			GameModeInstaGib();
 		}
-		if ( MasterTrio )
+		else if ( MasterTrio )
 		{
 			GameModeMasterTrio();
 		}
-		if ( RailTag )
+		else if ( RailTag )
 		{
 			GameModeRailTag();
 		}
-		if ( RocketArena )
+		else if ( RocketArena )
 		{
 			GameModeRocketArena();
 		}
-		if ( MasterBall )
+		else if ( MasterBall )
 		{
 			GameModeMasterBall();
 
 		}
+		else
+		{
+			GameModeDeathMatch();
+		}
 	}
-	
+
 	//
 	//GAMEMODES
 	//
 	
+	//
+	//DeathMatch
+	//
+	public void GameModeDeathMatch()
+	{
+		foreach ( var check in Entity.All.OfType<StartingWeapons>() )
+		{
+			UnlimitedAmmo = check.UnlimitedAmmo;
+			NoRocketSelfDmg = check.NoRocketSelfDMG;
+		}
+	}
+
 	//
 	//InstaGib
 	//
