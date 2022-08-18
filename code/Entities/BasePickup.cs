@@ -22,6 +22,8 @@ public partial class BasePickup : AnimatedEntity
 
 			if ( disabled )
 				Consume();
+			else
+				SetAvailable( true );
 		}
 	}
 
@@ -107,6 +109,6 @@ public partial class BasePickup : AnimatedEntity
 
 	public virtual bool CanPickup( BoomerPlayer player )
 	{
-		return Available;
+		return Available && !Disabled;
 	}
 }
