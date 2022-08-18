@@ -1,0 +1,11 @@
+sequence 0
+frame empty.png 1
+
+sequence 1
+frame megahealth.png 1
+
+sequence 2
+frame megaarmour.png 1
+
+sequence 3
+frame quaddamage.png 1

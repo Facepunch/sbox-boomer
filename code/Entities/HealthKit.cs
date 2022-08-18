@@ -21,7 +21,7 @@ partial class HealthKit : BasePickup
 		player.Health = newhealth;
 
 		PlayPickupSound();
-		PickupFeed.OnPickup( To.Single( player ), $"+{HealthGranted} Armour" );
+		PickupFeed.OnPickup( To.Single( player ), $"+{HealthGranted} Health" );
 		OnPickUpRpc( To.Single( player ) );
 
 		base.OnPickup( player );

@@ -65,7 +65,7 @@ public partial class BasePickup : AnimatedEntity
 			SetAvailable( true );
 		}
 		else
-			UntilRespawn = RespawnTime + 30;
+		UntilRespawn = RespawnTime + 30;
 	}
 
 	public override void StartTouch( Entity other )
@@ -111,6 +111,6 @@ public partial class BasePickup : AnimatedEntity
 
 	public virtual bool CanPickup( BoomerPlayer player )
 	{
-		return Available && !Disabled;
+		return Available && !Disabled;		
 	}
 }
