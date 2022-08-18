@@ -32,7 +32,7 @@ partial class MegaHealth : BasePickup
 
 		Timer = Particles.Create( "particles/gameplay/respawnvisual/respawn_timer.vpcf", Position + new Vector3( 0, 0, 32 ) );
 		Timer.SetPosition( 1, new Vector3( RespawnTime - UntilRespawn, 1, 0 ) );
-		Timer.SetPosition( 2, new Vector3( 0, 204, 255 ) );
+		Timer.SetPosition( 2, new Vector3( 0, 255, 255 ) );
 	}
 	
 	public override void StartTouch( Entity other )
@@ -46,17 +46,19 @@ partial class MegaHealth : BasePickup
 			OnPickup( player );
 			Timer = Particles.Create( "particles/gameplay/respawnvisual/respawn_timer.vpcf", Position + new Vector3(0,0,32) );
 			Timer.SetPosition( 1, new Vector3( RespawnTime, 1, 0 ) );
-			Timer.SetPosition( 2, new Vector3( 0, 204, 255 ) );
+			Timer.SetPosition( 2, new Vector3( 0, 255, 255 ) );
 		}
 	}
 	
 	[Event.Tick.Server]
 	public void DestroyTimer()
 	{
-		if ( Available )
+		if ( Disabled ) return;
+
+		if ( !Available && UntilRespawn )
 		{
-			Timer.Destroy( );
-			Log.Info( Available );
+			Timer.SetPosition( 1, new Vector3( 0, 2, 1 ) );
+			Timer.Destroy();
 		}
 
 	}

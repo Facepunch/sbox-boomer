@@ -277,6 +277,14 @@
 					m_Stops = [  ]
 				}
 			}
+			m_bDisableOperator = true
+		},
+		{
+			_class = "C_OP_RemapCPtoVector"
+			m_nCPInput = 2
+			m_nFieldOutput = "6"
+			m_vInputMax = [ 255.0, 255.0, 255.0 ]
+			m_vOutputMax = [ 255.0, 255.0, 255.0 ]
 		},
 	]
 	m_Renderers = 
