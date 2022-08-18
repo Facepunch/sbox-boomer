@@ -10,6 +10,8 @@ public partial class BasePickup : AnimatedEntity
 	[Net, Change( "OnAvailable" )] protected bool Available { get; set; } = false;
 	public TimeUntil UntilRespawn { get; set; }
 
+	public Action<BasePickup, BoomerPlayer> OnPickupAction;
+
 	protected void OnAvailable( bool before, bool after )
 	{
 		EnableDrawing = after;
@@ -61,6 +63,10 @@ public partial class BasePickup : AnimatedEntity
 		}
 	}
 
+	/// <summary>
+	/// Called to consume the current pickup - meaning it becomes unavailable
+	/// Stops drawing, and stop s being accessible
+	/// </summary>
 	protected void Consume()
 	{
 		UntilRespawn = RespawnTime;
@@ -81,6 +87,7 @@ public partial class BasePickup : AnimatedEntity
 	public virtual void OnPickup( BoomerPlayer player )
 	{
 		Consume();
+		OnPickupAction?.Invoke( this, player );
 	}
 
 	public virtual bool CanPickup( BoomerPlayer player )

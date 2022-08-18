@@ -221,6 +221,11 @@ public partial class BoomerPlayer : Player
 	}
 
 
+	protected void OnArmorPickUp( BasePickup pickup, BoomerPlayer player )
+	{
+		pickup?.Delete();
+	}
+
 	public override void OnKilled()
 	{
 		base.OnKilled();
@@ -239,7 +244,8 @@ public partial class BoomerPlayer : Player
 				{
 					var armour = new ArmorPickup()
 					{
-						Position = Position = Position + Vector3.Up * 30
+						Position = Position = Position + Vector3.Up * 30,
+						OnPickupAction = OnArmorPickUp
 					};
 					armour.DeleteAsync( 60f );
 					armour.PhysicsBody.Velocity = Owner.EyeRotation.Up * 200.0f + Owner.Velocity + Vector3.Random * 100.0f;
