@@ -268,7 +268,7 @@ partial class DeathmatchGame : Game
 	}
 	public void DeleteArmour()
 	{
-		foreach ( var ArmourKits in Entity.All.OfType<Armour>() )
+		foreach ( var ArmourKits in Entity.All.OfType<ArmorPickup>() )
 		{
 			ArmourKits.Delete();
 		}
