@@ -40,7 +40,6 @@ partial class DeathmatchGame : Game
 			Hud = new DeathmatchHud();
 
 			_ = GameLoopAsync();
-
 		}
 
 		if ( IsClient )
@@ -60,11 +59,45 @@ partial class DeathmatchGame : Game
 			Precache.Add( asset );
 		}
 	}
+	
+	[Net]
+	public static string BackUpMap { get; set; } = "facepunch.bm_dockyard";
 
 	public override void PostLevelLoaded()
 	{
 		base.PostLevelLoaded();
 		ItemRespawn.Init();
+	}
+	
+	[ConCmd.Server]
+	public static void PreMapCheck()
+	{
+		var startingweapons = All
+		.OfType<StartingWeapons>()
+				.FirstOrDefault();
+
+		if ( startingweapons == null )
+		{
+			Log.Error( $"Map is not valid, changing to {BackUpMap}. Map is missing the boomer_startingweapons entity." );
+			Log.Info( "Map is not valid, changing to " + BackUpMap );
+			Log.Info( "Map is missing the boomer_startingweapons entity" );
+
+		}
+	}
+
+	[ConCmd.Server]
+	public static void MapCheck()
+	{
+		var startingweapons = All
+		.OfType<StartingWeapons>()
+				.FirstOrDefault();
+
+		if ( startingweapons == null )
+		{
+			Global.ChangeLevel( BackUpMap );
+			Log.Info( "Map is not valid, changing to " + BackUpMap );
+
+		}
 	}
 
 
@@ -81,9 +114,9 @@ partial class DeathmatchGame : Game
 		var player = new BoomerPlayer();
 		player.UpdateClothes( To.Single( cl ) );
 		player.Respawn();
-		
+
 		player.PlayerColor = Color.Random;
-		
+
 		cl.Pawn = player;
 	}
 
@@ -96,7 +129,7 @@ partial class DeathmatchGame : Game
 		{
 			cl.Pawn.Delete();
 			cl.Pawn = null;
-			if(player.TaggedPlayer)
+			if ( player.TaggedPlayer )
 			{
 				StartTag();
 			}
@@ -118,7 +151,7 @@ partial class DeathmatchGame : Game
 
 		pawn.Transform = spawnpoint.Transform;
 
-		if( pawn is BoomerPlayer pl )
+		if ( pawn is BoomerPlayer pl )
 		{
 			pl.SetViewAngles( pawn.Rotation.Angles() );
 		}
@@ -197,7 +230,7 @@ partial class DeathmatchGame : Game
 			var damageUi = timeSinceDamage.LerpInverse( 0.25f, 0.0f, true ) * 0.3f;
 			if ( damageUi > 0 )
 			{
-			//	PostProcessing.Saturate.Amount -= damageUi;
+				//	PostProcessing.Saturate.Amount -= damageUi;
 				PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, damageUi );
 				PostProcessing.Vignette.Intensity += damageUi;
 				PostProcessing.Vignette.Smoothness += damageUi;
@@ -207,7 +240,7 @@ partial class DeathmatchGame : Game
 				PostProcessing.Blur.Strength = damageUi * 0.5f;
 			}
 
-			if( localPlayer.Controller is BoomerController ctrl )
+			if ( localPlayer.Controller is BoomerController ctrl )
 			{
 				var alpha = ctrl.GetMechanic<Dash>().DashAlpha;
 				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
@@ -283,7 +316,7 @@ partial class DeathmatchGame : Game
 
 			if ( overlap == owner )
 			{
-				if ( NoRocketSelfDmg || MasterTrio || RocketArena)
+				if ( NoRocketSelfDmg || MasterTrio || RocketArena )
 				{
 					dmg = 0;
 				}
@@ -307,7 +340,7 @@ partial class DeathmatchGame : Game
 	{
 		base.RenderHud();
 
-		if ( Local.Pawn is not BoomerPlayer pl ) 
+		if ( Local.Pawn is not BoomerPlayer pl )
 			return;
 
 		var scale = Screen.Height / 1080.0f;

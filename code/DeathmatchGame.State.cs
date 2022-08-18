@@ -10,7 +10,7 @@ partial class DeathmatchGame : Game
 	[Net]
 	public GameStates GameState { get; set; } = GameStates.Warmup;
 	[Net]
-	public string NextMap { get; set; } = "facepunch.datacore";
+	public string NextMap { get; set; } = "facepunch.bm_dockyard";
 
 	[ConCmd.Admin]
 	public static void SkipStage()
@@ -48,9 +48,11 @@ partial class DeathmatchGame : Game
 		GameState = GameStates.Warmup;
 		StateTimer = WarmupTime;
 		CountDownPlayed = false;
+		PreMapCheck();
 		await WaitStateTimer();
 
 		GameState = GameStates.Live;
+		MapCheck();
 		StateTimer = GameTime;
 		CountDownPlayed = false;
 		FreshStart();
