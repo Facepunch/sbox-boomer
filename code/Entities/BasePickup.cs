@@ -63,10 +63,8 @@ public partial class BasePickup : AnimatedEntity
 
 	protected void Consume()
 	{
-		Model = null;
 		UntilRespawn = RespawnTime;
 		SetAvailable( false );
-
 	}
 
 	[Event.Tick.Server]
