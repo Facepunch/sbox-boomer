@@ -289,7 +289,7 @@ partial class DeathmatchGame : Game
 	}
 	public void DeleteAmmo()
 	{
-		foreach ( var Ammos in Entity.All.OfType<BaseAmmo>() )
+		foreach ( var Ammos in Entity.All.OfType<AmmoPickup>() )
 		{
 			Ammos.Delete();
 		}
