@@ -12,6 +12,19 @@ public partial class BasePickup : AnimatedEntity
 
 	public Action<BasePickup, BoomerPlayer> OnPickupAction;
 
+	private bool disabled;
+	public bool Disabled
+	{
+		get => disabled;
+		set
+		{
+			disabled = value;
+
+			if ( disabled )
+				Consume();
+		}
+	}
+
 	protected void OnAvailable( bool before, bool after )
 	{
 		EnableDrawing = after;
@@ -76,6 +89,8 @@ public partial class BasePickup : AnimatedEntity
 	[Event.Tick.Server]
 	protected void Tick()
 	{
+		if ( Disabled ) return;
+
 		if ( !Available && UntilRespawn )
 		{
 			SetAvailable( true );
