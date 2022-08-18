@@ -18,7 +18,7 @@ partial class ArmorPickup : BasePickup
 		player.Armour = newhealth;
 
 		PlayPickupSound();
-		PickupFeed.OnPickup( To.Single( player ), $"+25 Armour" );
+		PickupFeed.OnPickup( To.Single( player ), $"+{ArmorGranted} Armour" );
 		OnPickUpRpc( To.Single( player ) );
 
 		base.OnPickup( player );
