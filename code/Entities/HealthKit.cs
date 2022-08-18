@@ -8,56 +8,32 @@ namespace Boomer;
 [Library( "boomer_healthkit" ), HammerEntity]
 [EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
 [Title( "Health Kit" ), Category( "PickUps" )]
-partial class HealthKit : AnimatedEntity, IRespawnableEntity
+partial class HealthKit : BasePickup
 {
-	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
+	public override Model WorldModel => Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
 
-	[Property]
-	public int RespawnTime { get; set; } = 30;
+	public float HealthGranted { get; set; } = 25f;
 	
-	public override void Spawn()
+	public override void OnPickup( BoomerPlayer player )
 	{
-		base.Spawn();
+		var newhealth = player.Health + HealthGranted;
+		newhealth = newhealth.Clamp( 0, 100 );
+		player.Health = newhealth;
 
-		Model = WorldModel;
+		PlayPickupSound();
+		PickupFeed.OnPickup( To.Single( player ), $"+{HealthGranted} Armour" );
+		OnPickUpRpc( To.Single( player ) );
 
-		PhysicsEnabled = true;
-		UsePhysicsCollision = true;
-
-		
-		Tags.Add( "trigger" );
-
+		base.OnPickup( player );
 	}
 
-	public override void StartTouch( Entity other )
+	public override bool CanPickup( BoomerPlayer player )
 	{
-		base.StartTouch( other );
+		if ( player.Health >= 100 ) return false;
 
-		if ( IsServer )
-		{
-			if ( other is not BoomerPlayer pl ) return;
-			if ( pl.Health >= 100 ) return;
-			
-			var newhealth = pl.Health + 25;
-
-			newhealth = newhealth.Clamp( 0, 100 );
-
-			pl.Health = newhealth;
-
-			PickEffect( pl );
-			PlayPickupSound();
-
-			PickupFeed.OnPickup( To.Single( pl ), $"+25 Health" );
-			ItemRespawn.Taken( this, RespawnTime );
-
-			OnPickUpRpc( To.Single( other ) );
-
-			if ( Host.IsServer )
-
-			Delete();
-		}
+		return base.CanPickup( player );
 	}
-	
+
 	[ClientRpc]
 	public void OnPickUpRpc()
 	{
@@ -76,16 +52,5 @@ partial class HealthKit : AnimatedEntity, IRespawnableEntity
 	private void PlayPickupSound()
 	{
 		Sound.FromWorld( "health.pickup", Position );
-	}
-
-	private void PickEffect( BoomerPlayer player )
-	{
-		if ( player.Controller is not BoomerController ctrl ) 
-		return;
-
-		if ( Host.IsServer || !player.IsLocalPawn )
-		return;
-
-		Particles.Create( "particles/gameplay/screeneffects/healthpickup/ss_healthpickup.vpcf",ctrl.Pawn);
 	}
 }

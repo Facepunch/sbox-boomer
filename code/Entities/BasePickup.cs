@@ -4,7 +4,7 @@ public partial class BasePickup : AnimatedEntity
 {
 	public virtual Model WorldModel => null;
 
-	[Property] public int RespawnTime { get; set; } = 15;
+	public int RespawnTime { get; set; } = 30;
 	[Property] public bool SpawnImmediate { get; set; } = true;
 
 	[Net, Change( "OnAvailable" )] protected bool Available { get; set; } = false;
@@ -65,7 +65,7 @@ public partial class BasePickup : AnimatedEntity
 			SetAvailable( true );
 		}
 		else
-			UntilRespawn = RespawnTime;
+			UntilRespawn = RespawnTime + 30;
 	}
 
 	public override void StartTouch( Entity other )

@@ -10,7 +10,7 @@ partial class ArmorPickup : BasePickup
 {
 	public override Model WorldModel => Model.Load( "models/gameplay/armour/armourkit.vmdl" );
 	public float ArmorGranted { get; set; } = 25f;
-
+	
 	public override void OnPickup( BoomerPlayer player )
 	{
 		var newhealth = player.Armour + ArmorGranted;
