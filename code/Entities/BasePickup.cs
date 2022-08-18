@@ -5,7 +5,7 @@ public partial class BasePickup : AnimatedEntity
 	public virtual Model WorldModel => null;
 
 	[Property] public int RespawnTime { get; set; } = 15;
-	[Property] public bool RespawnImmediately { get; set; } = true;
+	[Property] public bool SpawnImmediate { get; set; } = true;
 
 	[Net, Change( "OnAvailable" )] protected bool Available { get; set; } = false;
 	public TimeUntil UntilRespawn { get; set; }
@@ -42,6 +42,8 @@ public partial class BasePickup : AnimatedEntity
 
 			Tags.Add( "trigger" );
 		}
+
+		EnableDrawing = Available;
 	}
 
 	public void SetAvailable( bool available )
@@ -57,7 +59,7 @@ public partial class BasePickup : AnimatedEntity
 
 		SetupModel();
 
-		if ( RespawnImmediately )
+		if ( SpawnImmediate )
 		{
 			UntilRespawn = 0;
 			SetAvailable( true );
