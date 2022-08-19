@@ -47,6 +47,31 @@
     "ControlModes": {
       "Keyboard": true,
       "Gamepad": true
+    },
+    "GameSettings": {
+      "bm_gamemode": {
+        "DisplayType": "Choice",
+        "Choices": [
+          "Deathmatch",
+          "InstaGib",
+          "MasterTrio",
+          "RailTag",
+          "RocketArena",
+          "MasterBall"
+        ],
+        "ConVarName": "bm_gamemode",
+        "DisplayName": "Game Type",
+        "DefaultValue": "Deathmatch"
+      },
+      "bm_gametime": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_gametime",
+        "DisplayName": "Time Limit",
+        "DefaultValue": "10",
+        "Minimum": 5,
+        "Maximum": 30
+      }
     }
   }
 }

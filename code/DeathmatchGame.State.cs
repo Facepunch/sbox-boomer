@@ -34,8 +34,8 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_warmuptime", Min = 0, Max = 600 )]
 	public static float WarmupTime { get; set; } = 30f;
 
-	[ConVar.Replicated( "bm_gametime", Min = 0, Max = 1800 )]
-	public static float GameTime { get; set; } = 600f;
+	[ConVar.Replicated( "bm_gametime" )]
+	public static int GameTime { get; set; }
 
 	[ConVar.Replicated( "bm_roundendtime", Min = 0, Max = 1800 )]
 	public static float RoundEndTime { get; set; } = 10f;
@@ -53,7 +53,7 @@ partial class DeathmatchGame : Game
 
 		GameState = GameStates.Live;
 		MapCheck();
-		StateTimer = GameTime;
+		StateTimer = GameTime * 60;
 		CountDownPlayed = false;
 		FreshStart();
 		if ( RailTag )
