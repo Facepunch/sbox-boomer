@@ -2,22 +2,14 @@
 
 partial class DeathmatchGame : Game
 {
-	[ConVar.Replicated( "bm_deathmatch" )]
-	public static bool DeathMatch { get; set; } = false;
+	[ConVar.Replicated( "bm_gamemode" )]
+	public static string BoommerGameMode { get; set; }
 	
-	[ConVar.Replicated( "bm_instagib" )]
+	public static bool DeathMatch { get; set; } = false;
 	public static bool InstaGib { get; set; } = false;
-
-	[ConVar.Replicated( "bm_mastertrio" )]
 	public static bool MasterTrio { get; set; } = false;
-
-	[ConVar.Replicated( "bm_railtag" )]
 	public static bool RailTag { get; set; } = false;
-
-	[ConVar.Replicated( "bm_rocketarena" )]
 	public static bool RocketArena { get; set; } = false;
-
-	[ConVar.Replicated( "bm_masterball" )]
 	public static bool MasterBall { get; set; } = false;
 
 	[Net]
@@ -34,31 +26,36 @@ partial class DeathmatchGame : Game
 	
 	public void Gamemode()
 	{
-	
-		if ( InstaGib )
+		if ( BoommerGameMode == "Deathmatch" )
 		{
+			DeathMatch = true;
+			GameModeDeathMatch();
+		}
+		else if ( BoommerGameMode == "InstaGib" )
+		{
+			InstaGib = true;
 			GameModeInstaGib();
 		}
-		else if ( MasterTrio )
+		else if ( BoommerGameMode == "MasterTrio" )
 		{
+			MasterTrio = true;
 			GameModeMasterTrio();
 		}
-		else if ( RailTag )
+		else if ( BoommerGameMode == "RailTag" )
 		{
+			RailTag = true;
 			GameModeRailTag();
 		}
-		else if ( RocketArena )
+		else if ( BoommerGameMode == "RocketArena" )
 		{
+			RocketArena = true;
 			GameModeRocketArena();
 		}
-		else if ( MasterBall )
+		else if ( BoommerGameMode == "MasterBall" )
 		{
+			MasterBall = true;
 			GameModeMasterBall();
 
-		}
-		else
-		{
-			GameModeDeathMatch();
 		}
 	}
 
