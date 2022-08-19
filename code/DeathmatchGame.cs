@@ -68,8 +68,8 @@ partial class DeathmatchGame : Game
 		base.PostLevelLoaded();
 		ItemRespawn.Init();
 	}
-	
-	[ConCmd.Server]
+
+	[Event.Entity.PostSpawn]
 	public static void PreMapCheck()
 	{
 		var startingweapons = All
@@ -78,10 +78,11 @@ partial class DeathmatchGame : Game
 
 		if ( startingweapons == null )
 		{
-			Log.Error( $"Map is not valid, changing to {BackUpMap}. Map is missing the boomer_startingweapons entity." );
+			Log.Error( $"Map is not valid, changing to {BackUpMap}. Map is missing the boomer_startingweapons entity, Changing Map in 1m." );
 			Log.Info( "Map is not valid, changing to " + BackUpMap );
 			Log.Info( "Map is missing the boomer_startingweapons entity" );
-
+			Log.Info( "Changing Map in 1m" );
+			GameTime = 1;
 		}
 	}
 
@@ -95,8 +96,6 @@ partial class DeathmatchGame : Game
 		if ( startingweapons == null )
 		{
 			Global.ChangeLevel( BackUpMap );
-			Log.Info( "Map is not valid, changing to " + BackUpMap );
-
 		}
 	}
 

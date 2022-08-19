@@ -48,11 +48,10 @@ partial class DeathmatchGame : Game
 		GameState = GameStates.Warmup;
 		StateTimer = WarmupTime;
 		CountDownPlayed = false;
-		PreMapCheck();
 		await WaitStateTimer();
 
 		GameState = GameStates.Live;
-		MapCheck();
+		PreMapCheck();
 		StateTimer = GameTime * 60;
 		CountDownPlayed = false;
 		FreshStart();
@@ -66,6 +65,7 @@ partial class DeathmatchGame : Game
 		}
 		await WaitStateTimer();
 
+		MapCheck();
 		GameState = GameStates.GameEnd;
 		StateTimer = RoundEndTime;
 		_ = SubmitScore();
