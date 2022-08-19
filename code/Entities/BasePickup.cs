@@ -42,7 +42,7 @@ public partial class BasePickup : AnimatedEntity
 
 			Tags.Add( "trigger" );
 		}
-
+		Sound.FromWorld( "armour.respawn", Position );
 		EnableDrawing = Available;
 	}
 

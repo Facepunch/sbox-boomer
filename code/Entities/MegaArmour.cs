@@ -49,21 +49,14 @@ partial class MegaArmour : BasePickup
 		}
 	}
 
-	[Event.Tick.Server]
+	[Event.Tick.Client]
 	public void DestroyTimer()
 	{
-		if ( Disabled ) return;
-
-		if ( !Available && UntilRespawn )
+		if ( Available )
 		{
 			Timer.SetPosition( 1, new Vector3( 0, 2, 1 ) );
 			Timer.Destroy();
 		}
-
-	}
-	public override bool CanPickup( BoomerPlayer player )
-	{
-		return Available && !Disabled;
 	}
 	public override void OnPickup( BoomerPlayer player )
 	{
@@ -82,6 +75,6 @@ partial class MegaArmour : BasePickup
 	[ClientRpc]
 	private void PlayPickupSound()
 	{
-		Sound.FromWorld( "megahealth.armour", Position );
+		Sound.FromWorld( "megahealth.pickup", Position );
 	}
 }
