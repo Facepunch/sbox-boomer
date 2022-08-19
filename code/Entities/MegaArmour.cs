@@ -58,6 +58,7 @@ partial class MegaArmour : BasePickup
 			Timer.Destroy();
 		}
 	}
+	
 	public override void OnPickup( BoomerPlayer player )
 	{
 		var newhealth = player.Armour + HealthGranted;

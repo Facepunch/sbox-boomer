@@ -5,9 +5,9 @@ namespace Boomer;
 /// <summary>
 /// Gives 25 health points.
 /// </summary>
-[Library( "boomer_quaddamage" ), HammerEntity]
-[EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
-[Title( "Quad Damage" ), Category( "PickUps" )]
+//[Library( "boomer_quaddamage" ), HammerEntity]
+//[EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
+//[Title( "Quad Damage" ), Category( "PickUps" )]
 partial class QuadDamage : AnimatedEntity, IRespawnableEntity
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
