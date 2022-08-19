@@ -35,7 +35,7 @@ partial class DeathmatchGame : Game
 	public static float WarmupTime { get; set; } = 30f;
 
 	[ConVar.Replicated( "bm_gametime" )]
-	public static int GameTime { get; set; }
+	public static int GameTime { get; set; } = 10;
 
 	[ConVar.Replicated( "bm_roundendtime", Min = 0, Max = 1800 )]
 	public static float RoundEndTime { get; set; } = 10f;
