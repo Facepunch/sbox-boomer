@@ -646,7 +646,8 @@ public partial class BoomerPlayer : Player
 				info.Damage = 0;
 			}
 
-			OnArmourDmgRpc( To.Single( Client ) );
+			if ( Armour < lastArmor )
+				OnArmourDmgRpc( To.Single( Client ) );
 
 			if ( attacker.IsValid() )
 			{
@@ -678,7 +679,8 @@ public partial class BoomerPlayer : Player
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, Health.LerpInverse( 100, 0 ), Armour );
 			}
 
-			TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
+			if ( info.Damage > 0 )
+				TookDamage( To.Single( this ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
 		}
 
 		if ( LifeState == LifeState.Dead && info.Attacker != null && !DeathmatchGame.RailTag )
