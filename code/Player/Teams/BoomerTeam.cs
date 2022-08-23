@@ -3,6 +3,8 @@ namespace Boomer;
 // TODO - Use BaseNetworkable
 public partial class BoomerTeam : Entity
 {
+	[Net] public int Index { get; set; }
+
 	public virtual new string Name { get; set; }
 	public virtual Color Color { get; set; } = Color.White;
 

@@ -24,6 +24,7 @@ public partial class TeamManager : Entity
 			return;
 		}
 
+		team.Index = Teams.Count;
 		Teams.Add( team );
 
 		// Let the game know that team play is enabled above 1 teams

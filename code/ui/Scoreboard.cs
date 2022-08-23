@@ -54,10 +54,25 @@ public class Scoreboard : Panel
 		{
 			timeSinceSorted = 0;
 
-			//
-			// Sort by number of kills, then number of deaths
-			//
-			Canvas.SortChildren<ScoreboardEntry>( ( x ) => (-x.Client.GetInt( "kills" ) * 1000) + x.Client.GetInt( "deaths" ) );
+			if ( TeamManager.Current.IsValid() && TeamManager.Current.IsTeamPlayEnabled )
+			{
+				Canvas.SortChildren<ScoreboardEntry>( x =>
+				{
+					var team = x.Client.GetTeam();
+					if ( team == null ) return 0;
+
+					x.Style.BackgroundColor = team.Color.WithAlpha( 0.1f );
+
+					return -x.Client.GetTeam().Index * 1000;
+				} );
+			}
+			else
+			{
+				//
+				// Sort by number of kills, then number of deaths
+				//
+				Canvas.SortChildren<ScoreboardEntry>( ( x ) => (-x.Client.GetInt( "kills" ) * 1000) + x.Client.GetInt( "deaths" ) );
+			}
 		}
 	}
 
