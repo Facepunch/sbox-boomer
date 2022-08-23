@@ -16,6 +16,8 @@ namespace Boomer;
 /// </summary>
 partial class DeathmatchGame : Game
 {
+	public static new DeathmatchGame Current => Game.Current as DeathmatchGame;
+
 	[Net] private DeathmatchHud Hud { get; set; }
 	private StandardPostProcess PostProcessing { get; set; }
 
@@ -31,6 +33,9 @@ partial class DeathmatchGame : Game
 	public static bool FriendlyFire { get; set; } = false;
 
 	[Net] public TeamManager TeamManager { get; set; }
+
+	// Accessor
+	public static bool IsTeamPlayEnabled => Current.TeamManager.IsTeamPlayEnabled;
 
 	public DeathmatchGame()
 	{
