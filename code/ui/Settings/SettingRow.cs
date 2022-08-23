@@ -47,7 +47,7 @@ internal class SettingRow : Panel
 			dropdown.SetPropertyObject( "value", property.GetValue( target ) );
 			dropdown.AddEventListener( "value.changed", () =>
 			{
-				Enum.TryParse( property.PropertyType, dropdown.Value, out var newval );
+				Enum.TryParse( property.PropertyType, $"{dropdown.Value}", out var newval );
 				property.SetValue( target, newval );
 				CreateEvent( "save" );
 			} );
