@@ -27,6 +27,9 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_norocketselfdamage" )]
 	public static bool NoRocketSelfDmg { get; set; } = false;
 
+	[ConVar.Replicated( "bm_teams_friendly_fire" )]
+	public static bool FriendlyFire { get; set; } = false;
+
 	[Net] public TeamManager TeamManager { get; set; }
 
 	public DeathmatchGame()

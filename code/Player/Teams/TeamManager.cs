@@ -8,7 +8,10 @@ public partial class TeamManager : Entity
 	[Net] public bool IsTeamPlayEnabled { get; set; }
 	public bool AutoJoinTeam { get; set; } = true;
 
-	public TeamManager() => Current = this;
+	public TeamManager()
+	{
+		Current = this;
+	}
 
 	public void SetupTeam<T>() where T : BoomerTeam, new()
 	{

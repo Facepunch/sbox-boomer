@@ -591,6 +591,17 @@ public partial class BoomerPlayer : Player
 
 		var attacker = info.Attacker as BoomerPlayer;
 
+		if ( !DeathmatchGame.FriendlyFire )
+		{
+			var myTeam = Client.GetTeam();
+			var theirTeam = attacker.Client.GetTeam();
+
+			if ( myTeam.IsFriend( theirTeam ) )
+			{
+				return;
+			}
+		}
+
 		LastDamage = info;
 
 		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaKillRail )

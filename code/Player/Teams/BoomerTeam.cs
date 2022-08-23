@@ -32,16 +32,6 @@ public partial class BoomerTeam : Entity
 		return result;
 	}
 
-	public partial class Red : BoomerTeam
-	{
-		public override string Name => "Red";
-	}
-
-	public partial class Blue : BoomerTeam
-	{
-		public override string Name => "Blue";
-	}
-
 	public int CompareTo( BoomerTeam y )
 	{
 		if ( this.Count > y.Count )
@@ -52,4 +42,35 @@ public partial class BoomerTeam : Entity
 
 		return 0;
 	}
+
+
+	public override bool Equals( object obj )
+	{
+		return (obj is BoomerTeam team) && team.Name == Name;
+	}
+
+	public override int GetHashCode()
+	{
+		return Name.GetHashCode();
+	}
+
+	internal bool IsFriend( BoomerTeam other )
+	{
+		if ( this.Equals( other ) ) return true;
+
+		return false;
+	}
+
+	// Preset Teams
+
+	public partial class Red : BoomerTeam
+	{
+		public override string Name => "Red";
+	}
+
+	public partial class Blue : BoomerTeam
+	{
+		public override string Name => "Blue";
+	}
+
 }
