@@ -27,6 +27,8 @@ partial class DeathmatchGame : Game
 	[ConVar.Replicated( "bm_norocketselfdamage" )]
 	public static bool NoRocketSelfDmg { get; set; } = false;
 
+	[Net] public TeamManager TeamManager { get; set; }
+
 	public DeathmatchGame()
 	{
 		//
@@ -37,7 +39,8 @@ partial class DeathmatchGame : Game
 		{
 			PrecacheAssets();
 
-			Hud = new DeathmatchHud();
+			Hud = new();
+			TeamManager = new();
 
 			_ = GameLoopAsync();
 		}
