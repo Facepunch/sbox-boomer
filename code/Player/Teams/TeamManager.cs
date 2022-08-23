@@ -6,10 +6,11 @@ public partial class TeamManager : Entity
 
 	[Net] public IList<BoomerTeam> Teams { get; set; }
 	[Net] public bool IsTeamPlayEnabled { get; set; }
+	public bool AutoJoinTeam { get; set; } = true;
 
 	public TeamManager() => Current = this;
 
-	public void NewTeam<T>() where T : BoomerTeam, new()
+	public void SetupTeam<T>() where T : BoomerTeam, new()
 	{
 		BoomerTeam team = new T();
 
@@ -36,6 +37,40 @@ public partial class TeamManager : Entity
 
 	public bool RemoveMember( BoomerTeam team, Client cl ) => team?.RemoveMember( cl ) ?? false;
 	public bool RemoveMember( string name, Client cl ) => RemoveMember( Get( name ), cl );
+
+	// TODO - Allow gamemodes to specify different balancing rules
+	public BoomerTeam FindBalancedTeam()
+	{
+		var teams = Teams.ToList();
+		teams.OrderBy( x => x.Count );
+
+		return teams.First();
+	}
+
+	public void OnClientJoined( Client cl )
+	{
+		if ( !IsTeamPlayEnabled ) return;
+
+		if ( AutoJoinTeam )
+		{
+			var team = FindBalancedTeam();
+			if ( !AddMember( team, cl ) )
+			{
+				Log.Error( $"Something went wrong while adding {cl} to {team}" );
+			}
+		}
+	}
+
+	public void OnClientDisconnect( Client cl )
+	{
+		if ( !IsTeamPlayEnabled ) return;
+
+		var team = cl.GetTeam();
+		if ( !RemoveMember( team, cl ) )
+		{
+			Log.Error( $"Something went wrong while removing {cl} from {team}" );
+		}
+	}
 
 	public void Clear()
 	{

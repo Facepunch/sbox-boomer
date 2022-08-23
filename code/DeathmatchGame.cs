@@ -120,6 +120,8 @@ partial class DeathmatchGame : Game
 		player.PlayerColor = Color.Random;
 
 		cl.Pawn = player;
+
+		TeamManager.OnClientJoined( cl );
 	}
 
 	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
@@ -136,6 +138,8 @@ partial class DeathmatchGame : Game
 				StartTag();
 			}
 		}
+
+		TeamManager.OnClientDisconnect( cl );
 	}
 
 	public override void MoveToSpawnpoint( Entity pawn )
