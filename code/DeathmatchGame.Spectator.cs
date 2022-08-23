@@ -23,7 +23,6 @@ partial class DeathmatchGame : Game
 
 			player.UpdateClothes( To.Single( cl ) );
 			player.Respawn();
-			player.PlayerColor = Color.Random;
 
 			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} stopped spectating", $"avatar:{cl.PlayerId}" );
 		}

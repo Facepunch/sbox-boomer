@@ -103,13 +103,19 @@ public partial class BoomerPlayer : Player
 
 		SupressPickupNotices = false;
 
+		var team = Client.GetTeam();
+		if ( team != null )
+			PlayerColor = team.Color;
+		else
+			PlayerColor = Color.Random;
+
 		SetBodyGroup( "Hands", 1 );
 		SetBodyGroup( "Feet", 1 );
 
 		SetMaterialOverride( SkinMat, "skin" );
 		SetMaterialOverride( EyeMat, "eyes" );
-		UpdateClothes();
-		RandomColor();
+		RpcSetClothes();
+		RpcSetPlayerColor();
 
 		base.Respawn();
 	}
@@ -118,7 +124,7 @@ public partial class BoomerPlayer : Player
 	private Material ArmourMat { get; set; } = Material.Load( "models/gameplay/textures/textureatlas_player_outfit.vmat" );
 
 	[ClientRpc]
-	public void UpdateClothes()
+	public void RpcSetClothes()
 	{
 
 		ModelEntity pants = new ModelEntity();
@@ -181,7 +187,7 @@ public partial class BoomerPlayer : Player
 	}
 
 	[ClientRpc]
-	public void RandomColor()
+	public void RpcSetPlayerColor()
 	{
 		SceneObject.Attributes.Set( "RimColor", PlayerColor );
 	}

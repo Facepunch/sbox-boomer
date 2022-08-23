@@ -121,15 +121,14 @@ partial class DeathmatchGame : Game
 		Log.Info( $"\"{cl.Name}\" has joined the game" );
 		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has joined", $"avatar:{cl.PlayerId}" );
 
+		TeamManager.OnClientJoined( cl );
+
 		var player = new BoomerPlayer();
 		player.UpdateClothes( To.Single( cl ) );
 		player.Respawn();
 
-		player.PlayerColor = Color.Random;
-
 		cl.Pawn = player;
 
-		TeamManager.OnClientJoined( cl );
 	}
 
 	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )

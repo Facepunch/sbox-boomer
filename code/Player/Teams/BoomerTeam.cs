@@ -4,8 +4,8 @@ namespace Boomer;
 public partial class BoomerTeam : Entity
 {
 	public virtual new string Name { get; set; }
+	public virtual Color Color { get; set; } = Color.White;
 
-	public Color Color { get; set; }
 	[Net] public IList<Client> Members { get; set; }
 
 	public int Count => Members.Count;
@@ -71,11 +71,13 @@ public partial class BoomerTeam : Entity
 	public partial class Red : BoomerTeam
 	{
 		public override string Name => "Red";
+		public override Color Color => Color.Red;
 	}
 
 	public partial class Blue : BoomerTeam
 	{
 		public override string Name => "Blue";
+		public override Color Color => Color.Blue;
 	}
 
 }
