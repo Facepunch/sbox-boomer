@@ -8,12 +8,10 @@ namespace Boomer;
 //[Library( "boomer_quaddamage" ), HammerEntity]
 //[EditorModel( "models/gameplay/healthkit/healthkit.vmdl" )]
 //[Title( "Quad Damage" ), Category( "PickUps" )]
-partial class QuadDamage : AnimatedEntity, IRespawnableEntity
+partial class QuadDamage : BasePickup
 {
-	public static readonly Model WorldModel = Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
+	public override Model WorldModel => Model.Load( "models/gameplay/healthkit/healthkit.vmdl" );
 
-	[Property]
-	public int RespawnTime { get; set; } = 2;
 
 	public override void Spawn()
 	{
@@ -23,6 +21,8 @@ partial class QuadDamage : AnimatedEntity, IRespawnableEntity
 
 		PhysicsEnabled = true;
 		UsePhysicsCollision = true;
+
+		UntilRespawn = 60;
 
 		Tags.Add( "trigger" );
 	}
