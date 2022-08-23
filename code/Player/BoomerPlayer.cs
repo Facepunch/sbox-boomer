@@ -597,7 +597,7 @@ public partial class BoomerPlayer : Player
 
 		var attacker = info.Attacker as BoomerPlayer;
 
-		if ( !DeathmatchGame.FriendlyFire && DeathmatchGame.IsTeamPlayEnabled && attacker != this )
+		if ( attacker.IsValid() && attacker != this && !DeathmatchGame.FriendlyFire && DeathmatchGame.IsTeamPlayEnabled )
 		{
 			var myTeam = Client.GetTeam();
 			var theirTeam = attacker.Client.GetTeam();
