@@ -53,11 +53,16 @@
         "DisplayType": "Choice",
         "Choices": [
           "Deathmatch",
+          "TeamDeathmatch",
           "InstaGib",
+          "TeamInstaGib",
           "MasterTrio",
-          "RailTag",
+          "TeamMasterTrio",
           "RocketArena",
-          "MasterBall"
+          "TeamRocketArena",
+          "MasterBall",
+          "TeamMasterBall",
+          "RailTag"
         ],
         "ConVarName": "bm_gamemode",
         "DisplayName": "Game Type",

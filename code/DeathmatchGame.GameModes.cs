@@ -6,7 +6,9 @@ partial class DeathmatchGame : Game
 	public static string BoommerGameMode { get; set; }
 	
 	public static bool DeathMatch { get; set; } = false;
+	public static bool TeamDeathMatch { get; set; } = false;
 	public static bool InstaGib { get; set; } = false;
+	public static bool TeamInstaGib { get; set; } = false;
 	public static bool MasterTrio { get; set; } = false;
 	public static bool RailTag { get; set; } = false;
 	public static bool RocketArena { get; set; } = false;
@@ -31,15 +33,30 @@ partial class DeathmatchGame : Game
 			DeathMatch = true;
 			GameModeDeathMatch();
 		}
+		else if ( BoommerGameMode == "TeamDeathmatch" )
+		{
+			TeamDeathMatch = true;
+			GameModeTeamDeathMatch();
+		}
 		else if ( BoommerGameMode == "InstaGib" )
 		{
 			InstaGib = true;
 			GameModeInstaGib();
 		}
+		else if ( BoommerGameMode == "TeamInstaGib" )
+		{
+			InstaGib = true;
+			GameModeTeamInstaGib();
+		}
 		else if ( BoommerGameMode == "MasterTrio" )
 		{
 			MasterTrio = true;
 			GameModeMasterTrio();
+		}
+		else if ( BoommerGameMode == "TeamMasterTrio" )
+		{
+			MasterTrio = true;
+			GameModeTeamMasterTrio();
 		}
 		else if ( BoommerGameMode == "RailTag" )
 		{
@@ -51,10 +68,20 @@ partial class DeathmatchGame : Game
 			RocketArena = true;
 			GameModeRocketArena();
 		}
+		else if ( BoommerGameMode == "TeamRocketArena" )
+		{
+			RocketArena = true;
+			GameModeTeamRocketArena();
+		}
 		else if ( BoommerGameMode == "MasterBall" )
 		{
 			MasterBall = true;
 			GameModeMasterBall();
+		}
+		else if ( BoommerGameMode == "TeamMasterBall" )
+		{
+			MasterBall = true;
+			GameModeTeamMasterBall();
 
 		}
 	}
@@ -74,6 +101,21 @@ partial class DeathmatchGame : Game
 			NoRocketSelfDmg = check.NoRocketSelfDMG;
 		}
 	}
+	//
+	//TeamDeathMatch
+	//
+	public void GameModeTeamDeathMatch()
+	{
+		foreach ( var check in Entity.All.OfType<StartingWeapons>() )
+		{
+			UnlimitedAmmo = check.UnlimitedAmmo;
+			NoRocketSelfDmg = check.NoRocketSelfDMG;
+		}
+		
+		// Set up teams
+		TeamManager.SetupTeam<BoomerTeam.Red>();
+		TeamManager.SetupTeam<BoomerTeam.Blue>();
+	}
 
 	//
 	//InstaGib
@@ -88,13 +130,32 @@ partial class DeathmatchGame : Game
 		RailGun = true;
 		StartingGuns();
 	}
-	
+
+	//
+	//TeamInstaGib
+	//
+	public void GameModeTeamInstaGib()
+	{
+		DeleteAllPickUps();
+		DeleteAllGuns();
+		InstaKillRail = true;
+		UnlimitedAmmo = true;
+		NotUsingStartingGuns = true;
+		RailGun = true;
+		StartingGuns();
+
+		// Set up teams
+		TeamManager.SetupTeam<BoomerTeam.Red>();
+		TeamManager.SetupTeam<BoomerTeam.Blue>();
+	}
+
 	//
 	//MASTER TRIO
 	//
 	public void GameModeMasterTrio()
 	{
 		DeleteAllGuns();
+		DeleteAmmo();
 		UnlimitedAmmo = true;
 		NoRocketSelfDmg = true;
 		NotUsingStartingGuns = true;
@@ -103,7 +164,27 @@ partial class DeathmatchGame : Game
 		LightningGun = true;
 		StartingGuns();
 	}
-	
+
+	//
+	//Team MASTER TRIO
+	//
+	public void GameModeTeamMasterTrio()
+	{
+		DeleteAllGuns();
+		DeleteAmmo();
+		UnlimitedAmmo = true;
+		NoRocketSelfDmg = true;
+		NotUsingStartingGuns = true;
+		RailGun = true;
+		RocketLauncher = true;
+		LightningGun = true;
+		StartingGuns();
+
+		// Set up teams
+		TeamManager.SetupTeam<BoomerTeam.Red>();
+		TeamManager.SetupTeam<BoomerTeam.Blue>();
+	}
+
 	//
 	//RAIL TAG
 	//
@@ -140,7 +221,25 @@ partial class DeathmatchGame : Game
 		RocketLauncher = true;
 		StartingGuns();
 	}
-	
+
+	//
+	//Team ROCKET ARENA
+	//
+	public void GameModeTeamRocketArena()
+	{
+		DeleteAllGuns();
+		DeleteAllPickUps();
+		UnlimitedAmmo = true;
+		NoRocketSelfDmg = true;
+		NotUsingStartingGuns = true;
+		RocketLauncher = true;
+		StartingGuns();
+
+		// Set up teams
+		TeamManager.SetupTeam<BoomerTeam.Red>();
+		TeamManager.SetupTeam<BoomerTeam.Blue>();
+	}
+
 	//
 	//MASTERBALL
 	//
@@ -148,6 +247,19 @@ partial class DeathmatchGame : Game
 	{
 		UnlimitedAmmo = false;
 	}
+
+	//
+	//Team MASTERBALL
+	//
+	public void GameModeTeamMasterBall()
+	{
+		UnlimitedAmmo = false;
+
+		// Set up teams
+		TeamManager.SetupTeam<BoomerTeam.Red>();
+		TeamManager.SetupTeam<BoomerTeam.Blue>();
+	}
+	
 	public void StartMasterBall()
 	{
 		var masterball = new MasterBall();
