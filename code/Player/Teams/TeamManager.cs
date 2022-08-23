@@ -71,6 +71,10 @@ public partial class TeamManager : Entity
 			{
 				Log.Error( $"Something went wrong while adding {cl} to {team}" );
 			}
+			else
+			{
+				Log.Info( $"{cl} joined {team}" );
+			}
 		}
 	}
 

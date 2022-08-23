@@ -71,6 +71,13 @@
         "DefaultValue": "10",
         "Minimum": 5,
         "Maximum": 30
+      },
+      "bm_teams_friendly_fire": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "bm_teams_friendly_fire",
+        "DisplayName": "Friendly Fire",
+        "DefaultValue": "false"
       }
     }
   }

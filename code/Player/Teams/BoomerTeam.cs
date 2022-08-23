@@ -54,11 +54,16 @@ public partial class BoomerTeam : Entity
 		return Name.GetHashCode();
 	}
 
-	internal bool IsFriend( BoomerTeam other )
+	public bool IsFriend( BoomerTeam other )
 	{
 		if ( this.Equals( other ) ) return true;
 
 		return false;
+	}
+
+	public override string ToString()
+	{
+		return $"Team {Name}";
 	}
 
 	// Preset Teams
