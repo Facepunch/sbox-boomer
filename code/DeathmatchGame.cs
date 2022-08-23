@@ -125,10 +125,8 @@ partial class DeathmatchGame : Game
 
 		var player = new BoomerPlayer();
 		player.RpcSetClothes( To.Single( cl ) );
-		player.Respawn();
-
 		cl.Pawn = player;
-
+		player.Respawn();
 	}
 
 	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )

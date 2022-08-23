@@ -47,17 +47,17 @@ public partial class TeamManager : Entity
 		TeamSorter = comparison;
 	}
 
-	// TODO - Allow gamemodes to specify different balancing rules
 	public BoomerTeam FindBalancedTeam()
 	{
 		var teams = Teams.ToList();
 
 		if ( TeamSorter != null )
+		{
 			teams.Sort( TeamSorter );
+			return teams.First();
+		}
 		else
-			teams.OrderBy( x => x.Count );
-
-		return teams.First();
+			return teams.OrderBy( x => x.Count ).First();
 	}
 
 	public void OnClientJoined( Client cl )
