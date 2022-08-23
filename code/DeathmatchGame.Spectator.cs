@@ -21,7 +21,7 @@ partial class DeathmatchGame : Game
 			var player = new BoomerPlayer();
 			cl.Pawn = player;
 
-			player.UpdateClothes( To.Single( cl ) );
+			player.RpcSetClothes( To.Single( cl ) );
 			player.Respawn();
 
 			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} stopped spectating", $"avatar:{cl.PlayerId}" );

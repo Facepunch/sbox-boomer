@@ -124,7 +124,7 @@ partial class DeathmatchGame : Game
 		TeamManager.OnClientJoined( cl );
 
 		var player = new BoomerPlayer();
-		player.UpdateClothes( To.Single( cl ) );
+		player.RpcSetClothes( To.Single( cl ) );
 		player.Respawn();
 
 		cl.Pawn = player;
