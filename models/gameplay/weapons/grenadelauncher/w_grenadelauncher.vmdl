@@ -14,32 +14,24 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "lightgreen.vmat"
+								to = "models/gameplay/weapons/grenadelauncher/materials/base_lightgreen.vmat"
 							},
 							{
-								from = "purple.vmat"
-								to = "materials/dev/color_purple.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
 							},
 							{
-								from = "_defaultmat.vmat"
-								to = "materials/dev/dev_metal_rough20.vmat"
-							},
-							{
-								from = "pink.vmat"
-								to = "materials/dev/red_vr.vmat"
-							},
-							{
-								from = "green.vmat"
-								to = "materials/gameplay/weaponcolours/lightgreen.vmat"
+								from = "black.vmat"
+								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
 							},
 						]
 						use_global_default = false
@@ -77,10 +69,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/grenadelauncher/grenadelauncher.fbx"
-						import_translation = [ 1.0, 0.0, 0.0 ]
-						import_rotation = [ 5.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						filename = "models/gameplay/weapons/grenadelauncher/mesh/grenadelauncher.fbx"
+						import_translation = [ 9.0, 0.0, -1.0 ]
+						import_rotation = [ -4.0, 0.0, 0.0 ]
+						import_scale = 0.8
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"

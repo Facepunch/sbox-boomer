@@ -14,28 +14,24 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "red.vmat"
+								to = "models/gameplay/weapons/rocketlauncher/materials/base_red.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_red.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_red.vmat"
 							},
 							{
-								from = "purple.vmat"
-								to = "materials/gameplay/weaponcolours/red.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_red.vmat"
 							},
 							{
-								from = "_defaultmat.vmat"
-								to = "materials/dev/dev_metal_rough20.vmat"
-							},
-							{
-								from = "pink.vmat"
-								to = "materials/dev/red_vr.vmat"
+								from = "black.vmat"
+								to = "models/gameplay/textures/textureatlas_red.vmat"
 							},
 						]
 						use_global_default = false
@@ -64,10 +60,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/rocketlauncher/rocketlauncher.fbx"
+						filename = "models/gameplay/weapons/rocketlauncher/mesh/rocketlauncher.fbx"
 						import_translation = [ 1.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"

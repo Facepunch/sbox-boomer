@@ -14,24 +14,24 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "purple.vmat"
-								to = "materials/gameplay/weaponcolours/darkblue.vmat"
+								from = "black.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "_defaultmat.vmat"
-								to = "materials/dev/dev_metal_rough20.vmat"
+								from = "darkblue.vmat"
+								to = "models/gameplay/weapons/nailgun/materials/base_blue.vmat"
 							},
 						]
 						use_global_default = false
@@ -46,9 +46,9 @@
 					{
 						_class = "Attachment"
 						name = "muzzle"
-						parent_bone = ""
-						relative_origin = [ 34.07029, 0.0, -10.601562 ]
-						relative_angles = [ -0.0, 0.0, 0.0 ]
+						parent_bone = "Bone_end"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ -0.0, 90.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -60,10 +60,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/nailgun/nailgun.fbx"
-						import_translation = [ 4.0, 0.0, -3.0 ]
-						import_rotation = [ 4.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						filename = "models/gameplay/weapons/nailgun/mesh/nailgun.fbx"
+						import_translation = [ 24.0, 0.0, -12.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -76,10 +76,90 @@
 					},
 				]
 			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 24.0, 0.0, -12.0 ]
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "fire"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/weapons/nailgun/mesh/nailgun@fire.fbx"
+						start_frame = 0
+						end_frame = 10
+						framerate = -1.0
+						take = 1
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/weapons/nailgun/mesh/nailgun@fire.fbx"
+						start_frame = 0
+						end_frame = 0
+						framerate = -1.0
+						take = 1
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/weapons/nailgun/mesh/nailgun@deploy.fbx"
+						start_frame = 0
+						end_frame = 5
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "boomer/animgraphs/weapons/nailgun/nailgun.vanmgrph"
 		base_model_name = ""
 	}
 }

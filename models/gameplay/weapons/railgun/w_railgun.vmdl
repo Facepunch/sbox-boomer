@@ -14,36 +14,28 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "scope lens.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
 							},
 							{
-								from = "purple.vmat"
-								to = "materials/dev/color_purple.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
 							},
 							{
-								from = "_defaultmat.vmat"
-								to = "materials/dev/dev_metal_rough20.vmat"
+								from = "black.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
 							},
 							{
-								from = "pink.vmat"
-								to = "materials/dev/red_vr.vmat"
-							},
-							{
-								from = "green.vmat"
-								to = "materials/dev/green.vmat"
-							},
-							{
-								from = "yellow.vmat"
-								to = "materials/gameplay/weaponcolours/green.vmat"
+								from = "darkgreen.vmat"
+								to = "models/gameplay/weapons/railgun/materials/base_darkgreen.vmat"
 							},
 						]
 						use_global_default = false
@@ -59,7 +51,7 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = ""
-						relative_origin = [ 45.456734, 0.0, 7.146797 ]
+						relative_origin = [ 46.332626, 0.0, 1.077338 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
@@ -72,10 +64,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/railgun/railgun.fbx"
-						import_translation = [ 2.5, 0.0, 0.5 ]
-						import_rotation = [ 5.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						filename = "models/gameplay/weapons/railgun/mesh/railgun.fbx"
+						import_translation = [ 2.0, 0.0, -1.5 ]
+						import_rotation = [ -2.0, 0.0, 0.0 ]
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"

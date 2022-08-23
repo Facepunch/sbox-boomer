@@ -42,9 +42,19 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 		PlaySound( "gl.shoot" );
 		Reload();
 
+		ShootEffects();
+		
 		player.SetAnimParameter( "b_attack", true );
 
 		base.AttackPrimary();
+	}
+
+	[ClientRpc]
+	protected override void ShootEffects()
+	{
+		Host.AssertClient();
+
+		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )

@@ -14,20 +14,24 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "orange.vmat"
+								to = "models/gameplay/weapons/shotgun/materials/base_orange.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_orange.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_orange.vmat"
 							},
 							{
-								from = "yellow.vmat"
-								to = "materials/gameplay/weaponcolours/orange.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_orange.vmat"
+							},
+							{
+								from = "black.vmat"
+								to = "models/gameplay/textures/textureatlas_orange.vmat"
 							},
 						]
 						use_global_default = false
@@ -43,7 +47,7 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = ""
-						relative_origin = [ 34.07029, 0.0, -10.601562 ]
+						relative_origin = [ 20.99818, 0.0, 1.913237 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
@@ -56,10 +60,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/shotgun/shotgun.fbx"
-						import_translation = [ 1.25, 0.0, -0.1 ]
-						import_rotation = [ 0.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						filename = "models/gameplay/weapons/shotgun/mesh/shotgun.fbx"
+						import_translation = [ 3.0, 0.0, -2.0 ]
+						import_rotation = [ -6.0, 0.0, 0.0 ]
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"

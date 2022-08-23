@@ -14,28 +14,20 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "teal.vmat"
+								to = "models/gameplay/weapons/lightninggun/materials/base_cyan.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_cyan.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_cyan.vmat"
 							},
 							{
-								from = "purple.vmat"
-								to = "materials/dev/color_purple.vmat"
-							},
-							{
-								from = "_defaultmat.vmat"
-								to = "materials/dev/dev_metal_rough20.vmat"
-							},
-							{
-								from = "pink.vmat"
-								to = "materials/gameplay/weaponcolours/cyan.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_cyan.vmat"
 							},
 						]
 						use_global_default = false
@@ -50,9 +42,9 @@
 					{
 						_class = "Attachment"
 						name = "muzzle"
-						parent_bone = ""
-						relative_origin = [ 34.07029, 0.0, -10.601562 ]
-						relative_angles = [ -0.0, 0.0, 0.0 ]
+						parent_bone = "Bone_end"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ -0.0, 90.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -64,10 +56,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/lightninggun/lightninggun.fbx"
-						import_translation = [ 4.0, 0.0, -3.0 ]
-						import_rotation = [ 4.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						filename = "models/gameplay/weapons/lightninggun/mesh/lightninggun.fbx"
+						import_translation = [ 12.0, 0.0, -16.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.9
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -80,10 +72,90 @@
 					},
 				]
 			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 12.0, 0.0, -16.0 ]
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "fire"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/weapons/lightninggun/mesh/lightninggun@fire.fbx"
+						start_frame = 0
+						end_frame = 10
+						framerate = 32.0
+						take = 1
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/weapons/lightninggun/mesh/lightninggun@fire.fbx"
+						start_frame = 0
+						end_frame = 0
+						framerate = -1.0
+						take = 1
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/gameplay/weapons/lightninggun/mesh/lightninggun@deploy.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "boomer/animgraphs/weapons/lightninggun/lightninggun.vanmgrph"
 		base_model_name = ""
 	}
 }

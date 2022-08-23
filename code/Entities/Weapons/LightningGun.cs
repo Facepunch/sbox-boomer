@@ -177,6 +177,8 @@ partial class LightningGun : DeathmatchWeapon
 	{
 		Host.AssertClient();
 		CrosshairLastShoot = 0;
+
+		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )

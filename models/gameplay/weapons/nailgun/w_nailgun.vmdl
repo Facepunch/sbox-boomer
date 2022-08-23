@@ -14,24 +14,24 @@
 						remaps = 
 						[
 							{
-								from = "dark.vmat"
-								to = "materials/black_matte.vmat"
+								from = "metal02.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "darkmetal.vmat"
-								to = "materials/models/solids/black.vmat"
+								from = "metal01.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "metal.vmat"
-								to = "materials/dev/dev_metal_rough30.vmat"
+								from = "blackrubber.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "purple.vmat"
-								to = "materials/gameplay/weaponcolours/darkblue.vmat"
+								from = "black.vmat"
+								to = "models/gameplay/textures/textureatlas_blue.vmat"
 							},
 							{
-								from = "_defaultmat.vmat"
-								to = "materials/dev/dev_metal_rough20.vmat"
+								from = "darkblue.vmat"
+								to = "models/gameplay/weapons/nailgun/materials/base_blue.vmat"
 							},
 						]
 						use_global_default = false
@@ -56,7 +56,7 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = ""
-						relative_origin = [ 22.370434, 0.0, 4.496971 ]
+						relative_origin = [ 17.010406, 0.0, 6.440032 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
@@ -69,10 +69,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/weapons/nailgun/nailgun.fbx"
-						import_translation = [ 1.5, 0.0, 0.2 ]
-						import_rotation = [ 4.0, 180.0, 0.0 ]
-						import_scale = 5.0
+						filename = "models/gameplay/weapons/nailgun/mesh/nailgun.fbx"
+						import_translation = [ 5.0, 0.0, 5.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
