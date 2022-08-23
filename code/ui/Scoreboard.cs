@@ -40,7 +40,7 @@ public class Scoreboard : Panel
 			}
 		}
 
-		Style.PointerEvents = Cursor ? "all" : "none";
+		Style.PointerEvents = Cursor ? PointerEvents.All : PointerEvents.None;
 
 		if ( !HasClass( "open" ) ) Cursor = false;
 		if ( !IsVisible ) return;
