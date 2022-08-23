@@ -41,4 +41,15 @@ public partial class BoomerTeam : Entity
 	{
 		public override string Name => "Blue";
 	}
+
+	public int CompareTo( BoomerTeam y )
+	{
+		if ( this.Count > y.Count )
+			return 1;
+
+		if ( this.Count < y.Count )
+			return -1;
+
+		return 0;
+	}
 }

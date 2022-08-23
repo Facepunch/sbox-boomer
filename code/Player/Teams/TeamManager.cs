@@ -38,11 +38,21 @@ public partial class TeamManager : Entity
 	public bool RemoveMember( BoomerTeam team, Client cl ) => team?.RemoveMember( cl ) ?? false;
 	public bool RemoveMember( string name, Client cl ) => RemoveMember( Get( name ), cl );
 
+	protected Comparison<BoomerTeam> TeamSorter;
+	public void SetTeamSorter( Comparison<BoomerTeam> comparison )
+	{
+		TeamSorter = comparison;
+	}
+
 	// TODO - Allow gamemodes to specify different balancing rules
 	public BoomerTeam FindBalancedTeam()
 	{
 		var teams = Teams.ToList();
-		teams.OrderBy( x => x.Count );
+
+		if ( TeamSorter != null )
+			teams.Sort( TeamSorter );
+		else
+			teams.OrderBy( x => x.Count );
 
 		return teams.First();
 	}
