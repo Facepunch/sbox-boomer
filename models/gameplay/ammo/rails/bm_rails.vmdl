@@ -11,7 +11,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/ammo/rails/rails.fbx"
+						filename = "models/gameplay/ammo/rails/mesh/railgun_rods.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.5
@@ -51,8 +51,16 @@
 						remaps = 
 						[
 							{
-								from = "cube.020.vmat"
+								from = "scope lens.vmat"
 								to = "models/gameplay/ammo/rails/rail_ammo.vmat"
+							},
+							{
+								from = "metal01.002.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
+							},
+							{
+								from = "darkgreen.vmat"
+								to = "models/gameplay/textures/textureatlas_green.vmat"
 							},
 						]
 						use_global_default = false

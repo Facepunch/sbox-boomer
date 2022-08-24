@@ -11,10 +11,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/gameplay/ammo/lightning/lightning.fbx"
+						filename = "models/gameplay/ammo/lightning/mesh/battery.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 0.5
+						import_scale = 2.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -43,23 +43,6 @@
 				]
 			},
 			{
-				_class = "GameDataList"
-				children = 
-				[
-					{
-						_class = "GenericGameData"
-						game_class = "particle"
-						game_keys = 
-						{
-							name = resource:"particles/gameplay/ammo/lightning/lightninginabottle.vpcf"
-							attachment_point = ""
-							attachment_type = "5"
-							attachment_offset = [ 0.0, 0.0, 0.0 ]
-						}
-					},
-				]
-			},
-			{
 				_class = "MaterialGroupList"
 				children = 
 				[
@@ -73,11 +56,19 @@
 							},
 							{
 								from = "models/gameplay/textures/textureatlas.vmat"
+								to = ""
+							},
+							{
+								from = "teal.vmat"
+								to = "models/gameplay/textures/textureatlas_cyan.vmat"
+							},
+							{
+								from = "metal02.002.vmat"
 								to = "models/gameplay/textures/textureatlas_cyan.vmat"
 							},
 						]
-						use_global_default = false
-						global_default_material = ""
+						use_global_default = true
+						global_default_material = "models/gameplay/textures/textureatlas_cyan.vmat"
 					},
 				]
 			},
