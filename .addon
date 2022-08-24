@@ -52,27 +52,60 @@
       "bm_gamemode": {
         "DisplayType": "Choice",
         "Choices": [
-          "Deathmatch",
-          "TeamDeathmatch",
-          "InstaGib",
-          "TeamInstaGib",
-          "MasterTrio",
-          "TeamMasterTrio",
-          "RocketArena",
-          "TeamRocketArena",
-          "MasterBall",
-          "TeamMasterBall",
-          "RailTag"
+          {
+            "Value": "Deathmatch",
+            "Name": "Deathmatch"
+          },
+          {
+            "Value": "TeamDeathmatch",
+            "Name": "Team Deathmatch"
+          },
+          {
+            "Value": "InstaGib",
+            "Name": "InstaGib"
+          },
+          {
+            "Value": "TeamInstaGib",
+            "Name": "Team InstaGib"
+          },
+          {
+            "Value": "MasterTrio",
+            "Name": "MasterTrio"
+          },
+          {
+            "Value": "TeamMasterTrio",
+            "Name": "Team MasterTrio"
+          },
+          {
+            "Value": "RailTag",
+            "Name": "RailTag"
+          },
+          {
+            "Value": "RocketArena",
+            "Name": "RocketArena"
+          },
+          {
+            "Value": "TeamRocketArena",
+            "Name": "Team RocketArena"
+          },
+          {
+            "Value": "MasterBall",
+            "Name": "MasterBall"
+          },
+          {
+            "Value": "TeamMasterBall",
+            "Name": "Team MasterBall"
+          }
         ],
         "ConVarName": "bm_gamemode",
         "DisplayName": "Game Type",
         "DefaultValue": "Deathmatch"
       },
-      "bm_gametime": {
+      "bm_roundendtime": {
         "DisplayType": "Integer",
         "Choices": [],
-        "ConVarName": "bm_gametime",
-        "DisplayName": "Time Limit",
+        "ConVarName": "bm_roundendtime",
+        "DisplayName": "Round Time",
         "DefaultValue": "10",
         "Minimum": 5,
         "Maximum": 30
