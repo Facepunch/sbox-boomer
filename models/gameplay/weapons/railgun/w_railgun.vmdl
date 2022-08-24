@@ -64,7 +64,25 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "LOD0"
 						filename = "models/gameplay/weapons/railgun/mesh/railgun.fbx"
+						import_translation = [ 2.0, 0.0, -1.5 ]
+						import_rotation = [ -2.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = "hold_r"
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "LOD1"
+						filename = "models/gameplay/weapons/railgun/mesh/railgunLOD1.fbx"
 						import_translation = [ 2.0, 0.0, -1.5 ]
 						import_rotation = [ -2.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -90,6 +108,28 @@
 						origin = [ 0.0, 0.0, 0.0 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						do_not_discard = true
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"LOD0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 4.0
+						meshes = 
+						[
+							"LOD1",
+						]
 					},
 				]
 			},
