@@ -160,7 +160,16 @@ partial class LightningGun : DeathmatchWeapon
 
 		LightningEffect.SetPosition( 0, pos.Position );
 		LightningEffect.SetPosition( 1, tr.EndPosition );
-		LightningEffect.SetPosition( 2, new Vector3( DamageModifier * 10f, 0, 0 ) );
+
+
+		if ( !Zoomed )
+		{
+			LightningEffect.SetPosition( 2, new Vector3( 0, 0, 0 ) );
+		}
+		else
+		{
+			LightningEffect.SetPosition( 2, new Vector3( 1, 0, 0 ) );
+		}
 	}
 
 	protected override void OnDestroy()
