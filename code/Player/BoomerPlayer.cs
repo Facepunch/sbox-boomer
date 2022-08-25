@@ -3,7 +3,7 @@ using Boomer.UI;
 
 namespace Boomer;
 
-public partial class BoomerPlayer : Player
+public partial class BoomerPlayer : Player, IHudMarker
 {
 	TimeSince timeSinceDropped;
 
