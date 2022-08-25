@@ -3,6 +3,7 @@
 partial class AmmoPickup : BasePickup
 {
 	public virtual AmmoType AmmoType => AmmoType.None;
+	public virtual string AmmoName => "Ammo";
 	public virtual int AmmoAmount => 17;
 	public override Model WorldModel => Model.Load( "models/dm_battery.vmdl" );
 
@@ -30,6 +31,7 @@ partial class AmmoPickup : BasePickup
 partial class AmmoNails : AmmoPickup
 {
 	public override AmmoType AmmoType => AmmoType.Nails;
+	public override string AmmoName => "#Ammo.Nails";
 	public override int AmmoAmount => 100;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/nails/bm_nails.vmdl" );
 }
@@ -40,6 +42,7 @@ partial class AmmoNails : AmmoPickup
 partial class AmmoGrenades : AmmoPickup
 {
 	public override AmmoType AmmoType => AmmoType.Grenade;
+	public override string AmmoName => "#Ammo.Grenade";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/grenades/bm_grenades.vmdl" );
 }
@@ -50,6 +53,7 @@ partial class AmmoGrenades : AmmoPickup
 partial class AmmoBuckshot : AmmoPickup
 {
 	public override AmmoType AmmoType => AmmoType.Buckshot;
+	public override string AmmoName => "#Ammo.Buckshot";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" );
 }
@@ -60,6 +64,7 @@ partial class AmmoBuckshot : AmmoPickup
 partial class AmmoRockets : AmmoPickup
 {
 	public override AmmoType AmmoType => AmmoType.Rockets;
+	public override string AmmoName => "#Ammo.Rockets";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rockets/bm_rockets.vmdl" );
 }
@@ -70,6 +75,7 @@ partial class AmmoRockets : AmmoPickup
 partial class AmmoRails: AmmoPickup
 {
 	public override AmmoType AmmoType => AmmoType.Rails;
+	public override string AmmoName => "#Ammo.Rails";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rails/bm_rails.vmdl" );
 }
@@ -80,6 +86,7 @@ partial class AmmoRails: AmmoPickup
 partial class AmmoLightning : AmmoPickup
 {
 	public override AmmoType AmmoType => AmmoType.Lightning;
+	public override string AmmoName => "#Ammo.Lightning";
 	public override int AmmoAmount => 100;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/lightning/bm_lightning.vmdl" );
 }
