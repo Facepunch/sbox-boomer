@@ -30,6 +30,7 @@ public class HudRootPanel : RootPanel
 		AddChild<VoiceList>();
 		AddChild<VoiceSpeaker>();
 		AddChild<MasterballHud>();
+		AddChild<HudMarkers>();
 	}
 
 	public override void Tick()
