@@ -9,7 +9,8 @@
   "ResourcePaths": [
     "/ui/*",
     "/fonts/*",
-    "/resources/*"
+    "/resources/*",
+    "/.localization/*"
   ],
   "HasCode": true,
   "CodePath": "code",
@@ -105,15 +106,16 @@
         "DisplayType": "Integer",
         "Choices": [],
         "ConVarName": "bm_warmuptime",
-        "DisplayName": "Warmup Time",
+        "DisplayName": "Warmup Time (Secounds)",
         "DefaultValue": "30",
-        "Maximum": 600
+        "Minimum": 5,
+        "Maximum": 60
       },
       "bm_roundendtime": {
         "DisplayType": "Integer",
         "Choices": [],
         "ConVarName": "bm_roundendtime",
-        "DisplayName": "Round Time",
+        "DisplayName": "Round Time (Minutes)",
         "DefaultValue": "10",
         "Minimum": 5,
         "Maximum": 30
