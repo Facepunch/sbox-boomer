@@ -53,6 +53,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 		EarnedAwards = new();
 		Projectiles = new( this );
 		Inventory = new DmInventory( this );
+		PlayerColor = Color.Random;
 	}
 
 	public override void Respawn()
@@ -106,9 +107,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 		var team = Client.GetTeam();
 		if ( team != null )
 			PlayerColor = team.Color;
-		else
-			PlayerColor = Color.Random;
-
+			
 		SetBodyGroup( "Hands", 1 );
 		SetBodyGroup( "Feet", 1 );
 
