@@ -18,4 +18,13 @@ public static class ClientExtensions
 		var comp = cl.Components.GetOrCreate<TeamComponent>();
 		comp.Team = team;
 	}
+
+	public static bool IsFriend( this Client cl, Client otherCl )
+	{
+		var team = cl.GetTeam();
+		if ( team == null ) return false;
+
+		var otherTeam = otherCl.GetTeam();
+		return team.IsFriend( otherTeam );
+	}
 }
