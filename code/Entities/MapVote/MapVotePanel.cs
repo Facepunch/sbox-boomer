@@ -5,8 +5,8 @@ namespace Boomer.UI;
 [UseTemplate]
 class MapVotePanel : Panel
 {
-	public string TitleText { get; set; } = "Map Vote";
-	public string SubtitleText { get; set; } = "Choose your next map";
+	public string TitleText { get; set; } = "#MapVote.Title";
+	public string SubtitleText { get; set; } = "#MapVote.SubtitleText";
 	public string TimeText { get; set; } = "00:33";
 
 	public Panel Body { get; set; }
