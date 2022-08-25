@@ -35,7 +35,7 @@ partial class DeathmatchGame : Game
 	[Net] public TeamManager TeamManager { get; set; }
 
 	// Accessor
-	public static bool IsTeamPlayEnabled => Current.TeamManager.IsTeamPlayEnabled;
+	public static bool IsTeamPlayEnabled => Current?.TeamManager?.IsTeamPlayEnabled ?? false;
 
 	public DeathmatchGame()
 	{
