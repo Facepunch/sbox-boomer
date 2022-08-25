@@ -101,6 +101,14 @@
         "DisplayName": "Game Type",
         "DefaultValue": "Deathmatch"
       },
+      "bm_warmuptime": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_warmuptime",
+        "DisplayName": "Warmup Time",
+        "DefaultValue": "30",
+        "Maximum": 600
+      },
       "bm_roundendtime": {
         "DisplayType": "Integer",
         "Choices": [],
