@@ -120,6 +120,12 @@ partial class DeathmatchGame : Game
 		HasFirstPlayerDied = false;
 	}
 
+	[ConCmd.Server]
+	private static void AddTime()
+	{
+		DeathmatchGame.Current.StateTimer += 9999;
+	}
+
 	public enum GameStates
 	{
 		Warmup,
