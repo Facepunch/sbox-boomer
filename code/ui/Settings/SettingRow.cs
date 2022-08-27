@@ -17,45 +17,47 @@ internal class SettingRow : Panel
 
 		Label.Text = di.Name;
 
+		var typeDesc = TypeLibrary.GetDescription( property.PropertyType );
+		var propertyDesc = typeDesc.GetProperty( property.Name );
+		if ( propertyDesc == null ) Log.Error( property.PropertyType );
+		var currentValue = propertyDesc.GetValue( target );
+
 		if ( property.PropertyType == typeof( bool ) )
 		{
 			var button = ValueArea.Add.Button( string.Empty, "toggle" );
-			button.SetClass( "active", (bool)property.GetValue( target ) );
+			button.SetClass( "active", (bool)currentValue );
 			button.AddEventListener( "onmousedown", () =>
 			{
 				button.SetClass( "active", !button.HasClass( "active" ) );
-				property.SetValue( target, button.HasClass( "active" ) );
+				propertyDesc.SetValue( target, button.HasClass( "active" ) );
 				CreateEvent( "save" );
 			} );
 		}
 
 		if( property.PropertyType == typeof( string ) )
 		{
-			var value = (string)property.GetValue( target );
-			var textentry = ValueArea.Add.TextEntry( value );
+			var textentry = ValueArea.Add.TextEntry( (string)currentValue );
 			textentry.AddEventListener( "value.changed", () =>
 			{
-				property.SetValue( target, textentry.Text );
+				propertyDesc.SetValue( target, textentry.Value );
 				CreateEvent( "save" );
 			} );
 		}
 
 		if( property.PropertyType.IsEnum )
 		{
-			var value = property.GetValue( target ).ToString();
 			var dropdown = new DropDown( ValueArea );
-			dropdown.SetPropertyObject( "value", property.GetValue( target ) );
+			dropdown.SetPropertyObject( "value", currentValue );
 			dropdown.AddEventListener( "value.changed", () =>
 			{
 				Enum.TryParse( property.PropertyType, $"{dropdown.Value}", out var newval );
-				property.SetValue( target, newval );
+				propertyDesc.SetValue( target, newval );
 				CreateEvent( "save" );
 			} );
 		}
 
 		if( property.PropertyType == typeof( float ) )
 		{
-			var value = (float)property.GetValue( target );
 			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
 			var min = minmax?.MinValue ?? 0f;
 			var max = minmax?.MaxValue ?? 1000f;

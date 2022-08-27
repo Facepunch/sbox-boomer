@@ -16,7 +16,7 @@ internal class ObjectEditor : Panel
 	{
 		DeleteChildren( true );
 
-		var properties = target.GetType().GetProperties( BindingFlags.Public | BindingFlags.Instance );
+		var properties = TypeLibrary.GetProperties( target );
 		foreach ( var property in properties )
 		{
 			AddChild( new SettingRow( target, property ) );
