@@ -10,6 +10,16 @@ namespace Boomer.UI
 		public Panel Canvas { get; protected set; }
 		public TextEntry Input { get; protected set; }
 
+		public bool IsOpen
+		{
+			get => HasClass( "open" );
+			set
+			{
+				if ( IsOpen ) Close();
+				else Open();
+			}
+		}
+
 		public BoomerChatBox()
 		{
 			Current = this;
@@ -24,8 +34,6 @@ namespace Boomer.UI
 			Input.AddEventListener( "onblur", () => Close() );
 			Input.AcceptsFocus = true;
 			Input.AllowEmojiReplace = true;
-			
-			Sandbox.Hooks.Chat.OnOpenChat += Open;
 		}
 
 		void Open()
@@ -71,6 +79,15 @@ namespace Boomer.UI
 			}
 
 			Canvas.TryScrollToBottom();
+		}
+
+		[Event.BuildInput]
+		private void OnBuildInput( InputBuilder b )
+		{
+			if ( b.Pressed( InputButton.Chat ) )
+			{
+				IsOpen = !IsOpen;
+			}
 		}
 
 
