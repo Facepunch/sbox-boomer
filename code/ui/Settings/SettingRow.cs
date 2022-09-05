@@ -11,16 +11,12 @@ internal class SettingRow : Panel
 	public Label Label { get; }
 	public Panel ValueArea { get; }
 
-	public SettingRow( object target, PropertyInfo property ) : this()
+	public SettingRow( object target, PropertyDescription property ) : this()
 	{
-		var di = DisplayInfo.ForProperty( property );
-
-		Label.Text = di.Name;
+		Label.Text = DisplayInfo.For( property ).Name;
 
 		var typeDesc = TypeLibrary.GetDescription( property.PropertyType );
-		var propertyDesc = typeDesc.GetProperty( property.Name );
-		if ( propertyDesc == null ) Log.Error( property.PropertyType );
-		var currentValue = propertyDesc.GetValue( target );
+		var currentValue = property.GetValue( target );
 
 		if ( property.PropertyType == typeof( bool ) )
 		{
@@ -29,7 +25,7 @@ internal class SettingRow : Panel
 			button.AddEventListener( "onmousedown", () =>
 			{
 				button.SetClass( "active", !button.HasClass( "active" ) );
-				propertyDesc.SetValue( target, button.HasClass( "active" ) );
+				property.SetValue( target, button.HasClass( "active" ) );
 				CreateEvent( "save" );
 			} );
 		}
@@ -39,7 +35,7 @@ internal class SettingRow : Panel
 			var textentry = ValueArea.Add.TextEntry( (string)currentValue );
 			textentry.AddEventListener( "value.changed", () =>
 			{
-				propertyDesc.SetValue( target, textentry.Value );
+				property.SetValue( target, textentry.Value );
 				CreateEvent( "save" );
 			} );
 		}
@@ -51,7 +47,7 @@ internal class SettingRow : Panel
 			dropdown.AddEventListener( "value.changed", () =>
 			{
 				Enum.TryParse( property.PropertyType, $"{dropdown.Value}", out var newval );
-				propertyDesc.SetValue( target, newval );
+				property.SetValue( target, newval );
 				CreateEvent( "save" );
 			} );
 		}

@@ -16,7 +16,7 @@ internal class ObjectEditor : Panel
 	{
 		DeleteChildren( true );
 
-		var properties = TypeLibrary.GetProperties( target );
+		var properties = TypeLibrary.GetPropertyDescriptions( target );
 		foreach ( var property in properties )
 		{
 			AddChild( new SettingRow( target, property ) );
