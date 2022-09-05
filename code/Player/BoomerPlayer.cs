@@ -740,7 +740,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 		if ( TimeSinceArmorDamageEffect > .1f )
 		{
 			HitIndicator.Current?.OnHit( pos, amount );
-			Sound.FromScreen( "hitsound" ).SetPitch( 1 + armorinv * 1 );
+			Sound.FromScreen( "hitsound" ).SetPitch( 1 + armorinv / 2 );
 			TimeSinceArmorDamageEffect = 0f;
 		}
 
@@ -764,7 +764,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 		if ( TimeSinceDamageEffect > .1f )
 		{
 			HitIndicator.Current?.OnHit( pos, amount );
-			Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv * 1 );
+			Sound.FromScreen( "hitsound" ).SetPitch( 1 + healthinv / 2 );
 			TimeSinceDamageEffect = 0f;
 		}
 
