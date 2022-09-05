@@ -45,6 +45,10 @@ internal class ClientSettings
 	[MinMax(0f, 1f), SliderStep(.1f)]
 	public float AnnouncerVolume { get; set; } = 1f;
 
+	[Display( Name = "#GameSettings.MusicVolume", Description = "#GameSettings.MusicVolume.Description" )]
+	[MinMax( 0f, 1f ), SliderStep( .1f )]
+	public float MusicVolume { get; set; } = .1f;
+
 	public void Save() => Cookie.Set( "boomer.clientsettings", this );
 
 	private static ClientSettings current;
