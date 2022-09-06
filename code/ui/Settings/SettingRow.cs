@@ -13,7 +13,8 @@ internal class SettingRow : Panel
 
 	public SettingRow( object target, PropertyDescription property ) : this()
 	{
-		Label.Text = DisplayInfo.For( property ).Name;
+		
+		Label.Text = property.GetDisplayInfo().Name;
 
 		var typeDesc = TypeLibrary.GetDescription( property.PropertyType );
 		var currentValue = property.GetValue( target );
