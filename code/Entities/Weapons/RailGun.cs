@@ -122,7 +122,7 @@ partial class RailGun : DeathmatchWeapon
 		}
 
 		var tracer = Particles.Create( RailEffect, effectStart );
-		tracer.SetPosition( 1, effectEnd );
+		tracer?.SetPosition( 1, effectEnd );
 		//CreateTracerEffect( tr.EndPosition );
 	}
 
