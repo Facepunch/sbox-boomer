@@ -3,7 +3,7 @@
 namespace Boomer;
 
 [Library( "boomer_railgun" ), HammerEntity]
-[EditorModel( "weapons/rust_shotgun/rust_shotgun.vmdl" )]
+[EditorModel( "models/gameplay/weapons/railgun/w_railgun.vmdl" )]
 [Title( "RailGun" ), Category( "Weapons" )]
 partial class RailGun : DeathmatchWeapon
 {

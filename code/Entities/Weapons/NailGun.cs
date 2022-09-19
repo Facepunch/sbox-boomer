@@ -1,7 +1,7 @@
 ﻿namespace Boomer;
 
 [Library( "boomer_nailgun" ), HammerEntity]
-[EditorModel( "weapons/rust_smg/rust_smg.vmdl" )]
+[EditorModel( "models/gameplay/weapons/nailgun/w_nailgun.vmdl" )]
 [Title( "NailGun" ), Category( "Weapons" )]
 partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 {

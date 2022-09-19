@@ -3,7 +3,7 @@
 namespace Boomer;
 
 [Library( "boomer_masterball" ), HammerEntity]
-[EditorModel( "models/dm_crowbar.vmdl" )]
+[EditorModel( "models/gameplay/weapons/masterball/w_masterball.vmdl" )]
 [Title( "MasterBall" ), Category( "Weapons" )]
 partial class MasterBall : DeathmatchWeapon
 {
