@@ -17,6 +17,12 @@ public partial class Jumppad : BaseTrigger
 	[Net, Property] public float VerticalBoost { get; set; } = 200f;
 	[Net, Property] public float Force { get; set; } = 1000f;
 
+	/// <summary>
+	/// Name of the sound to play.
+	/// </summary>
+	[Property( "JumppadSound" ), Title( "Jump Sound" ), FGDType( "sound" )]
+	[Net] public string JumppadSound { get; set; }
+
 	public override void Spawn()
 	{
 		if ( Force == 0f )
@@ -24,6 +30,7 @@ public partial class Jumppad : BaseTrigger
 			Force = 1000f;
 		}
 		Tags.Add( "trigger" );
+
 		base.Spawn();
 	}
 
@@ -35,6 +42,10 @@ public partial class Jumppad : BaseTrigger
 
 		if ( target.IsValid() )
 		{
+			if ( JumppadSound != null )
+			{
+				_ = Sound.FromWorld( JumppadSound,Position );
+			}
 			var direction = (target.Position - other.Position).Normal;
 			pl.ApplyForce( new Vector3( 0f, 0f, VerticalBoost ) );
 			pl.ApplyForce( direction * Force );
