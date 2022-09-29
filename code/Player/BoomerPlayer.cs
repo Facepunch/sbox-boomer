@@ -901,7 +901,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	public virtual void RenderControlHud( in Vector2 screensize )
 	{
-		var center = screensize * 0.5f;
+		var center = screensize * .75f;
 
 		RenderCrosshair( center, 0, 0 );
 	}

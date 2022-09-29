@@ -19,7 +19,6 @@ partial class DeathmatchGame : Game
 	public static new DeathmatchGame Current => Game.Current as DeathmatchGame;
 
 	[Net] private DeathmatchHud Hud { get; set; }
-	private StandardPostProcess PostProcessing { get; set; }
 
 	public static bool HasFirstPlayerDied { get; set; }
 
@@ -51,12 +50,6 @@ partial class DeathmatchGame : Game
 			TeamManager = new();
 
 			_ = GameLoopAsync();
-		}
-
-		if ( IsClient )
-		{
-			PostProcessing = new StandardPostProcess();
-			PostProcess.Add( PostProcessing );
 		}
 	}
 
@@ -207,31 +200,21 @@ partial class DeathmatchGame : Game
 	public override void FrameSimulate( Client cl )
 	{
 		base.FrameSimulate( cl );
+		
+		//var PostProcessing = Map.Camera.FindOrCreateHook<Sandbox.Effects.ScreenEffects>();
+		
+		//PostProcessing.FilmGrain.Intensity = 0.2f;
+		//PostProcessing.FilmGrain.Response = 1;
 
-		PostProcessing.Sharpen.Enabled = false;
-		PostProcessing.Sharpen.Strength = 0.5f;
+		//PostProcessing.Vignette.Intensity = 1.0f;
+		//PostProcessing.Vignette.Roundness = 1.5f;
+		//PostProcessing.Vignette.Smoothness = 0.5f;
+		//PostProcessing.Vignette.Color = Color.Black;
 
-		PostProcessing.FilmGrain.Enabled = true;
-		PostProcessing.FilmGrain.Intensity = 0.2f;
-		PostProcessing.FilmGrain.Response = 1;
 
-		PostProcessing.Vignette.Enabled = true;
-		PostProcessing.Vignette.Intensity = 1.0f;
-		PostProcessing.Vignette.Roundness = 1.5f;
-		PostProcessing.Vignette.Smoothness = 0.5f;
-		PostProcessing.Vignette.Color = Color.Black;
+		//PostProcessing.Saturation = 1;
 
-		PostProcessing.Saturate.Enabled = true;
-		PostProcessing.Saturate.Amount = 1;
-
-		PostProcessing.Blur.Enabled = false;
-
-		PostProcessing.Pixelate.Enabled = false;
-		PostProcessing.Pixelate.PixelCount = 512;
-
-		PostProcessing.MotionBlur.Enabled = false;
-
-		PostProcessing.PaniniProjection.Enabled = false;
+		//PostProcessing.MotionBlur.Scale = 0;
 
 		Audio.SetEffect( "core.player.death.muffle1", 0 );
 
@@ -242,33 +225,30 @@ partial class DeathmatchGame : Game
 			if ( damageUi > 0 )
 			{
 				//	PostProcessing.Saturate.Amount -= damageUi;
-				PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, damageUi );
-				PostProcessing.Vignette.Intensity += damageUi;
-				PostProcessing.Vignette.Smoothness += damageUi;
-				PostProcessing.Vignette.Roundness += damageUi;
+				//PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, damageUi );
+				//PostProcessing.Vignette.Intensity += damageUi;
+				//PostProcessing.Vignette.Smoothness += damageUi;
+				//PostProcessing.Vignette.Roundness += damageUi;
 
-				PostProcessing.Blur.Enabled = true;
-				PostProcessing.Blur.Strength = damageUi * 0.5f;
+				//PostProcessing.MotionBlur.Scale = damageUi * 0.5f;
 			}
 
 			if ( localPlayer.Controller is BoomerController ctrl )
 			{
-				var alpha = ctrl.GetMechanic<Dash>().DashAlpha;
-				var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
-				PostProcessing.MotionBlur.Enabled = false;
-				PostProcessing.MotionBlur.Scale = parabola * 5f;
-				PostProcessing.MotionBlur.Samples = 4;
-				PostProcessing.Brightness.Enabled = ctrl.IsDashing;
-				PostProcessing.Brightness.Multiplier = 1f + 1f * parabola;
+				//var alpha = ctrl.GetMechanic<Dash>().DashAlpha;
+				//var parabola = (float)Math.Pow( 4 * alpha * (1 - alpha), 2 );
+				//PostProcessing.MotionBlur.Scale = parabola * 5f;
+				//PostProcessing.MotionBlur.Samples = 4;
+				//PostProcessing.Brightness = 1f + 1f * parabola;
 			}
 
 			var healthDelta = localPlayer.Health.LerpInverse( 0, 100.0f, true );
 			healthDelta = MathF.Pow( healthDelta, 0.5f );
 
-			PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, 1 - healthDelta );
-			PostProcessing.Vignette.Intensity += (1 - healthDelta) * 1f;
-			PostProcessing.Vignette.Smoothness += (1 - healthDelta) * 5f;
-			PostProcessing.Vignette.Roundness += (1 - healthDelta) * 1f;
+			//PostProcessing.Vignette.Color = Color.Lerp( PostProcessing.Vignette.Color, Color.Red, 1 - healthDelta );
+			//PostProcessing.Vignette.Intensity += (1 - healthDelta) * 1f;
+			//PostProcessing.Vignette.Smoothness += (1 - healthDelta) * 5f;
+			//PostProcessing.Vignette.Roundness += (1 - healthDelta) * 1f;
 			//PostProcessing.Saturate.Amount *= healthDelta;
 			//PostProcessing.FilmGrain.Intensity += (1 - healthDelta) * 0.1f;
 
@@ -277,9 +257,9 @@ partial class DeathmatchGame : Game
 
 		if ( CurrentState == GameStates.Warmup )
 		{
-			PostProcessing.FilmGrain.Intensity = 0.4f;
-			PostProcessing.FilmGrain.Response = 0.5f;
-			PostProcessing.Saturate.Amount = 0;
+			//PostProcessing.FilmGrain.Intensity = 0.4f;
+			//PostProcessing.FilmGrain.Response = 0.5f;
+			//PostProcessing.Saturation = 0;
 		}
 	}
 
