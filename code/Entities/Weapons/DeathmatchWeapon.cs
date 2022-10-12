@@ -227,7 +227,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 
 	public virtual void RenderHud( in Vector2 screensize )
 	{
-		var center = screensize * .75f;
+		var center = screensize * .5f;
 
 		if ( AvailableAmmo() == 0 )
 			CrosshairLastReload = 0;
