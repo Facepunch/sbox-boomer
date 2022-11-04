@@ -65,6 +65,7 @@ VS
 PS
 {
     StaticCombo( S_ILLUMINATE, F_ILLUMINATE, Sys( PC ) );
+    float3 g_vColorTint < Attribute( "ColorTint" ); Default3( 1.0, 1.0, 1.0 ); >;
     float4 g_vShadowTint< Default4(0.0f, 0.0f, 0.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Shadow,10/1" ); >;
     float3 g_vDiffuseColor< Default3(1.0f, 1.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Diffuse,10/1" );  >;
     float3 g_vSpecularColor< Default3(1.0f, 1.0f, 1.0f); UiType( Color ); UiGroup( "Toon,10/Specular,10/1" ); >;
@@ -150,6 +151,12 @@ PS
             shade.Specular = saturate( pow(fSpecularLobe, 1000.0f) * 10.0f );
             return shade;
         }
+
+        float4 PostProcess( float4 vColor )
+        {
+            // Do nothing
+            return vColor;
+        }
     };
 
 	//
@@ -160,6 +167,8 @@ PS
 		Material m = GatherMaterial( i );
 		ShadingModelStylizedToon sm;
 		
-		return FinalizePixelMaterial( i, m, sm );
+        PixelOutput o;
+        o.vColor.rgba = FinalizePixelMaterial( i, m, sm );
+        return o;
 	}
 }

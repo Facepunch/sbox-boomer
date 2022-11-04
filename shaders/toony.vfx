@@ -111,7 +111,9 @@ GS
 PS
 {
     #include "common/pixel.hlsl"
-	
+    
+    float3 g_vColorTint < Attribute( "ColorTint" ); Default3( 1.0, 1.0, 1.0 ); >;
+    
     class ShadingModelToon : ShadingModel
     {
         float3 Albedo;
@@ -181,6 +183,12 @@ PS
 
             return shade;
         }
+        
+        float4 PostProcess( float4 vColor )
+        {
+            // Do nothing
+            return vColor;
+        }
     };
 
 	//
@@ -205,6 +213,8 @@ PS
 		//
 		ShadingModelToon sm;
 		
-		return FinalizePixelMaterial( i, m, sm );
+        PixelOutput o;
+		o.vColor = FinalizePixelMaterial( i, m, sm );
+        return o;
 	}
 }
