@@ -41,7 +41,6 @@ public partial class BoomerPlayer : Player, IHudMarker
 	[Net]
 	public bool TaggedPlayer { get; set; } = false;
 									
-	[Net]
 	public bool HasTheBall => Children.Any( x => x is MasterBall );
 
 	[Net]
@@ -77,7 +76,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
-			if ( DeathmatchGame.NotUsingStartingGuns && !TaggedPlayer )
+			if ( DeathmatchGame.Current.NotUsingStartingGuns && !TaggedPlayer )
 			{
 				var w = StartingWeapons.Instance;
 				Inventory.DeleteContents();
@@ -86,7 +85,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 					w.SetupPlayer( this );
 				}
 			}
-			else if ( DeathmatchGame.NotUsingStartingGuns && TaggedPlayer )
+			else if ( DeathmatchGame.Current.NotUsingStartingGuns && TaggedPlayer )
 			{
 				Inventory.Add( new RailGun() );
 				GiveAmmo( AmmoType.Rails, 100 );
@@ -609,7 +608,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 		LastDamage = info;
 
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.InstaKillRail )
+		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.Current.InstaKillRail )
 		{
 			info.Damage = 100.0f;
 		}

@@ -15,10 +15,10 @@ partial class DeathmatchGame : Game
 	public static bool MasterBall { get; set; } = false;
 
 	[Net]
-	public static bool NotUsingStartingGuns { get; set; } = false;
+	public bool NotUsingStartingGuns { get; set; } = false;
 
 	[Net]
-	public static bool InstaKillRail { get; set; } = false;
+	public bool InstaKillRail { get; set; } = false;
 
 	[Event.Entity.PostSpawn]
 	public void PostEntitySpawn()

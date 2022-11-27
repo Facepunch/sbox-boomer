@@ -65,7 +65,7 @@ partial class DeathmatchGame : Game
 	}
 	
 	[Net]
-	public static string BackUpMap { get; set; } = "facepunch.bm_dockyard";
+	public string BackUpMap { get; set; } = "facepunch.bm_dockyard";
 
 	public override void PostLevelLoaded()
 	{
@@ -82,8 +82,8 @@ partial class DeathmatchGame : Game
 
 		if ( startingweapons == null )
 		{
-			Log.Error( $"Map is not valid, changing to {BackUpMap}. Map is missing the boomer_startingweapons entity, Changing Map in 1m." );
-			Log.Info( "Map is not valid, changing to " + BackUpMap );
+			Log.Error( $"Map is not valid, changing to {Current.BackUpMap}. Map is missing the boomer_startingweapons entity, Changing Map in 1m." );
+			Log.Info( "Map is not valid, changing to " + Current.BackUpMap );
 			Log.Info( "Map is missing the boomer_startingweapons entity" );
 			Log.Info( "Changing Map in 1m" );
 			GameTime = 1;
@@ -99,7 +99,7 @@ partial class DeathmatchGame : Game
 
 		if ( startingweapons == null )
 		{
-			Global.ChangeLevel( BackUpMap );
+			Global.ChangeLevel( Current.BackUpMap );
 		}
 	}
 

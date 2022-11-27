@@ -6,7 +6,6 @@
 [HammerEntity]
 partial class StartingWeapons : Entity
 {
-	[Net]
 	public static StartingWeapons Instance { get; set; }
 	
 	public StartingWeapons()
