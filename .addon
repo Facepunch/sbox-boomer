@@ -3,7 +3,7 @@
   "Type": "game",
   "Org": "facepunch",
   "Ident": "boomer",
-  "Tags": null,
+  "Tags": "",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -101,7 +101,8 @@
         ],
         "ConVarName": "bm_gamemode",
         "DisplayName": "Game Type",
-        "DefaultValue": "Deathmatch"
+        "DefaultValue": "Deathmatch",
+        "Description": ""
       },
       "bm_warmuptime": {
         "DisplayType": "Integer",
@@ -109,6 +110,7 @@
         "ConVarName": "bm_warmuptime",
         "DisplayName": "Warmup Time (Secounds)",
         "DefaultValue": "30",
+        "Description": "",
         "Minimum": 5,
         "Maximum": 60
       },
@@ -117,7 +119,8 @@
         "Choices": [],
         "ConVarName": "bm_roundendtime",
         "DisplayName": "Round Time (Minutes)",
-        "DefaultValue": "10",
+        "DefaultValue": "15",
+        "Description": "",
         "Minimum": 5,
         "Maximum": 30
       },
@@ -126,8 +129,14 @@
         "Choices": [],
         "ConVarName": "bm_teams_friendly_fire",
         "DisplayName": "Friendly Fire",
-        "DefaultValue": "false"
+        "DefaultValue": "false",
+        "Description": ""
       }
-    }
+    },
+    "DefaultLeaderboards": null,
+    "Summary": "Boomer is a fast-paced shooter inspired by old school shooters.",
+    "Description": "\uD83D\uDC77\u200D\u2642\uFE0F(WIP)\uD83D\uDC77\u200D\u2642\uFE0F\nBoomer is a fast-paced shooter inspired by old school shooters.\n\nAt the moment its just death match but more to come later;\nTDM\nCTF\nDuel\nKoth\n\nAs well a PVE style campaign mode.\n\nMake sure to include \u0022facepunch.boomer\u0022 in supported games if you are making custom maps.",
+    "ReplaceTags": "shooter fps pvp retro quake oldschool arena",
+    "Public": true
   }
 }
