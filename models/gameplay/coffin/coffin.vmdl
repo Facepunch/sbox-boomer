@@ -11,10 +11,10 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models\\gameplay\\charger\\dmx\\mesh\\charger_station.dmx"
+						filename = "models/gameplay/coffin/coffin.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 90.0, 0.0 ]
-						import_scale = 0.75
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 0.7
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
@@ -36,8 +36,8 @@
 						remaps = 
 						[
 							{
-								from = "materials/dev/black_grid_8.vmat"
-								to = "models/gameplay/charger/charger_power.vmat"
+								from = "material.vmat"
+								to = "models/gameplay/textures/textureatlas.vmat"
 							},
 						]
 						use_global_default = false
@@ -50,16 +50,22 @@
 				children = 
 				[
 					{
+						_class = "PhysicsShapeCylinder"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						radius = 8.0
+						point0 = [ 0.0, 0.0, 30.0 ]
+						point1 = [ 0.0, 0.0, 0.0 ]
+					},
+					{
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
-						origin = [ 1.732289, -0.312005, 0.170525 ]
+						collision_tags = "solid"
+						origin = [ -0.042098, -0.060782, 7.247547 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 6.082181, 23.623449, 35.900414 ]
+						dimensions = [ 21.137197, 14.766502, 14.584335 ]
 					},
 				]
 			},
@@ -67,5 +73,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
