@@ -10,8 +10,7 @@
   "ResourcePaths": [
     "/ui/*",
     "/fonts/*",
-    "/resources/*",
-    "/.localization/*"
+    "/resources/*"
   ],
   "HasCode": true,
   "CodePath": "code",
@@ -50,93 +49,45 @@
       "Keyboard": true,
       "Gamepad": true
     },
-    "GameSettings": {
-      "bm_gamemode": {
-        "DisplayType": "Choice",
-        "Choices": [
-          {
-            "Value": "Deathmatch",
-            "Name": "Deathmatch"
-          },
-          {
-            "Value": "TeamDeathmatch",
-            "Name": "Team Deathmatch"
-          },
-          {
-            "Value": "InstaGib",
-            "Name": "InstaGib"
-          },
-          {
-            "Value": "TeamInstaGib",
-            "Name": "Team InstaGib"
-          },
-          {
-            "Value": "MasterTrio",
-            "Name": "MasterTrio"
-          },
-          {
-            "Value": "TeamMasterTrio",
-            "Name": "Team MasterTrio"
-          },
-          {
-            "Value": "RailTag",
-            "Name": "RailTag"
-          },
-          {
-            "Value": "RocketArena",
-            "Name": "RocketArena"
-          },
-          {
-            "Value": "TeamRocketArena",
-            "Name": "Team RocketArena"
-          },
-          {
-            "Value": "MasterBall",
-            "Name": "MasterBall"
-          },
-          {
-            "Value": "TeamMasterBall",
-            "Name": "Team MasterBall"
-          }
-        ],
-        "ConVarName": "bm_gamemode",
-        "DisplayName": "Game Type",
-        "DefaultValue": "Deathmatch",
-        "Description": ""
+    "LobbySettings": {
+      "bm_friendly_fire": {
+        "Type": "Boolean",
+        "ConVar": "bm_friendly_fire",
+        "FriendlyName": "Friendly Fire",
+        "Default": "false"
       },
-      "bm_warmuptime": {
-        "DisplayType": "Integer",
-        "Choices": [],
-        "ConVarName": "bm_warmuptime",
-        "DisplayName": "Warmup Time (Secounds)",
-        "DefaultValue": "30",
-        "Description": "",
-        "Minimum": 5,
-        "Maximum": 60
+      "testfloat": {
+        "Type": "Number",
+        "ConVar": "testfloat",
+        "FriendlyName": "Test Float",
+        "Default": "4",
+        "Min": 4,
+        "Max": 12
       },
-      "bm_roundendtime": {
-        "DisplayType": "Integer",
-        "Choices": [],
-        "ConVarName": "bm_roundendtime",
-        "DisplayName": "Round Time (Minutes)",
-        "DefaultValue": "15",
-        "Description": "",
-        "Minimum": 5,
-        "Maximum": 30
-      },
-      "bm_teams_friendly_fire": {
-        "DisplayType": "Boolean",
-        "Choices": [],
-        "ConVarName": "bm_teams_friendly_fire",
-        "DisplayName": "Friendly Fire",
-        "DefaultValue": "false",
-        "Description": ""
+      "testconvar": {
+        "ConVar": "testconvar",
+        "FriendlyName": "Test String",
+        "Default": ""
       }
     },
-    "DefaultLeaderboards": null,
-    "Summary": "Boomer is a fast-paced shooter inspired by old school shooters.",
-    "Description": "\uD83D\uDC77\u200D\u2642\uFE0F(WIP)\uD83D\uDC77\u200D\u2642\uFE0F\nBoomer is a fast-paced shooter inspired by old school shooters.\n\nAt the moment its just death match but more to come later;\nTDM\nCTF\nDuel\nKoth\n\nAs well a PVE style campaign mode.\n\nMake sure to include \u0022facepunch.boomer\u0022 in supported games if you are making custom maps.",
-    "ReplaceTags": "shooter fps pvp retro quake oldschool arena",
-    "Public": true
+    "GameSettings": {
+      "bm_unlimitedammo": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "bm_unlimitedammo",
+        "DisplayName": "Unlimited Ammo",
+        "DefaultValue": "false"
+      },
+      "bm_timelimit": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_timelimit",
+        "DisplayName": "Time Limit",
+        "DefaultValue": "10",
+        "Maximum": 15
+      }
+    },
+    "ParentPackage": "facepunch.voxeltest",
+    "DefaultLeaderboards": null
   }
 }

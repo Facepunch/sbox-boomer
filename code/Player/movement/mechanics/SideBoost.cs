@@ -53,7 +53,7 @@ namespace Boomer.Movement
 
 			ctrl.ClearGroundEntity();
 
-			var boostVelocity = new Vector3( 0, Input.Left, 0 ) * Input.Rotation;
+			var boostVelocity = new Vector3( 0, Player.InputDirection.y, 0 ) * Player.ViewAngles.ToRotation();
 			boostVelocity *= 325f;
 			boostVelocity += Vector3.Up * 130;
 

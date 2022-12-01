@@ -20,6 +20,7 @@ partial class BoomerController : BasePlayerController
 	public float BodyHeight => 72.0f;
 	public Vector3 Mins { get; private set; }
 	public Vector3 Maxs { get; private set; }
+	public BoomerPlayer Player => (Pawn as BoomerPlayer);
 
 	private List<BaseMoveMechanic> mechanics = new();
 	private BaseMoveMechanic activeMechanic => mechanics.FirstOrDefault( x => x.IsActive );
@@ -66,7 +67,7 @@ partial class BoomerController : BasePlayerController
 	{
 		base.FrameSimulate();
 
-		EyeRotation = Input.Rotation;
+		EyeRotation = Player.ViewAngles.ToRotation();
 	}
 
 	public override void Simulate()
@@ -78,7 +79,7 @@ partial class BoomerController : BasePlayerController
 
 		EyeLocalPosition = Vector3.Up * newz;
 
-		EyeRotation = Input.Rotation;
+		EyeRotation = Player.ViewAngles.ToRotation();
 		UpdateBBox();
 
 		if ( Impulse.Length > 0 )
@@ -147,9 +148,9 @@ partial class BoomerController : BasePlayerController
 
 	public Vector3 GetWishVelocity( bool zeroPitch = false )
 	{
-		var result = new Vector3( Input.Forward, Input.Left, 0 );
+		var result = new Vector3( Player.InputDirection.x, Player.InputDirection.y, 0 );
 		var inSpeed = result.Length.Clamp( 0, 1 );
-		result *= Input.Rotation;
+		result *= Player.ViewAngles.ToRotation();
 
 		if ( zeroPitch )
 			result.z = 0;

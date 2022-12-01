@@ -15,7 +15,7 @@ namespace Sandbox
 
 		public override void Update()
 		{
-			var player = Local.Client;
+			var player = Local.Pawn as Player;
 			if ( !player.IsValid() ) return;
 
 			// lerp the focus point
@@ -23,12 +23,12 @@ namespace Sandbox
 
 			var tr = Trace.Ray( FocusPoint + Vector3.Up * 12, FocusPoint + GetViewOffset() )
 				.WorldOnly()
-				.Ignore( player.Pawn )
+				.Ignore( player )
 				.Radius( 6 )
 				.Run();
 
 			Position = tr.EndPosition;
-			Rotation = Input.Rotation;
+			Rotation = player.EyeRotation;
 			FieldOfView = FieldOfView.LerpTo( 90, Time.Delta * 3.0f );
 
 			Viewer = null;
@@ -46,10 +46,10 @@ namespace Sandbox
 
 		public virtual Vector3 GetViewOffset()
 		{
-			var player = Local.Client;
+			var player = Local.Pawn as Player;
 			if ( player == null ) return Vector3.Zero;
 
-			return Input.Rotation.Forward * (-130 * 1) + Vector3.Up * (20 * 1);
+			return player.EyeRotation.Forward * (-130 * 1) + Vector3.Up * (20 * 1);
 		}
 	}
 }
