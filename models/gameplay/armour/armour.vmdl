@@ -36,7 +36,7 @@
 						remaps = 
 						[
 							{
-								from = "models/gameplay/textures/textureatlas.vmat"
+								from = "material.vmat"
 								to = "models/gameplay/textures/textureatlas_armour.vmat"
 							},
 						]

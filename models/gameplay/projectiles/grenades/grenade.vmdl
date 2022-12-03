@@ -80,6 +80,10 @@
 						[
 							{
 								from = "models/gameplay/textures/textureatlas.vmat"
+								to = ""
+							},
+							{
+								from = "material.001.vmat"
 								to = "models/gameplay/textures/textureatlas_lightgreen.vmat"
 							},
 						]
