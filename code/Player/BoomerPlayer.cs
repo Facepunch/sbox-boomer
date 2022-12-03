@@ -271,7 +271,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 		}
 		else
 		{
-			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ), PlayerColor );
+			BecomeRagdollOnClient( LastDamage.Force, PlayerColor );
 		}
 
 		if ( LastDamage.Attacker is BoomerPlayer attacker && attacker != this )
@@ -291,7 +291,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 			attacker.TaggedPlayer = false;
 
-			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && GetHitboxGroup( LastDamage.HitboxIndex ) == 1 && LastDamage.Weapon is RailGun )
+			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && LastDamage.Hitbox.HasTag( "head" ) && LastDamage.Weapon is RailGun )
 			{
 				attacker.PlaySoundFromScreen( To.Single( attacker ), "headshot" );
 			}
@@ -608,7 +608,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 		LastDamage = info;
 
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 && info.Weapon is RailGun && !DeathmatchGame.Current.InstaKillRail )
+		if ( info.Hitbox.HasTag( "head" ) && info.Weapon is RailGun && !DeathmatchGame.Current.InstaKillRail )
 		{
 			info.Damage = 100.0f;
 		}
