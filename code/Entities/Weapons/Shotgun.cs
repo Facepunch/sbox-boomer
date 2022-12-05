@@ -79,24 +79,24 @@ partial class Shotgun : DeathmatchWeapon
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
-		var draw = Render.Draw2D;
+		//var draw = Render.Draw2D;
 
-		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
-		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.4f + lastAttack.LerpInverse( 1.2f, 0 ) * 0.5f );
+		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
+		//draw.BlendMode = BlendMode.Lighten;
+		//draw.Color = color.WithAlpha( 0.4f + lastAttack.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// center
-		{
-			var shootEase = 1 + Easing.BounceIn( lastAttack.LerpInverse( 0.3f, 0.0f ) );
-			draw.Ring( center, 32 * shootEase, 30 * shootEase );
-		}
+		//// center
+		//{
+		//	var shootEase = 1 + Easing.BounceIn( lastAttack.LerpInverse( 0.3f, 0.0f ) );
+		//	draw.Ring( center, 32 * shootEase, 30 * shootEase );
+		//}
 
-		// center circle
-		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
-			var length = 1.5f + shootEase * 2.0f;
-			draw.Circle( center, length );
-		}
+		//// center circle
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
+		//	var length = 1.5f + shootEase * 2.0f;
+		//	draw.Circle( center, length );
+		//}
 
 
 	}

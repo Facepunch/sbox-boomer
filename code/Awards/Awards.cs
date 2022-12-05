@@ -14,13 +14,13 @@
 		return (T)Lookup[type];
 	}
 
-	public static Award Add( Type type )
+	public static Award Add( TypeDescription type )
 	{
 		var name = type.Name;
 
 		if ( !Lookup.ContainsKey( name ) )
 		{
-			Lookup.Add( name, TypeLibrary.Create<Award>( type ) );
+			Lookup.Add( name, TypeLibrary.Create<Award>( type.TargetType ) );
 		}
 
 		return Lookup[name];
@@ -31,7 +31,7 @@
 		if ( Lookup.TryGetValue( name, out var award ) )
 			return award;
 
-		var type = TypeLibrary.GetTypeByName( name );
+		var type = TypeLibrary.GetDescription( name );
 
 		if ( type != null )
 		{

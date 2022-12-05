@@ -896,46 +896,45 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	public virtual void RenderControlHud( in Vector2 screensize )
 	{
-		var center = screensize * .75f;
+		var center = screensize * 0.75f;
 
 		RenderCrosshair( center, 0, 0 );
 	}
 
 	public void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
-		var draw = Render.Draw2D;
+		//var draw = Render.Draw2D;
 
-		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 1.0f, 1.4f ) );
-		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = Color.White.WithAlpha( 0.25f );
-		if(ClientSettings.Current.ShowMovementHint)
-		// outer lines
-		{
-			var length = 22.0f;
-			var gap = 48.0f;
-			var thickness = 2.0f;
+		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 1.0f, 1.4f ) );
+		//draw.BlendMode = BlendMode.Lighten;
+		//draw.Color = Color.White.WithAlpha( 0.25f );
+		//if(ClientSettings.Current.ShowMovementHint)
+		//// outer lines
+		//{
+		//	var length = 22.0f;
+		//	var gap = 48.0f;
+		//	var thickness = 2.0f;
 
-			if ( Input.Down( InputButton.Forward ) )
-			{
-				draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 20, gap ) );
-				draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( -20, gap ) );
-			}
-			if ( Input.Down( InputButton.Back ) )
-			{
-				draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 20, gap ) );
-				draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( -20, gap ) );
-			}
-			if ( Input.Down( InputButton.Left ) )
-			{
-				draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 20 ) );
-				draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, -20 ) );
-			}
-			if ( Input.Down( InputButton.Right ) )
-			{
-				draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 20 ) );
-				draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, -20 ) );
-			}
-
-		}
+		//	if ( Input.Down( InputButton.Forward ) )
+		//	{
+		//		draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 20, gap ) );
+		//		draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( -20, gap ) );
+		//	}
+		//	if ( Input.Down( InputButton.Back ) )
+		//	{
+		//		draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 20, gap ) );
+		//		draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( -20, gap ) );
+		//	}
+		//	if ( Input.Down( InputButton.Left ) )
+		//	{
+		//		draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 20 ) );
+		//		draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, -20 ) );
+		//	}
+		//	if ( Input.Down( InputButton.Right ) )
+		//	{
+		//		draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 20 ) );
+		//		draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, -20 ) );
+		//	}
+		//}
 	}
 }

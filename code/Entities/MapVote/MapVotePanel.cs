@@ -20,18 +20,9 @@ class MapVotePanel : Panel
 
 	public async Task PopulateMaps()
 	{
-		var query = new Package.Query
-		{
-			Type = Package.Type.Map,
-			Order = Package.Order.User,
-			Take = 16,
-		};
+		var query = await Package.FindAsync( "type:map sort:user game:facepunch.boomer", 16 );
 
-		query.Tags.Add( "game:facepunch.boomer" ); // maybe this should be a "for this game" type of thing instead
-
-		var packages = await query.RunAsync( default );
-
-		foreach ( var package in packages )
+		foreach ( var package in query.Packages )
 		{
 			AddMap( package.FullIdent );
 		}
