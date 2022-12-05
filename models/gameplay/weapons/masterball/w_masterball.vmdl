@@ -17,6 +17,10 @@
 								from = "dev/helper/testgrid.vmat"
 								to = "models/dm_battery.vmat"
 							},
+							{
+								from = "models/dm_battery.vmat"
+								to = "models/gameplay/healthkit/glassbottle.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""

@@ -9,14 +9,13 @@ public partial class BoomerPlayer
 	
 
 	[ClientRpc]
-	void BecomeRagdollOnClient( Vector3 force, int forceBone, Color PlyColor )
+	void BecomeRagdollOnClient( Vector3 force, Color PlyColor )
 	{
 		// TODO - lets not make everyone write this shit out all the time
 		// maybe a CreateRagdoll<T>() on ModelEntity?
 		var ent = new ModelEntity();
 		ent.Position = Position;
 		ent.Rotation = Rotation;
-		ent.MoveType = MoveType.Physics;
 		ent.UsePhysicsCollision = true;
 		Tags.Add( "debris" );
 		ent.PhysicsEnabled = true;
@@ -62,22 +61,7 @@ public partial class BoomerPlayer
 
 		ent.PhysicsGroup.AddVelocity( force );
 
-		if ( forceBone >= 0 )
-		{
-			var body = ent.GetBonePhysicsBody( forceBone );
-			if ( body != null )
-			{
-				body.ApplyForce( force * 1000 );
-			}
-			else
-			{
-				ent.PhysicsGroup.AddVelocity( force );
-			}
-		}
-
-
 		Corpse = ent;
-
 		RagdollLimit.Watch( ent );
 	}
 }
