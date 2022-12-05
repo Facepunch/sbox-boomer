@@ -15,6 +15,8 @@ namespace Boomer.Movement
 		public TimeSince TimeSinceActivate { get; private set; }
 		public virtual float EyePosMultiplier => 1f;
 
+		public BoomerPlayer Player => ctrl.Player;
+
 		protected BoomerController ctrl;
 
 		public BaseMoveMechanic( BoomerController controller )

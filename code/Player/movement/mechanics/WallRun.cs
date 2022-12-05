@@ -67,7 +67,7 @@ namespace Boomer.Movement
 			var gravity = timeSinceWallRun / WallRunTime * 150f;
 			var lookingAtWall = Vector3.Dot( Wall.Normal, wishVel.Normal ) < -.5f;
 
-			if ( lookingAtWall && Input.Forward > 0 )
+			if ( lookingAtWall && Player.InputDirection.x > 0 )
 			{
 				if ( timeSinceWallRun > WallClimbTime )
 				{

@@ -50,8 +50,8 @@ class Dash : BaseMoveMechanic
 		float flMul = 100f * 1.2f;
 		float forMul = 485f * 2.2f;
 
-		var dashDirection = new Vector3( Input.Forward, Input.Left, 0 ).Normal;
-		dashDirection *= Input.Rotation;
+		var dashDirection = new Vector3( Player.InputDirection.x, Player.InputDirection.y, 0 ).Normal;
+		dashDirection *= Player.ViewAngles.ToRotation();
 
 		if ( dashDirection.IsNearlyZero() )
 		{

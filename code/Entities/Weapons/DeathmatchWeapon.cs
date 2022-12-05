@@ -254,11 +254,11 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 		camSetup.ViewModel.FieldOfView = FOVCurrentVM;
 	}
 
-	public override void BuildInput( InputBuilder owner )
+	public override void BuildInput()
 	{
 		if ( Zoomed )
 		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, FOVCurrent / FOVDefault );
+			Input.AnalogLook *= FOVCurrent / FOVDefault;
 		}
 	}
 

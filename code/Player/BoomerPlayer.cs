@@ -357,21 +357,21 @@ public partial class BoomerPlayer : Player, IHudMarker
 		}
 	}
 
-	public override void BuildInput( InputBuilder input )
+	public override void BuildInput()
 	{
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 		{
-			input.ViewAngles = input.OriginalViewAngles;
+			Input.AnalogLook = Angles.Zero;
 			return;
 		};
 
 		if ( OverrideViewAngles )
 		{
 			OverrideViewAngles = false;
-			input.ViewAngles = NewViewAngles;
+			ViewAngles = NewViewAngles;
 		}
 
-		base.BuildInput( input );
+		base.BuildInput();
 	}
 
 	TimeSince PerSec = 0;
@@ -379,15 +379,11 @@ public partial class BoomerPlayer : Player, IHudMarker
 	public override void Simulate( Client cl )
 	{
 		Projectiles.Simulate();
+
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return;
 
 		base.Simulate( cl );
-
-		if ( Input.ActiveChild != null )
-		{
-			ActiveChild = Input.ActiveChild;
-		}
 
 		if ( LifeState != LifeState.Alive )
 			return;

@@ -77,11 +77,11 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 		PlaySound( "ng.shoot" );
 	}
 
-	public override void BuildInput( InputBuilder owner )
+	public override void BuildInput()
 	{
 		if ( Zoomed )
 		{
-			owner.ViewAngles = Angles.Lerp( owner.OriginalViewAngles, owner.ViewAngles, 0.2f );
+			Input.AnalogLook *= 0.2f;
 		}
 	}
 

@@ -82,9 +82,9 @@ namespace Boomer.UI
 		}
 
 		[Event.BuildInput]
-		private void OnBuildInput( InputBuilder b )
+		private void OnBuildInput()
 		{
-			if ( b.Pressed( InputButton.Chat ) )
+			if ( Sandbox.Input.Pressed( InputButton.Chat ) )
 			{
 				IsOpen = !IsOpen;
 			}
