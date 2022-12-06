@@ -9,6 +9,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 	public override string ViewModelPath => "models/gameplay/weapons/nailgun/nailgun.vmdl";
 	public override string ProjectileModel => "models/gameplay/projectiles/nails/nails.vmdl";
 	public override string TrailEffect => "particles/gameplay/weapons/nailgun/nail_trail.vpcf";
+	public override string Crosshair => "ui/crosshair/crosshair007.png";
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float ProjectileLifeTime => 10f;
 	public override float Gravity => 0f;

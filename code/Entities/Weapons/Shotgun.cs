@@ -9,6 +9,7 @@ partial class Shotgun : DeathmatchWeapon
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/shotgun/w_shotgun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/shotgun/shotgun.vmdl";
+	public override string Crosshair => "ui/crosshair/crosshair118.png";
 	public override float PrimaryRate => 1f;
 	public override AmmoType AmmoType => AmmoType.Buckshot;
 	public override int Bucket => 0;

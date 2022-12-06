@@ -5,6 +5,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	[Property]
 	public int RespawnTime { get; set; } = 10;
 	public virtual AmmoType AmmoType => AmmoType.Pistol;
+	public virtual string Crosshair => "ui/crosshair/crosshair002.png";
 	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
 	public virtual int MoveSpeed => Zoomed ? 150 : 350;

@@ -1,31 +1,33 @@
-﻿using Sandbox.UI;
+﻿using Boomer;
+using Sandbox.UI;
+using Sandbox.UI.Construct;
 
 public class Crosshair : Panel
 {
-	int fireCounter;
+	public Image Icon;
+	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
 
+	public DeathmatchWeapon Weapon;
+
+	private DeathmatchWeapon SelectedWeapon { get; set; }
 	public Crosshair()
 	{
-		for ( int i = 0; i < 5; i++ )
-		{
-			var p = Add.Panel( "element" );
-			p.AddClass( $"el{i}" );
-		}
-	}
+		StyleSheet.Load( "/ui/Crosshair.scss" );
 
+		Icon = Add.Image( "ui/crosshair/crosshair002.png", "icon" );
+	}
 	public override void Tick()
 	{
 		base.Tick();
+		
+		var player = Player;
 
-		SetClass( "fire", fireCounter > 0 );
+		SelectedWeapon = player?.ActiveChild as DeathmatchWeapon;
+		if ( SelectedWeapon != null )
+		{
+		var crosshair = SelectedWeapon.Crosshair;
 
-		if ( fireCounter > 0 )
-			fireCounter--;
-	}
-
-	[PanelEvent]
-	public void FireEvent()
-	{
-		fireCounter += 2;
+		Icon.SetTexture( crosshair );
+		}
 	}
 }

@@ -9,7 +9,7 @@ partial class RailGun : DeathmatchWeapon
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/railgun/w_railgun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/railgun/railgun.vmdl";
-
+	public override string Crosshair => "ui/crosshair/crosshair056.png";
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override bool CanZoom => true;

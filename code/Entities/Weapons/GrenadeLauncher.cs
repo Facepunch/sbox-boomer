@@ -7,7 +7,7 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl";
-
+	public override string Crosshair => "ui/crosshair/crosshair165.png";
 	public override string ProjectileModel => "models/gameplay/projectiles/grenades/grenade.vmdl";
 	public override string TrailEffect => "particles/grenade.vpcf";
 	public override float ProjectileLifeTime => 1.5f;

@@ -9,7 +9,7 @@ partial class LightningGun : DeathmatchWeapon
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/lightninggun/w_lightninggun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/lightninggun/lightninggun.vmdl";
-
+	public override string Crosshair => "ui/crosshair/crosshair060.png";
 	public override bool CanZoom => true;
 	public override float PrimaryRate => 50f;
 	public override int Bucket => 5;
