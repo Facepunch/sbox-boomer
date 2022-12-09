@@ -99,8 +99,8 @@ partial class DeathmatchGame : Game
 
 			var ScoreToSubmit = Kills - Deaths;
 			
-			var scoreResult = await GameServices.SubmitScore( cl.SteamId, ScoreToSubmit );
-			
+			// TODO - Replace me
+			//var scoreResult = await GameServices.RecordScore( cl.PlayerId, ScoreToSubmit );
 		}
 		
 	}

@@ -15,6 +15,8 @@ public class HudRootPanel : RootPanel
 		StyleSheet.Load( "/resource/styles/hud.scss" );
 		SetTemplate( "/resource/templates/hud.html" );
 
+		AddChild<Crosshair>();
+		
 		AddChild<DamageIndicator>();
 		AddChild<HitIndicator>();
 

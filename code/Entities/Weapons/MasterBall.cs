@@ -11,6 +11,7 @@ partial class MasterBall : DeathmatchWeapon
 	public TimeSince DroppedBall { get; set; }
 	public override string ViewModelPath => "models/gameplay/weapons/masterball/masterball.vmdl";
 
+	public override string Crosshair => "ui/crosshair/crosshair001.png";
 	public override float PrimaryRate => 2.0f;
 	public override float SecondaryRate => 1.0f;
 	public override AmmoType AmmoType => AmmoType.None;

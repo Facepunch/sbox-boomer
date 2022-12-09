@@ -50,6 +50,27 @@
       "Keyboard": true,
       "Gamepad": true
     },
+    "LobbySettings": {
+      "bm_friendly_fire": {
+        "Type": "Boolean",
+        "ConVar": "bm_friendly_fire",
+        "FriendlyName": "Friendly Fire",
+        "Default": "false"
+      },
+      "testfloat": {
+        "Type": "Number",
+        "ConVar": "testfloat",
+        "FriendlyName": "Test Float",
+        "Default": "4",
+        "Min": 4,
+        "Max": 12
+      },
+      "testconvar": {
+        "ConVar": "testconvar",
+        "FriendlyName": "Test String",
+        "Default": ""
+      }
+    },
     "GameSettings": {
       "bm_gamemode": {
         "DisplayType": "Choice",
@@ -133,10 +154,10 @@
         "Description": ""
       }
     },
+    "ParentPackage": "facepunch.voxeltest",
     "DefaultLeaderboards": null,
     "Summary": "Boomer is a fast-paced shooter inspired by old school shooters.",
     "Description": "\uD83D\uDC77\u200D\u2642\uFE0F(WIP)\uD83D\uDC77\u200D\u2642\uFE0F\nBoomer is a fast-paced shooter inspired by old school shooters.\n\nAt the moment its just death match but more to come later;\nTDM\nCTF\nDuel\nKoth\n\nAs well a PVE style campaign mode.\n\nMake sure to include \u0022facepunch.boomer\u0022 in supported games if you are making custom maps.",
-    "ReplaceTags": "shooter fps pvp retro quake oldschool arena",
     "Public": true
   }
 }

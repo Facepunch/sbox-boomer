@@ -9,6 +9,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 	public override string ViewModelPath => "models/gameplay/weapons/nailgun/nailgun.vmdl";
 	public override string ProjectileModel => "models/gameplay/projectiles/nails/nails.vmdl";
 	public override string TrailEffect => "particles/gameplay/weapons/nailgun/nail_trail.vpcf";
+	public override string Crosshair => "ui/crosshair/crosshair007.png";
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override float ProjectileLifeTime => 10f;
 	public override float Gravity => 0f;
@@ -96,26 +97,26 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
-		var draw = Render.Draw2D;
+		//var draw = Render.Draw2D;
 
-		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
-		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
+		//draw.BlendMode = BlendMode.Lighten;
+		//draw.Color = color.WithAlpha( 0.4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// outer lines
-		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.1f ) );
-			var length = 10.0f + shootEase * 2.0f;
-			var gap = 8.0f + shootEase * 10.0f;
-			var thickness = 2.0f;
+		//// outer lines
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.1f ) );
+		//	var length = 10.0f + shootEase * 2.0f;
+		//	var gap = 8.0f + shootEase * 10.0f;
+		//	var thickness = 2.0f;
 
-			draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 0, gap ) );
-			draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 0, gap ) );
+		//	draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 0, gap ) );
+		//	draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 0, gap ) );
 
-			draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 0 ) );
-			draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 0 ) );
+		//	draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 0 ) );
+		//	draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 0 ) );
 
-		}
+		//}
 	}
 
 	protected override void OnProjectileHit( BulletDropProjectile projectile, TraceResult trace )

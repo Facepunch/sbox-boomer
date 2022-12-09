@@ -7,7 +7,7 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl";
-
+	public override string Crosshair => "ui/crosshair/crosshair165.png";
 	public override string ProjectileModel => "models/gameplay/projectiles/grenades/grenade.vmdl";
 	public override string TrailEffect => "particles/grenade.vpcf";
 	public override float ProjectileLifeTime => 1.5f;
@@ -65,27 +65,27 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
-		var draw = Render.Draw2D;
+		//var draw = Render.Draw2D;
 
-		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
-		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( .4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
+		//draw.BlendMode = BlendMode.Lighten;
+		//draw.Color = color.WithAlpha( .4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// outer lines
-		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.0f ) );
-			var length = 10.0f + shootEase * 2.0f;
-			var gap = 8.0f + shootEase * 50.0f;
-			var thickness = 2.0f;
+		//// outer lines
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.0f ) );
+		//	var length = 10.0f + shootEase * 2.0f;
+		//	var gap = 8.0f + shootEase * 50.0f;
+		//	var thickness = 2.0f;
 
 
-			draw.Line( thickness, center - Vector2.Up * gap * 3f + Vector2.Left * length * 2.5f, center - Vector2.Up * gap * 3f - Vector2.Left * length * 2.5f );
-			draw.Line( thickness, center - Vector2.Up * gap * 1.5f + Vector2.Left * length * 2f, center - Vector2.Up * gap * 1.5f - Vector2.Left * length * 2f );
-			draw.Line( thickness, center - Vector2.Up + Vector2.Left * length * 1.5f, center - Vector2.Up - Vector2.Left * length * 1.5f );
-			draw.Line( thickness, center + Vector2.Up * gap * 1.5f + Vector2.Left * length * 1f, center + Vector2.Up * gap * 1.5f - Vector2.Left * length * 1f );
-			draw.Line( thickness, center + Vector2.Up * gap * 3f + Vector2.Left * length * .5f, center + Vector2.Up * gap * 3f - Vector2.Left * length * .5f );
+		//	draw.Line( thickness, center - Vector2.Up * gap * 3f + Vector2.Left * length * 2.5f, center - Vector2.Up * gap * 3f - Vector2.Left * length * 2.5f );
+		//	draw.Line( thickness, center - Vector2.Up * gap * 1.5f + Vector2.Left * length * 2f, center - Vector2.Up * gap * 1.5f - Vector2.Left * length * 2f );
+		//	draw.Line( thickness, center - Vector2.Up + Vector2.Left * length * 1.5f, center - Vector2.Up - Vector2.Left * length * 1.5f );
+		//	draw.Line( thickness, center + Vector2.Up * gap * 1.5f + Vector2.Left * length * 1f, center + Vector2.Up * gap * 1.5f - Vector2.Left * length * 1f );
+		//	draw.Line( thickness, center + Vector2.Up * gap * 3f + Vector2.Left * length * .5f, center + Vector2.Up * gap * 3f - Vector2.Left * length * .5f );
 
-		}
+		//}
 	}
 
 	protected override Vector3 AdjustProjectileVelocity( Vector3 velocity )

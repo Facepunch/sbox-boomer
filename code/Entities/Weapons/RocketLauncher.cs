@@ -11,7 +11,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override string ProjectileModel => "models/gameplay/projectiles/rockets/rocket.vmdl";
-	
+	public override string Crosshair => "ui/crosshair/crosshair121.png";
 	public override float ProjectileRadius => 2f;
 	public override string TrailEffect => "particles/gameplay/weapons/rocketlauncher/trail_1.vpcf";
 	public override float Spread => 0.0f;
@@ -75,35 +75,35 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
-		var draw = Render.Draw2D;
+		//var draw = Render.Draw2D;
 
-		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
-		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 1.8f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
+		//draw.BlendMode = BlendMode.Lighten;
+		//draw.Color = color.WithAlpha( 1.8f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
-		// center circle
-		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
-			var length = 2f + shootEase * 2.0f;
-			draw.Circle( center, length );
-		}
+		//// center circle
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
+		//	var length = 2f + shootEase * 2.0f;
+		//	draw.Circle( center, length );
+		//}
 
 
-		draw.Color = draw.Color.WithAlpha( draw.Color.a * 0.2f );
+		//draw.Color = draw.Color.WithAlpha( draw.Color.a * 0.2f );
 
-		// outer lines
-		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.0f ) );
-			var length = 10.0f + shootEase * 2.0f;
-			var gap = 8.0f + shootEase * 50.0f;
-			var thickness = 2.0f;
+		//// outer lines
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.2f, 0.0f ) );
+		//	var length = 10.0f + shootEase * 2.0f;
+		//	var gap = 8.0f + shootEase * 50.0f;
+		//	var thickness = 2.0f;
 
-			draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 0, gap) );
-			draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 0, gap) );
+		//	draw.Line( thickness, center - new Vector2( 0, gap + length ), center - new Vector2( 0, gap) );
+		//	draw.Line( thickness, center + new Vector2( 0, gap + length ), center + new Vector2( 0, gap) );
 			
-			draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 0 ) );
-			draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 0 ) );
-		}
+		//	draw.Line( thickness, center - new Vector2( gap + length, 0 ), center - new Vector2( gap, 0 ) );
+		//	draw.Line( thickness, center + new Vector2( gap + length, 0 ), center + new Vector2( gap, 0 ) );
+		//}
 	}
 
 	protected override void OnProjectileHit( RocketProjectile projectile, TraceResult trace )

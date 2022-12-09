@@ -9,7 +9,7 @@ partial class RailGun : DeathmatchWeapon
 {
 	public static readonly Model WorldModel = Model.Load( "models/gameplay/weapons/railgun/w_railgun.vmdl" );
 	public override string ViewModelPath => "models/gameplay/weapons/railgun/railgun.vmdl";
-
+	public override string Crosshair => "ui/crosshair/crosshair056.png";
 	public AnimatedEntity AnimationOwner => Owner as AnimatedEntity;
 	public override bool GivesAirshotAward => true;
 	public override bool CanZoom => true;
@@ -146,23 +146,23 @@ partial class RailGun : DeathmatchWeapon
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )
 	{
-		var draw = Render.Draw2D;
+		//var draw = Render.Draw2D;
 
-		if ( Zoomed )
-			timeSinceZoomed = 0;
+		//if ( Zoomed )
+		//	timeSinceZoomed = 0;
 
-		var zoomFactor = timeSinceZoomed.Relative.LerpInverse( 0.4f, 0 );
+		//var zoomFactor = timeSinceZoomed.Relative.LerpInverse( 0.4f, 0 );
 
-		var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
-		draw.BlendMode = BlendMode.Lighten;
-		draw.Color = color.WithAlpha( 0.4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
+		//var color = Color.Lerp( Color.Red, Color.Yellow, lastReload.LerpInverse( 0.0f, 0.4f ) );
+		//draw.BlendMode = BlendMode.Lighten;
+		//draw.Color = color.WithAlpha( 0.4f + CrosshairLastShoot.Relative.LerpInverse( 1.2f, 0 ) * 0.5f );
 
 
-		// center circle
-		{
-			var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
-			var length = 4.0f + shootEase * 2.0f;
-			draw.Circle( center, length );
-		}
+		//// center circle
+		//{
+		//	var shootEase = Easing.EaseInOut( lastAttack.LerpInverse( 0.1f, 0.0f ) );
+		//	var length = 4.0f + shootEase * 2.0f;
+		//	draw.Circle( center, length );
+		//}
 	}
 }

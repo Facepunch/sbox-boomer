@@ -343,33 +343,33 @@ partial class DeathmatchGame : Game
 		Sandbox.UI.KillFeed.Current?.AddEntry( leftid, left, rightid, right, method );
 	}
 
-	[DebugOverlay( "entities", "Entities", "" )]
-	public static void EntityDebugOverlay()
-	{
-		if ( !Host.IsClient ) return;
+	//[DebugOverlay( "entities", "Entities", "" )]
+	//public static void EntityDebugOverlay()
+	//{
+	//	if ( !Host.IsClient ) return;
 
-		var scale = Screen.Height / 1080.0f;
-		var screenSize = Screen.Size / scale;
-		var matrix = Matrix.CreateScale( scale );
+	//	var scale = Screen.Height / 1080.0f;
+	//	var screenSize = Screen.Size / scale;
+	//	var matrix = Matrix.CreateScale( scale );
 
-		using var _ = Render.Draw2D.MatrixScope( matrix );
+	//	using var _ = Render.Draw2D.MatrixScope( matrix );
 
-		foreach ( var ent in FindInSphere( Camera.Position, 600 ) )
-		{
-			var pos = ent.Position.ToScreen( screenSize );
-			if ( !pos.HasValue ) continue;
+	//	foreach ( var ent in FindInSphere( CurrentView.Position, 600 ) )
+	//	{
+	//		var pos = ent.Position.ToScreen( screenSize );
+	//		if ( !pos.HasValue ) continue;
 
-			var str = $"{ent}";
-			Render.Draw2D.FontFamily = "Poppins";
-			Render.Draw2D.FontWeight = 600;
-			Render.Draw2D.FontSize = 14;
+	//		var str = $"{ent}";
+	//		Render.Draw2D.FontFamily = "Poppins";
+	//		Render.Draw2D.FontWeight = 600;
+	//		Render.Draw2D.FontSize = 14;
 
-			var textRect = Render.Draw2D.MeasureText( new Rect( pos.Value ), str );
+	//		var textRect = Render.Draw2D.MeasureText( new Rect( pos.Value ), str );
 
-			Render.Draw2D.Color = Color.Black;
-			Render.Draw2D.DrawText( new Rect( pos.Value + Vector2.One ), str );
-			Render.Draw2D.Color = Color.White;
-			Render.Draw2D.DrawText( new Rect( pos.Value ), str );
-		}
-	}
+	//		Render.Draw2D.Color = Color.Black;
+	//		Render.Draw2D.DrawText( new Rect( pos.Value + Vector2.One ), str );
+	//		Render.Draw2D.Color = Color.White;
+	//		Render.Draw2D.DrawText( new Rect( pos.Value ), str );
+	//	}
+	//}
 }
