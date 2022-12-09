@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-partial class DeathmatchGame : Game
+partial class DeathmatchGame : GameManager
 {
 	[Net]
 	private bool CountDownPlayed { get; set; } = false;

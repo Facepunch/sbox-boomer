@@ -27,6 +27,8 @@ public partial class BoomerPlayer : Player, IHudMarker
 	public TimeSince HealthTick { get; set; }
 	public TimeSince ArmourTick { get; set; }
 
+	[Net, Predicted] public BaseCamera CurrentCamera { get; set; }
+
 	[Net]
 	private Material SkinMat { get; set; } = Material.Load( "models/gameplay/citizen/textures/citizen_skin.vmat" );
 
@@ -59,9 +61,8 @@ public partial class BoomerPlayer : Player, IHudMarker
 	{
 		SetModel( "models/citizen/citizen.vmdl" );
 
+		CurrentCamera = new BoomerCamera();
 		Controller = new BoomerController();
-		Animator = new StandardPlayerAnimator();
-		CameraMode = new BoomerCamera();
 
 		ConsecutiveKills = 0;
 		SpreeKills = 0;
@@ -252,13 +253,13 @@ public partial class BoomerPlayer : Player, IHudMarker
 						OnPickupAction = OnArmorPickUp
 					};
 					armour.DeleteAsync( 60f );
-					armour.PhysicsBody.Velocity = Owner.EyeRotation.Up * 200.0f + Owner.Velocity + Vector3.Random * 100.0f;
+					armour.PhysicsBody.Velocity = EyeRotation.Up * 200.0f + Velocity + Vector3.Random * 100.0f;
 				}
 			}
 
 		Inventory.DeleteContents();
 
-		if ( LastDamage.Flags.HasFlag( DamageFlags.Blast ) || DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
+		if ( LastDamage.HasTag( "blast" ) || DeathmatchGame.InstaGib || DeathmatchGame.RailTag )
 		{
 			using ( Prediction.Off() )
 			{
@@ -291,7 +292,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 			attacker.TaggedPlayer = false;
 
-			if ( !LastDamage.Flags.HasFlag( DamageFlags.Blast ) && LastDamage.Hitbox.HasTag( "head" ) && LastDamage.Weapon is RailGun )
+			if ( !LastDamage.HasTag( "blast" ) && LastDamage.Hitbox.HasTag( "head" ) && LastDamage.Weapon is RailGun )
 			{
 				attacker.PlaySoundFromScreen( To.Single( attacker ), "headshot" );
 			}
@@ -345,8 +346,8 @@ public partial class BoomerPlayer : Player, IHudMarker
 			}
 		}
 
+		CurrentCamera = new BoomerRagdollCamera();
 		Controller = null;
-		CameraMode = new BoomerRagdollCamera();
 
 		EnableAllCollisions = false;
 		EnableDrawing = false;
@@ -359,6 +360,8 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	public override void BuildInput()
 	{
+		CurrentCamera?.BuildInput();
+
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 		{
 			Input.AnalogLook = Angles.Zero;
@@ -376,9 +379,18 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	TimeSince PerSec = 0;
 
+	public override void FrameSimulate( Client cl )
+	{
+		CurrentCamera?.Update();
+
+		base.FrameSimulate( cl );
+	}
+
 	public override void Simulate( Client cl )
 	{
 		Projectiles.Simulate();
+
+		SimulateAnimation();
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
 			return;
@@ -472,31 +484,35 @@ public partial class BoomerPlayer : Player, IHudMarker
 		base.StartTouch( other );
 	}
 
-	public override void PostCameraSetup( ref CameraSetup setup )
+	[Event.Client.PostCamera]
+	private void PostCameraSetup()
 	{
-		base.PostCameraSetup( ref setup );
-
-		setup.ZNear = 1f;
+		Camera.ZNear = 1f;
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
-		if ( setup.Viewer == null ) return;
+		if ( Camera.FirstPersonViewer == null ) return;
 
-		AddCameraEffects( ref setup );
+		AddCameraEffects();
 
-		BaseCameraModifier.PostCameraSetup( ref setup );
+		if ( ActiveChild is DeathmatchWeapon weapon )
+		{
+			weapon.PostCameraSetup();
+		}
+
+		BaseCameraModifier.PostCameraSetup();
 	}
 
 	float walkBob = 0;
 	float lean = 0;
 	float fov = 0;
 
-	private void AddCameraEffects( ref CameraSetup setup )
+	private void AddCameraEffects()
 	{
 		var speed = Velocity.Length.LerpInverse( 0, 320 );
-		var forwardspeed = Velocity.Normal.Dot( setup.Rotation.Forward );
+		var forwardspeed = Velocity.Normal.Dot( Camera.Rotation.Forward );
 
-		var left = setup.Rotation.Left;
-		var up = setup.Rotation.Up;
+		var left = Camera.Rotation.Left;
+		var up = Camera.Rotation.Up;
 
 		if ( GroundEntity != null )
 		{
@@ -513,21 +529,21 @@ public partial class BoomerPlayer : Player, IHudMarker
 			walkBob = 0;
 		}
 
-		setup.Position += up * MathF.Sin( walkBob ) * speed * 2;
-		setup.Position += left * MathF.Sin( walkBob * 0.6f ) * speed * 1;
+		Camera.Position += up * MathF.Sin( walkBob ) * speed * 2;
+		Camera.Position += left * MathF.Sin( walkBob * 0.6f ) * speed * 1;
 
 		// Camera lean
-		lean = lean.LerpTo( Velocity.Dot( setup.Rotation.Right ) * 0.01f, Time.Delta * 15.0f );
+		lean = lean.LerpTo( Velocity.Dot( Camera.Rotation.Right ) * 0.01f, Time.Delta * 15.0f );
 
 		var appliedLean = lean;
 		appliedLean += MathF.Sin( walkBob ) * speed * 0.3f;
-		setup.Rotation *= Rotation.From( 0, 0, appliedLean );
+		Camera.Rotation *= Rotation.From( 0, 0, appliedLean );
 
 		speed = (speed - 0.7f).Clamp( 0, 1 ) * 3.0f;
 
 		fov = fov.LerpTo( speed * 20 * MathF.Abs( forwardspeed ), Time.Delta * 4.0f );
 
-		setup.FieldOfView += fov;
+		Camera.FieldOfView += fov;
 
 	}
 

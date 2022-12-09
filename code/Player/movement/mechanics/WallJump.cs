@@ -144,7 +144,7 @@ namespace Boomer.Movement
             IsActive = false;
 
             ctrl.Pawn.Rotation =  HitNormal.EulerAngles.ToRotation();
-            ctrl.Pawn.EyeRotation = HitNormal.EulerAngles.ToRotation();
+            (ctrl.Pawn as BoomerPlayer).EyeRotation = HitNormal.EulerAngles.ToRotation();
 
             // Consume our remaining double jumps
             ctrl.GetMechanic<DoubleJump>().TimeUntilCanDoubleJump += .25f;

@@ -1,4 +1,6 @@
-﻿namespace Sandbox.UI
+﻿using Boomer;
+
+namespace Sandbox.UI
 {
 	public static class PanelExtension
 	{
@@ -7,9 +9,11 @@
 			panel.PositionAtCrosshair( Local.Pawn );
 		}
 
-		public static void PositionAtCrosshair( this Panel panel, Entity player )
+		public static void PositionAtCrosshair( this Panel panel, Entity e )
 		{
-			if ( !player.IsValid() ) return;
+			if ( !e.IsValid() ) return;
+
+			if ( e is not BoomerPlayer player ) return;
 
 			var eyePos = player.EyePosition;
 			var eyeRot = player.EyeRotation;

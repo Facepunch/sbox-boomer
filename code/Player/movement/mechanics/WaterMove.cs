@@ -18,18 +18,26 @@ namespace Boomer.Movement
 
 		protected override bool TryActivate()
 		{
-			if ( ctrl.Pawn.WaterLevel > 0.6f ) 
-				return true;
+			//if ( ctrl.Pawn.WaterLevel > 0.6f ) 
+				//return true;
 			return false;
 		}
 
 		public override void Simulate()
 		{
+			if ( true )
+			{
+				IsActive = false;
+				return;
+			}
+
+			/*
 			if ( ctrl.Pawn.WaterLevel <= 0.6f )
 			{
 				IsActive = false;
 				return;
 			}
+			*/
 
 			if( InputActions.Jump.Down())
 				ctrl.Velocity = ctrl.Velocity.WithZ( 100 );

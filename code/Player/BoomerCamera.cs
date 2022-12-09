@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-internal class BoomerCamera : CameraMode
+internal class BoomerCamera : BaseCamera
 {
 	private static BoomerPlayer target;
 	public static BoomerPlayer Target
@@ -25,6 +25,10 @@ internal class BoomerCamera : CameraMode
 		return Entity.All.OfType<BoomerPlayer>();
 	}
 
+	public override void BuildInput()
+	{
+	}
+
 	public override void Update()
 	{
 		if ( Local.Pawn is BoomerPlayer player )
@@ -37,13 +41,13 @@ internal class BoomerCamera : CameraMode
 		if ( !target.IsValid() )
 			return;
 
-		Position = target.EyePosition;
+		Camera.Position = target.EyePosition;
 
 		if ( IsLocal )
-			Rotation = target.EyeRotation;
+			Camera.Rotation = target.EyeRotation;
 		else
-			Rotation = Rotation.Slerp( Rotation, target.EyeRotation, Time.Delta * 20f );
+			Camera.Rotation = Rotation.Slerp( Camera.Rotation, target.EyeRotation, Time.Delta * 20f );
 
-		Viewer = target;
+		Camera.FirstPersonViewer = target;
 	}
 }

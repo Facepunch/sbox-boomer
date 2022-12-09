@@ -1,16 +1,13 @@
 ﻿
 namespace Sandbox
 {
-	public class BoomerRagdollCamera : CameraMode
+	public class BoomerRagdollCamera : BaseCamera
 	{
 		Vector3 FocusPoint;
 
-		public override void Activated()
+		public override void BuildInput()
 		{
-			base.Activated();
 
-			FocusPoint = Camera.Position - GetViewOffset();
-			FieldOfView = Camera.FieldOfView;
 		}
 
 		public override void Update()
@@ -27,11 +24,10 @@ namespace Sandbox
 				.Radius( 6 )
 				.Run();
 
-			Position = tr.EndPosition;
-			Rotation = player.EyeRotation;
-			FieldOfView = FieldOfView.LerpTo( 90, Time.Delta * 3.0f );
-
-			Viewer = null;
+			Camera.Position = tr.EndPosition;
+			Camera.Rotation = player.EyeRotation;
+			Camera.FieldOfView = Camera.FieldOfView.LerpTo( 90, Time.Delta * 3.0f );
+			Camera.FirstPersonViewer = null;
 		}
 
 		public virtual Vector3 GetSpectatePoint()

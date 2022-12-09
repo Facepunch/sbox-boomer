@@ -14,9 +14,9 @@ namespace Boomer;
 /// <summary>
 /// This is the heart of the gamemode. It's responsible for creating the player and stuff.
 /// </summary>
-partial class DeathmatchGame : Game
+partial class DeathmatchGame : GameManager
 {
-	public static new DeathmatchGame Current => Game.Current as DeathmatchGame;
+	public static new DeathmatchGame Current => GameManager.Current as DeathmatchGame;
 
 	[Net] private DeathmatchHud Hud { get; set; }
 
@@ -182,7 +182,8 @@ partial class DeathmatchGame : Game
 		{
 			if ( client.Pawn == null ) continue;
 			if ( client.Pawn == pawn ) continue;
-			if ( client.Pawn.LifeState != LifeState.Alive ) continue;
+			if ( client.Pawn is not BoomerPlayer pl ) continue;
+			if ( pl.LifeState != LifeState.Alive ) continue;
 
 			var spawnDist = (spawnpoint.Position - client.Pawn.Position).Length;
 			distance = MathF.Min( distance, spawnDist );
@@ -318,8 +319,8 @@ partial class DeathmatchGame : Game
 				forceDir = (targetPos - (position + Vector3.Down * 32f)).Normal;
 			}
 
-			var damageInfo = DamageInfo.Explosion( position, forceDir * force, dmg )
-				.WithFlag( DamageFlags.Blast )
+			var damageInfo = DamageInfo.FromExplosion( position, forceDir * force, dmg )
+				.WithTag( "blast" )
 				.WithWeapon( weapon )
 				.WithAttacker( owner );
 

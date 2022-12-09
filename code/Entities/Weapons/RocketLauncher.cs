@@ -50,11 +50,6 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 		base.AttackPrimary();
 	}
 
-	public override void PostCameraSetup( ref CameraSetup camSetup )
-	{
-		base.PostCameraSetup( ref camSetup );
-	}
-
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
@@ -65,10 +60,9 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", 3 ); // TODO this is shit
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		anim.HoldType = CitizenAnimationHelper.HoldTypes.Shotgun;
 	}
 
 	TimeSince timeSinceZoomed;

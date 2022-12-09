@@ -16,7 +16,7 @@ internal class SettingRow : Panel
 		
 		Label.Text = property.GetDisplayInfo().Name;
 
-		var typeDesc = TypeLibrary.GetDescription( property.PropertyType );
+		var typeDesc = TypeLibrary.GetType( property.PropertyType );
 		var currentValue = property.GetValue( target );
 
 		if ( property.PropertyType == typeof( bool ) )

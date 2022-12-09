@@ -39,7 +39,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 			return;
 		}
 
-		var tr = Trace.Ray( Owner.EyePosition + new Vector3( 0, 0, -10 ), Owner.EyePosition + new Vector3( 0, 0, -10 ) + Owner.EyeRotation.Forward * 48 )
+		var tr = Trace.Ray( Player.EyePosition + new Vector3( 0, 0, -10 ), Player.EyePosition + new Vector3( 0, 0, -10 ) + Player.EyeRotation.Forward * 48 )
 			.UseHitboxes()
 			.WithAnyTags( "weapon", "player", "solid" )
 			.Ignore( Owner )

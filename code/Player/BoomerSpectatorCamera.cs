@@ -5,8 +5,6 @@ internal class BoomerSpectatorCamera : BoomerCamera
 	public bool IsFree { get; set; } = false;
 
 	protected virtual float BaseMoveSpeed => 800f;
-
-	// TODO - Input modifiers
 	protected float MoveMultiplier = 1f;
 
 	int playerIndex = 0;
@@ -41,7 +39,7 @@ internal class BoomerSpectatorCamera : BoomerCamera
 	{
 		// Force eye rotation to avoid lerping when switching targets
 		if ( Target.IsValid() )
-			Rotation = Target.EyeRotation;
+			Camera.Rotation = Target.EyeRotation;
 	}
 
 	protected void ToggleFree()
@@ -51,16 +49,16 @@ internal class BoomerSpectatorCamera : BoomerCamera
 		if ( IsFree )
 		{
 			if ( Target.IsValid() )
-				Position = Target.EyePosition;
+				Camera.Position = Target.EyePosition;
 
 			vm?.Delete();
 			cachedWeapon = null;
-			Viewer = null;
+			Camera.FirstPersonViewer = null;
 		}
 		else
 		{
 			ResetInterpolation();
-			Viewer = Target;
+			Camera.FirstPersonViewer = Target;
 		}
 	}
 
@@ -143,9 +141,9 @@ internal class BoomerSpectatorCamera : BoomerCamera
 
 		if ( IsFree )
 		{
-			var mv = MoveInput.Normal * BaseMoveSpeed * RealTime.Delta * Rotation * MoveMultiplier;
-			Position += mv;
-			Rotation = Rotation.From( LookAngles );
+			var mv = MoveInput.Normal * BaseMoveSpeed * RealTime.Delta * Camera.Rotation * MoveMultiplier;
+			Camera.Position += mv;
+			Camera.Rotation = Rotation.From( LookAngles );
 		}
 		else
 		{
@@ -155,8 +153,8 @@ internal class BoomerSpectatorCamera : BoomerCamera
 				cachedWeapon = curWeapon;
 				UpdateViewModel( curWeapon );
 			}
-
-			base.Update();
 		}
+
+		base.Update();
 	}
 }

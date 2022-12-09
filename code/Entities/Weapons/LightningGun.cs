@@ -73,11 +73,11 @@ partial class LightningGun : DeathmatchWeapon
 
 		for ( int i = 0; i < bulletCount; i++ )
 		{
-			var forward = Owner.EyeRotation.Forward;
+			var forward = Player.EyeRotation.Forward;
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
-			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 750f, bulletSize ) )
+			foreach ( var tr in TraceBullet( Player.EyePosition, Player.EyePosition + forward * 750f, bulletSize ) )
 			{
 				tr.Surface.DoBulletImpact( tr );
 
@@ -94,7 +94,7 @@ partial class LightningGun : DeathmatchWeapon
 
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100f * force, damage * DamageModifier )
 					.UsingTraceResult( tr )
-					.WithAttacker( Owner )
+					.WithAttacker( Player )
 					.WithWeapon( this );
 
 				tr.Entity.TakeDamage( damageInfo );
@@ -144,14 +144,14 @@ partial class LightningGun : DeathmatchWeapon
 		//	DebugOverlay.ScreenText( DamageModifier.ToString() );
 		}
 
-		var forward = Owner.EyeRotation.Forward;
+		var forward = Player.EyeRotation.Forward;
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0 * 0.25f;
 		forward = forward.Normal;
 		
-		var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + forward * 750f )
+		var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + forward * 750f )
 			.UseHitboxes()
 			.WithoutTags( "trigger" )
-			.Ignore( Owner )
+			.Ignore( Player )
 			.Ignore( this )
 			.Size( 1.0f )
 			.Run();
@@ -190,10 +190,9 @@ partial class LightningGun : DeathmatchWeapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", 1 );
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		anim.HoldType = CitizenAnimationHelper.HoldTypes.Pistol;
 	}
 
 	TimeSince timeSinceZoomed;

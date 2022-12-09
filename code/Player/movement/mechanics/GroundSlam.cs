@@ -64,15 +64,14 @@ namespace Boomer.Movement
 			foreach( var ent in ents )
 			{
 				if ( ent == ctrl.Pawn ) continue;
-				var dmgtype = ent is BoomerPlayer ? DamageFlags.Sonic : DamageFlags.Generic;
+				var dmgtype = ent is BoomerPlayer ? "sonic" : "generic";
 				var dmgAmount = ent is BoomerPlayer ? 2 : 80;
 
 				ent.TakeDamage( new DamageInfo()
 				{
 					Attacker = ctrl.Pawn,
-					Flags = dmgtype,
 					Damage = dmgAmount
-				} );
+				}.WithTag( dmgtype ) );
 			}
 
 			ctrl.Velocity += ctrl.Velocity.WithZ( -SlamGravity ) * Time.Delta;

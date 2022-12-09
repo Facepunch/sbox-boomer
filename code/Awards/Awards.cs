@@ -31,7 +31,7 @@
 		if ( Lookup.TryGetValue( name, out var award ) )
 			return award;
 
-		var type = TypeLibrary.GetDescription( name );
+		var type = TypeLibrary.GetType( name );
 
 		if ( type != null )
 		{

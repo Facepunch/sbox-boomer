@@ -23,14 +23,14 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	public virtual float ZoomedViewmodelFov => 40;
 	public virtual bool GivesAirshotAward => false;
 
+	public BoomerPlayer Player => Owner as BoomerPlayer;
+
 	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
 	[Net, Predicted]
 	public bool Zoomed { get; set; }
 
 	public PickupTrigger PickupTrigger { get; protected set; }
-
-	protected BoomerPlayer Player => Owner as BoomerPlayer;
 
 	public int AvailableAmmo()
 	{
@@ -117,7 +117,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 
 		for ( int i = 0; i < bulletCount; i++ )
 		{
-			var forward = Owner.EyeRotation.Forward;
+			var forward = Player.EyeRotation.Forward;
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
@@ -125,7 +125,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 			// ShootBullet is coded in a way where we can have bullets pass through shit
 			// or bounce off shit, in which case it'll return multiple results
 			//
-			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000, bulletSize ) )
+			foreach ( var tr in TraceBullet( Player.EyePosition, Player.EyePosition + forward * 5000, bulletSize ) )
 			{
 				// Move into the normal by the bullet radius to give us a better chance of making a decal
 				var impactTrace = tr;
@@ -142,7 +142,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage )
 					.UsingTraceResult( tr )
-					.WithAttacker( Owner )
+					.WithAttacker( Player )
 					.WithWeapon( this );
 
 				tr.Entity.TakeDamage( damageInfo );
@@ -239,20 +239,19 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	private float FOVDefault;
 	private float FOVCurrent;
 	private float FOVCurrentVM = 45;
-	public override void PostCameraSetup( ref CameraSetup camSetup )
-	{
-		base.PostCameraSetup( ref camSetup );
 
-		FOVDefault = camSetup.FieldOfView;
-		if ( FOVCurrent == 0 ) FOVCurrent = camSetup.FieldOfView;
+	public void PostCameraSetup()
+	{
+		FOVDefault = Camera.FieldOfView;
+		if ( FOVCurrent == 0 ) FOVCurrent = Camera.FieldOfView;
 
 		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 45f;
 		var targetFoV = Zoomed ? ZoomedFov : FOVDefault;
 		FOVCurrent = FOVCurrent.LerpTo( targetFoV, 15f * Time.Delta );
 		FOVCurrentVM = FOVCurrentVM.LerpTo( targetVMFoV, 15f * Time.Delta );
 
-		camSetup.FieldOfView = FOVCurrent;
-		camSetup.ViewModel.FieldOfView = FOVCurrentVM;
+		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( FOVCurrent );
+		Camera.Main.SetViewModelCamera( Screen.CreateVerticalFieldOfView( FOVCurrentVM ), 0.1f, 200f );
 	}
 
 	public override void BuildInput()

@@ -1,4 +1,6 @@
-﻿namespace Boomer.Movement
+﻿using Sandbox.Utility;
+
+namespace Boomer.Movement
 {
 	class Walk : BaseMoveMechanic
 	{

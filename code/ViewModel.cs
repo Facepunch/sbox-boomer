@@ -12,17 +12,17 @@ partial class DmViewModel : BaseViewModel
 	float WalkBob = 0f;
 	float MyRoll = 0f;
 
-	public override void PostCameraSetup( ref CameraSetup camSetup )
+	[Event.Client.PostCamera]
+	private void PostCameraSetup()
 	{
-		base.PostCameraSetup( ref camSetup );
-		//camSetup.ViewModel.FieldOfView = 75f;
 		if ( Local.Pawn is BoomerPlayer pl && pl.Controller is BoomerController ctrl )
 		{
 			ShouldBob = !ctrl.IsSliding && !ctrl.IsDashing;
 			TargetRoll = ctrl.IsSliding ? -45f : 0f;
 
 			TargetFOV = ctrl.IsSliding ? 80f : 75f;
-			camSetup.ViewModel.FieldOfView = TargetFOV;
+
+			Camera.Main.SetViewModelCamera( Screen.CreateVerticalFieldOfView( TargetFOV ), 0.1f, 200f );
 
 			TargetPos = TargetPos.LerpTo( Vector3.Up * (ctrl.IsSliding ? -15f : 0f), 2f * Time.Delta );
 			Position += TargetPos;
@@ -40,11 +40,10 @@ partial class DmViewModel : BaseViewModel
 			}
 		}
 
-
-		AddCameraEffects( ref camSetup );
+		AddCameraEffects();
 	}
 
-	private void AddCameraEffects( ref CameraSetup camSetup )
+	private void AddCameraEffects()
 	{
 		if ( Local.Pawn.LifeState == LifeState.Dead ) return;
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
@@ -58,8 +57,8 @@ partial class DmViewModel : BaseViewModel
 		// Bob up and down based on our walk movement
 		//
 		var speed = Owner.Velocity.Length.LerpInverse( 0, 400 );
-		var left = camSetup.Rotation.Left;
-		var up = camSetup.Rotation.Up;
+		var left = Camera.Rotation.Left;
+		var up = Camera.Rotation.Up;
 
 		if ( ShouldBob && Owner.GroundEntity != null )
 		{

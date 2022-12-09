@@ -57,10 +57,9 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", 3 );
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		anim.HoldType = CitizenAnimationHelper.HoldTypes.Shotgun;
 	}
 
 	public override void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload )

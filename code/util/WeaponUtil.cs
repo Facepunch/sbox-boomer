@@ -1,4 +1,6 @@
-﻿public static partial class WeaponUtil
+﻿using Boomer;
+
+public static partial class WeaponUtil
 {
 	[ClientRpc]
 	public static void PlayFlybySound( string sound )
@@ -35,7 +37,7 @@
 
 		foreach ( var client in Client.All )
 		{
-			var pawn = client.Pawn;
+			var pawn = client.Pawn as BoomerPlayer;
 
 			if ( !pawn.IsValid() || pawn == attacker )
 				continue;

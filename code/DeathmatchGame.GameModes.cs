@@ -1,6 +1,6 @@
 ﻿namespace Boomer;
 
-partial class DeathmatchGame : Game
+partial class DeathmatchGame : GameManager
 {
 	[ConVar.Replicated( "bm_gamemode" )]
 	public static string BoommerGameMode { get; set; }

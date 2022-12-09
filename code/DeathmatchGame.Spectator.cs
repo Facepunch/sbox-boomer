@@ -5,7 +5,7 @@ namespace Boomer;
 /// <summary>
 /// This is the heart of the gamemode. It's responsible for creating the player and stuff.
 /// </summary>
-partial class DeathmatchGame : Game
+partial class DeathmatchGame : GameManager
 {
 	[ConCmd.Server( "boomer_togglespectator", Help = "Toggles spectator mode" )]
 	public static void ToggleSpectator()
@@ -28,7 +28,7 @@ partial class DeathmatchGame : Game
 		}
 		else
 		{
-			cl.Pawn?.TakeDamage( DamageInfo.Generic( 5000f ) );
+			(cl.Pawn as Entity).TakeDamage( DamageInfo.Generic( 5000f ) );
 
 			cl.Pawn.Delete();
 			cl.Pawn = null;

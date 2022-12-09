@@ -18,7 +18,7 @@ internal class GameHud : Panel
 	{
 		base.Tick();
 
-		var game = Game.Current as DeathmatchGame;
+		var game = GameManager.Current as DeathmatchGame;
 		if ( !game.IsValid() ) return;
 
 		var span = TimeSpan.FromSeconds( (game.StateTimer * 1).Clamp( 0, float.MaxValue ) );

@@ -36,11 +36,11 @@ partial class Crowbar : DeathmatchWeapon
 
 		Rand.SetSeed( Time.Tick );
 
-		var forward = Owner.EyeRotation.Forward;
+		var forward = Player.EyeRotation.Forward;
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0.1f;
 		forward = forward.Normal;
 
-		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 70, 15 ) )
+		foreach ( var tr in TraceBullet( Player.EyePosition, Player.EyePosition + forward * 70, 15 ) )
 		{
 			tr.Surface.DoBulletImpact( tr );
 
@@ -63,15 +63,8 @@ partial class Crowbar : DeathmatchWeapon
 		}
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", 5 ); // TODO this is shit
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
-
-		if ( Owner.IsValid() )
-		{
-			ViewModelEntity?.SetAnimParameter( "b_grounded", Owner.GroundEntity.IsValid() );
-			ViewModelEntity?.SetAnimParameter( "aim_pitch", Owner.EyeRotation.Pitch() );
-		}
+		anim.HoldType = CitizenAnimationHelper.HoldTypes.Punch;
 	}
 }

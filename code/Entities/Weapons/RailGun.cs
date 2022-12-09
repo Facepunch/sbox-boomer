@@ -88,11 +88,11 @@ partial class RailGun : DeathmatchWeapon
 		Rand.SetSeed( Time.Tick );
 
 		var effectStart = EffectEntity?.GetAttachment( "muzzle" )?.Position ?? Transform.Position;
-		var effectEnd = effectStart + Owner.EyeRotation.Forward * 5000;
+		var effectEnd = effectStart + Player.EyeRotation.Forward * 5000;
 
 		for ( int i = 0; i < bulletCount; i++ )
 		{
-			var forward = Owner.EyeRotation.Forward;
+			var forward = Player.EyeRotation.Forward;
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
@@ -100,7 +100,7 @@ partial class RailGun : DeathmatchWeapon
 			// ShootBullet is coded in a way where we can have bullets pass through shit
 			// or bounce off shit, in which case it'll return multiple results
 			//
-			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 5000, bulletSize ) )
+			foreach ( var tr in TraceBullet( Player.EyePosition, Player.EyePosition + forward * 5000, bulletSize ) )
 			{
 				// Move into the normal by the bullet radius to give us a better chance of making a decal
 				var impactTrace = tr;
@@ -114,7 +114,7 @@ partial class RailGun : DeathmatchWeapon
 
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100 * force, damage )
 					.UsingTraceResult( tr )
-					.WithAttacker( Owner )
+					.WithAttacker( Player )
 					.WithWeapon( this );
 
 				tr.Entity.TakeDamage( damageInfo );
@@ -136,10 +136,9 @@ partial class RailGun : DeathmatchWeapon
 
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", 3 ); // TODO this is shit
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		anim.HoldType = CitizenAnimationHelper.HoldTypes.Shotgun;
 	}
 
 	TimeSince timeSinceZoomed;

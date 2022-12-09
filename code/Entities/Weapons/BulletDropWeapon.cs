@@ -12,7 +12,7 @@ public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : B
 	public virtual string MuzzleAttachment => "muzzle";
 	public virtual float BulletRange => 10000f;
 	public virtual float DamageFalloffStart => 2000f;
-	public virtual DamageFlags DamageType => DamageFlags.Bullet;
+	public virtual string DamageType => "bullet";
 	public virtual float DamageFalloffEnd => 6000f;
 	public virtual float BaseDamage => 20f;
 	public virtual float Gravity => 50f;
@@ -90,7 +90,7 @@ public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : B
 			.WithWeapon( this )
 			.WithPosition( position )
 			.WithForce( force )
-			.WithFlag( DamageType );
+			.WithTag( DamageType );
 
 		damageInfo.Damage = damage;
 

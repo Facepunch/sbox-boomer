@@ -1,6 +1,7 @@
 ﻿
 using Sandbox;
 using System;
+using Sandbox.Utility;
 
 namespace Boomer.Movement
 {
@@ -21,7 +22,7 @@ namespace Boomer.Movement
 			this.fallSpeed = fallSpeed * .5f;
 		}
 
-		public override bool Update( ref CameraSetup setup )
+		public override bool Update()
 		{
 			var delta = t.LerpInverse( 0, length, true );
 			delta = Easing.EaseOut( delta );
@@ -32,7 +33,7 @@ namespace Boomer.Movement
 			var a = Math.Min( Math.Abs(fallSpeed) / effectMaxSpeed, 1f );
 			if ( fallSpeed < 0f ) a *= -1f;
 
-			setup.Rotation *= Rotation.FromAxis( Vector3.Left, effectStrength * invdelta * pos * a );
+			Camera.Rotation *= Rotation.FromAxis( Vector3.Left, effectStrength * invdelta * pos * a );
 
 			t += Time.Delta;
 

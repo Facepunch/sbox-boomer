@@ -12,7 +12,7 @@ partial class MusicBox : Entity
 	[Property( "soundName" ), FGDType( "sound" )]
 	[Net] public string SoundName { get; set; }
 
-	public Sound PlayingSound { get; protected set; }
+	public Sound? PlayingSound { get; protected set; }
 
 	public override void Spawn()
 	{
@@ -31,7 +31,7 @@ partial class MusicBox : Entity
 	{
 		if( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.Live )
 		{
-			if ( PlayingSound.Index <= 0 )
+			if ( !PlayingSound.HasValue )
 			{
 				OnStartSound();
 			}

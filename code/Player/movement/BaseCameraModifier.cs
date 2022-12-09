@@ -11,16 +11,16 @@ internal class BaseCameraModifier
 		All.Add( this );
 	}
 
-	public static void PostCameraSetup( ref CameraSetup cam )
+	public static void PostCameraSetup()
 	{
 		for ( int i = All.Count - 1; i >= 0; i-- )
 		{
-			if ( !All[i].Update( ref cam ) )
+			if ( !All[i].Update() )
 				All.RemoveAt( i );
 		}
 	}
 
-	public virtual bool Update( ref CameraSetup cam )
+	public virtual bool Update()
 	{
 		return false;
 	}
