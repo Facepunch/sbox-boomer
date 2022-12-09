@@ -110,7 +110,7 @@ partial class MasterBall : DeathmatchWeapon
 
 		if ( BallTimer != null )
 			BallTimer.Destroy();
-		//BoomerChatBox.AddInformation( To.Everyone, $"{carrier.Client.Name} has the ball!", $"avatar:{carrier.Client.PlayerId}" );
+		//BoomerChatBox.AddInformation( To.Everyone, $"{carrier.Client.Name} has the ball!", $"avatar:{carrier.Client.SteamId}" );
 
 	}
 
@@ -125,7 +125,7 @@ partial class MasterBall : DeathmatchWeapon
 		MasterballHud.NotifyDroppedBall( To.Everyone, dropper.Client.Id );
 
 		BallTimer = Particles.Create( "particles/gameplay/gamemodes/masterball/masterball_b.vpcf", this );
-		//BoomerChatBox.AddInformation( To.Everyone, $"{dropper.Client.Name} has dropped the ball!", $"avatar:{dropper.Client.PlayerId}" );
+		//BoomerChatBox.AddInformation( To.Everyone, $"{dropper.Client.Name} has dropped the ball!", $"avatar:{dropper.Client.SteamId}" );
 	}
 
 	[Event.Tick.Client]

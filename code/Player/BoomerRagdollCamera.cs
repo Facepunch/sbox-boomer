@@ -9,8 +9,8 @@ namespace Sandbox
 		{
 			base.Activated();
 
-			FocusPoint = CurrentView.Position - GetViewOffset();
-			FieldOfView = CurrentView.FieldOfView;
+			FocusPoint = Camera.Position - GetViewOffset();
+			FieldOfView = Camera.FieldOfView;
 		}
 
 		public override void Update()

@@ -117,7 +117,7 @@ partial class LightningGun : DeathmatchWeapon
 		base.Simulate( cl );
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	private void OnFrame()
 	{
 		if ( IsLightningActive )

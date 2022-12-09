@@ -558,7 +558,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 			return;
 
 		KilledHud.Current.AttackerName.SetText( $"{attacker.Client.Name} Killed You" );
-		KilledHud.Current.AttackerAvatar.Style.SetBackgroundImage( $"avatar:{attacker.Client.PlayerId}" );
+		KilledHud.Current.AttackerAvatar.Style.SetBackgroundImage( $"avatar:{attacker.Client.SteamId}" );
 		KilledHud.Current.AttackerHealth.SetText( $"{(int)attacker.Health}" );
 		KilledHud.Current.AttackerArmour.SetText( $"{(int)attacker.Armour}" );
 		KilledHud.Current.SetClass( "show", true );
@@ -688,7 +688,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	public void TrackDominationKill( BoomerPlayer victim )
 	{
-		var id = victim.Client.PlayerId;
+		var id = victim.Client.SteamId;
 
 		if ( DominationTracker.TryGetValue( id, out var kills ) )
 		{
@@ -701,13 +701,13 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	public void ClearDominationKills( BoomerPlayer victim )
 	{
-		var id = victim.Client.PlayerId;
+		var id = victim.Client.SteamId;
 		DominationTracker.Remove( id );
 	}
 
 	public int GetDominationKills( BoomerPlayer victim )
 	{
-		var id = victim.Client.PlayerId;
+		var id = victim.Client.SteamId;
 
 		if ( DominationTracker.TryGetValue( id, out var kills ) )
 		{

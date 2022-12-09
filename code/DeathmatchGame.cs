@@ -1,5 +1,5 @@
 ﻿global using Sandbox;
-global using SandboxEditor;
+global using Editor;
 global using System;
 global using System.Collections.Generic;
 global using System.Linq;
@@ -112,7 +112,7 @@ partial class DeathmatchGame : Game
 			ScoreSystemDisabled = true;
 
 		Log.Info( $"\"{cl.Name}\" has joined the game" );
-		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has joined", $"avatar:{cl.PlayerId}" );
+		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has joined", $"avatar:{cl.SteamId}" );
 
 		TeamManager.OnClientJoined( cl );
 
@@ -125,7 +125,7 @@ partial class DeathmatchGame : Game
 	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
 	{
 		Log.Info( $"\"{cl.Name}\" has left the game ({reason})" );
-		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has left ({reason})", $"avatar:{cl.PlayerId}" );
+		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has left ({reason})", $"avatar:{cl.SteamId}" );
 		var player = cl.Pawn as BoomerPlayer;
 		if ( cl.Pawn.IsValid() )
 		{
@@ -354,7 +354,7 @@ partial class DeathmatchGame : Game
 
 		using var _ = Render.Draw2D.MatrixScope( matrix );
 
-		foreach ( var ent in FindInSphere( CurrentView.Position, 600 ) )
+		foreach ( var ent in FindInSphere( Camera.Position, 600 ) )
 		{
 			var pos = ent.Position.ToScreen( screenSize );
 			if ( !pos.HasValue ) continue;

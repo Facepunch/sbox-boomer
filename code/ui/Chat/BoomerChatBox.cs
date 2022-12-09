@@ -81,7 +81,7 @@ namespace Boomer.UI
 			Canvas.TryScrollToBottom();
 		}
 
-		[Event.BuildInput]
+		[Event.Client.BuildInput]
 		private void OnBuildInput()
 		{
 			if ( Sandbox.Input.Pressed( InputButton.Chat ) )
@@ -119,7 +119,7 @@ namespace Boomer.UI
 				return;
 
 			Log.Info( $"{ConsoleSystem.Caller}: {message}" );
-			AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, $"avatar:{ConsoleSystem.Caller.PlayerId}" );
+			AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, $"avatar:{ConsoleSystem.Caller.SteamId}" );
 		}
 	}
 }

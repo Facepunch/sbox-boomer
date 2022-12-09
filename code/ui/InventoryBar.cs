@@ -41,7 +41,7 @@ public class InventoryBar : Panel
 		}
 	}
 
-	[Event.BuildInput]
+	[Event.Client.BuildInput]
 	public void ProcessClientInput()
 	{
 		if ( DeathmatchGame.CurrentState != DeathmatchGame.GameStates.Live ) return;

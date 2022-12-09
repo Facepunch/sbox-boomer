@@ -12,7 +12,7 @@ public partial class BoomerPlayer
 
 	bool CalculateVisibility()
 	{
-		var tr = Trace.Ray( CurrentView.Position, EyePosition )
+		var tr = Trace.Ray( Camera.Position, EyePosition )
 			.WorldAndEntities()
 			.Ignore( Local.Pawn )
 			.Run();

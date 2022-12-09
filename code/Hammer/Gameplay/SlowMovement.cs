@@ -1,7 +1,7 @@
 ﻿
 using Boomer.Movement;
 using Sandbox;
-using SandboxEditor;
+using Editor;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

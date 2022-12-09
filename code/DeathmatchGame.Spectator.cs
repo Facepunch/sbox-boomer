@@ -24,7 +24,7 @@ partial class DeathmatchGame : Game
 			player.RpcSetClothes( To.Single( cl ) );
 			player.Respawn();
 
-			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} stopped spectating", $"avatar:{cl.PlayerId}" );
+			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} stopped spectating", $"avatar:{cl.SteamId}" );
 		}
 		else
 		{
@@ -37,7 +37,7 @@ partial class DeathmatchGame : Game
 			cl.Pawn = pawn;
 			pawn.Respawn();
 
-			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} started spectating", $"avatar:{cl.PlayerId}" );
+			BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} started spectating", $"avatar:{cl.SteamId}" );
 		}
 	}
 }
