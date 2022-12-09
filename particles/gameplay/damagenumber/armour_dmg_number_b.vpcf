@@ -451,7 +451,7 @@
 			}
 			m_bGammaCorrectVertexColors = false
 			m_bSaturateColorPreAlphaBlend = false
-			m_hTexture = resource:"particles/sprites/numbers/dmg_numbers.vtex"
+			m_hTexture = resource:"particles/sprites/dmg_numbers/dmg_numbers.vtex"
 			m_bDistanceAlpha = true
 			m_bDisableZBuffering = true
 		},
