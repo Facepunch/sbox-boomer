@@ -69,7 +69,7 @@ partial class LightningGun : DeathmatchWeapon
 
 	public override void ShootBullet( float spread, float force, float damage, float bulletSize, int bulletCount = 1 )
 	{
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		for ( int i = 0; i < bulletCount; i++ )
 		{
@@ -102,7 +102,7 @@ partial class LightningGun : DeathmatchWeapon
 		}
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		if ( Input.Down( InputButton.PrimaryAttack ) && IsUsable() )
 		{
@@ -184,7 +184,7 @@ partial class LightningGun : DeathmatchWeapon
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		CrosshairLastShoot = 0;
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );

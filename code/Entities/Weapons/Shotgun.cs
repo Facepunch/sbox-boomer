@@ -57,7 +57,7 @@ partial class Shotgun : DeathmatchWeapon
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 		Particles.Create( "particles/pistol_ejectbrass.vpcf", EffectEntity, "ejection_point" );

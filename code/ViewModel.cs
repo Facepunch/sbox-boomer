@@ -15,7 +15,7 @@ partial class DmViewModel : BaseViewModel
 	[Event.Client.PostCamera]
 	private void PostCameraSetup()
 	{
-		if ( Local.Pawn is BoomerPlayer pl && pl.Controller is BoomerController ctrl )
+		if ( Game.LocalPawn is BoomerPlayer pl && pl.Controller is BoomerController ctrl )
 		{
 			ShouldBob = !ctrl.IsSliding && !ctrl.IsDashing;
 			TargetRoll = ctrl.IsSliding ? -45f : 0f;
@@ -45,7 +45,7 @@ partial class DmViewModel : BaseViewModel
 
 	private void AddCameraEffects()
 	{
-		if ( Local.Pawn.LifeState == LifeState.Dead ) return;
+		if ( Game.LocalPawn.LifeState == LifeState.Dead ) return;
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
 		if ( !ClientSettings.Current.WalkBob ) return;
 

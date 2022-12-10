@@ -77,7 +77,7 @@ partial class DeathmatchGame : GameManager
 		StateTimer = mapVote.VoteTimeLeft;
 		await WaitStateTimer();
 
-		Global.ChangeLevel( mapVote.WinningMap );
+		Game.ChangeLevel( mapVote.WinningMap );
 	}
 
 	private bool HasEnoughPlayers()
@@ -92,7 +92,7 @@ partial class DeathmatchGame : GameManager
 	{
 		if ( ScoreSystemDisabled || DeathmatchGame.RailTag || DeathmatchGame.MasterBall) return;
 
-		foreach ( var cl in Client.All )
+		foreach ( var cl in Game.Clients )
 		{
 			var Kills = cl.GetInt( "kills" );
 			var Deaths = cl.GetInt( "deaths" );
@@ -106,7 +106,7 @@ partial class DeathmatchGame : GameManager
 	}
 
 	private void FreshStart(){
-		foreach ( var cl in Client.All )
+		foreach ( var cl in Game.Clients )
 		{
 			cl.SetInt( "kills", 0 );
 			cl.SetInt( "deaths", 0 );

@@ -32,7 +32,7 @@ public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : B
 	{
 		if ( Prediction.FirstTime )
         {
-			Rand.SetSeed( Time.Tick );
+			Game.SetRandomSeed( Time.Tick );
 			FireProjectile();
         }
 	}

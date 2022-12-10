@@ -7,19 +7,19 @@ public partial class TeamComponent : EntityComponent
 
 public static class ClientExtensions
 {
-	public static BoomerTeam GetTeam( this Client cl )
+	public static BoomerTeam GetTeam( this IClient cl )
 	{
 		var comp = cl.Components.GetOrCreate<TeamComponent>();
 		return comp.Team;
 	}
 	
-	public static void SetTeam( this Client cl, BoomerTeam team )
+	public static void SetTeam( this IClient cl, BoomerTeam team )
 	{
 		var comp = cl.Components.GetOrCreate<TeamComponent>();
 		comp.Team = team;
 	}
 
-	public static bool IsFriend( this Client cl, Client otherCl )
+	public static bool IsFriend( this IClient cl, IClient otherCl )
 	{
 		var team = cl.GetTeam();
 		if ( team == null ) return false;

@@ -85,7 +85,7 @@ partial class RailGun : DeathmatchWeapon
 		//
 		// Seed rand using the tick, so bullet cones match on client and server
 		//
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		var effectStart = EffectEntity?.GetAttachment( "muzzle" )?.Position ?? Transform.Position;
 		var effectEnd = effectStart + Player.EyeRotation.Forward * 5000;
@@ -129,7 +129,7 @@ partial class RailGun : DeathmatchWeapon
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;

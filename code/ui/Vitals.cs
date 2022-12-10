@@ -11,7 +11,7 @@ public partial class HealthHud : Panel
 	
 	public List<Panel> Segments;
 
-	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
+	BoomerPlayer Player => BoomerCamera.Target ?? Game.LocalPawn as BoomerPlayer;
 	
 	public static HealthHud Current { get; private set; }
 	public HealthHud()
@@ -73,7 +73,7 @@ public class ArmourHud : Panel
 
 	public List<Panel> ArmourSegments;
 
-	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
+	BoomerPlayer Player => BoomerCamera.Target ?? Game.LocalPawn as BoomerPlayer;
 
 	public static ArmourHud Current { get; private set; }
 

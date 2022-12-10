@@ -8,7 +8,7 @@ partial class MapVoteEntity : Entity
 	MapVotePanel Panel;
 
 	[Net]
-	public IDictionary<Client, string> Votes { get; set; }
+	public IDictionary<IClient, string> Votes { get; set; }
 
 	[Net]
 	public string WinningMap { get; set; } = "facepunch.bm_dockyard";
@@ -71,7 +71,7 @@ partial class MapVoteEntity : Entity
 		WinningMap = Votes.GroupBy( x => x.Value ).OrderByDescending( x => x.Count() ).First().Key;
 	}
 
-	void SetVote( Client client, string map )
+	void SetVote( IClient client, string map )
 	{
 		CullInvalidClients();
 		Votes[client] = map;

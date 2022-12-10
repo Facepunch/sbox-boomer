@@ -25,7 +25,7 @@ public partial class MasterballHud : Panel
 	[ConCmd.Client( "bm_hasball", CanBeCalledFromServer = true )]
 	public static void NotifyHasBall( int clientid )
 	{
-		var cl = Client.All.FirstOrDefault( x => x.Id == clientid );
+		var cl = Game.Clients.FirstOrDefault( x => x.Id == clientid );
 		if ( !cl.IsValid() ) return;
 		if ( Current == null ) return;
 
@@ -37,7 +37,7 @@ public partial class MasterballHud : Panel
 	[ConCmd.Client( "bm_droppedball", CanBeCalledFromServer = true )]
 	public static void NotifyDroppedBall( int clientid )
 	{
-		var cl = Client.All.FirstOrDefault( x => x.Id == clientid );
+		var cl = Game.Clients.FirstOrDefault( x => x.Id == clientid );
 		if ( !cl.IsValid() ) return;
 		if ( Current == null ) return;
 

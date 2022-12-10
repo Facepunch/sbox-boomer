@@ -34,7 +34,7 @@ partial class ArmorPickup : BasePickup
 	[ClientRpc]
 	public void OnPickUpRpc()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		_ = ChangedArmourAnim();
 	}
 

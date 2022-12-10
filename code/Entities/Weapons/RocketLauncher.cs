@@ -53,7 +53,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairLastShoot = 0;

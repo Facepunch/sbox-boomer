@@ -14,7 +14,7 @@ public class LastDamage : Panel
 
 	public override void Tick()
 	{
-		var player = Local.Pawn as BoomerPlayer;
+		var player = Game.LocalPawn as BoomerPlayer;
 		if ( player == null ) return;
 
 		SetClass( "nodmg", player.LastDamageDealt == 0 );

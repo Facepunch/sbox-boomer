@@ -5,7 +5,7 @@ using Sandbox.UI.Construct;
 public class Crosshair : Panel
 {
 	public Image Icon;
-	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
+	BoomerPlayer Player => BoomerCamera.Target ?? Game.LocalPawn as BoomerPlayer;
 
 	public DeathmatchWeapon Weapon;
 

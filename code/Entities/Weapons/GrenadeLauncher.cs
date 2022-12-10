@@ -52,7 +52,7 @@ partial class GrenadeLauncher : BulletDropWeapon<GrenadeProjectile>
 	[ClientRpc]
 	protected override void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}

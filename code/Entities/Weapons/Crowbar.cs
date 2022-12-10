@@ -34,7 +34,7 @@ partial class Crowbar : DeathmatchWeapon
 		// screen shake
 		PlaySound( "dm.crowbar_attack" );
 
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		var forward = Player.EyeRotation.Forward;
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0.1f;

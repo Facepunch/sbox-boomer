@@ -9,8 +9,8 @@ public partial class AmmoVital : Panel
 	public Label AmmoInv;
 
 	public static AmmoVital Current { get; private set; }
-
-	BoomerPlayer Player => BoomerCamera.Target ?? Local.Pawn as BoomerPlayer;
+	
+	BoomerPlayer Player => BoomerCamera.Target ?? Game.LocalPawn as BoomerPlayer;
 
 	public AmmoVital()
 	{

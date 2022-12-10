@@ -22,7 +22,7 @@ public class InventoryBar : Panel
 
 		SetClass( "active", IsOpen );
 
-		var player = Local.Pawn as Player;
+		var player = Game.LocalPawn as Player;
 		if ( player == null ) return;
 
 		Weapons.Clear();
@@ -47,7 +47,7 @@ public class InventoryBar : Panel
 		if ( DeathmatchGame.CurrentState != DeathmatchGame.GameStates.Live ) return;
 
 		bool wantOpen = IsOpen;
-		var localPlayer = Local.Pawn as Player;
+		var localPlayer = Game.LocalPawn as Player;
 
 		wantOpen = wantOpen || Input.MouseWheel != 0;
 		wantOpen = wantOpen || Input.Pressed( InputButton.Menu );

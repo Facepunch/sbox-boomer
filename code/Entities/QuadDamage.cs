@@ -44,7 +44,7 @@ partial class QuadDamage : BasePickup
 			PickupFeed.OnPickup( To.Single( pl ), $"QUAD DAMAGE!" );
 			ItemRespawn.Taken( this, RespawnTime );
 
-			if ( Host.IsServer )
+			if ( Game.IsServer )
 
 			Delete();
 		}
@@ -61,7 +61,7 @@ partial class QuadDamage : BasePickup
 		if ( player.Controller is not BoomerController ctrl ) 
 		return;
 
-		if ( Host.IsServer || !player.IsLocalPawn )
+		if ( Game.IsServer || !player.IsLocalPawn )
 		return;
 
 		Particles.Create( "particles/gameplay/screeneffects/healthpickup/ss_healthpickup.vpcf",ctrl.Pawn);

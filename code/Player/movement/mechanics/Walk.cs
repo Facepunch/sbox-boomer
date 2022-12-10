@@ -122,7 +122,7 @@ namespace Boomer.Movement
 
 			new FallCameraModifier( jumpPower );
 
-			if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
+			if ( Game.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
 			if ( !ClientSettings.Current.MuteGrunting )
 			{
 				Sound.FromWorld( "jump.single", ctrl.Position );

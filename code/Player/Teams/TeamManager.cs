@@ -36,11 +36,11 @@ public partial class TeamManager : Entity
 
 	public BoomerTeam Get( string name ) => Teams.FirstOrDefault( x => x.Name == name );
 
-	public bool AddMember( BoomerTeam team, Client cl ) => team?.AddMember( cl ) ?? false;
-	public bool AddMember( string name, Client cl ) => AddMember( Get( name ), cl );
+	public bool AddMember( BoomerTeam team, IClient cl ) => team?.AddMember( cl ) ?? false;
+	public bool AddMember( string name, IClient cl ) => AddMember( Get( name ), cl );
 
-	public bool RemoveMember( BoomerTeam team, Client cl ) => team?.RemoveMember( cl ) ?? false;
-	public bool RemoveMember( string name, Client cl ) => RemoveMember( Get( name ), cl );
+	public bool RemoveMember( BoomerTeam team, IClient cl ) => team?.RemoveMember( cl ) ?? false;
+	public bool RemoveMember( string name, IClient cl ) => RemoveMember( Get( name ), cl );
 
 	protected Comparison<BoomerTeam> TeamSorter;
 	public void SetTeamSorter( Comparison<BoomerTeam> comparison )
@@ -61,7 +61,7 @@ public partial class TeamManager : Entity
 			return teams.OrderBy( x => x.Count ).First();
 	}
 
-	public void OnClientJoined( Client cl )
+	public void OnClientJoined( IClient cl )
 	{
 		if ( !IsTeamPlayEnabled ) return;
 
@@ -79,7 +79,7 @@ public partial class TeamManager : Entity
 		}
 	}
 
-	public void OnClientDisconnect( Client cl )
+	public void OnClientDisconnect( IClient cl )
 	{
 		if ( !IsTeamPlayEnabled ) return;
 

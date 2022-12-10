@@ -18,7 +18,7 @@ public class MovementHint : Panel
 	
 	public override void Tick()
 	{
-		var player = Local.Pawn as Player;
+		var player = Game.LocalPawn as Player;
 		if ( player == null ) return;
 
 		if ( ClientSettings.Current.ShowMovementHint )

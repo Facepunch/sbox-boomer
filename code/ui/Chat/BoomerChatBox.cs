@@ -96,8 +96,8 @@ namespace Boomer.UI
 		{
 			Current?.AddEntry( name, message, avatar, lobbyState );
 
-			// Only log clientside if we're not the listen server host
-			if ( !Global.IsListenServer )
+			// Only log clientside if we're not the listen server Game
+			if ( !Game.IsListenServer )
 			{
 				Log.Info( $"{name}: {message}" );
 			}
@@ -112,8 +112,9 @@ namespace Boomer.UI
 		[ConCmd.Server( "chat" )]
 		public static void Chat( string message )
 		{
-			Assert.NotNull( ConsoleSystem.Caller );
-
+			//Assert.NotNull( ConsoleSystem.Caller );
+			//dunno how to fix
+			
 			// todo - reject more stuff
 			if ( message.Contains( '\n' ) || message.Contains( '\r' ) )
 				return;

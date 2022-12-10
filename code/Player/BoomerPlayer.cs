@@ -379,14 +379,14 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 	TimeSince PerSec = 0;
 
-	public override void FrameSimulate( Client cl )
+	public override void FrameSimulate( IClient cl )
 	{
 		CurrentCamera?.Update();
 
 		base.FrameSimulate( cl );
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		Projectiles.Simulate();
 
@@ -550,21 +550,21 @@ public partial class BoomerPlayer : Player, IHudMarker
 	[ClientRpc]
 	public void OnDmgRpc()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		_ = ChangedHealthAnim();
 	}
 
 	[ClientRpc]
 	public void OnArmourDmgRpc()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		_ = ChangedArmourAnim();
 	}
 
 	[ClientRpc]
 	public void OnKilledRpc( BoomerPlayer attacker )
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		_ = ShowDeathScreen( attacker );
 	}
 
@@ -816,7 +816,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 	[ConCmd.Client]
 	public static void InflictDamage()
 	{
-		if ( Local.Pawn is BoomerPlayer ply )
+		if ( Game.LocalPawn is BoomerPlayer ply )
 		{
 			ply.TookDamage( ply.Position + ply.EyeRotation.Forward * 100.0f );
 		}

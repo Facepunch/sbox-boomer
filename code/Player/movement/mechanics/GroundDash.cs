@@ -69,7 +69,7 @@ class Dash : BaseMoveMechanic
 	{
 		ctrl.AddEvent( "jump" );
 
-		if ( Host.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
+		if ( Game.IsServer || !ctrl.Pawn.IsLocalPawn ) return;
 
 		Particles.Create( "particles/gameplay/screeneffects/dash/ss_dash.vpcf", ctrl.Pawn );
 		Sound.FromWorld( "jump.double", ctrl.Pawn.Position );

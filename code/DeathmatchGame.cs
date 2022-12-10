@@ -99,14 +99,14 @@ partial class DeathmatchGame : GameManager
 
 		if ( startingweapons == null )
 		{
-			Global.ChangeLevel( Current.BackUpMap );
+			Game.ChangeLevel( Current.BackUpMap );
 		}
 	}
 
 
 	public static bool ScoreSystemDisabled { get; set; } = false;
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( IClient cl )
 	{
 		if ( cl.IsBot )
 			ScoreSystemDisabled = true;
@@ -122,7 +122,7 @@ partial class DeathmatchGame : GameManager
 		player.Respawn();
 	}
 
-	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
 		Log.Info( $"\"{cl.Name}\" has left the game ({reason})" );
 		BoomerChatBox.AddInformation( To.Everyone, $"{cl.Name} has left ({reason})", $"avatar:{cl.SteamId}" );
@@ -178,7 +178,7 @@ partial class DeathmatchGame : GameManager
 		// We want to find the closest player (worst weight)
 		float distance = float.MaxValue;
 
-		foreach ( var client in Client.All )
+		foreach ( var client in Game.Clients )
 		{
 			if ( client.Pawn == null ) continue;
 			if ( client.Pawn == pawn ) continue;
@@ -192,13 +192,13 @@ partial class DeathmatchGame : GameManager
 		return distance;
 	}
 
-	public override void OnKilled( Client client, Entity pawn )
+	public override void OnKilled( IClient client, Entity pawn )
 	{
 		base.OnKilled( client, pawn );
 		Hud.OnPlayerDied( To.Everyone, pawn as BoomerPlayer );
 	}
 
-	public override void FrameSimulate( Client cl )
+	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
 		
@@ -219,7 +219,7 @@ partial class DeathmatchGame : GameManager
 
 		Audio.SetEffect( "core.player.death.muffle1", 0 );
 
-		if ( Local.Pawn is BoomerPlayer localPlayer )
+		if ( Game.LocalPawn is BoomerPlayer localPlayer )
 		{
 			var timeSinceDamage = localPlayer.TimeSinceDamage.Relative;
 			var damageUi = timeSinceDamage.LerpInverse( 0.25f, 0.0f, true ) * 0.3f;
@@ -269,7 +269,7 @@ partial class DeathmatchGame : GameManager
 		Sound.FromWorld( "gl.explode", position );
 		Particles.Create( "particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_barrel.vpcf", position );
 
-		if ( Host.IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		var overlaps = FindInSphere( position, radius );
 
@@ -327,12 +327,12 @@ partial class DeathmatchGame : GameManager
 			entity.TakeDamage( damageInfo );
 		}
 	}
-
+	
 	public override void RenderHud()
 	{
 		base.RenderHud();
 
-		if ( Local.Pawn is not BoomerPlayer pl )
+		if ( Game.LocalPawn is not BoomerPlayer pl )
 			return;
 
 		pl.RenderHud( Screen.Size );
@@ -347,7 +347,7 @@ partial class DeathmatchGame : GameManager
 	//[DebugOverlay( "entities", "Entities", "" )]
 	//public static void EntityDebugOverlay()
 	//{
-	//	if ( !Host.IsClient ) return;
+	//	if ( !Game.IsClient ) return;
 
 	//	var scale = Screen.Height / 1080.0f;
 	//	var screenSize = Screen.Size / scale;

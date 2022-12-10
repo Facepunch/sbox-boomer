@@ -37,7 +37,7 @@ partial class HealthKit : BasePickup
 	[ClientRpc]
 	public void OnPickUpRpc()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		_ = ChangedHealthAnim();
 	}
 

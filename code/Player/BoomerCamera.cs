@@ -31,7 +31,7 @@ internal class BoomerCamera : BaseCamera
 
 	public override void Update()
 	{
-		if ( Local.Pawn is BoomerPlayer player )
+		if ( Game.LocalPawn is BoomerPlayer player )
 			Target = player;
 
 		if ( !Target.IsValid() )

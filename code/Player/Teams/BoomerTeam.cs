@@ -8,11 +8,11 @@ public partial class BoomerTeam : Entity
 	public virtual new string Name { get; set; }
 	public virtual Color Color { get; set; } = Color.White;
 
-	[Net] public IList<Client> Members { get; set; }
+	[Net] public IList<IClient> Members { get; set; }
 
 	public int Count => Members.Count;
 
-	public bool AddMember( Client cl )
+	public bool AddMember( IClient cl )
 	{
 		Members.Add( cl );
 		// Inform the team component
@@ -21,7 +21,7 @@ public partial class BoomerTeam : Entity
 		return true;
 	}
 
-	public bool RemoveMember( Client cl )
+	public bool RemoveMember( IClient cl )
 	{
 		var result = Members.Remove( cl );
 

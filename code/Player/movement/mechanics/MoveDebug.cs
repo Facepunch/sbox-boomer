@@ -18,12 +18,12 @@ namespace Boomer.Movement
 		{
 			if ( BasePlayerController.Debug )
 			{
-				//var boxColor = Host.IsServer ? Color.Red : Color.Green;
+				//var boxColor = Game.IsServer ? Color.Red : Color.Green;
 				//DebugOverlay.Box( ctrl.Position + ctrl.TraceOffset, ctrl.Mins, ctrl.Maxs, boxColor );
 				//DebugOverlay.Box( ctrl.Position, ctrl.Mins, ctrl.Maxs, boxColor );
 
-				var lineOffset = Host.IsServer ? 10 : 0;
-				var printTime = Host.IsServer ? 0f : 0.04f;
+				var lineOffset = Game.IsServer ? 10 : 0;
+				var printTime = Game.IsServer ? 0f : 0.04f;
 				// todo: print this shit so it doesn't flicker
 				DebugOverlay.ScreenText( $"        Position: {ctrl.Position}", lineOffset + 0, printTime );
 				DebugOverlay.ScreenText( $"        Velocity: {ctrl.Velocity}", lineOffset + 1, printTime );

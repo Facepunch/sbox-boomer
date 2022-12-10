@@ -113,7 +113,7 @@ public partial class BulletDropProjectile : ModelEntity
 			LaunchSound = Sound.FromWorld( LaunchSoundName, Position );
 
 		if ( !string.IsNullOrEmpty( ModelName ) )
-			ModelEntity = new SceneObject( Map.Scene, ModelName );
+			ModelEntity = new SceneObject( Game.SceneWorld, ModelName );
 	}
 
     public virtual void Simulate()

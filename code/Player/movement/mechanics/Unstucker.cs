@@ -33,7 +33,7 @@ namespace Boomer.Movement
 				Box( result.Entity, Color.Red );
 			}
 
-			if ( Host.IsClient )
+			if ( Game.IsClient )
 				return;
 
 			int AttemptsPerTick = 20;

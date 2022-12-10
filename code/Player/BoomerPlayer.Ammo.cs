@@ -22,7 +22,7 @@ public partial class BoomerPlayer
 	public bool SetAmmo( AmmoType type, int amount )
 	{
 		var iType = (int)type;
-		if ( !Host.IsServer ) return false;
+		if ( !Game.IsServer ) return false;
 		if ( Ammo == null ) return false;
 
 		while ( Ammo.Count <= iType )
@@ -36,7 +36,7 @@ public partial class BoomerPlayer
 
 	public int GiveAmmo( AmmoType type, int amount )
 	{
-		if ( !Host.IsServer ) return 0;
+		if ( !Game.IsServer ) return 0;
 		if ( Ammo == null ) return 0;
 		if ( type == AmmoType.None ) return 0;
 
@@ -48,7 +48,7 @@ public partial class BoomerPlayer
 
 		SetAmmo( type, total );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 			OnAmmoChanged( type, true );
 
 		return taken;
@@ -77,7 +77,7 @@ public partial class BoomerPlayer
 
 		SetAmmo( type, available - amount );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 			OnAmmoChanged( type, false );
 
 		return amount;
@@ -86,7 +86,7 @@ public partial class BoomerPlayer
 	[ClientRpc]
 	public void OnAmmoChanged( AmmoType type, bool positive )
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		if ( ActiveChild is DeathmatchWeapon weapon )
 		{

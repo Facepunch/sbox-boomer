@@ -17,7 +17,7 @@ public partial class SpectatorPawn : AnimatedEntity
 		base.BuildInput();
 	}
 
-	public override void FrameSimulate( Client cl )
+	public override void FrameSimulate( IClient cl )
 	{
 		Cam?.Update();
 

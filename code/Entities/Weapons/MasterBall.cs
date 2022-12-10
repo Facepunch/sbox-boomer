@@ -53,7 +53,7 @@ partial class MasterBall : DeathmatchWeapon
 		// screen shake
 		PlaySound( "dm.crowbar_attack" );
 
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		var forward = Player.EyeRotation.Forward;
 		forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * 0.1f;
@@ -125,12 +125,12 @@ partial class MasterBall : DeathmatchWeapon
 	[Event.Tick.Client]
 	public void UpdateParticle()
 	{
-		if ( Local.Pawn == Owner && BallEffect != null )
+		if ( Game.LocalPawn == Owner && BallEffect != null )
 		{
 			BallEffect.Destroy();
 			BallEffect = null;
 		}
-		else if ( Local.Pawn != Owner && BallEffect == null )
+		else if ( Game.LocalPawn != Owner && BallEffect == null )
 		{
 			BallEffect = Particles.Create( "particles/gameplay/gamemodes/masterball/masterball.vpcf", this );
 		}

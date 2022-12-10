@@ -13,7 +13,7 @@ public class Speedo : Panel
 
 	public override void Tick()
 	{
-		var player = Local.Pawn as Player;
+		var player = Game.LocalPawn as Player;
 		if ( player == null ) return;
 		if ( player.Controller is BoomerController controller )
 		{

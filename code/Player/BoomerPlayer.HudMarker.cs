@@ -14,7 +14,7 @@ public partial class BoomerPlayer
 	{
 		var tr = Trace.Ray( Camera.Position, EyePosition )
 			.WorldAndEntities()
-			.Ignore( Local.Pawn )
+			.Ignore( Game.LocalPawn )
 			.Run();
 
 		if ( tr.Hit && tr.Entity == this )
@@ -34,8 +34,8 @@ public partial class BoomerPlayer
 		if ( LifeState != LifeState.Alive )
 			return false;
 
-		if ( !Client.IsFriend( Local.Client ) ) 
-			return false;
+		//if ( !Client.IsFriend( Game.Client ) ) 
+			//return false;
 
 		builder.Text = $"keyboard_double_arrow_down";
 		builder.MaxDistance = 1000000f;

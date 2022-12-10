@@ -12,7 +12,7 @@ namespace Sandbox
 
 		public override void Update()
 		{
-			var player = Local.Pawn as Player;
+			var player = Game.LocalPawn as Player;
 			if ( !player.IsValid() ) return;
 
 			// lerp the focus point
@@ -32,17 +32,17 @@ namespace Sandbox
 
 		public virtual Vector3 GetSpectatePoint()
 		{
-			if ( Local.Pawn is Player player && player.Corpse.IsValid() )
+			if ( Game.LocalPawn is Player player && player.Corpse.IsValid() )
 			{
 				return player.Corpse.PhysicsGroup.MassCenter;
 			}
 
-			 return Local.Pawn.Position;
+			 return Game.LocalPawn.Position;
 		}
 
 		public virtual Vector3 GetViewOffset()
 		{
-			var player = Local.Pawn as Player;
+			var player = Game.LocalPawn as Player;
 			if ( player == null ) return Vector3.Zero;
 
 			return player.EyeRotation.Forward * (-130 * 1) + Vector3.Up * (20 * 1);

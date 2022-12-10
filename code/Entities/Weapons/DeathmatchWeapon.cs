@@ -65,7 +65,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	{
 	}
 
-	public override void Simulate( Client owner )
+	public override void Simulate( IClient owner )
 	{
 		if ( TimeSinceDeployed < 0.25f )
 			return;
@@ -92,7 +92,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	[ClientRpc]
 	protected virtual void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 	
@@ -113,7 +113,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 		//
 		// Seed rand using the tick, so bullet cones match on client and server
 		//
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		for ( int i = 0; i < bulletCount; i++ )
 		{
@@ -177,7 +177,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 
 	public override void CreateViewModel()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		if ( string.IsNullOrEmpty( ViewModelPath ) )
 			return;
@@ -192,7 +192,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 
 	public override void CreateHudElements()
 	{
-		if ( Local.Hud == null ) return;
+		//if ( Game.Hud == null ) return;
 	}
 
 	public bool IsUsable()

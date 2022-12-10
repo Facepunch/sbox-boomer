@@ -8,7 +8,7 @@ public class Scoreboard : Panel
 
 	bool Cursor;
 	RealTimeSince timeSinceSorted;
-	Dictionary<Client, ScoreboardEntry> Rows = new();
+	Dictionary<IClient, ScoreboardEntry> Rows = new();
 
 	public Panel Canvas { get; protected set; }
 	public Panel Header { get; protected set; }
@@ -25,13 +25,13 @@ public class Scoreboard : Panel
 		//
 		// Clients that were added
 		//
-		foreach ( var client in Client.All.Except( Rows.Keys ) )
+		foreach ( var client in Game.Clients.Except( Rows.Keys ) )
 		{
 			var entry = AddClient( client );
 			Rows[client] = entry;
 		}
 
-		foreach ( var client in Rows.Keys.Except( Client.All ) )
+		foreach ( var client in Rows.Keys.Except( Game.Clients ) )
 		{
 			if ( Rows.TryGetValue( client, out var row ) )
 			{
@@ -87,7 +87,7 @@ public class Scoreboard : Panel
 		return false;
 	}
 
-	private ScoreboardEntry AddClient( Client entry )
+	private ScoreboardEntry AddClient( IClient entry )
 	{
 		var p = Canvas.AddChild<ScoreboardEntry>();
 		p.Client = entry;
@@ -115,7 +115,7 @@ public class ScoreboardEntry : Sandbox.UI.ScoreboardEntry
 
 	public void OnClick()
 	{
-		if ( Client == Local.Client ) return;
+		if ( Client == Game.LocalPawn ) return;
 
 		if ( BoomerCamera.IsSpectator )
 		{

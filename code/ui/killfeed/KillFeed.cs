@@ -23,12 +23,12 @@ namespace Sandbox.UI
 			var e = Current.AddChild<KillFeedEntry>();
 
 			e.Left.Text = left;
-			e.Left.SetClass( "me", lsteamid == (Local.Client?.SteamId) );
+			e.Left.SetClass( "me", lsteamid == (Game.SteamId) );
 
 			e.Method.Text = method;
 
 			e.Right.Text = right;
-			e.Right.SetClass( "me", rsteamid == (Local.Client?.SteamId) );
+			e.Right.SetClass( "me", rsteamid == (Game.SteamId) );
 
 			return e;
 		}
