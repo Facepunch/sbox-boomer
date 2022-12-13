@@ -529,8 +529,8 @@ public partial class BoomerPlayer : Player, IHudMarker
 			walkBob = 0;
 		}
 
-		Camera.Position += up * MathF.Sin( walkBob ) * speed * 2;
-		Camera.Position += left * MathF.Sin( walkBob * 0.6f ) * speed * 1;
+		Camera.Position += up * MathF.Sin( walkBob ) * speed;
+		Camera.Position += left * MathF.Sin( walkBob * 0.6f ) * speed;
 
 		// Camera lean
 		lean = lean.LerpTo( Velocity.Dot( Camera.Rotation.Right ) * 0.01f, Time.Delta * 15.0f );

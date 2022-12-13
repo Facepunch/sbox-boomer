@@ -245,13 +245,13 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 		FOVDefault = Camera.FieldOfView;
 		if ( FOVCurrent == 0 ) FOVCurrent = Camera.FieldOfView;
 
-		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 45f;
+		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : 65f;
 		var targetFoV = Zoomed ? ZoomedFov : FOVDefault;
 		FOVCurrent = FOVCurrent.LerpTo( targetFoV, 15f * Time.Delta );
 		FOVCurrentVM = FOVCurrentVM.LerpTo( targetVMFoV, 15f * Time.Delta );
 
 		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( FOVCurrent );
-		Camera.Main.SetViewModelCamera( Screen.CreateVerticalFieldOfView( FOVCurrentVM ), 0.1f, 200f );
+		Camera.Main.SetViewModelCamera( Screen.CreateVerticalFieldOfView( FOVCurrentVM ), 0.1f, 1000f );
 	}
 
 	public override void BuildInput()
