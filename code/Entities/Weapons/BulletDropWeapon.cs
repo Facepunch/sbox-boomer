@@ -59,8 +59,12 @@ public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : B
 
 		OnCreateProjectile( projectile );
 
-		var muzzle = EffectEntity.GetAttachment( MuzzleAttachment );
-		var position = muzzle.Value.Position;
+		// problem: EffectEntity wants to return the ViewModelEntity, but that doesn't exist on the server
+		// so this doesn't work.  I've just changed the projectile to come from a fixed position in front of player
+		//var muzzle = EffectEntity.GetAttachment( MuzzleAttachment );
+		//var position = muzzle.Value.Position;
+		var position = player.EyePosition + player.EyeRotation.Forward * 15f + Vector3.Down * 10f;
+
 		var forward = player.EyeRotation.Forward;
 		var endPosition = player.EyePosition + forward * BulletRange;
 		var trace = Trace.Ray( player.EyePosition, endPosition )
