@@ -87,7 +87,7 @@ namespace Boomer.Movement
 		{
 			ctrl.AddEvent( "sitting" );
 
-			if ( !ctrl.Pawn.IsServer ) return;
+			if ( !Game.IsServer ) return;
 
 			using var _ = Prediction.Off();
 

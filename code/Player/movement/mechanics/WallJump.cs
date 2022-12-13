@@ -164,7 +164,7 @@ namespace Boomer.Movement
 
 		private void WallJumpEffect()
 		{
-			if ( !ctrl.Pawn.IsServer ) return;
+			if ( !Game.IsServer ) return;
 
 			using var _ = Prediction.Off();
 

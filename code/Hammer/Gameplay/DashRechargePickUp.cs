@@ -35,7 +35,7 @@ internal class DashRechargePickUp : ModelEntity
 	{
 		base.StartTouch( other );
 
-		if ( !IsServer ) return;
+		if ( !Game.IsServer ) return;
 
 		if ( other is not BoomerPlayer pl ) return;
 		

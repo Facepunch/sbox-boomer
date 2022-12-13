@@ -15,7 +15,6 @@
   ],
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "boomer",
   "Metadata": {
     "MinPlayers": 1,
     "MaxPlayers": 12,

@@ -64,7 +64,7 @@ namespace Boomer.Movement
 		{
 			ctrl.AddEvent( "jump" );
 
-			if ( !ctrl.Pawn.IsServer ) return;
+			if ( !Game.IsServer ) return;
 			using var _ = Prediction.Off();
 
 			Sound.FromWorld( "player.duckjump", ctrl.Pawn.Position );

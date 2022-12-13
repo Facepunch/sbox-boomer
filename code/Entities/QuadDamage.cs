@@ -31,7 +31,7 @@ partial class QuadDamage : BasePickup
 	{
 		base.StartTouch( other );
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			if ( other is not BoomerPlayer pl ) return;
 			if ( pl.HasQuadDamage ) return;
@@ -43,8 +43,6 @@ partial class QuadDamage : BasePickup
 
 			PickupFeed.OnPickup( To.Single( pl ), $"QUAD DAMAGE!" );
 			ItemRespawn.Taken( this, RespawnTime );
-
-			if ( Game.IsServer )
 
 			Delete();
 		}

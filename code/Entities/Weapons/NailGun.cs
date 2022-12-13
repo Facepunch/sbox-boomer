@@ -121,7 +121,7 @@ partial class NailGun : BulletDropWeapon<BulletDropProjectile>
 
 	protected override void OnProjectileHit( BulletDropProjectile projectile, TraceResult trace )
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			if ( trace.Entity.IsValid() )
 			{

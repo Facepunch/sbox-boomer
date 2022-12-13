@@ -42,7 +42,7 @@ partial class DeathmatchGame : GameManager
 		// Create the HUD entity. This is always broadcast to all clients
 		// and will create the UI panels clientside.
 		//
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			PrecacheAssets();
 

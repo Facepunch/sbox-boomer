@@ -63,7 +63,7 @@ partial class MasterBall : DeathmatchWeapon
 		{
 			tr.Surface.DoBulletImpact( tr );
 
-			if ( !IsServer ) continue;
+			if ( !Game.IsServer ) continue;
 			if ( !tr.Entity.IsValid() ) continue;
 
 			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 32, 75 )

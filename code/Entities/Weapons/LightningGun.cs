@@ -90,7 +90,7 @@ partial class LightningGun : DeathmatchWeapon
 
 				DamageModifier = DamageModifier.Clamp( 0, 10 );
 
-				if ( !IsServer ) continue;
+				if ( !Game.IsServer ) continue;
 
 				var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100f * force, damage * DamageModifier )
 					.UsingTraceResult( tr )

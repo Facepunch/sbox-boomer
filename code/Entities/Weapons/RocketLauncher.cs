@@ -111,7 +111,7 @@ public partial class RocketLauncher : BulletDropWeapon<RocketProjectile>
 			DeathmatchGame.Explosion( projectile, projectile.Attacker, projectile.Position, 180f, 80f, 1f, 0.3f );
 		}
 		
-		if ( IsClient )
+		if ( Game.IsClient )
 		{
 			trace.Surface.DoBulletImpact( trace );
 		}

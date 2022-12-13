@@ -62,7 +62,7 @@ namespace Boomer.Movement
 		{
 			var fallSpeed = Math.Abs( velocityAtStart.z );
 
-			if ( ctrl.Pawn.IsClient )
+			if ( Game.IsClient )
 			{
 				new FallCameraModifier( fallSpeed );
 			}

@@ -242,7 +242,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 
 		coffin.Populate( this );
 
-		if ( IsServer && !DeathmatchGame.InstaGib || !DeathmatchGame.MasterTrio || !DeathmatchGame.RailTag )
+		if ( Game.IsServer && !DeathmatchGame.InstaGib || !DeathmatchGame.MasterTrio || !DeathmatchGame.RailTag )
 			using ( Prediction.Off() )
 			{
 				for ( int i = 0; i < 2; i++ )
@@ -640,7 +640,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 		LastAttackerWeapon = info.Weapon;
 
 
-		if ( IsServer && Armour > 0 )
+		if ( Game.IsServer && Armour > 0 )
 		{
 			var lastArmor = Armour;
 
@@ -827,7 +827,7 @@ public partial class BoomerPlayer : Player, IHudMarker
 	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )
 	{
 		if ( LifeState != LifeState.Alive ) return;
-		if ( !IsServer ) return;
+		if ( !Game.IsServer ) return;
 		if ( timeSinceLastFootstep < 0.2f ) return;
 		if ( Controller is BoomerController ctrl && (ctrl.IsSliding || ctrl.IsDashing) ) return;
 

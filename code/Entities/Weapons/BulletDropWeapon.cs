@@ -119,7 +119,7 @@ public abstract partial class BulletDropWeapon<T> : DeathmatchWeapon where T : B
 
 	protected virtual void OnProjectileHit( T projectile, TraceResult trace )
 	{
-		if ( IsServer && trace.Entity.IsValid() )
+		if ( Game.IsServer && trace.Entity.IsValid() )
 		{
 			var distance = trace.Entity.Position.Distance( projectile.StartPosition );
 			var damage = GetDamageFalloff( distance, BaseDamage );

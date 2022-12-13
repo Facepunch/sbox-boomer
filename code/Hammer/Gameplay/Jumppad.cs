@@ -36,7 +36,7 @@ public partial class Jumppad : BaseTrigger
 
 	public override void Touch( Entity other )
 	{
-		if ( !other.IsServer ) return;
+		if ( !Game.IsServer ) return;
 		if ( other is not BoomerPlayer pl ) return;
 		var target = FindByName( TargetEntity );
 

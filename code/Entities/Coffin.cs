@@ -39,7 +39,7 @@ partial class Coffin : ModelEntity
 	{
 		base.StartTouch( other );
 
-		if ( IsClient )
+		if ( Game.IsClient )
 			return;
 
 		if ( other is not BoomerPlayer player )
