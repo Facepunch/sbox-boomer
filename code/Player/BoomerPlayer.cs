@@ -489,8 +489,6 @@ public partial class BoomerPlayer : Player, IHudMarker
 	[Event.Client.PostCamera]
 	private void PostCameraSetup()
 	{
-		if ( this != Game.LocalPawn ) return;
-
 		Camera.ZNear = 1f;
 
 		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd ) return;
