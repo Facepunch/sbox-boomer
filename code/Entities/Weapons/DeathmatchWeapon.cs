@@ -19,7 +19,7 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 	public virtual int StartingAmmo => 500;
 
 	public virtual bool CanZoom => false;
-	public virtual float ZoomedFov => 20;
+	public virtual float ZoomedFov => 40;
 	public virtual float ZoomedViewmodelFov => 40;
 	public virtual bool GivesAirshotAward => false;
 
@@ -234,32 +234,6 @@ public partial class DeathmatchWeapon : BaseWeapon, IRespawnableEntity
 			CrosshairLastReload = 0;
 
 		RenderCrosshair( center, CrosshairLastShoot.Relative, CrosshairLastReload.Relative );
-	}
-
-	private float FOVDefault;
-	private float FOVCurrent;
-	private float FOVCurrentVM = 45;
-
-	public void PostCameraSetup()
-	{
-		FOVDefault = Camera.FieldOfView;
-		if ( FOVCurrent == 0 ) FOVCurrent = Camera.FieldOfView;
-
-		var targetVMFoV = Zoomed ? ZoomedViewmodelFov : Game.Preferences.FieldOfView;
-		var targetFoV = Zoomed ? ZoomedFov : FOVDefault;
-		FOVCurrent = FOVCurrent.LerpTo( targetFoV, 15f * Time.Delta );
-		FOVCurrentVM = FOVCurrentVM.LerpTo( targetVMFoV, 15f * Time.Delta );
-
-		Camera.FieldOfView = FOVCurrent;
-		Camera.Main.SetViewModelCamera( FOVCurrentVM, 0.1f, 1000f );
-	}
-
-	public override void BuildInput()
-	{
-		if ( Zoomed )
-		{
-			Input.AnalogLook *= FOVCurrent / FOVDefault;
-		}
 	}
 
 	public virtual void RenderCrosshair( in Vector2 center, float lastAttack, float lastReload ) { }

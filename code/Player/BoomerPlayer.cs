@@ -383,7 +383,9 @@ public partial class BoomerPlayer : Player, IHudMarker
 	{
 		CurrentCamera?.Update();
 
-		base.FrameSimulate( cl );
+		Camera.Rotation = ViewAngles.ToRotation();
+		Camera.Position = EyePosition;
+		Camera.FirstPersonViewer = this;
 	}
 
 	public override void Simulate( IClient cl )
@@ -495,11 +497,6 @@ public partial class BoomerPlayer : Player, IHudMarker
 		if ( Camera.FirstPersonViewer == null ) return;
 
 		AddCameraEffects();
-
-		if ( ActiveChild is DeathmatchWeapon weapon )
-		{
-			weapon.PostCameraSetup();
-		}
 
 		BaseCameraModifier.PostCameraSetup();
 	}

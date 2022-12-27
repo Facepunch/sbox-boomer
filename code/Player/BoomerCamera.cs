@@ -27,7 +27,11 @@ internal class BoomerCamera : BaseCamera
 
 	public override void BuildInput()
 	{
+		Input.AnalogLook *= FOVCurrent / Game.Preferences.FieldOfView;
 	}
+
+	private float FOVCurrent;
+	private float FOVCurrentVM = 45;
 
 	public override void Update()
 	{
@@ -49,5 +53,25 @@ internal class BoomerCamera : BaseCamera
 			Camera.Rotation = Rotation.Slerp( Camera.Rotation, target.EyeRotation, Time.Delta * 20f );
 
 		Camera.FirstPersonViewer = target;
+
+		var wpn = Target.ActiveChild as DeathmatchWeapon;
+		var zoomed = false;
+		var zoomFov = 90f;
+		var zoomViewModelFov = Game.Preferences.FieldOfView;
+		if ( wpn.IsValid() )
+		{
+			// Set values if we have them
+			zoomed = wpn.Zoomed;
+			zoomFov = wpn.ZoomedFov;
+			zoomViewModelFov = wpn.ZoomedViewmodelFov;
+		}
+
+		var targetVMFoV = zoomed ? zoomViewModelFov : 90f;
+		var targetFoV = zoomed ? zoomFov : Game.Preferences.FieldOfView;
+		FOVCurrent = FOVCurrent.LerpTo( targetFoV, 15f * Time.Delta );
+		FOVCurrentVM = FOVCurrentVM.LerpTo( targetVMFoV, 15f * Time.Delta );
+
+		Camera.FieldOfView = FOVCurrent;
+		Camera.Main.SetViewModelCamera( FOVCurrentVM, 0.1f, 1000f );
 	}
 }

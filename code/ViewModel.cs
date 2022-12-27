@@ -19,10 +19,7 @@ partial class DmViewModel : BaseViewModel
 		{
 			ShouldBob = !ctrl.IsSliding && !ctrl.IsDashing;
 			TargetRoll = ctrl.IsSliding ? -45f : 0f;
-
 			TargetFOV = ctrl.IsSliding ? 80f : 75f;
-
-			Camera.Main.SetViewModelCamera( Screen.CreateVerticalFieldOfView( TargetFOV ), 0.1f, 200f );
 
 			TargetPos = TargetPos.LerpTo( Vector3.Up * (ctrl.IsSliding ? -15f : 0f), 2f * Time.Delta );
 			Position += TargetPos;
