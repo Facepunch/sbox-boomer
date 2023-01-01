@@ -8,18 +8,17 @@
     Info {
         position: absolute;
         bottom: 64px;
-        right: 64px;
+        left: 64px;
         flex-direction: column-reverse;
-
+       	
         .text {
             color: white;
             font-weight: 700;
-            font-size: 32px;
+            font-family: Quantico-Bold;
+            font-size: 64px;
             justify-content: center;
             align-items: center;
             align-content: stretch;
-
-            text-shadow: 2px 2px 5px rgba( black, 0.3 );
         }
 
         .icon {
@@ -32,7 +31,7 @@
         }
 
         .reserve {
-            color: lightgrey;
+            color: white;
             font-size: 24px;
         }
 
@@ -55,14 +54,12 @@
             }
 
             <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
-            <label class="icon">backpack</label>
         </div>
     }
 
     <div class="row">
         <label class="text @HealthClasses()">@Health</label>
         <label class="text reserve">100</label>
-        <label class="icon">monitor_heart</label>
     </div>
 </root>
 
