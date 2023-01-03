@@ -102,7 +102,11 @@ public partial class Player : AnimatedEntity
 
 		Components.Create<PlayerAnimator>();
 		var inventory = Components.Create<Inventory>();
-		inventory.AddWeapon( WeaponData.CreateInstance( "Nailgun" ) );
+
+		foreach ( var wpn in WeaponData.All )
+		{
+			inventory.AddWeapon( WeaponData.CreateInstance( wpn ) );
+		}
 
 		GameManager.Current?.MoveToSpawnpoint( this );
 		ResetInterpolation();
