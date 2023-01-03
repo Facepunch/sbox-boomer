@@ -11,7 +11,6 @@
 		Components = 
 		[
 			"PrimaryFire",
-			"Aim",
 			"Ammo",
 		]
 		ViewModelData = 
