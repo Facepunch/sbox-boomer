@@ -8,8 +8,8 @@ namespace Facepunch.Boomer.Mechanics;
 public partial class JumpMechanic : PlayerControllerMechanic
 {
 	public override int SortOrder => 25;
-	private float Gravity => 600f;
-	private float JumpPower => 350f;
+	private float Gravity => 900f;
+	private float JumpPower => 375f;
 
 	protected override bool ShouldStart()
 	{
