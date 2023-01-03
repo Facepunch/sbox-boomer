@@ -47,7 +47,15 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 			DoShootEffects( To.Single( player ) );
 		}
 
-		ShootBullet( Data.BulletSpread, Data.BulletForce, Data.BulletSize, Data.BulletCount, Data.BulletRange );
+		if ( Data.Projectile != null )
+		{
+			if ( Game.IsServer )
+				_ = ProjectileData.Create( Data.Projectile, player );
+		}
+		else
+		{
+			ShootBullet( Data.BulletSpread, Data.BulletForce, Data.BulletSize, Data.BulletCount, Data.BulletRange );
+		}
 	}
 
 	[ClientRpc]

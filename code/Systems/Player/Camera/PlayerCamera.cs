@@ -27,6 +27,8 @@ public partial class PlayerCamera
 	private float fovOffset = 0;
 	protected virtual void AddCameraEffects( Player player )
 	{
+		if ( player.LifeState != LifeState.Alive ) return;
+
 		var speed = player.Velocity.Length.LerpInverse( 0, 320 );
 		var forwardspeed = player.Velocity.Normal.Dot( Camera.Rotation.Forward );
 

@@ -6,7 +6,7 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 public partial class ProjectileData
 {
-	public static Model CachedModel;
+	public Model CachedModel;
 
 	/// <summary>
 	/// A list of all projectile data.
@@ -21,18 +21,28 @@ public partial class ProjectileData
 	/// <returns></returns>
 	public static ProjectileData Find( string name )
 	{
-		return All.FirstOrDefault( x => x.ResourceName.ToLower() == name.ToLower() );
+		return All.FirstOrDefault( x => x.ResourcePath.ToLower() == name.ToLower() );
 	}
 
 	public static Projectile Create( ProjectileData data, Player owner = null )
 	{
-		if ( data == null ) return null;
+		Game.AssertServer( "Can only create projectiles serverside." );
+
+		if ( data == null )
+		{
+			Log.Warning( $"Couldn't create projectile. (data: {data}, owner: {owner})" );
+
+			return null;
+		}
 
 		var projectile = new Projectile
 		{
-			Data = data,
 			Owner = owner
 		};
+
+		projectile.Position = owner.EyePosition;
+
+		projectile.Initialize( data );
 
 		if ( data.InitialForce != Vector3.Zero )
 		{
@@ -42,9 +52,10 @@ public partial class ProjectileData
 		return projectile;
 	}
 
-	public static Projectile Create( string name )
+	public static Projectile Create( string name, Player owner = null )
 	{
-		return Create( Find( name ) );
+		Log.Info( $"Trying to create projectile with name: {name}" );
+		return Create( Find( name ), owner );
 	}
 
 	protected override void PostLoad()

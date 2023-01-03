@@ -4,5 +4,21 @@
 	{
 		ModelPath = resource:"models/gameplay/projectiles/grenades/grenade.vmdl"
 		ParticlePath = resource:"particles/gameplay/weapons/grenade/grenade.vpcf"
+		ActiveSoundPath = null
+		InitialForce = "0,0,0"
+		Gravity = 0
+		Radius = 8
+		Lifetime = 5
+		ExplodeOnDeath = true
+		ExplodeHitTags = 
+		[
+			"player",
+		]
+		ExplosionRadius = 512
+		ExplosionDamage = 100
+		ExplosionParticlePath = resource:"particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_gib.vpcf"
+		ExplosionSoundPath = resource:"sounds/weapons/grenadelauncher/gl.explode.sound"
+		Bounciness = 0.8
+		BounceSoundPath = resource:"sounds/weapons/grenadelauncher/gl.impact.sound"
 	}
 }
