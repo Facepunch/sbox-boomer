@@ -43,6 +43,7 @@
 			FireDelay = 0.1
 			FireSound = resource:"sounds/weapons/nailgun/ng.shoot.sound"
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
+			Projectile = resource:"resources/weapons/projectiles/grenade.ple"
 		}
 		Aim = 
 		{

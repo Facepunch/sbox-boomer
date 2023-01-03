@@ -264,5 +264,8 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 		[ResourceType( "sound" )]
 		public string DryFireSound { get; set; }
+
+		[Category( "Projectile" ), ResourceType( "ple" )]
+		public string Projectile { get; set; }
 	}
 }
