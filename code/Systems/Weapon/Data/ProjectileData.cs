@@ -1,4 +1,5 @@
 using Sandbox;
+using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
@@ -18,10 +19,25 @@ public partial class ProjectileData : GameResource
 	public Vector3 InitialForce { get; set; }
 
 	[Category( "General" )]
+	public float Gravity { get; set; } = 0f;
+
+	[Category( "General" )]
+	public float Radius { get; set; } = 8f;
+
+	[Category( "General" )]
 	public float Lifetime { get; set; } = 5f;
 
 	[Category( "Explosion" )]
 	public bool ExplodeOnDeath { get; set; }
+
+	[Category( "Explosion" )]
+	/// <summary>
+	/// If we hit something that has any of these tags, we'll count it as a trigger to explode our projectile.
+	/// </summary>
+	public List<string> ExplodeHitTags { get; set; } = new()
+	{
+		"player"
+	};
 
 	[Category( "Explosion" )]
 	public float ExplosionRadius { get; set; } = 512f;
