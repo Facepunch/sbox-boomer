@@ -16,7 +16,7 @@ public partial class ProjectileData : GameResource
 	public string ActiveSoundPath { get; set; }
 
 	[Category( "General" )]
-	public Vector3 InitialForce { get; set; }
+	public Vector2 InitialForce { get; set; }
 
 	[Category( "General" )]
 	public float Gravity { get; set; } = 0f;
@@ -56,4 +56,7 @@ public partial class ProjectileData : GameResource
 
 	[Category( "Bounce" ), ResourceType( "sound" )]
 	public string BounceSoundPath { get; set; }
+
+	[Category( "Bounce" ), Range( 0, 1000 )]
+	public float BounceSoundMinVelocity { get; set; } = 300f;
 }

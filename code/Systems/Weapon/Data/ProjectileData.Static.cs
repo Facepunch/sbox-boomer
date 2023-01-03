@@ -40,11 +40,9 @@ public partial class ProjectileData
 			Owner = owner
 		};
 
-		projectile.Position = owner.EyePosition;
-
 		projectile.Initialize( data );
 
-		if ( data.InitialForce != Vector3.Zero )
+		if ( data.InitialForce != Vector2.Zero )
 		{
 			// Do initial force stuff
 		}

@@ -1,5 +1,7 @@
 using Sandbox;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
@@ -11,6 +13,12 @@ public partial class Projectile : ModelEntity
 	[Net] protected ProjectileData Data { get; set; }
 
 	public Particles ActiveParticle { get; set; }
+	protected float GravityModifier { get; set; }
+
+	public override void Spawn()
+	{
+		Predictable = true;
+	}
 
 	public void Initialize( ProjectileData data )
 	{
@@ -27,6 +35,75 @@ public partial class Projectile : ModelEntity
 
 		// Async delete
 		DeleteAsync( Data.Lifetime );
+
+		if ( Owner.IsValid() )
+		{
+			Position = Owner.AimRay.Position + Owner.AimRay.Forward * 50f;
+			Velocity = Owner.AimRay.Forward * data.InitialForce.x + Vector3.Up * data.InitialForce.y;
+		}
+	}
+
+	protected virtual Vector3 GetTargetPosition()
+	{
+		var newPosition = Position;
+		newPosition += Velocity * Time.Delta;
+
+		GravityModifier += Data.Gravity;
+		newPosition -= new Vector3( 0f, 0f, GravityModifier * Time.Delta );
+
+		return newPosition;
+	}
+
+	public static readonly float KGM3ToKGI3 = 0.0164f; // kg/m³ -> kg/in³
+	public static readonly float AirDensity = 1.204f * KGM3ToKGI3; // kg/in³
+	public static readonly float DragCoefficient = 0.5f;
+
+	private static Vector3 CalculateDrag( Vector3 velocity )
+	{
+		var dragForce = 0.1f * AirDensity * velocity.LengthSquared * DragCoefficient;
+		return -dragForce * velocity.Normal;
+	}
+
+	[Event.Tick.Server]
+	public void TickServer()
+	{
+		var drag = CalculateDrag( Velocity );
+		Velocity += drag * Time.Delta;
+
+		Rotation = Rotation.LookAt( Velocity.Normal );
+
+		var newPosition = GetTargetPosition();
+
+		var trace = Trace.Ray( Position, newPosition )
+			.Size( Data.Radius )
+			.Ignore( this )
+			.WithAnyTags( "solid" )
+			.WithoutTags( "player", "trigger" )
+			.Run();
+
+		Position = trace.EndPosition;
+
+		if ( trace.Hit || trace.StartedSolid )
+		{
+			if ( trace.Tags.Any( x => Data.ExplodeHitTags.Any( y => x == y ) ) )
+			{
+				Explode();
+				Delete();
+			}
+			else
+			{
+				if ( Data.Bounciness > 0f )
+				{
+					var reflect = Vector3.Reflect( Velocity.Normal, trace.Normal );
+
+					GravityModifier = 0f;
+					Velocity = reflect * Velocity.Length * Data.Bounciness;
+
+					if ( !string.IsNullOrEmpty( Data.BounceSoundPath ) && Velocity.Length > Data.BounceSoundMinVelocity )
+						PlaySound( Data.BounceSoundPath );
+				}
+			}
+		}
 	}
 
 	protected override void OnDestroy()
