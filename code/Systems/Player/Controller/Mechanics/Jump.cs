@@ -35,5 +35,7 @@ public partial class JumpMechanic : PlayerControllerMechanic
 
 		Controller.GetMechanic<WalkMechanic>()
 			.ClearGroundEntity();
+
+		Controller.Player.PlaySound( "jump.single" );
 	}
 }
