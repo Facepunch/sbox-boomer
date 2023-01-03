@@ -20,6 +20,16 @@
 		ExplosionParticlePath = resource:"particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_flash.vpcf"
 		ExplosionSoundPath = resource:"sounds/weapons/rocketlauncher/rl.explode.sound"
 		SelfDamageScale = 0.05
+		ExplosionDamageFalloff = 
+		[
+			{
+				y = 1
+			},
+			{
+				x = 1
+			},
+		]
+		NoDeleteOnExplode = false
 		Bounciness = 0
 		BounceSoundPath = null
 		BounceSoundMinVelocity = 300

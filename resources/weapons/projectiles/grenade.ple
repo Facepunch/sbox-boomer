@@ -18,6 +18,22 @@
 		ExplosionDamage = 100
 		ExplosionParticlePath = resource:"particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_gib.vpcf"
 		ExplosionSoundPath = resource:"sounds/weapons/grenadelauncher/gl.explode.sound"
+		SelfDamageScale = 0
+		ExplosionDamageFalloff = 
+		[
+			{
+				y = 1
+				in = 1.0
+				out = -1.0
+			},
+			{
+				x = 0.501232
+				y = 0.146429
+				in = 5.333332
+				out = -5.333332
+			},
+		]
+		NoDeleteOnExplode = false
 		Bounciness = 0.9
 		BounceSoundPath = resource:"sounds/weapons/grenadelauncher/gl.impact.sound"
 		BounceSoundMinVelocity = 300

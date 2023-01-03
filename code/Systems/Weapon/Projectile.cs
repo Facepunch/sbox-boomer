@@ -184,7 +184,8 @@ public partial class Projectile : ModelEntity
 				continue;
 
 			var forceScale = 1f;
-			var distanceMul = 1.0f - Math.Clamp( dist / Data.ExplosionRadius, 0.0f, 1.0f );
+			var distanceMul = Data.ExplosionDamageFalloff.Evaluate( dist / Data.ExplosionRadius );
+
 			var dmg = Data.ExplosionDamage * distanceMul;
 			var force = (forceScale * distanceMul) * ent.PhysicsBody.Mass;
 			var forceDir = (targetPos - Position).Normal;

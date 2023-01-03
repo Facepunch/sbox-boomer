@@ -55,6 +55,9 @@ public partial class ProjectileData : GameResource
 	public float SelfDamageScale { get; set; } = 1f;
 
 	[Category( "Explosion" )]
+	public Curve ExplosionDamageFalloff { get; set; }
+
+	[Category( "Explosion" )]
 	public bool NoDeleteOnExplode { get; set; } = false;
 
 	[Category( "Bounce" ), Range( 0, 1 )]

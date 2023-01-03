@@ -19,7 +19,16 @@
 		ExplosionDamage = 100
 		ExplosionParticlePath = null
 		ExplosionSoundPath = null
-		SelfDamageScale = 0.01
+		SelfDamageScale = 0
+		ExplosionImpulseScale = 
+		[
+			{
+				y = 1
+			},
+			{
+				x = 1
+			},
+		]
 		NoDeleteOnExplode = true
 		Bounciness = 0
 		BounceSoundPath = null
