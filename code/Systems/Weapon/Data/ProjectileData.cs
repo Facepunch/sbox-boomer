@@ -51,6 +51,9 @@ public partial class ProjectileData : GameResource
 	[Category( "Explosion" ), ResourceType( "sound" )]
 	public string ExplosionSoundPath { get; set; }
 
+	[Category( "Explosion" ), Range( 0, 1 )]
+	public float SelfDamageScale { get; set; } = 0f;
+
 	[Category( "Bounce" ), Range( 0, 1 )]
 	public float Bounciness { get; set; }
 

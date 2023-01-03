@@ -2,6 +2,8 @@ using Sandbox;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using static Sandbox.Event;
+using Facepunch.Boomer.Mechanics;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
@@ -20,6 +22,15 @@ public partial class Projectile : ModelEntity
 		Predictable = true;
 	}
 
+	[ClientRpc]
+	protected void SendActiveEffects()
+	{
+		if ( !string.IsNullOrEmpty( Data.ParticlePath ) )
+		{
+			ActiveParticle = Particles.Create( Data.ParticlePath, this, true );
+		}
+	}
+
 	public void Initialize( ProjectileData data )
 	{
 		Data = data;
@@ -30,8 +41,7 @@ public partial class Projectile : ModelEntity
 
 		Tags.Add( "trigger" );
 
-		if ( !string.IsNullOrEmpty( Data.ParticlePath ) )
-			ActiveParticle = Particles.Create( Data.ParticlePath, this, true );
+		SendActiveEffects( );
 
 		// Async delete
 		DeleteAsync( Data.Lifetime );
@@ -166,11 +176,21 @@ public partial class Projectile : ModelEntity
 			var force = (forceScale * distanceMul) * ent.PhysicsBody.Mass;
 			var forceDir = (targetPos - Position).Normal;
 
+			if ( Data.SelfDamageScale != 0f && ( ent == Owner || ent == ( Owner as Player )?.ActiveWeapon ) )
+				dmg *= Data.SelfDamageScale;
+
 			var damageInfo = DamageInfo.FromExplosion( Position, forceDir * force, dmg )
 				.WithWeapon( this )
 				.WithAttacker( Owner );
 
 			ent.TakeDamage( damageInfo );
+
+			if ( ent is Player player && player.Controller != null )
+			{
+				player.Controller.GetMechanic<WalkMechanic>()
+					.ClearGroundEntity();
+				player.Controller.Velocity += forceDir * force;
+			}
 		}
 	}
 }
