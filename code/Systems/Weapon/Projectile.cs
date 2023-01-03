@@ -48,7 +48,11 @@ public partial class Projectile : ModelEntity
 
 		if ( Owner.IsValid() )
 		{
-			Position = Owner.AimRay.Position + Owner.AimRay.Forward * 50f;
+			var tr = Trace.Ray( Owner.AimRay, 50f )
+				.Ignore( Owner )
+				.Run();
+
+			Position = tr.EndPosition;
 			Velocity = Owner.AimRay.Forward * data.InitialForce.x + Vector3.Up * data.InitialForce.y;
 		}
 	}
