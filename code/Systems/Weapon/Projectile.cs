@@ -20,6 +20,8 @@ public partial class Projectile : ModelEntity
 		Transmit = TransmitType.Always;
 		SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Vector3.Zero, Data.Radius );
 
+		Tags.Add( "trigger" );
+
 		if ( !string.IsNullOrEmpty( Data.ParticlePath ) )
 			ActiveParticle = Particles.Create( Data.ParticlePath, this, true );
 
