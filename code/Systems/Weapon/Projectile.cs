@@ -189,7 +189,7 @@ public partial class Projectile : ModelEntity
 			var force = (forceScale * distanceMul) * ent.PhysicsBody.Mass;
 			var forceDir = (targetPos - Position).Normal;
 
-			if ( Data.SelfDamageScale != 0f && ( ent == Owner || ent == ( Owner as Player )?.ActiveWeapon ) )
+			if ( ent == Owner || ent == ( Owner as Player )?.ActiveWeapon )
 				dmg *= Data.SelfDamageScale;
 
 			var damageInfo = DamageInfo.FromExplosion( Position, forceDir * force, dmg )
