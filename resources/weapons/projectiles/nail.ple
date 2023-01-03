@@ -1,0 +1,28 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		ModelPath = resource:"models/gameplay/projectiles/nails/nails.vmdl"
+		ParticlePath = resource:"particles/gameplay/weapons/nailgun/nail_trail.vpcf"
+		ActiveSoundPath = null
+		InitialForce = "3000,0"
+		Gravity = 3
+		Radius = 8
+		Lifetime = 10
+		ExplodeOnDeath = false
+		ExplodeHitTags = 
+		[
+			"player",
+			"solid",
+		]
+		ExplosionRadius = 40
+		ExplosionDamage = 100
+		ExplosionParticlePath = null
+		ExplosionSoundPath = null
+		SelfDamageScale = 0.01
+		NoDeleteOnExplode = true
+		Bounciness = 0
+		BounceSoundPath = null
+		BounceSoundMinVelocity = 300
+	}
+}

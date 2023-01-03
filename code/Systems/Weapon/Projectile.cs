@@ -17,6 +17,8 @@ public partial class Projectile : ModelEntity
 	public Particles ActiveParticle { get; set; }
 	protected float GravityModifier { get; set; }
 
+	private bool HasExploded = false;
+
 	public override void Spawn()
 	{
 		Predictable = true;
@@ -91,8 +93,9 @@ public partial class Projectile : ModelEntity
 		var trace = Trace.Ray( Position, newPosition )
 			.Size( Data.Radius )
 			.Ignore( this )
-			.WithAnyTags( "solid" )
-			.WithoutTags( "player", "trigger" )
+			.Ignore( Owner )
+			.WithAnyTags( "solid", "player" )
+			.WithoutTags( "trigger" )
 			.Run();
 
 		Position = trace.EndPosition;
@@ -102,7 +105,9 @@ public partial class Projectile : ModelEntity
 			if ( trace.Tags.Any( x => Data.ExplodeHitTags.Any( y => x == y ) ) )
 			{
 				Explode();
-				Delete();
+
+				if ( Data.NoDeleteOnExplode == false )
+					Delete();
 			}
 			else
 			{
@@ -136,6 +141,10 @@ public partial class Projectile : ModelEntity
 
 	public void Explode()
 	{
+		if ( HasExploded ) return;
+
+		HasExploded = true;
+
 		// Effects
 		if ( !string.IsNullOrEmpty( Data.ExplosionSoundPath ) )
 			Sound.FromWorld( Data.ExplosionSoundPath, Position );
