@@ -7,9 +7,9 @@ namespace Facepunch.Boomer.Mechanics;
 /// </summary>
 public partial class AirMoveMechanic : PlayerControllerMechanic
 {
-	public float Gravity => 900.0f;
-	public float AirControl => 100.0f;
-	public float AirAcceleration => 100.0f;
+	public float Gravity => 800.0f;
+	public float AirControl => 60.0f;
+	public float AirAcceleration => 85.0f;
 
 	protected override void Simulate()
 	{
