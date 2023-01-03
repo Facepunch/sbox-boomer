@@ -102,8 +102,7 @@ public partial class Player : AnimatedEntity
 
 		Components.Create<PlayerAnimator>();
 		var inventory = Components.Create<Inventory>();
-		inventory.AddWeapon( WeaponData.CreateInstance( "SMG" ) );
-		inventory.AddWeapon( WeaponData.CreateInstance( "Semi-Auto Pistol" ), false );
+		inventory.AddWeapon( WeaponData.CreateInstance( "Nailgun" ) );
 
 		GameManager.Current?.MoveToSpawnpoint( this );
 		ResetInterpolation();

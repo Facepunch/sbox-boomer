@@ -2,10 +2,10 @@
 {
 	data = 
 	{
-		Name = "Semi-Auto Pistol"
-		Model = resource:"weapons/rust_pistol/rust_pistol.vmdl"
-		ViewModel = resource:"weapons/rust_pistol/v_rust_pistol.vmdl"
-		Icon = resource:"models/m1911/w_m1911.vmdl.png"
+		Name = "Nailgun"
+		Model = resource:"models/gameplay/weapons/nailgun/w_nailgun.vmdl"
+		ViewModel = resource:"models/gameplay/weapons/nailgun/nailgun.vmdl"
+		Icon = null
 		HoldType = "Pistol"
 		Handedness = "Right"
 		Components = 
@@ -13,7 +13,6 @@
 			"PrimaryFire",
 			"Aim",
 			"Ammo",
-			"Recoil",
 		]
 		ViewModelData = 
 		{
@@ -27,10 +26,8 @@
 			WalkCycleOffset = "-2,25,0"
 			BobAmount = "25,50"
 			GlobalLerpPower = 1
-			GlobalPositionOffset = "-13.755,8.665003,-0.6950001"
 			CrouchPositionOffset = "-3,1,0"
 			CrouchAngleOffset = "2,0,-15"
-			SlideAngleOffset = "2,0,-15"
 			AvoidancePositionOffset = "-5,0,0"
 			AvoidanceAngleOffset = "2,0,-25"
 			SprintPositionOffset = "1,3.226,8"
@@ -44,8 +41,8 @@
 			BulletCount = 1
 			BulletForce = 100
 			BulletSize = 2
-			FireDelay = 0.2
-			FireSound = resource:"weapons/rust_pistol/sound/rust_pistol.shoot.sound"
+			FireDelay = 0.1
+			FireSound = resource:"sounds/weapons/nailgun/ng.shoot.sound"
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 		}
 		Aim = 
@@ -53,22 +50,9 @@
 		}
 		Ammo = 
 		{
-			DefaultAmmo = 7
-			MaximumAmmo = 7
-			AllowChamber = true
+			DefaultAmmo = 100
+			MaximumAmmo = 100
 			ReloadTime = 1.75
-		}
-		Recoil = 
-		{
-			Presets = 
-			[
-				"-30,60",
-				"30,60",
-				"15,55",
-			]
-			RecoveryTime = 0.3
-			MaxRecoil = 100
-			DecayFactor = 80
 		}
 	}
 }
