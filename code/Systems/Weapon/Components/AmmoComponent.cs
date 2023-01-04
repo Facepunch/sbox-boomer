@@ -9,6 +9,8 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 	protected bool ReloadLock { get; set; } = false;
 	public TimeUntil TimeUntilReloaded { get; set; }
 
+	public bool IsReloading => ReloadLock;
+
 	public ComponentData Data => Weapon.WeaponData.Ammo;
 
 	public bool IsFull
