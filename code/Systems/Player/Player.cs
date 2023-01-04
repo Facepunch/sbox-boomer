@@ -105,6 +105,7 @@ public partial class Player : AnimatedEntity
 		Components.Create<InteractionMechanic>();
 		Components.Create<UnstuckMechanic>();
 		Components.Create<SlideMechanic>();
+		Components.Create<DashMechanic>();
 
 		Components.Create<PlayerAnimator>();
 		var inventory = Components.Create<Inventory>();
