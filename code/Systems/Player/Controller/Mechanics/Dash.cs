@@ -27,6 +27,11 @@ public partial class DashMechanic : PlayerControllerMechanic
 	{
 		// Give a speed boost
 		var wish = Controller.GetWishInput();
+
+		// If you're not moving, default to forward
+		if ( wish.Length.AlmostEqual( 0 ) )
+			wish = Controller.Player.Rotation.Forward;
+
 		Controller.Velocity += wish * GetPower();
 
 		DashCount--;
