@@ -63,5 +63,12 @@ public partial class ProjectileData
 
 		if ( !All.Contains( this ) )
 			All.Add( this );
+
+		// Precache
+		if ( !string.IsNullOrEmpty( ActiveSoundPath ) ) Precache.Add( ActiveSoundPath );
+		if ( !string.IsNullOrEmpty( ParticlePath ) ) Precache.Add( ParticlePath );
+		if ( !string.IsNullOrEmpty( ExplosionParticlePath ) ) Precache.Add( ExplosionParticlePath );
+		if ( !string.IsNullOrEmpty( ExplosionSoundPath ) ) Precache.Add( ExplosionSoundPath );
+		if ( !string.IsNullOrEmpty( BounceSoundPath ) ) Precache.Add( BounceSoundPath );
 	}
 }
