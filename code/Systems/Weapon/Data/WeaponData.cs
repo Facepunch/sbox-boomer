@@ -16,6 +16,9 @@ public partial class WeaponData : GameResource
 	[Category( "Basic Information" ), ResourceType( "vmdl" )]
 	public string ViewModel { get; set; }
 
+	[Category( "Basic Information" ), ResourceType( "jpg" )]
+	public string CrosshairIcon { get; set; }
+
 	internal Model CachedModel;
 	internal Model CachedViewModel;
 

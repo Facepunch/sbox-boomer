@@ -5,6 +5,7 @@
 		Name = "Nailgun"
 		Model = resource:"models/gameplay/weapons/nailgun/w_nailgun.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/nailgun/nailgun.vmdl"
+		CrosshairIcon = resource:"ui/crosshair/crosshair118.png"
 		Icon = null
 		HoldType = "Pistol"
 		Handedness = "Right"

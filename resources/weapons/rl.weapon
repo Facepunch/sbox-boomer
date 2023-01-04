@@ -5,6 +5,7 @@
 		Name = "Rocket Launcher"
 		Model = resource:"models/gameplay/weapons/rocketlauncher/w_rocketlauncher.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl"
+		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
 		Icon = null
 		HoldType = "Rifle"
 		Handedness = "Right"

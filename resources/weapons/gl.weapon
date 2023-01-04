@@ -5,6 +5,7 @@
 		Name = "Grenade Launcher"
 		Model = resource:"models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl"
+		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
 		Icon = null
 		HoldType = "Rifle"
 		Handedness = "Right"
