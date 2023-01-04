@@ -55,5 +55,8 @@ public partial class WeaponData : GameResource
 
 		if ( !string.IsNullOrEmpty( ViewModel ) )
 			CachedViewModel = Sandbox.Model.Load( ViewModel );
+
+		// Precache
+		PrimaryFire.Precache();
 	}
 }

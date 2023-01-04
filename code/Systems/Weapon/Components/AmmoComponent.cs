@@ -74,10 +74,8 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 	{
 		base.OnStart( player );
 
-		if ( Weapon.GetComponent<Ammo>()?.IsFull ?? false )
-		{
+		if ( IsFull )
 			return;
-		}
 
 		TimeUntilReloaded = Data.ReloadTime;
 		ReloadLock = true;
@@ -114,7 +112,7 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 	protected void FinishReloading( Player player )
 	{
 		Weapon.Tags.Set( "reloading", false );
-		Weapon.GetComponent<Ammo>().Fill();
+		Fill();
 	}
 
 	public struct ComponentData

@@ -275,5 +275,11 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 		[Category( "Projectile" ), ResourceType( "ple" )]
 		public string Projectile { get; set; }
+
+		public void Precache()
+		{
+			if ( !string.IsNullOrEmpty( FireSound ) ) Sandbox.Precache.Add( FireSound );
+			if ( !string.IsNullOrEmpty( DryFireSound ) ) Sandbox.Precache.Add( DryFireSound );
+		}
 	}
 }
