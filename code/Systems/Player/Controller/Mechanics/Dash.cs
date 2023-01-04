@@ -32,6 +32,7 @@ public partial class DashMechanic : PlayerControllerMechanic
 			wish = Controller.Player.Rotation.Forward;
 
 		Controller.Velocity = wish * GetPower();
+		Controller.Velocity += Vector3.Up * 200f;
 
 		DashCount--;
 		DashEffect();
