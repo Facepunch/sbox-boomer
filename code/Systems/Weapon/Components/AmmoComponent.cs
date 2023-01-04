@@ -6,11 +6,6 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 {
 	[Net] public int AmmoCount { get; set; }
 
-	protected bool ReloadLock { get; set; } = false;
-	public TimeUntil TimeUntilReloaded { get; set; }
-
-	public bool IsReloading => ReloadLock;
-
 	public ComponentData Data => Weapon.WeaponData.Ammo;
 
 	public bool IsFull
@@ -33,6 +28,7 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 		}
 	}
 
+	// If we want to refill the ammo, here's a nice utility method for it.
 	public void Fill()
 	{
 		if ( AmmoCount == Data.MaximumAmmo && Data.AllowChamber )
@@ -60,68 +56,10 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 		return false;
 	}
 
-	/////
-	/// Reloading
-	/////
-	protected override bool CanStart( Player player )
-	{
-		if ( ReloadLock ) return false;
-
-		return Input.Pressed( InputButton.Reload );
-	}
-
-	protected override void OnStart( Player player )
-	{
-		base.OnStart( player );
-
-		if ( IsFull )
-			return;
-
-		TimeUntilReloaded = Data.ReloadTime;
-		ReloadLock = true;
-
-		StartReloading();
-	}
-
-	public override void Simulate( IClient cl, Player player )
-	{
-		base.Simulate( cl, player );
-
-		if ( ReloadLock && TimeUntilReloaded )
-		{
-			FinishReloading( player );
-			ReloadLock = false;
-		}
-	}
-
-	protected void StartReloading()
-	{
-		Player?.SetAnimParameter( "b_reload", true );
-		Weapon.Tags.Set( "reloading", true );
-
-		using ( Prediction.Off() )
-			StartReloadEffects( To.Single( Player.Client ) );
-	}
-
-	[ClientRpc]
-	public static void StartReloadEffects()
-	{
-		WeaponViewModel.Current?.SetAnimParameter( "reload", true );
-	}
-
-	protected void FinishReloading( Player player )
-	{
-		Weapon.Tags.Set( "reloading", false );
-		Fill();
-	}
-
 	public struct ComponentData
 	{
 		public int DefaultAmmo { get; set; }
 		public int MaximumAmmo { get; set; }
 		public bool AllowChamber { get; set; }
-
-		[Category( "Reloading" )]
-		public float ReloadTime { get; set; }
 	}
 }

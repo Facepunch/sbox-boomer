@@ -22,7 +22,6 @@ public partial class WeaponViewModel
 	float aimLerp = 0;
 	float crouchLerp = 0;
 	float airLerp = 0;
-	float reloadLerp = 0;
 	float sideLerp = 0;
 
 	protected float MouseDeltaLerpX;
@@ -105,7 +104,6 @@ public partial class WeaponViewModel
 		LerpTowards( ref aimLerp, isAiming ? 1 : 0, isAiming ? 30f : 10f );
 		LerpTowards( ref crouchLerp, isCrouching && !isAiming ? 1 : 0, 7f );
 		LerpTowards( ref airLerp, (isGrounded ? 0 : 1) * (1 - aimLerp), 10f );
-		LerpTowards( ref reloadLerp, (Weapon.GetComponent<Ammo>()?.IsReloading ?? false) ? 1 : 0, 10f );
 
 		var leftAmt = left.WithZ( 0 ).Normal.Dot( controller.Velocity.Normal );
 		LerpTowards( ref sideLerp, leftAmt * (1 - aimLerp), 5f );
@@ -175,10 +173,6 @@ public partial class WeaponViewModel
 
 			// Air
 			ApplyPositionOffset( new( 0, 0, 1 ), airLerp );
-
-			// Reload
-			ApplyPositionOffset( new( 0, 0, -2 ), reloadLerp );
-			rotationOffsetTarget *= Rotation.From( 5 * reloadLerp, 5 * reloadLerp, -5 * reloadLerp );
 
 			// Avoidance
 			rotationOffsetTarget *= Rotation.From( Data.AvoidanceAngleOffset * avoidance );
