@@ -104,6 +104,7 @@ public partial class Player : AnimatedEntity
 		Components.Create<CrouchMechanic>();
 		Components.Create<InteractionMechanic>();
 		Components.Create<UnstuckMechanic>();
+		Components.Create<SlideMechanic>();
 
 		Components.Create<PlayerAnimator>();
 		var inventory = Components.Create<Inventory>();
