@@ -19,7 +19,7 @@ public partial class DashMechanic : PlayerControllerMechanic
 
 	protected float GetPower()
 	{
-		return Controller.GroundEntity.IsValid() ? 1500 : 750;
+		return Controller.GroundEntity.IsValid() ? 1500 : 1250;
 	}
 
 	protected override void OnStart()
@@ -31,7 +31,7 @@ public partial class DashMechanic : PlayerControllerMechanic
 		if ( wish.Length.AlmostEqual( 0 ) )
 			wish = Controller.Player.Rotation.Forward;
 
-		Controller.Velocity += wish * GetPower();
+		Controller.Velocity = wish * GetPower();
 
 		DashCount--;
 		DashEffect();

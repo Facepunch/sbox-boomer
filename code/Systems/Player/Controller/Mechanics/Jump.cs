@@ -27,7 +27,7 @@ public partial class JumpMechanic : PlayerControllerMechanic
 		var wish = Controller.GetWishInput();
 
 		// Velocity boost in the player's wish dir
-		Velocity += wish * 200f;
+		Velocity += wish * 100f;
 
 		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
