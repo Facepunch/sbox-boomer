@@ -52,6 +52,11 @@ public partial class Player : AnimatedEntity
 	/// </summary>
 	public static Model PlayerModel = Model.Load( "models/citizen/citizen.vmdl" );
 
+	public Player()
+	{
+		ProjectileSimulator = new();
+	}
+
 	/// <summary>
 	/// When the player is first created. This isn't called when a player respawns.
 	/// </summary>
@@ -131,6 +136,8 @@ public partial class Player : AnimatedEntity
 	/// <param name="cl"></param>
 	public override void Simulate( IClient cl )
 	{
+		ProjectileSimulator.Simulate( cl );
+
 		Rotation = LookInput.WithPitch( 0f ).ToRotation();
 
 		Controller?.Simulate( cl );

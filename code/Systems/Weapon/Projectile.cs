@@ -1,8 +1,5 @@
 using Sandbox;
-using System;
 using System.Linq;
-using System.Collections.Generic;
-using static Sandbox.Event;
 using Facepunch.Boomer.Mechanics;
 
 namespace Facepunch.Boomer.WeaponSystem;
@@ -18,6 +15,8 @@ public partial class Projectile : ModelEntity
 	protected float GravityModifier { get; set; }
 
 	private bool HasExploded = false;
+
+	public ProjectileSimulator Simulator => (Owner as Player)?.ProjectileSimulator;
 
 	public override void Spawn()
 	{
@@ -56,7 +55,12 @@ public partial class Projectile : ModelEntity
 
 			Position = tr.EndPosition;
 			Velocity = Owner.AimRay.Forward * data.InitialForce.x + Vector3.Up * data.InitialForce.y;
+
+			Simulator.Add( this );
 		}
+
+		// Simulate first frame to setup shit like Rotation
+		Simulate( null );
 	}
 
 	protected virtual Vector3 GetTargetPosition()
@@ -80,8 +84,7 @@ public partial class Projectile : ModelEntity
 		return -dragForce * velocity.Normal;
 	}
 
-	[Event.Tick.Server]
-	public void TickServer()
+	public override void Simulate( IClient cl )
 	{
 		var drag = CalculateDrag( Velocity );
 		Velocity += drag * Time.Delta;
@@ -119,7 +122,12 @@ public partial class Projectile : ModelEntity
 					Velocity = reflect * Velocity.Length * Data.Bounciness;
 
 					if ( !string.IsNullOrEmpty( Data.BounceSoundPath ) && Velocity.Length > Data.BounceSoundMinVelocity )
-						PlaySound( Data.BounceSoundPath );
+					{
+						using ( Prediction.Off() )
+						{
+							PlaySound( Data.BounceSoundPath );
+						}
+					}
 				}
 			}
 		}
@@ -137,6 +145,8 @@ public partial class Projectile : ModelEntity
 			// Destroy active effects
 			ActiveParticle?.Destroy( true );
 		}
+
+		Simulator?.Remove( this );
 	}
 
 	public void Explode()
@@ -145,65 +155,68 @@ public partial class Projectile : ModelEntity
 
 		HasExploded = true;
 
-		// Effects
-		if ( !string.IsNullOrEmpty( Data.ExplosionSoundPath ) )
-			Sound.FromWorld( Data.ExplosionSoundPath, Position );
-
-		if ( !string.IsNullOrEmpty( Data.ExplosionParticlePath ) )
-			Particles.Create( Data.ExplosionParticlePath, Position );
-
-		// Damage
-		var overlaps = FindInSphere( Position, Data.ExplosionRadius );
-
-		foreach ( var overlap in overlaps )
+		using ( Prediction.Off() )
 		{
-			if ( overlap is not ModelEntity ent || !ent.IsValid() )
-				continue;
+			// Effects
+			if ( !string.IsNullOrEmpty( Data.ExplosionSoundPath ) )
+				Sound.FromWorld( Data.ExplosionSoundPath, Position );
 
-			if ( ent.LifeState != LifeState.Alive )
-				continue;
+			if ( !string.IsNullOrEmpty( Data.ExplosionParticlePath ) )
+				Particles.Create( Data.ExplosionParticlePath, Position );
 
-			if ( !ent.PhysicsBody.IsValid() )
-				continue;
+			// Damage
+			var overlaps = FindInSphere( Position, Data.ExplosionRadius );
 
-			if ( ent.IsWorld )
-				continue;
-
-			var targetPos = ent.PhysicsBody.MassCenter;
-
-			var dist = Vector3.DistanceBetween( Position, targetPos );
-			if ( dist > Data.ExplosionRadius )
-				continue;
-
-			var tr = Trace.Ray( Position, targetPos )
-				.Ignore( this )
-				.WorldOnly()
-				.Run();
-
-			if ( tr.Fraction < 0.98f )
-				continue;
-
-			var forceScale = 1f;
-			var distanceMul = Data.ExplosionDamageFalloff.Evaluate( dist / Data.ExplosionRadius );
-
-			var dmg = Data.ExplosionDamage * distanceMul;
-			var force = (forceScale * distanceMul) * ent.PhysicsBody.Mass;
-			var forceDir = (targetPos - Position).Normal;
-
-			if ( ent == Owner || ent == ( Owner as Player )?.ActiveWeapon )
-				dmg *= Data.SelfDamageScale;
-
-			var damageInfo = DamageInfo.FromExplosion( Position, forceDir * force, dmg )
-				.WithWeapon( this )
-				.WithAttacker( Owner );
-
-			ent.TakeDamage( damageInfo );
-
-			if ( ent is Player player && player.Controller != null )
+			foreach ( var overlap in overlaps )
 			{
-				player.Controller.GetMechanic<WalkMechanic>()
-					.ClearGroundEntity();
-				player.Controller.Velocity += forceDir * force;
+				if ( overlap is not ModelEntity ent || !ent.IsValid() )
+					continue;
+
+				if ( ent.LifeState != LifeState.Alive )
+					continue;
+
+				if ( !ent.PhysicsBody.IsValid() )
+					continue;
+
+				if ( ent.IsWorld )
+					continue;
+
+				var targetPos = ent.PhysicsBody.MassCenter;
+
+				var dist = Vector3.DistanceBetween( Position, targetPos );
+				if ( dist > Data.ExplosionRadius )
+					continue;
+
+				var tr = Trace.Ray( Position, targetPos )
+					.Ignore( this )
+					.WorldOnly()
+					.Run();
+
+				if ( tr.Fraction < 0.98f )
+					continue;
+
+				var forceScale = 1f;
+				var distanceMul = Data.ExplosionDamageFalloff.Evaluate( dist / Data.ExplosionRadius );
+
+				var dmg = Data.ExplosionDamage * distanceMul;
+				var force = (forceScale * distanceMul) * ent.PhysicsBody.Mass;
+				var forceDir = (targetPos - Position).Normal;
+
+				if ( ent == Owner || ent == (Owner as Player)?.ActiveWeapon )
+					dmg *= Data.SelfDamageScale;
+
+				var damageInfo = DamageInfo.FromExplosion( Position, forceDir * force, dmg )
+					.WithWeapon( this )
+					.WithAttacker( Owner );
+
+				ent.TakeDamage( damageInfo );
+
+				if ( ent is Player player && player.Controller != null )
+				{
+					player.Controller.GetMechanic<WalkMechanic>()
+						.ClearGroundEntity();
+					player.Controller.Velocity += forceDir * force;
+				}
 			}
 		}
 	}
