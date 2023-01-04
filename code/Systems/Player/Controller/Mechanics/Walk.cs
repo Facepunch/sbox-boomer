@@ -8,10 +8,10 @@ namespace Facepunch.Boomer.Mechanics;
 /// </summary>
 public partial class WalkMechanic : PlayerControllerMechanic
 {
-	public float StopSpeed => 150f;
+	public float StopSpeed => 100f;
 	public float StepSize => 18.0f;
 	public float GroundAngle => 46.0f;
-	public float GroundFriction => 5.0f;
+	public float GroundFriction => 4.0f;
 	public float MaxNonJumpVelocity => 140.0f;
 	public float SurfaceFriction { get; set; } = 1f;
 	public float Acceleration => 10f;
