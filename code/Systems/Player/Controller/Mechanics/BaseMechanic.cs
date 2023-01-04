@@ -123,6 +123,8 @@ public partial class PlayerControllerMechanic : EntityComponent<Player>
 			Stop();
 		}
 
+		Tick();
+
 		return IsActive;
 	}
 
@@ -172,6 +174,13 @@ public partial class PlayerControllerMechanic : EntityComponent<Player>
 	protected virtual void Simulate()
 	{
 		//
+	}
+
+	/// <summary>
+	/// Ran every simulate, but even when the mechanic is inactive.
+	/// </summary>
+	protected virtual void Tick()
+	{
 	}
 
 	public override string ToString()

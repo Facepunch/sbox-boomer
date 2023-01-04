@@ -38,11 +38,13 @@ public partial class DashMechanic : PlayerControllerMechanic
 		DashEffect();
 	}
 
-	[Event.Tick.Server]
-	public void TickServer()
+	protected override void Tick()
 	{
-		if ( TimeSinceStop > DashRechargeCooldown && DashCount != MaxDashes )
+		if ( TimeSinceStart > DashRechargeCooldown && DashCount != MaxDashes )
 		{
+			if ( !Controller.GroundEntity.IsValid() )
+				return;
+
 			DashCount = 2;
 
 			if ( Controller.Player.IsLocalPawn )

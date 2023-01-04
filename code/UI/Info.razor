@@ -1,6 +1,7 @@
 @using Sandbox;
 @using System;
 @using Facepunch.Boomer.WeaponSystem;
+@using Facepunch.Boomer.Mechanics;
 
 @namespace Facepunch.Boomer
 
@@ -23,7 +24,7 @@
 
         .icon {
             color: white;
-            font-size: 20px;
+            font-size: 30px;
             font-family: Material Icons;
             justify-content: center;
             align-items: center;
@@ -56,6 +57,12 @@
         <label class="text @HealthClasses()">@Health</label>
         <label class="text reserve">100</label>
     </div>
+
+    <div class="row">
+        <label class="text @HealthClasses()">@Dash.DashCount</label>
+        <label class="text reserve">@Dash.MaxDashes</label>
+        <label class="icon">speed</label>
+    </div>
 </root>
 
 @code 
@@ -64,10 +71,11 @@
     public Player Player => Game.LocalPawn as Player;
     public Weapon Weapon => Player?.ActiveWeapon;
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
+    public DashMechanic Dash => Player.Controller.GetMechanic<DashMechanic>();
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health );
+        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount );
     }
 
     protected string HealthClasses()
