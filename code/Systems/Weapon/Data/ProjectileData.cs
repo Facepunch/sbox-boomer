@@ -60,6 +60,9 @@ public partial class ProjectileData : GameResource
 	[Category( "Explosion" )]
 	public bool NoDeleteOnExplode { get; set; } = false;
 
+	[Category( "Explosion" )]
+	public bool ClearZVelocity { get; set; } = false;
+
 	[Category( "Bounce" ), Range( 0, 1 )]
 	public float Bounciness { get; set; }
 

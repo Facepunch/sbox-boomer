@@ -13,7 +13,6 @@ public partial class ProjectileData
 	/// </summary>
 	public static List<ProjectileData> All = new();
 
-
 	/// <summary>
 	/// Find projectile data from its name.
 	/// </summary>

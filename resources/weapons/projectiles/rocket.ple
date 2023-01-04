@@ -30,6 +30,7 @@
 			},
 		]
 		NoDeleteOnExplode = false
+		ClearZVelocity = true
 		Bounciness = 0
 		BounceSoundPath = null
 		BounceSoundMinVelocity = 300
