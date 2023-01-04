@@ -13,10 +13,7 @@
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
         transition: opacity 0.1s ease;
-        opacity: 0;
-        &.visible {
-            opacity: 1;
-        }
+        opacity: 1;
     }
 </style>
 
@@ -26,7 +23,7 @@
 
 @code {
     public Weapon Weapon => (Game.LocalPawn as Player)?.ActiveWeapon;
-    public string ImagePath => Weapon.WeaponData.CrosshairIcon;
+    public string ImagePath => Weapon?.WeaponData.CrosshairIcon ?? "";
 
     protected override int BuildHash()
     {
