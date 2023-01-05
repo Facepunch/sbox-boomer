@@ -58,7 +58,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 			ShootBullet( Data.BulletSpread, Data.BulletForce, Data.BulletSize, Data.BulletCount, Data.BulletRange );
 		}
 
-		if ( Data.KnockbackForce > 0f )
+		if ( Data.KnockbackForce > 0f && !player.Tags.Has( "ducked" ) )
 		{
 			player.Controller.GetMechanic<WalkMechanic>()
 				.ClearGroundEntity();

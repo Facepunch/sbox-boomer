@@ -19,4 +19,14 @@ public partial class CrouchMechanic : PlayerControllerMechanic
 
 		return true;
 	}
+
+	protected override void OnStart()
+	{
+		Player.Tags.Add( "ducked" );
+	}
+
+	protected override void OnStop()
+	{
+		Player.Tags.Remove( "ducked" );
+	}
 }
