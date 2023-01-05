@@ -12,7 +12,7 @@ public class Crosshair : Panel
 	private DeathmatchWeapon SelectedWeapon { get; set; }
 	public Crosshair()
 	{
-		StyleSheet.Load( "/ui/Crosshair.scss" );
+		StyleSheet.Load( "/Resource/Styles/_crosshair.scss" );
 
 		Icon = Add.Image( "ui/crosshair/crosshair002.png", "icon" );
 	}

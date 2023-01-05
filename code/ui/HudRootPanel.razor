@@ -1,8 +1,36 @@
-﻿using Sandbox.UI;
+﻿@using Sandbox.UI;
 
-namespace Boomer.UI;
+@namespace Boomer.UI
 
-public class HudRootPanel : RootPanel
+@inherits RootPanel
+
+@attribute [StyleSheet("/resource/styles/hud.scss")]
+
+
+<root>
+    <AwardQueue></AwardQueue>
+
+    <div class="bottom-left">
+        <HealthHud></HealthHud>
+        <ArmourHud></ArmourHud>
+        <LastDamage></LastDamage>
+    </div>
+
+    <div class="bottom-right">
+        <AmmoVital></AmmoVital>
+        <DashCount></DashCount>
+    </div>
+
+    <div class="top-middle">
+        <GameHud></GameHud>
+        <Speedo></Speedo>
+    </div>
+
+    <SpectatorWidget />
+    <SettingsMenu />
+</root>
+
+@code
 {
 	public static HudRootPanel Current;
 
@@ -11,9 +39,6 @@ public class HudRootPanel : RootPanel
 	public HudRootPanel()
 	{
 		Current = this;
-
-		StyleSheet.Load( "/resource/styles/hud.scss" );
-		SetTemplate( "/resource/templates/hud.html" );
 
 		AddChild<Crosshair>();
 		
