@@ -35,6 +35,12 @@
             color: white;
             font-size: 24px;
         }
+
+        .row {
+            &.hidden {
+                display: none;
+            }
+        }
     }
 </style>
 
@@ -50,12 +56,20 @@
             }
 
             <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
+            <label class="icon">backpack</label>
         </div>
     }
 
     <div class="row">
         <label class="text @HealthClasses()">@Health</label>
         <label class="text reserve">100</label>
+        <label class="icon">emergency</label>
+    </div>
+
+    <div class="row @ArmorClasses()">
+        <label class="text">@Armor</label>
+        <label class="text reserve">100</label>
+        <label class="icon">shield</label>
     </div>
 
     <div class="row">
@@ -68,6 +82,7 @@
 @code 
 {
     public string Health => $"{Player.Health:F0}";
+    public string Armor => $"{Player.ArmorComponent.Current:F0}";
     public Player Player => Game.LocalPawn as Player;
     public Weapon Weapon => Player?.ActiveWeapon;
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
@@ -75,12 +90,17 @@
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount );
+        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current );
     }
 
     protected string HealthClasses()
     {
         return Player.Health < 25f ? "low" : "";
+    }
+
+    protected string ArmorClasses()
+    {
+        return Player.ArmorComponent.Current < 1 ? "hidden" : "";
     }
 
     protected string AmmoClasses()
