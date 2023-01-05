@@ -14,6 +14,16 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	[Net] protected IList<Weapon> Weapons { get; set; }
 	[Net, Predicted] public Weapon ActiveWeapon { get; set; }
 
+	public Weapon FindWeapon( WeaponData data )
+	{
+		return Weapons.FirstOrDefault( x => x.WeaponData == data );
+	}
+
+	public Weapon FindWeapon( string name )
+	{
+		return FindWeapon( WeaponData.FindResource( name ) );
+	}
+
 	public bool AddWeapon( Weapon weapon, bool makeActive = true )
 	{
 		if ( Weapons.Contains( weapon ) ) return false;
