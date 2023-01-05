@@ -4,7 +4,7 @@
 /// Gives 25 Armour
 /// </summary>
 [Library( "boomer_armour" ), HammerEntity]
-[EditorModel( "models/dm_battery.vmdl" )]
+[EditorModel( "models/gameplay/armour/armour.vmdl" )]
 [Title( "Armour" ), Category( "PickUps" )]
 partial class ArmorPickup : BasePickup
 {

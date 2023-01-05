@@ -41,8 +41,7 @@
     "Compiler": {
       "RootNamespace": "Sandbox",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
-      "NoWarn": "1701;1702;1591;",
-      "ReleaseMode": "Release"
+      "NoWarn": "1701;1702;1591;"
     },
     "GameCategory": "Shooter",
     "ControlModes": {
@@ -157,6 +156,93 @@
     "DefaultLeaderboards": null,
     "Summary": "Boomer is a fast-paced shooter inspired by old school shooters.",
     "Description": "\uD83D\uDC77\u200D\u2642\uFE0F(WIP)\uD83D\uDC77\u200D\u2642\uFE0F\nBoomer is a fast-paced shooter inspired by old school shooters.\n\nAt the moment its just death match but more to come later;\nTDM\nCTF\nDuel\nKoth\n\nAs well a PVE style campaign mode.\n\nMake sure to include \u0022facepunch.boomer\u0022 in supported games if you are making custom maps.",
-    "Public": true
+    "Public": true,
+    "PackageSettings": [
+      {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "Deathmatch",
+            "Name": "Deathmatch"
+          },
+          {
+            "Value": "TeamDeathmatch",
+            "Name": "Team Deathmatch"
+          },
+          {
+            "Value": "InstaGib",
+            "Name": "InstaGib"
+          },
+          {
+            "Value": "TeamInstaGib",
+            "Name": "Team InstaGib"
+          },
+          {
+            "Value": "MasterTrio",
+            "Name": "MasterTrio"
+          },
+          {
+            "Value": "TeamMasterTrio",
+            "Name": "Team MasterTrio"
+          },
+          {
+            "Value": "RailTag",
+            "Name": "RailTag"
+          },
+          {
+            "Value": "RocketArena",
+            "Name": "RocketArena"
+          },
+          {
+            "Value": "TeamRocketArena",
+            "Name": "Team RocketArena"
+          },
+          {
+            "Value": "MasterBall",
+            "Name": "MasterBall"
+          },
+          {
+            "Value": "TeamMasterBall",
+            "Name": "Team MasterBall"
+          }
+        ],
+        "ConVarName": "bm_gamemode",
+        "DisplayName": "Game Type",
+        "DefaultValue": "Deathmatch",
+        "Description": "Select from a list of different game types",
+        "Group": ""
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "bm_friendly_fire",
+        "DisplayName": "Friendly Fire",
+        "DefaultValue": "false",
+        "Description": "Friendly Fire",
+        "Group": ""
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_warmuptime",
+        "DisplayName": "Warmup Time (Secounds)",
+        "DefaultValue": "29.700226",
+        "Description": "Warmup Time (Secounds)",
+        "Group": "",
+        "Minimum": 5,
+        "Maximum": 60
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_roundendtime",
+        "DisplayName": "Round Time (Minutes)",
+        "DefaultValue": "14.643665",
+        "Description": "Round Time (Minutes)",
+        "Group": "",
+        "Minimum": 5,
+        "Maximum": 30
+      }
+    ]
   }
 }
