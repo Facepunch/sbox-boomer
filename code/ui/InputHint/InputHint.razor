@@ -1,9 +1,15 @@
-using Sandbox.UI;
+@using Sandbox.UI;
 
-namespace Boomer.UI;
+@namespace Boomer.UI
+@attribute [StyleSheet("ui/InputHint/InputHint.scss")]
+@inherits Panel;
 
-[UseTemplate]
-public partial class InputHint : Panel
+<root>
+    <image class="glyph" @ref=Glyph />
+    <label class="action" @ref=ActionLabel></label>
+</root>
+
+@code
 {
 	// @ref
 	public Image Glyph { get; set; }
@@ -15,10 +21,15 @@ public partial class InputHint : Panel
 
 	public bool DisableOnGamepad { get; set; } = false;
 
-	public InputHint()
+	protected override void OnAfterTreeRender(bool firstTime)
 	{
-		BindClass( "noaction", () => string.IsNullOrEmpty( Text ) );
-		BindClass( "hide", () => DisableOnGamepad && Input.UsingController );
+		base.OnAfterTreeRender(firstTime);
+
+		if ( firstTime )
+		{
+			BindClass("noaction", () => string.IsNullOrEmpty(Text));
+			BindClass("hide", () => DisableOnGamepad && Input.UsingController);
+		}
 	}
 
 	public override void SetProperty( string name, string value )
