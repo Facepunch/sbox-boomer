@@ -18,12 +18,15 @@
 </style>
 
 <root>
+    @if ( DevCam != null ) return;
+
     <img class="icon" src="@ImagePath" />
 </root>
 
 @code {
     public Weapon Weapon => (Game.LocalPawn as Player)?.ActiveWeapon;
     public string ImagePath => Weapon?.WeaponData.CrosshairIcon ?? "";
+    public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>(false);
 
     protected override int BuildHash()
     {

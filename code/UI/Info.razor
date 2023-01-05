@@ -45,6 +45,9 @@
 </style>
 
 <root>
+    @if ( DevCam != null )
+        return;
+
     @if ( AmmoComponent != null )
     {
         <div class="row">
@@ -87,10 +90,11 @@
     public Weapon Weapon => Player?.ActiveWeapon;
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
     public DashMechanic Dash => Player.Controller.GetMechanic<DashMechanic>();
+    public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current );
+        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current, DevCam );
     }
 
     protected string HealthClasses()

@@ -48,9 +48,4 @@ public partial class GameManager : Sandbox.GameManager
 		base.ClientDisconnect( client, reason );
 		Chat.AddChatEntry( To.Everyone, client.Name, "left the game", client.SteamId, true );
 	}
-
-	public override void DoPlayerDevCam( IClient client )
-	{
-		// do nothing
-	}
 }
