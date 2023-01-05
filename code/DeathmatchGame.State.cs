@@ -2,7 +2,7 @@
 
 partial class DeathmatchGame : GameManager
 {
-	public static GameStates CurrentState => (Current as DeathmatchGame)?.GameState ?? GameStates.Warmup;
+	public static GameStates CurrentState => Current?.GameState ?? GameStates.Warmup;
 
 	[Net]
 	public RealTimeUntil StateTimer { get; set; } = 0f;
