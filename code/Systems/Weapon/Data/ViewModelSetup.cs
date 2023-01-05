@@ -44,4 +44,6 @@ public struct ViewModelData
 	/// Aim Down Sight
 	public Vector3 AimPositionOffset { get; set; }
 	public Angles AimAngleOffset { get; set; }
+
+	public float AimFovOffset { get; set; }
 }
