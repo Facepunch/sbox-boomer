@@ -23,6 +23,11 @@ public partial class Player : AnimatedEntity
 	[BindComponent] public Inventory Inventory { get; }
 
 	/// <summary>
+	/// Armor component, responsible for controlling player armor.
+	/// </summary>
+	[BindComponent] public ArmorComponent ArmorComponent { get; }
+
+	/// <summary>
 	/// Time since the player last took damage.
 	/// </summary>
 	[Net, Predicted] public TimeSince TimeSinceDamage { get; set; }
@@ -97,6 +102,7 @@ public partial class Player : AnimatedEntity
 		// Remove old mechanics.
 		Components.RemoveAny<PlayerControllerMechanic>();
 
+
 		// Add mechanics.
 		Components.Create<WalkMechanic>();
 		Components.Create<JumpMechanic>();
@@ -108,6 +114,8 @@ public partial class Player : AnimatedEntity
 		Components.Create<DashMechanic>();
 
 		Components.Create<PlayerAnimator>();
+		Components.Create<ArmorComponent>();
+
 		var inventory = Components.Create<Inventory>();
 
 		foreach ( var wpn in WeaponData.All )
@@ -204,6 +212,21 @@ public partial class Player : AnimatedEntity
 		if ( info.HasTag( "blast" ) )
 		{
 			SetAudioEffect( To.Single( Client ), "flasthbang", info.Damage.LerpInverse( 0, 60 ) );
+		}
+
+		if ( ArmorComponent != null )
+		{
+			ArmorComponent.Current -= info.Damage;
+
+			if ( ArmorComponent.Current < 0 )
+			{
+				info.Damage = ArmorComponent.Current * -1;
+				ArmorComponent.Current = 0;
+			}
+			else
+			{
+				info.Damage = 0;
+			}
 		}
 
 		if ( Health > 0 && info.Damage > 0 )

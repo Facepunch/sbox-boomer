@@ -16,9 +16,7 @@ partial class ArmorPickup : BasePickup
 
 	public override void OnPickup( Player player )
 	{
-		//var newhealth = player.Armour + ArmorGranted;
-		//newhealth = newhealth.Clamp( 0, 100 );
-		//player.Armor = newhealth;
+		player.ArmorComponent.Give( ArmorGranted );
 
 		PlayPickupSound();
 		OnPickUpRpc( To.Single( player ) );
@@ -28,7 +26,7 @@ partial class ArmorPickup : BasePickup
 
 	public override bool CanPickup( Player player )
 	{
-		//if ( player.Armour >= 100 ) return false;
+		if ( player.ArmorComponent.Current >= player.ArmorComponent.Max ) return false;
 		return base.CanPickup( player );
 	}
 
@@ -123,7 +121,8 @@ partial class MegaArmour : BasePickup
 
 	public override void OnPickup( Player player )
 	{
-		//player.Armour = (player.Armour + HealthGranted).Clamp( 0, 200 );
+		player.ArmorComponent.Current = 200;
+
 		PlayPickupSound();
 		Timer.Destroy( true );
 
