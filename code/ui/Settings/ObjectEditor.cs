@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Boomer.UI;
 
-internal class ObjectEditor : Panel
+public class ObjectEditor : Panel
 {
 
 	public ObjectEditor()

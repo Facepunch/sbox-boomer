@@ -1,0 +1,68 @@
+﻿
+@using Boomer.UI;
+@using Sandbox.UI;
+
+@namespace Boomer
+@attribute [StyleSheet("/ui/Settings/SettingsMenu.scss")]
+
+<root>
+
+    <div class="navbar">
+        <button>#GameSettings.GeneralSettings</button>
+        <div style="flex-grow: 1;" />
+        <button onclick=@(Close) class="exit">#GameSettings.Close</button>
+    </div>
+
+    <div class="body">
+        <ObjectEditor @ref=Editor />
+    </div>
+
+    <div class="footer">
+        <button onclick=@(SetDefaults) class="reset-defaults">#GameSettings.Reset</button>
+    </div>
+</root>
+
+@code {
+	public ObjectEditor Editor;
+
+	public SettingsMenu()
+	{
+		Current = this;
+	}
+
+	public override void OnHotloaded()
+	{
+		base.OnHotloaded();
+
+		Editor.SetTarget( ClientSettings.Current );
+	}
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		if ( firstTime )
+			Editor.SetTarget( ClientSettings.Current );
+	}
+
+	public void SetDefaults()
+	{
+		ClientSettings.Reset();
+
+		Editor.SetTarget( ClientSettings.Current );
+	}
+
+	public void Close() => SetOpen( false );
+
+	private static SettingsMenu Current;
+	public static void SetOpen( bool open ) => Current?.SetClass( "open", open );
+	public static void ToggleOpen() => Current?.SetClass( "open", !Current.HasClass( "open" ) );
+
+	protected override void OnEvent( PanelEvent e )
+	{
+		base.OnEvent( e );
+
+		if ( e.Name == "save" )
+		{
+			ClientSettings.Current.Save();
+		}
+	}
+}
