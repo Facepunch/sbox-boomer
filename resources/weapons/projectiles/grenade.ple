@@ -5,7 +5,7 @@
 		ModelPath = resource:"models/gameplay/projectiles/grenades/grenade.vmdl"
 		ParticlePath = resource:"particles/gameplay/weapons/grenade/grenade.vpcf"
 		ActiveSoundPath = null
-		InitialForce = "2000,0"
+		InitialForce = "2000,250"
 		Gravity = 10
 		Radius = 8
 		Lifetime = 5
@@ -23,8 +23,8 @@
 		[
 			{
 				y = 1
-				in = 1.0
-				out = -1.0
+				in = 1
+				out = -1
 			},
 			{
 				x = 0.501232
@@ -34,6 +34,7 @@
 			},
 		]
 		NoDeleteOnExplode = false
+		ClearZVelocity = false
 		Bounciness = 0.9
 		BounceSoundPath = resource:"sounds/weapons/grenadelauncher/gl.impact.sound"
 		BounceSoundMinVelocity = 300
