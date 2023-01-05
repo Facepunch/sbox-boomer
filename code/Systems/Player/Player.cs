@@ -195,11 +195,26 @@ public partial class Player : AnimatedEntity
 		if ( LifeState != LifeState.Alive )
 			return;
 
+		var attackerComponent = info.Attacker?.Components.Get<DamageModComponent>();
+		var victimComponent = Components.Get<DamageModComponent>();
+
 		// Check for headshot damage
 		var isHeadshot = info.Hitbox.HasTag( "head" );
 		if ( isHeadshot )
 		{
 			info.Damage *= 2.5f;
+		}
+
+		// If the attacker has a damage modifier component, we can apply a scale to outgoing damage.
+		if ( attackerComponent != null )
+		{
+			info.Damage *= attackerComponent.OutgoingScale;
+		}
+
+		// If the victim has a damage modifier component, we can apply a scale to incoming damage.
+		if ( victimComponent != null )
+		{
+			info.Damage *= victimComponent.IncomingScale;
 		}
 
 		// Check if we got hit by a bullet, if we did, play a sound.
