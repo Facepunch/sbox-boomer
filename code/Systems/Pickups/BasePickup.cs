@@ -7,7 +7,7 @@ public abstract partial class BasePickup : AnimatedEntity
 {
 	public virtual Model WorldModel => null;
 
-	public int RespawnTime { get; set; } = 30;
+	[Property] public int RespawnTime { get; set; } = 30;
 	[Property] public bool SpawnImmediate { get; set; } = true;
 
 	[Net, Change( "OnAvailable" )] protected bool Available { get; set; } = false;
