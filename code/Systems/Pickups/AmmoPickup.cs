@@ -16,9 +16,10 @@ partial class AmmoPickup : BasePickup
 		var wpn = player.Inventory.FindWeapon( ResourceIdent );
 		if ( !wpn.IsValid() ) return;
 
-		wpn.GetComponent<Ammo>()
-			.Fill();
-		
+		var ammoComponent = wpn.GetComponent<Ammo>();
+		if ( ammoComponent.IsFull ) return;
+
+		ammoComponent.Fill();
 		PlayPickupSound();
 
 		base.OnPickup( player );
