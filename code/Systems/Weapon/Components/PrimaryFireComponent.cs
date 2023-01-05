@@ -1,5 +1,6 @@
 using Facepunch.Boomer.Mechanics;
 using Sandbox;
+using Sandbox.UI;
 using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
@@ -55,6 +56,15 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		else
 		{
 			ShootBullet( Data.BulletSpread, Data.BulletForce, Data.BulletSize, Data.BulletCount, Data.BulletRange );
+		}
+
+		if ( Data.KnockbackForce > 0f )
+		{
+			player.Controller.GetMechanic<WalkMechanic>()
+				.ClearGroundEntity();
+
+			player.Controller.Velocity = player.Controller.Velocity.WithZ( 0f );
+			player.Controller.Velocity += player.EyeRotation.Backward * Data.KnockbackForce;
 		}
 	}
 
@@ -275,6 +285,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 		[Category( "Projectile" ), ResourceType( "ple" )]
 		public string Projectile { get; set; }
+
+		[Category( "Knockback" )]
+		public float KnockbackForce { get; set; }
 
 		public void Precache()
 		{
