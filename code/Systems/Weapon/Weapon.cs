@@ -31,6 +31,11 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster( Player player )
 	{
 		EnableDrawing = false;
+
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			component.Enabled = false;
+		}
 	}
 
 	/// <summary>
@@ -54,6 +59,11 @@ public partial class Weapon : AnimatedEntity
 
 		if ( Game.IsServer )
 			CreateViewModel( To.Single( player ) );
+
+		foreach ( var component in Components.GetAll<WeaponComponent>( true ) )
+		{
+			component.Enabled = true;
+		}
 	}
 
 	[ClientRpc]
