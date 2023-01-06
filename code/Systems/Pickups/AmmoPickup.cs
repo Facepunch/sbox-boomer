@@ -17,7 +17,7 @@ partial class AmmoPickup : BasePickup
 		if ( !wpn.IsValid() ) return;
 
 		var ammoComponent = wpn.GetComponent<Ammo>();
-		if ( ammoComponent.IsFull ) return;
+		if ( ammoComponent == null || ammoComponent.IsFull ) return;
 
 		ammoComponent.Fill();
 		PlayPickupSound();
