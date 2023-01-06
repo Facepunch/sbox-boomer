@@ -206,8 +206,6 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 			var damage = Data.BaseDamage;
 
-			Vector3 LastImpact = Vector3.Zero;
-			int count = 0;
 			foreach ( var tr in TraceBullet( Player.AimRay.Position, Player.AimRay.Position + forward * bulletRange, bulletSize, ref damage ) )
 			{
 				tr.Surface.DoBulletImpact( tr );
@@ -222,46 +220,16 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 				tr.Entity.TakeDamage( damageInfo );
 
-				DoTracer( To.Everyone, Weapon, tr.StartPosition, tr.EndPosition, tr.Distance, count );
-
-				if ( count == 1 )
+				if ( !string.IsNullOrEmpty( Data.TracerPath ) )
 				{
-					// TODO - Figure out assets
-					// Particles.Create( "particles/gameplay/guns/trail/rico_trail_impact_spark.vpcf", LastImpact );
+					using ( Prediction.Off() )
+					{
+						var tracer = Particles.Create( Data.TracerPath, tr.StartPosition );
+						tracer?.SetPosition( 1, tr.EndPosition );
+					}
 				}
-
-				LastImpact = tr.EndPosition;
-				count++;
 			}
 		}
-	}
-
-	[ClientRpc]
-	public static void DoTracer( Weapon weapon, Vector3 from, Vector3 to, float dist, int bullet )
-	{
-		// TODO - Figure out assets 
-
-		//var path = "particles/gameplay/guns/trail/trail_smoke.vpcf";
-
-		//if ( bullet > 0 )
-		//{
-		//	path = "particles/gameplay/guns/trail/rico_trail_smoke.vpcf";
-
-		//	// Project backward
-		//	Vector3 dir = (from - to).Normal;
-		//	var tr = Trace.Ray( to, from + (dir * 50f) )
-		//		.Radius( 1f )
-		//		.Ignore( weapon )
-		//		.Run();
-
-		//	tr.Surface.DoBulletImpact( tr );
-		//}
-
-		//var system = Particles.Create( path );
-
-		//system?.SetPosition( 0, bullet == 0 ? weapon.EffectEntity.GetAttachment( "muzzle" )?.Position ?? from : from );
-		//system?.SetPosition( 1, to );
-		//system?.SetPosition( 2, dist );
 	}
 
 	/// <summary>
@@ -289,10 +257,14 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		[Category( "Knockback" )]
 		public float KnockbackForce { get; set; }
 
+		[Category( "Effects" ), ResourceType( "vpcf" )]
+		public string TracerPath { get; set; }
+
 		public void Precache()
 		{
 			if ( !string.IsNullOrEmpty( FireSound ) ) Sandbox.Precache.Add( FireSound );
 			if ( !string.IsNullOrEmpty( DryFireSound ) ) Sandbox.Precache.Add( DryFireSound );
+			if ( !string.IsNullOrEmpty( TracerPath ) ) Sandbox.Precache.Add( TracerPath );
 		}
 	}
 }
