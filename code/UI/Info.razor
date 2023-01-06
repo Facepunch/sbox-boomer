@@ -75,11 +75,14 @@
         <label class="icon">shield</label>
     </div>
 
-    <div class="row">
-        <label class="text">@Dash.DashCount</label>
-        <label class="text reserve">@Dash.MaxDashes</label>
-        <label class="icon">speed</label>
-    </div>
+    @if ( Dash != null )
+    {
+        <div class="row">
+            <label class="text">@Dash.DashCount</label>
+            <label class="text reserve">@Dash.MaxDashes</label>
+            <label class="icon">speed</label>
+        </div>
+    }
 </root>
 
 @code 
@@ -89,7 +92,7 @@
     public Player Player => Game.LocalPawn as Player;
     public Weapon Weapon => Player?.ActiveWeapon;
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
-    public DashMechanic Dash => Player.Controller.GetMechanic<DashMechanic>();
+    public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
 
     protected override int BuildHash()
