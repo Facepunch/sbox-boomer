@@ -1,49 +1,54 @@
 using Facepunch.Boomer.Mechanics;
 using Sandbox;
-using Sandbox.UI;
 using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
-public partial class PrimaryFire : WeaponComponent, ISingletonComponent
+public partial class Shoot : WeaponComponent, ISingletonComponent
 {
-	public ComponentData Data => Weapon.WeaponData.PrimaryFire;
-	public TimeUntil TimeUntilCanFire { get; set; }
-
 	protected override bool UseLagCompensation => true;
+	public virtual InputButton FireButton => InputButton.PrimaryAttack;
+	public ComponentData Data => Weapon.WeaponData.Shoot;
 
-	bool CanFire( Player player )
+	/// <summary>
+	/// When penetrating a surface, this is the trace increment amount.
+	/// </summary>
+	protected float PenetrationIncrementAmount => 15f;
+
+	/// <summary>
+	/// How many increments?
+	/// </summary>
+	protected int PenetrationMaxSteps => 2;
+
+	/// <summary>
+	/// How many ricochet hits until we stop traversing
+	/// </summary>
+	protected float MaxAmtOfHits => 2f;
+
+	/// <summary>
+	/// Maximum angle in degrees for ricochet to be possible
+	/// </summary>
+	protected float MaxRicochetAngle => 45f;
+
+	public TimeUntil TimeUntilCanFire { get; set; }
+	protected Particles ActiveParticle { get; set; }
+	protected Sound? ActiveSound { get; set; }
+	protected bool IsFiring { get; set; } = false;
+
+	public void StartFiring( Player player )
 	{
-		if ( TimeUntilCanFire > 0 ) return false;
-		if ( !Input.Down( InputButton.PrimaryAttack ) ) return false;
-		if ( Weapon.Tags.Has( "reloading" ) ) return false;
-		// Optional
-		if ( GetComponent<Ammo>() is Ammo ammo && !ammo.HasEnoughAmmo() ) return false;
+		if ( IsFiring ) return;
 
-		return true;
+		IsFiring = true;
+
+		if ( Data.FireSoundOnlyOnStart )
+			player.PlaySound( Data.FireSound );
 	}
 
-	protected override bool CanStart( Player player )
+	public void StopFiring( Player player )
 	{
-		if ( !CanFire( player ) ) return false;
+		IsFiring = false;
 
-		return TimeSinceActivated > Data.FireDelay;
-	}
-
-	public override void OnGameEvent( string eventName )
-	{
-		if ( eventName == "sprint.stop" )
-		{
-			TimeUntilCanFire = 0.2f;
-		}
-		if ( eventName == "aim.start" )
-		{
-			TimeUntilCanFire = 0.15f;
-		}
-	}
-
-	protected override void OnDeactivate()
-	{
 		ActiveSound?.Stop();
 		ActiveSound = null;
 
@@ -51,20 +56,37 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		ActiveParticle = null;
 	}
 
+	protected override void OnDeactivate()
+	{
+		StopFiring( Player );
+	}
+
 	public override void Simulate( IClient cl, Player player )
 	{
 		base.Simulate( cl, player );
 
-		if ( !CanFire( player ) )
+		if ( WishesToFire( player ) )
 		{
-			ActiveSound?.Stop();
-			ActiveSound = null;
-
-			ActiveParticle?.Destroy( true );
-			ActiveParticle = null;
+			if ( CanFire( player ) )
+			{
+				StartFiring( player );
+			}
 		}
 		else
 		{
+			if ( IsFiring )
+			{
+				StopFiring( player );
+			}
+		}
+
+		if ( IsFiring )
+		{
+			if ( TimeSinceActivated > Data.FireDelay )
+			{
+				Fire( player );
+			}
+
 			if ( ActiveParticle != null && Game.IsClient )
 			{
 				var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
@@ -77,19 +99,16 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		}
 	}
 
-	protected Particles ActiveParticle { get; set; }
-	protected Sound? ActiveSound { get; set; }
-
-	protected override void OnStart( Player player )
+	void Fire( Player player )
 	{
-		base.OnStart( player );
+		TimeSinceActivated = 0;
 
 		player?.SetAnimParameter( "b_attack", true );
 
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
 		{
-			if ( !Data.FireSoundStartEnd )
+			if ( !Data.FireSoundOnlyOnStart && !string.IsNullOrEmpty( Data.FireSound ) )
 				player.PlaySound( Data.FireSound );
 
 			DoShootEffects( To.Single( player ) );
@@ -123,10 +142,37 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 				ActiveParticle = Particles.Create( Data.TracerPath );
 			}
 
-			if ( Data.FireSoundStartEnd && ActiveSound == null )
+			if ( !string.IsNullOrEmpty( Data.ActivateSound ) && ActiveSound == null )
 			{
-				ActiveSound = Sound.FromEntity( Data.FireSound, player );
+				ActiveSound = Sound.FromEntity( Data.ActivateSound, player );
 			}
+		}
+	}
+
+	protected bool WishesToFire( Player player )
+	{
+		if ( Input.Down( FireButton ) ) return true;
+		return false;
+	}
+
+	protected bool CanFire( Player player )
+	{
+		if ( TimeUntilCanFire > 0 ) return false;
+		if ( Weapon.Tags.Has( "reloading" ) ) return false;
+		if ( GetComponent<Ammo>() is Ammo ammo && !ammo.HasEnoughAmmo() ) return false;
+
+		return true;
+	}
+
+	public override void OnGameEvent( string eventName )
+	{
+		if ( eventName == "sprint.stop" )
+		{
+			TimeUntilCanFire = 0.2f;
+		}
+		if ( eventName == "aim.start" )
+		{
+			TimeUntilCanFire = 0.15f;
 		}
 	}
 
@@ -146,26 +192,6 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 			.Size( radius )
 			.Run();
 	}
-
-	/// <summary>
-	/// When penetrating a surface, this is the trace increment amount.
-	/// </summary>
-	protected float PenetrationIncrementAmount => 15f;
-
-	/// <summary>
-	/// How many increments?
-	/// </summary>
-	protected int PenetrationMaxSteps => 2;
-
-	/// <summary>
-	/// How many ricochet hits until we stop traversing
-	/// </summary>
-	protected float MaxAmtOfHits => 2f;
-
-	/// <summary>
-	/// Maximum angle in degrees for ricochet to be possible
-	/// </summary>
-	protected float MaxRicochetAngle => 45f;
 
 	protected bool ShouldPenetrate()
 	{
@@ -310,7 +336,10 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		[ResourceType( "sound" )]
 		public string FireSound { get; set; }
 
-		public bool FireSoundStartEnd { get; set; }
+		public bool FireSoundOnlyOnStart { get; set; }
+
+		[ResourceType( "sound" )]
+		public string ActivateSound { get; set; }
 
 		[ResourceType( "sound" )]
 		public string DryFireSound { get; set; }

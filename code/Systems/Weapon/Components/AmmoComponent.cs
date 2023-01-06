@@ -22,7 +22,7 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 
 	public override void OnGameEvent( string eventName )
 	{
-		if ( eventName == "primaryfire.start" )
+		if ( eventName == "shoot.start" )
 		{
 			TakeAmmo();
 		}

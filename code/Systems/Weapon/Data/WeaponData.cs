@@ -37,7 +37,7 @@ public partial class WeaponData : GameResource
 	public ViewModelData ViewModelData { get; set; }
 
 	// Component Information
-	public PrimaryFire.ComponentData PrimaryFire { get; set; }
+	public Shoot.ComponentData Shoot { get; set; }
 	public Aim.ComponentData Aim { get; set; }
 	public Ammo.ComponentData Ammo { get; set; }
 
@@ -57,6 +57,6 @@ public partial class WeaponData : GameResource
 			CachedViewModel = Sandbox.Model.Load( ViewModel );
 
 		// Precache
-		PrimaryFire.Precache();
+		Shoot.Precache();
 	}
 }

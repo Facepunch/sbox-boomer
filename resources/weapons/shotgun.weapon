@@ -11,7 +11,7 @@
 		Handedness = "Right"
 		Components = 
 		[
-			"PrimaryFire",
+			"Shoot",
 			"Ammo",
 			"Aim",
 		]
@@ -36,7 +36,7 @@
 			AimPositionOffset = "-6,0,2.5"
 			AimFovOffset = 15
 		}
-		PrimaryFire = 
+		Shoot = 
 		{
 			BaseDamage = 15
 			BulletRange = 5000

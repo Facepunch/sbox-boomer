@@ -11,7 +11,7 @@
 		Handedness = "Right"
 		Components = 
 		[
-			"PrimaryFire",
+			"Shoot",
 			"Ammo",
 		]
 		ViewModelData = 
@@ -34,7 +34,7 @@
 			SprintAngleOffset = "20,6.529,-12.2"
 			AimPositionOffset = "1.396,8.261003,3.366"
 		}
-		PrimaryFire = 
+		Shoot = 
 		{
 			BaseDamage = 15
 			BulletRange = 5000

@@ -11,7 +11,7 @@
 		Handedness = "Right"
 		Components = 
 		[
-			"PrimaryFire",
+			"Shoot",
 			"Ammo",
 			"Aim",
 		]
@@ -36,7 +36,7 @@
 			AimPositionOffset = "-10,0,3.366"
 			AimFovOffset = 60
 		}
-		PrimaryFire = 
+		Shoot = 
 		{
 			BaseDamage = 5
 			BulletRange = 5000
@@ -44,8 +44,9 @@
 			BulletForce = 1000
 			BulletSize = 1
 			FireDelay = 0.09
-			FireSound = resource:"sounds/weapons/lasergun/lg.beam.sound"
-			FireSoundStartEnd = true
+			FireSound = resource:"sounds/weapons/rocketlauncher/rl.shoot.sound"
+			FireSoundOnlyOnStart = true
+			ActivateSound = resource:"sounds/weapons/lasergun/lg.beam.sound"
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			TracerPath = resource:"particles/gameplay/weapons/lightninggun/lightninggun_trace.vpcf"
 			TracerStartEnd = true
