@@ -12,13 +12,20 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 	protected override bool UseLagCompensation => true;
 
-	protected override bool CanStart( Player player )
+	bool CanFire( Player player )
 	{
 		if ( TimeUntilCanFire > 0 ) return false;
 		if ( !Input.Down( InputButton.PrimaryAttack ) ) return false;
 		if ( Weapon.Tags.Has( "reloading" ) ) return false;
 		// Optional
-		if ( GetComponent<Ammo>() is Ammo ammo && !ammo.HasEnoughAmmo() ) return false; 
+		if ( GetComponent<Ammo>() is Ammo ammo && !ammo.HasEnoughAmmo() ) return false;
+
+		return true;
+	}
+
+	protected override bool CanStart( Player player )
+	{
+		if ( !CanFire( player ) ) return false;
 
 		return TimeSinceActivated > Data.FireDelay;
 	}
@@ -35,6 +42,44 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		}
 	}
 
+	protected override void OnDeactivate()
+	{
+		ActiveSound?.Stop();
+		ActiveSound = null;
+
+		ActiveParticle?.Destroy( true );
+		ActiveParticle = null;
+	}
+
+	public override void Simulate( IClient cl, Player player )
+	{
+		base.Simulate( cl, player );
+
+		if ( !CanFire( player ) )
+		{
+			ActiveSound?.Stop();
+			ActiveSound = null;
+
+			ActiveParticle?.Destroy( true );
+			ActiveParticle = null;
+		}
+		else
+		{
+			if ( ActiveParticle != null && Game.IsClient )
+			{
+				var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
+				ActiveParticle.SetPosition( 0, pos.Position );
+
+				var tr = Trace.Ray( Player.AimRay.Position, Player.AimRay.Position + Player.AimRay.Forward * Data.BulletRange ).Ignore( player ).Run();
+
+				ActiveParticle.SetPosition( 1, tr.EndPosition );
+			}
+		}
+	}
+
+	protected Particles ActiveParticle { get; set; }
+	protected Sound? ActiveSound { get; set; }
+
 	protected override void OnStart( Player player )
 	{
 		base.OnStart( player );
@@ -44,7 +89,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
 		{
-			player.PlaySound( Data.FireSound );
+			if ( !Data.FireSoundStartEnd )
+				player.PlaySound( Data.FireSound );
+
 			DoShootEffects( To.Single( player ) );
 		}
 
@@ -65,6 +112,21 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 			player.Controller.Velocity = player.Controller.Velocity.WithZ( 0f );
 			player.Controller.Velocity += player.EyeRotation.Backward * Data.KnockbackForce;
+		}
+
+		using ( Prediction.Off() )
+		{
+			if ( Game.IsServer ) return;
+
+			if ( Data.TracerStartEnd && ActiveParticle == null )
+			{
+				ActiveParticle = Particles.Create( Data.TracerPath );
+			}
+
+			if ( Data.FireSoundStartEnd && ActiveSound == null )
+			{
+				ActiveSound = Sound.FromEntity( Data.FireSound, player );
+			}
 		}
 	}
 
@@ -220,7 +282,7 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 				tr.Entity.TakeDamage( damageInfo );
 
-				if ( !string.IsNullOrEmpty( Data.TracerPath ) )
+				if ( !string.IsNullOrEmpty( Data.TracerPath ) && !Data.TracerStartEnd )
 				{
 					using ( Prediction.Off() )
 					{
@@ -248,6 +310,8 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 		[ResourceType( "sound" )]
 		public string FireSound { get; set; }
 
+		public bool FireSoundStartEnd { get; set; }
+
 		[ResourceType( "sound" )]
 		public string DryFireSound { get; set; }
 
@@ -259,6 +323,9 @@ public partial class PrimaryFire : WeaponComponent, ISingletonComponent
 
 		[Category( "Effects" ), ResourceType( "vpcf" )]
 		public string TracerPath { get; set; }
+
+		[Category( "Effects" )]
+		public bool TracerStartEnd { get; set; }
 
 		public void Precache()
 		{

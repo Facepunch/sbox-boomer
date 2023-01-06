@@ -96,6 +96,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 			InputButton.Slot3 => 2,
 			InputButton.Slot4 => 3,
 			InputButton.Slot5 => 4,
+			InputButton.Slot6 => 5,
 			_ => -1
 		};
 	}
@@ -120,6 +121,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		TrySlotFromInput( InputButton.Slot3 );
 		TrySlotFromInput( InputButton.Slot4 );
 		TrySlotFromInput( InputButton.Slot5 );
+		TrySlotFromInput( InputButton.Slot6 );
 
 		ActiveWeapon?.BuildInput();
 	}
