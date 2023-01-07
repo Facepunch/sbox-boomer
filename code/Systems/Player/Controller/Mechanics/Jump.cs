@@ -16,7 +16,16 @@ public partial class JumpMechanic : PlayerControllerMechanic
 
 	protected override bool ShouldStart()
 	{
-		if ( !Input.Down( InputButton.Jump ) ) return false;
+		// If we hit the ground, we'll bunny hop.
+		if ( GroundEntity.IsValid() )
+		{
+			if ( !Input.Down( InputButton.Jump ) ) return false;
+		}
+		// If we're in the air, we want to make sure we're pressing the button again.
+		else
+		{
+			if ( !Input.Pressed( InputButton.Jump ) ) return false;
+		}
 
 		return CurrentJumps > 0f;
 	}
@@ -50,5 +59,7 @@ public partial class JumpMechanic : PlayerControllerMechanic
 		Controller.Player.PlaySound( "jump.single" );
 
 		CurrentJumps--;
+
+		IsActive = false;
 	}
 }
