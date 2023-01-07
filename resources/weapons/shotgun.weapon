@@ -45,7 +45,11 @@
 			BulletSize = 1
 			BulletSpread = 0.2
 			FireDelay = 1
-			FireSound = resource:"sounds/weapons/shotgun/shotgun.shoot.sound"
+			FireSound = 
+			[
+				resource:"sounds/weapons/shotgun/shotgun.shoot.sound",
+				resource:"sounds/weapons/shotgun/shotgun.reload.sound",
+			]
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 		}
 		Aim = 

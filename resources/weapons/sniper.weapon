@@ -44,7 +44,12 @@
 			BulletForce = 1000
 			BulletSize = 1
 			FireDelay = 1.75
-			FireSound = resource:"sounds/weapons/railgun/rg.shoot.1.sound"
+			FireSound = 
+			[
+				resource:"sounds/weapons/railgun/rg.shoot.1.sound",
+				resource:"sounds/weapons/railgun/rg.shoot.2.sound",
+				resource:"sounds/weapons/rocketlauncher/rl.shoot.sound",
+			]
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			KnockbackForce = 400
 			TracerPath = resource:"particles/gameplay/weapons/railgun/railgun_trace.vpcf"

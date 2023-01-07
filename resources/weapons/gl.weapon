@@ -42,7 +42,10 @@
 			BulletForce = 1000
 			BulletSize = 2
 			FireDelay = 1
-			FireSound = resource:"sounds/weapons/grenadelauncher/gl.shoot.sound"
+			FireSound = 
+			[
+				resource:"sounds/weapons/grenadelauncher/gl.shoot.sound",
+			]
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			Projectile = resource:"resources/weapons/projectiles/grenade.ple"
 		}

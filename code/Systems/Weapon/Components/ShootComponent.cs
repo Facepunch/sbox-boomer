@@ -42,7 +42,9 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		IsFiring = true;
 
 		if ( Data.FireSoundOnlyOnStart )
-			player.PlaySound( Data.FireSound );
+		{
+			Data.FireSound.ForEach( x => player.PlaySound( x ) );
+		}
 	}
 
 	public void StopFiring( Player player )
@@ -110,8 +112,8 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
 		{
-			if ( !Data.FireSoundOnlyOnStart && !string.IsNullOrEmpty( Data.FireSound ) )
-				player.PlaySound( Data.FireSound );
+			if ( !Data.FireSoundOnlyOnStart )
+				Data.FireSound.ForEach( x => player.PlaySound( x ) );
 
 			DoShootEffects( To.Single( player ) );
 		}
@@ -336,7 +338,7 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		public float FireDelay { get; set; }
 
 		[ResourceType( "sound" )]
-		public string FireSound { get; set; }
+		public List<string> FireSound { get; set; }
 
 		public bool FireSoundOnlyOnStart { get; set; }
 
@@ -360,7 +362,11 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 		public void Precache()
 		{
-			if ( !string.IsNullOrEmpty( FireSound ) ) Sandbox.Precache.Add( FireSound );
+			if ( FireSound.Count > 0 )
+			{
+				FireSound.ForEach( Sandbox.Precache.Add );
+			}
+
 			if ( !string.IsNullOrEmpty( DryFireSound ) ) Sandbox.Precache.Add( DryFireSound );
 			if ( !string.IsNullOrEmpty( TracerPath ) ) Sandbox.Precache.Add( TracerPath );
 		}
