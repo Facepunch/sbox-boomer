@@ -284,6 +284,8 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		//
 		Game.SetRandomSeed( Time.Tick );
 
+		RunGameEvent( $"{Name}.fire" );
+
 		for ( int i = 0; i < bulletCount; i++ )
 		{
 			var rot = Rotation.LookAt( Player.AimRay.Forward );
