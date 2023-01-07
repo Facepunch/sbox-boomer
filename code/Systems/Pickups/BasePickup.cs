@@ -7,6 +7,8 @@ public abstract partial class BasePickup : AnimatedEntity
 {
 	public virtual Model WorldModel => null;
 
+	[Property, ResourceType( "vmdl" )] public string ModelPath { get; set; }
+
 	[Property] public int RespawnTime { get; set; } = 30;
 	[Property] public bool SpawnImmediate { get; set; } = true;
 
@@ -45,6 +47,17 @@ public abstract partial class BasePickup : AnimatedEntity
 
 			Tags.Add( "trigger" );
 		}
+
+		if ( !string.IsNullOrEmpty( ModelPath ) )
+		{
+			SetModel( ModelPath );
+
+			PhysicsEnabled = true;
+			UsePhysicsCollision = true;
+
+			Tags.Add( "trigger" );
+		}
+
 		Sound.FromWorld( "armour.respawn", Position );
 		EnableDrawing = Available;
 	}
