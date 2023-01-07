@@ -18,14 +18,14 @@
 		ViewModelData = 
 		{
 			OverallWeight = 0.5
-			WeightReturnForce = 100
-			WeightDamping = 18
+			WeightReturnForce = 35
+			WeightDamping = 20
 			AccelerationDamping = 15
-			VelocityScale = 10
+			VelocityScale = 9
 			RotationalPivotForce = 10
 			RotationalScale = 5
 			WalkCycleOffset = "-2,25,0"
-			BobAmount = "25,50"
+			BobAmount = "250,500"
 			GlobalLerpPower = 1
 			CrouchPositionOffset = "-3,1,0"
 			CrouchAngleOffset = "2,0,-15"
