@@ -105,6 +105,8 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 		player?.SetAnimParameter( "b_attack", true );
 
+		RunGameEvent( $"{Name}.fire" );
+
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
 		{
@@ -283,8 +285,6 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		// Seed rand using the tick, so bullet cones match on client and server
 		//
 		Game.SetRandomSeed( Time.Tick );
-
-		RunGameEvent( $"{Name}.fire" );
 
 		for ( int i = 0; i < bulletCount; i++ )
 		{
