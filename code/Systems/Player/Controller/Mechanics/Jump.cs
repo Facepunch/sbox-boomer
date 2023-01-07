@@ -10,12 +10,23 @@ public partial class JumpMechanic : PlayerControllerMechanic
 	public override int SortOrder => 25;
 	private float Gravity => 800f;
 	private float JumpPower => 342f;
+	public int MaxJumps => 2;
+
+	public int CurrentJumps { get; set; }
 
 	protected override bool ShouldStart()
 	{
 		if ( !Input.Down( InputButton.Jump ) ) return false;
-		if ( !Controller.GroundEntity.IsValid() ) return false;
-		return true;
+
+		return CurrentJumps > 0f;
+	}
+
+	public override void OnGameEvent( string eventName )
+	{
+		if ( eventName == "walkmechanic.land" )
+		{
+			CurrentJumps = MaxJumps;
+		}
 	}
 
 	protected override void OnStart()
@@ -37,5 +48,7 @@ public partial class JumpMechanic : PlayerControllerMechanic
 			.ClearGroundEntity();
 
 		Controller.Player.PlaySound( "jump.single" );
+
+		CurrentJumps--;
 	}
 }
