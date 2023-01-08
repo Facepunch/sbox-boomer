@@ -23,8 +23,8 @@
 			VelocityScale = 10
 			RotationalPivotForce = 10
 			RotationalScale = 5
-			WalkCycleOffset = "-2,25,0"
-			BobAmount = "25,50"
+			WalkCycleOffset = "-4,150,0"
+			BobAmount = "100,200"
 			GlobalLerpPower = 1
 			CrouchPositionOffset = "-3,1,0"
 			CrouchAngleOffset = "2,0,-15"

@@ -42,7 +42,7 @@ public partial class PlayerCamera
 
 		if ( player.Controller.GroundEntity.IsValid() )
 		{
-			walkBob += Time.Delta * 12.0f * speed;
+			//walkBob += Time.Delta * 12.0f * speed;
 		}
 
 		Camera.Position += up * MathF.Cos( walkBob ) * speed * 2;
