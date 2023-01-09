@@ -41,14 +41,13 @@ public partial class JumpMechanic : PlayerControllerMechanic
 	protected override void OnStart()
 	{
 		float flMul = JumpPower;
-		float startz = Velocity.z;
 
 		var wish = Controller.GetWishInput();
 
 		// Velocity boost in the player's wish dir
 		Velocity += wish * 100f;
 
-		Velocity = Velocity.WithZ( startz + flMul );
+		Velocity = Velocity.WithZ( flMul );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 
 		Controller.GetMechanic<WalkMechanic>()
