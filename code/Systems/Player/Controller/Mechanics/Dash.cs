@@ -36,6 +36,7 @@ public partial class DashMechanic : PlayerControllerMechanic
 
 		DashCount--;
 		DashEffect();
+		Particles.Create( "particles/gameplay/dash/player_dash.vpcf", Controller.Player );
 	}
 
 	protected override void Tick()
