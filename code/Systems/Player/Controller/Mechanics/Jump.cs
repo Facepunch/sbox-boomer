@@ -8,7 +8,7 @@ namespace Facepunch.Boomer.Mechanics;
 public partial class JumpMechanic : PlayerControllerMechanic
 {
 	public override int SortOrder => 25;
-	private float Gravity => 800f;
+	private float Gravity => GameGlobals.Gravity;
 	private float JumpPower => 342f;
 	public int MaxJumps => 2;
 
@@ -40,7 +40,6 @@ public partial class JumpMechanic : PlayerControllerMechanic
 
 	protected override void OnStart()
 	{
-		float flGroundFactor = 1.0f;
 		float flMul = JumpPower;
 		float startz = Velocity.z;
 
@@ -49,9 +48,8 @@ public partial class JumpMechanic : PlayerControllerMechanic
 		// Velocity boost in the player's wish dir
 		Velocity += wish * 100f;
 
-		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );
+		Velocity = Velocity.WithZ( startz + flMul );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
-
 
 		Controller.GetMechanic<WalkMechanic>()
 			.ClearGroundEntity();
