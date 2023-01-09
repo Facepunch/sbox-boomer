@@ -33,7 +33,7 @@
 			AvoidanceAngleOffset = "2,0,-25"
 			SprintPositionOffset = "1,3.226,8"
 			SprintAngleOffset = "20,6.529,-12.2"
-			AimPositionOffset = "-10,0,3.366"
+			AimPositionOffset = "-10,0,-5"
 			AimFovOffset = 60
 		}
 		Shoot = 
