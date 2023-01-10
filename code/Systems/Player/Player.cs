@@ -107,7 +107,6 @@ public partial class Player : AnimatedEntity
 		Components.Create<JumpMechanic>();
 		Components.Create<AirMoveMechanic>();
 		Components.Create<CrouchMechanic>();
-		Components.Create<InteractionMechanic>();
 		Components.Create<UnstuckMechanic>();
 		Components.Create<SlideMechanic>();
 		Components.Create<DashMechanic>();
