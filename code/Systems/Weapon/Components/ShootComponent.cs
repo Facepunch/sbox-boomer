@@ -31,7 +31,9 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 	protected float MaxRicochetAngle => 45f;
 
 	public TimeUntil TimeUntilCanFire { get; set; }
-	protected Particles ActiveParticle { get; set; }
+	protected Particles TracerParticle { get; set; }
+	protected Particles ImpactTrailParticle { get; set; }
+
 	protected Sound? ActiveSound { get; set; }
 	protected bool IsFiring { get; set; } = false;
 
@@ -54,8 +56,11 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		ActiveSound?.Stop();
 		ActiveSound = null;
 
-		ActiveParticle?.Destroy( true );
-		ActiveParticle = null;
+		TracerParticle?.Destroy();
+		TracerParticle = null;
+
+		ImpactTrailParticle?.Destroy();
+		ImpactTrailParticle = null;
 	}
 
 	protected override void OnDeactivate()
@@ -89,14 +94,17 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 				Fire( player );
 			}
 
-			if ( ActiveParticle != null && Game.IsClient )
+			if ( !Game.IsClient ) return;
+
+			if ( TracerParticle != null || ImpactTrailParticle != null )
 			{
 				var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
-				ActiveParticle.SetPosition( 0, pos.Position );
+				TracerParticle?.SetPosition( 0, pos.Position );
 
 				var tr = Trace.Ray( Player.AimRay.Position, Player.AimRay.Position + Player.AimRay.Forward * Data.BulletRange ).Ignore( player ).Run();
 
-				ActiveParticle.SetPosition( 1, tr.EndPosition );
+				TracerParticle?.SetPosition( 1, tr.EndPosition );
+				ImpactTrailParticle?.SetPosition( 0, tr.EndPosition );
 			}
 		}
 	}
@@ -141,9 +149,14 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		{
 			if ( Game.IsServer ) return;
 
-			if ( Data.TracerStartEnd && ActiveParticle == null )
+			if ( Data.TracerStartEnd && TracerParticle == null && !string.IsNullOrEmpty( Data.TracerPath ) )
 			{
-				ActiveParticle = Particles.Create( Data.TracerPath );
+				TracerParticle = Particles.Create( Data.TracerPath );
+			}
+
+			if ( !string.IsNullOrEmpty( Data.ImpactTrailPath ) )
+			{
+				ImpactTrailParticle = Particles.Create( Data.ImpactTrailPath );
 			}
 
 			if ( !string.IsNullOrEmpty( Data.ActivateSound ) && ActiveSound == null )
@@ -357,6 +370,9 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 		[Category( "Effects" ), ResourceType( "vpcf" )]
 		public string TracerPath { get; set; }
 
+		[Category( "Effects" ), ResourceType( "vpcf" )]
+		public string ImpactTrailPath { get; set; }
+
 		[Category( "Effects" )]
 		public bool TracerStartEnd { get; set; }
 
@@ -369,6 +385,7 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 			if ( !string.IsNullOrEmpty( DryFireSound ) ) Sandbox.Precache.Add( DryFireSound );
 			if ( !string.IsNullOrEmpty( TracerPath ) ) Sandbox.Precache.Add( TracerPath );
+			if ( !string.IsNullOrEmpty( ImpactTrailPath ) ) Sandbox.Precache.Add( ImpactTrailPath );
 		}
 	}
 }
