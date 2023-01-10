@@ -13,6 +13,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 {
 	[Net] protected IList<Weapon> Weapons { get; set; }
 	[Net, Predicted] public Weapon ActiveWeapon { get; set; }
+	[Net, Predicted] public int LastWeaponSlot { get; set; }
 
 	public Weapon FindWeapon( WeaponData data )
 	{
@@ -59,6 +60,10 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 			}
 
 			currentWeapon.OnHolster( Entity );
+
+			if ( currentWeapon.IsValid() )
+				LastWeaponSlot = ActiveSlot;
+
 			ActiveWeapon = null;
 		}
 
@@ -82,7 +87,9 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 	}
 
-	public int ActiveSlot => Weapons.IndexOf( ActiveWeapon );
+	public int GetSlotFromWeapon( Weapon weapon ) => Weapons.IndexOf( weapon );
+
+	public int ActiveSlot => GetSlotFromWeapon( ActiveWeapon );
 
 	public Weapon GetSlot( int slot )
 	{
@@ -103,16 +110,21 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		};
 	}
 
+	public void SetWeaponFromSlot( int slot )
+	{
+		if ( GetSlot( slot ) is Weapon weapon )
+		{
+			Entity.ActiveWeaponInput = weapon;
+		}
+	}
+
 	protected void TrySlotFromInput( InputButton slot )
 	{
 		if ( Input.Pressed( slot ) )
 		{
 			Input.SuppressButton( slot );
 
-			if ( GetSlot( GetSlotIndexFromInput( slot ) ) is Weapon weapon )
-			{
-				Entity.ActiveWeaponInput = weapon;
-			}
+			SetWeaponFromSlot( GetSlotIndexFromInput( slot ) );
 		}
 	}
 
@@ -159,6 +171,9 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 		if ( slotDirection != 0 )
 			SwitchActiveSlot( slotDirection, true );
+
+		if ( Input.Pressed( InputButton.Menu ) )
+			SetWeaponFromSlot( LastWeaponSlot );
 
 		ActiveWeapon?.BuildInput();
 	}
