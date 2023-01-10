@@ -105,6 +105,7 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 				TracerParticle?.SetPosition( 1, tr.EndPosition );
 				ImpactTrailParticle?.SetPosition( 0, tr.EndPosition );
+				ImpactTrailParticle?.SetForward( 0, tr.Normal );
 			}
 		}
 	}
