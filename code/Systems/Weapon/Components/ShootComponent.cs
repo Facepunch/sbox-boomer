@@ -101,10 +101,10 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 				var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
 				TracerParticle?.SetPosition( 0, pos.Position );
 
-				var tr = Trace.Ray( Player.AimRay.Position, Player.AimRay.Position + Player.AimRay.Forward * Data.BulletRange ).Ignore( player ).Run();
+				var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * Data.BulletRange ).Ignore( player ).Run();
 
 				TracerParticle?.SetPosition( 1, tr.EndPosition );
-				ImpactTrailParticle?.SetPosition( 0, tr.EndPosition );
+				ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
 				ImpactTrailParticle?.SetForward( 0, tr.Normal );
 			}
 		}
