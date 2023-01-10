@@ -175,6 +175,25 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		if ( Input.Pressed( InputButton.Menu ) )
 			SetWeaponFromSlot( LastWeaponSlot );
 
+		/* Boomer specific weapon shortcuts */
+		if ( Input.Pressed( InputButton.Use ) )
+		{
+			var wpn = FindWeapon( "lightning" );
+			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );
+		}
+
+		if ( Input.Pressed( InputButton.Reload ) )
+		{
+			var wpn = FindWeapon( "sniper" );
+			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );
+		}
+
+		if ( Input.Pressed( InputButton.Flashlight ) )
+		{
+			var wpn = FindWeapon( "rl" );
+			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );
+		}
+
 		ActiveWeapon?.BuildInput();
 	}
 
