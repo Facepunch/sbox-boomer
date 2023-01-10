@@ -154,7 +154,7 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 				TracerParticle = Particles.Create( Data.TracerPath );
 			}
 
-			if ( !string.IsNullOrEmpty( Data.ImpactTrailPath ) )
+			if ( !string.IsNullOrEmpty( Data.ImpactTrailPath ) && ImpactTrailParticle == null )
 			{
 				ImpactTrailParticle = Particles.Create( Data.ImpactTrailPath );
 			}
