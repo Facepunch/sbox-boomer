@@ -39,6 +39,7 @@ public partial class Player
 		pants.EnableHideInFirstPerson = true;
 		//pants.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
 		pants.EnableShadowInFirstPerson = true;
+		pants.Tags.Add( "clothes" );
 
 		var shoes = new ModelEntity();
 		shoes.SetModel( "models/cosmetics/outfit/boomeroutfit_shoes.vmdl" );
@@ -46,6 +47,7 @@ public partial class Player
 		shoes.EnableHideInFirstPerson = true;
 		//shoes.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
 		shoes.EnableShadowInFirstPerson = true;
+		shoes.Tags.Add( "clothes" );
 
 		var helmet = new ModelEntity();
 		helmet.SetModel( "models/cosmetics/outfit/boomeroutfit_helmet.vmdl" );
@@ -53,6 +55,7 @@ public partial class Player
 		helmet.EnableHideInFirstPerson = true;
 		//helmet.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
 		helmet.EnableShadowInFirstPerson = true;
+		helmet.Tags.Add( "clothes" );
 
 		var gloves = new ModelEntity();
 		gloves.SetModel( "models/cosmetics/outfit/boomeroutfit_gloves.vmdl" );
@@ -60,6 +63,7 @@ public partial class Player
 		gloves.EnableHideInFirstPerson = true;
 		//gloves.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
 		gloves.EnableShadowInFirstPerson = true;
+		gloves.Tags.Add( "clothes" );
 
 		var chest = new ModelEntity();
 		chest.SetModel( "models/cosmetics/outfit/boomeroutfit_chest.vmdl" );
@@ -67,5 +71,6 @@ public partial class Player
 		chest.EnableHideInFirstPerson = true;
 		//chest.SceneObject.Attributes.Set( "RimColor1", PlayerColor );
 		chest.EnableShadowInFirstPerson = true;
+		chest.Tags.Add( "clothes" );
 	}
 }
