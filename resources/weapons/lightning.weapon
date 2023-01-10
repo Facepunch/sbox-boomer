@@ -52,6 +52,7 @@
 			ActivateSound = resource:"sounds/weapons/lasergun/lg.beam.sound"
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			TracerPath = resource:"particles/gameplay/weapons/lightninggun/lightninggun_trace.vpcf"
+			ImpactTrailPath = resource:"particles/gameplay/weapons/lightninggun/lightninggun_impact_trail.vpcf"
 			TracerStartEnd = true
 		}
 		Aim = 
