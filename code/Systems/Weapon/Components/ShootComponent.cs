@@ -313,7 +313,8 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 			foreach ( var tr in TraceBullet( Player.AimRay.Position, Player.AimRay.Position + forward * bulletRange, bulletSize, ref damage ) )
 			{
-				tr.Surface.DoBulletImpact( tr );
+				if ( !Data.DisableBulletImpacts )
+					tr.Surface.DoBulletImpact( tr );
 
 				if ( !Game.IsServer ) continue;
 				if ( !tr.Entity.IsValid() ) continue;
@@ -372,6 +373,9 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 		[Category( "Effects" ), ResourceType( "vpcf" )]
 		public string ImpactTrailPath { get; set; }
+
+		[Category( "Effects" )]
+		public bool DisableBulletImpacts { get; set; }
 
 		[Category( "Effects" )]
 		public bool TracerStartEnd { get; set; }
