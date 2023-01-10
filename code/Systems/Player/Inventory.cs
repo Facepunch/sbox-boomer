@@ -82,6 +82,8 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 	}
 
+	public int ActiveSlot => Weapons.IndexOf( ActiveWeapon );
+
 	public Weapon GetSlot( int slot )
 	{
 		return Weapons.ElementAtOrDefault( slot ) ?? null;
@@ -114,6 +116,31 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 	}
 
+	public void SwitchActiveSlot( int idelta, bool loop )
+	{
+		var count = Weapons.Count;
+		if ( count == 0 ) return;
+
+		var slot = ActiveSlot;
+		var nextSlot = slot + idelta;
+
+		if ( loop )
+		{
+			while ( nextSlot < 0 ) nextSlot += count;
+			while ( nextSlot >= count ) nextSlot -= count;
+		}
+		else
+		{
+			if ( nextSlot < 0 ) return;
+			if ( nextSlot >= count ) return;
+		}
+
+		if ( GetSlot( nextSlot ) is Weapon weapon )
+		{
+			Entity.ActiveWeaponInput = weapon;
+		}
+	}
+
 	public void BuildInput()
 	{
 		TrySlotFromInput( InputButton.Slot1 );
@@ -122,6 +149,16 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		TrySlotFromInput( InputButton.Slot4 );
 		TrySlotFromInput( InputButton.Slot5 );
 		TrySlotFromInput( InputButton.Slot6 );
+
+		var slotDirection = Input.MouseWheel;
+
+		if ( Input.Pressed( InputButton.SlotPrev ) )
+			slotDirection = -1;
+		else if ( Input.Pressed( InputButton.SlotNext ) )
+			slotDirection = 1;
+
+		if ( slotDirection != 0 )
+			SwitchActiveSlot( slotDirection, true );
 
 		ActiveWeapon?.BuildInput();
 	}

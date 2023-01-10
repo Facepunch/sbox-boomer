@@ -9,7 +9,6 @@ public class Fov : CameraModifier
 	float Time = 1f;
 
 	TimeSince lifeTime = 0;
-	float pos = 0;
 
 	public Fov( float offset, float time = 1f )
 	{

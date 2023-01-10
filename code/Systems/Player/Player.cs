@@ -102,7 +102,6 @@ public partial class Player : AnimatedEntity
 		// Remove old mechanics.
 		Components.RemoveAny<PlayerControllerMechanic>();
 
-
 		// Add mechanics.
 		Components.Create<WalkMechanic>();
 		Components.Create<JumpMechanic>();
