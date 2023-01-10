@@ -386,10 +386,7 @@ public partial class Shoot : WeaponComponent, ISingletonComponent
 
 		public void Precache()
 		{
-			if ( FireSound.Count > 0 )
-			{
-				FireSound.ForEach( Sandbox.Precache.Add );
-			}
+			FireSound?.ForEach( Sandbox.Precache.Add );
 
 			if ( !string.IsNullOrEmpty( DryFireSound ) ) Sandbox.Precache.Add( DryFireSound );
 			if ( !string.IsNullOrEmpty( TracerPath ) ) Sandbox.Precache.Add( TracerPath );
