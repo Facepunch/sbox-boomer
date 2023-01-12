@@ -196,6 +196,9 @@ public partial class Player : AnimatedEntity
 		if ( LifeState != LifeState.Alive )
 			return;
 
+		if ( GamemodeSystem.Current is Gamemode gamemode && !gamemode.AllowDamage )
+			return;
+
 		var attackerComponent = info.Attacker?.Components.Get<DamageModComponent>();
 		var victimComponent = Components.Get<DamageModComponent>();
 
