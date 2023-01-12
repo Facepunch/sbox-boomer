@@ -22,25 +22,36 @@ public partial class GameManager : Sandbox.GameManager
 		base.ClientJoined( client );
 
 		// Create a pawn for this client to play with
-		var pawn = new Player();
-		client.Pawn = pawn;
-		pawn.Respawn();
+		var player = new Player();
+		client.Pawn = player;
+		player.Respawn();
 
-		// Get all of the spawnpoints
-		var spawnpoints = Entity.All.OfType<SpawnPoint>();
-
-		// chose a random one
-		var randomSpawnPoint = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
-
-		// if it exists, place the pawn there
-		if ( randomSpawnPoint != null )
-		{
-			var tx = randomSpawnPoint.Transform;
-			tx.Position = tx.Position + Vector3.Up * 10.0f; // raise it up
-			pawn.Transform = tx;
-		}
+		MoveToSpawnpoint( player );
 
 		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
+	}
+
+	public void MoveToSpawnpoint( Player player )
+	{
+		var gamemode = GamemodeSystem.Current;
+
+		gamemode?.PreSpawn( player );
+
+		var transform = gamemode?.GetDefaultSpawnPoint( player );
+		if ( transform is null )
+		{
+			// Grab an available spawnpoint as a fallback
+			transform = Entity.All.OfType<SpawnPoint>().OrderBy( x => Guid.NewGuid() ).FirstOrDefault()?.Transform;
+		}
+
+		// Did we fuck up?
+		if ( transform is null )
+		{
+			Log.Warning( $"Couldn't find spawnpoint for {player}" );
+			return;
+		}
+
+		player.Transform = transform.Value;
 	}
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
