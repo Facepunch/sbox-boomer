@@ -48,4 +48,11 @@ public partial class GameManager : Sandbox.GameManager
 		base.ClientDisconnect( client, reason );
 		Chat.AddChatEntry( To.Everyone, client.Name, "left the game", client.SteamId, true );
 	}
+
+	[Event.Entity.PostSpawn]
+	public void PostEntitySpawn()
+	{
+		// Try to set up the active gamemode
+		GamemodeSystem.SetupGamemode();
+	}
 }
