@@ -29,6 +29,8 @@ public partial class GameManager : Sandbox.GameManager
 		MoveToSpawnpoint( player );
 
 		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
+
+		GamemodeSystem.Current?.OnClientJoined( client );
 	}
 
 	public void MoveToSpawnpoint( Player player )
@@ -58,6 +60,8 @@ public partial class GameManager : Sandbox.GameManager
 	{
 		base.ClientDisconnect( client, reason );
 		Chat.AddChatEntry( To.Everyone, client.Name, "left the game", client.SteamId, true );
+
+		GamemodeSystem.Current?.OnClientDisconnected( client, reason );
 	}
 
 	[Event.Entity.PostSpawn]

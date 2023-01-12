@@ -38,12 +38,6 @@ public abstract partial class Gamemode : Entity
 	public virtual bool AllowMovement => true;
 
 	/// <summary>
-	/// Decides whether or not players can respawn
-	/// </summary>
-	/// <returns></returns>
-	public virtual bool AllowRespawning => true;
-
-	/// <summary>
 	/// Decides whether or not players can take damage
 	/// </summary>
 	/// <returns></returns>
@@ -108,7 +102,7 @@ public abstract partial class Gamemode : Entity
 	/// </summary>
 	/// <param name="cl"></param>
 	/// <param name="reason"></param>
-	internal virtual void OnClientLeft( IClient cl, NetworkDisconnectionReason reason )
+	internal virtual void OnClientDisconnected( IClient cl, NetworkDisconnectionReason reason )
 	{
 		PlayerCount--;
 	}
