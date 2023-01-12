@@ -267,10 +267,15 @@ public partial class Player : AnimatedEntity
 	{
 		if ( LifeState == LifeState.Alive )
 		{
+			// Default life state is Respawning, this means the player will handle respawning after a few seconds
+			LifeState newLifeState = LifeState.Respawning;
+
+			// Inform the active gamemode
+			GamemodeSystem.Current?.OnPlayerKilled( this, LastDamage, out newLifeState );
+
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
 				LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
 
-			LifeState = LifeState.Dead;
 			EnableAllCollisions = false;
 			EnableDrawing = false;
 
@@ -283,7 +288,12 @@ public partial class Player : AnimatedEntity
 				.ToList()
 				.ForEach( x => x.EnableDrawing = false );
 
-			AsyncRespawn();
+			// Inform the active gamemode
+			GamemodeSystem.Current?.PostPlayerKilled( this, LastDamage );
+
+			// TODO - Control this in the active gamemode
+			if ( newLifeState == LifeState.Respawning )
+				AsyncRespawn();
 		}
 	}
 
