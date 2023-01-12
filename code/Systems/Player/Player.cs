@@ -116,12 +116,15 @@ public partial class Player : AnimatedEntity
 
 		var inventory = Components.Create<Inventory>();
 
-		foreach ( var wpn in WeaponData.All )
+		var isOverriden = GamemodeSystem.Current?.PlayerLoadout( this ) ?? false;
+		if ( !isOverriden )
 		{
-			inventory.AddWeapon( WeaponData.CreateInstance( wpn ) );
+			foreach ( var wpn in WeaponData.All )
+			{
+				inventory.AddWeapon( WeaponData.CreateInstance( wpn ) );
+			}
 		}
 
-		GameManager.Current?.MoveToSpawnpoint( this );
 		ResetInterpolation();
 
 		ClientRespawn( To.Single( Client ) );
