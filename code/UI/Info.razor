@@ -7,11 +7,27 @@
 
 <style>
     Info {
+        width: 100%;
+        height: 100%;
         position: absolute;
-        bottom: 64px;
-        left: 64px;
-        flex-direction: column-reverse;
-       	
+
+        .left {
+            position: absolute;
+            bottom: 64px;
+            left: 64px;
+            flex-direction: column-reverse;
+        }
+
+        .right {
+            position: absolute;
+            bottom: 64px;
+            right: 64px;
+            justify-content: flex-end;
+            flex-direction: column-reverse;
+	        align-items: flex-end;
+	        align-content: stretch;
+        }
+
         .text {
             color: white;
             font-weight: 700;
@@ -48,41 +64,59 @@
     @if ( DevCam != null )
         return;
 
-    @if ( AmmoComponent != null )
-    {
+    <div class="left">
+        @if ( AmmoComponent != null )
+        {
+            <div class="row">
+                <label class="text @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
+
+                @if ( AmmoComponent.AmmoCount > AmmoComponent.Data.MaximumAmmo )
+                {
+                    <label class="text">+ @(AmmoComponent.AmmoCount - AmmoComponent.Data.MaximumAmmo)</label>
+                }
+
+                <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
+                <label class="icon">backpack</label>
+            </div>
+        }
+
         <div class="row">
-            <label class="text @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
-
-            @if ( AmmoComponent.AmmoCount > AmmoComponent.Data.MaximumAmmo )
-            {
-                <label class="text">+ @(AmmoComponent.AmmoCount - AmmoComponent.Data.MaximumAmmo)</label>
-            }
-
-            <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
-            <label class="icon">backpack</label>
+            <label class="text @HealthClasses()">@Health</label>
+            <label class="text reserve">100</label>
+            <label class="icon">emergency</label>
         </div>
-    }
 
-    <div class="row">
-        <label class="text @HealthClasses()">@Health</label>
-        <label class="text reserve">100</label>
-        <label class="icon">emergency</label>
+        <div class="row @ArmorClasses()">
+            <label class="text">@Armor</label>
+            <label class="text reserve">100</label>
+            <label class="icon">shield</label>
+        </div>
+
+        @if ( Dash != null )
+        {
+            <div class="row">
+                <label class="text">@Dash.DashCount</label>
+                <label class="text reserve">@Dash.MaxDashes</label>
+                <label class="icon">speed</label>
+            </div>
+        }
     </div>
 
-    <div class="row @ArmorClasses()">
-        <label class="text">@Armor</label>
-        <label class="text reserve">100</label>
-        <label class="icon">shield</label>
+    <div class="right">
+        @if ( !string.IsNullOrEmpty( TimeLeftLabel ) )
+        {
+             <div class="row">
+                <label class="text">@TimeLeftLabel</label>
+                <label class="icon">timer</label>
+            </div>   
+        }
+        @if ( !string.IsNullOrEmpty( GameStateLabel ) )
+        {
+             <div class="row">
+                <label class="text reserve">@GameStateLabel</label>
+            </div>   
+        }
     </div>
-
-    @if ( Dash != null )
-    {
-        <div class="row">
-            <label class="text">@Dash.DashCount</label>
-            <label class="text reserve">@Dash.MaxDashes</label>
-            <label class="icon">speed</label>
-        </div>
-    }
 </root>
 
 @code 
@@ -95,9 +129,13 @@
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
 
+    // Gamemode
+    public string TimeLeftLabel => GamemodeSystem.Current?.GetTimeLeftLabel();
+    public string GameStateLabel => GamemodeSystem.Current?.GetGameStateLabel();
+
     protected override int BuildHash()
     {
-        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current, DevCam );
+        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current, DevCam, TimeLeftLabel, GameStateLabel );
     }
 
     protected string HealthClasses()

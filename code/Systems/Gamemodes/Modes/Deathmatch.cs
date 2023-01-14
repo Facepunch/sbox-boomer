@@ -38,6 +38,8 @@ public partial class Deathmatch : Gamemode
 		return CurrentState switch
 		{
 			GameState.Warmup => "Waiting for players",
+			GameState.Countdown => "Game starting in",
+			GameState.GameActive => "Get the most kills",
 			GameState.GameOver => "Game over",
 			_ => null
 		};
