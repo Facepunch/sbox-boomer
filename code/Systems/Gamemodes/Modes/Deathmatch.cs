@@ -1,4 +1,5 @@
 using Sandbox;
+using System;
 using System.Threading.Tasks;
 
 namespace Facepunch.Boomer.Gamemodes;
@@ -9,6 +10,7 @@ public partial class Deathmatch : Gamemode
 	/// The current game state.
 	/// </summary>
 	[Net] public GameState CurrentState { get; set; }
+	[Net] public TimeUntil TimeUntilNextState { get; set; }
 
 	/// <summary>
 	/// How long the countdown is after we've got enough players in-game.
@@ -25,6 +27,22 @@ public partial class Deathmatch : Gamemode
 		_ = GameLoop();
 	}
 
+	TimeSpan TimeRemaining => TimeSpan.FromSeconds( TimeUntilNextState );
+	public override string GetTimeLeftLabel()
+	{
+		return TimeRemaining.ToString( @"mm\:ss" );
+	}
+
+	public override string GetGameStateLabel()
+	{
+		return CurrentState switch
+		{
+			GameState.Warmup => "Waiting for players",
+			GameState.GameOver => "Game over",
+			_ => null
+		};
+	}
+
 	private async Task WaitForPlayers()
 	{
 		while ( PlayerCount < MinimumPlayers )
@@ -37,6 +55,7 @@ public partial class Deathmatch : Gamemode
 
 	private async Task WaitAsync( float time )
 	{
+		TimeUntilNextState = time;
 		await Task.DelayRealtimeSeconds( time );
 	}
 
