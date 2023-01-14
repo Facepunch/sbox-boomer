@@ -61,7 +61,6 @@ public partial class Deathmatch : Gamemode
 		// The game's now active.
 		CurrentState = GameState.GameActive;
 		Chat.AddInformation( To.Everyone, $"The game begins." );
-
 		await WaitAsync( GameDuration );
 
 		// The game's over.
@@ -70,6 +69,9 @@ public partial class Deathmatch : Gamemode
 
 		// TODO - Decide Winner
 		// TODO - Map Vote
+
+		// Wait a certain amount of time. Replace this with Map Vote task.
+		await WaitAsync( 20f );
 
 		// For now, we'll just restart the current map.
 		Game.ChangeLevel( Game.Server.MapIdent );
