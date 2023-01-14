@@ -7,7 +7,7 @@ $rounding: 4px;
 Chat {
     position: absolute;
     bottom: -16px;
-    left: 32px;
+    left: 50%;
     z-index: 1001;
     flex-direction: column;
     width: 505px;
@@ -17,6 +17,7 @@ Chat {
     pointer-events: none;
     transition: all 0.1s ease, border 0s ease;
     padding: 18px;
+    transform: translateX(-50%);
 
     textentry {
         transition: opacity 0.1s ease;
