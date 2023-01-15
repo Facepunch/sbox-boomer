@@ -70,4 +70,12 @@ public partial class GameManager : Sandbox.GameManager
 		// Try to set up the active gamemode
 		GamemodeSystem.SetupGamemode();
 	}
+
+	public override void BuildInput()
+	{
+		base.BuildInput();
+		if ( Input.StopProcessing ) return;
+
+		GamemodeSystem.Current?.BuildInput();
+	}
 }

@@ -63,13 +63,12 @@ public partial class Player
 		if ( camera is not null )
 			return;
 
-		GamemodeSystem.Current?.BuildInput();
-		if ( Input.StopProcessing ) return;
-
 		Inventory?.BuildInput();
 		if ( Input.StopProcessing ) return;
 
-		MoveInput = Input.AnalogMove;
+		if ( GamemodeSystem.Current?.AllowMovement ?? true )
+			MoveInput = Input.AnalogMove;
+
 		var lookInput = (LookInput + Input.AnalogLook).Normal;
 
 		// Since we're a FPS game, let's clamp the player's pitch between -90, and 90.
