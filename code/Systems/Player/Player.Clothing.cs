@@ -43,7 +43,7 @@ public partial class Player
 
 	public void SetupClothing()
 	{
-		foreach( var entity in ClothingEntities )
+		foreach ( var entity in ClothingEntities )
 		{
 			entity.Delete();
 		}

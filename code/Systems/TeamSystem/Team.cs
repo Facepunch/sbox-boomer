@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using Sandbox;
+using System.Linq;
+
 namespace Facepunch.Boomer;
 
 public enum Team
@@ -34,5 +38,16 @@ public static class TeamExtensions
 			Team.Purple => "Purple Team",
 			_ => null
 		};
+	}
+
+	public static IEnumerable<IClient> GetClients( this Team team )
+	{
+		return Game.Clients.Where( x => TeamSystem.GetTeam( x ) == team );
+	}
+
+	public static int Count( this Team team )
+	{
+		return GetClients( team )
+			.Count();
 	}
 }
