@@ -19,8 +19,8 @@ public partial class TeamSystem
 
 	public static IEnumerable<Team> GetTeams()
 	{
-		// Use gamemode's team setup or default to all of the teams.
-		return GamemodeSystem.Current?.Teams ?? Enum.GetValues<Team>();
+		// Use gamemode's team setup or default to no teams.
+		return GamemodeSystem.Current?.Teams;
 	}
 
 	public static Team GetLowestCount()
