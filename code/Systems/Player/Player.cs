@@ -196,8 +196,21 @@ public partial class Player : AnimatedEntity
 		if ( LifeState != LifeState.Alive )
 			return;
 
-		if ( GamemodeSystem.Current is Gamemode gamemode && !gamemode.AllowDamage )
-			return;
+		if ( GamemodeSystem.Current is Gamemode gamemode )
+		{
+			if ( !gamemode.AllowDamage )
+				return;
+
+			// Friendly fire
+			if ( !gamemode.AllowFriendlyFire && info.Attacker.IsValid() && info.Attacker.Client.IsValid() )
+			{
+				var victimTeam = TeamSystem.GetTeam( Client );
+				var attackerTeam = TeamSystem.GetTeam( info.Attacker.Client );
+
+				// Prevent damage if they're both on the same team.
+				if ( victimTeam == attackerTeam ) return;
+			}
+		}
 
 		var attackerComponent = info.Attacker?.Components.Get<DamageModComponent>();
 		var victimComponent = Components.Get<DamageModComponent>();

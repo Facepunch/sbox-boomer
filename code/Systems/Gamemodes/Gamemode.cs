@@ -44,6 +44,11 @@ public abstract partial class Gamemode : Entity
 	public virtual bool AllowDamage => true;
 
 	/// <summary>
+	/// Decides whether or not friendly fire is enabled
+	/// </summary>
+	public virtual bool AllowFriendlyFire => true;
+
+	/// <summary>
 	/// Specify the list of teams that are supported in this mode.
 	/// </summary>
 	public virtual IEnumerable<Team> Teams => null;

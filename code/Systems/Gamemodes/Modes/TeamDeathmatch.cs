@@ -47,8 +47,7 @@ public partial class TeamDeathmatch : Gamemode
 		var teamComponent = cl.Components.GetOrCreate<TeamComponent>();
 		if ( teamComponent != null )
 		{
-			var lowest = TeamSystem.GetLowestCount();
-			teamComponent.Team = lowest;
+			teamComponent.Team = TeamSystem.GetLowestCount();
 		}
 	}
 
@@ -132,6 +131,11 @@ public partial class TeamDeathmatch : Gamemode
 	/// Disallow movement while we're counting down.
 	/// </summary>
 	public override bool AllowMovement => CurrentState != GameState.Countdown;
+
+	/// <summary>
+	/// Disallow hurting friendlies in TDM.
+	/// </summary>
+	public override bool AllowFriendlyFire => false;
 
 	public enum GameState
 	{
