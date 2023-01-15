@@ -129,7 +129,7 @@ public partial class Player : AnimatedEntity
 
 		ClientRespawn( To.Single( Client ) );
 
-		UpdateClothes();
+		SetupClothing();
 	}
 
 	/// <summary>

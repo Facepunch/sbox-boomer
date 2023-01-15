@@ -1,25 +1,13 @@
 using Sandbox;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Facepunch.Boomer;
 
 public partial class Player
 {
-	public ClothingContainer Clothing { get; protected set; }
-
-	/// <summary>
-	/// Set the clothes to whatever the player is wearing
-	/// </summary>
-	public void UpdateClothes()
-	{
-		Clothing = new();
-
-		Clothing.ClearEntities();
-		Clothing.LoadFromClient( Client );
-		
-		PlayerColor = Color.Random;
-		SetupClothing();
-	}
+	protected List<PlayerClothingEntity> ClothingEntities { get; set; } = new();
 
 	[Net] private Color playerColor { get; set; }
 	public Color PlayerColor
@@ -43,37 +31,35 @@ public partial class Player
 		}
 	}
 
+	public void AddClothing( string modelPath )
+	{
+		var entity = new PlayerClothingEntity();
+		entity.SetModel( modelPath );
+		entity.SetParent( this, true );
+		entity.EntityColor = PlayerColor;
+
+		ClothingEntities.Add( entity );
+	}
+
 	public void SetupClothing()
 	{
+		foreach( var entity in ClothingEntities )
+		{
+			entity.Delete();
+		}
+
+		ClothingEntities.Clear();
+
 		SetBodyGroup( "Hands", 1 );
 		SetBodyGroup( "Feet", 1 );
 
 		SetMaterialOverride( SkinMat, "skin" );
 		SetMaterialOverride( EyeMat, "eyes" );
 
-		var pants = new PlayerClothingEntity();
-		pants.SetModel( "models/cosmetics/outfit/boomeroutfit_pants.vmdl" );
-		pants.SetParent( this, true );
-		pants.EntityColor = PlayerColor;
-
-		var shoes = new PlayerClothingEntity();
-		shoes.SetModel( "models/cosmetics/outfit/boomeroutfit_shoes.vmdl" );
-		shoes.SetParent( this, true );
-		shoes.EntityColor = PlayerColor;
-
-		var helmet = new PlayerClothingEntity();
-		helmet.SetModel( "models/cosmetics/outfit/boomeroutfit_helmet.vmdl" );
-		helmet.SetParent( this, true );
-		helmet.EntityColor = PlayerColor;
-
-		var gloves = new PlayerClothingEntity();
-		gloves.SetModel( "models/cosmetics/outfit/boomeroutfit_gloves.vmdl" );
-		gloves.SetParent( this, true );
-		gloves.EntityColor = PlayerColor;
-
-		var chest = new PlayerClothingEntity();
-		chest.SetModel( "models/cosmetics/outfit/boomeroutfit_chest.vmdl" );
-		chest.SetParent( this, true );
-		chest.EntityColor = PlayerColor;
+		AddClothing( "models/cosmetics/outfit/boomeroutfit_pants.vmdl" );
+		AddClothing( "models/cosmetics/outfit/boomeroutfit_shoes.vmdl" );
+		AddClothing( "models/cosmetics/outfit/boomeroutfit_helmet.vmdl" );
+		AddClothing( "models/cosmetics/outfit/boomeroutfit_gloves.vmdl" );
+		AddClothing( "models/cosmetics/outfit/boomeroutfit_chest.vmdl" );
 	}
 }
