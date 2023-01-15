@@ -1,5 +1,6 @@
 using Sandbox;
 using System;
+using System.Collections.Generic;
 
 namespace Facepunch.Boomer;
 
@@ -16,12 +17,18 @@ public partial class TeamSystem
 		return one == two;
 	}
 
+	public static IEnumerable<Team> GetTeams()
+	{
+		// Use gamemode's team setup or default to all of the teams.
+		return GamemodeSystem.Current?.Teams ?? Enum.GetValues<Team>();
+	}
+
 	public static Team GetLowestCount()
 	{
 		var currentTeam = Team.None;
 		int lowestCount = 999;
 
-		foreach ( var team in Enum.GetValues<Team>() )
+		foreach ( var team in GetTeams() )
 		{
 			if ( team == Team.None ) continue;
 

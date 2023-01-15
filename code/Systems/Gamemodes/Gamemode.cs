@@ -43,6 +43,11 @@ public abstract partial class Gamemode : Entity
 	/// <returns></returns>
 	public virtual bool AllowDamage => true;
 
+	/// <summary>
+	/// Specify the list of teams that are supported in this mode.
+	/// </summary>
+	public virtual IEnumerable<Team> Teams => null;
+
 	// Stats
 	[ConVar.Server( "boomer_minimum_players" )]
 	protected static int MinimumPlayersConVar { get; set; } = 2;

@@ -1,5 +1,6 @@
 using Sandbox;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Facepunch.Boomer.Gamemodes;
@@ -21,6 +22,18 @@ public partial class TeamDeathmatch : Gamemode
 	/// How long the game lasts, after that we'll decide the winner.
 	/// </summary>
 	protected float GameDuration => 300f;
+
+	/// <summary>
+	/// Team setup for TDM. Default 2 teams.
+	/// </summary>
+	public override IEnumerable<Team> Teams 
+	{
+		get
+		{
+			yield return Team.Blue;
+			yield return Team.Red;
+		}
+	}
 
 	internal override void Initialize()
 	{
