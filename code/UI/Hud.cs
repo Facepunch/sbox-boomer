@@ -2,6 +2,8 @@ using Facepunch.Boomer;
 using Sandbox;
 using Sandbox.UI;
 
+namespace Facepunch.Boomer.UI;
+
 public partial class Hud : HudEntity<RootPanel>
 {
 	public Hud()

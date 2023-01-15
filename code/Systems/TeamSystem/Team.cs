@@ -20,10 +20,10 @@ public static class TeamExtensions
 	{
 		return team switch
 		{
-			Team.Blue => new Color( 5, 142, 217 ),
-			Team.Red => new Color( 242, 66, 54 ),
-			Team.Green => new Color( 106, 241, 144 ),
-			Team.Purple => new Color( 147, 95, 167 ),
+			Team.Blue => new Color32( 5, 142, 217 ),
+			Team.Red => new Color32( 242, 66, 54 ),
+			Team.Green => new Color32( 106, 241, 144 ),
+			Team.Purple => new Color32( 147, 95, 167 ),
 			_ => Color.Gray // incl None
 		};
 	}

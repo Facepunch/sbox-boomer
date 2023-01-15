@@ -3,7 +3,7 @@
 @using Sandbox.UI;
 @using System.Linq;
 
-@namespace Sandbox.UI
+@namespace Facepunch.Boomer.UI
 @inherits Panel;
 
 <style>
@@ -42,14 +42,20 @@
                 align-content: stretch;
                 height: 30px;
                 margin-bottom: 4px;
+                width: 400px;
 
                 > .name {
                     padding-left: 8px;
+                    min-width: 100px;
                 }
 
                 > .ping {
-                    right: 0;
+                    padding-left: 32px;
+                }
+
+                > .team {
                     position: absolute;
+                    right: 0;
                     padding-left: 32px;
                 }
 
@@ -87,6 +93,11 @@
                 <img class="avatar" src=@($"avatar:{cl.SteamId}") />
                 <label class="name">@cl.Name</label>
                 <label class="ping">@(cl.Ping)ms</label>
+
+                @if ( TeamSystem.GetTeam( cl ) != Team.None )
+                {
+                    <label class="team" style="color: @(TeamSystem.GetTeam( cl ).GetColor().Hex)">@TeamSystem.GetTeam( cl ).GetName()</label>
+                }
             </div>
         }
     </div>
