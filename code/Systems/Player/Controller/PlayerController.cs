@@ -93,8 +93,18 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		Player.EyeLocalPosition = Vector3.Up * CurrentEyeHeight;
 	}
 
+	protected bool ShouldSimulate()
+	{
+		var gamemode = GamemodeSystem.Current;
+		if ( !gamemode.IsValid() ) return true;
+
+		return gamemode.AllowMovement;
+	}
+
 	protected void SimulateMechanics()
 	{
+		if ( !ShouldSimulate() ) return;
+
 		foreach ( var mechanic in Mechanics )
 		{
 			mechanic.TrySimulate( this );
