@@ -157,7 +157,7 @@
 @code 
 {
     public string Health => $"{Player.Health:F0}";
-    public float Armor => (int)Player.ArmorComponent.Current;
+    public float Armor => Player.ArmorComponent.Current.CeilToInt();
     public string ArmorString => $"{Player.ArmorComponent.Current:F0}";
     public Player Player => Game.LocalPawn as Player;
     public Weapon Weapon => Player?.ActiveWeapon;
