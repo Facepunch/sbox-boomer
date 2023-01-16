@@ -19,11 +19,17 @@ public partial class WeaponData : GameResource
 	[Category( "Basic Information" ), ResourceType( "jpg" )]
 	public string CrosshairIcon { get; set; }
 
+	[Category( "Basic Information" ), ResourceType( "color" )]
+	public Color WeaponColor { get; set; } = Color.White;
+
 	internal Model CachedModel;
 	internal Model CachedViewModel;
 
 	[Category( "Basic Information" ), ResourceType( "jpg" )]
 	public string Icon { get; set; }
+
+	[Category( "Basic Information" ), ResourceType( "jpg" )]
+	public string AmmoIcon { get; set; }
 
 	[Category( "Animation" )]
 	public HoldType HoldType { get; set; } = HoldType.Pistol;

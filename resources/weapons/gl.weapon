@@ -6,7 +6,9 @@
 		Model = resource:"models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
+		WeaponColor = "0.04234,0.84682,0,1"
 		Icon = resource:"ui/weapons/dm_grenadelauncher.png"
+		AmmoIcon = resource:"ui/ammo/grenades.png"
 		HoldType = "Rifle"
 		Handedness = "Right"
 		Components = 

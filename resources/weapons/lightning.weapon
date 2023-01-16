@@ -6,7 +6,9 @@
 		Model = resource:"models/gameplay/weapons/lightninggun/w_lightninggun.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/lightninggun/lightninggun.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair060.png"
+		WeaponColor = "0,0.96533,1,1"
 		Icon = resource:"ui/weapons/dm_lightninggun.png"
+		AmmoIcon = resource:"ui/ammo/lightning.png"
 		HoldType = "Shotgun"
 		Handedness = "Right"
 		Components = 
