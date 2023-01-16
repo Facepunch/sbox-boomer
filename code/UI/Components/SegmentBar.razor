@@ -1,0 +1,47 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Collections.Generic;
+@using System;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel;
+@attribute [StyleSheet( "/UI/Components/SegmentBar.scss" )]
+
+@code {
+    public int Segments { get; set; } = 5;
+
+    public List<Panel> SegmentPanels { get; set; }
+    protected Func<int> ActiveSegmentMethod { get; set; }
+
+    public float CurrentValue { get; set; } = 60;
+    public float MaxValue { get; set; } = 100;
+
+    protected override void OnAfterTreeRender( bool firstTime )
+    {
+        SegmentPanels = new();
+        DeleteChildren( true );
+
+        for ( int i = 0; i < Segments; i++ )
+        {
+            var segment = AddChild<Panel>( "segment" );
+            var inner = segment.AddChild<Panel>( "inner" );
+            SegmentPanels.Add( segment ); 
+        }
+    }
+
+    protected int GetActiveSegments()
+    {
+        return (int)MathF.Round( ( CurrentValue / MaxValue ) * Segments );
+    }
+
+    public override void Tick()
+    {
+        var activeSegments = GetActiveSegments();
+
+        for ( int i = 0; i < Segments; i++ )
+        {
+            var segment = SegmentPanels[i];
+            segment.SetClass( "active", i < activeSegments );
+        }
+    }
+}

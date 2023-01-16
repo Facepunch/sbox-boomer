@@ -1,0 +1,43 @@
+SegmentBar
+{
+    padding: 3px;
+    background-color: #262626;
+    gap: 4px;
+    height: 57px;
+
+    .segment
+    {
+        padding: 2px;
+        background-image: linear-gradient( to top, #7b7575, #504d4d );
+        width: 26px;
+        height: 50px;
+
+        .inner
+        {
+            background-color: #353535;
+            width: 100%;
+            height: 100%;
+        }
+
+        &.active
+        {
+            background-image: linear-gradient( to top, #cbc1c0, darken( #cbc1c0, 20% ) );
+
+            .inner
+            {
+                background-image: linear-gradient( to top, #d5d1d1, darken( #d5d1d1, 20% ) );
+            }
+        }
+    }
+
+    &.slim
+    {
+        height: 23px;
+
+        .segment
+        {
+            width: 140px;
+            height: 16px;
+        }
+    }
+}
