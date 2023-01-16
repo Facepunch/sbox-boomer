@@ -8,7 +8,7 @@ public partial class ArmorComponent : EntityComponent<Player>, ISingletonCompone
 	[Net] public float Max { get; set; }
 	[Net] public TimeSince Tick { get; set; }
 
-	public float TickFrequency => 0.5f;
+	public float TickFrequency => 1f;
 
 	protected override void OnActivate()
 	{

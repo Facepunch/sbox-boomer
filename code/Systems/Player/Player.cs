@@ -168,7 +168,7 @@ public partial class Player : AnimatedEntity
 		// Health Tick
 		if ( Health > MaxHealth )
 		{
-			if ( HealthTick > 0.5f )
+			if ( HealthTick > 1f )
 			{
 				Health--;
 				HealthTick = 0;
