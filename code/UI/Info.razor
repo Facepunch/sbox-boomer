@@ -13,6 +13,7 @@
         position: absolute;
 
         .left {
+            row-gap: 24px;
             position: absolute;
             bottom: 64px;
             left: 24px;
@@ -30,21 +31,43 @@
         }
 
         .top {
+            margin-top: 16px;
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
         }
 
         .text {
             color: white;
             font-weight: 700;
-            font-family: Quantico-Bold;
-            font-size: 64px;
+            font-family: Quantico;
+            font-size: 40px;
+            height: 40px;
             justify-content: center;
             align-items: center;
             align-content: stretch;
-            text-shadow: 0px 2px 3px rgba( black, 0.25 );
+            text-shadow: 0px 2px 3px rgba( black, 0.5 );
+
+            &.big {
+                font-size: 50px;
+                height: 50px;
+                margin-right: 8px;
+            }
+        }
+
+        .stat {
+            margin-left: 55px;
+        }
+
+        .divider {
+            width: 3px;
+            height: 40px;
+            margin-left: 15px;
+            margin-right: 15px;
+            background-image: linear-gradient( to top, #D9D9D9 0%, #D9D9D9 50%, rgba(217, 217, 217, 0) 100%);
         }
 
         .icon {
@@ -63,16 +86,24 @@
         }
 
         .weapon-icon {
-            width: 128px;
+            width: 108px;
             aspect-ratio: 1;
         }
 
+        .inset {
+            margin-left: 32px;
+        }
+
         .reserve {
-            color: white;
-            font-size: 24px;
+            color: linear-gradient(180deg, rgba(225, 214, 212, 1) 0%, rgba(226, 213, 211, 1) 100%);
+            font-family: Quantico;
+            font-weight: 400;
+            font-size: 20px;
         }
 
         .row {
+            margin-bottom: 8px;
+
             &.hidden {
                 display: none;
             }
@@ -90,7 +121,6 @@
         .ammo {
             .reserve {
                 text-align: right;
-                top: -18px;
                 height: 20px;
                 justify-content: flex-end;
             }
@@ -103,9 +133,10 @@
         return;
 
     <div class="left">
-        <div class="column stat">
-            <div class="row">
+        <div class="column">
+            <div class="row stat">
                 <label class="text @HealthClasses()">@Health</label>
+                <div class="divider" />
                 <label class="text reserve">100</label>
             </div>
 
@@ -115,13 +146,14 @@
             </div>
         </div>
 
-        <div class="column stat">
-            <div class="row">
+        <div class="column inset">
+            <div class="row stat">
                 <label class="text">@Armor</label>
+                <div class="divider" />
                 <label class="text reserve">100</label>
             </div>
 
-            <div class="row stat">
+            <div class="row">
                 <label class="icon big">shield</label>
                 <SegmentBar Color=@ArmorColor CurrentValue=@Armor MaxValue=@(100) Segments=@(10) />
             </div>
@@ -143,8 +175,7 @@
         {
             <div class="row stat">
                 <div class="column ammo">
-                    <label class="text @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
-                    <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
+                    <label class="text big @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
                 </div>
 
                 <img class="weapon-icon" src=@Weapon.WeaponData.Icon />
@@ -155,13 +186,13 @@
     <div class="top">
         @if ( !string.IsNullOrEmpty( TimeLeftLabel ) )
         {
-            <div class="row">
+            <div class="row center">
                 <label class="text">@TimeLeftLabel</label>
             </div>
         }
         @if ( !string.IsNullOrEmpty( GameStateLabel ) )
         {
-             <div class="row">
+             <div class="row center">
                 <label class="text reserve">@GameStateLabel</label>
             </div>   
         }
