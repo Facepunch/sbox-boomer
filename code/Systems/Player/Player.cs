@@ -77,7 +77,7 @@ public partial class Player : AnimatedEntity
 		EnableLagCompensation = true;
 		EnableHitboxes = true;
 
-		MaxHealth = 200;
+		MaxHealth = 100;
 
 		Tags.Add( "player" );
 	}
