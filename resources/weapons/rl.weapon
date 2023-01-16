@@ -8,6 +8,7 @@
 		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
 		WeaponColor = "1,0,0,1"
 		Icon = resource:"ui/weapons/dm_rocketlauncher.png"
+		AmmoIcon = resource:"ui/ammo/rockets.png"
 		HoldType = "Rifle"
 		Handedness = "Right"
 		Components = 

@@ -6,7 +6,7 @@
 		Model = resource:"models/gameplay/weapons/nailgun/w_nailgun.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/nailgun/nailgun.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair118.png"
-		WeaponColor = "0,0.1115,1,1"
+		WeaponColor = "0,0.50383,1,1"
 		Icon = resource:"ui/weapons/dm_nailgun.png"
 		AmmoIcon = resource:"ui/ammo/nails.png"
 		HoldType = "Pistol"
