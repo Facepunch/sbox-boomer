@@ -208,7 +208,8 @@ public partial class Player : AnimatedEntity
 				var attackerTeam = TeamSystem.GetTeam( info.Attacker.Client );
 
 				// Prevent damage if they're both on the same team.
-				if ( victimTeam == attackerTeam ) return;
+				// Make sure that self-damage is still allowed.
+				if ( victimTeam == attackerTeam && info.Attacker != this ) return;
 			}
 		}
 
