@@ -2,6 +2,7 @@
 @using System;
 @using Facepunch.Boomer.WeaponSystem;
 @using Facepunch.Boomer.Mechanics;
+@using Facepunch.Boomer.UI;
 
 @namespace Facepunch.Boomer
 
@@ -14,18 +15,25 @@
         .left {
             position: absolute;
             bottom: 64px;
-            left: 64px;
+            left: 24px;
             flex-direction: column-reverse;
         }
 
         .right {
             position: absolute;
             bottom: 64px;
-            right: 64px;
+            right: 48px;
             justify-content: flex-end;
             flex-direction: column-reverse;
 	        align-items: flex-end;
 	        align-content: stretch;
+        }
+
+        .top {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            flex-direction: column;
         }
 
         .text {
@@ -45,6 +53,11 @@
             justify-content: center;
             align-items: center;
             align-content: center;
+
+            &.big {
+                font-size: 32px;
+                padding-right: 12px;
+            }
         }
 
         .reserve {
@@ -56,6 +69,15 @@
             &.hidden {
                 display: none;
             }
+
+        	justify-content: flex-start;
+	        align-items: center;
+	        align-content: stretch;
+            flex-direction: row;
+        }
+
+        .column {
+            flex-direction: column;
         }
     }
 </style>
@@ -65,9 +87,45 @@
         return;
 
     <div class="left">
+        <div class="column stat">
+            <div class="row">
+                <label class="text @HealthClasses()">@Health</label>
+                <label class="text reserve">100</label>
+            </div>
+
+            <div class="row">
+                <label class="icon big">emergency</label>
+                <SegmentBar CurrentValue=@Player.Health MaxValue=@(100) Segments=@(10) />
+            </div>
+        </div>
+
+        <div class="column stat">
+            <div class="row">
+                <label class="text">@Armor</label>
+                <label class="text reserve">100</label>
+            </div>
+
+            <div class="row stat">
+                <label class="icon big">shield</label>
+                <SegmentBar CurrentValue=@Armor MaxValue=@(100) Segments=@(10) />
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        @if ( Dash != null )
+        {
+            <div class="column">
+                <div class="row">
+                    <label class="icon big">speed</label>
+                    <SegmentBar class="slim" CurrentValue=@Dash.DashCount MaxValue=@Dash.MaxDashes Segments=@Dash.MaxDashes />
+                </div>
+            </div>
+        }
+
         @if ( AmmoComponent != null )
         {
-            <div class="row">
+            <div class="row stat">
                 <label class="text @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
 
                 @if ( AmmoComponent.AmmoCount > AmmoComponent.Data.MaximumAmmo )
@@ -76,39 +134,16 @@
                 }
 
                 <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
-                <label class="icon">backpack</label>
-            </div>
-        }
-
-        <div class="row">
-            <label class="text @HealthClasses()">@Health</label>
-            <label class="text reserve">100</label>
-            <label class="icon">emergency</label>
-        </div>
-
-        <div class="row @ArmorClasses()">
-            <label class="text">@Armor</label>
-            <label class="text reserve">100</label>
-            <label class="icon">shield</label>
-        </div>
-
-        @if ( Dash != null )
-        {
-            <div class="row">
-                <label class="text">@Dash.DashCount</label>
-                <label class="text reserve">@Dash.MaxDashes</label>
-                <label class="icon">speed</label>
             </div>
         }
     </div>
 
-    <div class="right">
+    <div class="top">
         @if ( !string.IsNullOrEmpty( TimeLeftLabel ) )
         {
-             <div class="row">
+            <div class="row">
                 <label class="text">@TimeLeftLabel</label>
-                <label class="icon">timer</label>
-            </div>   
+            </div>
         }
         @if ( !string.IsNullOrEmpty( GameStateLabel ) )
         {
@@ -122,7 +157,8 @@
 @code 
 {
     public string Health => $"{Player.Health:F0}";
-    public string Armor => $"{Player.ArmorComponent.Current:F0}";
+    public float Armor => Player.ArmorComponent.Current;
+    public string ArmorString => $"{Player.ArmorComponent.Current:F0}";
     public Player Player => Game.LocalPawn as Player;
     public Weapon Weapon => Player?.ActiveWeapon;
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
@@ -141,11 +177,6 @@
     protected string HealthClasses()
     {
         return Player.Health < 25f ? "low" : "";
-    }
-
-    protected string ArmorClasses()
-    {
-        return Player.ArmorComponent.Current < 1 ? "hidden" : "";
     }
 
     protected string AmmoClasses()
