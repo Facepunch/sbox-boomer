@@ -77,6 +77,8 @@ public partial class Player : AnimatedEntity
 		EnableLagCompensation = true;
 		EnableHitboxes = true;
 
+		MaxHealth = 200;
+
 		Tags.Add( "player" );
 	}
 
@@ -141,6 +143,9 @@ public partial class Player : AnimatedEntity
 		PlayerCamera = new PlayerCamera();
 	}
 
+	[Net] public float MaxHealth { get; set; }
+	[Net] public TimeSince HealthTick { get; set; }
+
 	/// <summary>
 	/// Called every server and client tick.
 	/// </summary>
@@ -156,6 +161,19 @@ public partial class Player : AnimatedEntity
 
 		// Simulate our active weapon if we can.
 		Inventory?.Simulate( cl );
+
+		// Simulate armor component, as we tick down
+		ArmorComponent?.Simulate( cl );
+
+		// Health Tick
+		if ( Health > MaxHealth )
+		{
+			if ( HealthTick > 0.5f )
+			{
+				Health--;
+				HealthTick = 0;
+			}
+		}
 	}
 
 	/// <summary>
