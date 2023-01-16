@@ -16,7 +16,7 @@
             position: absolute;
             bottom: 64px;
             left: 24px;
-            flex-direction: column-reverse;
+            flex-direction: column;
         }
 
         .right {
@@ -107,7 +107,7 @@
 
             <div class="row stat">
                 <label class="icon big">shield</label>
-                <SegmentBar CurrentValue=@Armor MaxValue=@(100) Segments=@(10) />
+                <SegmentBar Color=@ArmorColor CurrentValue=@Armor MaxValue=@(100) Segments=@(10) />
             </div>
         </div>
     </div>
@@ -118,7 +118,7 @@
             <div class="column">
                 <div class="row">
                     <label class="icon big">speed</label>
-                    <SegmentBar class="slim" CurrentValue=@Dash.DashCount MaxValue=@Dash.MaxDashes Segments=@Dash.MaxDashes />
+                    <SegmentBar class="slim" Color=@DashColor CurrentValue=@Dash.DashCount MaxValue=@Dash.MaxDashes Segments=@Dash.MaxDashes />
                 </div>
             </div>
         }
@@ -164,6 +164,9 @@
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
+
+    public Color DashColor => Color.Parse("#c27418") ?? Color.White;
+    public Color ArmorColor => Color.Parse("#e4dd35") ?? Color.White;
 
     // Gamemode
     public string TimeLeftLabel => GamemodeSystem.Current?.GetTimeLeftLabel();

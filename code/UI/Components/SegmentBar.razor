@@ -7,6 +7,28 @@
 @inherits Panel;
 @attribute [StyleSheet( "/UI/Components/SegmentBar.scss" )]
 
+<style>
+    SegmentBar {
+       .segment {
+            &.active {
+                background-image: linear-gradient( to top, darken( @Hex, 10% ), darken( @Hex, 10% ) );
+
+                .inner {
+                    background-image: linear-gradient( to top, @Hex, darken( @Hex, 10% ) );
+                }
+            }
+       }
+
+       &.slim {
+           .segment {
+               &.active {
+                    background-image: linear-gradient( to top, @Hex, darken( @Hex, 30% ) );
+               }
+           }
+       }
+    }
+</style>
+
 @code {
     public int Segments { get; set; } = 5;
 
@@ -15,6 +37,10 @@
 
     public float CurrentValue { get; set; } = 60;
     public float MaxValue { get; set; } = 100;
+
+    public Color Color { get; set; } = Color.Parse( "#E5DFDF" ) ?? Color.White;
+
+    public string Hex => Color.Hex;
 
     protected override void OnAfterTreeRender( bool firstTime )
     {
