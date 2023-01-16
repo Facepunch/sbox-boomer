@@ -48,7 +48,8 @@
         }
 
         .icon {
-            color: white;
+            color: linear-gradient( 180deg, white, #E2D5D3 );
+
             font-size: 30px;
             font-family: Material Icons;
             justify-content: center;
@@ -178,8 +179,8 @@
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
 
-    public Color DashColor => Color.Parse("#c27418") ?? Color.White;
-    public Color ArmorColor => Color.Parse("#e4dd35") ?? Color.White;
+    public static Color DashColor = Color.Parse( "#C57415" ) ?? Color.White;
+    public static Color ArmorColor = Color.Parse( "#F2EA2B" ) ?? Color.White;
 
     // Gamemode
     public string TimeLeftLabel => GamemodeSystem.Current?.GetTimeLeftLabel();
