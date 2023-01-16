@@ -44,6 +44,7 @@
             justify-content: center;
             align-items: center;
             align-content: stretch;
+            text-shadow: 0px 2px 3px rgba( black, 0.25 );
         }
 
         .icon {
@@ -58,6 +59,11 @@
                 font-size: 32px;
                 padding-right: 12px;
             }
+        }
+
+        .weapon-icon {
+            width: 128px;
+            aspect-ratio: 1;
         }
 
         .reserve {
@@ -78,6 +84,15 @@
 
         .column {
             flex-direction: column;
+        }
+
+        .ammo {
+            .reserve {
+                text-align: right;
+                top: -18px;
+                height: 20px;
+                justify-content: flex-end;
+            }
         }
     }
 </style>
@@ -126,14 +141,12 @@
         @if ( AmmoComponent != null )
         {
             <div class="row stat">
-                <label class="text @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
+                <div class="column ammo">
+                    <label class="text @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
+                    <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
+                </div>
 
-                @if ( AmmoComponent.AmmoCount > AmmoComponent.Data.MaximumAmmo )
-                {
-                    <label class="text">+ @(AmmoComponent.AmmoCount - AmmoComponent.Data.MaximumAmmo)</label>
-                }
-
-                <label class="text reserve">@AmmoComponent.Data.MaximumAmmo</label>
+                <img class="weapon-icon" src=@Weapon.WeaponData.Icon />
             </div>
         }
     </div>

@@ -6,7 +6,7 @@
 		Model = resource:"models/gameplay/weapons/railgun/w_railgun.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/railgun/railgun.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair056.png"
-		Icon = null
+		Icon = resource:"ui/weapons/dm_railgun.png"
 		HoldType = "Shotgun"
 		Handedness = "Right"
 		Components = 

@@ -6,7 +6,7 @@
 		Model = resource:"models/gameplay/weapons/lightninggun/w_lightninggun.vmdl"
 		ViewModel = resource:"models/gameplay/weapons/lightninggun/lightninggun.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair060.png"
-		Icon = null
+		Icon = resource:"ui/weapons/dm_lightninggun.png"
 		HoldType = "Shotgun"
 		Handedness = "Right"
 		Components = 
