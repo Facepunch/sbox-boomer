@@ -39,8 +39,11 @@
     public float MaxValue { get; set; } = 100;
 
     public Color Color { get; set; } = Color.Parse( "#E1D6D4" ) ?? Color.White;
+    public Color SuperchargeColor { get; set; } = Color.Parse( "#2A97D7" ) ?? Color.Cyan;
 
-    public string Hex => Color.Hex;
+    protected Color CurrentColor => CurrentValue > MaxValue ? SuperchargeColor : Color;
+
+    public string Hex => CurrentColor.Hex;
 
     protected override void OnAfterTreeRender( bool firstTime )
     {
