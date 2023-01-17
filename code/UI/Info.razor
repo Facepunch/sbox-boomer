@@ -30,16 +30,6 @@
 	        align-content: stretch;
         }
 
-        .top {
-            margin-top: 16px;
-            position: absolute;
-            width: 100%;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            align-content: stretch;
-        }
-
         .text {
             color: white;
             font-weight: 700;
@@ -182,25 +172,13 @@
             </div>
         }
     </div>
-
-    <div class="top">
-        @if ( !string.IsNullOrEmpty( TimeLeftLabel ) )
-        {
-            <div class="row center">
-                <label class="text">@TimeLeftLabel</label>
-            </div>
-        }
-        @if ( !string.IsNullOrEmpty( GameStateLabel ) )
-        {
-             <div class="row center">
-                <label class="text reserve">@GameStateLabel</label>
-            </div>   
-        }
-    </div>
 </root>
 
 @code 
 {
+    public static Color DashColor = Color.Parse( "#C57415" ) ?? Color.White;
+    public static Color ArmorColor = Color.Parse( "#F2EA2B" ) ?? Color.White;
+
     public string Health => $"{Player.Health:F0}";
     public float Armor => Player.ArmorComponent.Current.CeilToInt();
     public string ArmorString => $"{Player.ArmorComponent.Current:F0}";
@@ -209,19 +187,11 @@
     public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>();
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
-
-    public static Color DashColor = Color.Parse( "#C57415" ) ?? Color.White;
-    public static Color ArmorColor = Color.Parse( "#F2EA2B" ) ?? Color.White;
-
 	public string WeaponColor => Weapon.WeaponData.WeaponColor.ToString();
-
-    // Gamemode
-    public string TimeLeftLabel => GamemodeSystem.Current?.GetTimeLeftLabel();
-    public string GameStateLabel => GamemodeSystem.Current?.GetGameStateLabel();
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current, DevCam, TimeLeftLabel, GameStateLabel );
+        return HashCode.Combine( AmmoComponent?.AmmoCount, Player?.Health, Dash?.DashCount, Player.ArmorComponent.Current, DevCam );
     }
 
     protected string HealthClasses()

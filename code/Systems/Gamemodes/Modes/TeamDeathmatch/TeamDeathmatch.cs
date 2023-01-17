@@ -1,5 +1,6 @@
 using Facepunch.Boomer.UI;
 using Sandbox;
+using Sandbox.UI;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -35,6 +36,8 @@ public partial class TeamDeathmatch : Gamemode
 			yield return Team.Red;
 		}
 	}
+
+	internal override Panel HudPanel => new TDMHud();
 
 	internal override void Initialize()
 	{
