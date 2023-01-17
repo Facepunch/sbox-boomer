@@ -1,8 +1,25 @@
 @using Sandbox;
 @using Sandbox.UI;
 @using Sandbox.UI.Construct;
+@using System.Linq;
+@using System;
 
-@namespace Sandbox
+@namespace Facepunch.Boomer.UI
+
+<style>
+	ChatRow 
+	{
+		.header
+		{
+			color: @Team.GetColor().Hex;
+		}
+
+		img
+        {
+            border-right: 1.5px solid @Team.GetColor().Hex;
+        }
+	}
+</style>
 
 <root>
 	@if ( PlayerId > 0 )
@@ -26,4 +43,12 @@
 	public string Message { get; set; }
 	public long PlayerId { get; set; }
 	public TimeSince Lifetime { get; init; } = 0;
+
+	public IClient Client =>  Game.Clients.FirstOrDefault( x => x.SteamId == PlayerId );
+	public Team Team => TeamSystem.GetTeam( Client );
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Team );
+	}
 }

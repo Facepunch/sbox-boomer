@@ -24,7 +24,7 @@ public static class TeamExtensions
 			Team.Red => new Color32( 242, 66, 54 ),
 			Team.Green => new Color32( 106, 241, 144 ),
 			Team.Purple => new Color32( 147, 95, 167 ),
-			_ => Color.Gray // incl None
+			_ => new Color32( 200, 200, 200 ) // incl None
 		};
 	}
 
