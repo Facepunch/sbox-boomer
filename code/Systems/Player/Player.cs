@@ -177,18 +177,6 @@ public partial class Player : AnimatedEntity
 	}
 
 	/// <summary>
-	/// Entrypoint to update the player's camera.
-	/// </summary>
-	[Event.Client.PostCamera]
-	protected void PostCameraUpdate()
-	{
-		PlayerCamera?.Update( this );
-
-		// Apply camera modifiers after a camera update.
-		CameraModifier.Apply();
-	}
-
-	/// <summary>
 	/// Called every frame clientside.
 	/// </summary>
 	/// <param name="cl"></param>
@@ -201,6 +189,10 @@ public partial class Player : AnimatedEntity
 
 		// Simulate our active weapon if we can.
 		Inventory?.FrameSimulate( cl );
+
+		PlayerCamera?.Update( this );
+
+		CameraModifier.Apply();
 	}
 
 	[ClientRpc]

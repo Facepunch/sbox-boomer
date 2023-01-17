@@ -12,10 +12,6 @@ public partial class PlayerCamera
 
 	public virtual void Update( Player player )
 	{
-		var camera = Game.LocalClient.Components.Get<DevCamera>( false );
-		if ( camera is not null )
-			return;
-
 		Camera.Position = player.EyePosition;
 		Camera.Rotation = player.EyeRotation;
 		Camera.FieldOfView = Game.Preferences.FieldOfView;
