@@ -15,6 +15,8 @@ public partial class TeamDeathmatch : Gamemode
 	[Net] public GameState CurrentState { get; set; }
 	[Net] public TimeUntil TimeUntilNextState { get; set; }
 
+	[Net] public IDictionary<Team, int> Scores { get; set; }
+
 	/// <summary>
 	/// How long the countdown is after we've got enough players in-game.
 	/// </summary>
@@ -32,16 +34,27 @@ public partial class TeamDeathmatch : Gamemode
 	{
 		get
 		{
-			yield return Team.Blue;
 			yield return Team.Red;
+			yield return Team.Blue;
 		}
 	}
 
 	internal override Panel HudPanel => new TDMHud();
 
+	protected void ResetScores()
+	{
+		Scores = null;
+		foreach ( var team in Teams )
+		{
+			Scores.Add( team, 0 );
+		}
+	}
+
 	internal override void Initialize()
 	{
 		_ = GameLoop();
+
+		ResetScores();
 	}
 
 	internal override void OnClientJoined( IClient cl )
@@ -71,6 +84,27 @@ public partial class TeamDeathmatch : Gamemode
 			GameState.GameOver => "Game over",
 			_ => null
 		};
+	}
+
+	protected void AddScore( Team team, int amount = 1 )
+	{
+		Scores[team] += amount;
+	}
+
+	public int GetScore( Team team )
+	{
+		return Scores[team];
+	}
+
+	internal override void PostPlayerKilled( Player player, DamageInfo lastDamage )
+	{
+		base.PostPlayerKilled( player, lastDamage );
+
+		if ( lastDamage.Attacker is Player attacker )
+		{
+			var attackerTeam = TeamSystem.GetTeam( attacker.Client );
+			AddScore( attackerTeam );
+		}
 	}
 
 	private async Task WaitForPlayers()
