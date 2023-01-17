@@ -70,12 +70,12 @@ Chat
             transition: opacity 0.15s ease;
             box-shadow: 2px 2px 40px rgba( black, 0.5 );
             backdrop-filter: blur( 10px );
+            min-height: 30px;
 
             .header
             {
                 flex-shrink: 0;
                 flex-grow: 0;
-                padding-left: 4px;
                 margin-top: 3px;
                 font-weight: 700;
                 font-size: 16px;
