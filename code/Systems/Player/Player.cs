@@ -132,6 +132,8 @@ public partial class Player : AnimatedEntity
 		ClientRespawn( To.Single( Client ) );
 
 		SetupClothing();
+
+		GameManager.Current.MoveToSpawnpoint( this );
 	}
 
 	/// <summary>

@@ -27,8 +27,6 @@ public partial class GameManager : Sandbox.GameManager
 		client.Pawn = player;
 		player.Respawn();
 
-		MoveToSpawnpoint( player );
-
 		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
 
 		GamemodeSystem.Current?.OnClientJoined( client );
