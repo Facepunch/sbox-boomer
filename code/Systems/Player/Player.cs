@@ -225,6 +225,8 @@ public partial class Player : AnimatedEntity
 			}
 		}
 
+		LastDamage = info;
+
 		var attackerComponent = info.Attacker?.Components.Get<DamageModComponent>();
 		var victimComponent = Components.Get<DamageModComponent>();
 
