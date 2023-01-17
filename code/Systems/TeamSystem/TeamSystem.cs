@@ -8,7 +8,7 @@ public partial class TeamSystem
 {
 	public static Team GetTeam( IClient cl )
 	{
-		return cl.Components.Get<TeamComponent>()?.Team ?? Team.None;
+		return cl?.Components.Get<TeamComponent>()?.Team ?? Team.None;
 	}
 
 	public static bool IsFriendly( Team one, Team two )
