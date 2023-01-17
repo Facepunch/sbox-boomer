@@ -17,6 +17,8 @@ public partial class TeamDeathmatch : Gamemode
 
 	[Net] public IDictionary<Team, int> Scores { get; set; }
 
+	public int MaxScore => 75;
+
 	/// <summary>
 	/// How long the countdown is after we've got enough players in-game.
 	/// </summary>
