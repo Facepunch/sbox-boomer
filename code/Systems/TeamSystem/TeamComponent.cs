@@ -19,7 +19,7 @@ public partial class TeamComponent : EntityComponent
 
 	protected void OnTeamChanged( Team before, Team after )
 	{
-		if ( Entity is Player player )
+		if ( Entity is IClient cl && cl.Pawn is Player player )
 		{
 			// Let's set the player's color to match their team.
 			var color = after.GetColor();

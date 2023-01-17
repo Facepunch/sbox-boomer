@@ -21,7 +21,7 @@ public static class TeamExtensions
 		return team switch
 		{
 			Team.Blue => new Color32( 5, 142, 217 ),
-			Team.Red => new Color32( 242, 66, 54 ),
+			Team.Red => new Color32( 242, 20, 24 ),
 			Team.Green => new Color32( 106, 241, 144 ),
 			Team.Purple => new Color32( 147, 95, 167 ),
 			_ => new Color32( 200, 200, 200 ) // incl None
