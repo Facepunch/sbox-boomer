@@ -201,6 +201,10 @@ public partial class Shoot : WeaponComponent
 		{
 			TimeUntilCanFire = 0.15f;
 		}
+		if ( eventName == "shoot.fire" || eventName == "secondaryshoot.fire" )
+		{
+			TimeSinceActivated = 0;
+		}
 	}
 
 	[ClientRpc]
