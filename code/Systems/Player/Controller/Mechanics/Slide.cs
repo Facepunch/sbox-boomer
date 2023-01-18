@@ -39,7 +39,7 @@ public partial class SlideMechanic : PlayerControllerMechanic
 	protected override bool ShouldStart()
 	{
 		if ( Lock ) return true;
-		if ( !Input.Pressed( InputButton.View ) ) return false;
+		if ( !Input.Pressed( InputButton.Duck ) ) return false;
 		if ( !Controller.GroundEntity.IsValid() ) return false;
 		if ( Controller.Velocity.Length <= MinimumSpeed ) return false;
 
