@@ -22,11 +22,6 @@ public partial class SlideMechanic : PlayerControllerMechanic
 	private float SlideSpeed => 1500f;
 
 	/// <summary>
-	/// Slide cooldown.
-	/// </summary>
-	private float Cooldown => 1f;
-
-	/// <summary>
 	/// If lock is true, we'll be stuck sliding until ShouldSlide says otherwise.
 	/// </summary>
 	private bool Lock = false;
@@ -44,7 +39,7 @@ public partial class SlideMechanic : PlayerControllerMechanic
 	protected override bool ShouldStart()
 	{
 		if ( Lock ) return true;
-		if ( !Input.Pressed( InputButton.Duck ) ) return false;
+		if ( !Input.Down( InputButton.Duck ) ) return false;
 		if ( !Controller.GroundEntity.IsValid() ) return false;
 		if ( Controller.Velocity.Length <= MinimumSpeed ) return false;
 
@@ -68,8 +63,6 @@ public partial class SlideMechanic : PlayerControllerMechanic
 	protected override void OnStop()
 	{
 		base.OnStop();
-
-		TimeUntilCanStart = Cooldown;
 	}
 
 	protected override void Simulate()
