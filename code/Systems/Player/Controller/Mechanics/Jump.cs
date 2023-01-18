@@ -53,7 +53,8 @@ public partial class JumpMechanic : PlayerControllerMechanic
 		Controller.GetMechanic<WalkMechanic>()
 			.ClearGroundEntity();
 
-		Controller.Player.PlaySound( "jump.single" );
+		var sound = CurrentJumps == MaxJumps ? "jump.single" : "player.land1";
+		Controller.Player.PlaySound( sound );
 
 		CurrentJumps--;
 
