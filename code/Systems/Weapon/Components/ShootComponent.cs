@@ -4,10 +4,17 @@ using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
+public partial class SecondaryShoot : Shoot
+{
+	public override InputButton FireButton => InputButton.SecondaryAttack;
+	public override bool IsSecondary => true;
+}
+
 public partial class Shoot : WeaponComponent, ISingletonComponent
 {
-	public InputButton FireButton => InputButton.PrimaryAttack;
-	public ComponentData Data => Weapon.WeaponData.Shoot;
+	public virtual InputButton FireButton => InputButton.PrimaryAttack;
+	public ComponentData Data => IsSecondary ? Weapon.WeaponData.SecondaryShoot : Weapon.WeaponData.Shoot;
+	public virtual bool IsSecondary => false;
 
 	/// <summary>
 	/// When penetrating a surface, this is the trace increment amount.

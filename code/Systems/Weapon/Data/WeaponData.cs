@@ -44,6 +44,7 @@ public partial class WeaponData : GameResource
 
 	// Component Information
 	public Shoot.ComponentData Shoot { get; set; }
+	public Shoot.ComponentData SecondaryShoot { get; set; }
 	public Aim.ComponentData Aim { get; set; }
 	public Ammo.ComponentData Ammo { get; set; }
 

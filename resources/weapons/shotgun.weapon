@@ -15,7 +15,7 @@
 		[
 			"Shoot",
 			"Ammo",
-			"Aim",
+			"SecondaryShoot",
 		]
 		ViewModelData = 
 		{
@@ -47,6 +47,22 @@
 			BulletSize = 1
 			BulletSpread = 0.2
 			FireDelay = 1
+			FireSound = 
+			[
+				resource:"sounds/weapons/shotgun/shotgun.shoot.sound",
+				resource:"sounds/weapons/shotgun/shotgun.reload.sound",
+			]
+			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
+		}
+		SecondaryShoot = 
+		{
+			BaseDamage = 20
+			BulletRange = 1000
+			BulletCount = 6
+			BulletForce = 1000
+			BulletSize = 1
+			BulletSpread = 0.1
+			FireDelay = 2
 			FireSound = 
 			[
 				resource:"sounds/weapons/shotgun/shotgun.shoot.sound",
