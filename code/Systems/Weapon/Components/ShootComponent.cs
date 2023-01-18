@@ -10,7 +10,7 @@ public partial class SecondaryShoot : Shoot
 	public override bool IsSecondary => true;
 }
 
-public partial class Shoot : WeaponComponent, ISingletonComponent
+public partial class Shoot : WeaponComponent
 {
 	public virtual InputButton FireButton => InputButton.PrimaryAttack;
 	public ComponentData Data => IsSecondary ? Weapon.WeaponData.SecondaryShoot : Weapon.WeaponData.Shoot;
