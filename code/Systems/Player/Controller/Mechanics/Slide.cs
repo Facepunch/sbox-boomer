@@ -55,7 +55,7 @@ public partial class SlideMechanic : PlayerControllerMechanic
 
 		Controller.Player.PlaySound( "slide.stop" );
 
-		Controller.Velocity += forward * 500.0f;
+		Controller.Velocity += forward * 250.0f;
 
 		Lock = true;
 	}
