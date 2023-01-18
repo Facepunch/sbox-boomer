@@ -13,15 +13,13 @@ public partial class SlideMechanic : PlayerControllerMechanic
 	/// <summary>
 	/// How fast we must be going before activating Slide.
 	/// </summary>
-	private float MinimumSpeed => 150f;
+	private float MinimumSpeed => 250f;
 
 	/// <summary>
 	/// We'll try to push the player forward to reach this speed.
 	/// Make sure it's pretty high, as friction will make this much harder to reach.
 	/// </summary>
-	private float SlideSpeed => 1000f;
-
-	private Sound SlideSound;
+	private float SlideSpeed => 1500f;
 
 	/// <summary>
 	/// If lock is true, we'll be stuck sliding until ShouldSlide says otherwise.
@@ -32,8 +30,8 @@ public partial class SlideMechanic : PlayerControllerMechanic
 	{
 		if ( !Controller.GroundEntity.IsValid() ) return false;
 		if ( Controller.Velocity.Length < MinimumSpeed ) return false;
-		if ( TimeSinceStart < 1 ) return true;
-		if ( TimeSinceStart > 1 ) return false;
+		if ( TimeSinceStart < 0.5 ) return true;
+		if ( TimeSinceStart > 0.5 ) return false;
 
 		return true;
 	}
@@ -54,19 +52,12 @@ public partial class SlideMechanic : PlayerControllerMechanic
 
 		// Give a speed boost
 		var forward = new Vector3( Controller.Velocity.x, Controller.Velocity.y, 0 ).Normal;
-		
-		Controller.Velocity += forward * 400.0f;
 
-		SlideSound = Controller.Player.PlaySound( "sounds/player/foley/slide/ski.loop.sound" );
+		Controller.Player.PlaySound( "slide.stop" );
+
+		Controller.Velocity += forward * 500.0f;
+
 		Lock = true;
-	}
-
-	protected override void OnStop()
-	{
-		base.OnStop();
-
-		Controller.Player.PlaySound( "sounds/player/foley/slide/ski.stop.sound" );
-		SlideSound.Stop();
 	}
 
 	protected override void Simulate()
@@ -76,8 +67,6 @@ public partial class SlideMechanic : PlayerControllerMechanic
 
 		if ( Controller.Velocity.Length < SlideSpeed )
 			Controller.Velocity += slopeForward * SlideSpeed * Time.Delta;
-
-		SlideSound.SetPitch( 0.5f + (Controller.Velocity.Length / SlideSpeed) );
 
 		if ( !ShouldSlide() )
 			Lock = false;

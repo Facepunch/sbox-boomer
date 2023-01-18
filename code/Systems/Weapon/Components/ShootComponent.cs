@@ -6,8 +6,7 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 public partial class Shoot : WeaponComponent, ISingletonComponent
 {
-	protected override bool UseLagCompensation => true;
-	public virtual InputButton FireButton => InputButton.PrimaryAttack;
+	public InputButton FireButton => InputButton.PrimaryAttack;
 	public ComponentData Data => Weapon.WeaponData.Shoot;
 
 	/// <summary>

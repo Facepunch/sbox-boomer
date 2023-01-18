@@ -14,7 +14,7 @@ public partial class WalkMechanic : PlayerControllerMechanic
 	public float GroundFriction => 4.0f;
 	public float MaxNonJumpVelocity => 140.0f;
 	public float SurfaceFriction { get; set; } = 1f;
-	public float Acceleration => 10f;
+	public float Acceleration => 15f;
 	public float DuckAcceleration => 5f;
 
 	protected override bool ShouldStart()
