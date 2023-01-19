@@ -8,7 +8,7 @@
 		CrosshairIcon = resource:"ui/crosshair/crosshair056.png"
 		WeaponColor = "0,1,0.273,1"
 		Icon = resource:"ui/crosshair/crosshair001.png"
-		AmmoIcon = resource:"ui/ammo/railgun.png"
+		AmmoIcon = resource:"ui/ammo/icon_4_ammo.png"
 		HoldType = "Shotgun"
 		Handedness = "Right"
 		Components = 
@@ -55,6 +55,9 @@
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			KnockbackForce = 400
 			TracerPath = resource:"particles/gameplay/weapons/railgun/railgun_trace.vpcf"
+		}
+		SecondaryShoot = 
+		{
 		}
 		Aim = 
 		{

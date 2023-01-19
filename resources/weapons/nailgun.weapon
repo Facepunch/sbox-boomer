@@ -8,7 +8,7 @@
 		CrosshairIcon = resource:"ui/crosshair/crosshair118.png"
 		WeaponColor = "0,0.50383,1,1"
 		Icon = resource:"ui/weapons/dm_nailgun.png"
-		AmmoIcon = resource:"ui/ammo/nails.png"
+		AmmoIcon = resource:"ui/ammo/icon_3_ammo.png"
 		HoldType = "Pistol"
 		Handedness = "Right"
 		Components = 
@@ -51,6 +51,9 @@
 			]
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			Projectile = resource:"resources/weapons/projectiles/nail.ple"
+		}
+		SecondaryShoot = 
+		{
 		}
 		Aim = 
 		{

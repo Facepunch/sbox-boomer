@@ -8,7 +8,7 @@
 		CrosshairIcon = resource:"ui/crosshair/crosshair060.png"
 		WeaponColor = "0,0.96533,1,1"
 		Icon = resource:"ui/weapons/dm_lightninggun.png"
-		AmmoIcon = resource:"ui/ammo/lightning.png"
+		AmmoIcon = resource:"ui/ammo/icon_2_ammo.png"
 		HoldType = "Shotgun"
 		Handedness = "Right"
 		Components = 
@@ -57,6 +57,9 @@
 			ImpactTrailPath = resource:"particles/gameplay/weapons/lightninggun/lightninggun_impact_trail.vpcf"
 			DisableBulletImpacts = true
 			TracerStartEnd = true
+		}
+		SecondaryShoot = 
+		{
 		}
 		Aim = 
 		{

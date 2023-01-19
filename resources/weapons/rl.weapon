@@ -8,7 +8,7 @@
 		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
 		WeaponColor = "1,0,0,1"
 		Icon = resource:"ui/weapons/dm_rocketlauncher.png"
-		AmmoIcon = resource:"ui/ammo/rockets.png"
+		AmmoIcon = resource:"ui/ammo/icon_5_ammo.png"
 		HoldType = "Rifle"
 		Handedness = "Right"
 		Components = 
@@ -50,6 +50,9 @@
 			]
 			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
 			Projectile = resource:"resources/weapons/projectiles/rocket.ple"
+		}
+		SecondaryShoot = 
+		{
 		}
 		Aim = 
 		{
