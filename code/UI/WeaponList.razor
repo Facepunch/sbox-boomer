@@ -1,0 +1,142 @@
+@using System;
+@using Facepunch.Boomer.WeaponSystem;
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel;
+
+<style>
+    WeaponList {
+        margin-bottom: 32px;
+        flex-direction: column-reverse;
+        gap: 10px;
+        font-family: Quantico;
+
+        .entry {
+            width: 270px;
+            height: 80px;
+            background-image: linear-gradient( to left, rgba(0, 0, 0, 0.5) 0.14%, rgba(0, 0, 0, 0) 100%);
+            border-top: 2px solid rgba( black, 0.1 );
+            border-bottom: 2px solid rgba( black, 0.1 );
+            border-right: 2px solid rgba( black, 0.1 );
+            border-radius: 2px;
+
+            flex-direction: row-reverse;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: flex-start;
+
+            padding: 10px;
+
+            .icon-panel {
+                width: 75px;
+                aspect-ratio: 1;
+                border-radius: 100px;
+                border: 3px solid rgba( black, 0.4 );
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .input {
+                width: 38px;
+                height: 38px;
+                background-color: rgba( black, 0.7 );
+                backdrop-filter: blur( 3px );
+                justify-content: center;
+                align-items: center;
+                border-radius: 2px;
+
+                label {
+                    left: -2px;
+                    text-align: center;
+                    font-weight: 700;
+                    color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
+                    font-size: 20px;
+                }
+            }
+
+            .grow {
+                flex-grow: 1;
+            }
+
+            .ammo {
+                margin-right: 16px;
+                text-align: right;
+                font-weight: 700;
+                color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);;
+                font-size: 40px;
+                text-shadow: 2px 2px 4px rgba( black, 0.6 );
+            }
+
+            opacity: 0.5;
+            &.active {
+                opacity: 1;
+
+                .icon-panel {
+                    border: none;
+                }
+            }
+
+            &.current {
+                background-image: linear-gradient( to left, rgba(30, 30, 30, 0.8) 0.14%, rgba(30, 30, 30, 0) 100%);
+            }
+        }
+    }
+</style>
+
+<root>
+    @for ( int i = 0; i < 6; i++ )
+    {
+        <div class="entry @GetClasses( i )">
+            <div class="icon-panel">
+                <img src="@GetWeapon( i ).WeaponData.AmmoIcon" />
+            </div>
+
+            <label class="ammo">@(GetAmmoComponent( i )?.AmmoCount ?? 0)</label>
+            <div class="grow" />
+
+            <div class="input">
+                <label>@(i + 1)</label>
+            </div>
+        </div>
+    }
+</root>
+
+@code
+{
+    public int MaxColumns => 6;
+    public int CurrentIndex => Player.Inventory.ActiveSlot;
+
+    public Boomer.Player Player => Game.LocalPawn as Boomer.Player;
+
+    public Ammo GetAmmoComponent( int slot )
+    {
+        return GetWeapon( slot )?.GetComponent<Ammo>();    
+    }
+
+    public Weapon GetWeapon( int slot )
+    {
+        return Player.Inventory.GetSlot( slot );
+    }
+
+    public string GetClasses( int slot )
+    {
+        var wpn = GetWeapon( slot );
+        var str = "";
+
+        if ( wpn.IsValid() ) str += " active";
+        if ( CurrentIndex == slot ) str += " current";
+
+        return str;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Time.Now );
+    }
+}
