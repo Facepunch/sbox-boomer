@@ -7,7 +7,7 @@
 		ViewModel = resource:"models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
 		WeaponColor = "1,0,0,1"
-		Icon = resource:"ui/weapons/dm_rocketlauncher.png"
+		Icon = resource:"ui/weapons/icon_5.png"
 		AmmoIcon = resource:"ui/ammo/icon_5_ammo.png"
 		HoldType = "Rifle"
 		Handedness = "Right"

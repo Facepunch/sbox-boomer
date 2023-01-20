@@ -8,37 +8,36 @@
 
 <style>
     WeaponList {
-        margin-bottom: 32px;
+        margin-bottom: 48px;
         flex-direction: column-reverse;
         gap: 10px;
         font-family: Quantico;
-
+        
         .entry {
-            width: 270px;
+            width: 220px;
             height: 80px;
-            background-image: linear-gradient( to left, rgba(0, 0, 0, 0.5) 0.14%, rgba(0, 0, 0, 0) 100%);
+            background-image: linear-gradient( to left, rgba(0, 0, 0, 0.4) 0.14%, rgba(0, 0, 0, 0) 100%);
             border-top: 2px solid rgba( black, 0.1 );
             border-bottom: 2px solid rgba( black, 0.1 );
             border-right: 2px solid rgba( black, 0.1 );
             border-radius: 2px;
-
             flex-direction: row-reverse;
             flex-wrap: nowrap;
             justify-content: flex-start;
             align-items: center;
             align-content: flex-start;
-
             padding: 10px;
 
             .icon-panel {
-                width: 75px;
-                aspect-ratio: 1;
+                width: 130px;
+                aspect-ratio: 2.75;
                 border-radius: 100px;
                 border: 3px solid rgba( black, 0.4 );
-
+                opacity: .25;
                 img {
                     width: 100%;
-                    height: 100%;
+                    right: 25px;
+					bottom: 5px;           
                 }
             }
 
@@ -66,24 +65,28 @@
 
             .ammo {
                 margin-right: 16px;
+                right: -5px;
+                top: 46px;
                 text-align: right;
                 font-weight: 700;
-                color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);;
-                font-size: 40px;
+                color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
+                font-size: 20px;
                 text-shadow: 2px 2px 4px rgba( black, 0.6 );
+                position:absolute;
             }
 
-            opacity: 0.5;
             &.active {
                 opacity: 1;
-
                 .icon-panel {
                     border: none;
                 }
             }
 
             &.current {
-                background-image: linear-gradient( to left, rgba(30, 30, 30, 0.8) 0.14%, rgba(30, 30, 30, 0) 100%);
+                 background-image: linear-gradient(90deg, rgba(0,0,0,.25) 0%, rgba(226, 213, 211, .1) 100%);
+                .icon-panel {               
+                     opacity: 1;
+                }
             }
         }
     }
@@ -94,7 +97,7 @@
     {
         <div class="entry @GetClasses( i )">
             <div class="icon-panel">
-                <img src="@GetWeapon( i ).WeaponData.AmmoIcon" />
+                <img src="@GetWeapon( i ).WeaponData.Icon" />
             </div>
 
             <label class="ammo">@(GetAmmoComponent( i )?.AmmoCount ?? 0)</label>

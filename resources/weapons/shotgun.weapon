@@ -7,7 +7,7 @@
 		ViewModel = resource:"models/gameplay/weapons/shotgun/shotgun.vmdl"
 		CrosshairIcon = resource:"ui/crosshair/crosshair121.png"
 		WeaponColor = "1,0.727,0,1"
-		Icon = resource:"ui/weapons/dm_shotgun.png"
+		Icon = resource:"ui/weapons/icon_6.png"
 		AmmoIcon = resource:"ui/ammo/icon_6_ammo.png"
 		HoldType = "Shotgun"
 		Handedness = "Right"
