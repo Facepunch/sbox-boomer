@@ -95,7 +95,7 @@
 
             @if ( !string.IsNullOrEmpty( CurrentAward.Icon ) )
             {
-                <img class="icon" src="/ui/vitals/ammo.png" />
+                <img class="icon" src=@CurrentAward.Icon />
             }
 
             <label class="header">@CurrentAward.Name</label>

@@ -15,12 +15,12 @@ public partial class Player
 	public List<PlayerAward> GrantedAwards { get; set; } = new();
 
 	[ClientRpc]
-	public void ShowAward( string name, string icon, string description = null )
+	public void ShowAward( string name, string icon = null, string description = null )
 	{
-		Event.Run( "boomer.giveaward", name, icon, description ?? string.Empty );
+		Event.Run( "boomer.giveaward", name, icon ?? "/ui/vitals/ammo.png", description ?? string.Empty );
 	}
 
-	public void GiveAward( string name, string icon, string description = null )
+	public void GiveAward( string name, string icon = null, string description = null )
 	{
 		GrantedAwards.Add( new PlayerAward
 		{
