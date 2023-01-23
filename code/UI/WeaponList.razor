@@ -13,13 +13,13 @@
         gap: 10px;
         font-family: Quantico;
         
-        .entry {
+        .entry
+        {
             width: 220px;
             height: 80px;
-            background-image: linear-gradient( to left, rgba(0, 0, 0, 0.4) 0.14%, rgba(0, 0, 0, 0) 100%);
-            border-top: 2px solid rgba( black, 0.1 );
-            border-bottom: 2px solid rgba( black, 0.1 );
-            border-right: 2px solid rgba( black, 0.1 );
+            background-image: linear-gradient( to left, rgba( 0, 0, 0, 0.7 ) 0.14%, rgba( 0, 0, 0, 0 ) 100% );
+            border: 2px solid rgba( black, 0.1 );
+            border-left: none;
             border-radius: 2px;
             flex-direction: row-reverse;
             flex-wrap: nowrap;
@@ -27,21 +27,26 @@
             align-items: center;
             align-content: flex-start;
             padding: 10px;
+            transition: all 0.2s ease;
 
-            .icon-panel {
+            .icon-panel
+            {
+                transition: all 0.2s ease;
                 width: 130px;
                 aspect-ratio: 2.75;
                 border-radius: 100px;
                 border: 3px solid rgba( black, 0.4 );
-                opacity: .25;
-                img {
+                opacity: 0.45;
+                img 
+                {
                     width: 100%;
                     right: 25px;
 					bottom: 5px;           
                 }
             }
 
-            .input {
+            .input
+            {
                 width: 38px;
                 height: 38px;
                 background-color: rgba( black, 0.7 );
@@ -49,43 +54,63 @@
                 justify-content: center;
                 align-items: center;
                 border-radius: 2px;
+                transition: all 0.2s ease;
 
-                label {
+                label
+                {
                     left: -2px;
                     text-align: center;
                     font-weight: 700;
-                    color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
+                    color: linear-gradient( 180deg, #FFFFFF 0%, rgba( 226, 213, 211, 1 ) 100% );
                     font-size: 20px;
                 }
             }
 
-            .grow {
+            .grow
+            {
                 flex-grow: 1;
             }
 
-            .ammo {
+            .ammo
+            {
                 margin-right: 16px;
                 right: -5px;
-                top: 46px;
+                bottom: 4px;
                 text-align: right;
                 font-weight: 700;
-                color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
+                color: linear-gradient( 180deg, #FFFFFF 0%, rgba( 226, 213, 211, 1 ) 100% );
                 font-size: 20px;
                 text-shadow: 2px 2px 4px rgba( black, 0.6 );
-                position:absolute;
+                position: absolute;
             }
 
-            &.active {
+            &.active
+            {
                 opacity: 1;
-                .icon-panel {
+
+                .icon-panel
+                {
                     border: none;
                 }
             }
 
-            &.current {
-                 background-image: linear-gradient(90deg, rgba(0,0,0,.25) 0%, rgba(226, 213, 211, .1) 100%);
-                .icon-panel {               
-                     opacity: 1;
+            &.current
+            {
+                height: 100px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+
+                background-image: linear-gradient( 90deg, rgba( 0, 0, 0, 0.25 ) 0%, rgba( 100, 100, 100, 0.8 ) 100% );
+                .icon-panel
+                {               
+                    opacity: 1;
+                    width: 170px;
+                }
+
+                .input
+                {
+                    opacity: 0;
+                    transform: translateX( -6px );
                 }
             }
         }
