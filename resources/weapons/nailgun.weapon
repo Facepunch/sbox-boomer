@@ -16,6 +16,10 @@
 			"Shoot",
 			"Ammo",
 		]
+		KillMessages = 
+		[
+			"screwed",
+		]
 		ViewModelData = 
 		{
 			OverallWeight = 0.1
