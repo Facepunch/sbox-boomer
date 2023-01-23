@@ -36,8 +36,8 @@ public partial class TeamDeathmatch : Gamemode
 	{
 		get
 		{
-			yield return Team.Red;
-			yield return Team.Blue;
+			yield return Team.Yellow;
+			yield return Team.Cyan;
 		}
 	}
 
