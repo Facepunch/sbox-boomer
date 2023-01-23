@@ -1,3 +1,4 @@
+using Facepunch.Boomer.UI;
 using Sandbox;
 using Sandbox.Utility;
 using System;
@@ -25,6 +26,7 @@ public partial class PlayerCamera
 
 	private float walkBob = 0;
 	private float fovOffset = 0;
+	private Vector2 mouseDelta = 0;
 	protected virtual void AddCameraEffects( Player player )
 	{
 		if ( player.LifeState != LifeState.Alive ) return;
@@ -41,7 +43,6 @@ public partial class PlayerCamera
 			walkBob += Time.Delta * 18.0f * speed;
 		}
 
-
 		Camera.Position += up * Easing.QuadraticOut( MathF.Sin( walkBob ) ) * speed;
 		Camera.Position += left * MathF.Cos( walkBob ) * speed * -0.5f;
 
@@ -50,5 +51,13 @@ public partial class PlayerCamera
 		fovOffset = fovOffset.LerpTo( speed * 5 * MathF.Abs( forwardspeed ), Time.Delta * 4.0f );
 
 		Camera.FieldOfView += fovOffset;
+
+		mouseDelta += Input.MouseDelta;
+		mouseDelta = mouseDelta.LerpTo( 0, Time.Delta * 10f );
+
+		var uitx = new Sandbox.UI.PanelTransform();
+		uitx.AddTranslateY( mouseDelta.y * -0.01f );
+		uitx.AddTranslateX( mouseDelta.x * -0.01f );
+		Game.RootPanel.Style.Transform = uitx;
 	}
 }
