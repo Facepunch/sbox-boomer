@@ -47,6 +47,10 @@
                 height: 50px;
                 margin-right: 8px;
             }
+
+            &.thin {
+                font-weight: 300;
+            }
         }
 
         .stat {
@@ -158,6 +162,7 @@
                 <div class="row">
                     <label class="icon big">speed</label>
                     <SegmentBar class="slim" Color=@DashColor CurrentValue=@Dash.DashCount MaxValue=@Dash.MaxDashes Segments=@Dash.MaxDashes />
+                    <InputHint Button=@InputButton.Run style="margin-left: 12px; width: 64px; height:32px;" />
                 </div>
             </div>
         }
@@ -169,7 +174,15 @@
                     <label class="text big @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
                 </div>
 
-                <img class="weapon-icon";" src=@Weapon.WeaponData.AmmoIcon />
+                <img class="weapon-icon" src=@Weapon.WeaponData.AmmoIcon />
+
+                <InputHint Button=@InputButton.PrimaryAttack style="width: 32px; height:32px;" />
+
+                @if ( Weapon.GetComponent<SecondaryShoot>() != null )
+                {
+                    <label class="text thin" style="top: -4px; width: 10px;">|</label>
+                    <InputHint Button=@InputButton.SecondaryAttack style="margin-left: 10px; width: 32px; height:32px;" />
+                }
             </div>
         }
 
