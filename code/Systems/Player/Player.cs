@@ -33,6 +33,11 @@ public partial class Player : AnimatedEntity
 	[Net, Predicted] public TimeSince TimeSinceDamage { get; set; }
 
 	/// <summary>
+	/// Time since the player last killed another player.
+	/// </summary>
+	[Net, Predicted] public TimeSince TimeSinceKill { get; set; }
+
+	/// <summary>
 	/// Accessor for getting a player's active weapon.
 	/// </summary>
 	public Weapon ActiveWeapon => Inventory?.ActiveWeapon;
@@ -306,6 +311,14 @@ public partial class Player : AnimatedEntity
 
 			// Inform the active gamemode
 			GamemodeSystem.Current?.OnPlayerKilled( this, LastDamage, out newLifeState );
+
+			if ( LastDamage.Attacker is Player attacker && attacker != this )
+			{
+				attacker.ConsecutiveKills++;
+				attacker.CalculateKillingSpree();
+				attacker.TimeSinceKill = 0;
+				Sound.FromScreen( To.Single( attacker ), "killsound" );
+			}
 
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
 				LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
