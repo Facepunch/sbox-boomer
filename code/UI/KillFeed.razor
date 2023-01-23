@@ -1,0 +1,47 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel;
+
+<style>
+    KillFeed
+    {
+        position: absolute;
+        top: 32px;
+        right: 48px;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
+        font-family: Quantico;
+        text-transform: uppercase;
+
+        .canvas 
+        {
+            justify-content: flex-start;
+            align-items: stretch;
+            align-content: stretch;
+            flex-direction: column;
+
+            gap: 5px;
+        }
+    }
+</style>
+
+<root>
+    <div class="canvas">
+        <KillFeedEntry />
+        <KillFeedEntry WeaponIdent="Nailgun" />
+        <KillFeedEntry WeaponIdent="Rocket Launcher" />
+    </div>
+</root>
+
+@code
+{
+    [Event( "boomer.kill" )]
+    public void OnPlayerKilled( string attacker, string victim, string weapon )
+    {
+ 
+    }
+}
