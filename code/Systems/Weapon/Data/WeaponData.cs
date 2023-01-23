@@ -40,6 +40,8 @@ public partial class WeaponData : GameResource
 	[Category( "Basic Information" )]
 	public List<string> Components { get; set; }
 
+	public List<string> KillMessages { get; set; }
+
 	public ViewModelData ViewModelData { get; set; }
 
 	// Component Information
@@ -65,5 +67,10 @@ public partial class WeaponData : GameResource
 
 		// Precache
 		Shoot.Precache();
+	}
+
+	public string GetRandomKillMessage()
+	{
+		return Game.Random.FromList( KillMessages, "killed" );
 	}
 }
