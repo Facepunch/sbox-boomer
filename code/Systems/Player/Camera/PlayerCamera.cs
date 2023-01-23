@@ -53,11 +53,11 @@ public partial class PlayerCamera
 		Camera.FieldOfView += fovOffset;
 
 		mouseDelta += Input.MouseDelta;
-		mouseDelta = mouseDelta.LerpTo( 0, Time.Delta * 10f );
+		mouseDelta = mouseDelta.LerpTo( 0, Time.Delta * 5f );
 
 		var uitx = new Sandbox.UI.PanelTransform();
-		uitx.AddTranslateY( mouseDelta.y * -0.01f );
-		uitx.AddTranslateX( mouseDelta.x * -0.01f );
+		uitx.AddTranslateY( mouseDelta.y * -0.002f );
+		uitx.AddTranslateX( mouseDelta.x * -0.002f );
 		Game.RootPanel.Style.Transform = uitx;
 	}
 }
