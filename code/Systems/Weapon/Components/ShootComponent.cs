@@ -186,7 +186,7 @@ public partial class Shoot : WeaponComponent
 	{
 		if ( TimeUntilCanFire > 0 ) return false;
 		if ( Weapon.Tags.Has( "reloading" ) ) return false;
-		if ( GetComponent<Ammo>() is Ammo ammo && !ammo.HasEnoughAmmo() ) return false;
+		if ( GetComponent<Ammo>( true ) is Ammo ammo && !ammo.HasEnoughAmmo() ) return false;
 
 		return true;
 	}

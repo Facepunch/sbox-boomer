@@ -144,7 +144,7 @@
 
     public Ammo GetAmmoComponent( int slot )
     {
-        return GetWeapon( slot )?.GetComponent<Ammo>();    
+        return GetWeapon( slot )?.GetComponent<Ammo>( true );    
     }
 
     public Weapon GetWeapon( int slot )

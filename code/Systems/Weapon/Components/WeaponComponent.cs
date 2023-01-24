@@ -29,9 +29,9 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
-	public T GetComponent<T>() where T : WeaponComponent
+	public T GetComponent<T>( bool includeDisabled = false ) where T : WeaponComponent
 	{
-		return Weapon.GetComponent<T>();
+		return Weapon.GetComponent<T>( includeDisabled );
 	}
 
 	/// <summary>

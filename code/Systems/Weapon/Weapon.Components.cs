@@ -5,9 +5,9 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 public partial class Weapon
 {
-	public T GetComponent<T>() where T : WeaponComponent
+	public T GetComponent<T>( bool includeDisabled = false ) where T : WeaponComponent
 	{
-		return Components.Get<T>( false );
+		return Components.Get<T>( includeDisabled );
 	}
 
 	protected void SimulateComponents( IClient cl )
