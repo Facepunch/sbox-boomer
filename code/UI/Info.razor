@@ -178,7 +178,7 @@
 
                 <InputHint Button=@InputButton.PrimaryAttack style="width: 32px; height:32px;" />
 
-                @if ( Weapon.GetComponent<SecondaryShoot>() != null )
+                @if ( Weapon.GetComponent<SecondaryShoot>() != null || Weapon.GetComponent<Aim>() != null )
                 {
                     <label class="text thin" style="top: -4px; width: 10px;">|</label>
                     <InputHint Button=@InputButton.SecondaryAttack style="margin-left: 10px; width: 32px; height:32px;" />
