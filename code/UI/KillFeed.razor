@@ -30,18 +30,33 @@
 </style>
 
 <root>
-    <div class="canvas">
-        <KillFeedEntry />
-        <KillFeedEntry WeaponIdent="Nailgun" />
-        <KillFeedEntry WeaponIdent="Rocket Launcher" />
+    <div class="canvas" @ref=Canvas>
     </div>
 </root>
 
 @code
 {
+    public Panel Canvas { get; set; }
+
     [Event( "boomer.kill" )]
     public void OnPlayerKilled( string attacker, string victim, string weapon )
     {
- 
+        AddEntry( attacker, victim, weapon );
+    }
+
+    public void AddEntry( string attacker, string victim, string weapon )
+    {
+        var e = Canvas.AddChild<KillFeedEntry>();
+        e.AttackerName = attacker;
+        e.VictimName = victim;
+        e.WeaponIdent = weapon;
+
+        DeleteAsync( e, 5f );
+    }
+
+    async void DeleteAsync( KillFeedEntry e, float time = 5f )
+    {
+        await GameTask.DelaySeconds( time );
+        e.Delete();
     }
 }

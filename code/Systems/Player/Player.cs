@@ -293,13 +293,19 @@ public partial class Player : AnimatedEntity
 			}
 		}
 
-		this.ProceduralHitReaction( info, 0.05f );
+		// this.ProceduralHitReaction( info, 0.05f );
 	}
 
 	private async void AsyncRespawn()
 	{
 		await GameTask.DelaySeconds( 3f );
 		Respawn();
+	}
+
+	[ClientRpc]
+	public void RpcPlayerKilled( string attacker, string victim, string weapon )
+	{
+		Event.Run( "boomer.kill", attacker, victim, weapon );
 	}
 
 	public override void OnKilled()
@@ -318,6 +324,8 @@ public partial class Player : AnimatedEntity
 				attacker.CalculateKillingSpree();
 				attacker.TimeSinceKill = 0;
 				Sound.FromScreen( To.Single( attacker ), "killsound" );
+
+				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.WeaponData.Name ?? "" ); 
 			}
 
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
