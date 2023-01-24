@@ -9,7 +9,7 @@ namespace Facepunch.Boomer;
 public partial class GamemodeSystem
 {
 	[ConVar.Replicated( "boomer_gamemode" )]
-	public static string SelectedGamemode { get; set; } = "";
+	public static string SelectedGamemode { get; set; } = "TeamDeathmatch";
 
 	private static Gamemode current;
 	public static Gamemode Current
