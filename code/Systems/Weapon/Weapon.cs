@@ -31,6 +31,11 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster( Player player )
 	{
 		EnableDrawing = false;
+
+		foreach ( var component in Components.GetAll<WeaponComponent>() )
+		{
+			component.Enabled = false;
+		}
 	}
 
 	/// <summary>
