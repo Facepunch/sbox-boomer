@@ -123,8 +123,22 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		}
 	}
 
+	[Net, Predicted] public Vector3 Impulse { get; set; }
+
+	public void ApplyForce( Vector3 force )
+	{
+		Impulse += force;
+	}
+
 	public virtual void Simulate( IClient cl )
 	{
+		if ( Impulse.Length > 0 )
+		{
+			GetMechanic<WalkMechanic>()?.ClearGroundEntity();
+			Velocity += Impulse;
+			Impulse = 0f;
+		}
+
 		SimulateEyes();
 		SimulateMechanics();
 
