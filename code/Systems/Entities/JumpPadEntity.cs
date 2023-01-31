@@ -9,7 +9,7 @@ namespace Facepunch.Boomer;
 [AutoApplyMaterial( "materials/tools/toolstrigger.vmat" )]
 [Line( "targetname", "targetentity" )]
 [HammerEntity]
-public partial class Jumppad : BaseTrigger
+public partial class JumpPadEntity : BaseTrigger
 {
 	[Net, Property, FGDType( "target_destination" )] public string TargetEntity { get; set; } = "";
 	[Net, Property] public float VerticalBoost { get; set; } = 200f;

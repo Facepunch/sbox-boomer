@@ -71,9 +71,23 @@ public partial class Player
 
 		var lookInput = (LookInput + Input.AnalogLook).Normal;
 
+		if ( ViewAnglesOverride != Angles.Zero )
+		{
+			lookInput = ViewAnglesOverride;
+			ViewAnglesOverride = Angles.Zero;
+		}
+
 		// Since we're a FPS game, let's clamp the player's pitch between -90, and 90.
 		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -90f, 90f ) );
 
 		PlayerCamera?.BuildInput( this );
+	}
+
+	Angles ViewAnglesOverride;
+
+	[ClientRpc]
+	public void SetViewAngles( Angles angles )
+	{
+		ViewAnglesOverride = angles;
 	}
 }
