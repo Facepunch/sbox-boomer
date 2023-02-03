@@ -6,7 +6,7 @@ using System.Linq;
 namespace Facepunch.Boomer;
 
 [Library( "boomer_weaponpickup" ), HammerEntity]
-[EditorModel( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" )]
+[Model]
 [Title( "Weapon Pickup" ), Category( "Pickups" )]
 public partial class WeaponPickup : BasePickup
 {
