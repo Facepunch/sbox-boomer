@@ -35,6 +35,9 @@ public partial class WeaponData : GameResource
 	public HoldType HoldType { get; set; } = HoldType.Pistol;
 
 	[Category( "Animation" )]
+	public float HoldTypePose { get; set; } = 0;
+
+	[Category( "Animation" )]
 	public Handedness Handedness { get; set; } = Handedness.Both;
 
 	[Category( "Basic Information" )]

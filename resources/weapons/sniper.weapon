@@ -1,75 +1,62 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Name = "Sniper Rifle"
-		Model = resource:"models/gameplay/weapons/railgun/w_railgun.vmdl"
-		ViewModel = resource:"models/gameplay/weapons/railgun/railgun.vmdl"
-		CrosshairIcon = resource:"ui/crosshair/crosshair056.png"
-		WeaponColor = "0,1,0.273,1"
-		Icon = resource:"ui/weapons/icon_4.png"
-		AmmoIcon = resource:"ui/ammo/icon_4_ammo.png"
-		HoldType = "Shotgun"
-		Handedness = "Right"
-		Components = 
-		[
-			"Shoot",
-			"Ammo",
-			"Aim",
-		]
-		KillMessages = 
-		[
-			"railed",
-		]
-		ViewModelData = 
-		{
-			OverallWeight = 0.5
-			WeightReturnForce = 35
-			WeightDamping = 20
-			AccelerationDamping = 15
-			VelocityScale = 9
-			RotationalPivotForce = 10
-			RotationalScale = 5
-			WalkCycleOffset = "-4,150,0"
-			BobAmount = "100,200"
-			GlobalLerpPower = 1
-			CrouchPositionOffset = "-3,1,0"
-			CrouchAngleOffset = "2,0,-15"
-			AvoidancePositionOffset = "-5,0,0"
-			AvoidanceAngleOffset = "2,0,-25"
-			SprintPositionOffset = "1,3.226,8"
-			SprintAngleOffset = "20,6.529,-12.2"
-			AimPositionOffset = "-10,0,-30"
-			AimFovOffset = 60
-		}
-		Shoot = 
-		{
-			BaseDamage = 75
-			BulletRange = 5000
-			BulletCount = 1
-			BulletForce = 1000
-			BulletSize = 1
-			FireDelay = 1.75
-			FireSound = 
-			[
-				resource:"sounds/weapons/railgun/rg.shoot.1.sound",
-				resource:"sounds/weapons/railgun/rg.shoot.2.sound",
-				resource:"sounds/weapons/rocketlauncher/rl.shoot.sound",
-			]
-			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
-			KnockbackForce = 400
-			TracerPath = resource:"particles/gameplay/weapons/railgun/railgun_trace.vpcf"
-		}
-		SecondaryShoot = 
-		{
-		}
-		Aim = 
-		{
-		}
-		Ammo = 
-		{
-			DefaultAmmo = 8
-			MaximumAmmo = 8
-		}
-	}
+  "Name": "Sniper Rifle",
+  "Model": "models/gameplay/weapons/railgun/w_railgun.vmdl",
+  "ViewModel": "models/gameplay/weapons/railgun/railgun.vmdl",
+  "CrosshairIcon": "ui/crosshair/crosshair056.png",
+  "WeaponColor": "0,1,0.273,1",
+  "Icon": "ui/weapons/icon_4.png",
+  "AmmoIcon": "ui/ammo/icon_4_ammo.png",
+  "HoldType": "Shotgun",
+  "HoldTypePose": 0,
+  "Handedness": "Right",
+  "Components": [
+    "Shoot",
+    "Ammo",
+    "Aim"
+  ],
+  "KillMessages": [
+    "railed"
+  ],
+  "ViewModelData": {
+    "OverallWeight": 0.5,
+    "WeightReturnForce": 35,
+    "WeightDamping": 20,
+    "AccelerationDamping": 15,
+    "VelocityScale": 9,
+    "RotationalPivotForce": 10,
+    "RotationalScale": 5,
+    "WalkCycleOffset": "-4,150,0",
+    "BobAmount": "100,200",
+    "GlobalLerpPower": 1,
+    "CrouchPositionOffset": "-3,1,0",
+    "CrouchAngleOffset": "2,0,-15",
+    "AvoidancePositionOffset": "-5,0,0",
+    "AvoidanceAngleOffset": "2,0,-25",
+    "SprintPositionOffset": "1,3.226,8",
+    "SprintAngleOffset": "20,6.529,-12.2",
+    "AimPositionOffset": "-10,0,-30",
+    "AimFovOffset": 60
+  },
+  "Shoot": {
+    "BaseDamage": 75,
+    "BulletRange": 5000,
+    "BulletCount": 1,
+    "BulletForce": 1000,
+    "BulletSize": 1,
+    "FireDelay": 1.75,
+    "FireSound": [
+      "sounds/weapons/railgun/rg.shoot.1.sound",
+      "sounds/weapons/railgun/rg.shoot.2.sound",
+      "sounds/weapons/rocketlauncher/rl.shoot.sound"
+    ],
+    "DryFireSound": "sounds/weapons/dryfire_rifle-1.sound",
+    "KnockbackForce": 400,
+    "TracerPath": "particles/gameplay/weapons/railgun/railgun_trace.vpcf"
+  },
+  "SecondaryShoot": {},
+  "Aim": {},
+  "Ammo": {
+    "DefaultAmmo": 8,
+    "MaximumAmmo": 8
+  }
 }

@@ -8,7 +8,8 @@ public enum HoldType
 	Shotgun,
 	Item,
 	Fists,
-	Swing
+	Swing,
+	RPG
 }
 
 public enum Handedness
