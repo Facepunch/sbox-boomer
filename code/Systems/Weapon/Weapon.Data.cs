@@ -4,9 +4,6 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 public partial class Weapon
 {
-	[Net, Prefab, ResourceType( "vmdl" )]
-	public string ViewModelPath { get; set; }
-
 	[Net, Prefab, Category( "Basic Information" ), ResourceType( "jpg" )]
 	public string CrosshairIcon { get; set; }
 

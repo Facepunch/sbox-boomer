@@ -142,9 +142,9 @@
 
     public Boomer.Player Player => Game.LocalPawn as Boomer.Player;
 
-    public Ammo GetAmmoComponent( int slot )
+    public AmmoComponent GetAmmoComponent(int slot)
     {
-        return GetWeapon( slot )?.GetComponent<Ammo>( true );    
+        return GetWeapon( slot )?.GetComponent<AmmoComponent>( true );    
     }
 
     public Weapon GetWeapon( int slot )

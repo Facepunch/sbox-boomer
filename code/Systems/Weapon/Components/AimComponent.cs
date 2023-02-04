@@ -3,7 +3,7 @@ using Sandbox;
 namespace Facepunch.Boomer.WeaponSystem;
 
 [Prefab]
-public partial class Aim : WeaponComponent, ISingletonComponent
+public partial class AimComponent : WeaponComponent, ISingletonComponent
 {
 	[Prefab] public float AimTime { get; set; } = 0f;
 

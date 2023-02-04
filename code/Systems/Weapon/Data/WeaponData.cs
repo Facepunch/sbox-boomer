@@ -1,9 +1,10 @@
 using Sandbox;
+using System;
 using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
-[GameResource( "Weapon", "weapon", "A data asset for a weapon.",
+[Obsolete, GameResource( "Weapon", "weapon", "A data asset for a weapon.",
 	Icon = "track_changes", IconBgColor = "#4953a7", IconFgColor = "#2a3060" )]
 public partial class WeaponData : GameResource
 {
@@ -44,8 +45,6 @@ public partial class WeaponData : GameResource
 	public List<string> Components { get; set; }
 
 	public List<string> KillMessages { get; set; }
-
-	public ViewModelData ViewModelData { get; set; }
 
 	protected override void PostLoad()
 	{

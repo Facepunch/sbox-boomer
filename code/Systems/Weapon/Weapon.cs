@@ -69,8 +69,10 @@ public partial class Weapon : AnimatedEntity
 	[ClientRpc]
 	public void CreateViewModel()
 	{
+		if ( GetComponent<ViewModelComponent>() is not ViewModelComponent comp ) return;
+
 		var vm = new WeaponViewModel( this );
-		vm.Model = Model.Load( ViewModelPath );
+		vm.Model = Model.Load( comp.ViewModelPath );
 		ViewModelEntity = vm;
 	}
 

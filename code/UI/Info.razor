@@ -200,7 +200,7 @@
     public string ArmorString => $"{Player.ArmorComponent.Current:F0}";
     public Player Player => Game.LocalPawn as Player;
     public Weapon Weapon => Player?.ActiveWeapon;
-    public Ammo AmmoComponent => Weapon?.GetComponent<Ammo>( true );
+    public AmmoComponent AmmoComponent => Weapon?.GetComponent<AmmoComponent>( true );
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
 	public string WeaponColor => Weapon.WeaponData.WeaponColor.ToString();

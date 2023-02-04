@@ -7,8 +7,7 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 public partial class WeaponViewModel
 {
-	protected WeaponData WeaponData => Weapon.WeaponData;
-	protected ViewModelData Data => WeaponData.ViewModelData;
+	protected ViewModelComponent Data => Weapon.GetComponent<ViewModelComponent>();
 
 	// Fields
 	Vector3 SmoothedVelocity;
@@ -89,8 +88,6 @@ public partial class WeaponViewModel
 		Position = Camera.Position;
 		Rotation = Camera.Rotation;
 
-		if ( WeaponData == null ) return;
-
 		var player = Weapon.Player;
 		var controller = player?.Controller;
 		if ( controller == null )
@@ -105,7 +102,7 @@ public partial class WeaponViewModel
 		var up = Camera.Rotation.Up;
 		var forward = Camera.Rotation.Forward;
 		var isCrouching = controller.IsMechanicActive<CrouchMechanic>();
-		var isAiming = Weapon.GetComponent<Aim>()?.IsActive ?? false;
+		var isAiming = Weapon.GetComponent<AimComponent>()?.IsActive ?? false;
 
 		LerpTowards( ref aimLerp, isAiming ? 1 : 0, isAiming ? 30f : 10f );
 		LerpTowards( ref crouchLerp, isCrouching && !isAiming ? 1 : 0, 7f );

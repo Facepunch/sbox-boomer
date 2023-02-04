@@ -8,25 +8,119 @@
     "Entities": [],
     "Components": [
       {
-        "Guid": "db3a2e7a-cb25-4f49-8f9c-ff54907f297d",
-        "Class": "Aim",
+        "Guid": "c242fd90-4da1-4bcb-923b-c43521c75a86",
+        "Class": "ViewModelComponent",
         "Keys": {
+          "OverallWeight": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "WeightReturnForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "WeightDamping": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "AccelerationDamping": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "VelocityScale": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "RotationalPivotForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "RotationalScale": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "WalkCycleOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "BobAmount": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "GlobalLerpPower": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "SprintPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "SprintAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AimPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AimAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AimFovOffset": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "GlobalPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "GlobalAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "CrouchPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "CrouchAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AvoidancePositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AvoidanceAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
           "_tags": {
             "Value": "[]"
           },
-          "AimTime": {
-            "Type": "Single",
-            "Value": "0"
+          "ViewModelPath": {
+            "Type": "String",
+            "Value": "\u0022models/gameplay/weapons/shotgun/shotgun.vmdl\u0022"
           }
         }
       },
       {
-        "Guid": "0a9f1cdb-dd1b-43f2-ba71-6841ce74c8b3",
-        "Class": "Ammo",
+        "Guid": "19f9e405-389e-450f-847d-c4836cfcd59b",
+        "Class": "AimComponent",
         "Keys": {
+          "AimTime": {
+            "Type": "Single",
+            "Value": "0"
+          },
           "_tags": {
             "Value": "[]"
-          },
+          }
+        }
+      },
+      {
+        "Guid": "d9df3ebb-1251-45e1-9a5f-79986cde911a",
+        "Class": "AmmoComponent",
+        "Keys": {
           "DefaultAmmo": {
             "Type": "Int32",
             "Value": "0"
@@ -38,16 +132,16 @@
           "AllowChamber": {
             "Type": "Boolean",
             "Value": "false"
+          },
+          "_tags": {
+            "Value": "[]"
           }
         }
       },
       {
-        "Guid": "cd3d808d-f837-40a8-b672-1c2d025aa6bc",
-        "Class": "Shoot",
+        "Guid": "baa056d2-ffe6-46c0-8a01-ac4f9c8d50a1",
+        "Class": "ShootComponent",
         "Keys": {
-          "_tags": {
-            "Value": "[]"
-          },
           "FireButton": {
             "Type": "InputButton",
             "Value": "0"
@@ -84,29 +178,9 @@
             "Type": "Boolean",
             "Value": "false"
           },
-          "ActivateSound": {
-            "Type": "String",
-            "Value": "\u0022\u0022"
-          },
-          "DryFireSound": {
-            "Type": "String",
-            "Value": "\u0022\u0022"
-          },
-          "Projectile": {
-            "Type": "String",
-            "Value": "\u0022\u0022"
-          },
           "KnockbackForce": {
             "Type": "Single",
             "Value": "0"
-          },
-          "TracerPath": {
-            "Type": "String",
-            "Value": "\u0022\u0022"
-          },
-          "ImpactTrailPath": {
-            "Type": "String",
-            "Value": "\u0022\u0022"
           },
           "DisableBulletImpacts": {
             "Type": "Boolean",
@@ -116,17 +190,8 @@
             "Type": "Boolean",
             "Value": "false"
           },
-          "IsFiring": {
-            "Type": "Boolean",
-            "Value": "false"
-          },
-          "CurveTest": {
-            "Type": "Curve",
-            "Value": "{\r\n  \u0022rangex\u0022: \u00220,0\u0022,\r\n  \u0022rangey\u0022: \u00220,0\u0022\r\n}"
-          },
-          "FireSound": {
-            "Type": "List\u00601",
-            "Value": "[\r\n  \u0022\u0022\r\n]"
+          "_tags": {
+            "Value": "[]"
           }
         }
       }

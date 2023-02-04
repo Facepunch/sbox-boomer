@@ -4,7 +4,7 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 
 [Prefab]
-public partial class Ammo : WeaponComponent, ISingletonComponent
+public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 {
 	[Net] public int AmmoCount { get; set; }
 

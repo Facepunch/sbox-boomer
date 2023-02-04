@@ -5,29 +5,33 @@ using System.Collections.Generic;
 namespace Facepunch.Boomer.WeaponSystem;
 
 [Prefab]
-public partial class Shoot : WeaponComponent
+public partial class ShootComponent : WeaponComponent
 {
+	// I know that there's a metric fuck ton of Net properties here..
+	// ideally, when the prefab gets set up, we'd send the client a message with the prefab's name
+	// so we can populate all the Prefab marked properties with their defaults.
+
 	[Prefab] public InputButton FireButton { get; set; } = InputButton.PrimaryAttack;
 
 	/// <summary>
 	/// When penetrating a surface, this is the trace increment amount.
 	/// </summary>
-	protected float PenetrationIncrementAmount => 15f;
+	[Prefab] protected float PenetrationIncrementAmount { get; set; } = 15f;
 
 	/// <summary>
 	/// How many increments?
 	/// </summary>
-	protected int PenetrationMaxSteps => 2;
+	[Prefab] protected int PenetrationMaxSteps { get; set; } = 2;
 
 	/// <summary>
 	/// How many ricochet hits until we stop traversing
 	/// </summary>
-	protected float MaxAmtOfHits => 2f;
+	[Prefab] protected float MaxAmtOfHits { get; set; } = 2f;
 
 	/// <summary>
 	/// Maximum angle in degrees for ricochet to be possible
 	/// </summary>
-	protected float MaxRicochetAngle => 45f;
+	[Prefab] protected float MaxRicochetAngle { get; set; } = 45f;
 
 
 	[Prefab] public float BaseDamage { get; set; }
@@ -41,8 +45,7 @@ public partial class Shoot : WeaponComponent
 	[Prefab, ResourceType( "sound" )]
 	public List<string> FireSound { get; set; }
 
-	[Prefab]
-	public bool FireSoundOnlyOnStart { get; set; }
+	[Prefab] public bool FireSoundOnlyOnStart { get; set; }
 
 	[Prefab, ResourceType( "sound" )]
 	public string ActivateSound { get; set; }
@@ -71,7 +74,6 @@ public partial class Shoot : WeaponComponent
 	public TimeUntil TimeUntilCanFire { get; set; }
 	protected Particles TracerParticle { get; set; }
 	protected Particles ImpactTrailParticle { get; set; }
-
 	protected Sound? ActiveSound { get; set; }
 	protected bool IsFiring { get; set; } = false;
 
@@ -218,7 +220,7 @@ public partial class Shoot : WeaponComponent
 	{
 		if ( TimeUntilCanFire > 0 ) return false;
 		if ( Weapon.Tags.Has( "reloading" ) ) return false;
-		if ( GetComponent<Ammo>( true ) is Ammo ammo && !ammo.HasEnoughAmmo() ) return false;
+		if ( GetComponent<AmmoComponent>( true ) is AmmoComponent ammo && !ammo.HasEnoughAmmo() ) return false;
 
 		return true;
 	}
