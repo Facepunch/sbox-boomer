@@ -126,9 +126,16 @@ public partial class Player : AnimatedEntity
 		var isOverriden = GamemodeSystem.Current?.PlayerLoadout( this ) ?? false;
 		if ( !isOverriden )
 		{
-			foreach ( var wpn in WeaponData.All )
+			foreach ( var prefab in PrefabSystem.GetPrefabsOfType<Weapon>() )
 			{
-				inventory.AddWeapon( WeaponData.CreateInstance( wpn ) );
+				if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var wpn ) )
+				{
+					inventory.AddWeapon( wpn );
+				}
+				else
+				{
+					Log.Warning( $"Failed to spawn weapon from prefab: {prefab}" );
+				}
 			}
 		}
 
