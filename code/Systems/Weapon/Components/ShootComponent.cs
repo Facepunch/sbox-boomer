@@ -11,64 +11,64 @@ public partial class ShootComponent : WeaponComponent
 	// ideally, when the prefab gets set up, we'd send the client a message with the prefab's name
 	// so we can populate all the Prefab marked properties with their defaults.
 
-	[Prefab] public InputButton FireButton { get; set; } = InputButton.PrimaryAttack;
+	[Net, Prefab] public InputButton FireButton { get; set; } = InputButton.PrimaryAttack;
 
 	/// <summary>
 	/// When penetrating a surface, this is the trace increment amount.
 	/// </summary>
-	[Prefab] protected float PenetrationIncrementAmount { get; set; } = 15f;
+	[Net, Prefab] protected float PenetrationIncrementAmount { get; set; } = 15f;
 
 	/// <summary>
 	/// How many increments?
 	/// </summary>
-	[Prefab] protected int PenetrationMaxSteps { get; set; } = 2;
+	[Net, Prefab] protected int PenetrationMaxSteps { get; set; } = 2;
 
 	/// <summary>
 	/// How many ricochet hits until we stop traversing
 	/// </summary>
-	[Prefab] protected float MaxAmtOfHits { get; set; } = 2f;
+	[Net, Prefab] protected float MaxAmtOfHits { get; set; } = 2f;
 
 	/// <summary>
 	/// Maximum angle in degrees for ricochet to be possible
 	/// </summary>
-	[Prefab] protected float MaxRicochetAngle { get; set; } = 45f;
+	[Net, Prefab] protected float MaxRicochetAngle { get; set; } = 45f;
 
 
-	[Prefab] public float BaseDamage { get; set; }
-	[Prefab] public float BulletRange { get; set; }
-	[Prefab] public int BulletCount { get; set; }
-	[Prefab] public float BulletForce { get; set; }
-	[Prefab] public float BulletSize { get; set; }
-	[Prefab] public float BulletSpread { get; set; }
-	[Prefab] public float FireDelay { get; set; }
+	[Net, Prefab] public float BaseDamage { get; set; }
+	[Net, Prefab] public float BulletRange { get; set; }
+	[Net, Prefab] public int BulletCount { get; set; }
+	[Net, Prefab] public float BulletForce { get; set; }
+	[Net, Prefab] public float BulletSize { get; set; }
+	[Net, Prefab] public float BulletSpread { get; set; }
+	[Net, Prefab] public float FireDelay { get; set; }
 
-	[Prefab, ResourceType( "sound" )]
-	public List<string> FireSound { get; set; }
+	[Net, Prefab, ResourceType( "sound" )]
+	public IList<string> FireSound { get; set; }
 
-	[Prefab] public bool FireSoundOnlyOnStart { get; set; }
+	[Net, Prefab] public bool FireSoundOnlyOnStart { get; set; }
 
-	[Prefab, ResourceType( "sound" )]
+	[Net, Prefab, ResourceType( "sound" )]
 	public string ActivateSound { get; set; }
 
-	[Prefab, ResourceType( "sound" )]
+	[Net, Prefab, ResourceType( "sound" )]
 	public string DryFireSound { get; set; }
 
-	[Prefab, Category( "Projectile" ), ResourceType( "ple" )]
+	[Net, Prefab, Category( "Projectile" ), ResourceType( "ple" )]
 	public string Projectile { get; set; }
 
-	[Prefab, Category( "Knockback" )]
+	[Net, Prefab, Category( "Knockback" )]
 	public float KnockbackForce { get; set; }
 
-	[Prefab, Category( "Effects" ), ResourceType( "vpcf" )]
+	[Net, Prefab, Category( "Effects" ), ResourceType( "vpcf" )]
 	public string TracerPath { get; set; }
 
-	[Prefab, Category( "Effects" ), ResourceType( "vpcf" )]
+	[Net, Prefab, Category( "Effects" ), ResourceType( "vpcf" )]
 	public string ImpactTrailPath { get; set; }
 
-	[Prefab, Category( "Effects" )]
+	[Net, Prefab, Category( "Effects" )]
 	public bool DisableBulletImpacts { get; set; }
 
-	[Prefab, Category( "Effects" )]
+	[Net, Prefab, Category( "Effects" )]
 	public bool TracerStartEnd { get; set; }
 
 	public TimeUntil TimeUntilCanFire { get; set; }
@@ -85,7 +85,10 @@ public partial class ShootComponent : WeaponComponent
 
 		if ( FireSoundOnlyOnStart )
 		{
-			FireSound.ForEach( x => player.PlaySound( x ) );
+			foreach( var sound in FireSound )
+			{
+				player.PlaySound( sound );
+			}
 		}
 	}
 
@@ -165,7 +168,12 @@ public partial class ShootComponent : WeaponComponent
 		if ( Game.IsServer )
 		{
 			if ( !FireSoundOnlyOnStart )
-				FireSound.ForEach( x => player.PlaySound( x ) );
+			{
+				foreach ( var sound in FireSound )
+				{
+					player.PlaySound( sound );
+				}
+			}
 
 			DoShootEffects( To.Single( player ) );
 		}
@@ -231,11 +239,11 @@ public partial class ShootComponent : WeaponComponent
 		{
 			TimeUntilCanFire = 0.2f;
 		}
-		if ( eventName == "aim.start" )
+		if ( eventName == "aimcomponent.start" )
 		{
 			TimeUntilCanFire = 0.15f;
 		}
-		if ( eventName == "shoot.fire" || eventName == "secondaryshoot.fire" )
+		if ( eventName == "shootcomponent.fire" )
 		{
 			TimeSinceActivated = 0;
 		}
