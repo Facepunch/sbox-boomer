@@ -16,7 +16,7 @@ public partial class WeaponData : GameResource
 	[Category( "Basic Information" ), ResourceType( "vmdl" )]
 	public string ViewModel { get; set; }
 
-	[Category( "Basic Information" ), ResourceType( "jpg" )]
+	[Category( "Basic Information" ), ResourceType( "image" )]
 	public string CrosshairIcon { get; set; }
 
 	[Category( "Basic Information" ), ResourceType( "color" )]
@@ -47,12 +47,6 @@ public partial class WeaponData : GameResource
 
 	public ViewModelData ViewModelData { get; set; }
 
-	// Component Information
-	public Shoot.ComponentData Shoot { get; set; }
-	public Shoot.ComponentData SecondaryShoot { get; set; }
-	public Aim.ComponentData Aim { get; set; }
-	public Ammo.ComponentData Ammo { get; set; }
-
 	protected override void PostLoad()
 	{
 		base.PostLoad();
@@ -67,9 +61,6 @@ public partial class WeaponData : GameResource
 
 		if ( !string.IsNullOrEmpty( ViewModel ) )
 			CachedViewModel = Sandbox.Model.Load( ViewModel );
-
-		// Precache
-		Shoot.Precache();
 	}
 
 	public string GetRandomKillMessage()

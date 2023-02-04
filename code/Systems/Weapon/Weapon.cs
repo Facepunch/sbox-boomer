@@ -2,7 +2,7 @@ using Sandbox;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
-[Title( "Weapon" ), Icon( "track_changes" )]
+[Prefab, Title( "Weapon" ), Icon( "track_changes" )]
 public partial class Weapon : AnimatedEntity
 {
 	public AnimatedEntity EffectEntity => ViewModelEntity.IsValid() ? ViewModelEntity : this;

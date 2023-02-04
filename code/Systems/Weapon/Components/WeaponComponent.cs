@@ -3,7 +3,7 @@ using System;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
-public partial class WeaponComponent : EntityComponent<Weapon>
+public abstract partial class WeaponComponent : EntityComponent<Weapon>
 {
 	/// <summary>
 	/// Accessor.

@@ -1,0 +1,188 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "9087d022-d699-4bef-ae49-b585283b2f63",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "db3a2e7a-cb25-4f49-8f9c-ff54907f297d",
+        "Class": "Aim",
+        "Keys": {
+          "_tags": {
+            "Value": "[]"
+          },
+          "AimTime": {
+            "Type": "Single",
+            "Value": "0"
+          }
+        }
+      },
+      {
+        "Guid": "0a9f1cdb-dd1b-43f2-ba71-6841ce74c8b3",
+        "Class": "Ammo",
+        "Keys": {
+          "_tags": {
+            "Value": "[]"
+          },
+          "DefaultAmmo": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "MaximumAmmo": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "AllowChamber": {
+            "Type": "Boolean",
+            "Value": "false"
+          }
+        }
+      },
+      {
+        "Guid": "cd3d808d-f837-40a8-b672-1c2d025aa6bc",
+        "Class": "Shoot",
+        "Keys": {
+          "_tags": {
+            "Value": "[]"
+          },
+          "FireButton": {
+            "Type": "InputButton",
+            "Value": "0"
+          },
+          "BaseDamage": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletRange": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletCount": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "BulletForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletSize": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletSpread": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "FireDelay": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "FireSoundOnlyOnStart": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "ActivateSound": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "DryFireSound": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "Projectile": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "KnockbackForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "TracerPath": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "ImpactTrailPath": {
+            "Type": "String",
+            "Value": "\u0022\u0022"
+          },
+          "DisableBulletImpacts": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "TracerStartEnd": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "IsFiring": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "CurveTest": {
+            "Type": "Curve",
+            "Value": "{\r\n  \u0022rangex\u0022: \u00220,0\u0022,\r\n  \u0022rangey\u0022: \u00220,0\u0022\r\n}"
+          },
+          "FireSound": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022\u0022\r\n]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/gameplay/weapons/shotgun/w_shotgun.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Shotgun\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      },
+      "HoldTypePose": {
+        "Type": "Single",
+        "Value": "0"
+      },
+      "Handedness": {
+        "Type": "Handedness",
+        "Value": "\u0022Both\u0022"
+      },
+      "CrosshairIcon": {
+        "Type": "String",
+        "Value": "\u0022ui/crosshair/crosshair121.png\u0022"
+      },
+      "WeaponColor": {
+        "Type": "Color",
+        "Value": "\u00220.93064,0.65893,0.30554,1\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022ui/weapons/icon_6.png\u0022"
+      },
+      "AmmoIcon": {
+        "Type": "String",
+        "Value": "\u0022ui/ammo/icon_6_ammo.png\u0022"
+      },
+      "HoldType": {
+        "Type": "HoldType",
+        "Value": "\u0022Rifle\u0022"
+      },
+      "ViewModel": {
+        "Type": "Model",
+        "Value": "\u0022models/gameplay/weapons/shotgun/shotgun.vmdl\u0022"
+      }
+    }
+  }
+}

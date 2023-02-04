@@ -4,17 +4,10 @@ using System.Collections.Generic;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
-public partial class SecondaryShoot : Shoot
-{
-	public override InputButton FireButton => InputButton.SecondaryAttack;
-	public override bool IsSecondary => true;
-}
-
+[Prefab]
 public partial class Shoot : WeaponComponent
 {
-	public virtual InputButton FireButton => InputButton.PrimaryAttack;
-	public ComponentData Data => IsSecondary ? Weapon.WeaponData.SecondaryShoot : Weapon.WeaponData.Shoot;
-	public virtual bool IsSecondary => false;
+	[Prefab] public InputButton FireButton { get; set; } = InputButton.PrimaryAttack;
 
 	/// <summary>
 	/// When penetrating a surface, this is the trace increment amount.
@@ -36,6 +29,45 @@ public partial class Shoot : WeaponComponent
 	/// </summary>
 	protected float MaxRicochetAngle => 45f;
 
+
+	[Prefab] public float BaseDamage { get; set; }
+	[Prefab] public float BulletRange { get; set; }
+	[Prefab] public int BulletCount { get; set; }
+	[Prefab] public float BulletForce { get; set; }
+	[Prefab] public float BulletSize { get; set; }
+	[Prefab] public float BulletSpread { get; set; }
+	[Prefab] public float FireDelay { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
+	public List<string> FireSound { get; set; }
+
+	[Prefab]
+	public bool FireSoundOnlyOnStart { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
+	public string ActivateSound { get; set; }
+
+	[Prefab, ResourceType( "sound" )]
+	public string DryFireSound { get; set; }
+
+	[Prefab, Category( "Projectile" ), ResourceType( "ple" )]
+	public string Projectile { get; set; }
+
+	[Prefab, Category( "Knockback" )]
+	public float KnockbackForce { get; set; }
+
+	[Prefab, Category( "Effects" ), ResourceType( "vpcf" )]
+	public string TracerPath { get; set; }
+
+	[Prefab, Category( "Effects" ), ResourceType( "vpcf" )]
+	public string ImpactTrailPath { get; set; }
+
+	[Prefab, Category( "Effects" )]
+	public bool DisableBulletImpacts { get; set; }
+
+	[Prefab, Category( "Effects" )]
+	public bool TracerStartEnd { get; set; }
+
 	public TimeUntil TimeUntilCanFire { get; set; }
 	protected Particles TracerParticle { get; set; }
 	protected Particles ImpactTrailParticle { get; set; }
@@ -49,9 +81,9 @@ public partial class Shoot : WeaponComponent
 
 		IsFiring = true;
 
-		if ( Data.FireSoundOnlyOnStart )
+		if ( FireSoundOnlyOnStart )
 		{
-			Data.FireSound.ForEach( x => player.PlaySound( x ) );
+			FireSound.ForEach( x => player.PlaySound( x ) );
 		}
 	}
 
@@ -95,7 +127,7 @@ public partial class Shoot : WeaponComponent
 
 		if ( IsFiring )
 		{
-			if ( TimeSinceActivated > Data.FireDelay )
+			if ( TimeSinceActivated > FireDelay )
 			{
 				Fire( player );
 			}
@@ -107,7 +139,7 @@ public partial class Shoot : WeaponComponent
 				var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
 				TracerParticle?.SetPosition( 0, pos.Position );
 
-				var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * Data.BulletRange )
+				var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * BulletRange )
 					.WithAnyTags( "solid", "glass" )
 					.Ignore( player )
 					.Run();
@@ -130,48 +162,48 @@ public partial class Shoot : WeaponComponent
 		// Send clientside effects to the player.
 		if ( Game.IsServer )
 		{
-			if ( !Data.FireSoundOnlyOnStart )
-				Data.FireSound.ForEach( x => player.PlaySound( x ) );
+			if ( !FireSoundOnlyOnStart )
+				FireSound.ForEach( x => player.PlaySound( x ) );
 
 			DoShootEffects( To.Single( player ) );
 		}
 
-		if ( Data.Projectile != null )
+		if ( Projectile != null )
 		{
 			if ( Game.IsServer )
-				_ = ProjectileData.Create( Data.Projectile, player );
+				_ = ProjectileData.Create( Projectile, player );
 		}
 		else
 		{
-			ShootBullet( Data.BulletSpread, Data.BulletForce, Data.BulletSize, Data.BulletCount, Data.BulletRange );
+			ShootBullet( BulletSpread, BulletForce, BulletSize, BulletCount, BulletRange );
 		}
 
-		if ( Data.KnockbackForce > 0f && !player.Tags.Has( "ducked" ) )
+		if ( KnockbackForce > 0f && !player.Tags.Has( "ducked" ) )
 		{
 			player.Controller.GetMechanic<WalkMechanic>()
 				.ClearGroundEntity();
 
 			player.Controller.Velocity = player.Controller.Velocity.WithZ( 0f );
-			player.Controller.Velocity += player.EyeRotation.Backward * Data.KnockbackForce;
+			player.Controller.Velocity += player.EyeRotation.Backward * KnockbackForce;
 		}
 
 		using ( Prediction.Off() )
 		{
 			if ( Game.IsServer ) return;
 
-			if ( Data.TracerStartEnd && TracerParticle == null && !string.IsNullOrEmpty( Data.TracerPath ) )
+			if ( TracerStartEnd && TracerParticle == null && !string.IsNullOrEmpty( TracerPath ) )
 			{
-				TracerParticle = Particles.Create( Data.TracerPath );
+				TracerParticle = Particles.Create( TracerPath );
 			}
 
-			if ( !string.IsNullOrEmpty( Data.ImpactTrailPath ) && ImpactTrailParticle == null )
+			if ( !string.IsNullOrEmpty( ImpactTrailPath ) && ImpactTrailParticle == null )
 			{
-				ImpactTrailParticle = Particles.Create( Data.ImpactTrailPath );
+				ImpactTrailParticle = Particles.Create( ImpactTrailPath );
 			}
 
-			if ( !string.IsNullOrEmpty( Data.ActivateSound ) && ActiveSound == null )
+			if ( !string.IsNullOrEmpty( ActivateSound ) && ActiveSound == null )
 			{
-				ActiveSound = Sound.FromEntity( Data.ActivateSound, player );
+				ActiveSound = Sound.FromEntity( ActivateSound, player );
 			}
 		}
 	}
@@ -270,11 +302,11 @@ public partial class Shoot : WeaponComponent
 
 			var reflectDir = CalculateRicochetDirection( tr, ref curHits );
 			var angle = reflectDir.Angle( tr.Direction );
-			var dist = tr.Distance.Remap( 0, Data.BulletRange, 1, 0.5f ).Clamp( 0.5f, 1f );
+			var dist = tr.Distance.Remap( 0, BulletRange, 1, 0.5f ).Clamp( 0.5f, 1f );
 			damage *= dist;
 
 			start = tr.EndPosition;
-			end = tr.EndPosition + (reflectDir * Data.BulletRange);
+			end = tr.EndPosition + (reflectDir * BulletRange);
 
 			var didPenetrate = false;
 			if ( ShouldPenetrate() )
@@ -293,7 +325,7 @@ public partial class Shoot : WeaponComponent
 					if ( !penTrace.StartedSolid )
 					{
 						var newStart = penTrace.EndPosition;
-						var newTrace = DoTraceBullet( newStart, newStart + tr.Direction * Data.BulletRange, radius );
+						var newTrace = DoTraceBullet( newStart, newStart + tr.Direction * BulletRange, radius );
 						hits.Add( newTrace );
 						didPenetrate = true;
 						break;
@@ -323,11 +355,11 @@ public partial class Shoot : WeaponComponent
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * spread * 0.25f;
 			forward = forward.Normal;
 
-			var damage = Data.BaseDamage;
+			var damage = BaseDamage;
 
 			foreach ( var tr in TraceBullet( Player.AimRay.Position, Player.AimRay.Position + forward * bulletRange, bulletSize, ref damage ) )
 			{
-				if ( !Data.DisableBulletImpacts )
+				if ( !DisableBulletImpacts )
 					tr.Surface.DoBulletImpact( tr );
 
 				if ( !Game.IsServer ) continue;
@@ -340,67 +372,15 @@ public partial class Shoot : WeaponComponent
 
 				tr.Entity.TakeDamage( damageInfo );
 
-				if ( !string.IsNullOrEmpty( Data.TracerPath ) && !Data.TracerStartEnd )
+				if ( !string.IsNullOrEmpty( TracerPath ) && !TracerStartEnd )
 				{
 					using ( Prediction.Off() )
 					{
-						var tracer = Particles.Create( Data.TracerPath, tr.StartPosition );
+						var tracer = Particles.Create( TracerPath, tr.StartPosition );
 						tracer?.SetPosition( 1, tr.EndPosition );
 					}
 				}
 			}
-		}
-	}
-
-	/// <summary>
-	/// Data asset information.
-	/// </summary>
-	public struct ComponentData
-	{
-		public float BaseDamage { get; set; }
-		public float BulletRange { get; set; }
-		public int BulletCount { get; set; }
-		public float BulletForce { get; set; }
-		public float BulletSize { get; set; }
-		public float BulletSpread { get; set; }
-		public float FireDelay { get; set; }
-
-		[ResourceType( "sound" )]
-		public List<string> FireSound { get; set; }
-
-		public bool FireSoundOnlyOnStart { get; set; }
-
-		[ResourceType( "sound" )]
-		public string ActivateSound { get; set; }
-
-		[ResourceType( "sound" )]
-		public string DryFireSound { get; set; }
-
-		[Category( "Projectile" ), ResourceType( "ple" )]
-		public string Projectile { get; set; }
-
-		[Category( "Knockback" )]
-		public float KnockbackForce { get; set; }
-
-		[Category( "Effects" ), ResourceType( "vpcf" )]
-		public string TracerPath { get; set; }
-
-		[Category( "Effects" ), ResourceType( "vpcf" )]
-		public string ImpactTrailPath { get; set; }
-
-		[Category( "Effects" )]
-		public bool DisableBulletImpacts { get; set; }
-
-		[Category( "Effects" )]
-		public bool TracerStartEnd { get; set; }
-
-		public void Precache()
-		{
-			FireSound?.ForEach( Sandbox.Precache.Add );
-
-			if ( !string.IsNullOrEmpty( DryFireSound ) ) Sandbox.Precache.Add( DryFireSound );
-			if ( !string.IsNullOrEmpty( TracerPath ) ) Sandbox.Precache.Add( TracerPath );
-			if ( !string.IsNullOrEmpty( ImpactTrailPath ) ) Sandbox.Precache.Add( ImpactTrailPath );
 		}
 	}
 }

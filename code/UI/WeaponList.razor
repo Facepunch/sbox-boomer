@@ -122,7 +122,7 @@
     {
         <div class="entry @GetClasses( i )">
             <div class="icon-panel">
-                <img src="@GetWeapon( i ).WeaponData.Icon" />
+                <img src="@GetWeapon( i )?.Icon" />
             </div>
 
             <label class="ammo">@(GetAmmoComponent( i )?.AmmoCount ?? 0)</label>

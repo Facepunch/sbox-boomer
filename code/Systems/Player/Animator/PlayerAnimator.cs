@@ -28,9 +28,9 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		var weapon = player.ActiveWeapon;
 		if ( weapon.IsValid() )
 		{
-			player.SetAnimParameter( "holdtype", (int)weapon.WeaponData.HoldType );
-			player.SetAnimParameter( "holdtype_pose", (int)weapon.WeaponData.HoldTypePose );
-			player.SetAnimParameter( "holdtype_handedness", (int)weapon.WeaponData.Handedness );
+			player.SetAnimParameter( "holdtype", (int)weapon.HoldType );
+			player.SetAnimParameter( "holdtype_handedness", (int)weapon.Handedness );
+			player.SetAnimParameter( "holdtype_pose", (int)weapon.HoldTypePose );
 		}
 	}
 

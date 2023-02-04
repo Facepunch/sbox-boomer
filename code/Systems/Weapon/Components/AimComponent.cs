@@ -2,8 +2,11 @@ using Sandbox;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
+[Prefab]
 public partial class Aim : WeaponComponent, ISingletonComponent
 {
+	[Prefab] public float AimTime { get; set; } = 0f;
+
 	protected override bool CanStart( Player player )
 	{
 		if ( !Input.Down( InputButton.SecondaryAttack ) ) return false;
@@ -31,13 +34,5 @@ public partial class Aim : WeaponComponent, ISingletonComponent
 		{
 			Input.AnalogLook *= 0.5f;
 		}
-	}
-
-	/// <summary>
-	/// Data asset information.
-	/// </summary>
-	public struct ComponentData
-	{
-		public float AimTime { get; set; }
 	}
 }

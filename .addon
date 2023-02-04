@@ -39,7 +39,7 @@
       "SoftBodySubsteps": 1
     },
     "Compiler": {
-      "RootNamespace": "Sandbox",
+      "RootNamespace": "Facepunch.Boomer",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
       "NoWarn": "1701;1702;1591;",
       "ReleaseMode": "Release"
@@ -157,6 +157,7 @@
     "DefaultLeaderboards": null,
     "Summary": "Boomer is a fast-paced shooter inspired by old school shooters.",
     "Description": "\uD83D\uDC77\u200D\u2642\uFE0F(WIP)\uD83D\uDC77\u200D\u2642\uFE0F\nBoomer is a fast-paced shooter inspired by old school shooters.\n\nAt the moment its just death match but more to come later;\nTDM\nCTF\nDuel\nKoth\n\nAs well a PVE style campaign mode.\n\nMake sure to include \u0022facepunch.boomer\u0022 in supported games if you are making custom maps.",
-    "Public": true
+    "Public": true,
+    "CsProjName": "Boomer"
   }
 }

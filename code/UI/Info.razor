@@ -171,18 +171,18 @@
         {
             <div class="row stat">
                 <div class="column ammo">
-                    <label class="text big @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.Data.MaximumAmmo )</label>
+                    <label class="text big @AmmoClasses()">@AmmoComponent.AmmoCount.Clamp( 0, AmmoComponent.MaximumAmmo )</label>
                 </div>
 
-                <img class="weapon-icon" src=@Weapon.WeaponData.AmmoIcon />
+                <img class="weapon-icon" src=@Weapon.AmmoIcon />
 
                 <InputHint Button=@InputButton.PrimaryAttack style="width: 32px; height:32px;" />
 
-                @if ( Weapon.GetComponent<SecondaryShoot>() != null || Weapon.GetComponent<Aim>() != null )
+@*                @if ( Weapon.GetComponent<Shoot>() != null || Weapon.GetComponent<Aim>() != null )
                 {
                     <label class="text thin" style="top: -4px; width: 10px;">|</label>
                     <InputHint Button=@InputButton.SecondaryAttack style="margin-left: 10px; width: 32px; height:32px;" />
-                }
+                }*@
             </div>
         }
 
@@ -217,6 +217,6 @@
 
     protected string AmmoClasses()
     {
-        return ( (float)AmmoComponent.AmmoCount / (float)AmmoComponent.Data.MaximumAmmo ) < 0.25f ? "low" : "";
+        return ( (float)AmmoComponent.AmmoCount / (float)AmmoComponent.MaximumAmmo ) < 0.25f ? "low" : "";
     }
 }

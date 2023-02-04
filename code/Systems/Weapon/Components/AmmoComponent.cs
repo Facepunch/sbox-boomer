@@ -2,22 +2,19 @@ using Sandbox;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
+
+[Prefab]
 public partial class Ammo : WeaponComponent, ISingletonComponent
 {
 	[Net] public int AmmoCount { get; set; }
 
-	public ComponentData Data => Weapon.WeaponData.Ammo;
+	[Prefab] public int DefaultAmmo { get; set; } = 8;
+	[Prefab] public int MaximumAmmo { get; set; } = 8;
+	[Prefab] public bool AllowChamber { get; set; } = true;
 
 	public bool IsFull
 	{
-		get => AmmoCount >= ( Data.AllowChamber ? Data.MaximumAmmo + 1 : Data.MaximumAmmo ); 
-	}
-
-	public override void Initialize( Weapon weapon )
-	{
-		// TODO - this is shit
-		if ( Game.IsServer )
-			AmmoCount = weapon.WeaponData.Ammo.DefaultAmmo;
+		get => AmmoCount >= ( AllowChamber ? MaximumAmmo + 1 : MaximumAmmo ); 
 	}
 
 	public override void OnGameEvent( string eventName )
@@ -31,13 +28,13 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 	// If we want to refill the ammo, here's a nice utility method for it.
 	public void Fill()
 	{
-		if ( AmmoCount == Data.MaximumAmmo && Data.AllowChamber )
+		if ( AmmoCount == MaximumAmmo && AllowChamber )
 		{
 			++AmmoCount;
 			return;
 		}
 
-		AmmoCount = Data.DefaultAmmo;
+		AmmoCount = DefaultAmmo;
 	}
 
 	public bool HasEnoughAmmo( int amount = 1 )
@@ -54,12 +51,5 @@ public partial class Ammo : WeaponComponent, ISingletonComponent
 		}
 
 		return false;
-	}
-
-	public struct ComponentData
-	{
-		public int DefaultAmmo { get; set; }
-		public int MaximumAmmo { get; set; }
-		public bool AllowChamber { get; set; }
 	}
 }

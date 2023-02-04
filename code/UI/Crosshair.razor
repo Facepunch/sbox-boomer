@@ -25,7 +25,7 @@
 
 @code {
     public Weapon Weapon => (Game.LocalPawn as Player)?.ActiveWeapon;
-    public string ImagePath => Weapon?.WeaponData.CrosshairIcon ?? "";
+    public string ImagePath => Weapon?.CrosshairIcon ?? "";
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>(false);
 
     protected override int BuildHash()
