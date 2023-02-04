@@ -128,14 +128,7 @@ public partial class Player : AnimatedEntity
 		{
 			foreach ( var prefab in PrefabSystem.GetPrefabsOfType<Weapon>() )
 			{
-				if ( PrefabLibrary.TrySpawn<Weapon>( prefab.ResourcePath, out var wpn ) )
-				{
-					inventory.AddWeapon( wpn );
-				}
-				else
-				{
-					Log.Warning( $"Failed to spawn weapon from prefab: {prefab}" );
-				}
+				Inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( prefab ) );
 			}
 		}
 
@@ -332,7 +325,7 @@ public partial class Player : AnimatedEntity
 				attacker.TimeSinceKill = 0;
 				Sound.FromScreen( To.Single( attacker ), "killsound" );
 
-				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.WeaponData.Name ?? "" ); 
+				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.Name ?? "" ); 
 			}
 
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,

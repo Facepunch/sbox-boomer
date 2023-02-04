@@ -88,6 +88,6 @@ public partial class Weapon : AnimatedEntity
 
 	public override string ToString()
 	{
-		return $"Weapon ({WeaponData?.Name})";
+		return $"Weapon ({Name})";
 	}
 }

@@ -10,23 +10,22 @@ namespace Facepunch.Boomer;
 [Title( "Weapon Pickup" ), Category( "Pickups" )]
 public partial class WeaponPickup : BasePickup
 {
-	[Property, ResourceType( "weapon" )]
-	public string WeaponPath { get; set; }
+	[Property, ResourceType( "prefab" )]
+	public string Prefab { get; set; }
 
-	public WeaponData GetData()
-	{
-		return WeaponData.All.FirstOrDefault( x => x.ResourcePath == WeaponPath );
-	}
 
 	public override bool CanPickup( Player player )
 	{
-		var data = GetData();
-		return data != null && player.Inventory.FindWeapon( data ) == null;
+		return Prefab != null && player.Inventory.FindWeapon( Prefab ) == null;
 	}
 
 	public override void OnPickup( Player player )
 	{
-		player.Inventory.AddWeapon( WeaponData.CreateInstance( GetData() ) );
+		var prefabs = PrefabSystem.GetPrefabsOfType<Weapon>();
+		if ( prefabs.FirstOrDefault() is Prefab wpnPrefab )
+		{
+			player.Inventory.AddWeapon( PrefabLibrary.Spawn<Weapon>( wpnPrefab ) );
+		}
 
 		base.OnPickup( player );
 	}

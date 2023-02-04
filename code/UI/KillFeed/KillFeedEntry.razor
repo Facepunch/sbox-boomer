@@ -54,8 +54,8 @@
 
             label {
                 font-size: 16px;
-                text-shadow: 0px 0px 6px darken( @Data.WeaponColor.WithAlpha( 0.5f ).Hex, 50% );
-                color: linear-gradient( to bottom, darken( @Data.WeaponColor.Hex, 0% ), darken( @Data.WeaponColor.Hex, 40% ) );
+                text-shadow: 0px 0px 6px darken( @Color.WithAlpha( 0.5f ).Hex, 50% );
+                color: linear-gradient( to bottom, darken( @Color.Hex, 0% ), darken( @Color.Hex, 40% ) );
             }
         }
     }
@@ -65,11 +65,11 @@
     <label class="attacker">@AttackerName</label>
 
     <div class="weapon">
-        @if ( HasData )
+        @if ( Icon != null )
         {
-            <img class="icon" src=@Data.AmmoIcon />
-            <label>@Data.GetRandomKillMessage()</label>
+            <img class="icon" src=@Icon />
         }
+        <label>@KillMessage</label>
     </div>
 
     <label class="victim">@VictimName</label>
@@ -80,12 +80,12 @@
     public string AttackerName { get; set; } = "DevulTj";
     public string VictimName { get; set; } = "bakscratch";
     public string WeaponIdent { get; set; } = "Sniper Rifle";
-
-    public WeaponData Data => WeaponData.FindName( WeaponIdent );
-    public bool HasData => !string.IsNullOrEmpty( WeaponIdent ) && Data != null;
+    public string KillMessage { get; set; } = "Killed";
+    public string Icon { get; set; } = null;
+    public Color Color { get; set; } = Color.White;
 
     public override int GetHashCode()
     {
-        return HashCode.Combine( AttackerName, VictimName, WeaponIdent );
+        return HashCode.Combine( AttackerName, VictimName, WeaponIdent, KillMessage, Color, Icon );
     }
 }

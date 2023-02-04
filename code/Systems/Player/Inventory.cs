@@ -15,14 +15,9 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	[Net, Predicted] public Weapon ActiveWeapon { get; set; }
 	[Net, Predicted] public int LastWeaponSlot { get; set; }
 
-	public Weapon FindWeapon( WeaponData data )
-	{
-		return Weapons.FirstOrDefault( x => x.WeaponData == data );
-	}
-
 	public Weapon FindWeapon( string name )
 	{
-		return FindWeapon( WeaponData.FindResource( name ) );
+		return Weapons.FirstOrDefault( x => x.Name == name );
 	}
 
 	public bool AddWeapon( Weapon weapon, bool makeActive = true )

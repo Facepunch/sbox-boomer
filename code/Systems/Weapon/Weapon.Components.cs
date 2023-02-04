@@ -19,20 +19,6 @@ public partial class Weapon
 		}
 	}
 
-	protected void CreateComponents()
-	{
-		foreach ( var name in WeaponData.Components )
-		{
-			var component = TypeLibrary.Create<WeaponComponent>( name );
-			if ( component == null )
-				continue;
-
-			component.Initialize( this );
-			Components.Add( component );
-			Log.Info( $"Adding component {component} to {this}" );
-		}
-	}
-
 	public void RunGameEvent( string eventName )
 	{
 		Player?.RunGameEvent( eventName );

@@ -203,7 +203,7 @@
     public AmmoComponent AmmoComponent => Weapon?.GetComponent<AmmoComponent>( true );
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
-	public string WeaponColor => Weapon.WeaponData.WeaponColor.ToString();
+	public string WeaponColor => Weapon.WeaponColor.ToString();
 
     protected override int BuildHash()
     {
