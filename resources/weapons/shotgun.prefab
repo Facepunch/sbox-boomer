@@ -291,7 +291,9 @@
             "Type": "List\u00601",
             "Value": "[\r\n  \u0022sounds/weapons/shotgun/shotgun.shoot.sound\u0022\r\n]"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -301,7 +303,7 @@
         "Value": "\u0022models/gameplay/weapons/shotgun/w_shotgun.vmdl\u0022"
       },
       "_name": {
-        "Value": "\u0022Shotgun\u0022"
+        "Value": "\u0022Shotgun Gun\u0022"
       },
       "_localposition": {
         "Value": "\u00220,0,0\u0022"

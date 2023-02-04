@@ -109,6 +109,17 @@
             flex-direction: row;
         }
 
+        .fire-modes
+        {
+            InputHint
+            {
+                &:not( :first-child )
+                {
+                    border-left: 2px solid white;
+                }
+            }
+        }
+
         .column {
             flex-direction: column;
         }
@@ -176,13 +187,12 @@
 
                 <img class="weapon-icon" src=@Weapon.AmmoIcon />
 
-                <InputHint Button=@InputButton.PrimaryAttack style="width: 32px; height:32px;" />
-
-@*                @if ( Weapon.GetComponent<Shoot>() != null || Weapon.GetComponent<Aim>() != null )
-                {
-                    <label class="text thin" style="top: -4px; width: 10px;">|</label>
-                    <InputHint Button=@InputButton.SecondaryAttack style="margin-left: 10px; width: 32px; height:32px;" />
-                }*@
+                <div class="fire-modes">
+                    @foreach( var comp in Weapon.Components.GetAll<ShootComponent>() )
+                    {
+                        <InputHint Button=@comp.FireButton style="width: 32px; height:32px;" />
+                    }
+                </div>
             </div>
         }
 
@@ -203,7 +213,7 @@
     public AmmoComponent AmmoComponent => Weapon?.GetComponent<AmmoComponent>( true );
     public DashMechanic Dash => Player.Controller?.GetMechanic<DashMechanic>();
     public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
-	public string WeaponColor => Weapon.WeaponColor.ToString();
+    public string WeaponColor => Weapon.WeaponColor.ToString();
 
     protected override int BuildHash()
     {
