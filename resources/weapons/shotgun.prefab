@@ -182,6 +182,10 @@
       "ViewModel": {
         "Type": "Model",
         "Value": "\u0022models/gameplay/weapons/shotgun/shotgun.vmdl\u0022"
+      },
+      "ViewModelPath": {
+        "Type": "String",
+        "Value": "\u0022models/gameplay/weapons/shotgun/shotgun.vmdl\u0022"
       }
     }
   }

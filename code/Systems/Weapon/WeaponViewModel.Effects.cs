@@ -85,6 +85,12 @@ public partial class WeaponViewModel
 
 	public void AddEffects()
 	{
+		// TODO - Remove these
+		Position = Camera.Position;
+		Rotation = Camera.Rotation;
+
+		if ( WeaponData == null ) return;
+
 		var player = Weapon.Player;
 		var controller = player?.Controller;
 		if ( controller == null )

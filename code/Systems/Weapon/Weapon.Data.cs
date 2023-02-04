@@ -4,8 +4,8 @@ namespace Facepunch.Boomer.WeaponSystem;
 
 public partial class Weapon
 {
-	[Prefab]
-	public Model ViewModel { get; set; }
+	[Net, Prefab, ResourceType( "vmdl" )]
+	public string ViewModelPath { get; set; }
 
 	[Net, Prefab, Category( "Basic Information" ), ResourceType( "jpg" )]
 	public string CrosshairIcon { get; set; }
@@ -40,19 +40,12 @@ public partial class Weapon
 		set
 		{
 			weaponData = value;
-			SetupData( value );
+			// SetupData( value );
 		}
 	}
 
 	protected void OnWeaponDataChanged( WeaponData _, WeaponData data )
 	{
-		SetupData( data );
-	}
-
-	protected void SetupData( WeaponData data )
-	{
-		Model = data.CachedModel;
-
-		CreateComponents();
+		// SetupData( data );
 	}
 }

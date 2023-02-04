@@ -70,7 +70,7 @@ public partial class Weapon : AnimatedEntity
 	public void CreateViewModel()
 	{
 		var vm = new WeaponViewModel( this );
-		vm.Model = WeaponData.CachedViewModel;
+		vm.Model = Model.Load( ViewModelPath );
 		ViewModelEntity = vm;
 	}
 

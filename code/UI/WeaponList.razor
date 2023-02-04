@@ -138,7 +138,7 @@
 @code
 {
     public int MaxColumns => 6;
-    public int CurrentIndex => Player.Inventory.ActiveSlot;
+    public int CurrentIndex => Player?.Inventory?.ActiveSlot ?? 0;
 
     public Boomer.Player Player => Game.LocalPawn as Boomer.Player;
 
@@ -149,7 +149,7 @@
 
     public Weapon GetWeapon( int slot )
     {
-        return Player.Inventory.GetSlot( slot );
+        return Player?.Inventory?.GetSlot( slot );
     }
 
     public string GetClasses( int slot )
