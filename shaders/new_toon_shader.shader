@@ -108,15 +108,17 @@ PS
 		float4 local26 = local4 + local25;
 		float4 local27 = saturate( local26 );
 		float4 local28 = local25 / float4( 20, 20, 20, 20 );
-		float2 local29 = i.vTextureCoords.xy * float2( 1, 1 );
-		float4 local30 = Tex2DS( g_tNormal, g_sSampler0, local29 );
+		float4 local29 = local4 / float4( 4, 4, 4, 4 );
+		float4 local30 = local28 + local29;
 		float2 local31 = i.vTextureCoords.xy * float2( 1, 1 );
-		float4 local32 = Tex2DS( g_tAO, g_sSampler0, local31 );
+		float4 local32 = Tex2DS( g_tNormal, g_sSampler0, local31 );
+		float2 local33 = i.vTextureCoords.xy * float2( 1, 1 );
+		float4 local34 = Tex2DS( g_tAO, g_sSampler0, local33 );
 
 		m.Albedo = local27.xyz;
-		m.Emission = local28.xyz;
-		m.Normal = local30.xyz;
-		m.AmbientOcclusion = local32.x;
+		m.Emission = local30.xyz;
+		m.Normal = local32.xyz;
+		m.AmbientOcclusion = local34.x;
 
 		ShadingModelValveStandard sm;
 		return FinalizePixelMaterial( i, m, sm );

@@ -10,7 +10,7 @@
         "Output": "Result"
       },
       "Emission": {
-        "Identifier": "18",
+        "Identifier": "46",
         "Output": "Result"
       },
       "Opacity": {},
@@ -41,7 +41,7 @@
       "IndexOfRefraction": {},
       "MicroThickness": {},
       "Identifier": "0",
-      "Position": "1136,-272"
+      "Position": "1360,-288"
     },
     {
       "_class": "WorldNormal",
@@ -142,7 +142,7 @@
         "Output": "Result"
       },
       "Identifier": "10",
-      "Position": "896,-256"
+      "Position": "1024,-272"
     },
     {
       "_class": "Multiply",
@@ -544,6 +544,33 @@
       "DefaultB": 1,
       "Identifier": "45",
       "Position": "800,-512"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "47",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "46",
+      "Position": "992,-144"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "31",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 4,
+      "Identifier": "47",
+      "Position": "800,-240"
     }
   ]
 }
