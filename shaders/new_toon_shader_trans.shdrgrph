@@ -1,0 +1,635 @@
+{
+  "Model": "models/cosmetics/outfit/boomeroutfit_pants.vmdl",
+  "Description": "",
+  "BlendMode": "Translucent",
+  "nodes": [
+    {
+      "_class": "Result",
+      "Albedo": {
+        "Identifier": "10",
+        "Output": "Result"
+      },
+      "Emission": {
+        "Identifier": "42",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "48",
+        "Output": "R"
+      },
+      "TintMask": {},
+      "Normal": {
+        "Identifier": "35",
+        "Output": "Result"
+      },
+      "Roughness": {
+        "Identifier": "49",
+        "Output": "R"
+      },
+      "Metalness": {},
+      "AmbientOcclusion": {
+        "Identifier": "37",
+        "Output": "Result"
+      },
+      "Sheen": {},
+      "SheenRoughness": {},
+      "Clearcoat": {},
+      "ClearcoatRoughness": {},
+      "ClearcoatNormal": {},
+      "Anisotropy": {},
+      "AnisotropyRotation": {},
+      "Thickness": {},
+      "SubsurfacePower": {},
+      "SheenColor": {},
+      "SubsurfaceColor": {},
+      "Transmission": {},
+      "Absorption": {},
+      "IndexOfRefraction": {},
+      "MicroThickness": {},
+      "Identifier": "0",
+      "Position": "1360,-288"
+    },
+    {
+      "_class": "WorldNormal",
+      "Identifier": "1",
+      "Position": "-1248,-304"
+    },
+    {
+      "_class": "ViewDirection",
+      "Identifier": "2",
+      "Position": "-1152,-112"
+    },
+    {
+      "_class": "DotProduct",
+      "InputA": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "InputB": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Identifier": "3",
+      "Position": "-848,-208"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "4",
+      "Position": "-560,-208"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Texture": "models/gameplay/textures/textureatlas_color_png_4110fe3f.generated.vtex",
+      "UI": {
+        "Name": "Color",
+        "Group": "",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "5",
+      "Position": "-288,176"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "6",
+      "Position": "-512,176"
+    },
+    {
+      "_class": "Step",
+      "Input": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "Edge": {},
+      "DefaultEdge": 0.5,
+      "DefaultInput": 1,
+      "Identifier": "7",
+      "Position": "-352,-240"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "31",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "8",
+      "Position": "-112,-240"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0,1,0.94233,1",
+      "Identifier": "9",
+      "Position": "-768,0"
+    },
+    {
+      "_class": "Saturate",
+      "Input": {
+        "Identifier": "41",
+        "Output": "Result"
+      },
+      "Identifier": "10",
+      "Position": "1024,-272"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "11",
+      "Position": "464,-32"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "5",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "31",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "14",
+        "Output": "Result"
+      },
+      "Fraction": 1,
+      "BlendMode": "Multiply",
+      "Clamp": true,
+      "Identifier": "12",
+      "Position": "64,192"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "13",
+      "Position": "-528,368"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "13",
+        "Output": "Result"
+      },
+      "Texture": "models/gameplay/textures/textureatlas_tint_png_ff352687.generated.vtex",
+      "UI": {
+        "Name": "Mask",
+        "Group": "",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "14",
+      "Position": "-304,368"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "25",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "15",
+      "Position": "224,-224"
+    },
+    {
+      "_class": "WorldNormal",
+      "Identifier": "16",
+      "Position": "-2000,-512"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "40",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 20,
+      "Identifier": "17",
+      "Position": "784,-48"
+    },
+    {
+      "_class": "DotProduct",
+      "InputA": {
+        "Identifier": "16",
+        "Output": "Result"
+      },
+      "InputB": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "Identifier": "18",
+      "Position": "-1760,-512"
+    },
+    {
+      "_class": "ViewDirection",
+      "Identifier": "19",
+      "Position": "-2000,-448"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "18",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 2.2,
+      "Identifier": "20",
+      "Position": "-1504,-528"
+    },
+    {
+      "_class": "Step",
+      "Input": {
+        "Identifier": "20",
+        "Output": "Result"
+      },
+      "Edge": {},
+      "DefaultEdge": 1.55,
+      "DefaultInput": 1,
+      "Identifier": "21",
+      "Position": "-1200,-512"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "21",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "23",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "22",
+      "Position": "-736,-512"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0.3526,0.3526,0.3526,1",
+      "Identifier": "23",
+      "Position": "-992,-672"
+    },
+    {
+      "_class": "Step",
+      "Input": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
+      "Edge": {},
+      "DefaultEdge": -0.65,
+      "DefaultInput": -2.4,
+      "Identifier": "24",
+      "Position": "-1280,-768"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "38",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "25",
+      "Position": "96,-448"
+    },
+    {
+      "_class": "ViewDirection",
+      "Identifier": "26",
+      "Position": "-1952,-992"
+    },
+    {
+      "_class": "WorldNormal",
+      "Identifier": "27",
+      "Position": "-1984,-896"
+    },
+    {
+      "_class": "DotProduct",
+      "InputA": {
+        "Identifier": "26",
+        "Output": "Result"
+      },
+      "InputB": {
+        "Identifier": "27",
+        "Output": "Result"
+      },
+      "Identifier": "28",
+      "Position": "-1728,-1008"
+    },
+    {
+      "_class": "Float4",
+      "Name": "",
+      "Value": "0,0,0,1",
+      "Identifier": "29",
+      "Position": "-1344,-1408"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "24",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "29",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "30",
+      "Position": "-960,-1072"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {},
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "ColorTint",
+        "Group": "",
+        "Default": "1,0,0,1",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "31",
+      "Position": "-864,240"
+    },
+    {
+      "_class": "Multiply",
+      "A": {
+        "Identifier": "28",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": -2,
+      "Identifier": "32",
+      "Position": "-1488,-1008"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "39",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "24",
+        "Output": "Result"
+      },
+      "Fraction": 0.71,
+      "BlendMode": "Mix",
+      "Clamp": true,
+      "Identifier": "33",
+      "Position": "-576,-848"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "34",
+      "Position": "480,160"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Normal",
+        "Group": "",
+        "Extension": "Normal",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "35",
+      "Position": "720,176"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "36",
+      "Position": "464,528"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "36",
+        "Output": "Result"
+      },
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "AO",
+        "Group": "",
+        "Extension": "AO",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "37",
+      "Position": "704,544"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "46",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "22",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "38",
+      "Position": "-256,-512"
+    },
+    {
+      "_class": "Floor",
+      "Input": {
+        "Identifier": "30",
+        "Output": "Result"
+      },
+      "Identifier": "39",
+      "Position": "-752,-1104"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "15",
+        "Output": "Result"
+      },
+      "C": {},
+      "Fraction": 1,
+      "BlendMode": "Overlay",
+      "Clamp": true,
+      "Identifier": "40",
+      "Position": "560,-416"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "30",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "40",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "41",
+      "Position": "800,-512"
+    },
+    {
+      "_class": "Add",
+      "A": {
+        "Identifier": "17",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "43",
+        "Output": "Result"
+      },
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "42",
+      "Position": "992,-144"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "30",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 4,
+      "Identifier": "43",
+      "Position": "800,-240"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "47",
+        "Output": "Result"
+      },
+      "Texture": "models/gameplay/textures/crosshatch_png_cc375705.generated.vtex",
+      "UI": {
+        "Name": "Crosshatch",
+        "Group": "",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "44",
+      "Position": "-320,-1232"
+    },
+    {
+      "_class": "ScreenPosition",
+      "Identifier": "45",
+      "Position": "-704,-1280"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "44",
+        "Output": "R"
+      },
+      "B": {
+        "Identifier": "33",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "32",
+        "Output": "Result"
+      },
+      "Fraction": 1,
+      "BlendMode": "Mix",
+      "Clamp": true,
+      "Identifier": "46",
+      "Position": "-240,-992"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "45",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 350,
+      "Identifier": "47",
+      "Position": "-528,-1184"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {},
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Trans",
+        "Group": "",
+        "Extension": "Trans",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "48",
+      "Position": "1136,-560"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {},
+      "Texture": "textures/dev/white.vtex",
+      "UI": {
+        "Name": "Rough",
+        "Group": "",
+        "Extension": "Rough",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "49",
+      "Position": "1104,128"
+    }
+  ]
+}

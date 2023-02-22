@@ -7,6 +7,7 @@ Layer0
 	AO "materials/default/default_ao.tga"
 	Color "models/gameplay/textures/textureatlas_color.png"
 	ColorTint "[0.000000 1.000000 1.000000 1.000000]"
+	Crosshatch "models/gameplay/textures/crosshatch.png"
 	g_flDirectionalLightmapMinZ "0.000"
 	g_flDirectionalLightmapStrength "0.000"
 	Mask "models/gameplay/textures/textureatlas_tint.png"
