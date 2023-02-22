@@ -9,10 +9,7 @@
         "Identifier": "10",
         "Output": "Result"
       },
-      "Emission": {
-        "Identifier": "46",
-        "Output": "Result"
-      },
+      "Emission": {},
       "Opacity": {},
       "TintMask": {},
       "Normal": {
@@ -439,7 +436,7 @@
       "BlendMode": "Mix",
       "Clamp": true,
       "Identifier": "37",
-      "Position": "-96,-896"
+      "Position": "-144,-912"
     },
     {
       "_class": "TextureCoord",
@@ -492,7 +489,7 @@
     {
       "_class": "Add",
       "A": {
-        "Identifier": "37",
+        "Identifier": "50",
         "Output": "Result"
       },
       "B": {
@@ -511,7 +508,7 @@
         "Output": "Result"
       },
       "Identifier": "43",
-      "Position": "-496,-896"
+      "Position": "-448,-944"
     },
     {
       "_class": "Blend",
@@ -571,6 +568,59 @@
       "DefaultB": 4,
       "Identifier": "47",
       "Position": "800,-240"
+    },
+    {
+      "_class": "TextureSampler",
+      "Coords": {
+        "Identifier": "51",
+        "Output": "Result"
+      },
+      "Texture": "models/gameplay/textures/crosshatch_png_cc375705.generated.vtex",
+      "UI": {
+        "Name": "Crosshatch",
+        "Group": "",
+        "SrgbRead": true
+      },
+      "Sampler": {},
+      "Identifier": "48",
+      "Position": "-320,-1232"
+    },
+    {
+      "_class": "ScreenPosition",
+      "Identifier": "49",
+      "Position": "-704,-1280"
+    },
+    {
+      "_class": "Blend",
+      "A": {
+        "Identifier": "48",
+        "Output": "R"
+      },
+      "B": {
+        "Identifier": "37",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "36",
+        "Output": "Result"
+      },
+      "Fraction": 1,
+      "BlendMode": "Mix",
+      "Clamp": true,
+      "Identifier": "50",
+      "Position": "112,-928"
+    },
+    {
+      "_class": "Divide",
+      "A": {
+        "Identifier": "49",
+        "Output": "Result"
+      },
+      "B": {},
+      "DefaultA": 0,
+      "DefaultB": 350,
+      "Identifier": "51",
+      "Position": "-528,-1184"
     }
   ]
 }

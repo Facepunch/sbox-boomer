@@ -7,6 +7,7 @@ Layer0
 	AO "models/gameplay/citizen/textures/citizen_skin_ao.png"
 	Color "models/gameplay/citizen/textures/citizen_skin_color.png"
 	ColorTint "[0.701961 0.474510 0.392157 1.000000]"
+	Crosshatch "models/gameplay/textures/crosshatch.png"
 	g_flDirectionalLightmapMinZ "0.000"
 	g_flDirectionalLightmapStrength "0.000"
 	Mask "[1.000000 1.000000 1.000000 0.000000]"
