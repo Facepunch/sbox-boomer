@@ -9,17 +9,20 @@
         "Identifier": "10",
         "Output": "Result"
       },
-      "Emission": {},
+      "Emission": {
+        "Identifier": "43",
+        "Output": "Result"
+      },
       "Opacity": {},
       "TintMask": {},
       "Normal": {
-        "Identifier": "39",
+        "Identifier": "36",
         "Output": "Result"
       },
       "Roughness": {},
       "Metalness": {},
       "AmbientOcclusion": {
-        "Identifier": "41",
+        "Identifier": "38",
         "Output": "Result"
       },
       "Sheen": {},
@@ -135,7 +138,7 @@
     {
       "_class": "Saturate",
       "Input": {
-        "Identifier": "45",
+        "Identifier": "42",
         "Output": "Result"
       },
       "Identifier": "10",
@@ -221,12 +224,12 @@
     {
       "_class": "WorldNormal",
       "Identifier": "17",
-      "Position": "-1392,-560"
+      "Position": "-2000,-512"
     },
     {
       "_class": "Divide",
       "A": {
-        "Identifier": "44",
+        "Identifier": "41",
         "Output": "Result"
       },
       "B": {},
@@ -246,12 +249,12 @@
         "Output": "Result"
       },
       "Identifier": "19",
-      "Position": "-992,-464"
+      "Position": "-1760,-512"
     },
     {
       "_class": "ViewDirection",
       "Identifier": "20",
-      "Position": "-1296,-368"
+      "Position": "-2000,-448"
     },
     {
       "_class": "Multiply",
@@ -263,7 +266,7 @@
       "DefaultA": 0,
       "DefaultB": 2.2,
       "Identifier": "21",
-      "Position": "-704,-464"
+      "Position": "-1504,-528"
     },
     {
       "_class": "Step",
@@ -275,7 +278,7 @@
       "DefaultEdge": 1.55,
       "DefaultInput": 1,
       "Identifier": "22",
-      "Position": "-512,-400"
+      "Position": "-1200,-512"
     },
     {
       "_class": "Add",
@@ -290,31 +293,31 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "23",
-      "Position": "-288,-432"
+      "Position": "-736,-512"
     },
     {
       "_class": "Float4",
       "Name": "",
       "Value": "0.3526,0.3526,0.3526,1",
       "Identifier": "24",
-      "Position": "-528,-624"
+      "Position": "-992,-672"
     },
     {
       "_class": "Step",
       "Input": {
-        "Identifier": "36",
+        "Identifier": "33",
         "Output": "Result"
       },
       "Edge": {},
       "DefaultEdge": -0.65,
       "DefaultInput": -2.4,
       "Identifier": "25",
-      "Position": "-992,-848"
+      "Position": "-1280,-768"
     },
     {
       "_class": "Multiply",
       "A": {
-        "Identifier": "42",
+        "Identifier": "39",
         "Output": "Result"
       },
       "B": {
@@ -329,12 +332,12 @@
     {
       "_class": "ViewDirection",
       "Identifier": "27",
-      "Position": "-1984,-848"
+      "Position": "-1952,-992"
     },
     {
       "_class": "WorldNormal",
       "Identifier": "28",
-      "Position": "-2016,-752"
+      "Position": "-1984,-896"
     },
     {
       "_class": "DotProduct",
@@ -347,14 +350,14 @@
         "Output": "Result"
       },
       "Identifier": "29",
-      "Position": "-1760,-864"
+      "Position": "-1728,-1008"
     },
     {
       "_class": "Float4",
       "Name": "",
       "Value": "0,0,0,1",
       "Identifier": "30",
-      "Position": "-1040,-1152"
+      "Position": "-1344,-1408"
     },
     {
       "_class": "Add",
@@ -369,7 +372,7 @@
       "DefaultA": 0,
       "DefaultB": 1,
       "Identifier": "31",
-      "Position": "-752,-928"
+      "Position": "-960,-1072"
     },
     {
       "_class": "TextureSampler",
@@ -386,27 +389,6 @@
       "Position": "-864,240"
     },
     {
-      "_class": "Tan",
-      "Input": {},
-      "Identifier": "33",
-      "Position": "-1344,-784"
-    },
-    {
-      "_class": "Abs",
-      "Input": {
-        "Identifier": "31",
-        "Output": "Result"
-      },
-      "Identifier": "34",
-      "Position": "-576,-1024"
-    },
-    {
-      "_class": "Length",
-      "Input": {},
-      "Identifier": "35",
-      "Position": "-1328,-992"
-    },
-    {
       "_class": "Multiply",
       "A": {
         "Identifier": "29",
@@ -415,13 +397,13 @@
       "B": {},
       "DefaultA": 0,
       "DefaultB": -2,
-      "Identifier": "36",
-      "Position": "-1520,-864"
+      "Identifier": "33",
+      "Position": "-1488,-1008"
     },
     {
       "_class": "Blend",
       "A": {
-        "Identifier": "43",
+        "Identifier": "40",
         "Output": "Result"
       },
       "B": {
@@ -435,20 +417,20 @@
       "Fraction": 0.71,
       "BlendMode": "Mix",
       "Clamp": true,
-      "Identifier": "37",
-      "Position": "-144,-912"
+      "Identifier": "34",
+      "Position": "-576,-848"
     },
     {
       "_class": "TextureCoord",
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
-      "Identifier": "38",
+      "Identifier": "35",
       "Position": "480,160"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "38",
+        "Identifier": "35",
         "Output": "Result"
       },
       "Texture": "textures/dev/white.vtex",
@@ -459,20 +441,20 @@
         "SrgbRead": true
       },
       "Sampler": {},
-      "Identifier": "39",
+      "Identifier": "36",
       "Position": "720,176"
     },
     {
       "_class": "TextureCoord",
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
-      "Identifier": "40",
+      "Identifier": "37",
       "Position": "464,528"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "40",
+        "Identifier": "37",
         "Output": "Result"
       },
       "Texture": "textures/dev/white.vtex",
@@ -483,13 +465,13 @@
         "SrgbRead": true
       },
       "Sampler": {},
-      "Identifier": "41",
+      "Identifier": "38",
       "Position": "704,544"
     },
     {
       "_class": "Add",
       "A": {
-        "Identifier": "50",
+        "Identifier": "47",
         "Output": "Result"
       },
       "B": {
@@ -498,8 +480,8 @@
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "42",
-      "Position": "128,-688"
+      "Identifier": "39",
+      "Position": "-256,-512"
     },
     {
       "_class": "Floor",
@@ -507,8 +489,8 @@
         "Identifier": "31",
         "Output": "Result"
       },
-      "Identifier": "43",
-      "Position": "-448,-944"
+      "Identifier": "40",
+      "Position": "-752,-1104"
     },
     {
       "_class": "Blend",
@@ -524,7 +506,7 @@
       "Fraction": 1,
       "BlendMode": "Overlay",
       "Clamp": true,
-      "Identifier": "44",
+      "Identifier": "41",
       "Position": "560,-416"
     },
     {
@@ -534,12 +516,12 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "44",
+        "Identifier": "41",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "45",
+      "Identifier": "42",
       "Position": "800,-512"
     },
     {
@@ -549,12 +531,12 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "47",
+        "Identifier": "44",
         "Output": "Result"
       },
       "DefaultA": 0,
       "DefaultB": 1,
-      "Identifier": "46",
+      "Identifier": "43",
       "Position": "992,-144"
     },
     {
@@ -566,13 +548,13 @@
       "B": {},
       "DefaultA": 0,
       "DefaultB": 4,
-      "Identifier": "47",
+      "Identifier": "44",
       "Position": "800,-240"
     },
     {
       "_class": "TextureSampler",
       "Coords": {
-        "Identifier": "51",
+        "Identifier": "48",
         "Output": "Result"
       },
       "Texture": "models/gameplay/textures/crosshatch_png_cc375705.generated.vtex",
@@ -582,44 +564,44 @@
         "SrgbRead": true
       },
       "Sampler": {},
-      "Identifier": "48",
+      "Identifier": "45",
       "Position": "-320,-1232"
     },
     {
       "_class": "ScreenPosition",
-      "Identifier": "49",
+      "Identifier": "46",
       "Position": "-704,-1280"
     },
     {
       "_class": "Blend",
       "A": {
-        "Identifier": "48",
+        "Identifier": "45",
         "Output": "R"
       },
       "B": {
-        "Identifier": "37",
+        "Identifier": "34",
         "Output": "Result"
       },
       "C": {
-        "Identifier": "36",
+        "Identifier": "33",
         "Output": "Result"
       },
       "Fraction": 1,
       "BlendMode": "Mix",
       "Clamp": true,
-      "Identifier": "50",
-      "Position": "112,-928"
+      "Identifier": "47",
+      "Position": "-240,-992"
     },
     {
       "_class": "Divide",
       "A": {
-        "Identifier": "49",
+        "Identifier": "46",
         "Output": "Result"
       },
       "B": {},
       "DefaultA": 0,
       "DefaultB": 350,
-      "Identifier": "51",
+      "Identifier": "48",
       "Position": "-528,-1184"
     }
   ]
