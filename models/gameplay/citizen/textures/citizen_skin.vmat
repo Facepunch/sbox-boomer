@@ -8,16 +8,13 @@ Layer0
 	Color "models/gameplay/citizen/textures/citizen_skin_color.png"
 	ColorTint "[0.701961 0.474510 0.392157 1.000000]"
 	Crosshatch "models/gameplay/textures/crosshatch.png"
+	g_bTint "[0.450 0.275 0.240 255.000]"
 	g_flDirectionalLightmapMinZ "0.000"
 	g_flDirectionalLightmapStrength "0.000"
+	g_vCrosshatch "0"
 	Mask "[1.000000 1.000000 1.000000 0.000000]"
 	Normal "models/gameplay/citizen/textures/citizen_skin_normal.png"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
-
-	DynamicParams
-	{
-		ColorTint "RimColor"
-	}
 }

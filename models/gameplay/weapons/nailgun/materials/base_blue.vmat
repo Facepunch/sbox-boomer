@@ -10,6 +10,7 @@ Layer0
 	Crosshatch "models/gameplay/textures/crosshatch.png"
 	g_flDirectionalLightmapMinZ "0.000"
 	g_flDirectionalLightmapStrength "0.000"
+	g_flWhiteEdge "-2.000"
 	Mask "materials/default/default_color.tga"
 	Normal "materials/default/default_normal.tga"
 

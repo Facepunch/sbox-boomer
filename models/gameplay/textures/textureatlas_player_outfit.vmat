@@ -7,9 +7,12 @@ Layer0
 	AO "materials/default/default_ao.tga"
 	Color "models/gameplay/textures/textureatlas_color.png"
 	ColorTint "[0.952941 0.803922 0.078431 1.000000]"
-	Crosshatch "models/gameplay/textures/crosshatch.png"
+	Crosshatch "models/gameplay/textures/dot.png"
+	g_bTint "[0.000 0.000 0.000 0.000]"
+	g_flCrosshatchTile "300.000"
 	g_flDirectionalLightmapMinZ "0.000"
 	g_flDirectionalLightmapStrength "0.000"
+	g_vCrosshatch "0"
 	Mask "models/gameplay/textures/textureatlas_tint.png"
 	Normal "materials/default/default_normal.tga"
 
@@ -19,5 +22,6 @@ Layer0
 	DynamicParams
 	{
 		ColorTint "RimColor1"
+		g_bTint "RimColor1"
 	}
 }

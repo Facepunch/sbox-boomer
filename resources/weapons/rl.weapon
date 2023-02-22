@@ -7,7 +7,7 @@
   "Icon": "ui/weapons/icon_5.png",
   "AmmoIcon": "ui/ammo/icon_5_ammo.png",
   "HoldType": "RPG",
-  "HoldTypePose": 1,
+  "HoldTypePose": 2,
   "Handedness": "Right",
   "Components": [
     "Shoot",
