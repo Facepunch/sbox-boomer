@@ -4,17 +4,19 @@ Layer0
 {
 	shader "shaders/new_toon_shader.shader"
 
-	AO "models/gameplay/citizen/textures/citizen_skin_ao.png"
-	Color "models/gameplay/citizen/textures/citizen_skin_color.png"
-	ColorTint "[0.701961 0.474510 0.392157 1.000000]"
+	//---- Crosshatch ----
 	Crosshatch "models/gameplay/textures/crosshatch.png"
-	g_bTint "[0.450 0.275 0.240 255.000]"
-	g_flDirectionalLightmapMinZ "0.000"
-	g_flDirectionalLightmapStrength "0.000"
-	g_vCrosshatch "0"
-	Mask "[1.000000 1.000000 1.000000 0.000000]"
-	Normal "models/gameplay/citizen/textures/citizen_skin_normal.png"
+	g_bCrosshatch "0"
+	g_flCrosshatchTile "100.000"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
+
+	//---- Textures ----
+	AO "models/gameplay/citizen/textures/citizen_skin_ao.png"
+	Color "models/gameplay/citizen/textures/citizen_skin_color.png"
+	g_vColorTint "[0.109804 0.082353 0.070588 1.000000]"
+	g_vTint "[0.341176 0.196078 0.109804 1.000000]"
+	Mask "models/gameplay/citizen/textures/citizen_skin_mask.png"
+	Normal "models/gameplay/citizen/textures/citizen_skin_normal.png"
 }

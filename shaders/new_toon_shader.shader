@@ -55,21 +55,20 @@ PS
 	#include "common/proceedural.hlsl"
 
 	SamplerState g_sSampler0 < Filter( ANISO ); AddressU( WRAP ); AddressV( WRAP ); >;
-	CreateInputTexture2D( Color, Srgb, 8, "None", "_color", ",0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( Mask, Srgb, 8, "None", "_color", ",0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( Crosshatch, Srgb, 8, "None", "_color", ",0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( ColorTint, Srgb, 8, "None", "_color", ",0/0", Default4( 1.00, 0.00, 0.00, 1.00 ) );
-	CreateInputTexture2D( Normal, Srgb, 8, "None", "_normal", ",0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
-	CreateInputTexture2D( AO, Srgb, 8, "None", "_ao", ",0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( Color, Srgb, 8, "None", "_color", "Textures,0/0", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( Mask, Srgb, 8, "None", "_color", "Textures,0/1", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( Crosshatch, Srgb, 8, "None", "_color", "Crosshatch,0/1", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( Normal, Srgb, 8, "None", "_normal", "Textures,0/3", Default4( 0.00, 0.00, 0.00, 0.00 ) );
+	CreateInputTexture2D( AO, Srgb, 8, "None", "_ao", "Textures,0/4", Default4( 0.00, 0.00, 0.00, 0.00 ) );
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGBA, Box( Color ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	CreateTexture2DWithoutSampler( g_tMask ) < Channel( RGBA, Box( Mask ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	CreateTexture2DWithoutSampler( g_tCrosshatch ) < Channel( RGBA, Box( Crosshatch ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	CreateTexture2DWithoutSampler( g_tColorTint ) < Channel( RGBA, Box( ColorTint ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGBA, Box( Normal ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
 	CreateTexture2DWithoutSampler( g_tAO ) < Channel( RGBA, Box( AO ), Srgb ); OutputFormat( DXT5 ); SrgbRead( True ); >;
-	float4 g_bTint;
-	float g_flCrosshatchTile;
-	bool g_vCrosshatch;
+	float4 g_vTint < UiType( Color ); UiGroup( "Textures,2/,0/2" ); Default4( 1.00, 0.00, 0.00, 1.00 ); >;
+	float g_flCrosshatchTile < UiType( Slider ); UiGroup( "Crosshatch,1/,0/0" ); Default1( 200 ); Range1( 100, 500 ); >;
+	bool g_bCrosshatch < UiGroup( "Crosshatch,0/,0/0" ); Default( 0 ); >;
+	float4 g_vColorTint < UiType( Color ); UiGroup( "Textures,3/,0/3" ); Default4( 1.00, 1.00, 1.00, 1.00 ); >;
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
@@ -91,7 +90,7 @@ PS
 		float4 local4 = float4( local2, local2, local2, local2 ) + local3;
 		float2 local5 = i.vTextureCoords.xy * float2( 1, 1 );
 		float4 local6 = Tex2DS( g_tColor, g_sSampler0, local5 );
-		float4 local7 = g_bTint;
+		float4 local7 = g_vTint;
 		float2 local8 = i.vTextureCoords.xy * float2( 1, 1 );
 		float4 local9 = Tex2DS( g_tMask, g_sSampler0, local8 );
 		float4 local10 = saturate( lerp( local6, local6*local7, local9 ) );
@@ -103,16 +102,16 @@ PS
 		float local16 = dot( i.vNormalWs.xyz, CalculatePositionToCameraDirWs( i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz ) );
 		float local17 = local16 * 2.2;
 		float local18 = step( 1.55, local17 );
-		float4 local19 = float4( 0, 0, 0, 1 );
+		float4 local19 = float4( 0.65317917, 0.65317917, 0.65317917, 1 );
 		float4 local20 = float4( local18, local18, local18, local18 ) + local19;
 		float4 local21 = saturate( lerp( local15, local20, local2 ) );
 		float4 local22 = saturate( lerp( float4( local14, local14, local14, local14 ), local21, local1 ) );
-		float4 local23 = g_vCrosshatch ? local22 : float4( 1, 1, 1, 1 );
+		float4 local23 = g_bCrosshatch ? local22 : float4( 0, 0, 0, 0 );
 		float4 local24 = local23 + local20;
 		float local25 = dot( i.vNormalWs.xyz, CalculatePositionToCameraDirWs( i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz ) );
 		float local26 = local25 * 1;
 		float local27 = step( 0.5, local26 );
-		float4 local28 = Tex2DS( g_tColorTint, g_sSampler0, i.vTextureCoords.xy );
+		float4 local28 = g_vColorTint;
 		float4 local29 = float4( local27, local27, local27, local27 ) + local28;
 		float4 local30 = local24 * local29;
 		float4 local31 = local30 * float4( 1, 1, 1, 1 );
@@ -124,13 +123,18 @@ PS
 		float4 local37 = local35 + local36;
 		float2 local38 = i.vTextureCoords.xy * float2( 1, 1 );
 		float4 local39 = Tex2DS( g_tNormal, g_sSampler0, local38 );
-		float2 local40 = i.vTextureCoords.xy * float2( 1, 1 );
-		float4 local41 = Tex2DS( g_tAO, g_sSampler0, local40 );
+		float3 local40 = TransformNormal( i, DecodeNormal( local39.xyz ) );
+		float3 local41 = normalize( local40 );
+		float2 local42 = i.vTextureCoords.xy * float2( 1, 1 );
+		float4 local43 = Tex2DS( g_tAO, g_sSampler0, local42 );
 
 		m.Albedo = local34.xyz;
 		m.Emission = local37.xyz;
-		m.Normal = local39.xyz;
-		m.AmbientOcclusion = local41.x;
+		m.Opacity = 1;
+		m.Normal = local41;
+		m.Roughness = 1;
+		m.Metalness = 0;
+		m.AmbientOcclusion = local43.x;
 
 		ShadingModelValveStandard sm;
 		return FinalizePixelMaterial( i, m, sm );

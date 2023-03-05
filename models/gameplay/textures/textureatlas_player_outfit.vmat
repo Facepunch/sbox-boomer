@@ -4,24 +4,25 @@ Layer0
 {
 	shader "shaders/new_toon_shader.shader"
 
-	AO "materials/default/default_ao.tga"
-	Color "models/gameplay/textures/textureatlas_color.png"
-	ColorTint "[0.952941 0.803922 0.078431 1.000000]"
+	//---- Crosshatch ----
 	Crosshatch "models/gameplay/textures/dot.png"
-	g_bTint "[0.000 0.000 0.000 0.000]"
-	g_flCrosshatchTile "300.000"
-	g_flDirectionalLightmapMinZ "0.000"
-	g_flDirectionalLightmapStrength "0.000"
-	g_vCrosshatch "0"
-	Mask "models/gameplay/textures/textureatlas_tint.png"
-	Normal "materials/default/default_normal.tga"
+	g_bCrosshatch "0"
+	g_flCrosshatchTile "243.522"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
+	//---- Textures ----
+	AO "materials/default/default_ao.tga"
+	Color "models/gameplay/textures/textureatlas_color.png"
+	g_vColorTint "[0.000000 0.000000 0.000000 1.000000]"
+	g_vTint "[1.000000 1.000000 0.000000 1.000000]"
+	Mask "models/gameplay/textures/textureatlas_tint.png"
+	Normal "materials/default/default_normal.tga"
+
 	DynamicParams
 	{
-		ColorTint "RimColor1"
-		g_bTint "RimColor1"
+		g_vColorTint "RimColor1"
+		g_vTint "RimColor1"
 	}
 }

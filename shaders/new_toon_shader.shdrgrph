@@ -14,9 +14,8 @@
         "Output": "Result"
       },
       "Opacity": {},
-      "TintMask": {},
       "Normal": {
-        "Identifier": "34",
+        "Identifier": "53",
         "Output": "Result"
       },
       "Roughness": {},
@@ -25,21 +24,10 @@
         "Identifier": "36",
         "Output": "Result"
       },
-      "Sheen": {},
-      "SheenRoughness": {},
-      "Clearcoat": {},
-      "ClearcoatRoughness": {},
-      "ClearcoatNormal": {},
-      "Anisotropy": {},
-      "AnisotropyRotation": {},
-      "Thickness": {},
-      "SubsurfacePower": {},
-      "SheenColor": {},
-      "SubsurfaceColor": {},
-      "Transmission": {},
-      "Absorption": {},
-      "IndexOfRefraction": {},
-      "MicroThickness": {},
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
       "Identifier": "0",
       "Position": "1360,-288"
     },
@@ -87,7 +75,7 @@
       "Texture": "models/gameplay/textures/textureatlas_color_png_4110fe3f.generated.vtex",
       "UI": {
         "Name": "Color",
-        "Group": "",
+        "Group": "Textures",
         "SrgbRead": true
       },
       "Sampler": {},
@@ -120,7 +108,7 @@
         "Output": "Result"
       },
       "B": {
-        "Identifier": "30",
+        "Identifier": "54",
         "Output": "Result"
       },
       "DefaultA": 0,
@@ -188,7 +176,8 @@
       "Texture": "models/gameplay/textures/textureatlas_tint_png_ff352687.generated.vtex",
       "UI": {
         "Name": "Mask",
-        "Group": "",
+        "Group": "Textures",
+        "Priority": 1,
         "SrgbRead": true
       },
       "Sampler": {},
@@ -284,7 +273,17 @@
     {
       "_class": "Float4",
       "Name": "",
-      "Value": "0,0,0,1",
+      "Value": "0.65318,0.65318,0.65318,1",
+      "UI": {
+        "Type": "Color",
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "UIGroup": ",0/,0/0"
+      },
       "Identifier": "22",
       "Position": "-992,-672"
     },
@@ -342,6 +341,10 @@
       "_class": "Float4",
       "Name": "",
       "Value": "0,0,0,1",
+      "UI": {
+        "Type": "Color",
+        "UIGroup": ",0/,0/0"
+      },
       "Identifier": "28",
       "Position": "-1344,-1408"
     },
@@ -411,7 +414,7 @@
       "UseSecondaryCoord": false,
       "Tiling": "1,1",
       "Identifier": "33",
-      "Position": "480,160"
+      "Position": "224,320"
     },
     {
       "_class": "TextureSampler",
@@ -422,13 +425,14 @@
       "Texture": "textures/dev/white.vtex",
       "UI": {
         "Name": "Normal",
-        "Group": "",
+        "Group": "Textures",
+        "Priority": 3,
         "Extension": "Normal",
         "SrgbRead": true
       },
       "Sampler": {},
       "Identifier": "34",
-      "Position": "720,176"
+      "Position": "464,336"
     },
     {
       "_class": "TextureCoord",
@@ -446,7 +450,8 @@
       "Texture": "textures/dev/white.vtex",
       "UI": {
         "Name": "AO",
-        "Group": "",
+        "Group": "Textures",
+        "Priority": 4,
         "Extension": "AO",
         "SrgbRead": true
       },
@@ -546,7 +551,8 @@
       "Texture": "models/gameplay/textures/crosshatch_png_cc375705.generated.vtex",
       "UI": {
         "Name": "Crosshatch",
-        "Group": "",
+        "Group": "Crosshatch",
+        "Priority": 1,
         "SrgbRead": true
       },
       "Sampler": {},
@@ -595,15 +601,31 @@
     },
     {
       "_class": "Float",
+      "Min": 0,
+      "Max": 1,
       "Name": "",
       "Value": -0.65,
+      "UI": {
+        "UIGroup": ",0/,0/0"
+      },
       "Identifier": "47",
       "Position": "-1488,-704"
     },
     {
       "_class": "Float",
+      "Min": 0,
+      "Max": 1,
       "Name": "",
       "Value": 0,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "UIGroup": ",0/,0/0"
+      },
       "Identifier": "48",
       "Position": "-1696,-832"
     },
@@ -611,6 +633,18 @@
       "_class": "Float4",
       "Name": "Tint",
       "Value": "1,0,0,1",
+      "UI": {
+        "Type": "Color",
+        "Priority": 2,
+        "PrimaryGroup": {
+          "Name": "Textures",
+          "Priority": 2
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "UIGroup": "Textures,2/,0/2"
+      },
       "Identifier": "49",
       "Position": "-880,464"
     },
@@ -624,17 +658,77 @@
       "A": {},
       "B": {},
       "Name": "Crosshatch",
-      "Enabled": true,
+      "Enabled": false,
       "Operator": "Equal",
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Crosshatch"
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "UIGroup": "Crosshatch,0/,0/0"
+      },
       "Identifier": "50",
-      "Position": "48,-976"
+      "Position": "80,-912"
     },
     {
       "_class": "Float",
+      "Min": 100,
+      "Max": 500,
       "Name": "CrosshatchTile",
       "Value": 200,
+      "UI": {
+        "Type": "Slider",
+        "PrimaryGroup": {
+          "Name": "Crosshatch",
+          "Priority": 1
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "UIGroup": "Crosshatch,1/,0/0"
+      },
       "Identifier": "51",
       "Position": "-832,-1232"
+    },
+    {
+      "_class": "TransformNormal",
+      "Input": {
+        "Identifier": "34",
+        "Output": "Result"
+      },
+      "DecodeNormal": true,
+      "Identifier": "52",
+      "Position": "752,144"
+    },
+    {
+      "_class": "Normalize",
+      "Input": {
+        "Identifier": "52",
+        "Output": "Result"
+      },
+      "Identifier": "53",
+      "Position": "928,48"
+    },
+    {
+      "_class": "Float4",
+      "Name": "ColorTint",
+      "Value": "1,1,1,1",
+      "UI": {
+        "Type": "Color",
+        "Priority": 3,
+        "PrimaryGroup": {
+          "Name": "Textures",
+          "Priority": 3
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        },
+        "UIGroup": "Textures,3/,0/3"
+      },
+      "Identifier": "54",
+      "Position": "-864,64"
     }
   ]
 }
