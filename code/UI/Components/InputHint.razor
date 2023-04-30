@@ -25,7 +25,7 @@
     // @ref
     public Image Glyph { get; set; }
     public GlyphStyle GlyphStyle { get; set; } = GlyphStyle.Dark.WithSolidABXY().WithNeutralColorABXY();
-    public InputButton Button { get; set; } = InputButton.Use;
+    public string Button { get; set; } = "Use";
 
     /// <summary>
     /// Checks the current button and updates the glyph.

@@ -9,7 +9,7 @@ public partial class AimComponent : WeaponComponent, ISingletonComponent
 
 	protected override bool CanStart( Player player )
 	{
-		if ( !Input.Down( InputButton.SecondaryAttack ) ) return false;
+		if ( !Input.Down( "Attack2" ) ) return false;
 
 		return true;
 	}

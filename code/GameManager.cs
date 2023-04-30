@@ -63,7 +63,7 @@ public partial class GameManager : Sandbox.GameManager
 		GamemodeSystem.Current?.OnClientDisconnected( client, reason );
 	}
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{
 		// Try to set up the active gamemode

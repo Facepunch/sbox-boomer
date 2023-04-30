@@ -106,7 +106,7 @@ public abstract partial class BasePickup : AnimatedEntity
 		SetAvailable( false );
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	protected void Tick()
 	{
 		if ( Disabled ) return;

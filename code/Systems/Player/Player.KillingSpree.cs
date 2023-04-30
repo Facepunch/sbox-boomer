@@ -24,7 +24,7 @@ public partial class Player
 		};
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	protected virtual void ServerTick()
 	{
 		if ( TimeSinceKill > 4f && ConsecutiveKills > 0 )

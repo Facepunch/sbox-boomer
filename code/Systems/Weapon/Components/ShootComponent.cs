@@ -11,7 +11,7 @@ public partial class ShootComponent : WeaponComponent
 	// ideally, when the prefab gets set up, we'd send the client a message with the prefab's name
 	// so we can populate all the Prefab marked properties with their defaults.
 
-	[Net, Prefab] public InputButton FireButton { get; set; } = InputButton.PrimaryAttack;
+	[Net, Prefab] public string FireButton { get; set; } = "Attack1";
 
 	/// <summary>
 	/// When penetrating a surface, this is the trace increment amount.

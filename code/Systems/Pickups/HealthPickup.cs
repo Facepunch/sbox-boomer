@@ -110,7 +110,7 @@ partial class MegaHealth : BasePickup
 		}
 	}
 
-	[Event.Tick.Client]
+	[GameEvent.Tick.Client]
 	public void DestroyTimer()
 	{
 		if ( Available )

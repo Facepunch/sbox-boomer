@@ -91,16 +91,16 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		return Weapons.ElementAtOrDefault( slot ) ?? null;
 	}
 
-	protected int GetSlotIndexFromInput( InputButton slot )
+	protected int GetSlotIndexFromInput( string slot )
 	{
 		return slot switch
 		{
-			InputButton.Slot1 => 0,
-			InputButton.Slot2 => 1,
-			InputButton.Slot3 => 2,
-			InputButton.Slot4 => 3,
-			InputButton.Slot5 => 4,
-			InputButton.Slot6 => 5,
+			"Slot1" => 0,
+			"Slot2" => 1,
+			"Slot3" => 2,
+			"Slot4" => 3,
+			"Slot5" => 4,
+			"Slot6" => 5,
 			_ => -1
 		};
 	}
@@ -113,11 +113,11 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 	}
 
-	protected void TrySlotFromInput( InputButton slot )
+	protected void TrySlotFromInput( string slot )
 	{
 		if ( Input.Pressed( slot ) )
 		{
-			Input.SuppressButton( slot );
+			Input.ReleaseAction( slot );
 
 			SetWeaponFromSlot( GetSlotIndexFromInput( slot ) );
 		}
@@ -150,40 +150,40 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public void BuildInput()
 	{
-		TrySlotFromInput( InputButton.Slot1 );
-		TrySlotFromInput( InputButton.Slot2 );
-		TrySlotFromInput( InputButton.Slot3 );
-		TrySlotFromInput( InputButton.Slot4 );
-		TrySlotFromInput( InputButton.Slot5 );
-		TrySlotFromInput( InputButton.Slot6 );
+		TrySlotFromInput( "Slot1" );
+		TrySlotFromInput( "Slot2" );
+		TrySlotFromInput( "Slot3" );
+		TrySlotFromInput( "Slot4" );
+		TrySlotFromInput( "Slot5" );
+		TrySlotFromInput( "Slot6" );
 
 		var slotDirection = Input.MouseWheel;
 
-		if ( Input.Pressed( InputButton.SlotPrev ) )
+		if ( Input.Pressed( "SlotPrev" ) )
 			slotDirection = -1;
-		else if ( Input.Pressed( InputButton.SlotNext ) )
+		else if ( Input.Pressed( "SlotNext" ) )
 			slotDirection = 1;
 
 		if ( slotDirection != 0 )
 			SwitchActiveSlot( slotDirection, true );
 
-		if ( Input.Pressed( InputButton.Menu ) )
+		if ( Input.Pressed( "Menu" ) )
 			SetWeaponFromSlot( LastWeaponSlot );
 
 		/* Boomer specific weapon shortcuts */
-		if ( Input.Pressed( InputButton.Use ) )
+		if ( Input.Pressed( "Use" ) )
 		{
 			var wpn = FindWeapon( "lightning" );
 			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );
 		}
 
-		if ( Input.Pressed( InputButton.Reload ) )
+		if ( Input.Pressed( "Reload" ) )
 		{
 			var wpn = FindWeapon( "sniper" );
 			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );
 		}
 
-		if ( Input.Pressed( InputButton.Flashlight ) )
+		if ( Input.Pressed( "Flashlight" ) )
 		{
 			var wpn = FindWeapon( "rl" );
 			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );

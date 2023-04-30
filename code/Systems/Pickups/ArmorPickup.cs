@@ -109,7 +109,7 @@ partial class MegaArmour : BasePickup
 		}
 	}
 
-	[Event.Tick.Client]
+	[GameEvent.Tick.Client]
 	public void DestroyTimer()
 	{
 		if ( Available )

@@ -19,12 +19,12 @@ public partial class JumpMechanic : PlayerControllerMechanic
 		// If we hit the ground, we'll bunny hop.
 		if ( GroundEntity.IsValid() )
 		{
-			if ( !Input.Down( InputButton.Jump ) ) return false;
+			if ( !Input.Down( "Jump" ) ) return false;
 		}
 		// If we're in the air, we want to make sure we're pressing the button again.
 		else
 		{
-			if ( !Input.Pressed( InputButton.Jump ) ) return false;
+			if ( !Input.Pressed( "Jump" ) ) return false;
 		}
 
 		return CurrentJumps > 0f;

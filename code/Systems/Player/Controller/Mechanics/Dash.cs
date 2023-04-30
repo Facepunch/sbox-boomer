@@ -12,7 +12,7 @@ public partial class DashMechanic : PlayerControllerMechanic
 	protected override bool ShouldStart()
 	{
 		if ( DashCount < 1 ) return false;
-		if ( !Input.Pressed( InputButton.Run ) ) return false;
+		if ( !Input.Pressed( "Run" ) ) return false;
 
 		return true;
 	}
