@@ -46,11 +46,19 @@
         var friendly = TeamSystem.IsFriendly( TeamSystem.GetTeam( cl ), TeamSystem.GetTeam( Game.LocalClient ) );
         if ( friendly ) return "friend";
 
-		return "enemy";
-	}
+        return "enemy";
+    }
 
     protected override int BuildHash()
     {
         return HashCode.Combine( Kills, Deaths, Score );
+    }
+
+    protected override void OnClick( MousePanelEvent e )
+    {
+        var friend = new Friend(Client.SteamId);
+        
+        if ( friend.Id != 0 )
+            friend.OpenInOverlay();
     }
 }

@@ -230,6 +230,8 @@ Scoreboard
                 padding-right: 40px;
                 background-color: rgba(0, 0, 0, 0.2);
                 border: 2px solid rgba(0, 0, 0, 0.2);
+                pointer-events: all;
+                cursor: pointer;
 
                 label
                 {
@@ -241,6 +243,16 @@ Scoreboard
                 .name, .kills, .deaths, .score, .ping
                 {
                     color: white;
+                }
+
+                &:hover
+                {
+                    background-color: rgba(10, 10, 10, 0.4);
+
+                    .name, .kills, .deaths, .score, .ping
+                    {
+                        color: rgba( white, 0.5 );
+                    }
                 }
 
                 &.friend
