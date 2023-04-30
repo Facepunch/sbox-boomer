@@ -101,6 +101,9 @@
           "ViewModelPath": {
             "Type": "String",
             "Value": "\u0022models/gameplay/weapons/shotgun/shotgun.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022untitled\u0022"
           }
         }
       },
@@ -114,6 +117,9 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "_name": {
+            "Value": "\u0022untitled\u0022"
           }
         }
       },
@@ -135,6 +141,9 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "_name": {
+            "Value": "\u0022untitled\u0022"
           }
         }
       },
@@ -143,8 +152,8 @@
         "Class": "ShootComponent",
         "Keys": {
           "FireButton": {
-            "Type": "InputButton",
-            "Value": "\u0022PrimaryAttack\u0022"
+            "Type": "String",
+            "Value": "\u0022attack1\u0022"
           },
           "BaseDamage": {
             "Type": "Single",
@@ -216,6 +225,9 @@
           "FireSound": {
             "Type": "List\u00601",
             "Value": "[\r\n  \u0022sounds/weapons/shotgun/shotgun.shoot.sound\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022untitled\u0022"
           }
         }
       },
@@ -224,8 +236,8 @@
         "Class": "ShootComponent",
         "Keys": {
           "FireButton": {
-            "Type": "InputButton",
-            "Value": "\u0022SecondaryAttack\u0022"
+            "Type": "String",
+            "Value": "\u0022attack2\u0022"
           },
           "PenetrationIncrementAmount": {
             "Type": "Single",
@@ -293,6 +305,9 @@
           },
           "_tags": {
             "Value": "[]"
+          },
+          "_name": {
+            "Value": "\u0022untitled\u0022"
           }
         }
       }
