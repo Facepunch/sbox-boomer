@@ -9,7 +9,7 @@ public partial class GameManager : Sandbox.GameManager
 {
 	public GameManager()
 	{
-		if ( Game.IsServer )
+		if ( Game.IsClient )
 		{
 			_ = new Hud();
 		}

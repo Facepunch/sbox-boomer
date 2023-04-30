@@ -28,86 +28,77 @@
             }
         }
 
-        .canvas 
+        .main 
         {
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             align-content: stretch;
+            background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
+            min-width: 512px;
+            backdrop-filter: blur(3px);
 
-            .main 
+            .icon
             {
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                align-content: stretch;
-                background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
-                min-width: 512px;
-                backdrop-filter: blur(3px);
+                height: 32px;
+                width: 32px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                margin-top: 8px;
+            }
 
-                .icon
-                {
-                    height: 32px;
-                    width: 32px;
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    margin-top: 8px;
-                }
+            .spacer
+            {
+                width: 100%;
+                height: 2px;
+                background-image: linear-gradient(270deg, rgba(232, 28, 0, 0) 0%, rgba(232, 0, 0, 0.93) 47.92%, rgba(232, 28, 0, 0) 100%);
+            }
 
-                .spacer
-                {
-                    width: 100%;
-                    height: 2px;
-                    background-image: linear-gradient(270deg, rgba(232, 28, 0, 0) 0%, rgba(232, 0, 0, 0.93) 47.92%, rgba(232, 28, 0, 0) 100%);
-                }
+            .trim {
+                width: 100%;
+                height: 2px;
+                background-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 47.92%, rgba(0, 0, 0, 0) 100%);
+            }
 
-                .trim {
-                    width: 100%;
-                    height: 2px;
-                    background-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 47.92%, rgba(0, 0, 0, 0) 100%);
-                }
+            .header
+            {
+                font-size: 32px;
+                font-weight: 700;
+                text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+                color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
+            }
 
-                .header
-                {
-                    font-size: 32px;
-                    font-weight: 700;
-                    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-                    color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
-                }
-
-                .description
-                {
-                    font-size: 20px;
-                    font-weight: 500;
-                    text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-                    color: linear-gradient(180deg, darken( #FFFFFF, 10% ) 0%, rgba(206, 193, 191, 1) 100%);
-                    margin-bottom: 6px;
-                    margin-top: 6px;
-                }
+            .description
+            {
+                font-size: 20px;
+                font-weight: 500;
+                text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+                color: linear-gradient(180deg, darken( #FFFFFF, 10% ) 0%, rgba(206, 193, 191, 1) 100%);
+                margin-bottom: 6px;
+                margin-top: 6px;
             }
         }
     }
 </style>
 
 <root class="@Classes()">
-    <div class="canvas">
-        <div class="main">
-            <div class="trim" />
+    <div class="main">
+        <div class="trim" />
 
-            @if ( !string.IsNullOrEmpty( CurrentAward.Icon ) )
-            {
-                <img class="icon" src=@CurrentAward.Icon />
-            }
+        @if ( !string.IsNullOrEmpty( CurrentAward.Icon ) )
+        {
+            <img class="icon" src=@CurrentAward.Icon />
+        }
 
-            <label class="header">@CurrentAward.Name</label>
+        <label class="header" text=@CurrentAward.Name />
 
-            @if ( !string.IsNullOrEmpty( CurrentAward.Description ) )
-            {
-                <div class="spacer"/>
-                <label class="description">@CurrentAward.Description</label>
-            }
+        @if ( !string.IsNullOrEmpty( CurrentAward.Description ) )
+        {
+            <div class="spacer" />
+            <label class="description" text=@CurrentAward.Description />
+        }
 
-            <div class="trim" />
-        </div>
+        <div class="trim" />
     </div>
 </root>
 

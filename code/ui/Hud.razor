@@ -1,0 +1,33 @@
+@using Facepunch.Boomer;
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Facepunch.Boomer.UI
+@attribute [StyleSheet( "/UI/Hud.scss" )]
+@inherits RootPanel
+
+<root>
+	<Chat />
+	<Info />
+	<KillFeed />
+	<PlayerAwards />
+	<Players />
+	<Crosshair />
+</root>
+
+@code
+{
+	public static Panel CurrentHudPanel { get; protected set; }
+
+	public override void Tick()
+	{
+		if ( !GamemodeSystem.Current.IsValid() ) return;
+		if ( CurrentHudPanel is not null ) return;
+
+		var gamemode = GamemodeSystem.Current;
+		CurrentHudPanel = gamemode.HudPanel;
+
+		if ( CurrentHudPanel is not null )
+			CurrentHudPanel.Parent = this;
+	}
+}
