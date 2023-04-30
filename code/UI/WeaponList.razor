@@ -94,6 +94,21 @@
                 }
             }
 
+            &.inactive
+            {
+                opacity: 0.35;
+
+                .icon-panel 
+                {
+                    border: none;
+                }
+
+                .ammo
+                {
+                    display: none;
+                }
+            }
+
             &.current
             {
                 height: 100px;
@@ -158,6 +173,8 @@
         var str = "";
 
         if ( wpn.IsValid() ) str += " active";
+        else str += " inactive";
+
         if ( CurrentIndex == slot ) str += " current";
 
         return str;
