@@ -1,3 +1,4 @@
+using Facepunch.Boomer.Mechanics;
 using Sandbox;
 using System;
 
@@ -25,6 +26,8 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		animHelper.IsSwimming = player.GetWaterLevel() >= 0.5f;
 		animHelper.IsWeaponLowered = false;
 
+		player.SetAnimParameter( "special_movement_states", player.Controller.GetMechanic<SlideMechanic>().IsActive ? 3 : 0 );
+		
 		var weapon = player.ActiveWeapon;
 		if ( weapon.IsValid() )
 		{
