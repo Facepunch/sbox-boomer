@@ -3,86 +3,12 @@
 @using Sandbox.UI;
 
 @namespace Facepunch.Boomer.UI
-@inherits Panel;
+@inherits Panel
 
-<style>
-    PlayerAwards
-    {
-        position: absolute;
-        width: 100%;
-        height: 40%;
-        justify-content: center;
-        align-items: center;
-        align-content: stretch;
-        font-family: Quantico;
-        text-transform: uppercase;
+<root>
+    @if ( CurrentAward == null ) return;
 
-        .canvas {
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        &.active {
-            .canvas {
-                opacity: 1;
-            }
-        }
-
-        .main 
-        {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            align-content: stretch;
-            background-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
-            min-width: 512px;
-            backdrop-filter: blur(3px);
-
-            .icon
-            {
-                height: 32px;
-                width: 32px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                margin-top: 8px;
-            }
-
-            .spacer
-            {
-                width: 100%;
-                height: 2px;
-                background-image: linear-gradient(270deg, rgba(232, 28, 0, 0) 0%, rgba(232, 0, 0, 0.93) 47.92%, rgba(232, 28, 0, 0) 100%);
-            }
-
-            .trim {
-                width: 100%;
-                height: 2px;
-                background-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 47.92%, rgba(0, 0, 0, 0) 100%);
-            }
-
-            .header
-            {
-                font-size: 32px;
-                font-weight: 700;
-                text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-                color: linear-gradient(180deg, #FFFFFF 0%, rgba(226, 213, 211, 1) 100%);
-            }
-
-            .description
-            {
-                font-size: 20px;
-                font-weight: 500;
-                text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-                color: linear-gradient(180deg, darken( #FFFFFF, 10% ) 0%, rgba(206, 193, 191, 1) 100%);
-                margin-bottom: 6px;
-                margin-top: 6px;
-            }
-        }
-    }
-</style>
-
-<root class="@Classes()">
-    <div class="main">
+    <div class="main @Classes()">
         <div class="trim" />
 
         @if ( !string.IsNullOrEmpty( CurrentAward.Icon ) )
@@ -108,27 +34,21 @@
     PlayerAward CurrentAward { get; set; }
 
     [Event( "boomer.giveaward" )]
-    public void OnGiveAward( string name, string icon, string description = null )
+    public void OnGiveAward( PlayerAward award )
     {
         TimeSinceShown = 0;
-        CurrentAward = new PlayerAward
-        {
-            Name = name,
-            Description = description,
-            Icon = icon
-        };
+        CurrentAward = award;
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine( TimeSinceShown, CurrentAward );
+        return HashCode.Combine( Time.Now );
     }
 
     public string Classes()
     {
         var str = "";
         if ( TimeSinceShown < 5f ) str = str + "active";
-
         return str;
     }
 }

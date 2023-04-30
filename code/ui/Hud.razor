@@ -9,7 +9,7 @@
 <root>
 	<Chat />
 	<Info />
-	<KillFeed />
+	<Kills />
 	<PlayerAwards />
 	<Players />
 	<Crosshair />
@@ -26,8 +26,6 @@
 
 		var gamemode = GamemodeSystem.Current;
 		CurrentHudPanel = gamemode.HudPanel;
-
-		if ( CurrentHudPanel is not null )
-			CurrentHudPanel.Parent = this;
+		CurrentHudPanel.Parent = this;
 	}
 }

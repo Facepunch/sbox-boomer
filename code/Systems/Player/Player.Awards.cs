@@ -3,12 +3,7 @@ using System.Collections.Generic;
 
 namespace Facepunch.Boomer;
 
-public struct PlayerAward
-{
-	public string Name { get; set; }
-	public string Description { get; set; }
-	public string Icon { get; set; }
-}
+public record PlayerAward( string Name, string Description, string Icon );
 
 public partial class Player
 {
@@ -17,17 +12,12 @@ public partial class Player
 	[ClientRpc]
 	public void ShowAward( string name, string icon = null, string description = null )
 	{
-		Event.Run( "boomer.giveaward", name, icon ?? "/ui/vitals/ammo.png", description ?? string.Empty );
+		Event.Run( "boomer.giveaward", new PlayerAward( name, description ?? string.Empty, icon ?? "/ui/vitals/ammo.png" ) );
 	}
 
 	public void GiveAward( string name, string icon = null, string description = null )
 	{
-		GrantedAwards.Add( new PlayerAward
-		{
-			Name = name,
-			Description = description,
-			Icon = icon
-		} );
+		GrantedAwards.Add( new PlayerAward( name, description, icon ) );
 
 		ShowAward( To.Single( Client ), name, icon, description );
 	}
