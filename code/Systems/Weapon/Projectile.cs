@@ -11,6 +11,8 @@ public partial class Projectile : ModelEntity
 	/// </summary>
 	[Net] protected ProjectileData Data { get; set; }
 
+	public Weapon Weapon { get; set; }
+
 	public Particles ActiveParticle { get; set; }
 	protected float GravityModifier { get; set; }
 
@@ -206,7 +208,7 @@ public partial class Projectile : ModelEntity
 					dmg *= Data.SelfDamageScale;
 
 				var damageInfo = DamageInfo.FromExplosion( Position, forceDir * force, dmg )
-					.WithWeapon( this )
+					.WithWeapon( Weapon )
 					.WithAttacker( Owner );
 
 				ent.TakeDamage( damageInfo );

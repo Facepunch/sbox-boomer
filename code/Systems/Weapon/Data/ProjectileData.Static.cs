@@ -1,6 +1,7 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Facepunch.Boomer.WeaponSystem;
 
@@ -23,7 +24,7 @@ public partial class ProjectileData
 		return All.FirstOrDefault( x => x.ResourcePath.ToLower() == name.ToLower() );
 	}
 
-	public static Projectile Create( ProjectileData data, Player owner = null )
+	public static Projectile Create( ProjectileData data, Player owner = null, Weapon weapon = null )
 	{
 		Game.AssertServer( "Can only create projectiles serverside." );
 
@@ -36,7 +37,8 @@ public partial class ProjectileData
 
 		var projectile = new Projectile
 		{
-			Owner = owner
+			Owner = owner,
+			Weapon = weapon
 		};
 
 		projectile.Initialize( data );
@@ -49,10 +51,10 @@ public partial class ProjectileData
 		return projectile;
 	}
 
-	public static Projectile Create( string name, Player owner = null )
+	public static Projectile Create( string name, Player owner = null, Weapon weapon = null )
 	{
 		Log.Info( $"Trying to create projectile with name: {name}" );
-		return Create( Find( name ), owner );
+		return Create( Find( name ), owner, weapon );
 	}
 
 	protected override void PostLoad()
