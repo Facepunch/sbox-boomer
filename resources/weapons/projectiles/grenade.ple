@@ -18,7 +18,7 @@
 		ExplosionDamage = 100
 		ExplosionParticlePath = resource:"particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_gib.vpcf"
 		ExplosionSoundPath = resource:"sounds/weapons/grenadelauncher/gl.explode.sound"
-		SelfDamageScale = 0
+		SelfDamageScale = 0.5
 		ExplosionDamageFalloff = 
 		[
 			{

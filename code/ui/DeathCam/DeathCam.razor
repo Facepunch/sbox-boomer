@@ -1,0 +1,56 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel
+@attribute [StyleSheet( "/ui/DeathCam/DeathCam.scss" )]
+
+<root>
+    @if ( !ShouldShow() ) return;
+
+    <div class="main">
+        <div class="anim3" />
+        <div class="anim2" />
+
+        <div class="col">
+            <img class="avatar" src="avatarbig:@(Killer?.Client.SteamId ?? 76561197973858781)" />
+            <img class="weapon" src=@WeaponIcon />
+        </div>
+
+        <div class="col stretch">
+            <div class="row stretch">
+                <label class="text small thin">Killed by</label>
+                <label class="text">@(Killer?.Client.Name ?? "DevulTj")</label>
+            </div>
+        </div>
+
+    </div>
+</root>
+
+@code
+{
+    public static Boomer.Player Killer { get; set; }
+    public static string WeaponIcon { get; set; } = "/ui/ammo/icon_5_ammo.png";
+    public static TimeSince TimeSinceShown { get; set; } = -1000;
+
+    protected bool ShouldShow()
+    {
+        if ( TimeSinceShown > 5f ) return false;
+        return Game.LocalPawn.LifeState != LifeState.Alive;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Time.Now );
+    }
+
+    [ClientRpc]
+    public static void Show( Boomer.Player killer, string weaponIcon )
+    {
+        Killer = killer;
+
+        if ( weaponIcon != null ) WeaponIcon = weaponIcon;
+        TimeSinceShown = 0;
+    }
+}

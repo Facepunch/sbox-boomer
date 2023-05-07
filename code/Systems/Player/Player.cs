@@ -1,4 +1,5 @@
 using Facepunch.Boomer.Mechanics;
+using Facepunch.Boomer.UI;
 using Facepunch.Boomer.WeaponSystem;
 using Sandbox;
 using System.Linq;
@@ -314,6 +315,12 @@ public partial class Player : AnimatedEntity
 		Input.ClearActions();
 	}
 
+	[ClientRpc]
+	public void RpcShowDeathCam( Player attacker, string weaponIcon )
+	{
+		DeathCam.Show( attacker, weaponIcon );
+	}
+
 	public override void OnKilled()
 	{
 		if ( LifeState == LifeState.Alive )
@@ -323,6 +330,8 @@ public partial class Player : AnimatedEntity
 
 			// Inform the active gamemode
 			GamemodeSystem.Current?.OnPlayerKilled( this, LastDamage, out newLifeState );
+
+			LifeState = newLifeState;
 
 			// Let the client know
 			OnSelfKilled( To.Single( Client ) );
@@ -334,7 +343,8 @@ public partial class Player : AnimatedEntity
 				attacker.TimeSinceKill = 0;
 				Sound.FromScreen( To.Single( attacker ), "killsound" );
 
-				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.Name ?? "" ); 
+				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.Name ?? "" );
+				RpcShowDeathCam( To.Single( this ), attacker, (LastDamage.Weapon as Weapon)?.AmmoIcon ?? null );
 			}
 
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
