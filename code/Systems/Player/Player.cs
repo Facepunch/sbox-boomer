@@ -308,6 +308,12 @@ public partial class Player : AnimatedEntity
 		Event.Run( "boomer.kill", attacker, victim, weapon );
 	}
 
+	[ClientRpc]
+	public void OnSelfKilled()
+	{
+		Input.ClearActions();
+	}
+
 	public override void OnKilled()
 	{
 		if ( LifeState == LifeState.Alive )
@@ -317,6 +323,9 @@ public partial class Player : AnimatedEntity
 
 			// Inform the active gamemode
 			GamemodeSystem.Current?.OnPlayerKilled( this, LastDamage, out newLifeState );
+
+			// Let the client know
+			OnSelfKilled( To.Single( Client ) );
 
 			if ( LastDamage.Attacker is Player attacker && attacker != this )
 			{
