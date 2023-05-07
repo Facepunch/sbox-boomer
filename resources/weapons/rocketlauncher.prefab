@@ -1,0 +1,241 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "54a2762d-f16f-407f-a344-e41a0f19fe4e",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [
+      {
+        "Guid": "f9fa9e4d-51a5-4211-8329-254b2bdf341c",
+        "Class": "ShootComponent",
+        "Keys": {
+          "KnockbackForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "DisableBulletImpacts": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "TracerStartEnd": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "FireDelay": {
+            "Type": "Single",
+            "Value": "1"
+          },
+          "FireSoundOnlyOnStart": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "BaseDamage": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletRange": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletCount": {
+            "Type": "Int32",
+            "Value": "0"
+          },
+          "BulletForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletSize": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "BulletSpread": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "Projectile": {
+            "Type": "String",
+            "Value": "\u0022resources/weapons/projectiles/rocket.ple\u0022"
+          },
+          "FireSound": {
+            "Type": "List\u00601",
+            "Value": "[\r\n  \u0022sounds/weapons/rocketlauncher/rl.shoot.sound\u0022\r\n]"
+          },
+          "_name": {
+            "Value": "\u0022ShootComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "e2af2ad7-5baa-40f3-9066-568a3bde90f9",
+        "Class": "ViewModelComponent",
+        "Keys": {
+          "GlobalLerpPower": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "GlobalPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "GlobalAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "CrouchPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "CrouchAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AvoidancePositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AvoidanceAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "SprintPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "SprintAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AimPositionOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AimAngleOffset": {
+            "Type": "Angles",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "AimFovOffset": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "OverallWeight": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "WeightReturnForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "WeightDamping": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "AccelerationDamping": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "VelocityScale": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "RotationalPivotForce": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "RotationalScale": {
+            "Type": "Single",
+            "Value": "0"
+          },
+          "WalkCycleOffset": {
+            "Type": "Vector3",
+            "Value": "\u00220,0,0\u0022"
+          },
+          "BobAmount": {
+            "Type": "Vector2",
+            "Value": "\u00220,0\u0022"
+          },
+          "ViewModelPath": {
+            "Type": "String",
+            "Value": "\u0022models/gameplay/weapons/rocketlauncher/rocketlauncher.vmdl\u0022"
+          },
+          "_name": {
+            "Value": "\u0022ViewModelComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      },
+      {
+        "Guid": "700a8ddd-dfec-44ab-98d7-67bf7a30ee64",
+        "Class": "AmmoComponent",
+        "Keys": {
+          "MaximumAmmo": {
+            "Type": "Int32",
+            "Value": "8"
+          },
+          "DefaultAmmo": {
+            "Type": "Int32",
+            "Value": "4"
+          },
+          "AllowChamber": {
+            "Type": "Boolean",
+            "Value": "false"
+          },
+          "_name": {
+            "Value": "\u0022AmmoComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
+    "Keys": {
+      "WeaponColor": {
+        "Type": "Color",
+        "Value": "\u00221,0.18373,0.18373,1\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/gameplay/weapons/rocketlauncher/w_rocketlauncher.vmdl\u0022"
+      },
+      "CrosshairIcon": {
+        "Type": "String",
+        "Value": "\u0022ui/crosshair/crosshair165.png\u0022"
+      },
+      "AmmoIcon": {
+        "Type": "String",
+        "Value": "\u0022ui/ammo/icon_5_ammo.png\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022ui/weapons/icon_5.png\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Rocket Launcher\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      },
+      "HoldType": {
+        "Type": "HoldType",
+        "Value": "\u0022RPG\u0022"
+      }
+    }
+  }
+}
