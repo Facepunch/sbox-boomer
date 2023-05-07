@@ -130,6 +130,8 @@ public partial class ShootComponent : WeaponComponent
 			}
 		}
 
+		if ( !CanFire( player ) ) return;
+
 		if ( IsFiring )
 		{
 			if ( TimeSinceActivated > FireDelay )
