@@ -37,7 +37,7 @@ partial class AmmoPickup : BasePickup
 [Title( "Nail Clip" ), Category( "Ammo" )]
 partial class AmmoNails : AmmoPickup
 {
-	public override string ResourceIdent => "nailgun";
+	public override string ResourceIdent => "Nail Gun";
 	public override string AmmoName => "#Ammo.Nails";
 	public override int AmmoAmount => 100;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/nails/bm_nails.vmdl" );
@@ -48,7 +48,7 @@ partial class AmmoNails : AmmoPickup
 [Title( "Grenades" ), Category( "Ammo" )]
 partial class AmmoGrenades : AmmoPickup
 {
-	public override string ResourceIdent => "gl";
+	public override string ResourceIdent => "Grenade Launcher";
 	public override string AmmoName => "#Ammo.Grenade";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/grenades/bm_grenades.vmdl" );
@@ -59,7 +59,7 @@ partial class AmmoGrenades : AmmoPickup
 [Title( "Rockets" ), Category( "Ammo" )]
 partial class AmmoRockets : AmmoPickup
 {
-	public override string ResourceIdent => "rl";
+	public override string ResourceIdent => "Rocket Launcher";
 	public override string AmmoName => "#Ammo.Rockets";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rockets/bm_rockets.vmdl" );
@@ -70,7 +70,7 @@ partial class AmmoRockets : AmmoPickup
 [Title( "Rails" ), Category( "Ammo" )]
 partial class AmmoRails : AmmoPickup
 {
-	public override string ResourceIdent => "sniper";
+	public override string ResourceIdent => "Sniper";
 	public override string AmmoName => "#Ammo.Rails";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/rails/bm_rails.vmdl" );
@@ -81,7 +81,7 @@ partial class AmmoRails : AmmoPickup
 [Title( "Lightning" ), Category( "Ammo" )]
 partial class AmmoLightning : AmmoPickup
 {
-	public override string ResourceIdent => "lightning";
+	public override string ResourceIdent => "Lightning Gun";
 	public override string AmmoName => "#Ammo.Lightning";
 	public override int AmmoAmount => 100;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/lightning/bm_lightning.vmdl" );
@@ -92,7 +92,7 @@ partial class AmmoLightning : AmmoPickup
 [Title( "Buckshot" ), Category( "Ammo" )]
 partial class AmmoBuckshot : AmmoPickup
 {
-	public override string ResourceIdent => "shotgun";
+	public override string ResourceIdent => "Shotgun";
 	public override string AmmoName => "#Ammo.Buckshot";
 	public override int AmmoAmount => 5;
 	public override Model WorldModel => Model.Load( "models/gameplay/ammo/buckshot/bm_buckshot.vmdl" );
