@@ -10,7 +10,7 @@ public partial class Player
 	public List<PlayerAward> GrantedAwards { get; set; } = new();
 
 	[ClientRpc]
-	public void ShowAward( string name, string icon = null, string description = null )
+	public static void ShowAward( string name, string icon = null, string description = null )
 	{
 		Event.Run( "boomer.giveaward", new PlayerAward( name, description ?? string.Empty, icon ?? "/ui/vitals/ammo.png" ) );
 	}

@@ -151,6 +151,7 @@ public partial class TeamDeathmatch : Gamemode
 		// The game's over.
 		CurrentState = GameState.GameOver;
 		Chat.AddInformation( To.Everyone, $"Game over." );
+		Player.ShowAward( To.Everyone, "Game Over" );
 
 		// TODO - Decide Winner
 		// TODO - Map Vote
