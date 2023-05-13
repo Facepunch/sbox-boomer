@@ -43,7 +43,7 @@
         var cl = Game.Clients.FirstOrDefault( x => x.SteamId == Client.SteamId );
         if ( cl == null ) return "disconnected";
 
-        var friendly = TeamSystem.IsFriendly( TeamSystem.GetTeam( cl ), TeamSystem.GetTeam( Game.LocalClient ) );
+        var friendly = new Friend(cl.SteamId).IsFriend;
         if ( friendly ) return "friend";
 
         return "enemy";

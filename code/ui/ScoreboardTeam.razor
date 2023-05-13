@@ -11,10 +11,14 @@
     @if ( Team != Team.None )
     {
         <div class="header">
-            <label class="team-name">@TeamName</label>
+            <label class="team-name" @ref=TeamNameLabel text=@TeamName />
             <div class="grow" />
             <div class="score">
-                <label class="team-score">@TeamScore</label>
+                <div class="span">
+                    <label class="team-score" text=@TeamScore />
+                    <label class="team-score"> points</label>
+                </div>
+
                 <div class="bar">
                     <div class="bar-inner" style="width: @ScorePercent%"/>
                 </div>
@@ -22,13 +26,16 @@
         </div>
     }
 
-    <div class="names">
-        <label class="name">Name</label>
-        <label class="kills">Kills</label>
-        <label class="deaths">Deaths</label>
-        <label class="score">Score</label>
-        <label class="ping">Ping</label>
-    </div>
+    @if ( Rows.Count > 0 )
+    {
+        <div class="names">
+            <label class="name">Name</label>
+            <label class="kills">Kills</label>
+            <label class="deaths">Deaths</label>
+            <label class="score">Score</label>
+            <label class="ping">Ping</label>
+        </div>
+    }
 
     <div class="canvas" @ref=Canvas>
         @if ( Rows.Count < 1 )
@@ -44,6 +51,8 @@
     public Panel Canvas;
     public Team Team = Team.None;
 
+    public Label TeamNameLabel;
+
     public string TeamName => Team.GetName();
     public int TeamScore => 0;
     public float ScorePercent => 0;
@@ -57,6 +66,8 @@
         if ( Canvas == null ) return;
 
         TimeSinceUpdate = 0;
+
+        TeamNameLabel.Style.FontColor = Team.GetColor();
 
         Canvas.SortChildren<ScoreboardRow>( x => -x.Client.GetInt( "score" ) * 1000 );
 

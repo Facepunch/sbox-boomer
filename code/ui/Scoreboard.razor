@@ -9,11 +9,10 @@
 <root>
     <div class="main">
         <div class="title">
-            <text>Scoreboard</text>
+            <text>Boomer</text>
         </div>
 
-        <div class="canvases" @ref=Canvases>
-        </div>
+        <div class="canvases" @ref=Canvases />
     </div>
 </root>
 
@@ -41,9 +40,13 @@
         Canvases.DeleteChildren();
     }
 
+    bool ShowScore = false;
+
     public override void Tick()
     {
-        SetClass( "open", Input.Down( "Score" ) );
+        SetClass( "open", ShowScore );
+
+        if ( Input.Pressed( "score" ) ) ShowScore ^= true;
 
         if ( !IsVisible )
             return;

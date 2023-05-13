@@ -14,15 +14,17 @@ Scoreboard
     right: 0;
     z-index: 100;
     transition: opacity 0.2s ease;
+    backdrop-filter-blur: 25px;
 
     &.open
     {
         opacity: 1;
         pointer-events: all;
+        background-image: linear-gradient( to left, rgba( 0, 0, 0, 0.5 ), rgba( 0, 0, 25, 0.9 ) );
 
         .main
         {
-            transform: translateX(0%);
+            transform: translateX(0%) scale(1);
         }
     }
 
@@ -35,38 +37,16 @@ Scoreboard
     {
         flex-direction: column;
         transition: all 0.2s ease;
-        transform: translateX(-100%);
+        transform: translateX(-100%) scale(0.5);
         position: absolute;
-        width: 50%;
+        width: 100%;
         height: 100%;
-        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
-        backdrop-filter-blur: 50px;
+        justify-content: center;
     }
 
     .title
     {
-        margin-top: 5%;
-        height: 10%;
-        margin-left: 64px;
-        width: 450px;
-        border-left: 3px solid $main-color;
-        background-color: rgba( black, 0.2 );
-        padding-right: 20px;
-        padding-left: 24px;
-
-        > text
-        {
-            height: 100%;
-            top: 2px;
-            font-family: Quantico;
-            font-weight: 600;
-            font-size: 60px;
-            color: white;
-            text-transform: uppercase;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
-        }
+        display: none;
     }
 
     .names
@@ -95,73 +75,83 @@ Scoreboard
 
     .canvases
     {
+        width: 50%;
+        height: 85%;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
         margin-left: 64px;
-        margin-right: 32px;
+        margin-right: 64px;
+        gap: 64px;
     }
 
     scoreboardteam
     {
         &:first-child
         {
-            //transform: rotateY(10deg) rotateX(10deg);
+            transform: rotateY(-20deg) rotateX(10deg);
         }
 
         &:last-child
         {
-            //transform: rotateY(10deg) rotateX(-10deg);
+            transform: rotateY(-20deg) rotateX(10deg);
         }
 
         flex-direction: column;
-        margin-bottom: 20px;
         width: 100%;
 
         > .header
         {
-            flex-direction: row;
-            padding-top: 24px;
-            padding-bottom: 24px;
-            height: 100px;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
+            flex-direction: column;
+            align-content: flex-start;
+            margin-bottom: 8px;
 
             > .score
             {
+                margin-top: 16px;
                 flex-direction: column;
-                margin-right: 96px;
-                width: 300px;
+                width: 100%;
 
                 > .bar
                 {
-                    flex-grow: 1;
-                    background-color: rgba(40, 38, 38, 0.5);
-                    border: 2px solid rgba(0, 0, 0, 0.2);
+                    background-color: rgba(0, 0, 0, 0.2);
+                    margin-right: 64px;
+                    height: 16px;
 
                     > .bar-inner
                     {
-                        border: 2px solid rgba(0, 0, 0, 0.1);
+                        border: 1px solid rgba(0, 0, 0, 0.2);
                         box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
                     }
                 }
             }
 
-            .team-name, .team-score
+            .team-score
+            {
+                padding-top: 6px;
+                text-transform: uppercase;
+                font-family: Quantico;
+                font-weight: 900;
+                font-size: 20px;
+                color: white;
+                align-items: center;
+                text-shadow: 1px 1px 1px rgba( black, 1 );
+                padding-bottom: 4px;
+            }
+
+            .span
+            {
+                gap: 5px;
+            }
+
+            .team-name
             {
                 text-transform: uppercase;
                 font-family: Quantico;
-                font-weight: 600;
+                font-weight: 900;
                 font-size: 45px;
-                color: white;
-                align-items: center;
-                text-shadow: 0px 0px 20px rgba( black, 0.5 );
-            }
-
-            .team-score
-            {
-                height: 35px;
-                margin-left: -12px;
-                font-size: 30px;
+                text-shadow: 1px 1px 1px rgba( black, 0.5 );
             }
         }
 
@@ -169,14 +159,9 @@ Scoreboard
         {
             > .header
             {
-                label
-                {
-                    color: white;
-                }
-
                 .bar-inner
                 {
-                    background-color: rgba( #52afec, 0.8 );
+                    background-color: rgba( white, 0.8 );
                 }
             }
         }
@@ -185,14 +170,9 @@ Scoreboard
         {
             > .header
             {
-                label
-                {
-                    color: white;
-                }
-
                 .bar-inner
                 {
-                    background-color: rgba( #F53F16, 0.8 );
+                    background-color: rgba( white, 0.8 );
                 }
             }
         }
@@ -200,97 +180,64 @@ Scoreboard
         .canvas
         {
             flex-direction: column;
-            min-width: 30%;
+            gap: 8px;
 
             .placeholder
             {
-                border: 2px solid rgba(0, 0, 0, 0.2);
-                border-bottom: none;
                 text-align: center;
                 font-weight: 700;
                 font-family: Quantico;
-                font-size: 35px;
+                font-size: 30px;
+                text-transform: uppercase;
+                color: white;
                 align-items: center;
                 justify-content: center;
                 align-content: center;
-                height: 250px;
-                background-image: linear-gradient( to top, rgba( black, 0.5 ), rgba( black, 0 ) );
-                animation-name: placeholderanim;
-                animation-duration: 1.5s;
-                animation-timing-function: ease-in;
-                animation-iteration-count: infinite;
+                height: 100px;
+                background-color: rgba( black, 0.2 );
+                border: 2px solid rgba( 0, 0, 0, 0.2 );
             }
 
             ScoreboardRow
             {
+                margin-right: 55px;
                 align-items: center;
                 background-size: 100%;
-                margin-bottom: 4px;
-                height: 50px;
-                padding-right: 40px;
-                background-color: rgba(0, 0, 0, 0.2);
-                border: 2px solid rgba(0, 0, 0, 0.2);
+                height: 60px;
+                background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
                 cursor: pointer;
 
                 label
                 {
-                    font-weight: 600;
+                    font-weight: 700;
                     font-family: Quantico;
                     font-size: 20px;
                 }
 
-                .name, .kills, .deaths, .score, .ping
+                .name
                 {
-                    color: white;
+                    color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
+                }
+
+                .kills, .deaths, .score, .ping
+                {
+                    color: linear-gradient( 180deg, #E1D6D4 0%, darken(#E1D6D4, 50%) 100% );
                 }
 
                 &:hover
                 {
-                    background-color: rgba(10, 10, 10, 0.4);
-
-                    .name, .kills, .deaths, .score, .ping
-                    {
-                        color: rgba( white, 0.5 );
-                    }
+                    background-image: linear-gradient( to right, rgba(0, 0, 0, 0.8), rgba( 0, 0, 0, 0 ) );
                 }
 
                 &.friend
                 {
-                    img
-                    {
-                        border: 2px solid white;
-                    }
-
-                    .name
-                    {
-                        color: white;
-                    }
-                }
-
-                &.enemy
-                {
-                    img
-                    {
-                        border: 2px solid white;
-                    }
-
-                    .name
-                    {
-                        color: white;
-                    }
+                    background-image: linear-gradient( to right, rgba(50, 75, 50, 0.5), rgba( 0, 0, 0, 0 ) );
                 }
 
                 &.me
                 {
-                    img
-                    {
-                        border: 2px solid $main-color;
-                    }
-
-                    .name
-                    {
-                        color: $main-color;
-                    }
+                    background-image: linear-gradient( to right, rgba(50, 50, 75, 0.5), rgba( 0, 0, 0, 0 ) );
+                    border-bottom: 2px solid rgba(50, 50, 75, 0.5);
                 }
 
                 img
@@ -302,20 +249,5 @@ Scoreboard
                 }
             }
         }
-    }
-}
-
-
-@keyframes placeholderanim {
-    0% {
-        color: rgba( white, 1 );
-    }
-
-    50% {
-        color: rgba( grey, 0.5 );
-    }
-
-    100% {
-        color: rgba( white, 1 );
     }
 }
