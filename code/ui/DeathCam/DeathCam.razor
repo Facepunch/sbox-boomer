@@ -52,5 +52,10 @@
 
         if ( weaponIcon != null ) WeaponIcon = weaponIcon;
         TimeSinceShown = 0;
+
+        Boomer.GameManager.LocalPlayer.SetCamera( new PlayerDeathCamera()
+        {
+            FocusEntity = killer
+        } );
     }
 }

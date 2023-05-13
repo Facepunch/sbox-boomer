@@ -7,6 +7,8 @@ namespace Facepunch.Boomer;
 
 public partial class GameManager : Sandbox.GameManager
 {
+	public static Player LocalPlayer => Game.LocalPawn as Player;
+
 	public GameManager()
 	{
 		if ( Game.IsClient )

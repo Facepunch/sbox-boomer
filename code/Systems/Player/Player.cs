@@ -2,6 +2,7 @@ using Facepunch.Boomer.Mechanics;
 using Facepunch.Boomer.UI;
 using Facepunch.Boomer.WeaponSystem;
 using Sandbox;
+using System;
 using System.Linq;
 
 namespace Facepunch.Boomer;
@@ -148,7 +149,14 @@ public partial class Player : AnimatedEntity
 	[ClientRpc]
 	public void ClientRespawn()
 	{
-		PlayerCamera = new PlayerCamera();
+		SetCamera( new PlayerCamera() );
+	}
+
+	public void SetCamera( PlayerCamera camera )
+	{
+		Game.AssertClient();
+
+		PlayerCamera = camera;
 	}
 
 	[Net] public float MaxHealth { get; set; }
@@ -336,7 +344,8 @@ public partial class Player : AnimatedEntity
 			// Let the client know
 			OnSelfKilled( To.Single( Client ) );
 
-			if ( LastDamage.Attacker is Player attacker && attacker != this )
+			var attacker = LastDamage.Attacker as Player;
+			if ( attacker.IsValid() && attacker != this )
 			{
 				attacker.ConsecutiveKills++;
 				attacker.CalculateKillingSpree();
@@ -344,8 +353,9 @@ public partial class Player : AnimatedEntity
 				Sound.FromScreen( To.Single( attacker ), "killsound" );
 
 				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.Name ?? "" );
-				RpcShowDeathCam( To.Single( this ), attacker, (LastDamage.Weapon as Weapon)?.AmmoIcon ?? null );
 			}
+
+			RpcShowDeathCam( To.Single( this ), attacker, (LastDamage.Weapon as Weapon)?.AmmoIcon ?? null );
 
 			CreateRagdoll( Controller.Velocity, LastDamage.Position, LastDamage.Force,
 				LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
