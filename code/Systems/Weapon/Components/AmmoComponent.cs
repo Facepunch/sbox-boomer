@@ -12,9 +12,15 @@ public partial class AmmoComponent : WeaponComponent, ISingletonComponent
 	[Prefab] public int MaximumAmmo { get; set; } = 8;
 	[Prefab] public bool AllowChamber { get; set; } = true;
 
-	public AmmoComponent()
+	bool IsFirstTime = true;
+
+	protected override void OnActivate()
 	{
+		if ( !IsFirstTime ) return;
+
 		AmmoCount = DefaultAmmo;
+
+		IsFirstTime = false;
 	}
 
 	public bool IsFull
