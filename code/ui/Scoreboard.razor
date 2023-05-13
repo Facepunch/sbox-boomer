@@ -40,13 +40,9 @@
         Canvases.DeleteChildren();
     }
 
-    bool ShowScore = false;
-
     public override void Tick()
     {
-        SetClass( "open", ShowScore );
-
-        if ( Input.Pressed( "score" ) ) ShowScore ^= true;
+        SetClass( "open", Input.Down( "score" ) );
 
         if ( !IsVisible )
             return;
