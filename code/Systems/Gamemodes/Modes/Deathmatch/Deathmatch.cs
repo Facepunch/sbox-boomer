@@ -1,6 +1,4 @@
 using Facepunch.Boomer.UI;
-using Sandbox;
-using System;
 using System.Threading.Tasks;
 
 namespace Facepunch.Boomer.Gamemodes;
