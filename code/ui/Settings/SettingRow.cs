@@ -7,7 +7,7 @@ internal class SettingRow : Panel
 
 	public SettingRow()
 	{
-		Label = Add.Label( "Label" );
+		Label = Add.Label( null, "title" );
 		Add.Panel().Style.FlexGrow = 1;
 		ValueArea = Add.Panel( "value-area" );
 	}
@@ -18,6 +18,12 @@ internal class SettingRow : Panel
 
 		var typeDesc = TypeLibrary.GetType( property.PropertyType );
 		var currentValue = property.GetValue( target );
+
+		if ( property.IsStatic )
+		{
+			Delete();
+			return;
+		}
 
 		if ( property.PropertyType == typeof( bool ) )
 		{

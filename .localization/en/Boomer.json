@@ -7,6 +7,7 @@
     "Game.GameEnd" : "Game End",
     "Game.MapVote" : "Map Vote",
 	
+	"GameSettings.MusicVolume" : "Music Volume",
 	"GameSettings.WeaponPosition" : "Weapon Position",
     "GameSettings.WeaponPosition.Description" : "Screen position of your viewmodel",
 	"GameSettings.TennisBallMode" : "Tennis Ball Mode",
@@ -19,11 +20,11 @@
     "GameSettings.ShowDamageNumbers.Description" : "Show damaged numbers on the damaged player",
 	"GameSettings.BatchDamageNumbers" : "Batch Damage Numbers",
     "GameSettings.BatchDamageNumbers.Description" : "Batch the damage numbers",
-	"GameSettings.Speedometer" : "Speedometer",
+	"GameSettings.Speedometer" : "Show Speedometer",
     "GameSettings.Speedometer.Description" : "Displays player speed on the hud",
-	"GameSettings.GoreMode" : "GoreMode",
+	"GameSettings.GoreMode" : "Gore Mode",
     "GameSettings.GoreMode.Description" : "Controls the amount of gore",
-	"GameSettings.WalkBob" : "WalkBob",
+	"GameSettings.WalkBob" : "View Bobbing",
     "GameSettings.WalkBob.Description" : "Show the camera and view model bob when walking",
 	"GameSettings.HearOwnFootsteps" : "Hear Own Footsteps",
     "GameSettings.HearOwnFootsteps.Description" : "Disables your footsteps",
@@ -40,7 +41,7 @@
 	"GameSettingsOptions.NoRagdolls" : "No Ragdolls",
 	"GameSettingsOptions.NoGore" : "No Gore",
 	
-	"GameSettings.GeneralSettings" : "General Settings",
+	"GameSettings.GeneralSettings" : "Game Settings",
 	"GameSettings.Close" : "Close",
 	"GameSettings.Reset" : "Reset Defaults",
 	

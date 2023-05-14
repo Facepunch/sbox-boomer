@@ -4,19 +4,22 @@
 @attribute [StyleSheet( "/ui/Settings/SettingsMenu.scss" )]
 
 <root>
-    <div class="navbar">
-        <button>#GameSettings.GeneralSettings</button>
-        <div style="flex-grow: 1;" />
-        <button onclick=@(Close) class="exit">#GameSettings.Close</button>
-    </div>
+	<div class="main">
+		<div class="navbar">
+			<label class="title">#GameSettings.GeneralSettings</label>
+		</div>
 
-    <div class="body">
-        <ObjectEditor @ref=Editor />
-    </div>
+		<div class="body">
+			<ObjectEditor @ref=Editor />
+		</div>
 
-    <div class="footer">
-        <button onclick=@(SetDefaults) class="reset-defaults">#GameSettings.Reset</button>
-    </div>
+		<div class="grow" />
+
+		<div class="footer">
+			<button onclick=@SetDefaults><i>restart_alt</i>#GameSettings.Reset</button>
+			<button onclick=@Close class="exit"><i>close</i>#GameSettings.Close</button>
+		</div>
+	</div>
 </root>
 
 @code {
