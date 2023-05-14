@@ -44,6 +44,37 @@ Scoreboard
         justify-content: center;
     }
 
+    .footer
+    {
+        padding: 16px 64px;
+    }
+
+    button
+    {
+        background-image: linear-gradient( to right, rgba( 0, 0, 0, 0.25 ), rgba( 0, 0, 0, 0 ) );
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 8px 16px;
+        width: 256px;
+        align-items: center;
+        gap: 16px;
+        transform: rotateY(-20deg) rotateX(10deg);
+
+        i
+        {
+            font-family: Material Icons;
+            font-size: 32px;
+        }
+
+        &:hover
+        {
+            background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
+        }
+    }
+
+
     .title
     {
         display: none;
@@ -109,14 +140,12 @@ Scoreboard
 
             > .score
             {
-                margin-top: 16px;
                 flex-direction: column;
                 width: 100%;
 
                 > .bar
                 {
                     background-color: rgba(0, 0, 0, 0.2);
-                    margin-right: 64px;
                     height: 16px;
 
                     > .bar-inner
@@ -129,7 +158,6 @@ Scoreboard
 
             .team-score
             {
-                padding-top: 6px;
                 text-transform: uppercase;
                 font-family: Quantico;
                 font-weight: 900;
@@ -194,8 +222,7 @@ Scoreboard
                 justify-content: center;
                 align-content: center;
                 height: 100px;
-                background-color: rgba( black, 0.2 );
-                border: 2px solid rgba( 0, 0, 0, 0.2 );
+                background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
             }
 
             ScoreboardRow
