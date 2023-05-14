@@ -12,9 +12,14 @@ public class ObjectEditor : Panel
 		DeleteChildren( true );
 
 		var properties = TypeLibrary.GetPropertyDescriptions( target );
-		foreach ( var property in properties )
+		foreach ( var group in properties.GroupBy( x => x.Group ).Where( x => !string.IsNullOrEmpty( x.Key ) ) )
 		{
-			AddChild( new SettingRow( target, property ) );
+			AddChild<Label>( "group" ).Text = group.Key;
+
+			foreach( var property in group )
+			{
+				AddChild( new SettingRow( target, property ) );
+			}
 		}
 	}
 }

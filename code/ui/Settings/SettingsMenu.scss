@@ -53,11 +53,6 @@
         }
     }
 
-    .grow
-    {
-        flex-grow: 1;
-    }
-
     .navbar, .footer
     {
         gap: 4px;
@@ -109,6 +104,19 @@
 ObjectEditor
 {
     overflow: scroll;
+
+    .group
+    {
+        text-transform: uppercase;
+        color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
+        font-size: 18px;
+        font-weight: 900;
+
+        &:not( :first-child )
+        {
+            margin-top: 8px;
+        }
+    }
 }
 
 SettingRow
