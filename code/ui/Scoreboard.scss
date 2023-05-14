@@ -265,6 +265,12 @@ Scoreboard
                 {
                     background-image: linear-gradient( to right, rgba(50, 50, 75, 0.5), rgba( 0, 0, 0, 0 ) );
                     border-bottom: 2px solid rgba(50, 50, 75, 0.5);
+
+                    &:hover
+                    {
+                        background-image: linear-gradient( to right, rgba(50, 50, 75, 0.8), rgba( 0, 0, 0, 0 ) );
+                        border-bottom: 2px solid rgba(50, 50, 85, 0.5);
+                    }
                 }
 
                 img
