@@ -215,13 +215,9 @@ public partial class Projectile : ModelEntity
 
 				if ( ent is Player player && player.Controller != null )
 				{
-					player.Controller.GetMechanic<WalkMechanic>()
-						.ClearGroundEntity();
+					forceDir = (targetPos - (Position + Vector3.Down * 32f)).Normal;
 
-					if ( Data.ClearZVelocity )
-						player.Controller.Velocity = player.Controller.Velocity.WithZ( 0f );
-
-					player.Controller.Velocity += forceDir * force;
+					player.Controller.ApplyForce( forceDir * force );
 				}
 			}
 		}

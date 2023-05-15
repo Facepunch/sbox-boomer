@@ -132,13 +132,6 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 
 	public virtual void Simulate( IClient cl )
 	{
-		if ( Impulse.Length > 0 )
-		{
-			GetMechanic<WalkMechanic>()?.ClearGroundEntity();
-			Velocity += Impulse;
-			Impulse = 0f;
-		}
-
 		SimulateEyes();
 		SimulateMechanics();
 
@@ -163,6 +156,16 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 			{
 				DebugOverlay.ScreenText( $"{mechanic}", ++lineOffset );
 			}
+		}
+
+		if ( Impulse.Length > 0 )
+		{
+			GetMechanic<WalkMechanic>()
+				?.ClearGroundEntity();
+
+			Velocity = Velocity.WithZ( 0 );
+			Velocity += Impulse;
+			Impulse = 0f;
 		}
 	}
 

@@ -35,6 +35,8 @@
         align-content: stretch;
         margin-left: 64px;
         margin-right: 64px;
+        transition: all 0.2s ease;
+        transform: translateX(-100%) scale(0.5);
     }
 
     .navbar
