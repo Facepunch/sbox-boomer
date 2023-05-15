@@ -4,7 +4,7 @@ namespace Facepunch.Boomer.UI;
 
 public partial class Chat
 {
-	[ConCmd.Client( "chat_add", CanBeCalledFromServer = true )]
+	[ConCmd.Client( "boomer_chat_add", CanBeCalledFromServer = true )]
 	public static void AddChatEntry( string name, string message, string playerId = "0", bool isInfo = false )
 	{
 		Current?.AddEntry( name, message, long.Parse( playerId ), isInfo );
@@ -21,13 +21,13 @@ public partial class Chat
 		AddChatEntry( target, name, message, playerId.ToString(), isInfo );
 	}
 
-	[ConCmd.Client( "chat_addinfo", CanBeCalledFromServer = true )]
+	[ConCmd.Client( "boomer_chat_addinfo", CanBeCalledFromServer = true )]
 	public static void AddInformation( string message )
 	{
 		Current?.AddEntry( null, message );
 	}
 
-	[ConCmd.Server( "chat_say" )]
+	[ConCmd.Server( "boomer_chat_say" )]
 	public static void Say( string message )
 	{
 		// todo - reject more stuff
