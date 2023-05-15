@@ -16,6 +16,7 @@ public abstract partial class BasePickup : AnimatedEntity
 	public TimeUntil UntilRespawn { get; set; }
 
 	public Action<BasePickup, Player> OnPickupAction;
+	public Action OnRespawnAction;
 
 	private bool disabled;
 	public bool Disabled
@@ -35,6 +36,7 @@ public abstract partial class BasePickup : AnimatedEntity
 	protected void OnAvailable( bool before, bool after )
 	{
 		EnableDrawing = after;
+		OnRespawnAction?.Invoke();
 	}
 
 	public void SetupModel()
