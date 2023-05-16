@@ -71,4 +71,10 @@ public partial class ProjectileData : GameResource
 
 	[Category( "Bounce" ), Range( 0, 1000 )]
 	public float BounceSoundMinVelocity { get; set; } = 300f;
+
+	[Category( "Drag" )]
+	public float DragScale { get; set; } = 0;
+
+	[Category( "Explosion" )]
+	public bool ExplodeOnImpact { get; set; }
 }

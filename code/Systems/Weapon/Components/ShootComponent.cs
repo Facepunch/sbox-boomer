@@ -182,8 +182,7 @@ public partial class ShootComponent : WeaponComponent
 
 		if ( Projectile != null )
 		{
-			if ( Game.IsServer )
-				_ = ProjectileData.Create( Projectile, player, Weapon );
+			_ = ProjectileData.Create( Projectile, player, Weapon );
 		}
 		else
 		{

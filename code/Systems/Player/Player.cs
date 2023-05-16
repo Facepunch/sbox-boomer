@@ -66,7 +66,7 @@ public partial class Player : AnimatedEntity
 
 	public Player()
 	{
-		ProjectileSimulator = new();
+		ProjectileSimulator = new( this );
 	}
 
 	/// <summary>

@@ -26,8 +26,6 @@ public partial class ProjectileData
 
 	public static Projectile Create( ProjectileData data, Player owner = null, Weapon weapon = null )
 	{
-		Game.AssertServer( "Can only create projectiles serverside." );
-
 		if ( data == null )
 		{
 			Log.Warning( $"Couldn't create projectile. (data: {data}, owner: {owner})" );
@@ -37,7 +35,7 @@ public partial class ProjectileData
 
 		var projectile = new Projectile
 		{
-			Owner = owner,
+			Simulator = owner.ProjectileSimulator,
 			Weapon = weapon
 		};
 
