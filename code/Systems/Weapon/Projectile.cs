@@ -287,11 +287,11 @@ public partial class Projectile : ModelEntity
 
 					var damageInfo = DamageInfo.FromExplosion( Position, forceDir * force, dmg )
 						.WithTag( "blast" )
-						.WithWeapon( this )
+						.WithWeapon( Weapon )
 						.WithAttacker( Owner );
 
 					ent.TakeDamage( damageInfo );
-					ent.ApplyAbsoluteImpulse( forceDir * force );
+					// ent.ApplyAbsoluteImpulse( forceDir * force );
 
 					if ( ent is Player player && player.Controller != null )
 					{
