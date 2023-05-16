@@ -22,7 +22,7 @@ public partial class PlayerDeathCamera : PlayerCamera
 		Camera.Position = Camera.Position.LerpTo( FocusPoint + GetViewOffset(), delta );
 		Camera.Rotation = Rotation.Lerp( Camera.Rotation, Rotation.LookAt( -FocusRotation.Forward, Vector3.Up ), delta );
 		Camera.FirstPersonViewer = null;
-		Camera.FieldOfView = Camera.FieldOfView.LerpTo( 40, Time.Delta * 3f );
+		Camera.FieldOfView = Camera.FieldOfView.LerpTo( 55, Time.Delta * 3f );
 		Camera.ZNear = 0.5f;
 
 		UpdatePostProcess();
