@@ -4,6 +4,8 @@ namespace Facepunch.Boomer;
 
 public partial class Player
 {
+	public ModelEntity RagdollEntity { get; set; }
+
 	[ClientRpc]
 	private void CreateRagdoll( Vector3 velocity, Vector3 forcePos, Vector3 force, int bone, bool bullet, bool blast )
 	{
@@ -66,5 +68,7 @@ public partial class Player
 		}
 
 		ent.DeleteAsync( 10.0f );
+
+		RagdollEntity = ent;
 	}
 }
