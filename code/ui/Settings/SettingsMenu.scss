@@ -1,4 +1,5 @@
-﻿SettingsMenu
+﻿
+SettingsMenu
 {
     align-items: flex-start;
     background-image: linear-gradient(180deg, rgba(25, 25, 35, 0.6) 0%, rgba(0, 0, 25, 0.8) 100%);
@@ -217,5 +218,35 @@ SettingRow
             background-color: white;
             border-radius: 0px;
         }
+    }
+}
+
+
+.button.popupbutton.dropdown
+{
+    cursor: pointer;
+    transition: all .1s ease-out;
+
+    > .dropdown_indicator
+    {
+        position: absolute;
+        right: 8px;
+    }
+
+    &.open
+    {
+        border-bottom-left-radius: 1px;
+        border-bottom-right-radius: 1px;
+        transition: border-radius 0.2s ease-out;
+    }
+}
+
+select
+{
+    min-height: 40px;
+
+    > option
+    {
+        display: none;
     }
 }
