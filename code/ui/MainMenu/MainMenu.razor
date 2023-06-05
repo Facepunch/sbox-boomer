@@ -1,0 +1,40 @@
+@using Sandbox;
+@using Sandbox.UI;
+
+@inherits Sandbox.UI.NavHostPanel
+@implements Sandbox.Menu.IGameMenuPanel
+@attribute [StyleSheet]
+@namespace Boomer.UI.MainMenu
+
+<root>
+    <div class="background" />
+    <div class="navigator-canvas" slot="navigator-canvas" />
+
+    <div class="nav-bar">
+        <div class="content">
+            <a href="/">
+                HOME
+            </a>
+
+            <a href="/play" class="play">
+                PLAY
+            </a>
+
+            <a href="/settings">
+                SETTINGS
+            </a>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public MainMenu()
+    {
+        DefaultUrl = "/";
+        AddDestination( "/", typeof( HomePage ) );
+        AddDestination( "/settings", typeof( SettingsPage ) );
+        AddDestination( "/servers", typeof( ServerListPage ) );
+        AddDestination( "/play", typeof( PlayPage ) );
+    }
+}
