@@ -1,9 +1,5 @@
-@using System
-@using Sandbox;
-@using Sandbox.MenuSystem;
-@using Sandbox.UI;
-@using Sandbox.UI.GameMenu;
 
+@implements INavigatorPage
 @namespace Boomer.UI.MainMenu
 
 <root>
@@ -11,4 +7,6 @@
 
 @code
 {
+    public virtual void OnNavigationOpen() { }
+    public virtual void OnNavigationClose() { }
 }

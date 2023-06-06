@@ -1,4 +1,87 @@
 PlayPage
 {
-    //
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    flex-direction: column;
+
+    .flex-grow 
+    {
+        flex-grow: 1;
+    }
+
+    > .warning
+    {
+        z-index: 999;
+        width: 400px;
+        flex-direction: column;
+        height: 128px;
+        align-items: center;
+        gap: 16px;
+
+        .message
+        {
+            font-family: Quantico;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        a
+        {
+            width: 256px;
+        }
+    }
+
+    gap: 32px;
+
+    > .queue
+    {
+        width: 256px;
+        height: 128px;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
+        background-color: rgba( green, 0.1 );
+        flex-direction: column;
+
+        label
+        {
+            font-family: Quantico;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        > .time
+        {
+            font-size: 40px;
+            font-family: Quantico;
+            font-weight: 900;
+        }
+
+        > .bar
+        {
+            background-color: lighten( green, 25% );
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            animation-name: flash;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+        }
+    }
+}
+
+@keyframes flash
+{
+    0%
+    {
+        transform: scaleX(0);
+    }
+
+    100%
+    {
+        transform: scaleX(1);
+    }
 }

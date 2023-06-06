@@ -1,11 +1,138 @@
+@using System.Threading.Tasks;
+
 @inherits MainMenuPage
 @namespace Boomer.UI.MainMenu
 @attribute [StyleSheet]
 
 <root>
-    <a>we playing game</a>
+    <div class="flex-grow" />
+
+    @if ( FoundGameServer == null )
+    {
+        <div class="queue">
+            <label>Searching for a game...</label>
+            <label class="time">@TimeString</label>
+            <div class="bar" />
+        </div>
+
+        <div class="flex-grow" />
+
+        @if ( TimeSinceQueued > 10f )
+        {
+
+            <div class="warning">
+                <label class="message">You've been searching for a while - do you want to make a server instead?</label>
+                <a href="/servers">create server</a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="queue">
+            <label>Match found! Joining...</label>
+            <label class="time">@TimeString</label>
+        </div>
+
+        <div class="flex-grow" />
+    }
+
 </root>
 
 @code
 {
+    record GameServer( string Name, ulong SteamId, int PlayerCount );
+
+    /// <summary>
+    /// Time since we started queuing up.
+    /// </summary>
+    TimeSince TimeSinceQueued { get; set; } = 0;
+
+    /// <summary>
+    /// Time since we last queried the server list to find a server that we can join.
+    /// </summary>
+    TimeSince TimeSinceQueried { get; set; }
+
+    /// <summary>
+    /// The game server we found
+    /// </summary>
+    GameServer? FoundGameServer { get; set; }
+
+    /// <summary>
+    /// Countdown to join server
+    /// </summary>
+    TimeUntil TimeUntilJoiningServer { get; set; } = 0;
+
+
+    string TimeString
+    {
+        get
+        {
+            if ( FoundGameServer is not null )
+            {
+                return TimeSpan.FromSeconds( TimeUntilJoiningServer ).ToString( @"ss\:ff" );
+            }
+
+            TimeSpan t = TimeSpan.FromSeconds( TimeSinceQueued );
+            return t.ToString( @"mm\:ss" );
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( TimeString );
+    }
+
+    public override void OnNavigationOpen()
+    {
+        TimeSinceQueued = 0;
+    }
+
+
+    Task task;
+
+    public override void Tick()
+    {
+        if ( !IsVisible ) return;
+        if ( Game.InGame ) return;
+
+        if ( FoundGameServer is not null )
+        {
+            if ( TimeUntilJoiningServer )
+            {
+                Game.Menu.ConnectToServer( FoundGameServer.SteamId );
+                FoundGameServer = null;
+                TimeSinceQueued = 0;
+            }
+
+            return;
+        }
+
+        if ( TimeSinceQueried > 5f && ( task == null || task.IsCompleted ) )
+        {
+            task = Query();
+        }
+    }
+
+    async Task Query()
+    {
+        TimeSinceQueried = 0;
+
+        var result = await Boomer.Utility.MatchmakerUtility.FindServer();
+
+        TimeSinceQueried = 0;
+
+        if (result == null)
+        {
+            Log.Info( "No server found. Will continue to try again." );
+        }
+        else
+        {
+            var sv = result.Value;
+
+            Log.Info( $"Found a server! {sv.Name}");
+
+            FoundGameServer = new( sv.Name, sv.SteamId, sv.Players );
+            TimeUntilJoiningServer = 3;
+        }
+    }
 }
