@@ -1,7 +1,7 @@
 @using System.Threading.Tasks;
 
 @inherits MainMenuPage
-@namespace Boomer.UI.MainMenu
+@namespace Facepunch.Boomer.MainMenu
 @attribute [StyleSheet]
 
 <root>
@@ -117,7 +117,7 @@
     {
         TimeSinceQueried = 0;
 
-        var result = await Boomer.Utility.MatchmakerUtility.FindServer();
+        var result = await Facepunch.Boomer.Utility.MatchmakerUtility.FindServer();
 
         TimeSinceQueried = 0;
 

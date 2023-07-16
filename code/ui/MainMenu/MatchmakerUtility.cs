@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Boomer.Utility;
+namespace Facepunch.Boomer.Utility;
 
 public partial class MatchmakerUtility
 {
