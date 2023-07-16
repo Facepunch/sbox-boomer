@@ -31,6 +31,9 @@ public partial class GameManager : Sandbox.GameManager
 
 		Chat.AddChatEntry( To.Everyone, client.Name, "joined the game", client.SteamId, true );
 
+		// Track time (stats)
+		client.Components.Create<TimeComponent>();
+
 		GamemodeSystem.Current?.OnClientJoined( client );
 	}
 

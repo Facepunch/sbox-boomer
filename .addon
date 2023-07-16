@@ -303,6 +303,18 @@
         }
       ]
     },
-    "TickRate": 50
+    "TickRate": 50,
+    "LaunchConfigs": [
+      {
+        "Name": "dockyard",
+        "GameIdent": "facepunch.boomer#local",
+        "MapName": "facepunch.bm_dockyard",
+        "MaxPlayers": 10,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ]
   }
 }

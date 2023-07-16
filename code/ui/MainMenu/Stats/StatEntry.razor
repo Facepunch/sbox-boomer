@@ -17,7 +17,7 @@
         get => stat.Unit switch
         {
             "integer" => $"{stat.Value}",
-            "seconds" => TimeSpan.FromSeconds( stat.Value ).ToString( @"hh\:mm\:ss" ),
+            "seconds" => $"{TimeSpan.FromSeconds( stat.Value ).ToString( @"hh\:mm\:ss" )}",
             _ => $"{stat.Value}"
         };
     }
