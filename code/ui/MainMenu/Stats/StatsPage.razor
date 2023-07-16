@@ -1,0 +1,21 @@
+@using System.Threading.Tasks;
+
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <div class="flex-grow" />
+    <div class="col">
+        <StatContainer Gamemode="tdm" />
+        <StatContainer Gamemode="dm" />
+    </div>
+</root>
+
+@code
+{
+ 
+    public override void OnNavigationOpen()
+    {
+    }
+}

@@ -1,0 +1,23 @@
+StatEntry
+{
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+
+    .title
+    {
+        font-size: 20px;
+    }
+
+    .description
+    {
+        opacity: 0.5;
+        font-size: 12px;
+    }
+
+    .value
+    {
+        font-size: 16px;
+        flex-grow: 1;
+    }
+}

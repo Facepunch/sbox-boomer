@@ -67,7 +67,7 @@ public static partial class Stats
 		Set( identifier, amount, mode );
 	}
 
-	internal static Sandbox.Services.Stats.GlobalStat Get( string identifier, string mode = null )
+	public static Sandbox.Services.Stats.GlobalStat Get( string identifier, string mode = null )
 	{
 		return Sandbox.Services.Stats.Global.Get( GetIdent( identifier, mode ) );
 	}
