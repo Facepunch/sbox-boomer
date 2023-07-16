@@ -26,6 +26,8 @@ public partial class Deathmatch : Gamemode
 		_ = GameLoop();
 	}
 
+	public override string GamemodeIdent => "dm";
+
 	TimeSpan TimeRemaining => TimeSpan.FromSeconds( TimeUntilNextState );
 	public override string GetTimeLeftLabel()
 	{

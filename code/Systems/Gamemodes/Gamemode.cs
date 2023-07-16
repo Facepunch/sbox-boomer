@@ -72,6 +72,11 @@ public abstract partial class Gamemode : Entity
 	/// </summary>
 	public virtual int MaximumScore => 4;
 
+	/// <summary>
+	/// A gamemode identifier, used for stats.
+	/// </summary>
+	public virtual string GamemodeIdent => null;
+
 	protected Player LastKilledPlayer;
 
 	public virtual string GetTimeLeftLabel()

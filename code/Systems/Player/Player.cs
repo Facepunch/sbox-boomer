@@ -353,6 +353,10 @@ public partial class Player : AnimatedEntity
 				Sound.FromScreen( To.Single( attacker ), "killsound" );
 
 				RpcPlayerKilled( To.Everyone, attacker.Client.Name, Client.Name, ( LastDamage.Weapon as Weapon )?.Name ?? "" );
+
+				// Stats
+				Stats.RpcIncrement( To.Single( attacker ), "kills" );
+				Stats.RpcIncrement( To.Single( this ), "deaths" );
 			}
 
 			RpcShowDeathCam( To.Single( this ), attacker, (LastDamage.Weapon as Weapon)?.AmmoIcon ?? null );

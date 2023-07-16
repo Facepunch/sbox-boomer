@@ -9,6 +9,7 @@ namespace Facepunch.Boomer.Gamemodes;
 
 public partial class TeamDeathmatch : Gamemode
 {
+
 	/// <summary>
 	/// The current game state.
 	/// </summary>
@@ -28,6 +29,8 @@ public partial class TeamDeathmatch : Gamemode
 	/// How long the game lasts, after that we'll decide the winner.
 	/// </summary>
 	protected float GameDuration => 300f;
+
+	public override string GamemodeIdent => "tdm";
 
 	/// <summary>
 	/// Team setup for TDM. Default 2 teams.
