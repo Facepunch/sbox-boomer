@@ -1,0 +1,44 @@
+HomePage
+{
+    > .header
+    {
+        z-index: 10;
+        padding: 100px;
+        flex-direction: row;
+
+        label
+        {
+            transition: all 0.2s ease;
+            font-family: Quantico;
+            color: linear-gradient(180deg, #FFFFFF 0%, rgba(153, 153, 151, 1) 100%);
+            font-size: 24px;
+            font-weight: bold;
+
+            &.title
+            {
+                font-size: 60px;
+            }
+        }
+    }
+
+    > .canvas
+    {
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+
+        MainMenuScene
+        {
+            z-index: -1;
+            flex-grow: 1;
+        }
+    }
+}
