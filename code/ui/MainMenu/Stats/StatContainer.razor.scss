@@ -1,16 +1,31 @@
 StatContainer
 {
     padding: 8px;
+    font-family: Quantico;
     flex-direction: column;
+    background-color: rgba( 50, 50, 50, 0.5 );
+    border: 1px solid rgba( 50, 50, 50, 1 );
 
     > .title
     {
-        font-weight: bold;
+        height: 24px;
+        align-items: center;
+        font-weight: 900;
         font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    br
+    {
+        height: 2px;
+        background-color: rgba( 50, 50, 50, 1 );
     }
 
     .entries
     {
+        padding: 8px;
+        gap: 8px;
+
         flex-direction: column;
     }
 }
