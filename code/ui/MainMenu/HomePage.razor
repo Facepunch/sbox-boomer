@@ -6,6 +6,15 @@
      <div class="canvas">
         <MainMenuScene @ref="Scene" />
     </div>
+
+    <div class="content">
+         @{
+            var stat = Sandbox.Services.Stats.Global.Get( "kills-tdm" );
+
+            <h1>TDM Kills: </h1>
+            <h1>@stat.Value</h1>
+        }
+    </div>
 </root>
 
 @code
