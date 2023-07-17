@@ -125,4 +125,64 @@ MainMenu
         background-image: url( ui/mainmenu/backgrounds/guns_checkerboard_big_light.png );
         mask-image: radial-gradient( white, black, black, black );
     }
+
+    .controls
+    {
+        width: 100%;
+        flex-direction: column;
+        gap: 50px;
+        align-items: flex-start;
+        text-transform: uppercase;
+
+        a, .button
+        {
+            font-family: Quantico;
+
+            &:hover
+            {
+                color: rgba( white, 1 );
+                font-weight: 900;
+                sound-in: ui.button.over;
+            }
+
+            &:active
+            {
+                sound-in: ui.button.press;
+            }
+        }
+
+        .span
+        {
+            gap: 128px;
+        }
+    }
+}
+
+
+FormGroup
+{
+    flex-direction: column;
+    min-width: 300px;
+    gap: 16px;
+}
+
+i
+{
+    font-family: Material Icons;
+    text-transform: lowercase;
+
+    &.with-click
+    {
+        &:hover
+        {
+            color: white;
+            transform: scale( 1.1 );
+            sound-in: ui.button.over;
+        }
+
+        &:active
+        {
+            sound-in: ui.button.press;
+        }
+    }
 }

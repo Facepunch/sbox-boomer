@@ -1,0 +1,83 @@
+@using Sandbox;
+@using System;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using Sandbox.Menu;
+@using Sandbox.UI;
+
+<root>
+
+    @if ( ChoosingMap )
+    {
+        <MapSelect OnPackageSelected=@OnMapSelected />
+
+        return;
+    }
+
+    <div class="controls">
+        <div class="span">
+            @if ( MaxPlayersSupported > 1 )
+            {
+                <FormGroup class="form-group">
+                    <Label>Maximum Players</Label>
+                    <Control>
+                        <SliderControl ShowRange=@true Min=@(1f) Max=@MaxPlayersSupported Value:bind=@Game.Menu.Lobby.MaxMembers />
+                    </Control>
+                </FormGroup>
+            }
+
+            <FormGroup class="form-group">
+                <Label>Map</Label>
+                <Control>
+                    <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage />
+                </Control>
+            </FormGroup>
+        </div>
+
+        <div class="spacer" />
+
+        <a class="button" onclick=@Play>Start</a>
+        <a class="button" href="/">Return</a>
+    </div>
+</root>
+
+@code
+{
+    int MaxPlayersSupported { get; set; } = 1;
+    int MaxPlayers { get; set; } = 1;
+    Package MapPackage { get; set; }
+
+    bool ChoosingMap;
+    void OnMapClicked()
+    {
+        ChoosingMap = true;
+        StateHasChanged();
+    }
+
+    void OnMapSelected( Package map )
+    {
+        ChoosingMap = false;
+        MapPackage = map;
+        StateHasChanged();
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        MaxPlayersSupported = Game.Menu.Package.GetMeta<int>( "MaxPlayers", 1 );
+        MaxPlayers = MaxPlayersSupported;
+
+        MapPackage = await Package.FetchAsync( "facepunch.square", false );
+        StateHasChanged();
+    }
+
+    async Task Play()
+    {
+        await Game.Menu.StartServerAsync( MaxPlayers, $"My game", MapPackage.FullIdent );
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( MaxPlayers, MapPackage );
+    }
+}
