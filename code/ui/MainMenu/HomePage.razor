@@ -6,15 +6,6 @@
      <div class="canvas">
         <MainMenuScene @ref="Scene" />
     </div>
-
-    <div class="content">
-         @{
-            var stat = Facepunch.Boomer.Stats.Get( "kills", "tdm" );
-
-            <h1>TDM Kills: </h1>
-            <h1>@stat.Value</h1>
-        }
-    </div>
 </root>
 
 @code
@@ -26,7 +17,7 @@
     protected void SetupCamera()
     {
         Scene.TargetPosition = Vector3.Up * 62.0f + Vector3.Forward * 280f;
-        Scene.TargetRotation = Rotation.From(6f, 180f, 0);
+        Scene.TargetRotation = Rotation.From( 6f, 180f, 0 );
 
         Scene.Camera.Position = Scene.TargetPosition;
         Scene.Camera.Rotation = Scene.TargetRotation;

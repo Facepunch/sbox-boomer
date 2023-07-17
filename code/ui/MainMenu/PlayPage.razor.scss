@@ -5,7 +5,7 @@ PlayPage
     align-content: stretch;
     flex-direction: column;
 
-    .flex-grow 
+    .flex-grow
     {
         flex-grow: 1;
     }
@@ -15,7 +15,7 @@ PlayPage
         z-index: 999;
         width: 400px;
         flex-direction: column;
-        height: 128px;
+        align-items: flex-end;
         align-items: center;
         gap: 16px;
 
