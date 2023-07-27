@@ -1,9 +1,96 @@
+$blue-light: #97C9D2;
+$red: #E81C00;
+$grey-medium: #262424;
+$grey-light: #B6B6B6;
+$grey-dark: #121212;
+
+$text-shadow-1: 0 1px 1px rgba(#000,0.3);
+
+$padding: 80px;
+
 MainMenu
 {
     width: 100%;
     height: 100%;
-    background-color: rgba( 10, 15, 20, 1 );
+    flex-direction: column;
+    background-color: $grey-dark;
     transition: all 0.2s ease;
+
+    a {
+        cursor: pointer;
+    }
+
+    .btn {
+        border: 2px solid;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        margin-right: 8px;
+        min-height: 44px;
+        backdrop-filter: blur(10px);
+        
+        label.text {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        label.icon {
+            font-family: "Material Icons";
+            font-size: 18px;
+        }
+
+        &.has-icon {
+            label.icon {
+                margin-right: 8px;
+            }
+        }
+
+        &.is-icon {
+            width: 44px;
+            height: 44px;
+
+            label.icon {
+                font-size: 24px;
+                text-align: center;
+            }
+        }
+
+        &.is-primary {
+            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.1));
+            border-color: rgba($blue-light,0.1);
+            border-bottom: 2px solid $blue-light;
+            box-shadow: 0 6px 20px rgba(#000,0.4);
+            
+            .text, .icon {
+                color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
+            }
+        }
+
+        &.is-secondary {
+            background: linear-gradient(rgba($red,0), rgba($red,0.1));
+            border-color: rgba($red,0.1);
+            border-bottom: 2px solid $red;
+            box-shadow: 0 6px 20px rgba(#000,0.4);   
+
+            .text, .icon {
+                color: linear-gradient(rgba($red,0.8),rgba($red,1));
+            }
+        }
+
+        &.is-tertiary {
+            background: linear-gradient(rgba($grey-light,0), rgba($grey-light,0.03));
+            border-color: rgba($grey-light,0.05);
+            box-shadow: 0 6px 20px rgba(#000,0.4);   
+
+            .text, .icon {
+                color: linear-gradient(rgba($grey-light,0.8),rgba($grey-light,1));
+            }
+        }
+    }
+
+    .icon {
+        font-family: "Material Icons";
+    }
 
     &:intro
     {
@@ -15,182 +102,647 @@ MainMenu
         }
     }
 
-    a
-    {
-        pointer-events: all;
-        width: 180px;
-        height: 64px;
+    .header-container {
+        display: flex;
+        flex-direction: column;
         font-family: Quantico;
-        color: white;
-        background-image: linear-gradient( to right, darken( gray, 20% ), gray );
-        font-size: 20px;
-        font-weight: bold;
-        border: 2px solid rgba( lighten( gray, 20% ), 0.8 );
-        box-shadow: 0px 0px 15px rgba( black, 0.2 );
-        text-shadow: 0px 0px 1px rgba( black, 0.8 );
-        justify-content: center;
-        align-items: center;
-        text-transform: uppercase;
+        width: 100%;
 
-        &:hover
-        {
-            cursor: pointer;
-            border: 2px solid rgba( lighten( gray, 60% ), 0.8 );
+        .header-primary {
+            align-items: center;
+            background:linear-gradient(rgba($blue-light,0), rgba($blue-light,0.05));
+            border-bottom: 2px solid rgba($blue-light,0.1);
+            width: 100%;
+            height: 74px;
+            padding: 0 $padding;
+            z-index: 2;
 
-            &.play
-            {
-                border: 2px solid rgba( lighten( green, 60% ), 0.8 );
-                background-image: linear-gradient( to right, lighten( green, 20% ), green );
+            nav {
+                flex-grow: 1;
+
+                &.right {
+                    justify-content: flex-end;
+                }
+            }
+
+            .logo {
+                width: 442px;
+                height: 138px;
+                background-size: contain;
+                background-position: center;
+                background-image: url( ui/mainmenu/boomer-logo.png );
+                background-repeat: no-repeat;
+                margin-top: 68px;
+                //mask-image: linear-gradient( to right, white, grey, black );
+            }
+
+            a {
+                align-items: center;
+                border-left:2px solid transparent;
+                border-right: 2px solid transparent;
+                color: linear-gradient(rgba(#797979,0.5),rgba(#B6B6B6,1));
+                cursor: pointer;
+                font-size: 24px;
+                font-weight: 700;
+                height: 74px;
+                padding: 0 16px;
+                text-transform: uppercase;
+                text-shadow: $text-shadow-1;
+
+                .diamond {
+                    width: 12px;
+                    height: 12px;
+                    background-size: contain;
+                    background-position: center;
+                    background-image: url(  ui/mainmenu/icons/diamond.svg?color=$blue-light );
+                    background-repeat: no-repeat;
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    opacity: 0;
+                }
+
+                &:hover {
+                    color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
+                }
+
+                &.is-active {
+                    background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.1));
+                    border-color: rgba($blue-light,0.1);
+                    border-bottom: 2px solid $blue-light;
+                    box-shadow: 0 6px 20px rgba(#000,0.4);
+                    color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
+                    height: 78px;
+
+                    .diamond {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    
+        .header-secondary {
+            align-items: center;
+            background:linear-gradient(rgba($red,0), rgba($red,0.05));
+            border-bottom: 2px solid rgba($red,0.1);
+            height: 64px;
+            padding: 0 $padding;
+            margin-top: 2px;
+            z-index: 1;
+
+            
+            a {
+                align-items: center;
+                border-left:2px solid transparent;
+                border-right: 2px solid transparent;
+                color: linear-gradient(rgba(#797979,0.5),rgba(#B6B6B6,1));
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: 700;
+                height: 64px;
+                padding: 0 16px;
+                text-transform: uppercase;
+                text-shadow: $text-shadow-1;
+
+                .diamond {
+                    width: 12px;
+                    height: 12px;
+                    background-size: contain;
+                    background-position: center;
+                    background-image: url(  ui/mainmenu/icons/diamond.svg?color=$red );
+                    background-repeat: no-repeat;
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    opacity: 0;
+                }
+
+                &:hover {
+                    color: linear-gradient(rgba($red,0.8),rgba($red,1));
+                }
+
+                &.is-active {
+                    background: linear-gradient(rgba($red,0), rgba($red,0.1));
+                    border-color: rgba($red,0.1);
+                    border-bottom: 2px solid $red;
+                    box-shadow: 0 6px 20px rgba(#000,0.4);
+                    color: linear-gradient(rgba($red,0.8),rgba($red,1));
+                    height: 68px;
+
+                    .diamond {
+                        opacity: 1;
+                    }
+                }
             }
         }
 
-        &.play
-        {
-            width: 256px;
-            border: 2px solid rgba( lighten( green, 20% ), 0.8 );
-            font-size: 32px;
-            background-image: linear-gradient( to right, darken( green, 20% ), green );
+        .header-tertiary {
+            align-items: center;
+            background:linear-gradient(to right, rgba($grey-medium,0.5), rgba($grey-medium,0));
+            height: 80px;
+            padding: 0 $padding;
+
+            .title {
+                color: linear-gradient($grey-light, white);
+                font-size: 32px;
+                font-weight: bold;
+                text-transform: uppercase;
+                text-shadow: $text-shadow-1;
+            }
+
+            .diamond {
+                width: 10px;
+                height: 10px;
+                background-size: contain;
+                background-position: center;
+                background-image: url(  ui/mainmenu/icons/diamond.svg?color=$red);
+                background-repeat: no-repeat;
+                margin: 0 16px;
+            }
+
+            .subtitle {
+                color: $grey-light;
+                font-size: 16px;
+            }
         }
+
+        
     }
 
-    .navigator-canvas
-    {
-        pointer-events: none;
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
+    .body {
+        flex-grow: 1;
+        padding: 64px;
 
+        // Party
+        .party-players {
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
 
-        .navigator-body
-        {
-            padding: 128px 32px;
-            opacity: 1;
+            .player {
+                border: 2px solid $grey-medium;
+                font-family: "Quantico";
+                flex-direction: column;
+                height: 100%;
+                flex-grow: 1;
+                max-width: 410px;
+                min-width: 200px;
+
+                .player-header {
+                    height: 44px;
+                    border-bottom: 2px solid $grey-medium;
+                    width: 100%;
+
+                    .player-level {
+                        align-items: center;
+                        justify-content: center;
+                        background-color: $grey-medium;
+                        width: 44px;
+                        height: 44px;
+
+                        label {
+                            font-size: 20px;
+                            font-weight: bold;
+                            color: $grey-light;
+                        }
+                    }
+
+                    .player-name {
+                        align-items: center;
+                        padding-left: 10px;
+                        flex-grow: 1;
+
+                        label {
+                            font-size: 20px;
+                            color: $blue-light;
+                        }
+                    }
+
+                    .player-voice {
+                        align-items: center;
+                        justify-content: center;
+                        width: 44px;
+                        height: 44px;
+
+                        .icon {
+                            color: $grey-light;
+                            font-size: 20px;
+                        }
+                    }
+                }
+                .player-body {
+                    justify-content: center;
+                    background-size: cover;
+                    background-position: center;
+                    background-image: url(  ui/mainmenu/player/placeholder_image.png);
+                    mask-image: linear-gradient( to bottom, white, white, black );
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .player-footer {
+                    position: absolute;
+                    bottom: 16px;
+                    left: 0;
+                    right: 0;
+                    height: 44px;
+                    padding: 0 16px;
+                    justify-content: space-between;
+
+                }
+
+            }
+        }
+
+        .navigator-canvas {
             pointer-events: none;
             position: absolute;
             left: 0;
             top: 0;
-            bottom: 0;
+           bottom: 0;
             right: 0;
-            z-index: 9999;
-            transition: transform 0.2s ease-out, opacity 0.15s ease;
 
-            &.hidden
-            {
-                transform: scale(1.1) translateY(-5%);
-                opacity: 0;
+            .navigation-body {
+                
+                padding: 128px 32px;
+                opacity: 1;
+                pointer-events: none;
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                z-index: 9999;
+                transition: transform 0.2s ease-out, opacity 0.15s ease;
             }
         }
     }
 
-    > .nav-bar
-    {
-        pointer-events: none;
-        z-index: 10;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        height: 256px;
-        justify-content: center;
-        align-items: flex-end;
-        align-content: flex-end;
-        background-image: linear-gradient( to top, rgba( 30, 30, 30, 0 ), rgba( 20, 20, 20 ) );
+    .footer {
+        background: linear-gradient(to top, #131212, #0C0B0B);
+        align-items: center;
+        flex-direction: row;
+        border-top: 2px solid $grey-medium;
+        padding: 0 $padding;
+        justify-content: space-between;
+        height: 100px;
+        
+        .chat {
+            .chat-input {
+                
+                align-items: center;
+                background: linear-gradient(to right, rgba($grey-medium,0.5), rgba($grey-medium,0));
+                border: 2px solid $grey-medium;
+                
+                min-width: 360px;
+                height: 48px;
+                padding: 0 16px;
 
-        .content
-        {
-            z-index: 999;
-            pointer-events: all;
-            padding-bottom: 32px;
-            align-items: flex-end;
-            justify-content: space-evenly;
-            gap: 64px;
-        }
-    }
-
-    > .background
-    {
-        pointer-events: none;
-        z-index: 1;
-        position: absolute;
-        transform-origin: center center;
-        width: 100%;
-        height: 100%;
-        top: 55%;
-        flex-direction: column;
-        opacity: 1;
-        background-image-tint: rgba( 60, 100, 60, 1 );
-        background-image: url( ui/mainmenu/backgrounds/guns_checkerboard_big_light.png );
-        mask-image: radial-gradient( white, black, black, black );
-    }
-
-    .controls
-    {
-        width: 100%;
-        flex-direction: column;
-        gap: 50px;
-        align-items: flex-start;
-        text-transform: uppercase;
-
-        a, .button
-        {
-            font-family: Quantico;
-
-            &:hover
-            {
-                color: rgba( white, 1 );
-                font-weight: 900;
-                sound-in: ui.button.over;
-            }
-
-            &:active
-            {
-                sound-in: ui.button.press;
+                label {
+                    color: #B6B6B6;
+                    font-family: "Quantico";
+                }
             }
         }
 
-        .span
-        {
-            gap: 128px;
+        .footer-modal {
+            flex-direction: column;
+            margin-top: -60px;
+
+            .modal-close {
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(to right, rgba($red,0.02), rgba($red,0));
+                box-shadow: 0 5px 20px rgba(#000,0.5);
+                backdrop-filter: blur(25px);
+                border: 2px solid rgba($red,0.2);
+                width: 44px;
+                height: 44px;
+                position: absolute;
+                top: -22px;
+                right: -22px;
+                z-index: 2;
+
+                .icon {
+                    color: $red;
+                    font-family: "Material Icons";
+                    font-size: 24px;
+                }
+
+                &:hover {
+                    background: green;
+                }
+            }
+
+            .modal-box {
+                align-items: center;
+                background:linear-gradient(to top, rgba($red,0.03), rgba($red,0));
+                backdrop-filter: blur(25px);
+                border: 2px solid;
+                border-color: rgba($red,0.2);
+                box-shadow: 0 5px 30px rgba($red,0.02);
+                justify-content: center;
+                min-width: 300px;
+                min-height: 64px;
+                text-transform: uppercase;
+
+                .modal-text {
+                    font-family: "Quantico-Bold";
+                    font-size: 18px;
+                    color: $red;
+                }
+            }
+
+            .modal-bar {
+                align-items: center;
+                justify-content: center;
+                background-color: $red;
+                width: 100%;
+                height: 4px;
+                margin-bottom: 10px;
+
+                .diamond {
+                    align-items: center;
+                    justify-content: center;
+                    background-size: contain;
+                    background-position: center;
+                    background-image: url(  ui/mainmenu/icons/diamond.svg?color=$red);
+                    width: 28px;
+                    height: 28px;
+
+                    .crown {
+                        background-size: resize;
+                        background-position: center;
+                        background-image: url( ui/mainmenu/icons/crown_dark.svg );
+                        background-repeat: no-repeat;
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+
+            .modal-footer {
+                align-items: center;
+                color:  linear-gradient(to top, rgba($grey-light,1),rgba($grey-light,0.5));
+                font-family: Quantico-Bold;
+                font-size: 12px;
+                letter-spacing: 1px;
+                justify-content: center;
+                text-transform: uppercase;
+                margin-top: 8px;
+                text-shadow: 0 2px 5px rgba(#000,0.2);
+            }
+        }
+
+        .party {
+            height: 48px;
+            justify-content: flex-end;
+
+            a {
+                background: linear-gradient(to bottom, rgba($grey-medium,0.5), rgba($grey-medium,0));
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                border: 2px solid $grey-medium;
+                margin-left: 4px; 
+
+                .icon {
+                    color: #B6B6B6;
+                    font-family: "Material Icons";
+                    font-size: 24px;
+                    text-shadow: 0 1px 0 rgba(#000,0.2);
+                }
+
+                &.add {
+                    transform: scale(1);
+                    transition: all 0.2s ease;
+                    background: linear-gradient(to top, rgba($grey-medium,0.5), rgba($grey-medium,0));
+                    &:hover {
+                        transform: scale(1.1);
+                        z-index: 1;
+                    }
+                }
+
+                &.user {
+                    transform: scale(1);
+                    transition: all 0.2s ease;
+
+                    .avatar {
+                        background-color: $grey-medium;
+                        width: 38px;
+                        height: 38px;
+                    }
+
+                    &:hover {
+                        background: linear-gradient(to bottom, rgba($grey-medium,0.7), rgba($grey-medium,0));
+                        transform: scale(1.1);
+                        z-index: 1;
+                    }
+                }
+
+                &.button {
+                    background: linear-gradient(to right, rgba($blue-light,0.1), rgba($blue-light,0));
+                    border: 2px solid rgba($blue-light,0.2);
+                    color: $blue-light;
+                    font-size: 18px;
+                    font-weight: bold;
+                    padding: 0 20px;
+                    width: auto;
+                    text-shadow: 0 1px 0 rgba(#000,0.2);
+
+                    .icon {
+                        margin-right: 8px;
+                        color: $blue-light;
+                    }
+                }
+            }
         }
     }
+
+
+   
+
 }
 
+//     a
+//     {
+//         pointer-events: all;
+//         width: 180px;
+//         height: 64px;
+//         font-family: Quantico;
+//         color: white;
+//         background-image: linear-gradient( to right, darken( gray, 20% ), gray );
+//         font-size: 20px;
+//         font-weight: bold;
+//         border: 2px solid rgba( lighten( gray, 20% ), 0.8 );
+//         box-shadow: 0px 0px 15px rgba( black, 0.2 );
+//         text-shadow: 0px 0px 1px rgba( black, 0.8 );
+//         justify-content: center;
+//         align-items: center;
+//         text-transform: uppercase;
 
-FormGroup
-{
-    flex-direction: column;
-    min-width: 300px;
-    gap: 16px;
-}
+//         &:hover
+//         {
+//             cursor: pointer;
+//             border: 2px solid rgba( lighten( gray, 60% ), 0.8 );
 
-i
-{
-    font-family: Material Icons;
-    text-transform: lowercase;
+//             &.play
+//             {
+//                 border: 2px solid rgba( lighten( green, 60% ), 0.8 );
+//                 background-image: linear-gradient( to right, lighten( green, 20% ), green );
+//             }
+//         }
 
-    &.with-click
-    {
-        &:hover
-        {
-            color: white;
-            transform: scale( 1.1 );
-            sound-in: ui.button.over;
-        }
+//         &.play
+//         {
+//             width: 256px;
+//             border: 2px solid rgba( lighten( green, 20% ), 0.8 );
+//             font-size: 32px;
+//             background-image: linear-gradient( to right, darken( green, 20% ), green );
+//         }
+//     }
 
-        &:active
-        {
-            sound-in: ui.button.press;
-        }
-    }
-}
+//     .navigator-canvas
+//     {
+//         pointer-events: none;
+//         position: absolute;
+//         left: 0;
+//         top: 0;
+//         bottom: 0;
+//         right: 0;
 
-SetupGame
-{
-    PackageCard
-    {
-        pointer-events: all;
-    }
-}
+
+//         .navigator-body
+//         {
+//             padding: 128px 32px;
+//             opacity: 1;
+//             pointer-events: none;
+//             position: absolute;
+//             left: 0;
+//             top: 0;
+//             bottom: 0;
+//             right: 0;
+//             z-index: 9999;
+//             transition: transform 0.2s ease-out, opacity 0.15s ease;
+
+//             &.hidden
+//             {
+//                 transform: scale(1.1) translateY(-5%);
+//                 opacity: 0;
+//             }
+//         }
+//     }
+
+//     > .nav-bar
+//     {
+//         pointer-events: none;
+//         z-index: 10;
+//         position: absolute;
+//         left: 0;
+//         bottom: 0;
+//         right: 0;
+//         display: flex;
+//         height: 256px;
+//         justify-content: center;
+//         align-items: flex-end;
+//         align-content: flex-end;
+//         background-image: linear-gradient( to top, rgba( 30, 30, 30, 0 ), rgba( 20, 20, 20 ) );
+
+//         .content
+//         {
+//             z-index: 999;
+//             pointer-events: all;
+//             padding-bottom: 32px;
+//             align-items: flex-end;
+//             justify-content: space-evenly;
+//             gap: 64px;
+//         }
+//     }
+
+//     > .background
+//     {
+//         pointer-events: none;
+//         z-index: 1;
+//         position: absolute;
+//         transform-origin: center center;
+//         width: 100%;
+//         height: 100%;
+//         top: 55%;
+//         flex-direction: column;
+//         opacity: 1;
+//         background-image-tint: rgba( 60, 100, 60, 1 );
+//         background-image: url( ui/mainmenu/backgrounds/guns_checkerboard_big_light.png );
+//         mask-image: radial-gradient( white, black, black, black );
+//     }
+
+//     .controls
+//     {
+//         width: 100%;
+//         flex-direction: column;
+//         gap: 50px;
+//         align-items: flex-start;
+//         text-transform: uppercase;
+
+//         a, .button
+//         {
+//             font-family: Quantico;
+
+//             &:hover
+//             {
+//                 color: rgba( white, 1 );
+//                 font-weight: 900;
+//                 sound-in: ui.button.over;
+//             }
+
+//             &:active
+//             {
+//                 sound-in: ui.button.press;
+//             }
+//         }
+
+//         .span
+//         {
+//             gap: 128px;
+//         }
+//     }
+// }
+
+
+// FormGroup
+// {
+//     flex-direction: column;
+//     min-width: 300px;
+//     gap: 16px;
+// }
+
+// i
+// {
+//     font-family: Material Icons;
+//     text-transform: lowercase;
+
+//     &.with-click
+//     {
+//         &:hover
+//         {
+//             color: white;
+//             transform: scale( 1.1 );
+//             sound-in: ui.button.over;
+//         }
+
+//         &:active
+//         {
+//             sound-in: ui.button.press;
+//         }
+//     }
+// }
+
+// SetupGame
+// {
+//     PackageCard
+//     {
+//         pointer-events: all;
+//     }
+// }
