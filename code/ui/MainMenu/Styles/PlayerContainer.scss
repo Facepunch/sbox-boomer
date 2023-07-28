@@ -1,4 +1,3 @@
-// Party
 .party-players {
     flex-direction: row;
     gap: 20px;
@@ -11,6 +10,7 @@
         flex-direction: column;
         height: 100%;
         flex-grow: 1;
+        flex-basis: 1;
         min-width: 200px;
         box-shadow: 0 5px 20px rgba(#000,0.2);
         transition: all 0.1s ease;
@@ -63,13 +63,25 @@
             }
         }
         .player-body {
+            align-items: center;
             justify-content: center;
-            background-size: cover;
-            background-position: center;
-            background-image: url(  ui/mainmenu/player/placeholder_image.png);
-            mask-image: linear-gradient( to bottom, white, white, black );
             width: 100%;
             height: 100%;
+
+            label {
+                font-size: 32px;
+            }
+            
+
+            .player-image {
+                justify-content: center;
+                background-size: cover;
+                background-position: center;
+                background-image: url(  ui/mainmenu/player/placeholder_image.png);
+                mask-image: linear-gradient( to bottom, white, white, black );
+                width: 100%;
+                height: 100%;
+            }
         }
 
         .player-footer {
