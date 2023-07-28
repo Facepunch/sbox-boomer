@@ -2,6 +2,7 @@
 .party-players {
     flex-direction: row;
     gap: 20px;
+    flex-grow: 1;
     width: 100%;
 
     .player {
@@ -10,7 +11,6 @@
         flex-direction: column;
         height: 100%;
         flex-grow: 1;
-        max-width: 410px;
         min-width: 200px;
         box-shadow: 0 5px 20px rgba(#000,0.2);
         transition: all 0.1s ease;
