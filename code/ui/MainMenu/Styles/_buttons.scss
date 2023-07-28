@@ -3,6 +3,7 @@
     backdrop-filter: blur(10px);
     border: 2px solid;
     justify-content: center;
+    cursor: pointer;
     margin-right: 8px;
     height: 44px;
     padding: 10px;
@@ -23,12 +24,17 @@
     }
 
     &:hover {
-        transform: scale(1.1); 
+        transform: scale(1.05); 
         sound-in: ui.button.over;
     }
 
     &:active {
         sound-in: ui.button.press;
+    }
+
+    &.fill {
+        flex-grow: 1;
+        flex-basis: 1;
     }
 
     // If Button has text + icon
@@ -107,6 +113,32 @@
             .text, .icon {
                 color: linear-gradient(rgba(#fff,0.8),rgba(#fff,1));
             }
+        }
+    }
+
+    &.form-button {
+        background: linear-gradient(rgba($blue-dull,0), rgba($blue-dull,0.1));
+        border-color: rgba($blue-dull,0.1);
+        box-shadow: 0 6px 20px rgba(#000,0.4);
+        opacity: 0.2;
+        
+        .text, .icon {
+            color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
+        }
+
+        &:hover {
+            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.2));
+            border-color: rgba($blue-light,0.2);
+            opacity: 1;
+            
+            .text, .icon {
+                color: linear-gradient(rgba(#fff,0.8),rgba(#fff,1));
+            }
+        }
+
+        &.is-selected {
+            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.1));
+            opacity: 1;
         }
     }
 
