@@ -7,7 +7,7 @@
 @namespace Facepunch.Boomer.MainMenu
 
 <root>
-    <div class="body">
+    <div class="page-wrapper">
         <div class="navigator-canvas" slot="navigator-canvas" />
     </div>
 
@@ -18,11 +18,10 @@
 {
     public MainMenu()
     {
-        DefaultUrl = "/";
-        AddDestination( "/", typeof( HomePage ) );
+        DefaultUrl = "/play";
+        AddDestination( "/play", typeof( PlayPage ) );
         AddDestination( "/settings", typeof( SettingsPage ) );
         AddDestination( "/customize", typeof( CustomizePage ) );
-        AddDestination( "/play", typeof( PlayPage ) );
         AddDestination( "/play/server-browser", typeof( ServerListPage ) );
         AddDestination( "/play/create", typeof( SetupGame ) );
         AddDestination( "/stats", typeof( StatsPage ) );

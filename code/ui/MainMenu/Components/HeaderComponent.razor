@@ -2,9 +2,6 @@
 <div class="header-container">
     <div class="header-primary">
         <div class="nav-container">
-            <nav href="/">
-                <span>Home</span>
-            </nav>
             <nav href="play">
                 <span>Play</span>
             </nav>
@@ -25,13 +22,18 @@
             </nav>
         </div>
     </div>
-    <div class="header-secondary">
-        @SecondaryHeader
-    </div>
+    @if (SecondaryHeader != null) {
+        <div class="header-secondary">
+            @SecondaryHeader
+        </div>
+    }
     
-    <div class="header-tertiary">
-        @TertiaryHeader
-    </div>
+    @if (TertiaryHeader != null) {
+        <div class="header-tertiary">
+            @TertiaryHeader
+        </div>
+    }
+    
 </div>
 
 @code 

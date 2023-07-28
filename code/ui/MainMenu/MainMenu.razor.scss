@@ -2,6 +2,7 @@
 @import "Styles/_buttons.scss";
 @import "Styles/Header.scss";
 @import "Styles/Footer.scss";
+@import "Styles/BodyContainer.scss";
 
 MainMenu
 {
@@ -28,7 +29,7 @@ MainMenu
         }
     }
 
-    .body {
+    .page-wrapper {
         flex-grow: 1;
 
         // Party

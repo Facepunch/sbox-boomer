@@ -14,6 +14,7 @@
         height: 74px;
         padding: 0 $padding;
         z-index: 2;
+        flex-shrink: 0;
 
         .nav-container {
             flex-grow: 1;
@@ -90,6 +91,7 @@
         padding: 0 $padding;
         margin-top: 2px;
         z-index: 1;
+        flex-shrink: 0;
         
         &:empty
         {
@@ -150,6 +152,7 @@
     background:linear-gradient(to right, rgba($grey-medium,0.5), rgba($grey-medium,0));
     height: 80px;
     padding: 0 $padding;
+    flex-shrink: 0;
 
     .title {
         color: linear-gradient($grey-light, white);
