@@ -1,0 +1,87 @@
+// Party
+.party-players {
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+
+    .player {
+        border: 2px solid $grey-medium;
+        font-family: "Quantico";
+        flex-direction: column;
+        height: 100%;
+        flex-grow: 1;
+        max-width: 410px;
+        min-width: 200px;
+        box-shadow: 0 5px 20px rgba(#000,0.2);
+        transition: all 0.1s ease;
+
+        &:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 30px rgba(#000,0.7);
+        }
+
+        .player-header {
+            height: 44px;
+            border-bottom: 2px solid $grey-medium;
+            width: 100%;
+
+            .player-level {
+                align-items: center;
+                justify-content: center;
+                background-color: $grey-medium;
+                width: 44px;
+                height: 44px;
+
+                label {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: $grey-light;
+                }
+            }
+
+            .player-name {
+                align-items: center;
+                padding-left: 10px;
+                flex-grow: 1;
+
+                label {
+                    font-size: 20px;
+                    color: $blue-light;
+                }
+            }
+
+            .player-voice {
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+
+                .icon {
+                    color: $grey-light;
+                    font-size: 20px;
+                }
+            }
+        }
+        .player-body {
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-image: url(  ui/mainmenu/player/placeholder_image.png);
+            mask-image: linear-gradient( to bottom, white, white, black );
+            width: 100%;
+            height: 100%;
+        }
+
+        .player-footer {
+            position: absolute;
+            bottom: 16px;
+            left: 0;
+            right: 0;
+            height: 44px;
+            padding: 0 16px;
+            justify-content: space-between;
+
+        }
+
+    }
+}

@@ -3,6 +3,7 @@
 @import "Styles/Header.scss";
 @import "Styles/Footer.scss";
 @import "Styles/BodyContainer.scss";
+@import "Styles/PlayerContainer.scss";
 
 MainMenu
 {
@@ -10,7 +11,7 @@ MainMenu
     height: 100%;
     flex-direction: column;
     background-color: $grey-dark;
-    transition: all 0.2s ease;
+    transition: all 3s ease;
 
     nav {
         cursor: pointer;
@@ -23,98 +24,12 @@ MainMenu
     &:intro
     {
         opacity: 0;
-
-        .header-container {
-            opacity: 0;
-        }
     }
 
     .page-wrapper {
         flex-grow: 1;
 
-        // Party
-        .party-players {
-            flex-direction: row;
-            gap: 20px;
-            width: 100%;
-
-            .player {
-                border: 2px solid $grey-medium;
-                font-family: "Quantico";
-                flex-direction: column;
-                height: 100%;
-                flex-grow: 1;
-                max-width: 410px;
-                min-width: 200px;
-
-                .player-header {
-                    height: 44px;
-                    border-bottom: 2px solid $grey-medium;
-                    width: 100%;
-
-                    .player-level {
-                        align-items: center;
-                        justify-content: center;
-                        background-color: $grey-medium;
-                        width: 44px;
-                        height: 44px;
-
-                        label {
-                            font-size: 20px;
-                            font-weight: bold;
-                            color: $grey-light;
-                        }
-                    }
-
-                    .player-name {
-                        align-items: center;
-                        padding-left: 10px;
-                        flex-grow: 1;
-
-                        label {
-                            font-size: 20px;
-                            color: $blue-light;
-                        }
-                    }
-
-                    .player-voice {
-                        align-items: center;
-                        justify-content: center;
-                        width: 44px;
-                        height: 44px;
-
-                        .icon {
-                            color: $grey-light;
-                            font-size: 20px;
-                        }
-                    }
-                }
-                .player-body {
-                    justify-content: center;
-                    background-size: cover;
-                    background-position: center;
-                    background-image: url(  ui/mainmenu/player/placeholder_image.png);
-                    mask-image: linear-gradient( to bottom, white, white, black );
-                    width: 100%;
-                    height: 100%;
-                }
-
-                .player-footer {
-                    position: absolute;
-                    bottom: 16px;
-                    left: 0;
-                    right: 0;
-                    height: 44px;
-                    padding: 0 16px;
-                    justify-content: space-between;
-
-                }
-
-            }
-        }
-
         .navigator-canvas {
-            pointer-events: none;
             position: absolute;
             left: 0;
             top: 0;
@@ -123,7 +38,6 @@ MainMenu
 
             .navigator-body {
                 opacity: 1;
-                pointer-events: none;
                 position: absolute;
                 flex-direction: column;
                 left: 0;
