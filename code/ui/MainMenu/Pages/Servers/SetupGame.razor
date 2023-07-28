@@ -28,38 +28,43 @@
         </TertiaryHeader>
     </HeaderComponent>
 
-    @if ( ChoosingMap )
-    {
-        <MapSelect OnPackageSelected=@OnMapSelected />
-
-        return;
-    }
-
-    <div class="controls">
-        <div class="span">
-            @if ( MaxPlayersSupported > 1 )
+     <BodyContainer>
+        <Body>
+            @if ( ChoosingMap )
             {
-                <FormGroup class="form-group">
-                    <Label>Maximum Players</Label>
-                    <Control>
-                        <SliderControl ShowRange=@true Min=@(1f) Max=@MaxPlayersSupported Value:bind=@Game.Menu.Lobby.MaxMembers />
-                    </Control>
-                </FormGroup>
+                <MapSelect OnPackageSelected=@OnMapSelected />
+
+                return;
             }
 
-            <FormGroup class="form-group">
-                <Label>Map</Label>
-                <Control>
-                    <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage />
-                </Control>
-            </FormGroup>
-        </div>
+            <div class="controls">
+                <div class="span">
+                    @if ( MaxPlayersSupported > 1 )
+                    {
+                        <FormGroup class="form-group">
+                            <Label>Maximum Players</Label>
+                            <Control>
+                                <SliderControl ShowRange=@true Min=@(1f) Max=@MaxPlayersSupported Value:bind=@Game.Menu.Lobby.MaxMembers />
+                            </Control>
+                        </FormGroup>
+                    }
 
-        <div class="spacer" />
+                    <FormGroup class="form-group">
+                        <Label>Map</Label>
+                        <Control>
+                            <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage />
+                        </Control>
+                    </FormGroup>
+                </div>
 
-        <a class="button" onclick=@Play>Start</a>
-        <a class="button" href="/">Return</a>
-    </div>
+                <div class="spacer" />
+
+                <a class="button" onclick=@Play>Start</a>
+                <a class="button" href="/">Return</a>
+            </div>
+        </Body>
+    </BodyContainer>
+
 </root>
 
 @code
