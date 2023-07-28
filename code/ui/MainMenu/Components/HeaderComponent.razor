@@ -1,3 +1,4 @@
+@using Sandbox.Razor
 <div class="header-container">
     <div class="header-primary">
         <div class="nav-container">
@@ -25,18 +26,11 @@
         </div>
     </div>
     <div class="header-secondary">
-        <nav href="#">
-            <span>Match Making</span>
-            <div class="diamond"></div>
-        </nav>
-        <nav href="#">
-            <span>Server Browser</span>
-            <div class="diamond"></div>
-        </nav>
-        <nav href="#">
-            <span>Create</span>
-            <div class="diamond"></div>
-        </nav>
+        @SecondaryHeader
+    </div>
+    
+    <div class="header-tertiary">
+        @TertiaryHeader
     </div>
     <div class="header-tertiary">
         <span class="title">Match Making</span>
@@ -44,3 +38,9 @@
         <span class="subtitle">Automatically find a game that meets your requirements</span>
     </div>
 </div>
+
+@code 
+{
+    public RenderFragment SecondaryHeader { get; set; }
+    public RenderFragment TertiaryHeader { get; set; }
+}

@@ -7,8 +7,6 @@
 @namespace Facepunch.Boomer.MainMenu
 
 <root>
-    <HeaderComponent />
-
     <div class="body">
         <div class="navigator-canvas" slot="navigator-canvas" />
     </div>
@@ -24,9 +22,9 @@
         AddDestination( "/", typeof( HomePage ) );
         AddDestination( "/settings", typeof( SettingsPage ) );
         AddDestination( "/customize", typeof( CustomizePage ) );
-        AddDestination( "/servers", typeof( ServerListPage ) );
         AddDestination( "/play", typeof( PlayPage ) );
-        AddDestination( "/servers/setup", typeof( SetupGame ) );
+        AddDestination( "/play/server-browser", typeof( ServerListPage ) );
+        AddDestination( "/play/create", typeof( SetupGame ) );
         AddDestination( "/stats", typeof( StatsPage ) );
     }
 }

@@ -124,6 +124,7 @@ MainMenu
                 opacity: 1;
                 pointer-events: none;
                 position: absolute;
+                flex-direction: column;
                 left: 0;
                 top: 0;
                 bottom: 0;
@@ -137,8 +138,4 @@ MainMenu
             }
         }
     }
-
-
-   
-
 }

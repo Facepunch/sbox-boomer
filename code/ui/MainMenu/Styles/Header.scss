@@ -4,6 +4,7 @@
     font-family: Quantico;
     width: 100%;
     flex-shrink: 0;
+    pointer-events: all;
 
     .header-primary {
         align-items: center;
@@ -85,11 +86,15 @@
         align-items: center;
         background:linear-gradient(rgba($red,0), rgba($red,0.05));
         border-bottom: 2px solid rgba($red,0.1);
-        height: 64px;
+        max-height: 64px;
         padding: 0 $padding;
         margin-top: 2px;
         z-index: 1;
-
+        
+        &:empty
+        {
+            display: none;
+        }
         
         nav {
             justify-content: center;

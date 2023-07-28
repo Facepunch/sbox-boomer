@@ -1,14 +1,21 @@
 @using System.Threading.Tasks;
 
-@inherits MainMenuPage
 @namespace Facepunch.Boomer.MainMenu
+@inherits MainMenuPage
 @attribute [StyleSheet]
 
 <root>
-    <div class="flex-grow" />
+    <HeaderComponent>
+        <TertiaryHeader>
+            <span class="title">Stats</span>
+            <div class="diamond"></div>
+            <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec iaculis tellus.</span>
+        </TertiaryHeader>
+    </HeaderComponent>
+    
     <div class="col">
-        <StatContainer Gamemode="tdm" />
-        <StatContainer Gamemode="dm" />
+        <StatContainer Gamemode="tdm"/>
+        <StatContainer Gamemode="dm"/>
     </div>
 </root>
 

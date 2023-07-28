@@ -6,6 +6,27 @@
 @using Sandbox.UI;
 
 <root>
+    <HeaderComponent>
+        <SecondaryHeader>
+            <nav href="/play/matchmaking">
+                <span>Match Making</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/server-browser">
+                <span>Server Browser</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/create">
+                <span>Create</span>
+                <div class="diamond"></div>
+            </nav>
+        </SecondaryHeader>
+        <TertiaryHeader>
+            <span class="title">Host a Server</span>
+            <div class="diamond"></div>
+            <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec iaculis tellus.</span>
+        </TertiaryHeader>
+    </HeaderComponent>
 
     @if ( ChoosingMap )
     {
