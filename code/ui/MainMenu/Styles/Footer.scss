@@ -1,0 +1,104 @@
+.footer {
+    background: linear-gradient(to top, #131212, #0C0B0B);
+    align-items: center;
+    flex-direction: row;
+    border-top: 2px solid $grey-medium;
+    padding: 0 $padding;
+    justify-content: space-between;
+    height: 100px;
+    flex-shrink: 0;
+    
+    .chat {
+        .chat-input {
+            
+            align-items: center;
+            background: linear-gradient(to right, rgba($grey-medium,0.5), rgba($grey-medium,0));
+            border: 2px solid $grey-medium;
+            
+            min-width: 360px;
+            height: 48px;
+            padding: 0 16px;
+
+            label {
+                color: #B6B6B6;
+                font-family: "Quantico";
+            }
+        }
+    }
+
+    .footer-modal {
+        flex-direction: column;
+        margin-top: -60px;
+
+        .btn {
+            position: absolute;
+            top: -22px;
+            right: -22px;
+            z-index: 2;
+        }
+
+        .modal-box {
+            align-items: center;
+            background:linear-gradient(to top, rgba($red,0.03), rgba($red,0));
+            backdrop-filter: blur(25px);
+            border: 2px solid;
+            border-color: rgba($red,0.2);
+            box-shadow: 0 5px 30px rgba($red,0.02);
+            justify-content: center;
+            min-width: 300px;
+            min-height: 64px;
+            text-transform: uppercase;
+
+            .modal-text {
+                font-family: "Quantico-Bold";
+                font-size: 18px;
+                color: $red;
+            }
+        }
+
+        .modal-bar {
+            align-items: center;
+            justify-content: center;
+            background-color: $red;
+            width: 100%;
+            height: 4px;
+            margin-bottom: 10px;
+
+            .diamond {
+                align-items: center;
+                justify-content: center;
+                background-size: contain;
+                background-position: center;
+                background-image: url(  ui/mainmenu/icons/diamond.svg?color=$red);
+                width: 28px;
+                height: 28px;
+
+                .crown {
+                    background-size: resize;
+                    background-position: center;
+                    background-image: url( ui/mainmenu/icons/crown_dark.svg );
+                    background-repeat: no-repeat;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+
+        .modal-footer {
+            align-items: center;
+            color:  linear-gradient(to top, rgba($grey-light,1),rgba($grey-light,0.5));
+            font-family: Quantico-Bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+            justify-content: center;
+            text-transform: uppercase;
+            margin-top: 8px;
+            text-shadow: 0 2px 5px rgba(#000,0.2);
+        }
+    }
+
+    .party {
+        height: 48px;
+        justify-content: flex-end;
+    }
+}
