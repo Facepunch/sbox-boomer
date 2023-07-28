@@ -1,15 +1,17 @@
 
 .form-container {
-    max-width: 800px;
+    max-width: 1000px;
     flex-direction: column;
     flex-grow: 1;
+    justify-content: center;
 }
+
 .form-row {
     align-items: center;
-    border-bottom: 2px solid rgba($blue-dull,0.03);
+    border-bottom: 2px solid rgba($blue-dull,0.02);
     font-family: Quantico;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
 
     .form-label {
         color: $blue-dull;
@@ -40,4 +42,11 @@
             }
         }
     }
+}
+
+.button-container {
+    flex-grow: 1;
+    align-items: flex-end;
+    justify-content: flex-end;
+    max-width: 400px;
 }

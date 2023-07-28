@@ -1,4 +1,9 @@
 SettingsPage
 {
-    //
+    
+    .settings-page {
+        flex-grow: 1;
+        justify-content: space-between;
+    }
 }
+
