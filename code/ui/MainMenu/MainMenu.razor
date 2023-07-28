@@ -29,11 +29,15 @@
     <div class="header-container">
         <div class="header-primary">
             <nav>
+                <a href="/">
+                    <span>Home</span>
+                    <div class="diamond"></div>
+                </a>
                 <a href="/play" class="is-active">
                     <span>Play</span>
                     <div class="diamond"></div>
                 </a>
-                <a href="#">
+                <a href="/customize">
                     <span>Customize</span>
                     <div class="diamond"></div>
                 </a>
@@ -44,7 +48,7 @@
             </nav>
             <div class="logo"></div>
             <nav class="right">
-                <a href="#">
+                <a href="/settings">
                     <span>Settings</span>
                     <div class="diamond"></div>
                 </a>
@@ -76,97 +80,7 @@
     </div>
 
     <div class="body">
-        <!-- <div class="navigator-canvas" slot="navigator-canvas" /> -->
-        <div class="party-players">
-            <div class="player">
-                <div class="player-header">
-                    <div class="player-level">
-                        <label>14</label>
-                    </div>
-                    <div class="player-name">
-                        <label>xx_lewis</label>
-                    </div>
-                    <div class="player-voice">
-                        <label class="icon">mic</label>
-                    </div>
-                </div>
-                <div class="player-body"></div>
-                <div class="player-footer">
-                    <a href="#" class="btn is-secondary is-icon">
-                        <label class="icon">how_to_reg</label>
-                    </a>
-                    <a href="#" class="btn is-tertiary is-icon">
-                        <label class="icon">more_horiz</label>
-                    </a>
-                </div>
-            </div>
-            <div class="player">
-                <div class="player-header">
-                    <div class="player-level">
-                        <label>14</label>
-                    </div>
-                    <div class="player-name">
-                        <label>xx_lewis</label>
-                    </div>
-                    <div class="player-voice">
-                        <label class="icon">mic</label>
-                    </div>
-                </div>
-                <div class="player-body"></div>
-                <div class="player-footer">
-                    <a href="#" class="btn is-secondary is-icon">
-                        <label class="icon">how_to_reg</label>
-                    </a>
-                    <a href="#" class="btn is-tertiary is-icon">
-                        <label class="icon">more_horiz</label>
-                    </a>
-                </div>
-            </div>
-            <div class="player">
-                <div class="player-header">
-                    <div class="player-level">
-                        <label>14</label>
-                    </div>
-                    <div class="player-name">
-                        <label>xx_lewis</label>
-                    </div>
-                    <div class="player-voice">
-                        <label class="icon">mic</label>
-                    </div>
-                </div>
-                <div class="player-body"></div>
-                <div class="player-footer">
-                    <a href="#" class="btn is-secondary is-icon">
-                        <label class="icon">how_to_reg</label>
-                    </a>
-                    <a href="#" class="btn is-tertiary is-icon">
-                        <label class="icon">more_horiz</label>
-                    </a>
-                </div>
-            </div>
-            <div class="player">
-                <div class="player-header">
-                    <div class="player-level">
-                        <label>14</label>
-                    </div>
-                    <div class="player-name">
-                        <label>xx_lewis</label>
-                    </div>
-                    <div class="player-voice">
-                        <label class="icon">mic</label>
-                    </div>
-                </div>
-                <div class="player-body"></div>
-                <div class="player-footer">
-                    <a href="#" class="btn is-secondary is-icon">
-                        <label class="icon">how_to_reg</label>
-                    </a>
-                    <a href="#" class="btn is-tertiary is-icon">
-                        <label class="icon">more_horiz</label>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <div class="navigator-canvas" slot="navigator-canvas" />
     </div>
 
     <div class="footer">
@@ -219,6 +133,7 @@
         DefaultUrl = "/";
         AddDestination( "/", typeof( HomePage ) );
         AddDestination( "/settings", typeof( SettingsPage ) );
+        AddDestination( "/customize", typeof( CustomizePage ) );
         AddDestination( "/servers", typeof( ServerListPage ) );
         AddDestination( "/play", typeof( PlayPage ) );
         AddDestination( "/servers/setup", typeof( SetupGame ) );
