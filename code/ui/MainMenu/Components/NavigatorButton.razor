@@ -20,12 +20,18 @@
         Navigator = Ancestors.OfType<NavHostPanel>().FirstOrDefault();
     }
     
-    
     public override void Tick()
     {
         base.Tick();
 
-        var active = Navigator?.CurrentUrl == HRef;
+        if ( HRef == null ) return;
+        
+        // Oh god this sucks
+        var active = Navigator?.CurrentUrl.Contains( HRef ) ?? false;
+        
+        if ( HRef == "/" ) 
+            active = Navigator?.CurrentUrl == HRef;
+        
         SetClass( "is-active", active );
     }
     
