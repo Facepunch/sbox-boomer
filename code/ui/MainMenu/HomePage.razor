@@ -3,9 +3,17 @@
 @attribute [StyleSheet]
 
 <root>
-     <div class="canvas">
-        <MainMenuScene @ref="Scene" />
+    <div class="header-tertiary">
+        <span class="title">Match Making</span>
+        <div class="diamond"></div>
+        <span class="subtitle">Automatically find a game that meets your requirements</span>
     </div>
+    <Container>
+        <div class="canvas">
+            <MainMenuScene @ref="Scene" />
+        </div>
+    </Container>
+    
 </root>
 
 @code

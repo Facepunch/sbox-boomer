@@ -1,0 +1,17 @@
+@using Sandbox
+@using Sandbox.Razor
+@using Sandbox.UI
+
+@inherits Panel
+
+<root>
+    <div class="body">
+        @Body
+    </div>
+</root>
+
+
+@code
+{
+    public RenderFragment Body { get; set; }
+}

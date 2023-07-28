@@ -30,7 +30,6 @@ MainMenu
 
     .body {
         flex-grow: 1;
-        padding: 64px;
 
         // Party
         .party-players {
@@ -116,10 +115,10 @@ MainMenu
         .navigator-canvas {
             pointer-events: none;
             position: absolute;
-            left: $padding;
-            top: $padding;
-            bottom: $padding;
-            right: $padding;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
 
             .navigator-body {
                 opacity: 1;
