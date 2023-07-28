@@ -7,123 +7,13 @@
 @namespace Facepunch.Boomer.MainMenu
 
 <root>
-    <!-- <div class="background" />
-    <div class="navigator-canvas" slot="navigator-canvas" />
-
-    <div class="nav-bar">
-        <div class="content">
-            <a href="/">
-                HOME
-            </a>
-
-            <a href="/play" class="play">
-                PLAY
-            </a>
-
-            <a href="/stats">
-                STATS
-            </a>
-        </div>
-    </div> -->
-
-    <div class="header-container">
-        <div class="header-primary">
-            <nav>
-                <nav href="/">
-                    <span>Home</span>
-                    <div class="diamond"></div>
-                </nav>
-                <nav href="/play">
-                    <span>Play</span>
-                    <div class="diamond"></div>
-                </nav>
-                <nav href="/customize">
-                    <span>Customize</span>
-                    <div class="diamond"></div>
-                </nav>
-                <nav href="/stats">
-                    <span>Stats</span>
-                    <div class="diamond"></div>
-                </nav>
-            </nav>
-            <div class="logo"></div>
-            <nav class="right">
-                <nav href="/settings">
-                    <span>Settings</span>
-                    <div class="diamond"></div>
-                </nav>
-                <nav href="#">
-                    <span>Quit</span>
-                    <div class="diamond"></div>
-                </nav>
-            </nav>
-        </div>
-        <div class="header-secondary">
-            <nav href="#">
-                <span>Match Making</span>
-                <div class="diamond"></div>
-            </nav>
-            <nav href="#">
-                <span>Server Browser</span>
-                <div class="diamond"></div>
-            </nav>
-            <nav href="#">
-                <span>Create</span>
-                <div class="diamond"></div>
-            </nav>
-        </div>
-        <div class="header-tertiary">
-            <span class="title">Match Making</span>
-            <div class="diamond"></div>
-            <span class="subtitle">Automatically find a game that meets your requirements</span>
-        </div>
-    </div>
+    <HeaderComponent />
 
     <div class="body">
         <div class="navigator-canvas" slot="navigator-canvas" />
     </div>
 
-    <div class="footer">
-        <div class="chat">
-            <div class="chat-input">
-                <label>Press Enter to start typing...</label>
-            </div>
-        </div>
-        <div class="footer-modal">
-            <a href="#" class="btn is-icon is-secondary">
-                <label class="icon">close</label>
-            </a>
-            <div class="modal-box">
-                <div><span class="modal-text">Searching for Game</span></div>
-            </div>
-
-            <div class="modal-bar">
-                <div class="diamond">
-                    <div class="crown"></div>
-                </div>
-            </div>
-
-            <span class="modal-footer">Queue estimate 32s...</span>
-        </div>
-        <div class="party">
-            <a href="#" class="btn is-icon is-tertiary">
-                <label class="icon">group_add</label>
-            </a>
-            <a href="#" class="btn is-icon is-tertiary">
-                <div class="avatar"></div>
-            </a>
-            <a href="#" class="btn is-icon is-tertiary">
-                <div class="avatar"></div>
-            </a>
-            <a href="#" class="btn is-icon is-tertiary">
-                <div class="avatar"></div>
-            </a>
-            <a href="#" class="btn is-primary has-icon">
-                <label class="icon">group</label>
-                <label class="text">13</label>
-            </a>
-        </div>
-    </div>
+    <FooterComponent />
 </root>
 
 @code

@@ -4,13 +4,14 @@
 @inherits Button
 @attribute [Library( "nav" )]
 
-<root>
-    @* TODO - template for the buttons here instead? *@
+<root>   
+    <div class="diamond"></div>
 </root>
 
 @code
 {
     public string HRef { get; set; }
+    public string Title { get; set; }
 
     NavHostPanel Navigator;
     
