@@ -1,0 +1,49 @@
+﻿@using Sandbox
+@using Sandbox.UI
+
+@inherits Button
+@attribute [Library( "nav" )]
+
+<root>
+    @* TODO - template for the buttons here instead? *@
+</root>
+
+@code
+{
+    public string HRef { get; set; }
+
+    NavHostPanel Navigator;
+    
+    public override void OnParentChanged()
+    {
+        Navigator = Ancestors.OfType<NavHostPanel>().FirstOrDefault();
+    }
+    
+    
+    public override void Tick()
+    {
+        base.Tick();
+
+        var active = Navigator?.CurrentUrl == HRef;
+        SetClass( "is-active", active );
+    }
+    
+    protected override void OnMouseDown( MousePanelEvent e )
+    {
+        if ( e.Button == "mouseleft" )
+        {
+            this.Navigate( HRef );
+            e.StopPropagation();
+        }
+    }
+    
+    public override void SetProperty( string name, string value )
+    {
+        base.SetProperty( name, value );
+
+        if ( name == "href" )
+        {
+            HRef = value;
+        }
+    }
+}
