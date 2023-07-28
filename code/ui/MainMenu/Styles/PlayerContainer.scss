@@ -68,9 +68,32 @@
             width: 100%;
             height: 100%;
 
-            label {
-                font-size: 32px;
+            .invite-box {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                opacity: 0.5;
+
+                label {
+                    color: linear-gradient(rgba($grey-light,0.8),rgba($grey-light,1));
+                    
+                    &.icon {
+                        font-family: "Material Icons";
+                        font-size: 48px;
+                        margin-bottom: 8px;
+                    }
+    
+                    &.invite-text {
+                        font-size: 24px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+                }
             }
+
+            
+
+            
             
 
             .player-image {
