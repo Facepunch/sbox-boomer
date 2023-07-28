@@ -1,12 +1,5 @@
-$blue-light: #97C9D2;
-$red: #E81C00;
-$grey-medium: #262424;
-$grey-light: #B6B6B6;
-$grey-dark: #121212;
-
-$text-shadow-1: 0 1px 1px rgba(#000,0.3);
-
-$padding: 80px;
+@import "Styles/_variables.scss";
+@import "Styles/_buttons.scss";
 
 MainMenu
 {
@@ -18,74 +11,6 @@ MainMenu
 
     a {
         cursor: pointer;
-    }
-
-    .btn {
-        border: 2px solid;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        margin-right: 8px;
-        min-height: 44px;
-        backdrop-filter: blur(10px);
-        
-        label.text {
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        label.icon {
-            font-family: "Material Icons";
-            font-size: 18px;
-        }
-
-        &.has-icon {
-            label.icon {
-                margin-right: 8px;
-            }
-        }
-
-        &.is-icon {
-            width: 44px;
-            height: 44px;
-
-            label.icon {
-                font-size: 24px;
-                text-align: center;
-            }
-        }
-
-        &.is-primary {
-            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.1));
-            border-color: rgba($blue-light,0.1);
-            border-bottom: 2px solid $blue-light;
-            box-shadow: 0 6px 20px rgba(#000,0.4);
-            
-            .text, .icon {
-                color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
-            }
-        }
-
-        &.is-secondary {
-            background: linear-gradient(rgba($red,0), rgba($red,0.1));
-            border-color: rgba($red,0.1);
-            border-bottom: 2px solid $red;
-            box-shadow: 0 6px 20px rgba(#000,0.4);   
-
-            .text, .icon {
-                color: linear-gradient(rgba($red,0.8),rgba($red,1));
-            }
-        }
-
-        &.is-tertiary {
-            background: linear-gradient(rgba($grey-light,0), rgba($grey-light,0.03));
-            border-color: rgba($grey-light,0.05);
-            box-shadow: 0 6px 20px rgba(#000,0.4);   
-
-            .text, .icon {
-                color: linear-gradient(rgba($grey-light,0.8),rgba($grey-light,1));
-            }
-        }
     }
 
     .icon {
@@ -107,6 +32,7 @@ MainMenu
         flex-direction: column;
         font-family: Quantico;
         width: 100%;
+        flex-shrink: 0;
 
         .header-primary {
             align-items: center;
@@ -388,6 +314,7 @@ MainMenu
         padding: 0 $padding;
         justify-content: space-between;
         height: 100px;
+        flex-shrink: 0;
         
         .chat {
             .chat-input {
@@ -411,29 +338,11 @@ MainMenu
             flex-direction: column;
             margin-top: -60px;
 
-            .modal-close {
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(to right, rgba($red,0.02), rgba($red,0));
-                box-shadow: 0 5px 20px rgba(#000,0.5);
-                backdrop-filter: blur(25px);
-                border: 2px solid rgba($red,0.2);
-                width: 44px;
-                height: 44px;
+            .btn {
                 position: absolute;
                 top: -22px;
                 right: -22px;
                 z-index: 2;
-
-                .icon {
-                    color: $red;
-                    font-family: "Material Icons";
-                    font-size: 24px;
-                }
-
-                &:hover {
-                    background: green;
-                }
             }
 
             .modal-box {
@@ -500,65 +409,65 @@ MainMenu
             height: 48px;
             justify-content: flex-end;
 
-            a {
-                background: linear-gradient(to bottom, rgba($grey-medium,0.5), rgba($grey-medium,0));
-                align-items: center;
-                justify-content: center;
-                width: 48px;
-                height: 48px;
-                border: 2px solid $grey-medium;
-                margin-left: 4px; 
+            // a {
+            //     background: linear-gradient(to bottom, rgba($grey-medium,0.5), rgba($grey-medium,0));
+            //     align-items: center;
+            //     justify-content: center;
+            //     width: 48px;
+            //     height: 48px;
+            //     border: 2px solid $grey-medium;
+            //     margin-left: 4px; 
 
-                .icon {
-                    color: #B6B6B6;
-                    font-family: "Material Icons";
-                    font-size: 24px;
-                    text-shadow: 0 1px 0 rgba(#000,0.2);
-                }
+            //     .icon {
+            //         color: #B6B6B6;
+            //         font-family: "Material Icons";
+            //         font-size: 24px;
+            //         text-shadow: 0 1px 0 rgba(#000,0.2);
+            //     }
 
-                &.add {
-                    transform: scale(1);
-                    transition: all 0.2s ease;
-                    background: linear-gradient(to top, rgba($grey-medium,0.5), rgba($grey-medium,0));
-                    &:hover {
-                        transform: scale(1.1);
-                        z-index: 1;
-                    }
-                }
+            //     &.add {
+            //         transform: scale(1);
+            //         transition: all 0.2s ease;
+            //         background: linear-gradient(to top, rgba($grey-medium,0.5), rgba($grey-medium,0));
+            //         &:hover {
+            //             transform: scale(1.1);
+            //             z-index: 1;
+            //         }
+            //     }
 
-                &.user {
-                    transform: scale(1);
-                    transition: all 0.2s ease;
+            //     &.user {
+            //         transform: scale(1);
+            //         transition: all 0.2s ease;
 
-                    .avatar {
-                        background-color: $grey-medium;
-                        width: 38px;
-                        height: 38px;
-                    }
+            //         .avatar {
+            //             background-color: $grey-medium;
+            //             width: 38px;
+            //             height: 38px;
+            //         }
 
-                    &:hover {
-                        background: linear-gradient(to bottom, rgba($grey-medium,0.7), rgba($grey-medium,0));
-                        transform: scale(1.1);
-                        z-index: 1;
-                    }
-                }
+            //         &:hover {
+            //             background: linear-gradient(to bottom, rgba($grey-medium,0.7), rgba($grey-medium,0));
+            //             transform: scale(1.1);
+            //             z-index: 1;
+            //         }
+            //     }
 
-                &.button {
-                    background: linear-gradient(to right, rgba($blue-light,0.1), rgba($blue-light,0));
-                    border: 2px solid rgba($blue-light,0.2);
-                    color: $blue-light;
-                    font-size: 18px;
-                    font-weight: bold;
-                    padding: 0 20px;
-                    width: auto;
-                    text-shadow: 0 1px 0 rgba(#000,0.2);
+            //     &.button {
+            //         background: linear-gradient(to right, rgba($blue-light,0.1), rgba($blue-light,0));
+            //         border: 2px solid rgba($blue-light,0.2);
+            //         color: $blue-light;
+            //         font-size: 18px;
+            //         font-weight: bold;
+            //         padding: 0 20px;
+            //         width: auto;
+            //         text-shadow: 0 1px 0 rgba(#000,0.2);
 
-                    .icon {
-                        margin-right: 8px;
-                        color: $blue-light;
-                    }
-                }
-            }
+            //         .icon {
+            //             margin-right: 8px;
+            //             color: $blue-light;
+            //         }
+            //     }
+            // }
         }
     }
 
