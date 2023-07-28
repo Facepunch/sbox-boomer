@@ -14,8 +14,9 @@
         padding: 0 $padding;
         z-index: 2;
 
-        nav {
+        .nav-container {
             flex-grow: 1;
+            flex-basis: 1;
 
             &.right {
                 justify-content: flex-end;
@@ -30,7 +31,6 @@
             background-image: url( ui/mainmenu/boomer-logo.png );
             background-repeat: no-repeat;
             margin-top: 68px;
-            //mask-image: linear-gradient( to right, white, grey, black );
         }
 
         nav {
