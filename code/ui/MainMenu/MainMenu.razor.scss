@@ -115,10 +115,6 @@ MainMenu
         .navigator-canvas {
             pointer-events: none;
             position: absolute;
-            left: $padding;
-            top: $padding;
-            bottom: $padding;
-            right: $padding;
 
             .navigator-body {
                 opacity: 1;
