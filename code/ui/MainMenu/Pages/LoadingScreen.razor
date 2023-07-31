@@ -18,13 +18,9 @@
             <label> @(Progress.Title ?? "Loading...")</label>
             <div class="flex-grow" />
 
-            @if ( Progress.Mbps > 0 )
+            @if ( Progress.Fraction > 0f )
             {
-                <label>@( ( Progress.Mbps / 8f ).ToString( "0.00" ) ) MB/s</label>
-            }
-            else
-            {
-                <label>@(Progress.Fraction * 100f)%</label>
+                <label>@( ( Progress.Mbps / 8f ).ToString( "0.00" ) ) MB/s (@(Progress.Fraction * 100f)%)</label>
             }
         </div>
     </div>
