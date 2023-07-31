@@ -39,9 +39,7 @@
                         <div class="form-row">
                             <label class="form-label">Server Name</label>
                             <div class="form-control">
-                                <div class="form-input text-left">
-                                    <label>Server Name</label>
-                                </div>
+                                <TextEntry @ref=Input onblur=@Close class="form-input text-left"/>
                             </div>
                         </div>
 
@@ -69,7 +67,13 @@
                         <div class="form-row">
                             <label class="form-label">Map</label>
                             <div class="form-control">
-                                <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage />
+                                @* <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage /> *@
+                                <div class="form-input text-left">
+                                    <label>@MapPackage.Title</label>
+                                </div>
+                                <div class="btn form-button is-selected is-icon" onClick=@OnMapClicked>
+                                    <label class="icon">map</label>
+                                </div>
                             </div>
                         </div>
 
@@ -98,63 +102,38 @@
                     </div>
                 </div>
                 <div class="column is-4">
-                    @if ( ChoosingMap )
-                    {
-                        <MapSelect OnPackageSelected=@OnMapSelected />
-
-                        return;
-                    }
+                    
 
                     <div class="box">
                         <div class="box-body">
-                            <div class="box-image"></div>
+                        @if ( ChoosingMap )
+                        {
+                            <MapSelect OnPackageSelected=@OnMapSelected />
+
+                            return;
+                        } else {
+                            <div class="box-image" onClick=@OnMapClicked>
+                                <img src=@MapPackage.Thumb alt=@MapPackage.Title />
+                            </div>
+                        }
+                        
                         </div>
                         <div class="box-footer">
-                            <label class="title">de_dusty</label>
+                            <label class="title">@MapPackage.Title</label>
                         </div>
                     </div>
 
                     <div class="button-container">
-                        <a class="btn is-secondary has-icon fill" onclick=@Play>
+                        <a class="btn is-secondary has-icon fill diamond" onclick=@Play>
                             <label class="icon">check</label>
                             <label class="text">Create Server</label>
+                            <div class="button-bar">
+                                <div class="diamond"></div>
+                            </div>
                         </a>
                     </div>
                 </div>
             </div>
-
-            @* @if ( ChoosingMap )
-            {
-                <MapSelect OnPackageSelected=@OnMapSelected />
-
-                return;
-            }
-
-            <div class="controls">
-                <div class="span">
-                    @if ( MaxPlayersSupported > 1 )
-                    {
-                        <FormGroup class="form-group">
-                            <Label>Maximum Players</Label>
-                            <Control>
-                                <SliderControl ShowRange=@true Min=@(1f) Max=@MaxPlayersSupported Value:bind=@Game.Menu.Lobby.MaxMembers />
-                            </Control>
-                        </FormGroup>
-                    }
-
-                    <FormGroup class="form-group">
-                        <Label>Map</Label>
-                        <Control>
-                            <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage />
-                        </Control>
-                    </FormGroup>
-                </div>
-
-                <div class="spacer" />
-
-                <a class="button" onclick=@Play>Start</a>
-                <a class="button" href="/">Return</a>
-            </div> *@
         </Body>
     </BodyContainer>
 
@@ -165,6 +144,9 @@
     int MaxPlayersSupported { get; set; } = 1;
     int MaxPlayers { get; set; } = 1;
     Package MapPackage { get; set; }
+
+    string ServerName { get; set; } = "Default Server";
+    public TextEntry Input { get; protected set; }
 
     bool ChoosingMap;
     void OnMapClicked()
@@ -192,8 +174,40 @@
 
     async Task Play()
     {
-        await Game.Menu.StartServerAsync( MaxPlayers, $"My game", MapPackage.FullIdent );
+        await Game.Menu.StartServerAsync( MaxPlayers, Input.Text, MapPackage.FullIdent );
     }
+
+    public bool IsOpen
+	{
+		get => HasClass( "is-focused" );
+		set
+		{
+			SetClass( "is-focused", value );
+			if ( value )
+			{
+				Input.Focus();
+				Input.Text = string.Empty;
+				Input.Label.SetCaretPosition( 0 );
+			}
+		}
+	}
+
+    public override void Tick()
+	{
+		Input.Placeholder = string.IsNullOrEmpty( Input.Text ) ? "Server Name..." : string.Empty;
+	}
+
+    void Open()
+	{
+		AddClass( "is-focused" );
+		Input.Focus();
+	}
+
+    void Close()
+	{
+		RemoveClass( "is-focused" );
+		Input.Blur();
+	}
 
     protected override int BuildHash()
     {

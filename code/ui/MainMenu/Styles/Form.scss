@@ -53,6 +53,11 @@
                 text-align: left;
                 justify-content: flex-start;
             }
+
+            .is-focused {
+                background: red;
+
+            }
         }
     }
 
