@@ -1,25 +1,32 @@
+@using Sandbox.Razor
+
 <div class="footer">
     <div class="chat">
         <div class="chat-input">
             <label>Press Enter to start typing...</label>
         </div>
     </div>
-    <div class="footer-modal">
-        <a href="#" class="btn is-icon is-secondary">
-            <label class="icon">close</label>
-        </a>
-        <div class="modal-box">
-            <div><span class="modal-text">Searching for Game</span></div>
-        </div>
 
-        <div class="modal-bar">
-            <div class="diamond">
-                <div class="crown"></div>
+    @if (FooterModal != null) {
+            <div class="footer-modal">
+                @FooterModal
+                <a href="#" class="btn is-icon is-secondary">
+                    <label class="icon">close</label>
+                </a>
+                <div class="modal-box">
+                    <div><span class="modal-text">Searching for Game</span></div>
+                </div>
+
+                <div class="modal-bar">
+                    <div class="diamond">
+                        <div class="crown"></div>
+                    </div>
+                </div>
+
+                <span class="modal-footer">Queue estimate 32s...</span>
             </div>
-        </div>
+    }
 
-        <span class="modal-footer">Queue estimate 32s...</span>
-    </div>
     <div class="party">
         <a href="#" class="btn is-icon is-tertiary">
             <label class="icon">group_add</label>
@@ -40,6 +47,7 @@
     </div>
 </div>
 
-@code
+@code 
 {
+    public RenderFragment FooterModal { get; set; }
 }
