@@ -72,16 +72,12 @@
                             <Switch Value:bind=@IsPrivate />
                         </div>
 
-                        <div class="form-row disabled">
+                        <div class="form-row @( IsPrivate ? "" : "disabled" )">
                             <label class="form-label">Password</label>
                             <div class="form-control">
-                                <div class="form-input text-left">
-                                    <label>Enter a password...</label>
-                                </div>
+                                <TextEntry Value:bind=@ServerPassword class="form-input text-left" />
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="column is-4">
@@ -118,6 +114,7 @@
 @code
 {
     string ServerName { get; set; } = "My Boomer Server";
+    string ServerPassword { get; set; } = "Password";
     bool IsPrivate { get; set; } = false;
     
     // Players
@@ -151,6 +148,11 @@
 
     async Task Play()
     {
+        @if ( IsPrivate && !string.IsNullOrEmpty( ServerPassword ) )
+        {
+            ConsoleSystem.Run( $"sv_password {ServerPassword}" );
+        }
+        
         await Game.Menu.StartServerAsync( MaxPlayers, ServerName, MapPackage.FullIdent );
     }
 
