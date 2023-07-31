@@ -50,18 +50,7 @@
                         {
                             <div class="form-row">
                                 <label class="form-label">Max Players</label>
-                                <div class="form-control">
-                                    @* <a href="#" class="btn is-icon form-button">
-                                        <label class="icon">chevron_left</label>
-                                    </a>
-                                    <div class="form-input">
-                                        <label>16</label>
-                                    </div>
-                                    <a href="#" class="btn is-icon form-button">
-                                        <label class="icon">chevron_right</label>
-                                    </a> *@
-                                    <SliderControl ShowRange=@true Min=@(1f) Max=@MaxPlayersSupported Value:bind=@Game.Menu.Lobby.MaxMembers />
-                                </div>
+                                <Slider Value:bind=@MaxPlayers Min=@(1f) Max=@MaxPlayersSupported />
                             </div>
                         }
                     
