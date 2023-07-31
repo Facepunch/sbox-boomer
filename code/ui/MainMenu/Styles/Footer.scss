@@ -8,6 +8,8 @@
     height: 100px;
     flex-shrink: 0;
     flex-grow: 1;
+    bottom: 0;
+    transition: bottom 1.5s ease;
     
     .chat {
         .chat-input {

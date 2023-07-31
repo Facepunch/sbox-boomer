@@ -28,6 +28,36 @@ MainMenu
     &:intro
     {
         opacity: 0;
+
+        .header-container {
+            .header-primary{top: -100px;}
+            .header-secondary{top: -100px;}
+        }
+
+        BodyContainer {
+            opacity: 0;
+        }
+
+        .footer {
+            bottom: -100px;
+        }
+    }
+
+    &:outro {
+        opacity: 0;
+
+        .header-container {
+            .header-primary{top: -100px;}
+            .header-secondary{top: -100px;}
+        }
+
+        BodyContainer {
+            opacity: 0;
+        }
+
+        .footer {
+            bottom: -100px;
+        }
     }
 
     .two-column {
