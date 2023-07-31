@@ -41,7 +41,7 @@
                         <div class="form-row">
                             <label class="form-label">Server Name</label>
                             <div class="form-control">
-                                <TextEntry @ref=Input onblur=@Close class="form-input text-left"/>
+                                <TextEntry Value:bind=@ServerName @ref=Input onblur=@Close class="form-input text-left"/>
                             </div>
                         </div>
 
@@ -134,11 +134,14 @@
 
 @code
 {
+    string ServerName { get; set; } = "My Boomer Server";
+    
+    // Players
     int MaxPlayersSupported { get; set; } = 1;
     int MaxPlayers { get; set; } = 1;
+    
     Package MapPackage { get; set; }
 
-    string ServerName { get; set; } = "Default Server";
     public TextEntry Input { get; protected set; }
 
     void OnMapClicked()
@@ -164,7 +167,7 @@
 
     async Task Play()
     {
-        await Game.Menu.StartServerAsync( MaxPlayers, Input.Text, MapPackage.FullIdent );
+        await Game.Menu.StartServerAsync( MaxPlayers, ServerName, MapPackage.FullIdent );
     }
 
     public bool IsOpen
