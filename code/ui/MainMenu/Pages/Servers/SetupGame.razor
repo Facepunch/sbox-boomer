@@ -22,15 +22,94 @@
             </nav>
         </SecondaryHeader>
         <TertiaryHeader>
-            <span class="title">Host a Server</span>
+            <span class="title">Create</span>
             <div class="diamond"></div>
-            <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec iaculis tellus.</span>
+            <span class="subtitle">Host your own custom Public or Private Boomer server.</span>
         </TertiaryHeader>
     </HeaderComponent>
 
      <BodyContainer>
         <Body>
-            @if ( ChoosingMap )
+
+            <div class="columns space-between">
+                <div class="column is-6">
+                    <div class="form-container">
+
+                        <div class="form-row">
+                            <label class="form-label">Server Name</label>
+                            <div class="form-control">
+                                <div class="form-input text-left">
+                                    <label>Server Name</label>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="form-row">
+                            <label class="form-label">Max Players</label>
+                            <div class="form-control">
+                                <a href="#" class="btn is-icon form-button">
+                                    <label class="icon">chevron_left</label>
+                                </a>
+                                <div class="form-input">
+                                    <label>16</label>
+                                </div>
+                                <a href="#" class="btn is-icon form-button">
+                                    <label class="icon">chevron_right</label>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-label">Map</label>
+                            <div class="form-control">
+                                <div class="form-input text-left">
+                                    <label>De_Dusty2</label>
+                                </div>
+                                <a href="#" class="btn form-button is-icon is-selected">
+                                    <label class="icon">map</label>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-label">Private</label>
+                            <div class="form-control">
+                                <a href="#" class="btn form-button fill is-selected">
+                                    <label class="text">Off</label>
+                                </a>
+                                <a href="#" class="btn form-button fill">
+                                    <label class="text">On</label>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-row disabled">
+                            <label class="form-label">Password</label>
+                            <div class="form-control">
+                                <div class="form-input text-left">
+                                    <label>Enter a password...</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="button-container">
+                        <a href="/" class="btn is-primary has-icon fill">
+                            <label class="icon">close</label>
+                            <label class="text">Cancel</label>
+                        </a>
+                        <a class="btn is-secondary has-icon fill" onclick=@Play>
+                            <label class="icon">check</label>
+                            <label class="text">Start</label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            @* @if ( ChoosingMap )
             {
                 <MapSelect OnPackageSelected=@OnMapSelected />
 
@@ -61,7 +140,7 @@
 
                 <a class="button" onclick=@Play>Start</a>
                 <a class="button" href="/">Return</a>
-            </div>
+            </div> *@
         </Body>
     </BodyContainer>
 

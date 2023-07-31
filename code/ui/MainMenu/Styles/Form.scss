@@ -34,12 +34,25 @@
             flex-grow: 1;
             height: 44px;
             margin: 0 8px;
+            padding: 0 16px;
 
             label {
                 font-size: 18px;
                 color: $blue-light;
-                text-transform: uppercase;
+                
             }
+
+            &.text-left {
+                text-align: left;
+                justify-content: flex-start;
+            }
+        }
+    }
+
+    &.disabled {
+        opacity: 0.1;
+        .form-control {
+            pointer-events: none;
         }
     }
 }

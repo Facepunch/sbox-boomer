@@ -1,5 +1,7 @@
 @import "Styles/_variables.scss";
 @import "Styles/_buttons.scss";
+@import "Styles/_grid.scss";
+
 @import "Styles/Header.scss";
 @import "Styles/Footer.scss";
 @import "Styles/BodyContainer.scss";
@@ -25,6 +27,11 @@ MainMenu
     &:intro
     {
         opacity: 0;
+    }
+
+    .two-column {
+        flex-grow: 1;
+        justify-content: space-between;
     }
 
     .page-wrapper {
