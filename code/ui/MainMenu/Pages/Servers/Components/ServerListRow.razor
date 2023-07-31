@@ -1,0 +1,30 @@
+﻿@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <section>
+        <i>heart</i>
+    </section>
+    <section class="grow">
+        @Title
+    </section>
+    <section>
+        @MapIdent
+    </section>
+    <section>
+        @(Players)/@(MaxPlayers)
+    </section>
+    <section>
+        @Ping
+    </section>
+</root>
+
+@code
+{
+    public string Title { get; set; }
+    public string MapIdent { get; set; }
+    public int Players { get; set; } = 0;
+    public int MaxPlayers { get; set; } = 0;
+    public int Ping { get; set; } = 999;
+}

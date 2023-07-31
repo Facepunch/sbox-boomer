@@ -1,0 +1,65 @@
+﻿
+ServerList
+{
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  
+  background-color: green;
+  
+  > .header
+  {
+    height: 40px;
+    background-color: red;
+
+    justify-content: space-around;
+    align-items: center;
+    > section
+    {
+      label
+      {
+        font-family: Quantico;
+      }
+
+      i
+      {
+        font-family: Material Icons;
+      }
+    }
+  }
+  
+  > .main
+  {
+    flex-direction: column;
+  }
+}
+
+ServerListRow
+{
+  flex-grow: 1;
+  padding: 16px;
+  justify-content: space-around;
+  
+  > section
+  {
+    label
+    {
+      font-family: Quantico;
+    }
+    
+    i
+    {
+      font-family: Material Icons;
+    }
+  }
+  
+  &:nth-child(even)
+  {
+    background: linear-gradient( to right, darkgrey, transparent );
+  }
+  
+  &:nth-child(odd)
+  {
+    background: linear-gradient( to right, grey, transparent );
+  }
+}

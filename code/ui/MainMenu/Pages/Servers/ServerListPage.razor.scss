@@ -1,4 +1,19 @@
 ServerListPage
 {
-    //
+  BodyContainer
+  {
+    gap: 16px;
+
+    > .main
+    {
+      flex-grow: 3;
+      background-color: rgba( 0, 0, 0, 10 );
+    }
+
+    > .current-server
+    {
+      flex-grow: 1;
+      background-color: rgba( 0, 0, 0, 10 );
+    }
+  }
 }
