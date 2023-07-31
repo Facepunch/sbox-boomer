@@ -4,6 +4,7 @@
 @using System.Threading.Tasks;
 @using Sandbox.Menu;
 @using Sandbox.UI;
+@attribute [StyleSheet]
 
 <root>
     <HeaderComponent>
@@ -43,31 +44,32 @@
                                 </div>
                             </div>
                         </div>
-                    
-                        <div class="form-row">
-                            <label class="form-label">Max Players</label>
-                            <div class="form-control">
-                                <a href="#" class="btn is-icon form-button">
-                                    <label class="icon">chevron_left</label>
-                                </a>
-                                <div class="form-input">
-                                    <label>16</label>
+
+                        @if ( MaxPlayersSupported > 1 )
+                        {
+                            <div class="form-row">
+                                <label class="form-label">Max Players</label>
+                                <div class="form-control">
+                                    @* <a href="#" class="btn is-icon form-button">
+                                        <label class="icon">chevron_left</label>
+                                    </a>
+                                    <div class="form-input">
+                                        <label>16</label>
+                                    </div>
+                                    <a href="#" class="btn is-icon form-button">
+                                        <label class="icon">chevron_right</label>
+                                    </a> *@
+                                    <SliderControl ShowRange=@true Min=@(1f) Max=@MaxPlayersSupported Value:bind=@Game.Menu.Lobby.MaxMembers />
                                 </div>
-                                <a href="#" class="btn is-icon form-button">
-                                    <label class="icon">chevron_right</label>
-                                </a>
                             </div>
-                        </div>
+                        }
+                    
+                        
 
                         <div class="form-row">
                             <label class="form-label">Map</label>
                             <div class="form-control">
-                                <div class="form-input text-left">
-                                    <label>De_Dusty2</label>
-                                </div>
-                                <a href="#" class="btn form-button is-icon is-selected">
-                                    <label class="icon">map</label>
-                                </a>
+                                <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage />
                             </div>
                         </div>
 
@@ -96,14 +98,26 @@
                     </div>
                 </div>
                 <div class="column is-4">
+                    @if ( ChoosingMap )
+                    {
+                        <MapSelect OnPackageSelected=@OnMapSelected />
+
+                        return;
+                    }
+
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="box-image"></div>
+                        </div>
+                        <div class="box-footer">
+                            <label class="title">de_dusty</label>
+                        </div>
+                    </div>
+
                     <div class="button-container">
-                        <a href="/" class="btn is-primary has-icon fill">
-                            <label class="icon">close</label>
-                            <label class="text">Cancel</label>
-                        </a>
                         <a class="btn is-secondary has-icon fill" onclick=@Play>
                             <label class="icon">check</label>
-                            <label class="text">Start</label>
+                            <label class="text">Create Server</label>
                         </a>
                     </div>
                 </div>

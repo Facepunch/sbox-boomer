@@ -8,10 +8,17 @@
 
 .form-row {
     align-items: center;
+    background: linear-gradient(to top, rgba(#000,0.1), rgba(#000,0));
     border-bottom: 2px solid rgba($blue-dull,0.02);
     font-family: Quantico;
     margin-bottom: 16px;
-    padding-bottom: 16px;
+    padding: 0 16px 16px 16px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: linear-gradient(to top, rgba(#000,0.3), rgba(#000,0));
+        border-bottom: 2px solid rgba($blue-dull,0.1);
+    }
 
     .form-label {
         color: $blue-dull;
@@ -58,8 +65,12 @@
 }
 
 .button-container {
-    flex-grow: 1;
     align-items: flex-end;
     justify-content: flex-end;
-    max-width: 400px;
+    margin-top: 20px;
+
+    .btn {
+        flex-grow: 1;
+        height: 64px;
+    }
 }
