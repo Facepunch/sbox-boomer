@@ -19,29 +19,15 @@
 {
     public Enum Value { get; set; }
 
-    void Move( bool right )
+    void Move( bool isAscending )
     {
         var values = Enum.GetValues( Value.GetType() );
         var indexOf = Convert.ToInt32( Value );
         
-        // There's a better way to do this with modulo, but I can't remember for the life of me
-        
         var newId = indexOf;
-        if ( right )
-        {
-            if ( indexOf == values.Length - 1 )
-                newId = 0;
-            else
-                newId++;
-        }
-        else
-        {
-            if (indexOf == 0)
-                newId = values.Length - 1;
-            else 
-                newId--;
-        }
+        newId += isAscending ? 1 : -1;
+        newId = (newId + values.Length) % values.Length;
         
-        Value = (Enum)Enum.ToObject( Value.GetType(), newId );;
+        Value = (Enum)Enum.ToObject( Value.GetType(), newId );
     }
 }
