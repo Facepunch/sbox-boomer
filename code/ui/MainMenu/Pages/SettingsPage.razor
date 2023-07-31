@@ -19,17 +19,7 @@
                 
                     <div class="form-row">
                         <label class="form-label">Weapon Position</label>
-                        <div class="form-control">
-                            <a href="#" class="btn is-icon form-button">
-                                <label class="icon">chevron_left</label>
-                            </a>
-                            <div class="form-input">
-                                <label>Left</label>
-                            </div>
-                            <a href="#" class="btn is-icon form-button">
-                                <label class="icon">chevron_right</label>
-                            </a>
-                        </div>
+                        <Input Value:bind=@WeaponPos />
                     </div>
 
                     <div class="form-row">
@@ -103,4 +93,14 @@
 
 @code
 {
+    // TODO - REMOVE THIS
+    
+    WeaponPosition WeaponPos { get; set; } = WeaponPosition.Right;
+    
+    enum WeaponPosition
+    {
+        Left,
+        Center,
+        Right
+    }
 }
