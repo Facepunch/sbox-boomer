@@ -3,12 +3,14 @@
     background-color: red;
     flex-wrap: wrap;
     gap: 8px;
+    justify-content: space-evenly;
 
     .player {
         background-color: yellow;
-        height: 260px;
-        max-width: 260px;
-        width: 260px;
+        flex-grow: 1;
+        height: 200px;
+        width: 100%;
+        max-width: 300px;
     }
 }
 
