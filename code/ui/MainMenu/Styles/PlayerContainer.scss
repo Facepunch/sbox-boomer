@@ -1,3 +1,17 @@
+.lobby {
+    width: 100%;
+    background-color: red;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .player {
+        background-color: yellow;
+        height: 260px;
+        max-width: 260px;
+        width: 260px;
+    }
+}
+
 .party-players {
     flex-direction: row;
     gap: 20px;
