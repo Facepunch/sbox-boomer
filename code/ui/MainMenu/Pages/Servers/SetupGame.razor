@@ -79,14 +79,7 @@
 
                         <div class="form-row">
                             <label class="form-label">Private</label>
-                            <div class="form-control">
-                                <a href="#" class="btn form-button fill is-selected">
-                                    <label class="text">Off</label>
-                                </a>
-                                <a href="#" class="btn form-button fill">
-                                    <label class="text">On</label>
-                                </a>
-                            </div>
+                            <Switch Value:bind=@IsPrivate />
                         </div>
 
                         <div class="form-row disabled">
@@ -135,6 +128,7 @@
 @code
 {
     string ServerName { get; set; } = "My Boomer Server";
+    bool IsPrivate { get; set; } = false;
     
     // Players
     int MaxPlayersSupported { get; set; } = 1;
