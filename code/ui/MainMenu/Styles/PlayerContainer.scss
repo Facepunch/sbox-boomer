@@ -1,134 +1,174 @@
-.lobby {
-    width: 100%;
-    background-color: red;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-evenly;
-
-    .player {
-        background-color: yellow;
-        flex-grow: 1;
-        height: 200px;
-        width: 100%;
-        max-width: 300px;
+@keyframes LivePulse {
+    0% {
+        color: rgba(#fff,0.5);
+    }
+    100% {
+        color: red;
     }
 }
 
-.party-players {
-    flex-direction: row;
-    gap: 20px;
-    flex-grow: 1;
-    width: 100%;
+.lobby-container {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 
-    .player {
-        border: 2px solid $grey-medium;
-        font-family: "Quantico";
-        flex-direction: column;
-        height: 100%;
-        flex-grow: 1;
-        flex-basis: 1;
-        min-width: 200px;
-        box-shadow: 0 5px 20px rgba(#000,0.2);
-        transition: all 0.1s ease;
-        opacity: 1;
-
-        &:hover {
-            transform: scale(1.03);
-            box-shadow: 0 5px 30px rgba(#000,0.7);
-        }
-
-        .player-header {
-            height: 44px;
-            border-bottom: 2px solid $grey-medium;
-            width: 100%;
-
-            .player-level {
-                align-items: center;
-                justify-content: center;
-                background-color: $grey-medium;
-                width: 44px;
-                height: 44px;
-
-                label {
-                    font-size: 20px;
-                    font-weight: bold;
-                    color: $grey-light;
-                }
-            }
-
-            .player-name {
-                align-items: center;
-                padding-left: 10px;
-                flex-grow: 1;
-
-                label {
-                    font-size: 20px;
-                    color: $blue-light;
-                }
-            }
-
-            .player-voice {
-                align-items: center;
-                justify-content: center;
-                width: 44px;
-                height: 44px;
-
-                .icon {
-                    color: $grey-light;
-                    font-size: 20px;
-                }
-            }
-        }
-        .player-body {
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-
-            .invite-box {
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                opacity: 0.5;
-
-                label {
-                    color: linear-gradient(rgba($grey-light,0.8),rgba($grey-light,1));
-                    
-                    &.icon {
-                        font-family: "Material Icons";
-                        font-size: 48px;
-                        margin-bottom: 8px;
-                    }
+    .lobby {
+        width: 100%;
+        flex-wrap: wrap;
+        height: auto;
+        left: -8px;
+        right: -8px;
     
-                    &.invite-text {
-                        font-size: 24px;
-                        font-weight: bold;
-                        text-transform: uppercase;
+        .player-container {
+            width:12.5%;
+            padding: 8px;
+    
+            .player {
+                background-color: $grey-dark;
+                border: 2px solid $grey-medium;
+                box-shadow: 0 10px 20px rgba(#000,0.2);
+                flex-direction: column;
+                width: 100%;
+                height: 280px;
+
+                // Is you duh
+                &.is-you {
+                    border-bottom: 2px solid $red;
+                }
+
+                // Is Host
+                &.is-host {
+                    border-bottom: 2px solid $red;
+                    border-color: rgba($red,0.1);
+
+                    .player-leader {
+                        display: flex;
+                    }
+                }
+
+                // Using Mic
+                &.is-speaking {
+                    .player-header .mic .icon {
+                        animation-name: LivePulse;
+                        animation-duration: 1s;
+                        animation-timing-function: ease;
+                        animation-direction: alternate;
+                    }
+                }
+
+                // Player Joining
+                &.is-connecting {
+                    background: linear-gradient(to top, rgba($blue-dull,0.05), rgba($blue-dull,0.0));
+                    border: 2px solid rgba($blue-dull,0.2);
+                    align-items: center;
+                    justify-content: center;
+
+                    .title {
+                        color: linear-gradient(rgba($blue-dull,0.4),$blue-light);
+                        text-shadow: 0 1px 2px rgba(#000,0.4);
+                    }
+                }
+
+                // Empty slot
+                &.is-empty {
+                    align-items: center;
+                    justify-content: center;
+                    .icon.large {
+                        color: linear-gradient(rgba($grey-light,0.1),rgba($grey-light,0.5));
+                        font-size: 48px;
+                        text-shadow: 0 5px 10px rgba(#000,0.2);
+                        opacity: .5;
+                    }
+                }
+
+                .title {
+                    font-size: 16px;
+                    font-family: "Quantico";
+                    text-transform: uppercase;
+                    padding: 0 20px;
+                    text-align: center;
+                }
+
+                .player-header {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    padding: 8px;
+                    z-index: 1;
+                    align-items: center;
+                    justify-content: flex-end;
+
+                    .mic {
+                        
+                        .icon {
+                            font-family: "Material Icons";
+                            font-size: 20px;
+                            color: rgba(#fff,0.5);
+                            text-shadow: 0 1px 0 rgba(#000,0.2);
+                        }
+                    }
+                }
+
+                .player-image {
+                    justify-content: center;
+                    background-size: cover;
+                    background-position: center;
+                    background-image: url(  ui/mainmenu/player/placeholder_image.png);
+                    mask-image: linear-gradient( to bottom, white, white, black );
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .player-footer {
+                    align-items: center;
+                    padding: 8px 8px 12px 8px;
+
+                    .player-avatar {
+                        background-image: url(  ui/mainmenu/player/placeholder_image.png);
+                        background-size: cover;
+                        background-position: center;
+                        border: 2px solid $grey-medium;
+                        width: 28px;
+                        height: 28px;
+                        margin-right: 8px;
+                    }
+
+                    .player-name {
+                        font-family: "Quantico";
+                        font-size: 16px;
+                        color: $blue-light;
+                        flex-grow: 1;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        word-break: break-all;
+                    }
+                }
+
+                .player-leader {
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $red;
+                    display: none;
+                    box-shadow: 0 1px 20px rgba($red,0.05);
+                    position: absolute;
+                    bottom: -3px;
+                    left: -3px;
+                    right: -3px;
+                    height: 2px;
+
+                    .diamond {
+                        align-items: center;
+                        justify-content: center;
+                        background-size: contain;
+                        background-position: center;
+                        background-image: url(  ui/mainmenu/icons/diamond_crown_red.svg);
+                        width: 20px;
+                        height: 20px;
                     }
                 }
             }
-            
-            .player-image {
-                justify-content: center;
-                background-size: cover;
-                background-position: center;
-                background-image: url(  ui/mainmenu/player/placeholder_image.png);
-                mask-image: linear-gradient( to bottom, white, white, black );
-                width: 100%;
-                height: 100%;
-            }
         }
-
-        .player-footer {
-            position: absolute;
-            bottom: 16px;
-            left: 0;
-            right: 0;
-            height: 44px;
-            padding: 0 16px;
-            justify-content: space-between;
-
-        }
-
     }
+
 }

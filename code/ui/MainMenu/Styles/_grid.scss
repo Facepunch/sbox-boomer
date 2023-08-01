@@ -30,13 +30,13 @@
     padding-left: $column-gap;
     padding-right: $column-gap;
 
-    &:first-child {
-        padding-left: 0;
-    }
+    // &:first-child {
+    //     padding-left: 0;
+    // }
 
-    &:last-child {
-        padding-right: 0;
-    }
+    // &:last-child {
+    //     padding-right: 0;
+    // }
 
     > .box {
         width: 100%;
