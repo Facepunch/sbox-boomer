@@ -1,19 +1,57 @@
-﻿
+﻿@import "../../../Styles/_variables.scss";
+
+
 ServerList
 {
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 0;
+
+  .icon-header {
+    width: 40px;
+
+    .icon {
+      font-family: "Material Icons";
+      font-size: 20px;
+      color: $red;
+      display: flex;
+    }
+  }
   
-  background-color: green;
+  .min-200 {
+    min-width: 200px;
+  }
+
+  .min-100 {
+    min-width: 100px;
+  }
   
   > .header
   {
-    height: 40px;
-    background-color: red;
-
+    height: 44px;
+    background:linear-gradient(to top, rgba(#2A3030,0.2), rgba(#2A3030,0));
     justify-content: space-around;
     align-items: center;
+
+    .th-title {
+      color: #B6B6B6;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-shadow: 0 1px 0 rgba(#000,0.2);
+    }
+
+    > section {
+      padding: 0 20px;
+  
+      &.grow {
+        flex-grow: 1;
+        flex-basis: 1;
+      }
+
+      
+    }
+
     > section
     {
       label
@@ -37,8 +75,18 @@ ServerList
 ServerListRow
 {
   flex-grow: 1;
-  padding: 16px;
   justify-content: space-around;
+  height: 44px;
+  align-items: center;
+
+  > section {
+    padding: 0 20px;
+
+    &.grow {
+      flex-grow: 1;
+      flex-basis: 1;
+    }
+  }
   
   > section
   {
@@ -55,11 +103,11 @@ ServerListRow
   
   &:nth-child(even)
   {
-    background: linear-gradient( to right, darkgrey, transparent );
+    background: linear-gradient(#151515,#1A1D1D);
   }
   
   &:nth-child(odd)
   {
-    background: linear-gradient( to right, grey, transparent );
+    background: transparent;
   }
 }
