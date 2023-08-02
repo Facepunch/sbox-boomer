@@ -15,13 +15,14 @@
     }
 
     .box-header {
-        height: 44px;
-        border-bottom: 2px solid $grey-medium;
         width: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        padding: 24px;
 
         .box-title {
             align-items: center;
-            padding-left: 10px;
             flex-grow: 1;
 
             label {
@@ -56,6 +57,7 @@
     .box-footer {
         pointer-events: none;
         position: absolute;
+        flex-direction: column;
         bottom: 0;
         left: 0;
         right: 0;
@@ -67,6 +69,31 @@
             font-weight: bold;
             font-size: 24px;
             text-shadow: 0 1px 0 rgba(#000,0.3);
+        }
+
+        .box-footer-info {
+            margin-top: 10px;
+            .bf-info {
+                flex-direction: row;
+                align-items: center;
+                margin-right: 32px;
+
+                label {
+                    color: linear-gradient(rgba(#F4F4F4,0.5),#F5F5F5);
+                    text-shadow: 0 1px 0 rgba(#000,0.2);
+                }
+
+                .icon {
+                    margin-right: 8px;
+                    font-size: 24px;
+                }
+                .subtitle {
+                    font-size: 16px;
+                    font-weight: bold;
+
+                    
+                }
+            }
         }
     }
 }
