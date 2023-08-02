@@ -52,22 +52,18 @@ ServerList
       
     }
 
-    > section
-    {
-      label
-      {
+    > section {
+      label {
         font-family: Quantico;
       }
 
-      i
-      {
+      i {
         font-family: Material Icons;
       }
     }
   }
   
-  > .main
-  {
+  > .main {
     flex-direction: column;
   }
 }
@@ -78,25 +74,24 @@ ServerListRow
   justify-content: space-around;
   height: 44px;
   align-items: center;
-
+  transition: all 0.2s ease;
+  
   > section {
     padding: 0 20px;
-
+  
     &.grow {
       flex-grow: 1;
       flex-basis: 1;
     }
-  }
-  
-  > section
-  {
-    label
-    {
-      font-family: Quantico;
+
+    label {
+      color: rgba(#F4F4F4,0.8);
+      font-family: Quantico-Bold;
+      font-size: 16px;
+      transition: color 0.2s ease;
     }
     
-    i
-    {
+    i {
       font-family: Material Icons;
     }
   }
@@ -109,5 +104,14 @@ ServerListRow
   &:nth-child(odd)
   {
     background: transparent;
+  }
+  
+  &:hover {
+    background: linear-gradient(to right, rgba(#76190D,0.05),#151515);
+    cursor: pointer;
+
+    label {
+      color: rgba(#F4F4F4,1);
+    }
   }
 }
