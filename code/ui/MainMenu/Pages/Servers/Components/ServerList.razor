@@ -45,8 +45,10 @@
                     <ServerListRow 
                         Title=@server.Name 
                         Players=@server.Players
+                        MapIdent=@server.Map
                         MaxPlayers=@server.MaxPlayers 
                         Ping=@server.Ping
+                        OnServerSelected=@SelectServer
                     />
                 }
             }
@@ -56,7 +58,14 @@
 
 @code
 {
-    bool IsDebug => true;
+    bool IsDebug => false;
+    
+    public Action<ServerListRow> OnServerSelected { get; set; }
+
+    void SelectServer( ServerListRow row )
+    {
+        OnServerSelected?.Invoke( row );
+    }
     
     Sandbox.Services.ServerList List;
     
