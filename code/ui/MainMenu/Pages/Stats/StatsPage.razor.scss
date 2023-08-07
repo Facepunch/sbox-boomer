@@ -214,6 +214,27 @@ StatsPage
                 height: 90px;
                 margin-bottom: 8px;
                 padding-right: 16px;
+                position: relative;
+
+                .diamond {
+                    align-items: center;
+                    justify-content: center;
+                    height: 2px;
+                    background-color: $red;
+                    box-shadow: 0 1px 20px rgba($red,0.1);
+                    position: absolute;
+                    bottom: -2px;
+                    left: -2px;
+                    right: -2px;
+
+                    > .diamond-icon {
+                        background-size: contain;
+                        background-position: center;
+                        background-image: url(  ui/mainmenu/icons/diamond.svg?color=$red);
+                        width: 12px;
+                        height: 12px;
+                    }
+                }
 
                 &.is-you {
                     border-color: rgba($red,0.3);
