@@ -1,8 +1,258 @@
+@import "../../Styles/_variables.scss";
+
+$weapon-green: #93C93D;
+$weapon-green-dark: #489955;
+$weapon-blue: #00D7D5;
+$weapon-purple: #7F85C9;
+$weapon-red: #C11A32;
+$weapon-orange: #E2522F;
+
+
+
 StatsPage
 {
     .col
     {
         flex-direction: column;
         gap: 16px;
+    }
+
+
+    .stats-container {
+        flex-direction: column;
+        height: 100%;
+
+        .stats-header {
+            label {
+                color: #989898;
+                font-size: 20px;
+                font-family: Quantico;
+                font-weight: bold;
+                margin-bottom: 16px;
+                text-transform: uppercase;
+            }
+        }
+
+        .stats-box {
+            border:2px solid #262424;
+            box-shadow: 0 3px 10px rgba(#000,0.3);
+            font-family: Quantico;
+            flex-direction: column;
+            flex-grow: 1;
+            
+            &.weapons, &.players {
+                border: 0;
+            }
+            
+
+            .stats-row {
+                border-bottom: 2px solid #262424;
+                padding: 16px;
+                flex-direction: row;
+
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                label{
+                    
+                    &.stats-title {
+                        color: rgba(#fff,0.5);
+                        flex-direction: row;
+                        flex-grow: 1;
+                        font-size: 20px; 
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+
+                    &.stats-value {
+                        color: #fff;
+                        font-size: 20px; 
+                        font-weight: bold;
+                    }
+
+                }
+            }
+
+            .weapons-row {
+                align-items: center;
+                margin-bottom: 8px;
+                flex-grow: 1;
+                transition: all 0.1s ease;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 10px 30px rgba(#000,0.5);
+                    z-index: 1;
+                }
+
+                &.is-green {
+                    background: linear-gradient( to right,rgba($weapon-green,0.05), rgba($weapon-green,0));
+                    border: 2px solid $weapon-green;
+
+                    .weapon-stat {
+                        border-left: 2px solid $weapon-green;
+                    }
+
+                    .weapon-name {
+                        color: $weapon-green;
+                    }
+                }
+
+                &.is-orange {
+                    background: linear-gradient( to right,rgba($weapon-orange,0.05), rgba($weapon-orange,0));
+                    border: 2px solid $weapon-orange;
+
+                    .weapon-stat {
+                        border-left: 2px solid $weapon-orange;
+                    }
+
+                    .weapon-name {
+                        color: $weapon-orange;
+                    }
+                }
+
+                &.is-red {
+                    background: linear-gradient( to right,rgba($weapon-red,0.05), rgba($weapon-red,0));
+                    border: 2px solid $weapon-red;
+
+                    .weapon-stat {
+                        border-left: 2px solid $weapon-red;
+                    }
+
+                    .weapon-name {
+                        color: $weapon-red;
+                    }
+                }
+
+                &.is-purple {
+                    background: linear-gradient( to right,rgba($weapon-purple,0.05), rgba($weapon-purple,0));
+                    border: 2px solid $weapon-purple;
+
+                    .weapon-stat {
+                        border-left: 2px solid $weapon-purple;
+                    }
+
+                    .weapon-name {
+                        color: $weapon-purple;
+                    }
+                }
+
+                &.is-blue {
+                    background: linear-gradient( to right,rgba($weapon-blue,0.05), rgba($weapon-blue,0));
+                    border: 2px solid $weapon-blue;
+
+                    .weapon-stat {
+                        border-left: 2px solid $weapon-blue;
+                    }
+
+                    .weapon-name {
+                        color: $weapon-blue;
+                    }
+                }
+
+                &.is-dark-green {
+                    background: linear-gradient( to right,rgba($weapon-green-dark,0.05), rgba($weapon-green-dark,0));
+                    border: 2px solid $weapon-green-dark;
+
+                    .weapon-stat {
+                        border-left: 2px solid $weapon-green-dark;
+                    }
+
+                    .weapon-name {
+                        color: $weapon-green-dark;
+                    }
+                }
+
+                .weapon-icon {
+                    background-color: #ddd;
+                    width: 80px;
+                    height: 60px;
+                    margin: 16px;
+                }
+
+                .weapon-name {
+                    font-size: 20px; 
+                    font-weight: bold;
+                    word-spacing: 20px;
+                    flex-grow: 1;
+                    text-transform: uppercase;
+                    
+                }
+
+                .weapon-stat {
+                    flex-direction: column;
+                    justify-content: center;
+                    border-left: 2px solid red;
+                    height: 100%;
+                    min-width: 100px;
+                    padding: 0 16px;
+                    text-shadow: 0 1px 0 rgba(#000,0.7);
+
+                    .stat-title {
+                        color: rgba(#fff,0.7);
+                        font-size: 16px; 
+                        font-weight: bold;
+                        text-transform: uppercase;
+                    }
+                    .stat-value {
+                        color: #fff;
+                        font-size: 20px; 
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .player-row{
+                align-items: center;
+                border:2px solid #262424;
+                box-shadow: 0 3px 10px rgba(#000,0.3);
+                height: 90px;
+                margin-bottom: 8px;
+                padding-right: 16px;
+
+                &.is-you {
+                    border-color: rgba($red,0.3);
+                    background: linear-gradient(to top, rgba($red,0.07), rgba($red,0));
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .player-position {
+                    font-size: 20px;
+                    font-weight: bold;
+                    width: 60px;
+                    text-align: center;
+                }
+
+                .player-info {
+                    align-items: center;
+                    flex: 1;
+                    .player-avatar {
+                        background-color: #ddd;
+                        width: 50px;
+                        height: 50px;
+                        margin-right: 16px;
+                    }
+
+                    .player-name {
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+
+                .player-value {
+                    color: #fff;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 }
