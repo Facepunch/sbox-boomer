@@ -24,4 +24,7 @@ public partial class Weapon
 
 	[Net, Prefab, Category( "Animation" )]
 	public float HoldTypePose { get; set; } = 0;
+
+	[Net, Prefab, Category( "Basic Information" )]
+	public int Slot { get; set; } = 0;
 }

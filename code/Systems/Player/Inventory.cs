@@ -26,6 +26,8 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 		Weapons.Add( weapon );
 
+		OrderWeaponsBySlot();
+
 		if ( makeActive )
 			SetActiveWeapon( weapon );
 
@@ -89,6 +91,10 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	public Weapon GetSlot( int slot )
 	{
 		return Weapons.ElementAtOrDefault( slot ) ?? null;
+	}
+	public void OrderWeaponsBySlot()
+	{
+		Weapons = Weapons.OrderBy( w => w.Slot ).ToList();
 	}
 
 	protected int GetSlotIndexFromInput( string slot )
@@ -179,7 +185,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 		if ( Input.Pressed( "Reload" ) )
 		{
-			var wpn = FindWeapon( "Sniper" );
+			var wpn = FindWeapon( "Railgun" );
 			if ( wpn.IsValid() ) SetWeaponFromSlot( GetSlotFromWeapon( wpn ) );
 		}
 
