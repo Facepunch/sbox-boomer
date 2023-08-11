@@ -192,11 +192,11 @@
         "Keys": {
           "MaximumAmmo": {
             "Type": "Int32",
-            "Value": "100"
+            "Value": "300"
           },
           "DefaultAmmo": {
             "Type": "Int32",
-            "Value": "100"
+            "Value": "150"
           },
           "AllowChamber": {
             "Type": "Boolean",
@@ -250,6 +250,10 @@
       "HoldType": {
         "Type": "HoldType",
         "Value": "\u0022Rifle\u0022"
+      },
+      "Slot": {
+        "Type": "Int32",
+        "Value": "6"
       }
     }
   }

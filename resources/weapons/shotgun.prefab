@@ -129,11 +129,11 @@
         "Keys": {
           "DefaultAmmo": {
             "Type": "Int32",
-            "Value": "8"
+            "Value": "25"
           },
           "MaximumAmmo": {
             "Type": "Int32",
-            "Value": "8"
+            "Value": "25"
           },
           "AllowChamber": {
             "Type": "Boolean",
@@ -367,6 +367,10 @@
       "ViewModelPath": {
         "Type": "String",
         "Value": "\u0022models/gameplay/weapons/shotgun/shotgun.vmdl\u0022"
+      },
+      "Slot": {
+        "Type": "Int32",
+        "Value": "1"
       }
     }
   }

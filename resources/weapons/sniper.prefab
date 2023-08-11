@@ -191,7 +191,7 @@
           },
           "DefaultAmmo": {
             "Type": "Int32",
-            "Value": "8"
+            "Value": "10"
           },
           "AllowChamber": {
             "Type": "Boolean",
@@ -261,6 +261,10 @@
       "HoldType": {
         "Type": "HoldType",
         "Value": "\u0022Rifle\u0022"
+      },
+      "Slot": {
+        "Type": "Int32",
+        "Value": "5"
       }
     }
   }

@@ -177,7 +177,7 @@
         "Keys": {
           "MaximumAmmo": {
             "Type": "Int32",
-            "Value": "100"
+            "Value": "200"
           },
           "DefaultAmmo": {
             "Type": "Int32",
@@ -190,7 +190,9 @@
           "_name": {
             "Value": "\u0022AmmoComponent\u0022"
           },
-          "_tags": {}
+          "_tags": {
+            "Value": "[]"
+          }
         }
       }
     ],
@@ -229,6 +231,10 @@
       },
       "_tags": {
         "Value": "\u0022\u0022"
+      },
+      "Slot": {
+        "Type": "Int32",
+        "Value": "2"
       }
     }
   }

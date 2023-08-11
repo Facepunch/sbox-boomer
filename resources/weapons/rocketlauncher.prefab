@@ -177,11 +177,11 @@
         "Keys": {
           "MaximumAmmo": {
             "Type": "Int32",
-            "Value": "8"
+            "Value": "20"
           },
           "DefaultAmmo": {
             "Type": "Int32",
-            "Value": "4"
+            "Value": "10"
           },
           "AllowChamber": {
             "Type": "Boolean",
@@ -235,6 +235,10 @@
       "HoldType": {
         "Type": "HoldType",
         "Value": "\u0022RPG\u0022"
+      },
+      "Slot": {
+        "Type": "Int32",
+        "Value": "4"
       }
     }
   }
