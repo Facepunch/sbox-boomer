@@ -1,0 +1,38 @@
+{
+  "ModelPath": "models/gameplay/projectiles/grenades/grenade.vmdl",
+  "ParticlePath": "particles/gameplay/weapons/grenade/grenade.vpcf",
+  "ActiveSoundPath": null,
+  "InitialForce": "2000,250",
+  "Gravity": 10,
+  "Radius": 8,
+  "Lifetime": 5,
+  "ExplodeOnDeath": true,
+  "ExplodeHitTags": [
+    "player"
+  ],
+  "ExplosionRadius": 512,
+  "ExplosionDamage": 100,
+  "ExplosionParticlePath": "particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_gib.vpcf",
+  "ExplosionSoundPath": "sounds/weapons/grenadelauncher/gl.explode.sound",
+  "SelfDamageScale": 0.5,
+  "ExplosionDamageFalloff": [
+    {
+      "y": 1,
+      "in": 1,
+      "out": -1
+    },
+    {
+      "x": 0.501232,
+      "y": 0.146429,
+      "in": 5.333332,
+      "out": -5.333332
+    }
+  ],
+  "NoDeleteOnExplode": false,
+  "ClearZVelocity": false,
+  "Bounciness": 0.9,
+  "BounceSoundPath": "sounds/weapons/grenadelauncher/gl.impact.sound",
+  "BounceSoundMinVelocity": 300,
+  "DragScale": 0.5,
+  "ExplodeOnImpact": false
+}

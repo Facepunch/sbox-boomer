@@ -1,0 +1,29 @@
+@using Sandbox;
+@using Sandbox.UI;
+
+@inherits Sandbox.UI.NavHostPanel
+@implements Sandbox.Menu.IGameMenuPanel
+@attribute [StyleSheet]
+@namespace Facepunch.Boomer.MainMenu
+
+<root>
+    <div class="page-wrapper">
+        <div class="navigator-canvas" slot="navigator-canvas" />
+    </div>
+
+    <FooterComponent />
+</root>
+
+@code
+{
+    public MainMenu()
+    {
+        DefaultUrl = "/play/matchmaking";
+        AddDestination( "/play/matchmaking", typeof( PlayPage ) );
+        AddDestination( "/settings", typeof( SettingsPage ) );
+        AddDestination( "/customize", typeof( CustomizePage ) );
+        AddDestination( "/play/server-browser", typeof( ServerListPage ) );
+        AddDestination( "/play/create", typeof( SetupGame ) );
+        AddDestination( "/stats", typeof( StatsPage ) );
+    }
+}

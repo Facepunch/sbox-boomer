@@ -1,0 +1,38 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		ModelPath = resource:"models/gameplay/projectiles/rockets/rocket.vmdl"
+		ParticlePath = resource:"particles/gameplay/weapons/rocketlauncher/trail_1.vpcf"
+		ActiveSoundPath = resource:"sounds/weapons/rocketlauncher/rl.trail.sound"
+		InitialForce = "2000,0"
+		Gravity = 0
+		Radius = 8
+		Lifetime = 5
+		ExplodeOnDeath = false
+		ExplodeHitTags = 
+		[
+			"player",
+			"solid",
+		]
+		ExplosionRadius = 512
+		ExplosionDamage = 100
+		ExplosionParticlePath = resource:"particles/gameplay/weapons/rocketlauncher/explosion/boomer_explosion_flash.vpcf"
+		ExplosionSoundPath = resource:"sounds/weapons/rocketlauncher/rl.explode.sound"
+		SelfDamageScale = 0.05
+		ExplosionDamageFalloff = 
+		[
+			{
+				y = 1
+			},
+			{
+				x = 1
+			},
+		]
+		NoDeleteOnExplode = false
+		ClearZVelocity = true
+		Bounciness = 0
+		BounceSoundPath = null
+		BounceSoundMinVelocity = 300
+	}
+}

@@ -1,0 +1,106 @@
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <HeaderComponent>
+        <TertiaryHeader>
+            <span class="title">Settings</span>
+            <div class="diamond"></div>
+            <span class="subtitle">Configure your game options</span>
+        </TertiaryHeader>
+    </HeaderComponent>
+
+    <BodyContainer>
+        <Body>
+        <div class="columns">
+            <div class="column is-6 space-between">
+                <div class="form-container">
+                
+                    <div class="form-row">
+                        <label class="form-label">Weapon Position</label>
+                        <Input Value:bind=@WeaponPos />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Tennis Ball Mode</label>
+                        <Switch />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Tennis Ball Colour </label>
+                        <div class="form-control">
+                            <a href="#" class="btn is-icon form-button">
+                                <label class="icon">chevron_left</label>
+                            </a>
+                            <div class="form-input">
+                                <label>Left</label>
+                            </div>
+                            <a href="#" class="btn is-icon form-button">
+                                <label class="icon">chevron_right</label>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Show Hitmarkers</label>
+                        <Switch />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Show Damage Numbbers</label>
+                        <Switch />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Speedometer</label>
+                        <Switch />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Gore</label>
+                        <Switch />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Walk Bob</label>
+                        <Switch />
+                    </div>
+
+                    <div class="form-row">
+                        <label class="form-label">Footstep Sounds</label>
+                        <Switch />
+                    </div>
+                </div>
+            </div>
+            <div class="column is-4">
+
+                <div class="button-container">
+                    <a href="#" class="btn is-primary has-icon fill">
+                        <label class="icon">close</label>
+                        <label class="text">Cancel</label>
+                    </a>
+                    <a href="#" class="btn is-secondary has-icon fill">
+                        <label class="icon">check</label>
+                        <label class="text">Save Changes</label>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </Body>
+    </BodyContainer>
+</root>
+
+@code
+{
+    // TODO - REMOVE THIS
+    
+    WeaponPosition WeaponPos { get; set; } = WeaponPosition.Right;
+    
+    enum WeaponPosition
+    {
+        Left,
+        Center,
+        Right
+    }
+}

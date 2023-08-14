@@ -1,0 +1,50 @@
+@using Facepunch.Boomer;
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Facepunch.Boomer.UI
+@attribute [StyleSheet( "/UI/Hud.scss" )]
+@inherits RootPanel
+
+@if ( DevCam != null ) return;
+
+<style>
+	.hidden
+	{
+		display: none;
+	}
+</style>
+
+<root>
+	<Chat />
+	<Info />
+	<Kills />
+	<PlayerAwards />
+	<Scoreboard />
+	<Crosshair />
+
+	<DeathCam />
+	<SettingsMenu />
+</root>
+
+@code
+{
+	public static Panel CurrentHudPanel { get; protected set; }
+	public DevCamera DevCam => Game.LocalClient.Components.Get<DevCamera>( false );
+
+	public override void Tick()
+	{
+		if ( !GamemodeSystem.Current.IsValid() ) return;
+		if ( CurrentHudPanel is not null ) return;
+
+		var gamemode = GamemodeSystem.Current;
+		CurrentHudPanel = gamemode.HudPanel;
+		CurrentHudPanel.Parent = this;
+		CurrentHudPanel.BindClass( "hidden", () => DevCam != null );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Time.Now );
+	}
+}

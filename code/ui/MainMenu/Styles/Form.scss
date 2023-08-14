@@ -1,0 +1,81 @@
+
+.form-container {
+    max-width: 1000px;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.form-row {
+    align-items: center;
+    background: linear-gradient(to top, rgba(#000,0.1), rgba(#000,0));
+    border-bottom: 2px solid rgba($blue-dull,0.02);
+    font-family: Quantico;
+    margin-bottom: 16px;
+    padding: 0 16px 16px 16px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: linear-gradient(to top, rgba(#000,0.3), rgba(#000,0));
+        border-bottom: 2px solid rgba($blue-dull,0.1);
+    }
+
+    .form-label {
+        color: $blue-dull;
+        flex-grow: 1;
+        font-size: 20px;
+    }
+
+    .form-control {
+        min-width: 300px;
+
+        .form-button {
+            margin: 0 4px;
+        }
+
+        .form-input {
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to top, rgba($blue-dull,0.03), rgba($blue-dull,0.01));
+            border-bottom: 2px solid rgba($blue-light,0.1);
+            flex-grow: 1;
+            height: 44px;
+            margin: 0 8px;
+            padding: 0 16px;
+
+            label {
+                font-size: 18px;
+                color: $blue-light;
+                
+            }
+
+            &.text-left {
+                text-align: left;
+                justify-content: flex-start;
+            }
+
+            .is-focused {
+                background: red;
+
+            }
+        }
+    }
+
+    &.disabled {
+        opacity: 0.1;
+        .form-control {
+            pointer-events: none;
+        }
+    }
+}
+
+.button-container {
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 20px;
+
+    .btn {
+        flex-grow: 1;
+        height: 64px;
+    }
+}

@@ -1,0 +1,64 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Collections.Generic;
+@using System;
+@using System.Linq;
+
+@namespace Facepunch.Boomer.UI
+
+<root class="@RootClasses()">
+    @if ( Client.IsValid() )
+    {
+        <img class="avatar" src="avatar:@Client.SteamId" />
+        <label class="name">@Client.Name</label>
+        <label class="kills">@Kills</label>
+        <label class="deaths">@Deaths</label>
+        <label class="score">@Score</label>
+        <label class="ping">@Client.Ping</label>
+    }
+    else
+    {
+        <label class="loading">...</label>
+    }
+</root>
+
+@code
+{
+    public IClient Client { get; protected set; }
+
+    public int Kills => Client.GetInt( "frags", 0 );
+    public int Deaths => Client.GetInt( "deaths", 0 );
+    public int Score => Client.GetInt( "score", 0 );
+
+    public void SetClient( IClient cl )
+    {
+        Client = cl;
+        SetClass( "me", cl == Game.LocalClient );
+
+        StateHasChanged();
+    }
+
+    public string RootClasses()
+    {
+        var cl = Game.Clients.FirstOrDefault( x => x.SteamId == Client.SteamId );
+        if ( cl == null ) return "disconnected";
+
+        var friendly = new Friend(cl.SteamId).IsFriend;
+        if ( friendly ) return "friend";
+
+        return "enemy";
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Kills, Deaths, Score );
+    }
+
+    protected override void OnClick( MousePanelEvent e )
+    {
+        var friend = new Friend(Client.SteamId);
+        
+        if ( friend.Id != 0 )
+            friend.OpenInOverlay();
+    }
+}

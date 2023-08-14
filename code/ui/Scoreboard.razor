@@ -1,128 +1,83 @@
-﻿
-@using Boomer;
+@using Sandbox;
 @using Sandbox.UI;
+@using System.Collections.Generic;
+@using System.Linq;
 
-@namespace Boomer.UI
-@attribute [StyleSheet("ui/Scoreboard.scss")]
-@inherits Panel;
+@attribute [StyleSheet( "/UI/Scoreboard.scss" )]
+@namespace Facepunch.Boomer.UI
 
-<root class="scoreboard">
-	<button onclick=@OpenSettings class="button" style="margin-bottom: 20px;">#Scoreboard.Settings</button>
+<root>
+    <div class="main">
+        <div class="title">
+            <text>Boomer</text>
+        </div>
 
-	<panel class="header" @ref=Header>
-		<label class="name">#Scoreboard.Player</label>
-		<label class="kills">#Scoreboard.Kills</label>
-		<label class="deaths">#Scoreboard.Deaths</label>
-		<label class="ping">#Scoreboard.Ping</label>
-	</panel>
+        <div class="canvases" @ref=Canvases />
 
-	<panel class="canvas" @ref=Canvas></panel>
-
-	<button onclick=@ToggleSpectator class="button" style="margin-bottom: 20px;">#Scoreboard.ToggleSpectator</button>
+        <div class="footer">
+            <button onclick=@(()=> SettingsMenu.SetOpen( true ) )<i>tune</i>Settings</button>
+        </div>
+    </div>
 </root>
 
 @code
 {
-	bool Cursor;
-	RealTimeSince timeSinceSorted;
-	Dictionary<IClient, ScoreboardEntry> Rows = new();
+    public Dictionary<Team, ScoreboardTeam> Teams = new();
 
-	public Panel Canvas;
-	public Panel Header;
+    public Panel Canvases;
 
-	public override void Tick()
-	{
-		SetClass( "open", ShouldBeOpen() );
+    bool IsLoaded = false;
 
-		if ( !IsVisible )
-			return;
+    public void AddTeam( Team team )
+    {
+        var teamPanel = Canvases.AddChild<ScoreboardTeam>( "team" );
+        teamPanel.Team = team;
 
-		//
-		// Clients that were added
-		//
-		foreach ( var client in Game.Clients.Except( Rows.Keys ) )
-		{
-			var entry = AddClient( client );
-			Rows[client] = entry;
-		}
+        Teams.Add( team, teamPanel );
+    }
 
-		foreach ( var client in Rows.Keys.Except( Game.Clients ) )
-		{
-			if ( Rows.TryGetValue( client, out var row ) )
-			{
-				row?.Delete();
-				Rows.Remove( client );
-			}
-		}
+    [Event.Hotload]
+    protected void Hotload()
+    {
+        IsLoaded = false;
+        Teams.Clear();
+        Canvases.DeleteChildren();
+    }
 
-		Style.PointerEvents = Cursor ? PointerEvents.All : PointerEvents.None;
+    public override void Tick()
+    {
+        SetClass( "open", Input.Down( "score" ) );
 
-		if ( !HasClass( "open" ) ) Cursor = false;
-		if ( !IsVisible ) return;
+        if ( !IsVisible )
+            return;
 
-		if ( Input.Down( InputButton.PrimaryAttack ) || Input.Down( InputButton.SecondaryAttack ) )
-		{
-			Cursor = true;
-		}
+        if ( !IsLoaded )
+        {
+            if ( !GamemodeSystem.Current.IsValid() )
+            {
+                AddTeam( Team.None );
+            }
+            else
+            {
+                GamemodeSystem.Current.Teams.ToList().ForEach( AddTeam );
+            }
 
-		if ( timeSinceSorted > 0.1f )
-		{
-			timeSinceSorted = 0;
+            IsLoaded = true;
+        }
 
-			if ( TeamManager.Current.IsValid() && TeamManager.Current.IsTeamPlayEnabled )
-			{
-				Canvas.SortChildren<ScoreboardEntry>( x =>
-				{
-					var team = x.Client.GetTeam();
-					if ( team == null ) return 0;
+        Update();
+    }
 
-					x.Style.BackgroundColor = team.Color.WithAlpha( 0.1f );
 
-					return -x.Client.GetTeam().Index * 1000;
-				} );
-			}
-			else
-			{
-				//
-				// Sort by number of kills, then number of deaths
-				//
-				Canvas.SortChildren<ScoreboardEntry>( ( x ) => (-x.Client.GetInt( "kills" ) * 1000) + x.Client.GetInt( "deaths" ) );
-			}
-		}
-	}
+    TimeUntil TimeUntilNextUpdate = 0;
+    void Update()
+    {
+        if ( TimeUntilNextUpdate )
+        {
+            TimeUntilNextUpdate = 0.2f;
 
-	protected override int BuildHash()
-	{
-		if (timeSinceSorted < 0.1f) return 0;
-
-		return HashCode.Combine( Time.Now );
-	}
-
-	private bool ShouldBeOpen()
-	{
-		if ( DeathmatchGame.CurrentState == DeathmatchGame.GameStates.GameEnd )
-			return true;
-
-		if ( Input.Down( InputButton.Score ) )
-			return true;
-
-		return false;
-	}
-
-	private ScoreboardEntry AddClient( IClient entry )
-	{
-		var p = Canvas.AddChild<ScoreboardEntry>();
-		p.Client = entry;
-		return p;
-	}
-
-	public void OpenSettings()
-	{
-		SettingsMenu.SetOpen( true );
-	}
-
-	public void ToggleSpectator()
-	{
-		DeathmatchGame.ToggleSpectator();
-	}
+            foreach( var team in Teams )
+                team.Value.Update();
+        }
+    }
 }

@@ -1,0 +1,82 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Name = "Shotgun"
+		Model = resource:"models/gameplay/weapons/shotgun/w_shotgun.vmdl"
+		ViewModel = resource:"models/gameplay/weapons/shotgun/shotgun.vmdl"
+		CrosshairIcon = resource:"ui/crosshair/crosshair121.png"
+		WeaponColor = "1,0.727,0,1"
+		Icon = resource:"ui/weapons/icon_6.png"
+		AmmoIcon = resource:"ui/ammo/icon_6_ammo.png"
+		HoldType = "Shotgun"
+		Handedness = "Right"
+		Components = 
+		[
+			"Shoot",
+			"Ammo",
+			"SecondaryShoot",
+		]
+		ViewModelData = 
+		{
+			OverallWeight = 0.5
+			WeightReturnForce = 100
+			WeightDamping = 18
+			AccelerationDamping = 15
+			VelocityScale = 10
+			RotationalPivotForce = 10
+			RotationalScale = 5
+			WalkCycleOffset = "-4,150,0"
+			BobAmount = "100,200"
+			GlobalLerpPower = 1
+			CrouchPositionOffset = "-3,1,0"
+			CrouchAngleOffset = "2,0,-15"
+			AvoidancePositionOffset = "-5,0,0"
+			AvoidanceAngleOffset = "2,0,-25"
+			SprintPositionOffset = "1,3.226,8"
+			SprintAngleOffset = "20,6.529,-12.2"
+			AimPositionOffset = "-6,0,2.5"
+			AimFovOffset = 15
+		}
+		Shoot = 
+		{
+			BaseDamage = 15
+			BulletRange = 5000
+			BulletCount = 12
+			BulletForce = 1000
+			BulletSize = 1
+			BulletSpread = 0.2
+			FireDelay = 1
+			FireSound = 
+			[
+				resource:"sounds/weapons/shotgun/shotgun.shoot.sound",
+				resource:"sounds/weapons/shotgun/shotgun.reload.sound",
+			]
+			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
+		}
+		SecondaryShoot = 
+		{
+			BaseDamage = 20
+			BulletRange = 1000
+			BulletCount = 6
+			BulletForce = 1000
+			BulletSize = 1
+			BulletSpread = 0.1
+			FireDelay = 2
+			FireSound = 
+			[
+				resource:"sounds/weapons/shotgun/shotgun.shoot.sound",
+				resource:"sounds/weapons/shotgun/shotgun.reload.sound",
+			]
+			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
+		}
+		Aim = 
+		{
+		}
+		Ammo = 
+		{
+			DefaultAmmo = 24
+			MaximumAmmo = 24
+		}
+	}
+}

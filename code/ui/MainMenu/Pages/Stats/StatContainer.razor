@@ -1,0 +1,32 @@
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <label class="title">@FormattedGamemode</label>
+
+    <br />
+
+    <div class="entries">
+        <StatEntry Stat="time" Gamemode=@Gamemode />
+        <StatEntry Stat="kills" Gamemode=@Gamemode />
+        <StatEntry Stat="deaths" Gamemode=@Gamemode />
+    </div>
+</root>
+
+@code
+{
+    public string Gamemode { get; set; } = "tdm";
+
+    protected string FormattedGamemode
+    {
+        get
+        {
+            return Gamemode switch
+            {
+                "tdm" => "Team Deathmatch",
+                "dm" => "Deathmatch",
+                _ => "Team Deathmatch",
+            };
+        }
+    }
+}

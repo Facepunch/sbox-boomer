@@ -1,0 +1,32 @@
+@using Facepunch.Boomer.WeaponSystem;
+@using Sandbox;
+@using System;
+@using Sandbox.UI;
+
+@namespace Facepunch.Boomer
+@inherits Panel;
+
+<style>
+    Crosshair {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        transition: opacity 0.1s ease;
+        opacity: 1;
+    }
+</style>
+
+<root>
+    <img class="icon" src="@ImagePath" />
+</root>
+
+@code {
+    public Weapon Weapon => (Game.LocalPawn as Player)?.ActiveWeapon;
+    public string ImagePath => Weapon?.CrosshairIcon ?? "";
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( ImagePath );
+    }
+}

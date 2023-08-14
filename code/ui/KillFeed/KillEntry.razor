@@ -1,0 +1,102 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+@using Facepunch.Boomer.WeaponSystem;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel
+
+<style>
+    KillEntry
+    {
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+        font-family: Quantico;
+        font-weight: 700;
+        color: white;
+        background-color: rgba( 0, 0, 0, 0.65 );
+        backdrop-filter: blur( 5px );
+        box-shadow: 5px 5px 30px rgba( 0, 0, 0, 0.5 );
+        max-height: 40px;
+        border-radius: 2px;
+        padding: 12px;
+        transition: all 0.2s ease;
+
+        .attacker, .victim
+        {
+            text-shadow: 0px 0px 2px rgba( 0, 0, 0, 0.3 );
+        }
+
+        &:intro
+        {
+            opacity: 0;
+        }
+
+        &:outro
+        {
+            opacity: 0;
+        }
+
+        .weapon
+        {
+            padding-left: 12px;
+            padding-right: 12px;
+            align-items: center;
+
+            .icon
+            {
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 38px;
+                aspect-ratio: 1;
+            }
+
+            label
+            {
+                font-size: 16px;
+                text-shadow: 0px 0px 6px darken( @Color.WithAlpha( 0.5f ).Hex, 50% );
+                color: linear-gradient( to bottom, darken( @Color.Hex, 0% ), darken( @Color.Hex, 40% ) );
+            }
+        }
+    }
+</style>
+
+<root>
+    <label class="attacker">@AttackerName</label>
+
+    <div class="weapon">
+        @if ( Icon != null )
+        {
+            <img class="icon" src=@Icon />
+        }
+        <label>@KillMessage</label>
+    </div>
+
+    <label class="victim">@VictimName</label>
+</root>
+
+@code
+{
+    public string AttackerName { get; set; } = "DevulTj";
+    public string VictimName { get; set; } = "bakscratch";
+    public string WeaponIdent { get; set; } = "Sniper Rifle";
+    public string KillMessage { get; set; } = "Killed";
+    public string Icon { get; set; } = null;
+    public Color Color { get; set; } = Color.White;
+
+    TimeSince TimeSinceCreated { get; set; } = 0;
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine( AttackerName, VictimName, WeaponIdent, KillMessage, Color, Icon );
+    }
+
+    public override void Tick()
+    {
+        if ( TimeSinceCreated > 5f && !IsDeleting )
+        {
+            Delete();
+        }
+    }
+}

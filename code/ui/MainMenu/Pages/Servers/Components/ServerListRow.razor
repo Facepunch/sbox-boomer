@@ -1,0 +1,99 @@
+﻿@using System.Threading.Tasks
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <section class="icon-header">
+        <label class="icon">favorite</label>
+    </section>
+    <section class="grow">
+        @Title
+    </section>
+	<section class="min-200">
+		@if ( MapPackage != null )
+		{
+			<label>@(MapPackage.Title)</label> 
+		}
+		else
+		{
+		    <label>@MapIdent</label>
+		}
+	</section>
+    <section class="min-200">
+        @(Players)/@(MaxPlayers)
+    </section>
+    <section class="min-100">
+        @Ping
+    </section>
+</root>
+
+@code
+{
+    public string Title { get; set; }
+	
+    private string _map;
+    public Package MapPackage;
+	
+    public string MapIdent
+    {
+        get => _map;
+        set
+        {
+            _map = value;
+            _ = SyncMap();
+        }
+    }
+    public int Players { get; set; } = 0;
+    public int MaxPlayers { get; set; } = 0;
+    public int Ping { get; set; } = 100;
+    public ulong SteamId { get; set; }
+	
+    public Action<ServerListRow> OnServerSelected { get; set; }
+    public Sandbox.Services.ServerList.Entry? Server { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        Refresh();
+    }
+
+    void Refresh()
+    {
+        if ( Server != null )
+        {
+            var server = Server.Value;
+			
+            Players = server.Players;
+            MaxPlayers = server.MaxPlayers;
+            MapIdent = server.Map;
+            Ping = server.Ping;
+            SteamId = server.SteamId;
+            Title = server.Name;
+        }
+    }
+
+    string PingIcon
+    {
+        get
+        {
+            if ( Ping < 50 ) return "network_wifi";
+            if ( Ping < 100 ) return "network_wifi_3_bar";
+            if ( Ping < 150 ) return "network_wifi_2_bar";
+			
+            return "network_wifi_1_bar";
+        }
+    }
+	
+    protected override void OnClick( MousePanelEvent e )
+    {
+        OnServerSelected?.Invoke( this );
+    }
+
+    async Task SyncMap()
+    {
+        MapPackage = await Package.Fetch( _map, false );
+        StateHasChanged();
+    }
+}

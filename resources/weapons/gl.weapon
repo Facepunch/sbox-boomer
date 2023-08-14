@@ -1,0 +1,70 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Name = "Grenade Launcher"
+		Model = resource:"models/gameplay/weapons/grenadelauncher/w_grenadelauncher.vmdl"
+		ViewModel = resource:"models/gameplay/weapons/grenadelauncher/grenadelauncher.vmdl"
+		CrosshairIcon = resource:"ui/crosshair/crosshair165.png"
+		WeaponColor = "0.43922,0.63137,0.17647,1"
+		Icon = resource:"ui/weapons/icon_1.png"
+		AmmoIcon = resource:"ui/ammo/icon_1_ammo.png"
+		HoldType = "Rifle"
+		Handedness = "Right"
+		Components = 
+		[
+			"Shoot",
+			"Ammo",
+		]
+		KillMessages = 
+		[
+			"banged",
+		]
+		ViewModelData = 
+		{
+			OverallWeight = 0.1
+			WeightReturnForce = 100
+			WeightDamping = 18
+			AccelerationDamping = 15
+			VelocityScale = 10
+			RotationalPivotForce = 10
+			RotationalScale = 5
+			WalkCycleOffset = "-4,150,0"
+			BobAmount = "100,200"
+			GlobalLerpPower = 1
+			CrouchPositionOffset = "-3,1,0"
+			CrouchAngleOffset = "2,0,-15"
+			AvoidancePositionOffset = "-5,0,0"
+			AvoidanceAngleOffset = "2,0,-25"
+			SprintPositionOffset = "1,3.226,8"
+			SprintAngleOffset = "20,6.529,-12.2"
+			AimPositionOffset = "1.396,8.261003,3.366"
+		}
+		Shoot = 
+		{
+			BaseDamage = 15
+			BulletRange = 5000
+			BulletCount = 1
+			BulletForce = 1000
+			BulletSize = 2
+			FireDelay = 1
+			FireSound = 
+			[
+				resource:"sounds/weapons/grenadelauncher/gl.shoot.sound",
+			]
+			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
+			Projectile = resource:"resources/weapons/projectiles/grenade.ple"
+		}
+		SecondaryShoot = 
+		{
+		}
+		Aim = 
+		{
+		}
+		Ammo = 
+		{
+			DefaultAmmo = 8
+			MaximumAmmo = 8
+		}
+	}
+}

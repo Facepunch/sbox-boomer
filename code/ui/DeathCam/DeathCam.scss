@@ -1,0 +1,157 @@
+@import "/ui/Hud.scss";
+
+DeathCam
+{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+
+    .main
+    {
+        width: 30%;
+        height: 80px;
+        padding: 8px;
+        backdrop-filter: blur( 50px );
+        border: 0.5px solid rgba( black, 0.3 );
+        background: linear-gradient( to left, rgba( black, 0.1 ), rgba( black, 0.6 ) );
+
+        .avatar
+        {
+            width: 60px;
+            height: 60px;
+            border: 2px solid $main-color;
+        }
+
+        .anim
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient( to right, rgba( black, 0 ) 0%, rgba( red, 0 ) 15%, rgba( red, 0.1 ) 50%, rgba( red, 0 ) 85%, rgba( black, 0 ) 100% );
+            animation-name: flash;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-direction: alternate;
+        }
+
+        .anim2
+        {
+            position: absolute;
+            bottom: -2px;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient( to right, rgba( black, 0 ) 0%, rgba( black, 0 ) 10%, rgba( white, 0.3 ) 50%, rgba( black, 0 ) 90%, rgba( black, 0 ) 100% );
+            animation-name: anim2;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-direction: alternate-reverse;
+        }
+
+        .anim3
+        {
+            position: absolute;
+            top: -2px;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient( to right, rgba( black, 0 ) 0%, rgba( black, 0 ) 10%, rgba( white, 0.3 ) 50%, rgba( black, 0 ) 90%, rgba( black, 0 ) 100% );
+            animation-name: anim2;
+            animation-duration: 3s;
+            animation-timing-function: ease-in-out;
+            animation-direction: alternate;
+        }
+
+        .weapon
+        {
+            position: absolute;
+            right: -16px;
+            bottom: -16px;
+            height: 48px;
+            width: 48px;
+        }
+
+        .center
+        {
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+        }
+
+        .col
+        {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+        }
+
+        .row
+        {
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+            gap: 16px;
+        }
+
+        .stretch
+        {
+            flex-grow: 1;
+        }
+
+        .text
+        {
+            color: white;
+            font-weight: 700;
+            font-family: Quantico;
+            font-size: 28px;
+            height: 28px;
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+            text-shadow: 0px 2px 3px rgba( black, 0.5 );
+
+            &.thin
+            {
+                font-weight: 300;
+            }
+
+            &.small
+            {
+                height: 24px;
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+@keyframes flash
+{
+    0%
+    {
+        transform: translateX(-100%);
+    }
+
+    100%
+    {
+        transform: translateX(100%);
+    }
+}
+
+
+@keyframes anim2
+{
+    0%
+    {
+        transform: translateX(-20%);
+    }
+
+
+    100%
+    {
+        transform: translateX(20%);
+    }
+}

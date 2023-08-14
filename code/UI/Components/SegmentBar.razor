@@ -1,0 +1,99 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Collections.Generic;
+@using System;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel;
+@attribute [StyleSheet( "/UI/Components/SegmentBar.scss" )]
+
+<style>
+    SegmentBar {
+       .segment {
+            &.active {
+                background-image: linear-gradient( to top, darken( @Hex, 10% ), darken( @Hex, 10% ) );
+
+                .inner {
+                    background-image: linear-gradient( to top, @Hex, darken( @Hex, 10% ) );
+                }
+            }
+
+            &.supercharged {
+                background-image: linear-gradient( to top, darken( @SuperchargeHex, 10% ), darken( @SuperchargeHex, 10% ) );
+
+                .inner {
+                    background-image: linear-gradient( to top, @SuperchargeHex, darken( @SuperchargeHex, 10% ) );
+                }
+            }
+       }
+
+       &.slim {
+           .segment {
+               &.active {
+                    background-image: linear-gradient( to top, @Hex, darken( @Hex, 30% ) );
+               }
+           }
+       }
+    }
+</style>
+
+@code {
+    public int Segments { get; set; } = 5;
+
+    public List<Panel> SegmentPanels { get; set; }
+    protected Func<int> ActiveSegmentMethod { get; set; }
+
+    public float CurrentValue { get; set; } = 60;
+    public float MaxValue { get; set; } = 100;
+
+    public Color Color { get; set; } = Color.Parse( "#E1D6D4" ) ?? Color.White;
+    public Color SuperchargeColor { get; set; } = Color.Parse( "#2A97D7" ) ?? Color.Cyan;
+
+    public string Hex => Color.Hex;
+    public string SuperchargeHex => SuperchargeColor.Hex;
+
+    protected override void OnAfterTreeRender( bool firstTime )
+    {
+        SegmentPanels = new();
+        DeleteChildren( true );
+
+        for ( int i = 0; i < Segments; i++ )
+        {
+            var segment = AddChild<Panel>( "segment" );
+            var inner = segment.AddChild<Panel>( "inner" );
+            SegmentPanels.Add( segment ); 
+        }
+    }
+
+    protected int GetActiveSegments()
+    {
+        return (int)MathF.Round( ( CurrentValue / MaxValue ) * Segments );
+    }
+
+    int ActiveCount, SuperchargedCount = 0;
+    public override void Tick()
+    {
+        ActiveCount = 0;
+        SuperchargedCount = 0;
+
+        var activeSegments = GetActiveSegments();
+
+        for ( int i = 0; i < Segments; i++ )
+        {
+            var segment = SegmentPanels[i];
+
+            var isActive = i < activeSegments;
+            segment.SetClass( "active", isActive );
+            if ( isActive ) ActiveCount++;
+
+            var isSupercharged = ( i + Segments ) < activeSegments;
+            segment.SetClass( "supercharged", isSupercharged );
+            if ( isSupercharged ) SuperchargedCount++;
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( ActiveCount, SuperchargedCount );
+    }
+}

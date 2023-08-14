@@ -1,62 +1,285 @@
-﻿.scoreboard {
-    position: absolute;
-    z-index: 100;
-    flex-direction: column;
-    font-family: Poppins;
-    font-size: 18px;
-    font-weight: 500;
-    color: white;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    background-color: rgba( 0, 0, 0, 0.9 );
-    transition: all 0.1s ease-out;
-    transform: scale( 1.05 );
-    transform-origin: 50% 50%;
+@import "/ui/Hud.scss";
 
-    &.open {
+Scoreboard
+{
+    align-items: flex-start;
+    background-image: linear-gradient(180deg, rgba(25, 25, 35, 0.6) 0%, rgba(0, 0, 25, 0.8) 100%);
+    font-family: Quantico;
+    flex-direction: row;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    transition: opacity 0.2s ease;
+    backdrop-filter-blur: 25px;
+
+    &.open
+    {
         opacity: 1;
-        transform: scale( 1 );
+        pointer-events: all;
+        background-image: linear-gradient( to left, rgba( 0, 0, 0, 0.5 ), rgba( 0, 0, 25, 0.9 ) );
+
+        .main
+        {
+            transform: translateX(0%) scale(1);
+        }
     }
 
-    .name {
+    .grow
+    {
         flex-grow: 1;
     }
 
-    .deaths, .kills, .ping {
-        width: 90px;
-        text-align: right;
-    }
-
-    .header {
-        font-weight: 200;
-        opacity: 0.3;
-        border-bottom: 2px solid rgba( white, 0.6 );
-        min-width: 30%;
-    }
-
-    .canvas {
+    .main
+    {
         flex-direction: column;
-        min-height: 50%;
-        min-width: 30%;
+        transition: all 0.2s ease;
+        transform: translateX(-100%) scale(0.5);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+    }
 
-        .entry {
-            margin-bottom: 2px;
-            padding: 4px;
+    .footer
+    {
+        padding: 16px 64px;
+    }
 
-            &.me {
-                color: #b6ff00;
+    button
+    {
+        background-image: linear-gradient( to right, rgba( 0, 0, 0, 0.25 ), rgba( 0, 0, 0, 0 ) );
+        color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 8px 16px;
+        width: 256px;
+        align-items: center;
+        gap: 16px;
+        transform: rotateY(-20deg) rotateX(10deg);
+
+        i
+        {
+            font-family: Material Icons;
+            font-size: 32px;
+        }
+
+        &:hover
+        {
+            background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
+        }
+    }
+
+
+    .title
+    {
+        display: none;
+    }
+
+    .names
+    {
+        align-items: center;
+        background-size: 100%;
+        color: $main-color;
+        height: 44px;
+        padding-right: 64px;
+        padding-left: 64px;
+        font-weight: 500;
+        font-family: Quantico;
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+
+    .name
+    {
+        flex-grow: 1;
+    }
+
+    .deaths, .kills, .score, .fps, .captures, .ping
+    {
+        width: 150px;
+    }
+
+    .canvases
+    {
+        width: 50%;
+        height: 85%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
+        margin-left: 64px;
+        margin-right: 64px;
+        gap: 64px;
+    }
+
+    scoreboardteam
+    {
+        &:first-child
+        {
+            transform: rotateY(-20deg) rotateX(10deg);
+        }
+
+        &:last-child
+        {
+            transform: rotateY(-20deg) rotateX(10deg);
+        }
+
+        flex-direction: column;
+        width: 100%;
+
+        > .header
+        {
+            flex-direction: column;
+            align-content: flex-start;
+            margin-bottom: 8px;
+
+            > .score
+            {
+                flex-direction: column;
+                width: 100%;
+
+                > .bar
+                {
+                    background-color: rgba(0, 0, 0, 0.2);
+                    height: 16px;
+
+                    > .bar-inner
+                    {
+                        border: 1px solid rgba(0, 0, 0, 0.2);
+                        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+                    }
+                }
             }
 
-            &:hover {
+            .team-score
+            {
+                text-transform: uppercase;
+                font-family: Quantico;
+                font-weight: 900;
+                font-size: 20px;
+                color: white;
+                align-items: center;
+                text-shadow: 1px 1px 1px rgba( black, 1 );
+                padding-bottom: 4px;
+            }
+
+            .span
+            {
+                gap: 5px;
+            }
+
+            .team-name
+            {
+                text-transform: uppercase;
+                font-family: Quantico;
+                font-weight: 900;
+                font-size: 45px;
+                text-shadow: 1px 1px 1px rgba( black, 0.5 );
+            }
+        }
+
+        &.friend
+        {
+            > .header
+            {
+                .bar-inner
+                {
+                    background-color: rgba( white, 0.8 );
+                }
+            }
+        }
+
+        &.enemy
+        {
+            > .header
+            {
+                .bar-inner
+                {
+                    background-color: rgba( white, 0.8 );
+                }
+            }
+        }
+
+        .canvas
+        {
+            flex-direction: column;
+            gap: 8px;
+
+            .placeholder
+            {
+                text-align: center;
+                font-weight: 700;
+                font-family: Quantico;
+                font-size: 30px;
+                text-transform: uppercase;
+                color: white;
+                align-items: center;
+                justify-content: center;
+                align-content: center;
+                height: 100px;
+                background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
+            }
+
+            ScoreboardRow
+            {
+                margin-right: 55px;
+                align-items: center;
+                background-size: 100%;
+                height: 60px;
+                background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
                 cursor: pointer;
-                background-color: rgba( #FAB002, 0.2 );
-            }
 
-            &:active {
-                background-color: rgba( #FAB002, 0.4 );
+                label
+                {
+                    font-weight: 700;
+                    font-family: Quantico;
+                    font-size: 20px;
+                }
+
+                .name
+                {
+                    color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
+                }
+
+                .kills, .deaths, .score, .ping
+                {
+                    color: linear-gradient( 180deg, #E1D6D4 0%, darken(#E1D6D4, 50%) 100% );
+                }
+
+                &:hover
+                {
+                    background-image: linear-gradient( to right, rgba(0, 0, 0, 0.8), rgba( 0, 0, 0, 0 ) );
+                }
+
+                &.friend
+                {
+                    background-image: linear-gradient( to right, rgba(50, 75, 50, 0.5), rgba( 0, 0, 0, 0 ) );
+                }
+
+                &.me
+                {
+                    background-image: linear-gradient( to right, rgba(50, 50, 75, 0.5), rgba( 0, 0, 0, 0 ) );
+                    border-bottom: 2px solid rgba(50, 50, 75, 0.5);
+
+                    &:hover
+                    {
+                        background-image: linear-gradient( to right, rgba(50, 50, 75, 0.8), rgba( 0, 0, 0, 0 ) );
+                        border-bottom: 2px solid rgba(50, 50, 85, 0.5);
+                    }
+                }
+
+                img
+                {
+                    left: 0;
+                    height: 100%;
+                    aspect-ratio: 1;
+                    margin-right: 8px;
+                }
             }
         }
     }

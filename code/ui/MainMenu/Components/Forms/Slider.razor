@@ -1,0 +1,45 @@
+﻿@inherits Panel 
+@namespace Facepunch.Boomer.MainMenu
+
+<root>
+    <div class="form-control">
+        <div class="btn is-icon form-button" @onclick=@(() => Move( false ) )>
+            <label class="icon">chevron_left</label>
+        </div>
+        <div class="form-input">
+            <label>@Value.ToString( NumberFormat )</label>
+        </div>
+        <div class="btn is-icon form-button" @onclick=@(() => Move( true ) )>
+            <label class="icon">chevron_right</label>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    float _value;
+    public float Value
+    {
+        get => _value;
+
+        set
+        {
+            if ( _value == value )
+                return;
+
+            _value = MathX.Clamp( value, Min, Max );
+
+            StateHasChanged();
+        }
+    }
+    
+    public string NumberFormat { get; set; } = "0.###";
+    public float Step { get; set; } = 1.0f;
+    public float Max { get; set; } = 32;
+    public float Min { get; set; } = 1;
+
+    void Move( bool isAscending )
+    {
+        Value += isAscending ? Step : -Step;
+    }
+}

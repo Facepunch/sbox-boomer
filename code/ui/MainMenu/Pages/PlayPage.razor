@@ -1,0 +1,289 @@
+@using System.Threading.Tasks;
+
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <HeaderComponent>
+        <SecondaryHeader>
+            <nav href="/play/matchmaking">
+                <span>Match Making</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/server-browser">
+                <span>Server Browser</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/create">
+                <span>Create</span>
+                <div class="diamond"></div>
+            </nav>
+        </SecondaryHeader>
+       
+    </HeaderComponent>
+
+    <BodyContainer>
+        <Body>
+            <div class="lobby-container">
+                <div class="lobby">
+                    
+                    <div class="player-container">
+                        <div class="player is-host">
+                            <div class="player-header">
+                                <div class="mic">
+                                    <label class="icon">mic</label>
+                                </div>
+                            </div>
+                            <div class="player-image"></div>
+                            <div class="player-footer">
+                                <div class="player-avatar"></div>
+                                <label class="player-name">Player Nameasdadasdadasdasds</label>
+                            </div>
+                            <div class="player-leader">
+                                <div class="diamond"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="player-container">
+                        <div class="player is-speaking">
+                            <div class="player-header">
+                                <div class="mic">
+                                    <label class="icon">mic</label>
+                                </div>
+                            </div>
+                            <div class="player-image"></div>
+                            <div class="player-footer">
+                                <div class="player-avatar"></div>
+                                <label class="player-name">Player Nameasdadasdadasdasds</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="player-container">
+                        <div class="player">
+                            <div class="player-header">
+                                <div class="mic">
+                                    <label class="icon">mic</label>
+                                </div>
+                            </div>
+                            <div class="player-image"></div>
+                            <div class="player-footer">
+                                <div class="player-avatar"></div>
+                                <label class="player-name">Player Nameasdadasdadasdasds</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="player-container">
+                        <div class="player is-connecting">
+                            <label class="title">Player Connecting...</label>
+                        </div>
+                    </div>
+
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>        
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    <div class="player-container">
+                        <div class="player is-empty">
+                            <label class="icon large">person_add</label>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </Body>
+    </BodyContainer>
+
+    
+
+    <!-- @if ( FoundGameServer == null )
+    {
+        <div class="queue">
+            <label>Searching for a game...</label>
+            <label class="time">@TimeString</label>
+            <div class="bar" />
+        </div>
+
+        <div class="flex-grow" />
+
+        @if ( TimeSinceQueued > 10f )
+        {
+
+            <div class="warning">
+                <label class="message">You've been searching for a while - do you want to make a server instead?</label>
+                <a href="/servers/setup">create server</a>
+            </div>
+        }
+        else
+        {
+            <div class="warning">
+                <a href="/servers/setup">create server</a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="queue">
+            <label>Match found! Joining...</label>
+            <label class="time">@TimeString</label>
+        </div>
+
+        <div class="flex-grow" />
+    } -->
+
+</root>
+
+@code
+{
+    record GameServer( string Name, ulong SteamId, int PlayerCount );
+
+    /// <summary>
+    /// Time since we started queuing up.
+    /// </summary>
+    TimeSince TimeSinceQueued { get; set; } = 0;
+
+    /// <summary>
+    /// Time since we last queried the server list to find a server that we can join.
+    /// </summary>
+    TimeSince TimeSinceQueried { get; set; }
+
+    /// <summary>
+    /// The game server we found
+    /// </summary>
+    GameServer? FoundGameServer { get; set; }
+
+    /// <summary>
+    /// Countdown to join server
+    /// </summary>
+    TimeUntil TimeUntilJoiningServer { get; set; } = 0;
+
+
+    string TimeString
+    {
+        get
+        {
+            if ( FoundGameServer is not null )
+            {
+                return TimeSpan.FromSeconds( TimeUntilJoiningServer ).ToString( @"ss\:ff" );
+            }
+
+            TimeSpan t = TimeSpan.FromSeconds( TimeSinceQueued );
+            return t.ToString( @"mm\:ss" );
+        }
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( TimeString );
+    }
+
+    public override void OnNavigationOpen()
+    {
+        TimeSinceQueued = 0;
+    }
+
+
+    Task task;
+
+    /* public override void Tick()
+    {
+        if ( !IsVisible ) return;
+        if ( Game.InGame ) return;
+
+        if ( FoundGameServer is not null )
+        {
+            if ( TimeUntilJoiningServer )
+            {
+                Game.Menu.ConnectToServer( FoundGameServer.SteamId );
+                FoundGameServer = null;
+                TimeSinceQueued = 0;
+            }
+
+            return;
+        }
+
+        if ( TimeSinceQueried > 5f && ( task == null || task.IsCompleted ) )
+        {
+            task = Query();
+        }
+    }*/
+
+    async Task Query()
+    {
+        TimeSinceQueried = 0;
+
+        var result = await Facepunch.Boomer.Utility.MatchmakerUtility.FindServer();
+
+        TimeSinceQueried = 0;
+
+        if (result == null)
+        {
+            Log.Info( "No server found. Will continue to try again." );
+        }
+        else
+        {
+            var sv = result.Value;
+
+            Log.Info( $"Found a server! {sv.Name}");
+
+            FoundGameServer = new( sv.Name, sv.SteamId, sv.Players );
+            TimeUntilJoiningServer = 3;
+        }
+    }
+}

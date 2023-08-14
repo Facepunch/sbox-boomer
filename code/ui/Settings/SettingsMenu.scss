@@ -1,114 +1,252 @@
 ﻿
-@import "../../Resource/Styles/hud.scss";
-
-SettingsMenu {
+SettingsMenu
+{
+    align-items: flex-start;
+    background-image: linear-gradient(180deg, rgba(25, 25, 35, 0.6) 0%, rgba(0, 0, 25, 0.8) 100%);
+    font-family: Quantico;
+    flex-direction: row;
     position: absolute;
-    z-index: 999;
-    width: 40%;
-    height: 75%;
-    flex-direction: column;
-    left: -100%;
-    top: 12.5%;
     opacity: 0;
-    font-size: 34px;
-    font-family: Teko-SemiBold;
-    transition: all 0.3s ease-out;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    transition: opacity 0.2s ease;
+    backdrop-filter-blur: 25px;
+    align-items: center;
 
-    &.open {
-        pointer-events: all;
+    &.open
+    {
         opacity: 1;
-        left: 0%;
-        transition: all 0.3s ease-out;
+        pointer-events: all;
+        background-image: linear-gradient( to left, rgba( 0, 0, 0, 0.5 ), rgba( 0, 0, 25, 0.9 ) );
+
+        .main
+        {
+            transform: translateX(0%) scale(1);
+        }
     }
 
-    .body {
-        background-color: rgba(black .25);
-        flex-grow: 1;
-        backdrop-filter: blur(15px);
-        border-top: 2px solid $yellow2;
-        border-radius: 0 0 10px 10px;
-        padding: 20px;
+    .main
+    {
+        width: 50%;
+        flex-direction: column;
+        justify-content: center;
+        align-content: stretch;
+        margin-left: 64px;
+        margin-right: 64px;
+        transition: all 0.2s ease;
+        transform: translateX(-100%) scale(0.5);
+    }
+
+    .navbar
+    {
+        flex-direction: column;
+        transform: rotateY(-20deg) rotateX(10deg);
+
+        .title
+        {
+            text-transform: uppercase;
+            font-family: Quantico;
+            font-weight: 900;
+            font-size: 45px;
+            text-shadow: 1px 1px 1px rgba( black, 0.5 );
+            color: rgba( 55, 125, 255, 1 );
+        }
+    }
+
+    .navbar, .footer
+    {
+        gap: 4px;
+
+        button
+        {
+            transform: rotateY(-20deg) rotateX(10deg);
+            background-image: linear-gradient( to right, rgba( 0, 0, 0, 0.25 ), rgba( 0, 0, 0, 0 ) );
+            color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 8px 16px;
+            width: 256px;
+            align-items: center;
+            gap: 16px;
+            height: 50px;
+
+            i
+            {
+                font-family: Material Icons;
+                font-size: 32px;
+            }
+
+            &:hover
+            {
+                background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
+            }
+        }
+    }
+
+    .body
+    {
+        padding: 10px;
         flex-direction: column;
     }
 
-    .navbar button {
-        border-radius: 0px 00px 0 0;
-        backdrop-filter: blur(15px);
-    }
-
-    .footer {
+    .footer
+    {
         flex-direction: column;
-        margin-top: 10px;
     }
 
-    .reset-defaults {
+    .reset-defaults
+    {
         align-self: flex-end;
     }
 }
 
-ObjectEditor {
+ObjectEditor
+{
     overflow: scroll;
+
+    .group
+    {
+        text-transform: uppercase;
+        color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
+        font-size: 18px;
+        font-weight: 900;
+
+        &:not( :first-child )
+        {
+            margin-top: 8px;
+        }
+    }
 }
 
-SettingRow {
-    background-color: rgba(black .1);
-    color: white;
+SettingRow
+{
+    background-image: linear-gradient( to right, rgba(0, 0, 0, 0.5), rgba( 0, 0, 0, 0 ) );
+    color: linear-gradient( 180deg, lighten( #E1D6D4, 20% ) 0%, darken(#E1D6D4, 20%) 100% );
     margin-bottom: 4px;
     align-items: center;
-    font-size: 24px;
-    font-family: Teko-SemiBold;
+    font-size: 18px;
+    font-family: Quantico;
+    font-weight: 700;
     flex-shrink: 0;
+    height: 50px;
+    padding-left: 10px;
 
-    &:hover {
-        background-color: rgba(black .3);
+    &:hover
+    {
+        background-image: linear-gradient( to right, rgba(0, 0, 0, 0.7), rgba( 0, 0, 0, 0 ) );
+        cursor: pointer;
     }
 
-    > Label {
-        min-width: 200px;
-        padding: 10px;
+    .title
+    {
+        transform: rotateY(-20deg) rotateX(10deg);
     }
 
-    TextEntry {
-        cursor: text;
+    .value-area
+    {
+        gap: 5px;
+        align-items: center;
         height: 100%;
-        padding: 20px;
-        background-color: black;
+        padding-right: 8px;
     }
 
-    Button.toggle {
-        border: 2px solid black;
-        background-color: rgba($yellow .01);
-        border-radius: 0%;
+    SliderEntry
+    {
+        gap: 16px;
+        align-items: center;
+    }
+
+    TextEntry
+    {
+        cursor: text;
         width: 32px;
         height: 32px;
-        padding: 0;
-        margin-right: 5px;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        background-color: rgba( black, 0.2 );
+    }
 
-        &:hover {
-            background-color: rgba( $yellow .5 );
+    Button.toggle
+    {
+        background-color: rgba( black, 0.2 );
+        width: 32px;
+        height: 32px;
+        transition: all 0.1s ease;
+
+        &:hover
+        {
+            background-color: rgba( white .2 );
+            cursor: pointer;
         }
 
-        &.active {
-            background-color: $yellow2;
+        &.active
+        {
+            background-color: rgba( 55, 125, 255, 0.6 );
+
+            &:hover
+            {
+                background-color: rgba( 55, 125, 255, 1 );
+            }
         }
     }
 
-    .slider {
-        min-width: 200px;
+    .slider
+    {
+        width: 300px;
+        height: 8px;
 
-        .track {
-            background-color: rgba($yellow, .15);
+        .track
+        {
+            height: 8px;
+            background-color: rgba(white, .15);
             border-radius: 0px;
         }
 
-        .track .inner {
-            background-color: $yellow2;
+        .track .inner
+        {
+            background-color: white;
             border-radius: 0px;
         }
 
-        .thumb {
-            background-color: $yellow2;
+        .thumb
+        {
+            background-color: white;
             border-radius: 0px;
         }
+    }
+}
+
+
+.button.popupbutton.dropdown
+{
+    cursor: pointer;
+    transition: all .1s ease-out;
+
+    > .dropdown_indicator
+    {
+        position: absolute;
+        right: 8px;
+    }
+
+    &.open
+    {
+        border-bottom-left-radius: 1px;
+        border-bottom-right-radius: 1px;
+        transition: border-radius 0.2s ease-out;
+    }
+}
+
+select
+{
+    min-height: 40px;
+
+    > option
+    {
+        display: none;
     }
 }

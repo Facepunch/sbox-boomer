@@ -1,0 +1,46 @@
+﻿﻿@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Menu;
+
+@inherits RootPanel
+@implements Sandbox.Menu.ILoadingScreenPanel
+@attribute [StyleSheet]
+
+@namespace Facepunch.Boomer.MainMenu
+
+<root>
+    <div class="background" @ref=Background />
+
+    <div class="col">
+        <div class="flex-grow" />
+
+        <div class="span">
+            <label> @(Progress.Title ?? "Loading...")</label>
+            <div class="flex-grow" />
+
+            @if ( Progress.Fraction > 0f )
+            {
+                <label>@( ( Progress.Mbps / 8f ).ToString( "0.00" ) ) MB/s (@(Progress.Fraction * 100f)%)</label>
+            }
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public LoadingProgress Progress;
+
+    public Panel Background;
+
+    public void OnLoadingProgress( LoadingProgress progress )
+    {
+        Progress = progress;
+        StateHasChanged();
+    }
+
+    public override void Tick()
+    {
+        Background.Style.BackgroundTint = new ColorHsv( 1, 1, 2 )
+        .WithHue( Time.Now * 25f );
+    }
+}

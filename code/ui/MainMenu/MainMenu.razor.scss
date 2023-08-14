@@ -1,0 +1,94 @@
+@import "Styles/_variables.scss";
+@import "Styles/_buttons.scss";
+@import "Styles/_grid.scss";
+@import "Styles/_box.scss";
+
+@import "Styles/Header.scss";
+@import "Styles/Footer.scss";
+@import "Styles/BodyContainer.scss";
+@import "Styles/Form.scss";
+@import "Styles/PlayerContainer.scss";
+
+MainMenu
+{
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    background-color: $grey-dark;
+    transition: all 3s ease;
+
+    nav {
+        cursor: pointer;
+    }
+
+    .icon {
+        font-family: "Material Icons";
+    }
+    &:intro
+    {
+        opacity: 0;
+
+        .header-container {
+            .header-primary{top: -100px;}
+            .header-secondary{top: -100px;}
+        }
+
+        BodyContainer {
+            opacity: 0;
+        }
+
+        .footer {
+            bottom: -100px;
+        }
+    }
+
+    &:outro {
+        opacity: 0;
+
+        .header-container {
+            .header-primary{top: -100px;}
+            .header-secondary{top: -100px;}
+        }
+
+        BodyContainer {
+            opacity: 0;
+        }
+
+        .footer {
+            bottom: -100px;
+        }
+    }
+
+    .two-column {
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+    .page-wrapper {
+        flex-grow: 1;
+
+        .navigator-canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+
+            .navigator-body {
+                opacity: 1;
+                position: absolute;
+                flex-direction: column;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                z-index: 9999;
+                transition: transform 0.2s ease-out, opacity 0.15s ease;
+
+                &.hidden {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}

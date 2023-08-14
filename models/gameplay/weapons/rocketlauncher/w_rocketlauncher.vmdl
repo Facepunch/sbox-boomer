@@ -62,8 +62,8 @@
 						_class = "RenderMeshFile"
 						name = "LOD0"
 						filename = "models/gameplay/weapons/rocketlauncher/mesh/rocketlauncher.fbx"
-						import_translation = [ 1.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_translation = [ -4.0, 0.0, -1.0 ]
+						import_rotation = [ -2.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -79,8 +79,8 @@
 						_class = "RenderMeshFile"
 						name = "LOD1"
 						filename = "models/gameplay/weapons/rocketlauncher/mesh/rocketlauncherLOD1.fbx"
-						import_translation = [ 1.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_translation = [ -4.0, 0.0, -1.0 ]
+						import_rotation = [ -2.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"

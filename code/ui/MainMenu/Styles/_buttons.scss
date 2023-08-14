@@ -1,0 +1,197 @@
+.btn {
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 8px;
+    height: 44px;
+    padding: 10px;
+    transition: all 0.2s ease;
+
+    label.text {
+        font-family: Quantico-Bold;
+        font-weight: bold;
+        font-size: 18px;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(#000,0.3);
+    }
+
+    label.icon {
+        font-family: "Material Icons";
+        font-size: 18px;
+        text-shadow: 0 1px 0 rgba(#000,0.3);
+    }
+
+    &:hover {
+        transform: scale(1.05); 
+        sound-in: ui.button.over;
+    }
+
+    &:active {
+        sound-in: ui.button.press;
+    }
+
+    &.fill {
+        flex-grow: 1;
+        flex-basis: 1;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.diamond {
+        .button-bar {
+            position: absolute;
+            bottom: -3px;
+            width: 100%;
+            height: 3px;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease-in-out;
+
+            .diamond {
+                align-items: center;
+                justify-content: center;
+                background-size: contain;
+                background-position: center;
+                background-image: url(  ui/mainmenu/icons/diamond.svg);
+                width: 16px;
+                height: 16px;
+                
+            }
+        }  
+
+        &.is-primary {
+            .button-bar {
+                background-color: $blue-light;
+                .diamond {
+                    background-image: url(  ui/mainmenu/icons/diamond.svg?color=$blue-light);
+                }
+            }
+        }
+
+        &.is-secondary {
+            .button-bar {
+                background-color: $red;
+                .diamond {
+                    background-image: url(  ui/mainmenu/icons/diamond.svg?color=$red);
+                }
+            }
+        }
+
+        &:hover {
+            .button-bar {
+                width: 50%;
+            }
+        }
+    }
+
+    // If Button has text + icon
+    &.has-icon {
+        label.icon {
+            margin-right: 8px;
+            font-size: 24px;
+        }
+    }
+
+    // Square Icon only button
+    &.is-icon {
+        width: 44px;
+
+        label.icon {
+            font-size: 24px;
+            text-align: center;
+        }
+    }
+
+    // Blue Primary Button
+    &.is-primary {
+        background: linear-gradient(to top,rgba($blue-light,0.03), rgba($blue-light,0.0));
+        border-color: rgba($blue-light,0.1);
+        box-shadow: 0 6px 20px rgba(#000,0.4);
+        
+        .text, .icon {
+            color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
+        }
+
+        &:hover {
+            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.2));
+            border-color: rgba($blue-light,0.2);
+            
+            .text, .icon {
+                color: linear-gradient(rgba(#fff,0.8),rgba(#fff,1));
+            }
+        }
+    }
+
+    // Red Primary Button
+    &.is-secondary {
+        background:linear-gradient(to top, rgba($red,0.03), rgba($red,0));
+        border-color: rgba($red,0.1);
+        box-shadow: 0 6px 20px rgba(#000,0.4);  
+        
+
+        .text, .icon {
+            color: linear-gradient(rgba($red,0.8),rgba($red,1));
+        }
+
+        &:hover {
+            background: linear-gradient(rgba($red,0.05), rgba($red,0.2));
+            border-color: rgba($red,0.2);
+            
+            .text, .icon {
+                color: linear-gradient(rgba(#fff,0.8),rgba(#fff,1));
+            }
+        }
+    }
+
+    // Grey Primary Button
+    &.is-tertiary {
+        background: linear-gradient(rgba($grey-light,0), rgba($grey-light,0.03));
+        border-color: rgba($grey-light,0.05);
+        box-shadow: 0 6px 20px rgba(#000,0.4);   
+
+        .text, .icon {
+            color: linear-gradient(rgba($grey-light,0.8),rgba($grey-light,1));
+        }
+
+        &:hover {
+            background: linear-gradient(rgba($grey-light,0.05), rgba($grey-light,0.2));
+            border-color: rgba($grey-light,0.1);
+            
+            .text, .icon {
+                color: linear-gradient(rgba(#fff,0.8),rgba(#fff,1));
+            }
+        }
+    }
+
+    &.form-button {
+        background: linear-gradient(rgba($blue-dull,0), rgba($blue-dull,0.1));
+        border-color: rgba($blue-dull,0.1);
+        box-shadow: 0 6px 20px rgba(#000,0.4);
+        opacity: 0.2;
+        
+        .text, .icon {
+            color: linear-gradient(rgba($blue-light,0.8),rgba(#fff,1));
+        }
+
+        &:hover {
+            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.1));
+            border-color: rgba($blue-light,0.2);
+            opacity: 1;
+            
+            .text, .icon {
+                color: linear-gradient(rgba(#fff,0.8),rgba(#fff,1));
+            }
+        }
+
+        &.is-selected {
+            background: linear-gradient(rgba($blue-light,0), rgba($blue-light,0.05));
+            opacity: 1;
+        }
+    }
+
+    
+}

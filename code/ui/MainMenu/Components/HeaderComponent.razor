@@ -1,0 +1,38 @@
+@using Sandbox.Razor
+<div class="header-container">
+    <div class="header-primary">
+        <div class="nav-container">
+            <nav href="play">
+                <span>Play</span>
+            </nav>
+            <nav href="/stats">
+                <span>Stats</span>
+            </nav>
+            <nav href="/settings">
+                <span>Settings</span>
+            </nav>
+            <nav href="#">
+                <span>Quit</span>
+            </nav>
+        </div>
+        <div class="logo"></div>
+    </div>
+    @if (SecondaryHeader != null) {
+        <div class="header-secondary">
+            @SecondaryHeader
+        </div>
+    }
+    
+    @if (TertiaryHeader != null) {
+        <div class="header-tertiary">
+            @TertiaryHeader
+        </div>
+    }
+    
+</div>
+
+@code 
+{
+    public RenderFragment SecondaryHeader { get; set; }
+    public RenderFragment TertiaryHeader { get; set; }
+}

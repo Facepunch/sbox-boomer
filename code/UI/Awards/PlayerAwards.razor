@@ -1,0 +1,54 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Facepunch.Boomer.UI
+@inherits Panel
+
+<root>
+    @if ( CurrentAward == null ) return;
+
+    <div class="main @Classes()">
+        <div class="trim" />
+
+        @if ( !string.IsNullOrEmpty( CurrentAward.Icon ) )
+        {
+            <img class="icon" src=@CurrentAward.Icon />
+        }
+
+        <label class="header" text=@CurrentAward.Name />
+
+        @if ( !string.IsNullOrEmpty( CurrentAward.Description ) )
+        {
+            <div class="spacer" />
+            <label class="description" text=@CurrentAward.Description />
+        }
+
+        <div class="trim" />
+    </div>
+</root>
+
+@code
+{
+    TimeSince TimeSinceShown { get; set; } = 0;
+    PlayerAward CurrentAward { get; set; }
+
+    [Event( "boomer.giveaward" )]
+    public void OnGiveAward( PlayerAward award )
+    {
+        TimeSinceShown = 0;
+        CurrentAward = award;
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( Time.Now );
+    }
+
+    public string Classes()
+    {
+        var str = "";
+        if ( TimeSinceShown < 5f ) str = str + "active";
+        return str;
+    }
+}

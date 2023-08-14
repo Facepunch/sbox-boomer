@@ -1,0 +1,62 @@
+LoadingScreen
+{
+    width: 100%;
+    height: 100%;
+    background-color: rgba( 10, 10, 10 );
+
+    > .background
+    {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-size: contain;
+        background-image: url( ui/mainmenu/backgrounds/guns_checkerboard_big_light.png );
+        mask-image: linear-gradient( to right, white, grey, black );
+        opacity: 0.18;
+    }
+
+    transition: all 0.2s ease;
+
+    &:intro
+    {
+        .background
+        {
+            opacity: 0;
+        }
+    }
+
+    padding: 32px;
+
+    label
+    {
+        transition: all 0.2s ease;
+        font-family: Quantico;
+        font-weight: 900;
+        font-size: 30px;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .logo
+    {
+        left: -49px;
+        top: 0px;
+        width: 540px;
+        height: 200px;
+        background-size: contain;
+    }
+
+    .col
+    {
+        width: 100%;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .flex-grow
+    {
+        flex-grow: 1;
+    }
+}

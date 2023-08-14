@@ -1,0 +1,73 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Name = "Lightning Gun"
+		Model = resource:"models/gameplay/weapons/lightninggun/w_lightninggun.vmdl"
+		ViewModel = resource:"models/gameplay/weapons/lightninggun/lightninggun.vmdl"
+		CrosshairIcon = resource:"ui/crosshair/crosshair060.png"
+		WeaponColor = "0,0.96533,1,1"
+		Icon = resource:"ui/weapons/icon_2.png"
+		AmmoIcon = resource:"ui/ammo/icon_2_ammo.png"
+		HoldType = "Shotgun"
+		Handedness = "Right"
+		Components = 
+		[
+			"Shoot",
+			"Ammo",
+			"Aim",
+		]
+		ViewModelData = 
+		{
+			OverallWeight = 0.5
+			WeightReturnForce = 100
+			WeightDamping = 18
+			AccelerationDamping = 15
+			VelocityScale = 10
+			RotationalPivotForce = 10
+			RotationalScale = 5
+			WalkCycleOffset = "-4,150,0"
+			BobAmount = "100,200"
+			GlobalLerpPower = 1
+			CrouchPositionOffset = "-3,1,0"
+			CrouchAngleOffset = "2,0,-15"
+			AvoidancePositionOffset = "-5,0,0"
+			AvoidanceAngleOffset = "2,0,-25"
+			SprintPositionOffset = "1,3.226,8"
+			SprintAngleOffset = "20,6.529,-12.2"
+			AimPositionOffset = "-10,0,-5"
+			AimFovOffset = 60
+		}
+		Shoot = 
+		{
+			BaseDamage = 5
+			BulletRange = 5000
+			BulletCount = 1
+			BulletForce = 1000
+			BulletSize = 1
+			FireDelay = 0.09
+			FireSound = 
+			[
+				resource:"sounds/weapons/rocketlauncher/rl.shoot.sound",
+			]
+			FireSoundOnlyOnStart = true
+			ActivateSound = resource:"sounds/weapons/lasergun/lg.beam.sound"
+			DryFireSound = resource:"sounds/weapons/dryfire_rifle-1.sound"
+			TracerPath = resource:"particles/gameplay/weapons/lightninggun/lightninggun_trace.vpcf"
+			ImpactTrailPath = resource:"particles/gameplay/weapons/lightninggun/lightninggun_impact_trail.vpcf"
+			DisableBulletImpacts = true
+			TracerStartEnd = true
+		}
+		SecondaryShoot = 
+		{
+		}
+		Aim = 
+		{
+		}
+		Ammo = 
+		{
+			DefaultAmmo = 200
+			MaximumAmmo = 200
+		}
+	}
+}

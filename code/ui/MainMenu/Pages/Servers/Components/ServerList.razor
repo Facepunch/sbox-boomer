@@ -1,0 +1,104 @@
+﻿@using System.Threading.Tasks
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <div class="header">
+        <section class="icon-header">
+            <label class="icon">favorite</label>
+        </section>
+        <section class="grow">
+            <label class="th-title">Name</label>
+        </section>
+        <section class="min-200">
+            <label class="th-title">Map</label>
+        </section>
+        <section class="min-200">
+            <label class="th-title">Players</label>
+        </section>
+        <section class="min-100">
+            <label class="th-title">Ping</label>
+        </section>
+    </div>
+    
+    <div class="main">
+        @if ( IsDebug )
+        {
+            <ServerListRow Title="[EU] Boom-punch 1" MapIdent="facepunch.dockyard"/>
+            <ServerListRow Title="[EU] Boom-punch 2" MapIdent="facepunch.dockyard"/>
+        }
+        else
+        {
+            @if ( List == null || ( List.IsQuerying && !List.Any() ) )
+            {
+                <label>Loading...</label>
+            }
+            else if ( !List.Any() )
+            {
+                <label>No servers available...</label>
+            }
+            else
+            {
+                @foreach ( var server in List )
+                {
+                    <ServerListRow 
+                        Title=@server.Name 
+                        Players=@server.Players
+                        MapIdent=@server.Map
+                        MaxPlayers=@server.MaxPlayers 
+                        Ping=@server.Ping
+                        OnServerSelected=@SelectServer
+                    />
+                }
+            }
+        }
+    </div>
+</root>
+
+@code
+{
+    bool IsDebug => false;
+    
+    public Action<ServerListRow> OnServerSelected { get; set; }
+
+    void SelectServer( ServerListRow row )
+    {
+        OnServerSelected?.Invoke( row );
+    }
+    
+    Sandbox.Services.ServerList List;
+    
+    protected override void OnParametersSet()
+    {
+        var game = "facepunch.boomer";
+        
+        Log.Info($"Filtering By Game '{game}'");
+
+        List?.Dispose();
+        List = new Sandbox.Services.ServerList();
+
+        if ( !string.IsNullOrWhiteSpace( game ) )
+        {
+            List.AddFilter("gametagsand", $"game:{game}");
+        }
+
+        _ = Refresh();
+    }
+    
+    async Task Refresh()
+    {
+        if ( List.IsQuerying )
+            return;
+
+         List.Query();
+
+        while ( List.IsQuerying )
+        {
+            await Task.Delay( 100 );
+            StateHasChanged();
+        }
+
+        StateHasChanged();
+    }
+}

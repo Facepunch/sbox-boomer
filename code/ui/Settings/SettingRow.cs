@@ -1,23 +1,29 @@
-﻿
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Reflection;
-
-namespace Boomer.UI;
+﻿namespace Facepunch.Boomer.UI;
 
 internal class SettingRow : Panel
 {
-
 	public Label Label { get; }
 	public Panel ValueArea { get; }
 
+	public SettingRow()
+	{
+		Label = Add.Label( null, "title" );
+		Add.Panel().Style.FlexGrow = 1;
+		ValueArea = Add.Panel( "value-area" );
+	}
+
 	public SettingRow( object target, PropertyDescription property ) : this()
 	{
-		
 		Label.Text = property.GetDisplayInfo().Name;
 
 		var typeDesc = TypeLibrary.GetType( property.PropertyType );
 		var currentValue = property.GetValue( target );
+
+		if ( property.IsStatic )
+		{
+			Delete();
+			return;
+		}
 
 		if ( property.PropertyType == typeof( bool ) )
 		{
@@ -31,7 +37,7 @@ internal class SettingRow : Panel
 			} );
 		}
 
-		if( property.PropertyType == typeof( string ) )
+		if ( property.PropertyType == typeof( string ) )
 		{
 			var textentry = ValueArea.Add.TextEntry( (string)currentValue );
 			textentry.AddEventListener( "value.changed", () =>
@@ -41,7 +47,7 @@ internal class SettingRow : Panel
 			} );
 		}
 
-		if( property.PropertyType.IsEnum )
+		if ( property.PropertyType.IsEnum )
 		{
 			var dropdown = new DropDown( ValueArea );
 			dropdown.SetPropertyObject( "value", currentValue );
@@ -53,26 +59,18 @@ internal class SettingRow : Panel
 			} );
 		}
 
-		if( property.PropertyType == typeof( float ) )
-		{
-			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
-			var min = minmax?.MinValue ?? 0f;
-			var max = minmax?.MaxValue ?? 1000f;
-			var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step ?? .1f;
-			var slider = ValueArea.Add.SliderWithEntry( min, max, step );
-			slider.Bind( "value", target, property.Name );
-			slider.AddEventListener( "value.changed", () =>
-			{
-				CreateEvent( "save" );
-			} );
-		}
+		//if ( property.PropertyType == typeof( float ) )
+		//{
+		//	var minmax = property.GetCustomAttribute<MinMaxAttribute>();
+		//	var min = minmax?.MinValue ?? 0f;
+		//	var max = minmax?.MaxValue ?? 1000f;
+		//	var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step ?? .1f;
+		//	var slider = ValueArea.Add.SliderWithEntry( min, max, step );
+		//	slider.Bind( "value", target, property.Name );
+		//	slider.AddEventListener( "value.changed", () =>
+		//	{
+		//		CreateEvent( "save" );
+		//	} );
+		//}
 	}
-
-	public SettingRow()
-	{
-		Label = Add.Label( "Label" );
-		Add.Panel().Style.FlexGrow = 1;
-		ValueArea = Add.Panel( "value-area" );
-	}
-
 }

@@ -1,0 +1,24 @@
+﻿@inherits Panel 
+@namespace Facepunch.Boomer.MainMenu
+
+<root>
+    <div class="form-control">
+        <div class="btn form-button fill @Class( false )" @onclick=@(() => Value = false)>
+            <label class="text">Off</label>
+        </div>
+        <div class="btn form-button fill @Class( true )" @onclick=@(() => Value = true)>
+            <label class="text">On</label>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public bool Value { get; set; }
+
+    string Class( bool value )
+    {
+        if ( Value == value ) return "is-selected";
+        return "";
+    }
+}

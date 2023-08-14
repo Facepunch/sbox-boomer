@@ -1,0 +1,36 @@
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <label class="title">@stat.Title</label>
+    <label class="description">@stat.Description</label>
+    <label class="value">@FormattedValue</label>
+</root>
+
+@code
+{
+    public string Stat { get; set; } = "kills";
+    public string Gamemode { get; set; } = "tdm";
+
+    protected string FormattedValue
+    {
+        get => stat.Unit switch
+        {
+            "integer" => $"{stat.Value}",
+            "seconds" => $"{TimeSpan.FromSeconds( stat.Value ).ToString( @"hh\:mm\:ss" )}",
+            _ => $"{stat.Value}"
+        };
+    }
+
+    Sandbox.Services.Stats.GlobalStat stat { get; set; }
+
+    protected override void OnAfterTreeRender( bool firstTime )
+    {
+        stat = Facepunch.Boomer.Stats.Get( Stat, Gamemode );
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( stat );
+    }
+}

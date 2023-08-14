@@ -1,0 +1,33 @@
+﻿@inherits Panel 
+@namespace Facepunch.Boomer.MainMenu
+
+<root>
+    <div class="form-control">
+        <div class="btn is-icon form-button" @onclick=@(() => Move( false ) )>
+            <label class="icon">chevron_left</label>
+        </div>
+        <div class="form-input">
+            <label>@Value</label>
+        </div>
+        <div class="btn is-icon form-button" @onclick=@(() => Move( true ) )>
+            <label class="icon">chevron_right</label>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public Enum Value { get; set; }
+
+    void Move( bool isAscending )
+    {
+        var values = Enum.GetValues( Value.GetType() );
+        var indexOf = Convert.ToInt32( Value );
+        
+        var newId = indexOf;
+        newId += isAscending ? 1 : -1;
+        newId = (newId + values.Length) % values.Length;
+        
+        Value = (Enum)Enum.ToObject( Value.GetType(), newId );
+    }
+}

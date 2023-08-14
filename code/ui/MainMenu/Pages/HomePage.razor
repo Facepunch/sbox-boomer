@@ -1,0 +1,79 @@
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <HeaderComponent>
+        <TertiaryHeader>
+            <span class="title">Home</span>
+            <div class="diamond"></div>
+            <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec iaculis tellus.</span>
+        </TertiaryHeader>
+    </HeaderComponent>
+
+    <div class="container">
+        <div class="canvas">
+            <MainMenuScene @ref="Scene"/>
+        </div>
+    </div>
+</root>
+
+@code
+{
+    MainMenuScene Scene { get; set; }
+    // SceneMap SceneMap { get; set; }
+
+    [Event.Hotload]
+    protected void SetupCamera()
+    {
+        Scene.TargetPosition = Vector3.Up * 62.0f + Vector3.Forward * 280f;
+        Scene.TargetRotation = Rotation.From( 6f, 180f, 0 );
+
+        Scene.Camera.Position = Scene.TargetPosition;
+        Scene.Camera.Rotation = Scene.TargetRotation;
+        Scene.Camera.FieldOfView = 50f;
+    }
+
+    protected void PopulateLobbyMembers()
+    {
+        Scene.Reset();
+
+        var mdl = Model.Load( "models/citizen/citizen.vmdl" );
+
+        foreach ( var friend in Game.Menu.Lobby.Members )
+        {
+            Scene.AddPlayer( friend );
+            Scene.AddPlayer( friend );
+            Scene.AddPlayer( friend );
+        }
+    }
+
+    protected override void OnAfterTreeRender( bool firstTime )
+    {
+        if ( firstTime )
+        {
+            Scene.Camera.Name = "Boomer";
+            // SceneMap = new SceneMap( Scene.World, "maps/mainmenu/bm_lobby" );
+
+            // Create a new lobby
+            _ = Game.Menu.CreateLobbyAsync();
+        }
+
+        SetupCamera();
+    }
+
+    [GameEvent.Menu.LobbyJoined]
+    public void OnLobbyJoined()
+    {
+        Log.Info( "Joined lobby" );
+        PopulateLobbyMembers();
+    }
+
+    [GameEvent.Menu.LobbyLeave]
+    public void OnLobbyLeave()
+    {
+        Scene.Reset();
+        // Temporary
+        Scene.AddPlayer( new Friend( Game.LocalClient.SteamId ) );
+    }
+}

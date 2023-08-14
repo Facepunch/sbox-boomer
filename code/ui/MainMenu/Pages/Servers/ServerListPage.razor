@@ -1,0 +1,105 @@
+@inherits MainMenuPage
+@namespace Facepunch.Boomer.MainMenu
+@attribute [StyleSheet]
+
+<root>
+    <HeaderComponent>
+        <SecondaryHeader>
+            <nav href="/play/matchmaking">
+                <span>Match Making</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/server-browser">
+                <span>Server Browser</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/create">
+                <span>Create</span>
+                <div class="diamond"></div>
+            </nav>
+        </SecondaryHeader>
+        <TertiaryHeader>
+            <span class="title">Server Browser</span>
+            <div class="diamond"></div>
+            <span class="subtitle">Find and filter through all of the available game servers.</span>
+        </TertiaryHeader>
+    </HeaderComponent>
+    
+    <BodyContainer>
+        <Body>
+
+            <div class="columns">
+                <div class="column is-8">
+                    <ServerList OnServerSelected=@OnServerSelected />
+                </div>
+                 <div class="column is-4">
+                    
+                     @if ( SelectedServer != null )
+                     {
+                         <div class="box">
+                             <div class="box-header">
+                                 <div class="box-title">
+                                     <label>@SelectedServer.Title</label>
+                                 </div>
+                                 <a href="#" class="btn is-secondary is-icon">
+                                     <label class="icon">favorite</label>
+                                 </a>
+                             </div>
+                             <div class="box-body">
+                                 <div class="box-image">
+                                     <img src="@(SelectedServer.MapPackage.Screenshots?.FirstOrDefault()?.Url ?? SelectedServer.MapPackage.Thumb)" alt="Server Image"/>
+                                 </div>
+                             </div>
+
+                             <div class="box-footer">
+                                 <label class="title">@SelectedServer.MapPackage?.Title</label>
+                                 <div class="box-footer-info">
+                                     <div class="bf-info">
+                                         <label class="icon">people</label>
+                                         <label class="subtitle">@(SelectedServer.Players)/@(SelectedServer.MaxPlayers)</label>
+                                     </div>
+                                     <div class="bf-info">
+                                         <label class="icon">wifi</label>
+                                         <label class="subtitle">@SelectedServer.Ping</label>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+
+                         <div class="button-container">
+                             <div class="btn is-secondary fill diamond" @onclick=@JoinServer>
+                                 <label class="text">Connect To Server</label>
+                                 <div class="button-bar">
+                                     <div class="diamond"></div>
+                                 </div>
+                             </div>
+                         </div>
+                     }
+                     else
+                     {
+                         
+                     }
+                 </div>
+            </div>
+
+
+        </Body>
+    </BodyContainer>
+</root>
+
+@code
+{
+    ServerListRow SelectedServer { get; set; }
+
+    void OnServerSelected( ServerListRow server )
+    {
+        SelectedServer = server;
+    }
+
+    void JoinServer( PanelEvent e )
+    {
+        if ( SelectedServer == null ) return;
+            
+        Game.Menu.ConnectToServer( SelectedServer.SteamId );
+    }
+}

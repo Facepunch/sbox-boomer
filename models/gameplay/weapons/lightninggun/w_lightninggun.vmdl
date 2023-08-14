@@ -58,7 +58,7 @@
 						_class = "RenderMeshFile"
 						name = "LOD0"
 						filename = "models/gameplay/weapons/lightninggun/mesh/lightninggun.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_translation = [ -10.0, 0.0, -4.0 ]
 						import_rotation = [ 1.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
@@ -75,7 +75,7 @@
 						_class = "RenderMeshFile"
 						name = "LOD1"
 						filename = "models/gameplay/weapons/lightninggun/mesh/lightninggunlod1.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_translation = [ -10.0, 0.0, -4.0 ]
 						import_rotation = [ 1.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"

@@ -1,0 +1,320 @@
+{
+  "Title": "Boomer",
+  "Type": "game",
+  "Org": "facepunch",
+  "Ident": "boomer",
+  "Tags": "",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "Resources": null,
+  "MenuResources": null,
+  "HasCode": true,
+  "CodePath": "code",
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Metadata": {
+    "MinPlayers": 1,
+    "MaxPlayers": 12,
+    "GameNetworkType": "Multiplayer",
+    "MapList": [
+      "facepunch.bm_dockyard"
+    ],
+    "MapSelect": "Tagged",
+    "PerMapRanking": false,
+    "LeaderboardType": "Descending",
+    "RankType": "Increment",
+    "Physics": {
+      "SubSteps": 1,
+      "TimeScale": 1,
+      "Gravity": "0,0,-800",
+      "AirDensity": 1.2,
+      "SleepingEnabled": true,
+      "SimulationMode": "Continuous",
+      "PositionIterations": 2,
+      "VelocityIterations": 8,
+      "SoftBodyIterations": 1,
+      "SoftBodySubsteps": 1
+    },
+    "Compiler": {
+      "RootNamespace": "Facepunch.Boomer",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;",
+      "ReleaseMode": "Release"
+    },
+    "GameCategory": "Shooter",
+    "ControlModes": {
+      "Keyboard": true,
+      "Gamepad": true
+    },
+    "LobbySettings": {
+      "bm_friendly_fire": {
+        "Type": "Boolean",
+        "ConVar": "bm_friendly_fire",
+        "FriendlyName": "Friendly Fire",
+        "Default": "false"
+      },
+      "testfloat": {
+        "Type": "Number",
+        "ConVar": "testfloat",
+        "FriendlyName": "Test Float",
+        "Default": "4",
+        "Min": 4,
+        "Max": 12
+      },
+      "testconvar": {
+        "ConVar": "testconvar",
+        "FriendlyName": "Test String",
+        "Default": ""
+      }
+    },
+    "GameSettings": {
+      "bm_gamemode": {
+        "DisplayType": "Choice",
+        "Choices": [
+          {
+            "Value": "Deathmatch",
+            "Name": "Deathmatch"
+          },
+          {
+            "Value": "TeamDeathmatch",
+            "Name": "Team Deathmatch"
+          },
+          {
+            "Value": "InstaGib",
+            "Name": "InstaGib"
+          },
+          {
+            "Value": "TeamInstaGib",
+            "Name": "Team InstaGib"
+          },
+          {
+            "Value": "MasterTrio",
+            "Name": "MasterTrio"
+          },
+          {
+            "Value": "TeamMasterTrio",
+            "Name": "Team MasterTrio"
+          },
+          {
+            "Value": "RailTag",
+            "Name": "RailTag"
+          },
+          {
+            "Value": "RocketArena",
+            "Name": "RocketArena"
+          },
+          {
+            "Value": "TeamRocketArena",
+            "Name": "Team RocketArena"
+          },
+          {
+            "Value": "MasterBall",
+            "Name": "MasterBall"
+          },
+          {
+            "Value": "TeamMasterBall",
+            "Name": "Team MasterBall"
+          }
+        ],
+        "ConVarName": "bm_gamemode",
+        "DisplayName": "Game Type",
+        "DefaultValue": "Deathmatch",
+        "Description": ""
+      },
+      "bm_warmuptime": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_warmuptime",
+        "DisplayName": "Warmup Time (Secounds)",
+        "DefaultValue": "30",
+        "Description": "",
+        "Minimum": 5,
+        "Maximum": 60
+      },
+      "bm_roundendtime": {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "bm_roundendtime",
+        "DisplayName": "Round Time (Minutes)",
+        "DefaultValue": "15",
+        "Description": "",
+        "Minimum": 5,
+        "Maximum": 30
+      },
+      "bm_teams_friendly_fire": {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "bm_teams_friendly_fire",
+        "DisplayName": "Friendly Fire",
+        "DefaultValue": "false",
+        "Description": ""
+      }
+    },
+    "ParentPackage": "",
+    "DefaultLeaderboards": null,
+    "Summary": "Boomer is a fast-paced shooter inspired by old school shooters.",
+    "Description": "\uD83D\uDC77\u200D\u2642\uFE0F(WIP)\uD83D\uDC77\u200D\u2642\uFE0F\nBoomer is a fast-paced shooter inspired by old school shooters.\n\nAt the moment its just death match but more to come later;\nTDM\nCTF\nDuel\nKoth\n\nAs well a PVE style campaign mode.\n\nMake sure to include \u0022facepunch.boomer\u0022 in supported games if you are making custom maps.",
+    "Public": true,
+    "CsProjName": "Boomer",
+    "HttpAllowList": null,
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "Forward",
+          "KeyboardCode": "W",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Backward",
+          "KeyboardCode": "S",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Left",
+          "KeyboardCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Right",
+          "KeyboardCode": "D",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Jump",
+          "KeyboardCode": "space",
+          "GamepadCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Run",
+          "KeyboardCode": "shift",
+          "GamepadCode": "LeftJoystickButton",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Walk",
+          "KeyboardCode": "alt",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Duck",
+          "KeyboardCode": "ctrl",
+          "GamepadCode": "B",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "attack1",
+          "KeyboardCode": "mouse1",
+          "GamepadCode": "RightTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "attack2",
+          "KeyboardCode": "mouse2",
+          "GamepadCode": "LeftTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "reload",
+          "KeyboardCode": "r",
+          "GamepadCode": "X",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "use",
+          "KeyboardCode": "e",
+          "GamepadCode": "Y",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "Slot1",
+          "KeyboardCode": "1",
+          "GamepadCode": "DpadWest",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot2",
+          "KeyboardCode": "2",
+          "GamepadCode": "DpadEast",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot3",
+          "KeyboardCode": "3",
+          "GamepadCode": "DpadSouth",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot4",
+          "KeyboardCode": "4",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot5",
+          "KeyboardCode": "5",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot6",
+          "KeyboardCode": "6",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "SlotPrev",
+          "KeyboardCode": "mouse4",
+          "GamepadCode": "SwitchLeftBumper",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "SlotNext",
+          "KeyboardCode": "mouse5",
+          "GamepadCode": "SwitchRightBumper",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Voice",
+          "KeyboardCode": "v",
+          "GamepadCode": "RightJoystickButton",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Flashlight",
+          "KeyboardCode": "f",
+          "GamepadCode": "DpadNorth",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Score",
+          "KeyboardCode": "tab",
+          "GamepadCode": "SwitchLeftMenu",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Menu",
+          "KeyboardCode": "Q",
+          "GamepadCode": "SwitchRightMenu",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Chat",
+          "KeyboardCode": "enter",
+          "GroupName": "Other"
+        }
+      ]
+    },
+    "TickRate": 50,
+    "LaunchConfigs": [
+      {
+        "Name": "dockyard",
+        "GameIdent": "facepunch.boomer#local",
+        "MapName": "facepunch.bm_dockyard",
+        "MaxPlayers": 10,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ]
+  }
+}

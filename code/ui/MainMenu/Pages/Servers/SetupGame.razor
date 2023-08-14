@@ -1,0 +1,195 @@
+@using Sandbox;
+@using System;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using Sandbox.Menu;
+@using Sandbox.UI;
+
+@inherits Panel
+@attribute [StyleSheet]
+@namespace Facepunch.Boomer.MainMenu
+
+<root>
+    <HeaderComponent>
+        <SecondaryHeader>
+            <nav href="/play/matchmaking">
+                <span>Match Making</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/server-browser">
+                <span>Server Browser</span>
+                <div class="diamond"></div>
+            </nav>
+            <nav href="/play/create">
+                <span>Create</span>
+                <div class="diamond"></div>
+            </nav>
+        </SecondaryHeader>
+        <TertiaryHeader>
+            <span class="title">Create</span>
+            <div class="diamond"></div>
+            <span class="subtitle">Host your own custom Public or Private Boomer server.</span>
+        </TertiaryHeader>
+    </HeaderComponent>
+
+     <BodyContainer>
+        <Body>
+
+            <div class="columns space-between">
+                <div class="column is-7">
+                    <div class="form-container">
+
+                        <div class="form-row">
+                            <label class="form-label">Server Name</label>
+                            <div class="form-control">
+                                <TextEntry Value:bind=@ServerName @ref=Input onblur=@Close class="form-input text-left"/>
+                            </div>
+                        </div>
+
+                        @if ( MaxPlayersSupported > 1 )
+                        {
+                            <div class="form-row">
+                                <label class="form-label">Max Players</label>
+                                <Slider Value:bind=@MaxPlayers Min=@(1f) Max=@MaxPlayersSupported />
+                            </div>
+                        }
+                    
+                        <div class="form-row">
+                            <label class="form-label">Map</label>
+                            <div class="form-control">
+                                @* <PackageCard OnLaunch=@OnMapClicked Package=@MapPackage /> *@
+                                <div class="form-input text-left">
+                                    <label>@MapPackage.Title</label>
+                                </div>
+                                <div class="btn form-button is-selected is-icon" onClick=@OnMapClicked>
+                                    <label class="icon">map</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-label">Private</label>
+                            <Switch Value:bind=@IsPrivate />
+                        </div>
+
+                        <div class="form-row @( IsPrivate ? "" : "disabled" )">
+                            <label class="form-label">Password</label>
+                            <div class="form-control">
+                                <TextEntry Value:bind=@ServerPassword class="form-input text-left" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    
+
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="box-image" onClick=@OnMapClicked>
+                                <img src=@MapPackage.Thumb alt=@MapPackage.Title />
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <label class="title">@MapPackage.Title</label>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <a class="btn is-secondary has-icon fill diamond" onclick=@Play>
+                            <label class="icon">check</label>
+                            <label class="text">Create Server</label>
+                            <div class="button-bar">
+                                <div class="diamond"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </Body>
+    </BodyContainer>
+
+</root>
+
+@code
+{
+    string ServerName { get; set; } = "My Boomer Server";
+    string ServerPassword { get; set; } = "Password";
+    bool IsPrivate { get; set; } = false;
+    
+    // Players
+    int MaxPlayersSupported { get; set; } = 1;
+    int MaxPlayers { get; set; } = 1;
+    
+    Package MapPackage { get; set; }
+
+    public TextEntry Input { get; protected set; }
+
+    void OnMapClicked()
+    {
+        Game.Overlay.ShowPackageSelector( "type:map sort:popular game:facepunch.boomer", OnMapSelected );
+        StateHasChanged();
+    }
+
+    void OnMapSelected( Package map )
+    {
+        MapPackage = map;
+        StateHasChanged();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        MaxPlayersSupported = Game.Menu.Package.GetMeta<int>( "MaxPlayers", 1 );
+        MaxPlayers = MaxPlayersSupported;
+
+        MapPackage = await Package.FetchAsync( "facepunch.square", false );
+        StateHasChanged();
+    }
+
+    async Task Play()
+    {
+        @if ( IsPrivate && !string.IsNullOrEmpty( ServerPassword ) )
+        {
+            ConsoleSystem.Run( $"sv_password {ServerPassword}" );
+        }
+        
+        await Game.Menu.StartServerAsync( MaxPlayers, ServerName, MapPackage.FullIdent );
+    }
+
+    public bool IsOpen
+	{
+		get => HasClass( "is-focused" );
+		set
+		{
+			SetClass( "is-focused", value );
+			if ( value )
+			{
+				Input.Focus();
+				Input.Text = string.Empty;
+				Input.Label.SetCaretPosition( 0 );
+			}
+		}
+	}
+
+    public override void Tick()
+	{
+		Input.Placeholder = string.IsNullOrEmpty( Input.Text ) ? "Server Name..." : string.Empty;
+	}
+
+    void Open()
+	{
+		AddClass( "is-focused" );
+		Input.Focus();
+	}
+
+    void Close()
+	{
+		RemoveClass( "is-focused" );
+		Input.Blur();
+	}
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( MaxPlayers, MapPackage );
+    }
+}

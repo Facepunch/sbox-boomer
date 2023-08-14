@@ -1,0 +1,117 @@
+﻿@import "../../../Styles/_variables.scss";
+
+
+ServerList
+{
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  
+  .icon-header {
+    width: 40px;
+
+    .icon {
+      font-family: "Material Icons";
+      font-size: 20px;
+      color: $red;
+      display: flex;
+    }
+  }
+  
+  .min-200 {
+    min-width: 200px;
+  }
+
+  .min-100 {
+    min-width: 100px;
+  }
+  
+  > .header
+  {
+    height: 44px;
+    background:linear-gradient(to top, rgba(#2A3030,0.2), rgba(#2A3030,0));
+    justify-content: space-around;
+    align-items: center;
+
+    .th-title {
+      color: #B6B6B6;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-shadow: 0 1px 0 rgba(#000,0.2);
+    }
+
+    > section {
+      padding: 0 20px;
+  
+      &.grow {
+        flex-grow: 1;
+        flex-basis: 1;
+      }
+
+      
+    }
+
+    > section {
+      label {
+        font-family: Quantico;
+      }
+
+      i {
+        font-family: Material Icons;
+      }
+    }
+  }
+  
+  > .main {
+    flex-direction: column;
+  }
+}
+
+ServerListRow
+{
+  flex-grow: 1;
+  justify-content: space-around;
+  height: 44px;
+  align-items: center;
+  transition: all 0.2s ease;
+  
+  > section {
+    padding: 0 20px;
+  
+    &.grow {
+      flex-grow: 1;
+      flex-basis: 1;
+    }
+
+    label {
+      color: rgba(#F4F4F4,0.8);
+      font-family: Quantico-Bold;
+      font-size: 16px;
+      transition: color 0.2s ease;
+    }
+    
+    i {
+      font-family: Material Icons;
+    }
+  }
+  
+  &:nth-child(even)
+  {
+    background: linear-gradient(#151515,#1A1D1D);
+  }
+  
+  &:nth-child(odd)
+  {
+    background: transparent;
+  }
+  
+  &:hover {
+    background: linear-gradient(to right, rgba(#76190D,0.05),#151515);
+    cursor: pointer;
+
+    label {
+      color: rgba(#F4F4F4,1);
+    }
+  }
+}

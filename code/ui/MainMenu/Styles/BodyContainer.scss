@@ -1,0 +1,8 @@
+
+BodyContainer {
+    padding: 32px $padding;
+    flex-grow: 1;
+    flex-basis: 1;
+    opacity: 1;
+    transition: opacity 3s ease-in-out;
+}

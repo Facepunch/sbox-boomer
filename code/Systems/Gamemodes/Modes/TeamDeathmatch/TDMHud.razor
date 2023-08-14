@@ -1,0 +1,196 @@
+@using Facepunch.Boomer.Gamemodes;
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@using System.Linq;
+
+@namespace Facepunch.Boomer.UI
+
+<style>
+    TDMHud
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        .top
+        {
+            margin-top: 16px;
+            position: absolute;
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+            
+            column-gap: 50px;
+        }
+
+        .text
+        {
+            color: white;
+            font-weight: 700;
+            font-family: Quantico;
+            font-size: 40px;
+            height: 40px;
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+            text-shadow: 0px 2px 3px rgba( black, 0.5 );
+        }
+
+       .reserve
+       {
+            color: linear-gradient(180deg, rgba(225, 214, 212, 1) 0%, rgba(226, 213, 211, 1) 100%);
+            font-family: Quantico;
+            font-weight: 400;
+            font-size: 20px;
+        }
+        
+        .column
+        {
+            justify-content: center;
+            align-items: center;
+            align-content: stretch;
+            flex-direction: column;
+        }
+
+        .bar
+        {
+            width: 165px;
+            height: 28px;
+
+            background-color: rgba( black, 0.6 );
+            box-shadow: 2px 2px 100px rgba( black, 0.6 );
+            backdrop-filter: blur( 10px );
+
+            .bar-bg
+            {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+            .score 
+            {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                justify-content: center;
+	            align-items: center;
+	            align-content: stretch;
+
+                label
+                {
+                    top: -1px;
+                    color: white;
+                    font-family: Quantico;
+                    font-size: 20px;
+                    font-weight: 700;
+                    text-shadow: 2px 2px black;
+                }
+            }
+
+            .bar-inner
+            {
+                position: absolute;
+                width: 70%;
+                height: 100%;
+
+                border: 1px solid rgba( black, 0.2 );
+            }
+
+            &.team-one
+            {
+                .bar-bg
+                {
+                    border: 3px solid rgba( 255, 255, 0, 0.25 );
+                    background-color: rgba( 255, 255, 0, 0.1 );
+                }
+
+                .bar-inner
+                {
+                    background-image: linear-gradient( to top, yellow, darken( yellow, 20% ) );
+                }
+            }
+
+            &.team-two
+            {
+                .bar-bg
+                {
+                    border: 3px solid rgba( 0, 255, 255, 0.25 );
+                    background-color: rgba( 0, 255, 255, 0.1 );
+                }
+
+                .bar-inner
+                {
+                    background-image: linear-gradient( to top, cyan, darken( cyan, 20% ) );
+                }
+            }
+        }
+
+    }
+</style>
+
+<root>
+    <div class="top">
+        <div class="column">
+            <div class="bar team-one">
+                <div class="bar-bg"></div>
+                <div class="bar-inner" style="width: @TeamOneFraction%"></div>
+
+                <div class="score">
+                    <label>@Gamemode.GetScore(TeamOne)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            @if ( !string.IsNullOrEmpty( TimeLeftLabel ) )
+            {
+                <div class="row center">
+                    <label class="text">@TimeLeftLabel</label>
+                </div>
+            }
+            @if ( !string.IsNullOrEmpty( GameStateLabel ) )
+            {
+                 <div class="row center">
+                    <label class="text reserve">@GameStateLabel</label>
+                </div>   
+            }
+        </div>
+
+        <div class="column">
+            <div class="bar team-two">
+                <div class="bar-bg"></div>
+                <div class="bar-inner" style="width: @TeamTwoFraction%"></div>
+                <div class="score">
+                    <label>@Gamemode.GetScore(TeamTwo)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code
+{
+
+    public TeamDeathmatch Gamemode => GamemodeSystem.Current as TeamDeathmatch;
+
+    // Gamemode
+    public string TimeLeftLabel => Gamemode.GetTimeLeftLabel();
+    public string GameStateLabel => Gamemode.GetGameStateLabel();
+
+    public Team TeamOne => Gamemode.Teams.ToArray()[0];
+    public float TeamOneFraction => ( (float)Gamemode.GetScore( TeamOne ) / (float)MaxScore ) * 100f;
+    
+    public int MaxScore => Gamemode.MaxScore;
+    public Team TeamTwo => Gamemode.Teams.ToArray()[1];
+    public float TeamTwoFraction => ( (float)Gamemode.GetScore( TeamTwo ) / (float)MaxScore ) * 100f;
+
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( TimeLeftLabel, GameStateLabel, string.Join( ", ", Gamemode.Scores ) );
+    }
+}

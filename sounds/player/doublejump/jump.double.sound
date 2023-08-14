@@ -3,19 +3,17 @@
 	data = 
 	{
 		UI = true
-		Volume = 0.15
-		VolumeRandom = 0
-		Pitch = 1
-		PitchRandom = 0
-		Decibels = 70
+		Volume = "0.15,0.15,0"
+		Pitch = "1.00,1.00,0"
+		Decibels = 50
+		SelectionMode = "Random"
 		Sounds = 
 		[
 			resource:"sounds/player/doublejump/jump.double.1.vsnd",
 			resource:"sounds/player/doublejump/jump.double.2.vsnd",
 			resource:"sounds/player/doublejump/jump.double.4.vsnd",
 		]
-		SelectionMode = "Random"
-		MaximumDistance = 1143.9335
-		MinimumDistance = 57.196674
+		MaximumDistance = 599.31305
+		MinimumDistance = 29.965652
 	}
 }
