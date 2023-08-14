@@ -45,9 +45,9 @@ public static partial class WeaponUtil
 			if ( pawn.LifeState != LifeState.Alive )
 				continue;
 
-			var distance = pawn.Position.DistanceToLine( start, end, out var _ );
+			var sqrDistance = pawn.Position.SqrDistanceToLine( start, end, out var _ );
 
-			if ( distance >= minDistance && distance <= maxDistance )
+			if ( sqrDistance >= minDistance * minDistance && sqrDistance <= maxDistance * maxDistance )
 			{
 				PlayFlybySound( To.Single( client ), sound );
 			}
